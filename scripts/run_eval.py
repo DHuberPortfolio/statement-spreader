@@ -127,6 +127,7 @@ def main() -> None:
                         "statements": s.statements_found, "buckets": dict(c),
                         "checks_failed": sum(1 for ch in checks if ch.status.value == "fail"), "checks_run": len(checks),
                         "review_items": len([i for i in (spread.review if spread else []) if i.severity.value != "info"]),
+                        "blockers": len([i for i in (spread.review if spread else []) if i.severity.value == "blocker"]),
                         "expected_review_missing": s.expected_review_missing, "forbidden_present": s.forbidden_present})
         flag = " ERROR " + s.error if s.error else ""
         print(f"{doc_id:42s} {per_doc[-1]['ms']:6d} ms  {dict(c)}{flag}")
@@ -158,6 +159,16 @@ def main() -> None:
     for k, label in labels.items():
         lines.append(f"| {label} | {r[k].text()} |")
     lines.append(f"| Not judged (the answer key cannot place a row the value includes) | {summ.buckets['unjudged']} values |")
+    # Reviewer workload is per review item (one failed check flags all of its lines, but is
+    # resolved once), so it is reported per document, not per flagged value.
+    items = sorted(d["review_items"] for d in per_doc if not d["error"])
+    blockers = sorted(d.get("blockers", 0) for d in per_doc if not d["error"])
+    if items:
+        med = items[len(items) // 2]
+        report["review_items_per_document"] = {"median": med, "mean": round(sum(items) / len(items), 1),
+                                               "median_blockers": blockers[len(blockers) // 2]}
+        lines.append(f"| Open review items per document (reviewer workload) | median {med}, mean "
+                     f"{sum(items) / len(items):.1f}; blockers median {blockers[len(blockers) // 2]} |")
     cells = summ.cells
     if cells["found"][1]:
         lines += ["", "Printed numbers (SEC cells located by the answer key's tags):", "", "| Measure | Result |", "|---|---|"]

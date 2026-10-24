@@ -20,14 +20,15 @@ def fmt(r: dict) -> str:
 
 
 def main(names: list[str]) -> None:
-    print("| Set | Documents | Values right | Silent error rate | Silent omissions | Sent to review | Wrong values caught |")
+    print("| Set | Documents | Values right | Silent error rate | Silent omissions | Wrong values caught | Review items per document (median) |")
     print("|---|---|---|---|---|---|---|")
     for name in names:
         rep = json.loads((REPORTS / f"{name}.json").read_text())
         r = rep["rates"]
         model = " + local model" if rep.get("model") else ""
         print(f"| {name}{model} | {rep['documents']} | {fmt(r['accuracy'])} | {fmt(r['silent_error_rate'])} | "
-              f"{fmt(r['silent_omission_rate'])} | {fmt(r['review_rate'])} | {fmt(r['catch_rate'])} |")
+              f"{fmt(r['silent_omission_rate'])} | {fmt(r['catch_rate'])} | "
+              f"{rep.get('review_items_per_document', {}).get('median', 'n/a')} |")
 
 
 if __name__ == "__main__":
