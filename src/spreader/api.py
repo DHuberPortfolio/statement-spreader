@@ -1,0 +1,254 @@
+"""HTTP API (FastAPI). Thin: validation and HTTP status codes here, all logic in service.py.
+
+Run locally:  .venv/Scripts/python -m uvicorn spreader.api:app --port 8765
+
+Boundaries, stated plainly:
+- There is no sign-in. The reviewer's name comes from the X-Actor header and is recorded in the
+  audit log, but nothing verifies it. This is a single-user local prototype; a deployment must
+  put it behind the organisation's SSO and map roles (preparer, reviewer) before approval means
+  anything.
+- Documents never come back as raw HTML (that would run a filing's markup in the browser). The
+  evidence view gets the parsed table as text cells, or a rendered PNG of a PDF page.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import re
+from pathlib import Path
+from typing import Any
+
+from fastapi import FastAPI, File, Header, HTTPException, Request, UploadFile
+from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
+
+from . import __version__
+from .contracts import RowRole
+from .export import to_csv, to_json, to_xlsx
+from .ingest import MAX_BYTES
+from .service import ActionError, Service
+from .store import Store, now
+
+ROOT = Path(__file__).resolve().parents[2]
+DATA_DIR = Path(os.environ.get("SPREADER_DATA", ROOT / "var"))
+WEB_DIST = ROOT / "web" / "dist"
+REPORTS = ROOT / "eval" / "reports"
+
+app = FastAPI(title="Statement Spreader", version=__version__)
+_service: Service | None = None
+
+
+def service() -> Service:
+    global _service
+    if _service is None:
+        from .llm import configured_model
+
+        model, model_id = configured_model()
+        _service = Service(Store(DATA_DIR / "spreader.sqlite3"), model=model, model_id=model_id)
+    return _service
+
+
+def set_service(svc: Service) -> None:
+    """Tests use this to point the API at a temporary store."""
+    global _service
+    _service = svc
+
+
+def _actor(x_actor: str | None) -> str:
+    name = (x_actor or "local-user").strip()[:60]
+    return re.sub(r"[^\w .@-]", "", name) or "local-user"
+
+
+@app.exception_handler(ActionError)
+async def _action_error(_: Request, exc: ActionError) -> JSONResponse:
+    return JSONResponse(status_code=400, content={"error": str(exc)})
+
+
+def _run_payload(view: Any) -> dict[str, Any]:
+    svc = service()
+    spread = view.spread
+    out: dict[str, Any] = {"run": view.run, "spread": json.loads(spread.model_dump_json()) if spread else None}
+    if spread is not None:
+        out["lines"] = {ln.id: {"label": ln.label, "kind": ln.kind, "critical": ln.critical,
+                                "statement": svc.profile.line_statement[ln.id].value}
+                        for ln in svc.profile.lines.values()}
+        out["summary"] = {
+            "values": len(spread.values),
+            "auto_accepted": sum(1 for v in spread.values if not v.flags),
+            "open_blockers": sum(1 for i in spread.review if not i.resolved and i.severity.value == "blocker"),
+            "open_warnings": sum(1 for i in spread.review if not i.resolved and i.severity.value == "warning"),
+            "checks_passed": sum(1 for c in spread.checks if c.status.value == "pass"),
+            "checks_failed": sum(1 for c in spread.checks if c.status.value == "fail"),
+            "checks_skipped": sum(1 for c in spread.checks if c.status.value == "skipped"),
+        }
+    doc = svc.store.document(view.run["document_id"])
+    out["document"] = dict(doc) if doc else None
+    return out
+
+
+@app.get("/api/health")
+def health() -> dict[str, Any]:
+    svc = service()
+    return {"ok": True, "version": __version__, "profile": f"{svc.profile.id} {svc.profile.version}", "model": svc.model_id}
+
+
+@app.get("/api/profile")
+def profile() -> dict[str, Any]:
+    p = service().profile
+    return {
+        "id": p.id, "version": p.version, "hash": p.content_hash, "title": p.title,
+        "statements": {k.value: {"title": s.title, "lines": [{"id": ln.id, "label": ln.label, "kind": ln.kind,
+                                                               "critical": ln.critical} for ln in s.lines]}
+                       for k, s in p.statements.items()},
+        "checks": [c.model_dump() for c in p.checks],
+        "ratios": [r.model_dump() for r in p.ratios],
+        "derived": [d.model_dump() for d in p.derived],
+    }
+
+
+@app.get("/api/documents")
+def documents() -> list[dict[str, Any]]:
+    return service().documents()
+
+
+@app.post("/api/documents")
+async def upload(file: UploadFile = File(...), x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+    data = await file.read(MAX_BYTES + 1)
+    if len(data) > MAX_BYTES:
+        raise HTTPException(413, f"File is larger than {MAX_BYTES // 1_000_000} MB")
+    doc, view = service().upload(file.filename or "document", data, _actor(x_actor))
+    return _run_payload(view)
+
+
+@app.post("/api/documents/{doc_id}/runs")
+def rerun(doc_id: str, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+    if not re.fullmatch(r"[0-9a-f]{64}", doc_id):
+        raise HTTPException(404, "Unknown document")
+    return _run_payload(service().run(doc_id, _actor(x_actor)))
+
+
+@app.get("/api/runs/{run_id}")
+def get_run(run_id: int) -> dict[str, Any]:
+    try:
+        return _run_payload(service().get(run_id))
+    except ActionError as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
+@app.post("/api/runs/{run_id}/actions")
+async def act(run_id: int, request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+    try:
+        body = await request.json()
+    except json.JSONDecodeError as exc:
+        raise HTTPException(400, "Body must be JSON") from exc
+    if not isinstance(body, dict):
+        raise HTTPException(400, "Body must be a JSON object")
+    return _run_payload(service().act(run_id, body, _actor(x_actor)))
+
+
+@app.get("/api/runs/{run_id}/events")
+def events(run_id: int) -> list[dict[str, Any]]:
+    return service().events(run_id)
+
+
+@app.get("/api/runs/{run_id}/source/{statement}")
+def source_table(run_id: int, statement: str) -> dict[str, Any]:
+    """The statement as the pipeline read it: rows of text cells with their row index and role."""
+    view = service().get(run_id)
+    if view.spread is None or statement not in view.spread.statements:
+        raise HTTPException(404, "No such statement in this run")
+    res = view.spread.statements[statement]
+    t = res.table
+    mapping_of = {m.row_index: m for m in res.mappings}
+    rows = []
+    for r in t.rows:
+        m = mapping_of.get(r.index)
+        rows.append({
+            "index": r.index, "label": r.label, "section": r.section, "indent": r.indent, "bold": r.bold,
+            "role": r.role.value, "unit": r.unit.value, "children": r.children,
+            "values": {k: {"raw": v.raw, "displayed": None if v.displayed is None else str(v.displayed),
+                           "ref": v.ref.model_dump() if v.ref else None, "note": v.note} for k, v in r.values.items()},
+            "mapping": m.model_dump() if m else None,
+            "header": r.role is RowRole.HEADER,
+        })
+    return {"statement": statement, "title": t.title, "table_index": t.table_index, "scale": t.scale.model_dump(),
+            "share_scale": t.share_scale.model_dump() if t.share_scale else None,
+            "periods": [p.model_dump() for p in t.periods], "rows": rows, "warnings": t.warnings}
+
+
+@app.get("/api/documents/{doc_id}/pages/{page}.png")
+def page_image(doc_id: str, page: int) -> Response:
+    svc = service()
+    doc = svc.store.document(doc_id) if re.fullmatch(r"[0-9a-f]{64}", doc_id) else None
+    if doc is None or doc["format"] != "pdf":
+        raise HTTPException(404, "Not a PDF document")
+    import pypdfium2 as pdfium
+
+    pdf = pdfium.PdfDocument(svc.store.document_bytes(doc_id, "pdf"))
+    try:
+        if not 1 <= page <= len(pdf):
+            raise HTTPException(404, "No such page")
+        img = pdf[page - 1].render(scale=1.5).to_pil()
+        import io
+
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return Response(buf.getvalue(), media_type="image/png", headers={"Cache-Control": "max-age=3600"})
+    finally:
+        pdf.close()
+
+
+def _export_meta(view: Any) -> dict[str, Any]:
+    doc = service().store.document(view.run["document_id"])
+    approved = view.run["state"].get("approved")
+    return {"run_id": view.run["id"], "filename": doc["filename"] if doc else "",
+            "approved": f"yes, by {approved['by']} at {approved['at']}" if approved else None, "exported_at": now()}
+
+
+@app.get("/api/runs/{run_id}/export.{fmt}")
+def export(run_id: int, fmt: str, x_actor: str | None = Header(default=None)) -> Response:
+    svc = service()
+    view = svc.get(run_id)
+    if view.spread is None:
+        raise HTTPException(409, "This run has no spread to export")
+    meta = _export_meta(view)
+    if fmt == "xlsx":
+        body, media = to_xlsx(view.spread, svc.profile, meta), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    elif fmt == "csv":
+        body, media = to_csv(view.spread, svc.profile), "text/csv"
+    elif fmt == "json":
+        body, media = to_json(view.spread, meta), "application/json"
+    else:
+        raise HTTPException(404, "Formats: xlsx, csv, json")
+    with svc.store.tx() as c:
+        svc.store.log(c, "export", {"format": fmt, "approved": bool(meta["approved"])}, _actor(x_actor), run_id,
+                      view.run["document_id"])
+    name = f"spread-run{run_id}.{fmt}"
+    return Response(body, media_type=media, headers={"Content-Disposition": f'attachment; filename="{name}"'})
+
+
+@app.get("/api/evaluation")
+def evaluation() -> dict[str, Any]:
+    """The saved evaluation reports (eval/reports/*.json), newest first."""
+    reports = []
+    for p in sorted(REPORTS.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True):
+        try:
+            r = json.loads(p.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        reports.append({k: r.get(k) for k in ("name", "documents", "crashed", "profile", "rates", "cells", "error_kinds",
+                                              "buckets", "seconds")} | {"file": p.name})
+    return {"reports": reports}
+
+
+from . import roi_api  # noqa: E402  (registers the ROI routes)
+
+app.include_router(roi_api.router)
+
+if WEB_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=WEB_DIST / "assets"), name="assets")
+
+    @app.get("/{path:path}", include_in_schema=False)
+    def spa(path: str) -> FileResponse:
+        return FileResponse(WEB_DIST / "index.html")

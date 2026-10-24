@@ -1,0 +1,89 @@
+"""Download recent 10-K filings (inline XBRL) for the SEC evaluation set.
+
+Follows the SEC's fair-access rules: a User-Agent that identifies the requester, and fewer than
+10 requests a second (this script waits between requests). Files are cached in eval/sec/raw/
+(git-ignored); eval/sec/manifest.json records exactly which filing each file is, with its hash,
+so anyone can re-download the same documents.
+
+    .venv/Scripts/python scripts/fetch_sec.py            # the default ticker list
+    .venv/Scripts/python scripts/fetch_sec.py AAPL MSFT  # just these
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
+import time
+import zlib
+from pathlib import Path
+
+import httpx
+
+ROOT = Path(__file__).resolve().parents[1]
+RAW = ROOT / "eval" / "sec" / "raw"
+MANIFEST = ROOT / "eval" / "sec" / "manifest.json"
+USER_AGENT = "StatementSpreader/0.1 research prototype (devinhuber.com)"
+PAUSE = 0.2  # seconds between requests: at most 5 a second, half the SEC's limit
+
+# Non-financial companies across industries and sizes. Banks and insurers use different
+# statements and are out of scope for this template.
+TICKERS = [
+    "AAPL", "MSFT", "KO", "PG", "CAT", "HD", "NKE", "PEP", "JNJ", "XOM", "UNP", "MMM", "DE", "LOW", "TGT",
+    "COST", "WMT", "ADBE", "CSCO", "INTC", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "F", "BA", "HON", "MCD",
+    "SBUX", "DIS", "NFLX", "PFE", "MRK", "CVX", "LMT", "UPS", "FDX", "ORCL", "IBM", "TXN", "QCOM", "AMD",
+    "CMG", "DPZ", "SHAK", "BOOT", "YETI", "DUOL", "ETSY", "ROKU", "CROX", "HAS", "MAT", "ULTA", "LULU",
+    "DECK", "POOL", "FAST", "SNA", "GPC", "ODFL", "CHRW", "EXPD",
+]
+
+
+def split_of(ticker: str) -> str:
+    """A fixed split by hash: tuning looks only at 'dev'; 'holdout' is for honest measurement."""
+    return "dev" if zlib.crc32(ticker.encode()) % 2 == 0 else "holdout"
+
+
+def main(tickers: list[str]) -> None:
+    RAW.mkdir(parents=True, exist_ok=True)
+    manifest = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
+    client = httpx.Client(headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate"}, timeout=60)
+    ciks = client.get("https://www.sec.gov/files/company_tickers.json").json()
+    by_ticker = {v["ticker"]: int(v["cik_str"]) for v in ciks.values()}
+    time.sleep(PAUSE)
+    for t in tickers:
+        if t in manifest and (RAW / manifest[t]["file"]).exists():
+            continue
+        cik = by_ticker.get(t)
+        if cik is None:
+            print(f"{t}: no CIK")
+            continue
+        sub = client.get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json").json()
+        time.sleep(PAUSE)
+        rec = sub["filings"]["recent"]
+        pick = None
+        for i, form in enumerate(rec["form"]):
+            if form == "10-K" and rec["isInlineXBRL"][i]:
+                pick = i
+                break
+        if pick is None:
+            print(f"{t}: no inline XBRL 10-K in recent filings")
+            continue
+        acc = rec["accessionNumber"][pick]
+        doc = rec["primaryDocument"][pick]
+        url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/{doc}"
+        r = client.get(url)
+        time.sleep(PAUSE)
+        if r.status_code != 200:
+            print(f"{t}: HTTP {r.status_code} for {url}")
+            continue
+        name = f"{t}-{acc}.htm"
+        (RAW / name).write_bytes(r.content)
+        manifest[t] = {"ticker": t, "company": sub.get("name"), "cik": cik, "accession": acc, "filed": rec["filingDate"][pick],
+                       "period": rec["reportDate"][pick], "url": url, "file": name, "bytes": len(r.content),
+                       "sha256": hashlib.sha256(r.content).hexdigest(), "split": split_of(t)}
+        print(f"{t}: {acc} {len(r.content) / 1e6:.1f} MB ({manifest[t]['split']})")
+        MANIFEST.write_text(json.dumps(manifest, indent=1, sort_keys=True))
+    MANIFEST.write_text(json.dumps(manifest, indent=1, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:] or TICKERS)

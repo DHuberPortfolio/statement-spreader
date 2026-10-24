@@ -1,0 +1,57 @@
+[project]
+name = "statement-spreader"
+version = "0.1.0"
+description = "Turns financial statements (HTML, PDF, Excel) into a standard spread with every number traced to its source, checked by accounting identities, and measured against answer keys."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "lxml>=5.2",
+  "openpyxl>=3.1",
+  "pdfplumber>=0.11",
+  "pypdfium2>=4.30",
+  "rapidfuzz>=3.9",
+  "pyyaml>=6.0",
+  "httpx>=0.27",
+  "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "hypothesis>=6.100", "ruff>=0.5", "mypy>=1.10", "types-PyYAML"]
+
+[project.scripts]
+spreader = "spreader.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+spreader = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+ignore = ["E501", "UP042"]  # (str, Enum) kept on purpose: it serialises the same in pydantic and JSON
+
+[tool.ruff.lint.per-file-ignores]
+"src/spreader/api.py" = ["B008"]  # FastAPI's File(...) default is its documented pattern
+
+[tool.mypy]
+python_version = "3.11"
+strict_optional = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+files = ["src/spreader"]
