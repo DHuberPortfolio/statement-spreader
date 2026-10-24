@@ -44,8 +44,11 @@ def service() -> Service:
     if _service is None:
         from .llm import configured_model
 
+        from .profile import load_profile
+
         model, model_id = configured_model()
-        _service = Service(Store(DATA_DIR / "spreader.sqlite3"), model=model, model_id=model_id)
+        profile = load_profile(os.environ["SPREADER_PROFILE"]) if os.environ.get("SPREADER_PROFILE") else None
+        _service = Service(Store(DATA_DIR / "spreader.sqlite3"), profile=profile, model=model, model_id=model_id)
     return _service
 
 

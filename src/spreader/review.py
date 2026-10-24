@@ -11,6 +11,7 @@ from decimal import Decimal
 from .contracts import (
     CheckResult,
     CheckStatus,
+    RatioResult,
     ReviewItem,
     ReviewKind,
     RowMapping,
@@ -27,7 +28,7 @@ JUMP_FACTOR = Decimal(10)  # a line changing more than 10x between adjacent peri
 
 
 def build_review(statements: dict[str, StatementResult], values: list[SpreadValue], checks: list[CheckResult],
-                 profile: Profile) -> list[ReviewItem]:
+                 profile: Profile, ratios: list[RatioResult] | None = None) -> list[ReviewItem]:
     items: list[ReviewItem] = []
 
     for stype in profile.statements:
@@ -113,6 +114,24 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
         items.append(ReviewItem(id=f"check:{c.id}:{c.period}", kind=ReviewKind.FAILED_CHECK, severity=sev,
                                 statement=cdef.statement, lines=c.lines, periods=[c.period],
                                 message=f"{c.title}: failed. {c.explanation}{(' ' + hint) if hint else ''}"))
+
+    # Covenant and policy limits on ratios.
+    for r in ratios or []:
+        rdef = next((d for d in profile.ratios if d.id == r.id), None)
+        if rdef is None or (rdef.min is None and rdef.max is None):
+            continue
+        limit = " and ".join(x for x in [f"at least {rdef.min}" if rdef.min is not None else "",
+                                          f"at most {rdef.max}" if rdef.max is not None else ""] if x)
+        lines = sorted(r.inputs)
+        if r.value is None:
+            items.append(ReviewItem(id=f"covenant:{r.id}:{r.period}", kind=ReviewKind.SUSPICIOUS, severity=Severity.WARNING,
+                                    lines=lines, periods=[r.period],
+                                    message=f"{r.label} must be {limit}, but it cannot be computed ({r.reason})."))
+        elif (rdef.min is not None and r.value < Decimal(str(rdef.min))) or (rdef.max is not None and r.value > Decimal(str(rdef.max))):
+            items.append(ReviewItem(id=f"covenant:{r.id}:{r.period}", kind=ReviewKind.SUSPICIOUS, severity=Severity.BLOCKER,
+                                    lines=lines, periods=[r.period],
+                                    message=f"{r.label} is {r.value:.2f}; the limit is {limit}. Confirm the inputs, then "
+                                            "record the breach (resolving this item needs a note)."))
 
     # Suspicious values that pass every check.
     by_line: dict[str, list[SpreadValue]] = {}

@@ -98,6 +98,10 @@ class RatioDef(BaseModel):
     expr: str
     format: str = "times"
     note: str = ""
+    # A covenant or policy limit. A computed value outside it raises a review item; a value that
+    # cannot be computed raises one too, because an unknown covenant is not a passed covenant.
+    min: float | None = None
+    max: float | None = None
 
 
 class Profile(BaseModel):
@@ -155,14 +159,59 @@ def matches(pattern: str, label: str) -> bool:
     return label == pattern
 
 
+def _overlay(base: dict, over: dict) -> dict:
+    """Apply an organisation's overlay to a base profile.
+
+    The overlay can: rename and re-version the profile; add aliases or section rules to existing
+    lines (`add_aliases: {line_id: [...]}`, `add_sections: {line_id: [...]}`); append checks,
+    derived lines and ratios; and replace a ratio or check with the same id. It cannot delete
+    template lines, so every organisation's spread stays comparable with the base template.
+    """
+    out = dict(base)
+    for k in ("id", "version", "title"):
+        if k in over:
+            out[k] = over[k]
+    lines = {ln["id"]: ln for st in out["statements"].values() for ln in st["lines"]}
+    for line_id, aliases in (over.get("add_aliases") or {}).items():
+        if line_id not in lines:
+            raise ValueError(f"overlay: add_aliases names unknown line '{line_id}'")
+        lines[line_id]["aliases"] = list(lines[line_id].get("aliases", [])) + list(aliases)
+    for line_id, rules in (over.get("add_sections") or {}).items():
+        if line_id not in lines:
+            raise ValueError(f"overlay: add_sections names unknown line '{line_id}'")
+        lines[line_id]["sections"] = list(lines[line_id].get("sections", [])) + list(rules)
+    for stype, extra in (over.get("add_detect") or {}).items():
+        if stype not in out["statements"]:
+            raise ValueError(f"overlay: add_detect names unknown statement '{stype}'")
+        det = dict(out["statements"][stype]["detect"])
+        for k in ("must_any", "also_any"):
+            det[k] = list(det.get(k, [])) + list(extra.get(k, []))
+        out["statements"][stype] = {**out["statements"][stype], "detect": det}
+    for key in ("checks", "ratios", "derived"):
+        merged = {(d.get("id") or d.get("line")): d for d in out.get(key, [])}
+        for d in over.get(key, []) or []:
+            merged[d.get("id") or d.get("line")] = d
+        out[key] = list(merged.values())
+    return out
+
+
 def load_profile(path: str | Path | None = None) -> Profile:
+    """Load a profile. A profile with `extends: <file>` is an overlay on that base profile."""
     p = Path(path) if path else PROFILE_DIR / "us-commercial.yaml"
     raw = p.read_bytes()
     data = yaml.safe_load(raw)
     if not isinstance(data, dict):
         raise ValueError(f"{p} is not a profile")
+    digest = hashlib.sha256(raw)
+    if "extends" in data:
+        base_path = (p.parent / str(data["extends"])).resolve()
+        if base_path.parent != p.parent.resolve():
+            raise ValueError("overlay: 'extends' must name a profile in the same folder")
+        base_raw = base_path.read_bytes()
+        digest.update(base_raw)
+        data = _overlay(yaml.safe_load(base_raw), data)
     profile = Profile.model_validate(data)
-    profile.content_hash = hashlib.sha256(raw).hexdigest()[:12]
+    profile.content_hash = digest.hexdigest()[:12]
     return profile
 
 

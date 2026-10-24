@@ -172,7 +172,7 @@ class Service:
         values.extend(derived)
         checks = run_checks(values, periods, self.profile, period_keys, scales, skip)
         ratios = run_ratios(values, periods, self.profile)
-        review = build_review(spread.statements, values, checks, self.profile)
+        review = build_review(spread.statements, values, checks, self.profile, ratios)
         human = {(v.line, v.period) for v in values if v.status is ValueStatus.HUMAN}
         for it in review:
             if it.id in resolved:

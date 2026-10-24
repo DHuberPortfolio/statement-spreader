@@ -1,0 +1,28 @@
+# An organisation's overlay on the base template: what a new deployment changes, and nothing else.
+#
+# Here, an example middle-market lender: its analysts write "Turnover" for revenue and "Profit for
+# the year" for net income (UK-style statements from some borrowers), and its credit policy has
+# two covenants checked on every spread. Load it with SPREADER_PROFILE=config/profiles/example-lender-overlay.yaml.
+
+extends: us-commercial.yaml
+id: example-lender
+version: "2026.10.24-overlay-1"
+title: Example lender spread (base template + this lender's labels and covenants)
+
+add_detect:
+  income_statement:
+    must_any: ["profit for the year*", "profit for the period*", "loss for the year*"]
+    also_any: ["turnover*", "profit before tax*"]
+
+add_aliases:
+  revenue: [turnover, "turnover*"]
+  net_income: [profit for the year, profit for the period, "profit for the year*"]
+  pretax_income: [profit before taxation, "profit before tax*"]
+  receivables: [trade and other receivables, "trade and other receivables*"]
+  payables: [trade and other payables, "trade and other payables*"]
+
+ratios:
+  - {id: covenant_leverage, label: "Covenant: total debt / EBITDA", expr: "(st_debt_or_zero + lt_debt_or_zero) / (operating_income + cf_dna)",
+     format: times, max: 3.5, note: "Facility agreement, section 7.1 (example): at most 3.5x."}
+  - {id: covenant_interest_cover, label: "Covenant: EBIT / interest", expr: "operating_income / interest_expense",
+     format: times, min: 3.0, note: "Facility agreement, section 7.2 (example): at least 3.0x."}

@@ -83,7 +83,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     values.extend(derived)
     checks = timer.run("check", run_checks, values, periods, profile, period_keys, scales, skip)
     ratios = timer.run("ratios", run_ratios, values, periods, profile)
-    review = timer.run("review", build_review, statements, values, checks, profile)
+    review = timer.run("review", build_review, statements, values, checks, profile, ratios)
     attach_flags(values, review)
 
     order = {ln: i for i, ln in enumerate(profile.lines)}
