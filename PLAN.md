@@ -34,11 +34,13 @@ ROI layer that separates what was measured from what is assumed.
 - [ ] Waits on Devin: repo visibility (nothing pushed); timed sessions so ROI can be measured (3 by hand + 3 assisted)
 - Next ideas (ranked) in IMPROVEMENT_LOG.md "Next" section
 
-## Running services (local only)
-- llama-server: `C:\Users\devin\tools\llama.cpp\b11853\bin\llama-server.exe` on 127.0.0.1:8088 with
-  `C:\Users\devin\tools\models\Qwen3-4B-Instruct-2507-Q4_K_M.gguf` (log `C:\Users\devin\tools\llama-server.log`)
-- Demo app: `SPREADER_DATA=var/demo` uvicorn on 127.0.0.1:8766 (`scripts/load_demo.py var/demo` loads it)
-- (The frontend agent's servers on 8765 and 5173 were stopped at 11:40.)
+## Services (none left running; start them when needed)
+- Model server (optional): `C:\Users\devin\tools\llama.cpp\b11853\bin\llama-server.exe -m
+  C:\Users\devin\tools\models\Qwen3-4B-Instruct-2507-Q4_K_M.gguf -ngl 99 -c 8192 --host 127.0.0.1 --port 8088`,
+  then set `SPREADER_MODEL_URL=http://127.0.0.1:8088` for the app or pass `--model` to `scripts/run_eval.py`.
+- App: `.venv\Scripts\python scripts\load_demo.py var\demo`, then
+  `SPREADER_DATA=var/demo .venv/Scripts/python -m uvicorn spreader.api:app --host 127.0.0.1 --port 8765`
+  (build the web first: `cd web && npm install && npm run build`).
 
 ## How to resume
 
