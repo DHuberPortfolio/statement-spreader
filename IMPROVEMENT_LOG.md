@@ -17,6 +17,7 @@ Each entry: what was wrong, the hypothesis, the change, and the measured effect 
 | 9 | Local model tier (Qwen3-4B-Instruct-2507, Q4_K_M, llama.cpp CUDA on the RTX 3060 Ti) for rows no rule placed; grammar-constrained to the statement's line ids, never sees numbers, confidence capped so every suggestion is reviewed. Measured against the same code without it (#7) | 83.2% | 2.2% (53 of 2,451) | 4.6% | Yes, optional. The model's own placements were right 90.5% of the time (296 of 327); wrong values caught rose from 68.8% to 80.3%; review rate rose from 32.9% to 36.9%; 306 calls, about 10 s of local GPU time per filing, $0 |
 | 10 | Red-team fixes (15 findings, see THREAT_MODEL.md); table context stops at the previous table; scorer counts a missing value as caught only when a flagged row prints it; key leaves total non-operating income unjudged when its parts are tagged | 79.6% | 2.7% (69 of 2,520) | 4.4% | Yes. Final measurement on the same code: holdout 73.5% right, 3.3% silent (70 of 2,100, likely 2.6-4.2%), 6.2% silent omissions; with the local model, holdout 75.0%, 2.9% (61 of 2,086), 4.1%, and wrong values caught 81.5% -> 86.7%. Reviewer workload: median 21 open review items per filing (25 with the model) |
 | 11 | PDF reader rewrite (parallel agent; printed SEC 10-Ks 43.3% -> 77.1% right, synthetic PDFs 91.3% -> 97.3%) and its recommendations for detection and structure; release measurement | 80.0% | 2.8% (70 of 2,542) | 3.9% | Yes. Release numbers: holdout 73.5% right, 3.2% silent (68 of 2,100), 5.3% silent omissions; with the local model 75.0%, 2.8% (59 of 2,086), 3.8%. Synthetic 97.0% right, 6 silent errors in 13,452 auto-accepted values |
+| 12 | Experiment: a failed check flags only its printed total, inputs with weaker provenance and lines named in its hint (the check still blocks approval) | 80.0% | 3.1% (95 of 3,061) | 3.9% | **Reverted.** Right values sent to review fell from 30.5% to 16.3%, but wrong values caught fell from 68.2% to 56.8% and silent errors rose from 70 to 95: the newly silent values were confident exact-alias mappings that were wrong, which provenance cannot tell apart from right ones |
 
 Known measurement limitation (fixed in #4): when a filing tags a row with a
 company-specific concept, the answer key does not know which template line that row feeds, so the
@@ -27,7 +28,7 @@ Apple's working-capital line: the key misses "vendor non-trade receivables").
 
 1. **Measure ROI for real.** Time 3+ documents spread by hand and 3+ reviewed in the tool (the ROI page's timer), by an
    analyst, on documents like the organisation's own. Until then, time saved is "not measured" on purpose.
-2. **Cut reviewer workload without hiding errors.** A failed check flags every line it touches (bs_assets_parts flags
+2. **Cut reviewer workload without hiding errors** (one attempt reverted, #12). A failed check flags every line it touches (bs_assets_parts flags
    ~28 correct values per wrong one on the dev split). Narrow the flags to the lines the hint implicates (the row whose
    amount equals the difference), measured on dev: the catch rate must not fall.
 3. **Mapping recall on unseen filings** (holdout 73.5% vs dev 80.0%): the gap is mostly long-tail labels. Options:
