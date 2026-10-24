@@ -22,6 +22,8 @@ from typing import Any
 from fastapi import FastAPI, File, Header, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from . import __version__
 from .contracts import RowRole
@@ -36,6 +38,28 @@ WEB_DIST = ROOT / "web" / "dist"
 REPORTS = ROOT / "eval" / "reports"
 
 app = FastAPI(title="Statement Spreader", version=__version__)
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get("SPREADER_ALLOWED_HOSTS", "127.0.0.1,localhost,testserver").split(",")]
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)  # blocks DNS-rebinding hosts
+
+
+@app.middleware("http")
+async def same_origin_writes(request: Request, call_next):  # type: ignore[no-untyped-def]
+    """A web page on another site must not be able to drive this API from the reviewer's browser.
+
+    Writes must come from this app's own origin (or from a non-browser client, which sends no
+    Origin), and JSON bodies must be declared as JSON (a cross-site form cannot send that
+    without a preflight the server never approves).
+    """
+    if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
+        origin = request.headers.get("origin")
+        site = request.headers.get("sec-fetch-site")
+        host = request.headers.get("host", "")
+        if site == "cross-site" or (origin and origin.split("://", 1)[-1] != host):
+            return JSONResponse(status_code=403, content={"error": "Cross-site request refused"})
+        ctype = request.headers.get("content-type", "")
+        if not ctype.startswith(("application/json", "multipart/form-data")):
+            return JSONResponse(status_code=415, content={"error": "Send JSON (application/json) or a file upload"})
+    return await call_next(request)
 _service: Service | None = None
 
 
@@ -119,8 +143,8 @@ async def upload(file: UploadFile = File(...), x_actor: str | None = Header(defa
     data = await file.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
         raise HTTPException(413, f"File is larger than {MAX_BYTES // 1_000_000} MB")
-    doc, view = service().upload(file.filename or "document", data, _actor(x_actor))
-    return _run_payload(view)
+    doc, view = await run_in_threadpool(service().upload, file.filename or "document", data, _actor(x_actor))
+    return await run_in_threadpool(_run_payload, view)
 
 
 @app.post("/api/documents/{doc_id}/runs")
@@ -146,7 +170,8 @@ async def act(run_id: int, request: Request, x_actor: str | None = Header(defaul
         raise HTTPException(400, "Body must be JSON") from exc
     if not isinstance(body, dict):
         raise HTTPException(400, "Body must be a JSON object")
-    return _run_payload(service().act(run_id, body, _actor(x_actor)))
+    view = await run_in_threadpool(service().act, run_id, body, _actor(x_actor))
+    return await run_in_threadpool(_run_payload, view)
 
 
 @app.get("/api/runs/{run_id}/events")

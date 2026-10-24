@@ -74,7 +74,11 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
             warnings.append(f"Sheet '{ws.title}' is hidden and was not read.")
             continue
         wf = wb_formulas[ws.title]
-        hidden_cols = {k for k, d in ws.column_dimensions.items() if d.hidden}
+        hidden_cols: set[str] = set()
+        for d in ws.column_dimensions.values():
+            if d.hidden or (d.width is not None and d.customWidth and d.width < 0.5):
+                lo, hi = (d.min or 0), (d.max or 0)
+                hidden_cols.update(get_column_letter(i) for i in range(max(lo, 1), min(hi, MAX_COLS) + 1))
         merged: dict[tuple[int, int], int] = {}
         for rng in ws.merged_cells.ranges:
             merged[(rng.min_row, rng.min_col)] = rng.max_col
@@ -86,7 +90,8 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
         if (ws.max_row or 0) > MAX_ROWS:
             warnings.append(f"Sheet '{ws.title}' has more than {MAX_ROWS} rows; only the first {MAX_ROWS} were read.")
         for r in range(1, max_row + 1):
-            if ws.row_dimensions[r].hidden:
+            rd = ws.row_dimensions[r]
+            if rd.hidden or (rd.height is not None and rd.customHeight and rd.height < 0.5):
                 continue
             tokens: list[Token] = []
             indent = 0.0
@@ -128,6 +133,8 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
                     v = int(v)
                     # A year typed as a number near the top of the sheet is a column header, not 2,022.
                     text = str(v)
+                elif isinstance(v, int | float | Decimal) and re.fullmatch(r"\s*;\s*;\s*;?\s*", cell.number_format or ""):
+                    continue  # the ";;;" format shows nothing: a hidden number
                 elif isinstance(v, int | float | Decimal):
                     # A format like "#,##0,," shows the stored 1,234,000,000 as "1,234". The unit line
                     # ("in millions") describes what is shown, so read the number as shown.

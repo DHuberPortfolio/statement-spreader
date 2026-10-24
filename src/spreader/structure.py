@@ -35,7 +35,8 @@ _MONEY_WORDS = re.compile(r"par value|paid in|capital|authorized|payments?|proce
                           r"settlement|compensation|dividend|treasury|stock based|share based", re.I)
 _PER_SHARE_SECTION = re.compile(r"per (common )?share|\beps\b|earnings loss per|net income loss per", re.I)
 _SHARES_SECTION = re.compile(r"shares used|weighted average|shares outstanding|number of shares|share count", re.I)
-_NOT_PERIOD = re.compile(r"%|\bchange\b|\bvariance\b|\bnotes?\b|\bref\b", re.I)
+_NOT_PERIOD = re.compile(r"%|\bchange\b|\bvariance\b|\bnotes?\b|\bref\b|previously reported|as originally|\bbudget|"
+                         r"\bforecast|\bplan\b|pro\s*forma|\bprojected|\btarget", re.I)
 _EUROPEAN_MULTI = re.compile(r"^\(?[$€£]?\s*-?\d{1,3}(\.\d{3}){2,}(,\d+)?\)?$|^\(?[$€£]?\s*-?\d{1,3}(\.\d{3})+,\d+\)?$")
 _EUROPEAN_SINGLE = re.compile(r"^\(?[$€£]?\s*-?\d{1,3}\.\d{3}\)?$")
 
@@ -78,7 +79,8 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
         if p is None:
             continue
         if p.key in seen:
-            warnings.append(f"Two columns read as the same period ({p.key}); the second was left out.")
+            warnings.append(f"DUPLICATE_PERIOD:{p.key}: two columns read as the same period ({p.key}); the second "
+                            "was left out. Confirm which column is the one to spread.")
             periods[i] = None
         else:
             seen[p.key] = i

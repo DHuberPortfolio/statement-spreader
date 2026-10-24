@@ -19,11 +19,42 @@ from ..numbers import clean_text, is_amount_like
 from . import IngestError, doc_id_for
 from .paths import element_path
 
-_HIDDEN = re.compile(r"display\s*:\s*none|visibility\s*:\s*hidden", re.I)
+_HIDDEN = re.compile(
+    r"display\s*:\s*none|visibility\s*:\s*(hidden|collapse)|font-size\s*:\s*0(?![.\d])|opacity\s*:\s*0(?![.\d]*[1-9])"
+    r"|(?:left|top|text-indent|margin-left|margin-top)\s*:\s*-\d{3,}|clip\s*:\s*rect\(\s*0|transform\s*:\s*scale\(\s*0\s*\)"
+    r"|(?:max-)?height\s*:\s*0(?![.\d])[^;]*;?.*overflow\s*:\s*hidden|overflow\s*:\s*hidden.*(?:max-)?height\s*:\s*0(?![.\d])",
+    re.I)
+_CSS_COMMENT = re.compile(r"/\*.*?\*/", re.S)
+_CSS_RULE = re.compile(r"([^{}]+)\{([^{}]*)\}")
+_HIDDEN_SELECTORS: set[str] = set()  # set per document from its <style> blocks (see read_html)
+
+
+def _normalise_css(style: str) -> str:
+    """Remove comments and escapes so "display:/**/none" and "d\\isplay:none" read as written."""
+    style = _CSS_COMMENT.sub("", style)
+    style = re.sub(r"\\([0-9a-fA-F]{1,6}\s?)", lambda m: chr(int(m.group(1), 16)) if int(m.group(1), 16) < 0x110000 else "", style)
+    return style.replace("\\", "")
+
+
+def _stylesheet_hidden(root: etree._Element) -> set[str]:
+    """Class, id and tag selectors that a <style> block hides (".x{display:none}")."""
+    hidden: set[str] = set()
+    for el in root.iter():
+        if _local(el.tag) != "style":
+            continue
+        css = _normalise_css("".join(el.itertext()))
+        for selectors, body in _CSS_RULE.findall(css):
+            if _HIDDEN.search(body):
+                for sel in selectors.split(","):
+                    last = sel.strip().split()[-1] if sel.strip() else ""
+                    if last:
+                        hidden.add(last.lower())
+    return hidden
 _INDENT = re.compile(r"(padding-left|text-indent|margin-left)\s*:\s*(-?[\d.]+)\s*(pt|px|em|in|rem|%)?", re.I)
 _BOLD = re.compile(r"font-weight\s*:\s*(bold|[6-9]00)", re.I)
 _SKIP_TAGS = {"script", "style", "head", "title", "noscript", "template"}
 CONTEXT_CHARS = 700
+MAX_GRID_CELLS = 200_000
 
 
 def _local(tag: object) -> str:
@@ -33,8 +64,15 @@ def _local(tag: object) -> str:
 
 
 def _hidden(el: etree._Element) -> bool:
-    style = el.get("style") or ""
+    style = _normalise_css(el.get("style") or "")
     tag = el.tag.lower() if isinstance(el.tag, str) else ""
+    if _HIDDEN_SELECTORS:
+        names = {f".{c.lower()}" for c in (el.get("class") or "").split()}
+        if el.get("id"):
+            names.add(f"#{el.get('id', '').lower()}")
+        names.add(_local(el.tag))
+        if names & _HIDDEN_SELECTORS:
+            return True
     # ix:header holds inline XBRL's hidden facts; an HTML5 <header> is ordinary visible content.
     return bool(_HIDDEN.search(style)) or el.get("hidden") is not None or tag.endswith("ix:header")
 
@@ -115,6 +153,7 @@ def _table_rows(table: etree._Element, tree: etree._ElementTree, doc_id: str, t_
     rows: list[RawRow] = []
     occupied: dict[tuple[int, int], bool] = {}
     r_index = 0
+    n_rows = sum(1 for tr in table.iter() if _local(tr.tag) == "tr")
     for tr in table.iter():
         if _local(tr.tag) != "tr":
             continue
@@ -139,9 +178,12 @@ def _table_rows(table: etree._Element, tree: etree._ElementTree, doc_id: str, t_
                 rspan = max(1, min(int(td.get("rowspan") or 1), 50))
             except ValueError:
                 span, rspan = 1, 1
+            rspan = min(rspan, max(1, n_rows - r_index))  # a span cannot reach past the table
             for dr in range(1, rspan):
                 for dc in range(span):
                     occupied[(r_index + dr, col + dc)] = True
+            if len(occupied) > MAX_GRID_CELLS:
+                raise IngestError("A table's row and column spans describe an implausibly large grid; not read")
             if _hidden(td):
                 col += span
                 continue
@@ -171,12 +213,19 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
     except (etree.ParserError, ValueError) as exc:
         raise IngestError(f"Could not parse HTML: {exc}") from exc
     tree = root.getroottree()
+    global _HIDDEN_SELECTORS
+    _HIDDEN_SELECTORS = _stylesheet_hidden(root)
     tables: list[RawTable] = []
     warnings: list[str] = []
     buffer: list[str] = []
     buffer_len = 0
 
     preface: list[str] = []
+
+    def reset_buffer() -> None:
+        nonlocal buffer_len
+        buffer.clear()
+        buffer_len = 0
 
     def push(text: str | None) -> None:
         nonlocal buffer_len
@@ -195,10 +244,18 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
             return
         if tag == "table":
             context = clean_text(" ".join(buffer))[-CONTEXT_CHARS:]
-            rows = _table_rows(node, tree, doc_id, len(tables))
+            try:
+                rows = _table_rows(node, tree, doc_id, len(tables))
+            except IngestError as exc:
+                warnings.append(str(exc))
+                push(node.tail)
+                return
             value_tokens = sum(1 for r in rows for t in r.tokens if is_amount_like(t.text))
             if len(rows) >= 2 and value_tokens >= 2:
                 tables.append(RawTable(index=len(tables), rows=rows, context=context))
+                # The next table's context starts here: a title above one table ("Unaudited pro
+                # forma ...") must not become the title of the table after it.
+                reset_buffer()
             else:
                 push(_visible_text(node))  # a layout table: its text is context for what follows
             push(node.tail)

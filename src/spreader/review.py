@@ -50,6 +50,16 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                 items.append(ReviewItem(id=f"period:{skey}:{p.key}", kind=ReviewKind.ASSUMED_PERIOD, severity=Severity.WARNING,
                                         statement=stype, message=f"Column '{p.label}': " + " ".join(p.assumed),
                                         lines=[m.canonical for m in res.mappings if m.canonical], periods=[p.key]))
+        for w in t.warnings:
+            if w.startswith("DUPLICATE_PERIOD:"):
+                pk = w.split(":")[1]
+                items.append(ReviewItem(id=f"dup_period:{skey}:{pk}", kind=ReviewKind.CONFLICT, severity=Severity.BLOCKER,
+                                        statement=stype, periods=[pk],
+                                        lines=[m.canonical for m in res.mappings if m.canonical],
+                                        message=w.split(":", 2)[2].strip().capitalize()))
+            if w.startswith("COMPETING_TABLE:"):
+                items.append(ReviewItem(id=f"competing:{skey}", kind=ReviewKind.CONFLICT, severity=Severity.WARNING,
+                                        statement=stype, message=w.split(":", 1)[1].strip()))
         by_index = {r.index: r for r in t.rows}
         mapping_of = {m.row_index: m for m in res.mappings}
         for row in t.rows:

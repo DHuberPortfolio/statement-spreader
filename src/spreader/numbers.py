@@ -27,7 +27,7 @@ _NUMBER = re.compile(
     (?P<cur1>[$€£])?\s*
     (?P<sign>[-−‒–—])?\s*
     (?P<cur2>[$€£])?\s*
-    (?P<digits>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)
+    (?P<digits>(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)(?:\.[0-9]+)?|\.[0-9]+)
     \s*(?P<pct>%)?
     \s*(?P<rpar>\))?
     \s*(?P<foot>\((?:[a-z]|\d{1,2}|[ivx]{1,4})\)|\*{1,3}|†|‡)?
@@ -64,6 +64,8 @@ def parse_amount(text: str) -> tuple[Amount | None, str | None]:
         return None, None
     if t in DASHES or t.strip("$ ") in DASHES:
         return Amount(Decimal(0), negative_display=False, dash=True), None
+    if any(ch.isdigit() and not ("0" <= ch <= "9") for ch in t):
+        return None, f"'{t}' contains digits from another script; not read"
     if t.lower() in NOT_AVAILABLE:
         return None, f"'{t}' means not available"
     if _EUROPEAN.match(t) and not re.match(r"^\(?[$]?\s*\d{1,3}\.\d{3}\)?$", t):
@@ -91,7 +93,8 @@ def is_amount_like(text: str) -> bool:
     return amount is not None
 
 
-_FOOTNOTE_TAIL = re.compile(r"(\s*(\((?:[a-z]|\d{1,2}|[ivx]{1,4})\)|\*{1,3}|†|‡|\[\d+\]))+\s*$")
+_FOOTNOTE_ONE = re.compile(r"\s*(?:\((?:[a-z]|[0-9]{1,2}|[ivx]{1,4})\)|\*+|†|‡|\[[0-9]+\])\s*$")
+MAX_LABEL = 300
 _PUNCT = re.compile(r"[^a-z0-9% ]+")
 
 
@@ -101,9 +104,13 @@ def clean_label(label: str) -> str:
     "Selling, general and administrative (1)" -> "selling general and administrative"
     "Cash and cash equivalents†" -> "cash and cash equivalents"
     """
-    t = clean_text(label).lower()
+    t = clean_text(label)[:MAX_LABEL].lower()
     t = t.replace("’", "'").replace("&", " and ")
-    t = _FOOTNOTE_TAIL.sub("", t)
+    for _ in range(10):  # one marker at a time: no nested repetition, so no catastrophic backtracking
+        stripped = _FOOTNOTE_ONE.sub("", t)
+        if stripped == t:
+            break
+        t = stripped
     t = t.replace("'", "")
     t = _PUNCT.sub(" ", t)
     t = re.sub(r"\s+", " ", t).strip()

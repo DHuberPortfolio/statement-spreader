@@ -8,6 +8,8 @@ so leaving a tab open does not inflate a session.
 from __future__ import annotations
 
 import json
+import math
+from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
@@ -49,6 +51,12 @@ async def start_session(request: Request, x_actor: str | None = Header(default=N
     if doc is None:
         raise HTTPException(404, "Unknown document")
     run_id = b.get("run_id")
+    if run_id is not None:
+        if not isinstance(run_id, int) or isinstance(run_id, bool):
+            raise HTTPException(400, "run_id must be a run number")
+        owner = svc.store.query("SELECT document_id FROM runs WHERE id=?", (run_id,))
+        if not owner or owner[0]["document_id"] != doc["id"]:
+            raise HTTPException(400, "That run does not belong to this document")
     with svc.store.tx() as c:
         cur = c.execute("INSERT INTO work_sessions(document_id, run_id, mode, actor, started_at) VALUES (?,?,?,?,?)",
                         (doc["id"], run_id, mode, actor_of(x_actor), now()))
@@ -65,8 +73,15 @@ async def heartbeat(sid: int, request: Request) -> dict[str, Any]:
         delta = float(b.get("active_seconds", 0))
     except (TypeError, ValueError) as exc:
         raise HTTPException(400, "active_seconds must be a number") from exc
+    if not math.isfinite(delta):
+        raise HTTPException(400, "active_seconds must be a finite number")
     delta = max(0.0, min(delta, MAX_HEARTBEAT_SECONDS))
     with svc.store.tx() as c:
+        row = c.execute("SELECT started_at, active_seconds FROM work_sessions WHERE id=? AND ended_at IS NULL", (sid,)).fetchone()
+        if row is None:
+            raise HTTPException(409, "Session is unknown or already ended")
+        elapsed = (datetime.now(UTC) - datetime.fromisoformat(row["started_at"])).total_seconds() + 1
+        delta = max(0.0, min(delta, elapsed - row["active_seconds"]))  # active time cannot exceed clock time
         cur = c.execute("UPDATE work_sessions SET active_seconds = active_seconds + ? WHERE id=? AND ended_at IS NULL",
                         (delta, sid))
         if cur.rowcount != 1:
@@ -88,9 +103,10 @@ async def end_session(sid: int, request: Request, x_actor: str | None = Header(d
     entered = b.get("values") if isinstance(b.get("values"), dict) else {}
     errors = checked = None
     if s["mode"] == "baseline" and entered and s["run_id"]:
-        # Hand-keyed values are compared with the run's spread as the reviewer left it.
+        # Hand-keyed values are compared with the approved spread of the same document only; an
+        # unapproved spread may hold the tool's own errors, which must not count against the person.
         view = svc.get(int(s["run_id"]))
-        if view.spread is not None:
+        if view.run["document_id"] == s["document_id"] and view.run["state"].get("approved") and view.spread is not None:
             index = {f"{v.line}@{v.period}": v.value for v in view.spread.values}
             errors = checked = 0
             for k, raw in entered.items():
@@ -142,7 +158,7 @@ async def set_assumptions(request: Request, x_actor: str | None = Header(default
                 f = float(v)
             except (TypeError, ValueError) as exc:
                 raise HTTPException(400, f"'{k}' must be a number") from exc
-            if f < 0 or (k.endswith("_share") and f > 1) or f > 1e9:
+            if not math.isfinite(f) or f < 0 or (k.endswith("_share") and f > 1) or f > 1e9:
                 raise HTTPException(400, f"'{k}' is out of range")
             c.execute("INSERT OR REPLACE INTO assumptions(key, value, source, note, updated_at, updated_by) VALUES (?,?,?,?,?,?)",
                       (k, str(f), "entered", None, now(), actor_of(x_actor)))

@@ -176,8 +176,11 @@ class Service:
         human = {(v.line, v.period) for v in values if v.status is ValueStatus.HUMAN}
         for it in review:
             if it.id in resolved:
+                r = resolved[it.id]
+                if isinstance(r, dict) and r.get("fingerprint") not in (None, _fingerprint(it.message)):
+                    continue  # the numbers it was resolved on have changed: open again
                 it.resolved = True
-                it.resolution = resolved[it.id]
+                it.resolution = r["note"] if isinstance(r, dict) else r
             elif it.kind is not ReviewKind.FAILED_CHECK and it.lines and all(
                     (ln, p) in human for ln in it.lines for p in it.periods):
                 it.resolved = True
@@ -194,6 +197,7 @@ class Service:
         if run["status"] != "succeeded" or spread is None:
             raise ActionError("Only a finished run can be reviewed")
         state = run["state"]
+        before = json.loads(json.dumps(state))
         if state.get("approved") and action.get("type") not in {"reopen"}:
             raise ActionError("This spread is approved. Reopen it before changing anything.")
         kind = action.get("type")
@@ -227,7 +231,8 @@ class Service:
                 raise ActionError("Resolving an item needs a note saying why")
             if item.kind is ReviewKind.ASSUMED_SCALE and "confirm" not in note.lower():
                 raise ActionError("An assumed unit can only be resolved by confirming it (include the word 'confirm')")
-            state.setdefault("resolved", {})[item_id] = f"{note[:500]} ({actor}, {now()})"
+            state.setdefault("resolved", {})[item_id] = {"note": f"{note[:500]} ({actor}, {now()})",
+                                                        "fingerprint": _fingerprint(item.message)}
         elif kind in {"remap_row", "exclude_row"}:
             return self._remap(run, spread, action, actor)
         elif kind == "approve":
@@ -243,6 +248,9 @@ class Service:
         else:
             raise ActionError(f"Unknown action '{kind}'")
         with self.store.tx() as c:
+            current = c.execute("SELECT state FROM runs WHERE id=?", (run_id,)).fetchone()["state"]
+            if json.loads(current or "{}") != before:
+                raise ActionError("This spread was changed by someone else a moment ago. Reload it and try again.")
             c.execute("UPDATE runs SET state=? WHERE id=?", (json.dumps(state), run_id))
             self.store.log(c, kind, payload, actor, run_id, run["document_id"])
         return self.get(run_id)
@@ -307,6 +315,10 @@ class Service:
                                     "auto_accepted": sum(1 for v in view.spread.values if not v.flags)}
             out.append(d)
         return out
+
+
+def _fingerprint(message: str) -> str:
+    return hashlib.sha256(message.encode()).hexdigest()[:16]
 
 
 def _safe_name(name: str) -> str:

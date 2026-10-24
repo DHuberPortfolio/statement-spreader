@@ -155,11 +155,12 @@ def compute(inp: RoiInputs) -> RoiReport:
     # Paired difference when the same documents were done both ways (the stronger design).
     by_doc: dict[str, dict[str, list[float]]] = {}
     for s in inp.sessions:
-        by_doc.setdefault(s.document_id, {}).setdefault(s.mode, []).append(s.active_seconds / 60)
+        if s.active_seconds > 0:
+            by_doc.setdefault(s.document_id, {}).setdefault(s.mode, []).append(s.active_seconds / 60)
     diffs = [statistics.fmean(d["baseline"]) - statistics.fmean(d["assisted"]) for d in by_doc.values()
              if d.get("baseline") and d.get("assisted")]
     saved: Number
-    if len(diffs) >= MIN_SESSIONS:
+    if len(diffs) >= MIN_SESSIONS and len(base) >= MIN_SESSIONS and len(assist) >= MIN_SESSIONS:
         m, lo, hi = mean_range(diffs)
         saved = Number(m, "observed", "minutes per document",
                        "Paired: the same documents timed by hand and assisted. Order effects (seeing a document twice) "

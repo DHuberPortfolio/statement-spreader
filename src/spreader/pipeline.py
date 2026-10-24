@@ -10,6 +10,7 @@ store.py and service.py, outside this function.
 
 from __future__ import annotations
 
+import re
 import time
 from dataclasses import dataclass, field
 
@@ -24,6 +25,8 @@ from .spread import assemble_statement, merge_periods
 from .structure import build_statement, harmonize_periods
 
 LAYOUT_TOLERANCE = {SourceFormat.HTML: 0.0, SourceFormat.XLSX: 0.0, SourceFormat.PDF: 2.0}
+_NOT_PRIMARY = re.compile(r"pro\s*forma|unaudited|segment|quarterly|selected financial|summary|condensed consolidating|"
+                          r"supplementary|non-gaap|illustrative", re.I)
 
 
 @dataclass
@@ -48,15 +51,25 @@ class StageTimer:
 def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dict[StatementType, tuple]:
     """Lay out every table and keep the best-scoring one per statement type."""
     best: dict[StatementType, tuple] = {}
+    rivals: dict[StatementType, list[tuple]] = {}
     tol = LAYOUT_TOLERANCE[doc.format]
     for table in doc.tables:
         layout = timer.run("layout", lay_out, table, tol)
         det = timer.run("classify", classify, layout, table, profile)
         if det is None:
             continue
+        title = (layout.title_text + " " + table.context[-200:]).lower()
+        if _NOT_PRIMARY.search(title):
+            det.score -= 6  # a pro forma, unaudited, segment or quarterly table is not the primary statement
+        rivals.setdefault(det.statement, []).append((table, layout, det))
         cur = best.get(det.statement)
         if cur is None or det.score > cur[2].score:
             best[det.statement] = (table, layout, det)
+    for stype, cands in rivals.items():
+        chosen = best[stype]
+        close = [c for c in cands if c[0] is not chosen[0] and c[2].score >= chosen[2].score - 3]
+        if close:
+            chosen[0].__dict__.setdefault("_rivals", [c[0].index for c in close])
     return best
 
 
@@ -68,6 +81,13 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     values = []
     built = {stype: timer.run("structure", build_statement, table, layout, stype, doc.doc_id, det.score)
              for stype, (table, layout, det) in picked.items()}
+    for stype, (table, _layout, _det) in picked.items():
+        rival_ids = table.__dict__.get("_rivals")
+        if rival_ids:
+            built[stype].warnings.append(
+                f"COMPETING_TABLE: another table (table {', '.join(str(i + 1) for i in rival_ids)}) also looks like the "
+                f"{stype.value.replace('_', ' ')}; the pipeline used table {table.index + 1}. Confirm it is the audited "
+                "primary statement.")
     harmonize_periods(list(built.values()), doc.preface)
     for stype, st in built.items():
         mappings = timer.run("map", map_table, st, profile, memory, model)
