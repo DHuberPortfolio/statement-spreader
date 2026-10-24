@@ -51,6 +51,7 @@ class CellOutcome:
     line_truth: str | None
     line_pred: str | None
     mapping_ok: bool | None  # None when the key cannot judge the mapping
+    method: str = ""  # how the pipeline mapped the row (alias, fuzzy, structure, model, ...)
 
 
 @dataclass
@@ -104,6 +105,7 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
     # key is incomplete there, so the value is "unjudged" rather than scored either way.
     unknown_extra: dict[tuple[str, str], Decimal] = {}
     by_xpath: dict[str, tuple[str, str, Decimal | None, str | None]] = {}
+    method_of: dict[str, str] = {}
     if key.cells:
         for skey, res in spread.statements.items():
             mapping_of = {m.row_index: m for m in res.mappings}
@@ -115,6 +117,8 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
                         unit_mult = 1 if r.unit.value in {"per_share", "percent"} else (
                             res.table.share_scale.multiplier if r.unit.value == "shares" and res.table.share_scale else mult)
                         by_xpath[pv.ref.xpath] = (skey, pk, pv.displayed * unit_mult, m.canonical if m else None)
+                        method_of[pv.ref.xpath] = m.method.value if m else ""
+
         for c in key.cells:
             if c.line is None and c.role != "component" and c.xpath in by_xpath:
                 _, pk, val, line = by_xpath[c.xpath]
@@ -165,7 +169,8 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
             _, pk, val, line = got
             value_ok = val is not None and abs(val - c.value) <= max(abs(c.value) * Decimal("0.000001"), Decimal("0.5"))
             mapping_ok = None if c.line is None else (line == c.line or _equivalent(line, c.line))
-            ds.cells.append(CellOutcome(c.row_label, c.period, c.value, True, value_ok, pk == c.period, c.line, line, mapping_ok))
+            ds.cells.append(CellOutcome(c.row_label, c.period, c.value, True, value_ok, pk == c.period, c.line, line, mapping_ok,
+                                        method_of.get(c.xpath, "")))
 
     kinds = {i.kind.value for i in spread.review}
     ds.expected_review_missing = [k for k in key.expect_review if k not in kinds]

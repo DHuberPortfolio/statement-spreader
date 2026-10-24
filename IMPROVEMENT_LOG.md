@@ -10,7 +10,12 @@ Each entry: what was wrong, the hypothesis, the change, and the measured effect 
 | 2 | Only dates after period wording ("years ended June 30", "as of") count; header-row label cell read first; "% change" tables penalised in detection; unit statements like "Millions, except per share" recognised | 69.4% | 6.3% (152 of 2,410) | 8.4% | Yes. No filing got worse; PG, PEP, UNP, HAS went from ~0 to mostly right |
 | 3 | A cost printed in parentheses inside a printed total is a deduction: spread as a positive cost (found by a unit test: interest expense "(10)" broke the pre-tax check) | 70.3% | 6.4% (158 of 2,478) | 8.4% | Yes (silent rate change within noise; accuracy up) |
 
-Known measurement limitation (to fix in the scorer): when a filing tags a row with a
+| 4 | Scorer: one namespace-free cell path for reader and key (attribution now measurable: 89.5% of tagged cells found, 99.5% of those read right); values the key cannot judge (company-specific tags) moved to "unjudged" | 72.3% | 3.7% (90 of 2,410) | 8.7% | Yes. A measurement correction, not a pipeline gain: 125 values were scored wrong only because the key was incomplete |
+| 5 | Cover page "fiscal year ended January 3, 2026" dates year-only columns (52/53-week years) | 75.0% | 3.7% (90 of 2,440) | 5.7% | Yes |
+| 6 | Fixes from the synthetic corpus: tax sign with costs in parentheses, "weighted average shares outstanding - basic", "in U.S. dollars" as a unit, units from period columns only, ambiguous three-decimal amounts refused, Excel year/date headers | 75.1% | 3.9% (96 of 2,451) | 5.7% | Yes. Synthetic silent error rate 1.9% -> 0.3%; SEC change within noise |
+| 7 | Mapping accuracy measured per method (alias 95.4%, section catch-all 56.0%, fuzzy 66.7%); aliases added for the rows catch-alls got wrong (financing, investing, opex, receivables, accrued); totals worded "...investing activities" mapped by footing; fuzzy confidence 0.85 -> 0.7 (measured 12 of 18) | 79.4% | 2.9% (72 of 2,519) | 4.6% | Yes. First holdout measurement (30 filings, never tuned on): 73.3% right, 3.4% silent (73 of 2,116, likely 2.8-4.3%), 5.9% silent omissions. Synthetic: 94.7% right, 0.1% silent |
+
+Known measurement limitation (fixed in #4): when a filing tags a row with a
 company-specific concept, the answer key does not know which template line that row feeds, so the
 key's total for that line can be incomplete and a correct spread value is scored wrong (seen on
 Apple's working-capital line: the key misses "vendor non-trade receivables").

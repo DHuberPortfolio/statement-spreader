@@ -73,6 +73,12 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
         return RowMapping(row_index=row.index, canonical=None, method=MapMethod.NONE, confidence=0.0,
                           reason="The row has no label.")
 
+    if row.role is RowRole.TOTAL:
+        for ln in lines:
+            if any(matches(p, lab) for p in ln.total_aliases):
+                return RowMapping(row_index=row.index, canonical=ln.id, method=MapMethod.ALIAS, confidence=0.97,
+                                  reason=f"'{lab}' is a total (its rows add up to it) worded like {ln.label}.")
+
     for sec in sections:
         if any(matches(p, sec) for p in sdef.ignore_sections):
             return RowMapping(row_index=row.index, canonical=None, method=MapMethod.STRUCTURE, confidence=0.95,
@@ -121,7 +127,7 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
         hits = process.extract(lab, choices, scorer=fuzz.token_sort_ratio, limit=3)
         if hits and hits[0][1] >= FUZZY_ACCEPT:
             (line_id, alias) = hits[0][2]
-            return RowMapping(row_index=row.index, canonical=line_id, method=MapMethod.FUZZY, confidence=0.85,
+            return RowMapping(row_index=row.index, canonical=line_id, method=MapMethod.FUZZY, confidence=0.7,
                               candidates=[(h[2][0], round(h[1] / 100, 2)) for h in hits],
                               reason=f"'{lab}' is spelled almost like '{alias}' ({hits[0][1]:.0f}/100).")
         cands = [(h[2][0], round(h[1] / 100, 2)) for h in hits if h[1] >= FUZZY_CANDIDATE]

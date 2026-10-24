@@ -41,6 +41,7 @@ class LineDef(BaseModel):
     aliases: list[str] = Field(default_factory=list)
     sections: list[SectionRule] = Field(default_factory=list)
     parts: list[str] = Field(default_factory=list)
+    total_aliases: list[str] = Field(default_factory=list)  # only for rows that foot as totals
 
     @model_validator(mode="after")
     def _kind(self) -> LineDef:

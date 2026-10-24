@@ -79,9 +79,15 @@ def main() -> None:
     ap.add_argument("--save", default=None, help="report name (default: latest-<set>)")
     ap.add_argument("--only", default=None, help="comma-separated document ids")
     ap.add_argument("--rebuild-keys", action="store_true", help="rebuild SEC answer keys from the filings")
+    ap.add_argument("--model", default=None, help="URL of a local llama-server for the mapping tier")
     args = ap.parse_args()
 
     profile = load_profile()
+    model = None
+    if args.model:
+        from spreader.llm.local import LocalModelMapper
+
+        model = LocalModelMapper(args.model, model_name="qwen3-4b-instruct-2507-q4km")
     docs: list[tuple[str, Path, Path]] = []
     if args.split != "none":
         docs += [("sec:" + t, raw, k) for t, raw, k in sec_docs(args.split)]
@@ -107,7 +113,7 @@ def main() -> None:
                 key_path.parent.mkdir(parents=True, exist_ok=True)
                 key.save(key_path)
             ir = read_document(path.name, data)
-            spread, _ = spread_document(ir, profile)
+            spread, _ = spread_document(ir, profile, model=model)
             s = score(spread, key)
         except Exception as exc:  # a crash is a result too: record it, keep going
             s = DocScore(document=doc_id, source=doc_id.split(":")[0], error=f"{type(exc).__name__}: {exc}")
@@ -158,6 +164,20 @@ def main() -> None:
         for k, label in [("found", "Found at the right source cell"), ("value", "Value read right"), ("period", "Period right"),
                          ("mapping", "Template line right (where the key can judge)")]:
             lines.append(f"| {label} | {Rate(*cells[k]).text()} |")
+    by_method: dict[str, list[int]] = {}
+    for s in scores:
+        for c in s.cells:
+            if c.found and c.mapping_ok is not None:
+                b = by_method.setdefault(c.method or "unmapped", [0, 0])
+                b[1] += 1
+                b[0] += int(c.mapping_ok)
+    if by_method:
+        lines += ["", "Template line right, by how the row was mapped:", "", "| Method | Result |", "|---|---|"]
+        lines += [f"| {m} | {Rate(*v).text()} |" for m, v in sorted(by_method.items(), key=lambda kv: -kv[1][1])]
+    report["mapping_by_method"] = by_method
+    if model is not None:
+        report["model"] = {"calls": model.calls, "cache_hits": model.cache_hits, "errors": model.errors}
+    (REPORTS / f"{name}.json").write_text(json.dumps(report, indent=1, default=str))
     lines += ["", "Wrong values by kind: " + (", ".join(f"{k} {n}" for k, n in summ.kinds.most_common()) or "none"), ""]
     misses = Counter((v.line, v.bucket) for _, v in wrong)
     lines += ["Most frequent problems (line, outcome):", ""] + [f"- {ln} {b}: {n}" for (ln, b), n in misses.most_common(25)]
