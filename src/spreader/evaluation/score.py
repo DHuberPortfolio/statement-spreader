@@ -144,6 +144,29 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
                 _, pk, val, line = by_xpath[c.xpath]
                 if line and val is not None:
                     unknown_extra[(line, pk)] = unknown_extra.get((line, pk), Decimal(0)) + val
+        if not by_xpath:
+            # PDF or Excel: no cell paths, so find the key's unplaceable rows by statement, label,
+            # period and printed value instead (the same rows, located another way).
+            from ..numbers import clean_label
+
+            by_label: dict[tuple[str, str, str], list[tuple[Decimal, str]]] = {}
+            for skey, res in spread.statements.items():
+                mapping_of = {m.row_index: m for m in res.mappings}
+                mult = Decimal(res.table.scale.multiplier)
+                for r in res.table.rows:
+                    m = mapping_of.get(r.index)
+                    if m is None or not m.canonical:
+                        continue
+                    for pk, pv in r.values.items():
+                        if pv.displayed is not None:
+                            by_label.setdefault((skey, r.label_clean, pk), []).append((pv.displayed * mult, m.canonical))
+            for c in key.cells:
+                if c.line is not None or c.role == "component":
+                    continue
+                for val, line in by_label.get((c.statement, clean_label(c.row_label), c.period), []):
+                    if abs(abs(val) - abs(c.value)) <= max(abs(c.value) * Decimal("0.000001"), Decimal("0.5")):
+                        unknown_extra[(line, c.period)] = unknown_extra.get((line, c.period), Decimal(0)) + val
+                        break
 
     align = _align_periods({t.period for t in key.spread}, {v.period for v in spread.values})
     for t in key.spread:

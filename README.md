@@ -49,9 +49,9 @@ statement packages (30 clean, 10 adversarial) in HTML, Excel and PDF, with exact
 | **SEC holdout, HTML (never tuned on)** | 30 | 73.5% (2,858 of 3,890; 72.1-74.8%) | 3.2% (68 of 2,100; 2.6-4.1%) | 5.3% (208 of 3,890; 4.7-6.1%) | 81.7% (304 of 372; 77.5-85.3%) | 20 |
 | SEC holdout, HTML, + local model | 30 | 75.0% (2,870 of 3,827; 73.6-76.3%) | 2.8% (59 of 2,086; 2.2-3.6%) | 3.8% (144 of 3,827; 3.2-4.4%) | 86.9% (392 of 451; 83.5-89.7%) | 24 |
 | Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,452; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0.0% (0 of 6; 0.0-39.0%) | 1 |
-| SEC dev printed to PDF | 33 | 77.5% (3,572 of 4,612; 76.2-78.6%) | 7.0% (193 of 2,756; 6.1-8.0%) | 2.5% (115 of 4,612; 2.1-3.0%) | - | - |
+| SEC dev printed to PDF | 33 | 80.5% (3,572 of 4,438; 79.3-81.6%) | 3.3% (87 of 2,650; 2.7-4.0%) | 2.6% (115 of 4,438; 2.2-3.1%) | - | - |
 
-Sources: `eval/reports/{dev,holdout}-final[-model].json`, `eval/reports/syn-final.json`, `eval/sec/pdf/eval-sec-pdf-final.json`; regenerate with `scripts/run_eval.py`, `scripts/print_sec_pdfs.py --eval` and `scripts/results_table.py`. The PDF row's silent error rate is not comparable with the HTML rows: the scorer's "unjudged" correction (values the answer key cannot judge) matches HTML cell paths, so it never applies to PDFs. "Review items per document" is the reviewer's workload: one failed check flags several values but is resolved once.
+Sources: `eval/reports/{dev,holdout}-final[-model].json`, `eval/reports/syn-final.json`, `eval/sec/pdf/eval-sec-pdf-unjudged.json`; regenerate with `scripts/run_eval.py`, `scripts/print_sec_pdfs.py --eval` and `scripts/results_table.py`. For PDFs the scorer finds the answer key's unplaceable rows by label, period and value instead of HTML cell paths, so the PDF row is comparable with the HTML dev rows. "Review items per document" is the reviewer's workload: one failed check flags several values but is resolved once.
 
 The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out
 without a person looking, how much is wrong. Every improvement and every reverted idea is in

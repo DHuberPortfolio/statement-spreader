@@ -18,6 +18,7 @@ Each entry: what was wrong, the hypothesis, the change, and the measured effect 
 | 10 | Red-team fixes (15 findings, see THREAT_MODEL.md); table context stops at the previous table; scorer counts a missing value as caught only when a flagged row prints it; key leaves total non-operating income unjudged when its parts are tagged | 79.6% | 2.7% (69 of 2,520) | 4.4% | Yes. Final measurement on the same code: holdout 73.5% right, 3.3% silent (70 of 2,100, likely 2.6-4.2%), 6.2% silent omissions; with the local model, holdout 75.0%, 2.9% (61 of 2,086), 4.1%, and wrong values caught 81.5% -> 86.7%. Reviewer workload: median 21 open review items per filing (25 with the model) |
 | 11 | PDF reader rewrite (parallel agent; printed SEC 10-Ks 43.3% -> 77.1% right, synthetic PDFs 91.3% -> 97.3%) and its recommendations for detection and structure; release measurement | 80.0% | 2.8% (70 of 2,542) | 3.9% | Yes. Release numbers: holdout 73.5% right, 3.2% silent (68 of 2,100), 5.3% silent omissions; with the local model 75.0%, 2.8% (59 of 2,086), 3.8%. Synthetic 97.0% right, 6 silent errors in 13,452 auto-accepted values |
 | 12 | Experiment: a failed check flags only its printed total, inputs with weaker provenance and lines named in its hint (the check still blocks approval) | 80.0% | 3.1% (95 of 3,061) | 3.9% | **Reverted.** Right values sent to review fell from 30.5% to 16.3%, but wrong values caught fell from 68.2% to 56.8% and silent errors rose from 70 to 95: the newly silent values were confident exact-alias mappings that were wrong, which provenance cannot tell apart from right ones |
+| 13 | Scorer: PDFs and Excel locate the key's unplaceable rows by label, period and value (no HTML cell paths), so their "unjudged" values stop counting as wrong | PDF: 80.5% | PDF: 3.3% (87 of 2,650) | PDF: 2.6% | Yes. A measurement correction: printed SEC 10-Ks were 77.5% / 7.0% only because 174 values the key cannot judge were scored wrong |
 
 Known measurement limitation (fixed in #4): when a filing tags a row with a
 company-specific concept, the answer key does not know which template line that row feeds, so the
@@ -34,7 +35,7 @@ Apple's working-capital line: the key misses "vendor non-trade receivables").
 3. **Mapping recall on unseen filings** (holdout 73.5% vs dev 80.0%): the gap is mostly long-tail labels. Options:
    grow aliases from reviewer memory across documents; run the local model on catch-all mappings too (not only
    unplaced rows) as a second opinion.
-4. **PDF silent errors** (7.0% on printed 10-Ks vs 2.7% for the same filings in HTML): partly the scorer (PDFs cannot
+4. **PDF silent errors** (3.3% on printed 10-Ks after the scorer fix #13, vs 2.8% in HTML): formerly partly the scorer (PDFs cannot
    use the "unjudged" correction because it matches HTML cell paths; match on label, period and value instead), partly
    real (sign and section cues are weaker in PDFs).
 5. **OCR for scanned statements** (refused today): an open-source OCR model behind the same `DocumentIR`.
