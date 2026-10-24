@@ -156,6 +156,23 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
             continue
         out[row.index] = map_row(row, table, profile, memory)
 
+    # A printed subtotal of rows already placed on different lines ("Total cash, cash equivalents
+    # and short-term investments") is not a template line: placing it anywhere counts its rows
+    # twice. It is left out, unless an alias names it as a template total.
+    for row in table.rows:
+        if row.role is not RowRole.TOTAL:
+            continue
+        m = out[row.index]
+        if m.method not in (MapMethod.STRUCTURE, MapMethod.NONE, MapMethod.FUZZY):
+            continue
+        targets = {out[c].canonical for c in row.children if c in out and out[c].canonical}
+        if len(targets) >= 2:
+            names = ", ".join(sorted(profile.lines[t].label for t in targets))
+            out[row.index] = RowMapping(row_index=row.index, canonical=None, method=MapMethod.STRUCTURE, confidence=0.95,
+                                        excluded=True,
+                                        reason=f"A subtotal of rows already placed on {names}; left out so they are "
+                                               "not counted twice (its footing is still checked).")
+
     # Structure: a total whose rows all feed one line feeds it too (when nothing else placed it).
     for row in table.rows:
         if row.role is not RowRole.TOTAL:

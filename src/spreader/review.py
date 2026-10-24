@@ -148,7 +148,27 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
 
 def _likely_causes(c: CheckResult, statements: dict[str, StatementResult], profile: Profile) -> str:
     hints: list[str] = []
-    for res in statements.values():
+    # The most useful pointer: a printed row whose amount equals the difference.
+    if c.difference not in (None, Decimal(0)):
+        for skey, res in statements.items():
+            mult = Decimal(res.table.scale.multiplier)
+            maps = {m.row_index: m for m in res.mappings}
+            for r in res.table.rows:
+                v = r.values.get(c.period) or r.values.get(c.period.split("/")[0] + "/I")
+                if v is None or v.displayed in (None, Decimal(0)) or c.difference is None or c.tolerance is None:
+                    continue
+                if abs(abs(v.displayed * mult) - abs(c.difference)) <= max(c.tolerance, mult):
+                    m = maps.get(r.index)
+                    where = (f"placed on {profile.lines[m.canonical].label}" if m and m.canonical else "not placed")
+                    hints.append(f"the difference equals '{r.label}' ({v.raw}, {where})")
+            if len(hints) >= 2:
+                break
+        if hints:
+            return "Possible cause: " + "; ".join(hints[:2]) + "."
+    stmt = next((cd.statement.value for cd in profile.checks if cd.id == c.id), None)
+    for skey, res in statements.items():
+        if stmt and skey != stmt:
+            continue
         unmapped = [r for r in res.table.rows for m in res.mappings
                     if m.row_index == r.index and m.canonical is None and not m.excluded
                     and r.values.get(c.period) is not None and r.values[c.period].displayed not in (None, Decimal(0))]
