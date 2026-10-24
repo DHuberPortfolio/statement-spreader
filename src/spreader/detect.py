@@ -24,6 +24,13 @@ _MONTH_DAY = re.compile(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|de
 _MONTH_YEAR = re.compile(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?,?\s+(\d{4})\b", re.I)
 _YEAR = re.compile(r"(?<!\d)(19[5-9]\d|20\d\d)(?!\d)")
 _FY_SHORT = re.compile(r"\bfy\s*'?(\d{2})\b", re.I)
+_STATEMENT_TITLE = {
+    StatementType.INCOME: re.compile(r"statements?\s+of\s+(consolidated\s+)?(operations|income|earnings)|income\s+statements?",
+                                     re.I),
+    StatementType.BALANCE: re.compile(r"balance\s+sheets?|statements?\s+of\s+(consolidated\s+)?financial\s+position", re.I),
+    StatementType.CASH_FLOW: re.compile(r"statements?\s+of\s+(consolidated\s+)?cash\s+flows?|cash\s+flows?\s+statements?",
+                                        re.I),
+}
 _COMPARISON = re.compile(r"%|\bchange\b|increase|decrease|\bvariance\b|\bfavorable\b|\bunfavorable\b", re.I)
 
 _DURATIONS = [
@@ -99,6 +106,12 @@ def classify(layout: Layout, table: RawTable, profile: Profile) -> Detection | N
         # a primary statement does not.
         if any(_COMPARISON.search(s.header or "") for s in layout.slots):
             score -= 12
+        # Percent values belong to analysis tables, not primary statements; a title naming the
+        # statement just above the table is evidence for it.
+        if any(t.text.rstrip().endswith("%") for r in table.rows for t in r.tokens):
+            score -= 3
+        if _STATEMENT_TITLE[stype].search(table.context[-300:]):
+            score += 2
         if best is None or score > best.score:
             best = Detection(stype, score)
     if best and best.score < 8:

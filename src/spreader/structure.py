@@ -148,7 +148,7 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
             words = set(lab.replace("total", "").split())
             if words and words <= set(section_stack[-1][1].split()) | {"net"}:
                 section_stack.pop()
-        elif section_stack and indent < section_stack[-1][0]:
+        elif lab and section_stack and indent < section_stack[-1][0]:  # an unlabelled subtotal closes nothing
             while section_stack and indent < section_stack[-1][0]:
                 section_stack.pop()
 

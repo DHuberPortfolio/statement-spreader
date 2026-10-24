@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from .contracts import RawRow, RawTable, Token
 from .numbers import clean_text, parse_amount
 
-_YEAR = re.compile(r"^(?:fy\s*)?(19[5-9]\d|20\d\d)$", re.I)
+_YEAR = re.compile(r"^(?:fy\s*)?(19[5-9]\d|20\d\d)(?:\s*\((?:\d{1,2}|[a-z])\)|\*{1,3})?$", re.I)
 _DATEWORD = re.compile(
     r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\b|\b(19[5-9]\d|20\d\d)\b|"
     r"\b(year|years|months|weeks|quarter|ended|ending|as of|fiscal|period)\b",

@@ -25,7 +25,8 @@ statements:
   income_statement:
     title: Income statement
     detect:
-      must_any: ["net income*", "net loss*", "net earnings*", "net income loss*", "net loss income*"]
+      must_any: ["net income*", "net loss*", "net earnings*", "net income loss*", "net loss income*", "profit", "profit loss",
+                 "profit attributable to*"]
       also_any: ["revenue*", "total revenue*", "net sales", "total net sales", "sales", "operating income*",
                  "gross profit", "gross margin", "income before*", "loss before*", "cost of*", "earnings per share*"]
       exclude_any: ["net cash provided by*", "net cash used in*", "total assets", "total liabilities*",
@@ -145,7 +146,7 @@ statements:
         kind: result
         critical: true
         aliases: [net income, net loss, net income loss, net loss income, net earnings, net earnings loss, "net income including*",
-                  consolidated net income, "net income loss including*", profit for the year, net profit]
+                  consolidated net income, "net income loss including*", profit for the year, net profit, profit, profit loss]
       - id: nci_net_income
         label: Net income attributable to noncontrolling interests
         kind: either
