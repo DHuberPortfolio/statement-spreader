@@ -279,6 +279,9 @@ class Service:
             carried = {k: v for k, v in run["state"].items() if k in {"overrides", "resolved"}}
             with self.store.tx() as c:
                 c.execute("UPDATE runs SET state=? WHERE id=?", (json.dumps(carried), new.run["id"]))
+                self.store.log(c, "carry_over", {"from_run": run["id"], "overrides": carried.get("overrides", {}),
+                                                 "resolved": carried.get("resolved", {})}, actor, new.run["id"],
+                               run["document_id"])
             new = self.get(new.run["id"])
         return new
 
@@ -296,6 +299,12 @@ class Service:
             d = dict(r)
             st = json.loads(d.pop("run_state") or "{}")
             d["approved"] = bool(st.get("approved"))
+            d["summary"] = None
+            if d.get("run_id") and d.get("run_status") == "succeeded":
+                view = self.get(int(d["run_id"]))
+                if view.spread is not None:
+                    d["summary"] = {**severity_counts(view.spread), "values": len(view.spread.values),
+                                    "auto_accepted": sum(1 for v in view.spread.values if not v.flags)}
             out.append(d)
         return out
 

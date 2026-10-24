@@ -117,6 +117,12 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
                     steps.append(ProvenanceStep(kind="sign", detail=f"Printed as a deduction inside '{sorted(parents)[0]}'; "
                                                                     "spread as a positive cost"))
                     status = ValueStatus.NORMALIZED
+                else:
+                    total = -total
+                    steps.append(ProvenanceStep(kind="sign", detail="Printed in parentheses on a cost line, read as a "
+                                                                    "deduction and spread as a positive cost; the statement's "
+                                                                    "checks confirm or contradict this"))
+                    status = ValueStatus.NORMALIZED
             unit = by_index[parts[0][0]].unit
             mult, evidence, assumed = _multiplier(table, unit)
             if mult != 1:

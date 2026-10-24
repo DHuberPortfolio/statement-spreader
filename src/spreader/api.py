@@ -149,13 +149,20 @@ async def act(run_id: int, request: Request, x_actor: str | None = Header(defaul
 
 @app.get("/api/runs/{run_id}/events")
 def events(run_id: int) -> list[dict[str, Any]]:
+    try:
+        service().get(run_id)
+    except ActionError as exc:
+        raise HTTPException(404, str(exc)) from exc
     return service().events(run_id)
 
 
 @app.get("/api/runs/{run_id}/source/{statement}")
 def source_table(run_id: int, statement: str) -> dict[str, Any]:
     """The statement as the pipeline read it: rows of text cells with their row index and role."""
-    view = service().get(run_id)
+    try:
+        view = service().get(run_id)
+    except ActionError as exc:
+        raise HTTPException(404, str(exc)) from exc
     if view.spread is None or statement not in view.spread.statements:
         raise HTTPException(404, "No such statement in this run")
     res = view.spread.statements[statement]

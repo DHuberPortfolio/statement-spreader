@@ -1,0 +1,87 @@
+/* Design tokens. Light: a well-kept working paper (off-white paper, deep ink, one ink-blue accent).
+   Dark: the same roles on a dark desk. Every colour in the app comes from here. */
+
+:root {
+  color-scheme: light dark;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, Menlo, monospace;
+
+  --paper: #f5f3ec;
+  --sheet: #fdfcf8;
+  --sheet-2: #efece3;
+  --ink: #1a1f26;
+  --ink-2: #39414b;
+  --muted: #5a616a;
+  --rule: #dcd7ca;
+  --rule-faint: #e9e5da;
+  --rule-strong: #b3ac9c;
+
+  --accent: #1d3f6e;
+  --accent-ink: #ffffff;
+  --accent-wash: #e2e9f3;
+  --accent-soft: #a9bcd6;
+  --focus: #2457a8;
+
+  --ok: #2b6838;
+  --ok-wash: #e1eee1;
+  --bad: #a12f29;
+  --bad-wash: #f8e2de;
+  --warn: #7d5200;
+  --warn-mark: #c58610;
+  --warn-wash: #f8ebcc;
+  --info: #4b5b6f;
+  --violet: #6f45a8;
+
+  --st-extracted: #6b727c;
+  --st-normalized: #23706f;
+  --st-calculated: #44598a;
+  --st-ai_mapped: #7a45b5;
+  --st-human: #1d3f6e;
+  --st-assumed: #b37400;
+  --st-missing: #a12f29;
+
+  --radius: 3px;
+  --shadow: 0 1px 0 rgba(26, 31, 38, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #13161a;
+    --sheet: #1a1e23;
+    --sheet-2: #22272e;
+    --ink: #e6e3da;
+    --ink-2: #c3c6cb;
+    --muted: #9ba2ab;
+    --rule: #2f353d;
+    --rule-faint: #252a31;
+    --rule-strong: #4a535e;
+
+    --accent: #8fb5e9;
+    --accent-ink: #0d1520;
+    --accent-wash: #1c2939;
+    --accent-soft: #3f5a7e;
+    --focus: #9cc1f2;
+
+    --ok: #7fc68c;
+    --ok-wash: #1b2e20;
+    --bad: #f0877d;
+    --bad-wash: #3a211f;
+    --warn: #e6b65f;
+    --warn-mark: #e0aa45;
+    --warn-wash: #33291a;
+    --info: #a6b4c6;
+    --violet: #b996ea;
+
+    --st-extracted: #a1a8b1;
+    --st-normalized: #5fc0bd;
+    --st-calculated: #9bb0e0;
+    --st-ai_mapped: #bf95f0;
+    --st-human: #8fb5e9;
+    --st-assumed: #e6b65f;
+    --st-missing: #f0877d;
+
+    --shadow: none;
+  }
+}

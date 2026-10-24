@@ -247,8 +247,10 @@ def compute(inp: RoiInputs) -> RoiReport:
         unit = {"capacity_hours": "hours per month", "first_year_roi_cash": "ratio", "payback_months_cash": "months"}.get(k, "$ per month")
         rep.numbers[k] = Number(v, label, unit, expl)
     if expected["payback_months_cash"] is None and expected["net_monthly_cash"] is not None:
-        rep.warnings.append("No payback: the cash benefit does not cover the running costs at these assumptions "
-                            "(with cash realisation at its default of 0%, no cash saving is claimed).")
+        share = A["cash_realization_share"]
+        rep.warnings.append("No payback: the cash benefit does not cover the running costs at these assumptions"
+                            + (" (cash realisation is 0%, so no cash saving is claimed)." if share == 0 else
+                               f" (cash realisation {share:.0%}).") )
 
     if "baseline_error_rate" in rep.numbers and "silent_error_rate" in rep.numbers:
         be, se = rep.numbers["baseline_error_rate"].value or 0, rep.numbers["silent_error_rate"].value or 0

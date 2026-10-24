@@ -124,7 +124,9 @@ def run_checks(values: list[SpreadValue], periods: list[Period], profile: Profil
                 continue
             involved = {profile.line_statement[n] for n in lines}
             scale = max(scales.get(s, 1) for s in involved)
-            terms = formulas.term_count(c.lhs) + formulas.term_count(c.rhs)
+            # Rounding tolerance grows with the printed numbers actually combined, not with every
+            # line the formula could name (an absent line adds no rounding).
+            terms = max(2, sum(1 for n in lines if env.get(n, p) is not None))
             tol = Decimal(terms) * Decimal("0.5") * Decimal(scale)
             if c.relative_tolerance:
                 tol = max(tol, abs(rhs) * Decimal(str(c.relative_tolerance)))
@@ -149,6 +151,8 @@ def run_ratios(values: list[SpreadValue], periods: list[Period], profile: Profil
         for p in columns:
             value, missing, why = env.evaluate(r.expr, p)
             inputs = {n: env.get(n, p) for n in sorted(formulas.names(r.expr))}
+            if inputs and all(v is None for v in inputs.values()):
+                value, missing, why = None, sorted(inputs), "missing"
             reason = None
             if value is None:
                 reason = f"Not computable: {', '.join(missing)} missing" if missing else f"Not computable: {why}"
