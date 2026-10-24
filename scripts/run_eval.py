@@ -78,6 +78,7 @@ def main() -> None:
     ap.add_argument("--formats", default="html,xlsx,pdf")
     ap.add_argument("--save", default=None, help="report name (default: latest-<set>)")
     ap.add_argument("--only", default=None, help="comma-separated document ids")
+    ap.add_argument("--rebuild-keys", action="store_true", help="rebuild SEC answer keys from the filings")
     args = ap.parse_args()
 
     profile = load_profile()
@@ -99,7 +100,7 @@ def main() -> None:
         data = path.read_bytes()
         t0 = time.perf_counter()
         try:
-            if key_path.exists():
+            if key_path.exists() and not (args.rebuild_keys and doc_id.startswith("sec:")):
                 key = AnswerKey.load(key_path)
             else:
                 key, _ = build_key(path.name, data, profile)
@@ -150,6 +151,7 @@ def main() -> None:
               "unnecessary_review_rate": "Right values sent to review anyway", "coverage": "Answer-key values present in the spread"}
     for k, label in labels.items():
         lines.append(f"| {label} | {r[k].text()} |")
+    lines.append(f"| Not judged (the answer key cannot place a row the value includes) | {summ.buckets['unjudged']} values |")
     cells = summ.cells
     if cells["found"][1]:
         lines += ["", "Printed numbers (SEC cells located by the answer key's tags):", "", "| Measure | Result |", "|---|---|"]

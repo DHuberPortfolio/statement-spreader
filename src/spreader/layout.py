@@ -57,9 +57,12 @@ class Layout:
     header_label_text: str = ""  # header-row text left of the value columns ("fiscal years ended June 30")
 
 
+_EUROPEAN_LIKE = re.compile(r"^\(?[$\u20ac\u00a3]?\s*-?\d{1,3}(\.\d{3})+(,\d+)?\)?$|^\(?-?\d+,\d{1,2}\)?$")
+
+
 def _is_value(tok: Token) -> bool:
     amount, _ = parse_amount(tok.text)
-    return amount is not None
+    return amount is not None or bool(_EUROPEAN_LIKE.match(tok.text.strip()))
 
 
 def _is_year(tok: Token) -> bool:

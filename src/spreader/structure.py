@@ -36,6 +36,8 @@ _MONEY_WORDS = re.compile(r"par value|paid in|capital|authorized|payments?|proce
 _PER_SHARE_SECTION = re.compile(r"per (common )?share|\beps\b|earnings loss per|net income loss per", re.I)
 _SHARES_SECTION = re.compile(r"shares used|weighted average|shares outstanding|number of shares|share count", re.I)
 _NOT_PERIOD = re.compile(r"%|\bchange\b|\bvariance\b|\bnotes?\b|\bref\b", re.I)
+_EUROPEAN_MULTI = re.compile(r"^\(?[$€£]?\s*-?\d{1,3}(\.\d{3}){2,}(,\d+)?\)?$|^\(?[$€£]?\s*-?\d{1,3}(\.\d{3})+,\d+\)?$")
+_EUROPEAN_SINGLE = re.compile(r"^\(?[$€£]?\s*-?\d{1,3}\.\d{3}\)?$")
 
 MAX_FOOTING_RUN = 30
 
@@ -86,6 +88,10 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
              table.context[-400:], table.context]
     scale, share_scale = detect_scale(texts)
 
+    # European grouping ("1.234.567", "1.234,5") anywhere in the table means a lone "719.147" is
+    # 719 thousand, not 719.147: refuse every such number in the table instead of misreading it.
+    european = any(_EUROPEAN_MULTI.match(t.text.strip()) for lo in layout.rows for t in lo.values.values())
+
     rows: list[StatementRow] = []
     section_stack: list[tuple[float, str]] = []
     for lo in layout.rows:
@@ -97,6 +103,8 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
             if p is None:
                 continue
             amount, why = parse_amount(tok.text)
+            if european and _EUROPEAN_SINGLE.match(tok.text.strip()):
+                amount, why = None, f"'{tok.text}' uses European number grouping, which is not supported"
             values[p.key] = ParsedValue(
                 raw=tok.text,
                 displayed=amount.displayed if amount else None,
@@ -121,7 +129,16 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
             continue
         # A total closes the section it totals ("Total current assets" ends "Current assets:").
         section = " > ".join(s for _, s in section_stack)
-        unit = _unit(lab, section, lo)
+        unit = _unit(lab, section, [lo.values[si].text for si in lo.values if periods[si] is not None])
+        if unit in (ValueUnit.MONEY, ValueUnit.SHARES):
+            # A money amount printed with exactly three decimals ("719.147") is how European
+            # statements write 719,147. US statements print money as whole numbers, so this is
+            # ambiguous: refuse it rather than read it either way.
+            for k, pv in values.items():
+                if pv.displayed is not None and _EUROPEAN_SINGLE.match(pv.raw.strip()):
+                    values[k] = pv.model_copy(update={"displayed": None, "note": (
+                        f"'{pv.raw}' is ambiguous: three decimals on an amount is how European statements write "
+                        "thousands (719.147 = 719,147); not read")})
         rows.append(StatementRow(index=lo.row.index, label=label, label_clean=lab, section=section, indent=indent,
                                  bold=lo.row.bold, unit=unit, values=values,
                                  label_ref=lo.label_token.ref if lo.label_token else None))
@@ -142,7 +159,22 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
     return st
 
 
-def harmonize_periods(tables: list[StatementTable]) -> None:
+_FYE = re.compile(r"(?:fiscal\s+)?(?:year|period)\s+ended\s*:?\s*((?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s*\d{1,2}\s*,?\s*\d{4})",
+                  re.I)
+
+
+def fiscal_year_end(preface: str) -> str | None:
+    """The fiscal year-end a filing's cover page states ("For the fiscal year ended January 3, 2026")."""
+    from .detect import parse_period
+
+    m = _FYE.search(preface or "")
+    if not m:
+        return None
+    p = parse_period(m.group(1), StatementType.BALANCE)
+    return p.end if p and not p.assumed else None
+
+
+def harmonize_periods(tables: list[StatementTable], preface: str = "") -> None:
     """Give year-only columns the exact fiscal year-end another statement prints.
 
     An income statement headed "2025 | 2024" next to a balance sheet headed "September 27, 2025"
@@ -153,6 +185,36 @@ def harmonize_periods(tables: list[StatementTable]) -> None:
         for p in t.periods:
             if not any("Only the year" in a or "assumed to end" in a for a in p.assumed):
                 exact.setdefault(p.end[:4], p.end)
+    fye = fiscal_year_end(preface)
+    if fye and not exact:
+        # Only the years are printed anywhere; the cover page names the latest year-end. A year
+        # ending early in January (a 52/53-week year) is labelled by the year before it.
+        label_year = int(fye[:4]) - 1 if fye[5:7] == "01" and int(fye[8:10]) <= 10 else int(fye[:4])
+        years = {p.end[:4] for t in tables for p in t.periods}
+        if str(label_year) in years:
+            for t in tables:
+                rename: dict[str, str] = {}
+                new_periods = []
+                for p in t.periods:
+                    if not any("Only the year" in a for a in p.assumed):
+                        new_periods.append(p)
+                        continue
+                    shift = int(p.end[:4]) - label_year
+                    end = f"{int(fye[:4]) + shift:04d}{fye[4:]}"
+                    key = f"{end}/{'I' if p.months is None else f'{p.months}M'}"
+                    kept = [a for a in p.assumed if "Only the year" not in a]
+                    notes = list(p.notes)
+                    if shift == 0:
+                        notes.append(f"The column prints {p.end[:4]}; the cover page says the fiscal year ended {fye}.")
+                    else:
+                        kept.append(f"The column prints {p.end[:4]}; its end date is assumed to fall on the same day as the "
+                                    f"latest year-end ({fye}); 52/53-week years can differ by a few days.")
+                    rename[p.key] = key
+                    new_periods.append(p.model_copy(update={"key": key, "end": end, "assumed": kept, "notes": notes}))
+                t.periods = new_periods
+                for r in t.rows:
+                    r.values = {rename.get(k, k): v for k, v in r.values.items()}
+            return
     for t in tables:
         rename: dict[str, str] = {}
         new_periods = []
@@ -176,8 +238,8 @@ def harmonize_periods(tables: list[StatementTable]) -> None:
                 r.values = {rename.get(k, k): v for k, v in r.values.items()}
 
 
-def _unit(lab: str, section: str, lo: object) -> ValueUnit:
-    raw_vals = " ".join(t.text for t in getattr(lo, "values", {}).values())
+def _unit(lab: str, section: str, period_texts: list[str]) -> ValueUnit:
+    raw_vals = " ".join(period_texts)
     if "%" in raw_vals:
         return ValueUnit.PERCENT
     if _PER_SHARE.search(lab) and not _MONEY_WORDS.search(lab):

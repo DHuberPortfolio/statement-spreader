@@ -1,0 +1,1163 @@
+{
+ "source": "synthetic",
+ "generator": "spreader.evaluation.synthetic",
+ "version": "2026.10.24-1",
+ "seed": 7,
+ "count": 40,
+ "pdf": {
+  "status": "ok",
+  "problems": []
+ },
+ "key_file": "key.json",
+ "document_stem": "statement",
+ "cases": [
+  {
+   "id": "s7-001-clean",
+   "kind": "clean",
+   "dir": "s7-001-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-thousands",
+    "3-periods",
+    "fye-mar",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "no-interest-income",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Valecrest Logistics Corporation (fictional) for fiscal years ending 2021-03-31, 2022-03-31, 2023-03-31. Printed in thousands (share counts in thousands); HTML style 'simple', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-002-clean",
+   "kind": "clean",
+   "dir": "s7-002-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-units",
+    "3-periods",
+    "fye-jan",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "oldest-first",
+    "no-gross-profit",
+    "sga-split",
+    "footnotes",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Cobalt Ridge Instruments Corp. (fictional) for fiscal years ending 2022-01-31, 2023-01-31, 2024-01-31. Printed in units (share counts in units); HTML style 'simple', negatives as paren, zero as '\u2014', oldest period first."
+  },
+  {
+   "id": "s7-003-clean",
+   "kind": "clean",
+   "dir": "s7-003-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-millions",
+    "2-periods",
+    "fye-dec",
+    "unit-row",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "shares-units",
+    "no-interest-income",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Silverbrook Precision Inc. (fictional) for fiscal years ending 2023-12-31, 2024-12-31. Printed in millions (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2013', newest period first."
+  },
+  {
+   "id": "s7-004-clean",
+   "kind": "clean",
+   "dir": "s7-004-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "2-periods",
+    "fye-wk-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "shares-units",
+    "no-gross-profit",
+    "costs-and-expenses",
+    "supplemental",
+    "no-total-liabilities",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Birchline Health Services Inc. (fictional) for fiscal years ending 2022-12-31, 2023-12-30. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-005-clean",
+   "kind": "clean",
+   "dir": "s7-005-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-millions",
+    "2-periods",
+    "fye-wk-sep",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "neg-minus",
+    "no-interest-income",
+    "sga-split"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Fairhollow Analytics Inc. (fictional) for fiscal years ending 2023-09-30, 2024-09-28. Printed in millions (share counts in millions); HTML style 'sec', negatives as minus, zero as '\u2013', newest period first."
+  },
+  {
+   "id": "s7-006-clean",
+   "kind": "clean",
+   "dir": "s7-006-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-thousands",
+    "2-periods",
+    "fye-jan",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-mixed",
+    "xlsx-headers-text",
+    "neg-minus",
+    "no-gross-profit",
+    "footnotes",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Fairhollow Analytics Inc. (fictional) for fiscal years ending 2025-01-31, 2026-01-31. Printed in thousands (share counts in thousands); HTML style 'simple', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-007-clean",
+   "kind": "clean",
+   "dir": "s7-007-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-thousands",
+    "3-periods",
+    "fye-wk-sep",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "no-gross-profit",
+    "costs-and-expenses",
+    "no-interest-income",
+    "revenue-split",
+    "footnotes",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Emberfield Components Inc. (fictional) for fiscal years ending 2023-09-30, 2024-09-28, 2025-09-27. Printed in thousands (share counts in thousands); HTML style 'simple', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-008-clean",
+   "kind": "clean",
+   "dir": "s7-008-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-thousands",
+    "3-periods",
+    "fye-wk-dec",
+    "unit-span",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "loss-year",
+    "supplemental",
+    "no-total-liabilities",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Harborline Logistics Corp. (fictional) for fiscal years ending 2021-12-25, 2022-12-31, 2023-12-30. Printed in thousands (share counts in thousands); HTML style 'simple', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-009-clean",
+   "kind": "clean",
+   "dir": "s7-009-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-thousands",
+    "2-periods",
+    "fye-jan",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "shares-units",
+    "neg-minus",
+    "no-interest-income",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Juniper Hollow Analytics Holdings, Inc. (fictional) for fiscal years ending 2024-01-31, 2025-01-31. Printed in thousands (share counts in units); HTML style 'simple', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-010-clean",
+   "kind": "clean",
+   "dir": "s7-010-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-grid",
+    "scale-millions",
+    "3-periods",
+    "fye-jan",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-mixed",
+    "xlsx-headers-text",
+    "shares-units",
+    "oldest-first",
+    "no-interest-income",
+    "footnotes",
+    "supplemental",
+    "no-total-liabilities",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Marrow Bay Components Holdings, Inc. (fictional) for fiscal years ending 2024-01-31, 2025-01-31, 2026-01-31. Printed in millions (share counts in units); HTML style 'grid', negatives as paren, zero as '\u2014', oldest period first."
+  },
+  {
+   "id": "s7-011-clean",
+   "kind": "clean",
+   "dir": "s7-011-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-thousands",
+    "3-periods",
+    "fye-wk-sep",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "neg-minus",
+    "no-interest-income",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Oakhurst Vale Precision Inc. (fictional) for fiscal years ending 2023-09-30, 2024-09-28, 2025-09-27. Printed in thousands (share counts in thousands); HTML style 'simple', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-012-clean",
+   "kind": "clean",
+   "dir": "s7-012-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "2-periods",
+    "fye-wk-dec",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-mixed",
+    "xlsx-headers-native",
+    "shares-units",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Emberfield Instruments Corporation (fictional) for fiscal years ending 2022-12-31, 2023-12-30. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-013-clean",
+   "kind": "clean",
+   "dir": "s7-013-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-grid",
+    "scale-millions",
+    "3-periods",
+    "fye-wk-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-text",
+    "xlsx-headers-text",
+    "shares-units",
+    "costs-negative",
+    "oldest-first",
+    "extra-opex",
+    "sga-split",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Yarrowfield Foods Holdings, Inc. (fictional) for fiscal years ending 2023-12-30, 2024-12-28, 2025-12-27. Printed in millions (share counts in units); HTML style 'grid', negatives as paren, zero as '-', oldest period first."
+  },
+  {
+   "id": "s7-014-clean",
+   "kind": "clean",
+   "dir": "s7-014-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "3-periods",
+    "fye-wk-dec",
+    "unit-span",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "oldest-first",
+    "extra-opex",
+    "footnotes",
+    "loss-year",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Yarrowfield Health Services Corporation (fictional) for fiscal years ending 2023-12-30, 2024-12-28, 2025-12-27. Printed in thousands (share counts in thousands); HTML style 'sec', negatives as paren, zero as '-', oldest period first."
+  },
+  {
+   "id": "s7-015-clean",
+   "kind": "clean",
+   "dir": "s7-015-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-millions",
+    "3-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "oldest-first",
+    "no-interest-income"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Quarry Glen Health Services Inc. (fictional) for fiscal years ending 2021-12-31, 2022-12-31, 2023-12-31. Printed in millions (share counts in millions); HTML style 'simple', negatives as paren, zero as '-', oldest period first."
+  },
+  {
+   "id": "s7-016-clean",
+   "kind": "clean",
+   "dir": "s7-016-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-grid",
+    "scale-thousands",
+    "3-periods",
+    "fye-sep",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "no-interest-income",
+    "revenue-split",
+    "footnotes",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Granite Bend Precision Holdings, Inc. (fictional) for fiscal years ending 2023-09-30, 2024-09-30, 2025-09-30. Printed in thousands (share counts in thousands); HTML style 'grid', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-017-clean",
+   "kind": "clean",
+   "dir": "s7-017-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-units",
+    "2-periods",
+    "fye-dec",
+    "unit-row",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "extra-opex"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Kestrel Point Industrial Corp. (fictional) for fiscal years ending 2023-12-31, 2024-12-31. Printed in units (share counts in units); HTML style 'sec', negatives as paren, zero as '0', newest period first."
+  },
+  {
+   "id": "s7-018-clean",
+   "kind": "clean",
+   "dir": "s7-018-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "3-periods",
+    "fye-mar",
+    "unit-span",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "shares-units",
+    "revenue-split",
+    "footnotes",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Pinecastle Analytics Co. (fictional) for fiscal years ending 2022-03-31, 2023-03-31, 2024-03-31. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '-', newest period first."
+  },
+  {
+   "id": "s7-019-clean",
+   "kind": "clean",
+   "dir": "s7-019-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-grid",
+    "scale-millions",
+    "2-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-mixed",
+    "xlsx-headers-text",
+    "shares-units",
+    "no-interest-income",
+    "extra-opex"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Upland Forge Software Inc. (fictional) for fiscal years ending 2022-12-31, 2023-12-31. Printed in millions (share counts in units); HTML style 'grid', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-020-clean",
+   "kind": "clean",
+   "dir": "s7-020-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-units",
+    "3-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-mixed",
+    "xlsx-headers-text",
+    "neg-minus",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Oakhurst Vale Packaging Holdings, Inc. (fictional) for fiscal years ending 2022-12-31, 2023-12-31, 2024-12-31. Printed in units (share counts in units); HTML style 'sec', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-021-clean",
+   "kind": "clean",
+   "dir": "s7-021-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-grid",
+    "scale-units",
+    "2-periods",
+    "fye-mar",
+    "unit-span",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "neg-minus",
+    "revenue-split",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Quarry Glen Instruments Corporation (fictional) for fiscal years ending 2022-03-31, 2023-03-31. Printed in units (share counts in units); HTML style 'grid', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-022-clean",
+   "kind": "clean",
+   "dir": "s7-022-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-millions",
+    "2-periods",
+    "fye-wk-dec",
+    "unit-span",
+    "xlsx-sheets",
+    "xlsx-text",
+    "xlsx-headers-native",
+    "oldest-first",
+    "no-interest-income",
+    "sga-split",
+    "revenue-split",
+    "no-total-liabilities",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Valecrest Foods Holdings, Inc. (fictional) for fiscal years ending 2022-12-31, 2023-12-30. Printed in millions (share counts in millions); HTML style 'sec', negatives as paren, zero as '-', oldest period first."
+  },
+  {
+   "id": "s7-023-clean",
+   "kind": "clean",
+   "dir": "s7-023-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "2-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "shares-units",
+    "sga-split",
+    "treasury-stock",
+    "no-total-liabilities",
+    "zero-printed"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Juniper Hollow Labs Inc. (fictional) for fiscal years ending 2024-12-31, 2025-12-31. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '0', newest period first."
+  },
+  {
+   "id": "s7-024-clean",
+   "kind": "clean",
+   "dir": "s7-024-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-units",
+    "3-periods",
+    "fye-dec",
+    "unit-span",
+    "xlsx-sheets",
+    "xlsx-text",
+    "xlsx-headers-native",
+    "neg-minus",
+    "costs-negative",
+    "no-interest-income",
+    "revenue-split",
+    "supplemental"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Birchline Software Corp. (fictional) for fiscal years ending 2022-12-31, 2023-12-31, 2024-12-31. Printed in units (share counts in units); HTML style 'simple', negatives as minus, zero as '-', newest period first."
+  },
+  {
+   "id": "s7-025-clean",
+   "kind": "clean",
+   "dir": "s7-025-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-millions",
+    "3-periods",
+    "fye-wk-dec",
+    "unit-row",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "shares-units",
+    "costs-negative",
+    "no-gross-profit",
+    "costs-and-expenses",
+    "sga-split",
+    "revenue-split"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Birchline Fabrication Co. (fictional) for fiscal years ending 2023-12-30, 2024-12-28, 2025-12-27. Printed in millions (share counts in units); HTML style 'sec', negatives as paren, zero as '-', newest period first."
+  },
+  {
+   "id": "s7-026-clean",
+   "kind": "clean",
+   "dir": "s7-026-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-grid",
+    "scale-thousands",
+    "2-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "shares-units",
+    "sga-split",
+    "revenue-split",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Lakemont Supply Holdings, Inc. (fictional) for fiscal years ending 2022-12-31, 2023-12-31. Printed in thousands (share counts in units); HTML style 'grid', negatives as paren, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-027-clean",
+   "kind": "clean",
+   "dir": "s7-027-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "2-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-text",
+    "xlsx-headers-text",
+    "shares-units",
+    "no-interest-income",
+    "revenue-split",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Marrow Bay Health Services Holdings, Inc. (fictional) for fiscal years ending 2024-12-31, 2025-12-31. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2013', newest period first."
+  },
+  {
+   "id": "s7-028-clean",
+   "kind": "clean",
+   "dir": "s7-028-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "3-periods",
+    "fye-jun",
+    "unit-span",
+    "xlsx-single",
+    "xlsx-text",
+    "xlsx-headers-native",
+    "shares-units",
+    "no-interest-income",
+    "revenue-split",
+    "footnotes",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Quarry Glen Supply Co. (fictional) for fiscal years ending 2022-06-30, 2023-06-30, 2024-06-30. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '-', newest period first."
+  },
+  {
+   "id": "s7-029-clean",
+   "kind": "clean",
+   "dir": "s7-029-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-simple",
+    "scale-millions",
+    "3-periods",
+    "fye-dec",
+    "unit-span",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "neg-minus",
+    "costs-negative",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Redfern Mill Health Services Corp. (fictional) for fiscal years ending 2021-12-31, 2022-12-31, 2023-12-31. Printed in millions (share counts in millions); HTML style 'simple', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-030-clean",
+   "kind": "clean",
+   "dir": "s7-030-clean",
+   "tags": [
+    "synthetic",
+    "clean",
+    "html-sec",
+    "scale-thousands",
+    "3-periods",
+    "fye-mar",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "neg-minus",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Quarry Glen Components Inc. (fictional) for fiscal years ending 2023-03-31, 2024-03-31, 2025-03-31. Printed in thousands (share counts in thousands); HTML style 'sec', negatives as minus, zero as '\u2014', newest period first."
+  },
+  {
+   "id": "s7-031-no-unit-statement",
+   "kind": "no-unit-statement",
+   "dir": "s7-031-no-unit-statement",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "no-unit-statement",
+    "html-sec",
+    "scale-units",
+    "3-periods",
+    "fye-wk-dec",
+    "unit-none",
+    "xlsx-sheets",
+    "xlsx-mixed",
+    "xlsx-headers-text",
+    "oldest-first",
+    "no-interest-income",
+    "extra-opex",
+    "revenue-split",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [
+    "assumed_scale"
+   ],
+   "description": "Synthetic statements of Birchline Marine Corp. (fictional) for fiscal years ending 2021-12-25, 2022-12-31, 2023-12-30. Printed in units (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2014', oldest period first. No unit statement anywhere; amounts are whole dollars, so taking them as printed is right, but the scale must still be flagged."
+  },
+  {
+   "id": "s7-032-footing-error",
+   "kind": "footing-error",
+   "dir": "s7-032-footing-error",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "footing-error",
+    "html-sec",
+    "scale-units",
+    "3-periods",
+    "fye-sep",
+    "unit-above",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "sga-split",
+    "footnotes",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [
+    "failed_check",
+    "footing"
+   ],
+   "description": "Synthetic statements of Birchline Marine Corp. (fictional) for fiscal years ending 2021-09-30, 2022-09-30, 2023-09-30. Printed in units (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2014', newest period first. 'Total current liabilities' is printed wrong in the newest period (two digits transposed). The key holds the printed value; the review must catch it (a failed check, and a footing item for a 'Total' row)."
+  },
+  {
+   "id": "s7-033-hidden-row",
+   "kind": "hidden-row",
+   "dir": "s7-033-hidden-row",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "hidden-row",
+    "html-simple",
+    "scale-thousands",
+    "2-periods",
+    "fye-dec",
+    "unit-span",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "shares-units",
+    "costs-negative",
+    "revenue-split",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Oakhurst Vale Fabrication Inc. (fictional) for fiscal years ending 2022-12-31, 2023-12-31. Printed in thousands (share counts in units); HTML style 'simple', negatives as paren, zero as '\u2014', newest period first. A display:none row 'Marketable securities' under current assets carries a fake value."
+  },
+  {
+   "id": "s7-034-prompt-injection",
+   "kind": "prompt-injection",
+   "dir": "s7-034-prompt-injection",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "prompt-injection",
+    "html-simple",
+    "scale-millions",
+    "3-periods",
+    "fye-sep",
+    "unit-row",
+    "xlsx-sheets",
+    "xlsx-mixed",
+    "xlsx-headers-text",
+    "footnotes"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Emberfield Outdoor Holdings, Inc. (fictional) for fiscal years ending 2021-09-30, 2022-09-30, 2023-09-30. Printed in millions (share counts in millions); HTML style 'simple', negatives as paren, zero as '\u2014', newest period first. Injected instructions in a note row, a paragraph and a label; the spread must not change."
+  },
+  {
+   "id": "s7-035-pct-change-column",
+   "kind": "pct-change-column",
+   "dir": "s7-035-pct-change-column",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "pct-change-column",
+    "html-simple",
+    "scale-millions",
+    "2-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "oldest-first",
+    "sga-split",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Yarrowfield Software Inc. (fictional) for fiscal years ending 2023-12-31, 2024-12-31. Printed in millions (share counts in millions); HTML style 'simple', negatives as paren, zero as '\u2014', oldest period first. A '% change' column beside the periods (income statement and balance sheet)."
+  },
+  {
+   "id": "s7-036-note-column",
+   "kind": "note-column",
+   "dir": "s7-036-note-column",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "note-column",
+    "html-sec",
+    "scale-thousands",
+    "2-periods",
+    "fye-jan",
+    "unit-row",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "shares-units",
+    "costs-negative",
+    "oldest-first",
+    "no-interest-income",
+    "supplemental",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Cobalt Ridge Packaging Holdings, Inc. (fictional) for fiscal years ending 2023-01-31, 2024-01-31. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '\u2014', oldest period first. A 'Note' column of note numbers between the labels and the values."
+  },
+  {
+   "id": "s7-037-shares-thousands-money-millions",
+   "kind": "shares-thousands-money-millions",
+   "dir": "s7-037-shares-thousands-money-millions",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "shares-thousands-money-millions",
+    "html-simple",
+    "scale-millions",
+    "3-periods",
+    "fye-mar",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-text",
+    "xlsx-headers-text",
+    "shares-thousands",
+    "costs-negative",
+    "sga-split",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Lakemont Instruments Inc. (fictional) for fiscal years ending 2023-03-31, 2024-03-31, 2025-03-31. Printed in millions (share counts in thousands); HTML style 'simple', negatives as paren, zero as '\u2014', newest period first. Money in millions, share counts in thousands (the unit line says so)."
+  },
+  {
+   "id": "s7-038-par-value-label",
+   "kind": "par-value-label",
+   "dir": "s7-038-par-value-label",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "par-value-label",
+    "html-grid",
+    "scale-millions",
+    "3-periods",
+    "fye-dec",
+    "unit-span",
+    "xlsx-single",
+    "xlsx-numeric",
+    "xlsx-headers-native",
+    "shares-units",
+    "no-interest-income",
+    "loss-year",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Marrow Bay Fabrication Co. (fictional) for fiscal years ending 2022-12-31, 2023-12-31, 2024-12-31. Printed in millions (share counts in units); HTML style 'grid', negatives as paren, zero as '\u2014', newest period first. The common stock label states par value, shares authorized and shares outstanding."
+  },
+  {
+   "id": "s7-039-european-format",
+   "kind": "european-format",
+   "dir": "s7-039-european-format",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "european-format",
+    "html-simple",
+    "scale-thousands",
+    "3-periods",
+    "fye-dec",
+    "unit-span",
+    "xlsx-single",
+    "xlsx-text",
+    "xlsx-headers-native",
+    "oldest-first",
+    "no-gross-profit",
+    "dash-zero"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [
+    "unreadable"
+   ],
+   "description": "Synthetic statements of Kestrel Point Fabrication Corporation (fictional) for fiscal years ending 2021-12-31, 2022-12-31, 2023-12-31. Printed in thousands (share counts in thousands); HTML style 'simple', negatives as paren, zero as '\u2014', oldest period first. European number grouping (1.234.567; decimal comma). The parser must refuse these, not misread them; forbid_values lists the misreadings of one-group numbers like 123.456."
+  },
+  {
+   "id": "s7-040-investments-current-noncurrent",
+   "kind": "investments-current-noncurrent",
+   "dir": "s7-040-investments-current-noncurrent",
+   "tags": [
+    "synthetic",
+    "adversarial",
+    "investments-current-noncurrent",
+    "html-sec",
+    "scale-thousands",
+    "2-periods",
+    "fye-dec",
+    "unit-above",
+    "xlsx-sheets",
+    "xlsx-numeric",
+    "xlsx-headers-text",
+    "shares-units",
+    "oldest-first",
+    "no-gross-profit",
+    "costs-and-expenses",
+    "zero-printed"
+   ],
+   "formats": [
+    "html",
+    "xlsx",
+    "pdf"
+   ],
+   "expect_review": [],
+   "description": "Synthetic statements of Birchline Packaging Inc. (fictional) for fiscal years ending 2023-12-31, 2024-12-31. Printed in thousands (share counts in units); HTML style 'sec', negatives as paren, zero as '0', oldest period first. Two rows labelled just 'Investments': one under current assets, one under non-current assets."
+  }
+ ]
+}

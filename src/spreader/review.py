@@ -59,7 +59,13 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                                         lines=[mapping_of[row.index].canonical] if mapping_of.get(row.index) and mapping_of[row.index].canonical else [],
                                         message=f"Row '{row.label}': {v.note}."))
             looks_total = row.label_clean.startswith("total") and row.unit.value == "money"
-            if looks_total and row.role is not RowRole.TOTAL and row.values and len(row.values) >= 1:
+            # A "total" with no detail rows of its own above it (the only revenue line, labelled
+            # "Total revenue") has nothing to foot against.
+            pos = t.rows.index(row)
+            prev = next((r for r in reversed(t.rows[:pos]) if r.role is RowRole.HEADER or r.role is RowRole.TOTAL
+                         or r.values), None)
+            standalone = prev is None or prev.role is not RowRole.DETAIL
+            if looks_total and not standalone and row.role is not RowRole.TOTAL and row.values:
                 m = mapping_of.get(row.index)
                 items.append(ReviewItem(
                     id=f"footing:{skey}:{row.index}", kind=ReviewKind.FOOTING, severity=Severity.WARNING, statement=stype,

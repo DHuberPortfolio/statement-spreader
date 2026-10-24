@@ -129,6 +129,7 @@ statements:
       - id: income_tax
         label: Income tax expense (benefit)
         kind: either
+        deduction: true
         critical: true
         aliases: [provision for income taxes, income tax expense, income taxes, "income tax*", "provision benefit for income taxes",
                   "benefit provision for income taxes", "provision for income tax*", "benefit from income tax*", "income tax provision*",
@@ -166,12 +167,12 @@ statements:
       - id: shares_basic
         label: Weighted average shares, basic
         kind: shares
-        aliases: ["basic shares*", "weighted average shares basic*", "weighted average basic*", "basic weighted average*",
+        aliases: ["basic shares*", "weighted average*basic*", "weighted average shares basic*", "weighted average basic*", "basic weighted average*",
                   "weighted average common shares outstanding basic*", "basic"]
       - id: shares_diluted
         label: Weighted average shares, diluted
         kind: shares
-        aliases: ["diluted shares*", "weighted average shares diluted*", "weighted average diluted*", "diluted weighted average*",
+        aliases: ["diluted shares*", "weighted average*diluted*", "weighted average shares diluted*", "weighted average diluted*", "diluted weighted average*",
                   "weighted average common shares outstanding diluted*", "diluted"]
 
   balance_sheet:

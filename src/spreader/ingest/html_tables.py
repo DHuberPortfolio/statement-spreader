@@ -17,6 +17,7 @@ from lxml import etree, html
 from ..contracts import DocumentIR, RawRow, RawTable, SourceFormat, SourceRef, Token
 from ..numbers import clean_text, is_amount_like
 from . import IngestError, doc_id_for
+from .paths import element_path
 
 _HIDDEN = re.compile(r"display\s*:\s*none|visibility\s*:\s*hidden", re.I)
 _INDENT = re.compile(r"(padding-left|text-indent|margin-left)\s*:\s*(-?[\d.]+)\s*(pt|px|em|in|rem|%)?", re.I)
@@ -105,7 +106,8 @@ def _merge_fragments(tokens: list[Token]) -> list[Token]:
 
 def _join(a: Token, b: Token, sep: str) -> Token:
     text = (a.text + sep + b.text).strip()
-    ref = b.ref.model_copy(update={"text": text}) if is_amount_like(b.text) else a.ref.model_copy(update={"text": text})
+    has_digits = any(ch.isdigit() for ch in b.text) or not any(ch.isdigit() for ch in a.text)
+    ref = (b.ref if has_digits else a.ref).model_copy(update={"text": text})
     return Token(text=text, x0=min(a.x0, b.x0), x1=max(a.x1, b.x1), ref=ref)
 
 
@@ -146,7 +148,7 @@ def _table_rows(table: etree._Element, tree: etree._ElementTree, doc_id: str, t_
             text = _visible_text(td)
             if text:
                 ref = SourceRef(doc_id=doc_id, format=SourceFormat.HTML, table=t_index, row=r_index,
-                                xpath=tree.getpath(td), text=text)
+                                xpath=element_path(td), text=text)
                 tokens.append(Token(text=text, x0=float(col), x1=float(col + span), ref=ref))
                 if first_text:
                     row_indent, row_bold = _indent_and_bold(td)
@@ -174,9 +176,13 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
     buffer: list[str] = []
     buffer_len = 0
 
+    preface: list[str] = []
+
     def push(text: str | None) -> None:
         nonlocal buffer_len
         if text and text.strip():
+            if not tables and sum(len(x) for x in preface) < 6000:
+                preface.append(text)
             buffer.append(text)
             buffer_len += len(text)
             while buffer_len > CONTEXT_CHARS * 3 and len(buffer) > 1:
@@ -209,4 +215,5 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
     for i, t in enumerate(tables):
         if t.index != i:  # pragma: no cover - indexes are assigned in order above
             t.index = i
-    return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.HTML, tables=tables, warnings=warnings)
+    return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.HTML, tables=tables, warnings=warnings,
+                      preface=clean_text(" ".join(preface))[:6000])

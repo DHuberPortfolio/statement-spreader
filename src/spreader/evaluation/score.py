@@ -99,27 +99,12 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
                        ReviewKind.FOOTING} and it.statement is not None:
             flagged_periods_unmapped.setdefault(it.statement.value, set()).update(it.periods or ["*"])
 
-    for t in key.spread:
-        v = pred.get((t.line, t.period))
-        if v is None or v.value is None:
-            fl = flagged_periods_unmapped.get(t.statement, set())
-            bucket = "missing_flagged" if (t.period in fl or "*" in fl) else "missing_silent"
-            ds.values.append(ValueOutcome(t.line, t.period, t.value, None, bucket))
-            continue
-        n_terms = 3 if v.status is ValueStatus.CALCULATED else len(v.source_rows)
-        ok = abs(v.value - t.value) <= _tolerance(t, n_terms)
-        auto = not v.flags
-        if ok:
-            bucket = "correct_auto" if auto else "correct_review"
-            kind = ""
-        else:
-            bucket = "wrong_auto" if auto else "wrong_review"
-            kind = _kind(v.value, t.value, list(truth_by_line.get(t.line, {}).values()))
-        ds.values.append(ValueOutcome(t.line, t.period, t.value, v.value, bucket, kind, v.status.value, list(v.flags)))
-
-    # Cell level (when the key has cell truth with source locations).
+    # Rows the key cannot place (a company-specific concept): what the pipeline added from them to
+    # each line. A spread value that equals the key's total plus these is not provably wrong; the
+    # key is incomplete there, so the value is "unjudged" rather than scored either way.
+    unknown_extra: dict[tuple[str, str], Decimal] = {}
+    by_xpath: dict[str, tuple[str, str, Decimal | None, str | None]] = {}
     if key.cells:
-        by_xpath: dict[str, tuple[str, str, Decimal | None, str | None]] = {}
         for skey, res in spread.statements.items():
             mapping_of = {m.row_index: m for m in res.mappings}
             mult = res.table.scale.multiplier
@@ -130,6 +115,46 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
                         unit_mult = 1 if r.unit.value in {"per_share", "percent"} else (
                             res.table.share_scale.multiplier if r.unit.value == "shares" and res.table.share_scale else mult)
                         by_xpath[pv.ref.xpath] = (skey, pk, pv.displayed * unit_mult, m.canonical if m else None)
+        for c in key.cells:
+            if c.line is None and c.role != "component" and c.xpath in by_xpath:
+                _, pk, val, line = by_xpath[c.xpath]
+                if line and val is not None:
+                    unknown_extra[(line, pk)] = unknown_extra.get((line, pk), Decimal(0)) + val
+
+    align = _align_periods({t.period for t in key.spread}, {v.period for v in spread.values})
+    for t in key.spread:
+        v = pred.get((t.line, t.period))
+        approx = False
+        if v is None and t.period in align:
+            v = pred.get((t.line, align[t.period]))
+            approx = v is not None
+        if approx and v is not None and not v.flags:
+            # A value under a period dated a few days off, and nothing says the date was assumed:
+            # the number may be right but the column is mislabelled without warning.
+            ds.values.append(ValueOutcome(t.line, t.period, t.value, v.value, "wrong_auto", "period", v.status.value, []))
+            continue
+        if v is None or v.value is None:
+            fl = flagged_periods_unmapped.get(t.statement, set())
+            bucket = "missing_flagged" if (t.period in fl or "*" in fl) else "missing_silent"
+            ds.values.append(ValueOutcome(t.line, t.period, t.value, None, bucket))
+            continue
+        n_terms = 3 if v.status is ValueStatus.CALCULATED else len(v.source_rows)
+        ok = abs(v.value - t.value) <= _tolerance(t, n_terms)
+        auto = not v.flags
+        extra = unknown_extra.get((t.line, t.period))
+        if ok:
+            bucket = "correct_auto" if auto else "correct_review"
+            kind = ""
+        elif extra and min(abs(v.value - (t.value + extra)), abs(abs(v.value) - abs(t.value + extra))) <= _tolerance(t, n_terms + 2):
+            bucket, kind = "unjudged", ""
+        else:
+            bucket = "wrong_auto" if auto else "wrong_review"
+            kind = _kind(v.value, t.value, list(truth_by_line.get(t.line, {}).values()))
+        ds.values.append(ValueOutcome(t.line, t.period, t.value, v.value, bucket, kind, v.status.value, list(v.flags)))
+
+    # Cell level (when the key has cell truth with source locations, and the document is the
+    # HTML those locations refer to).
+    if key.cells and by_xpath:
         for c in key.cells:
             if c.role == "component" or c.xpath is None:
                 continue
@@ -152,6 +177,29 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
 
 
 _EQUIV = [{"net_income", "net_income_parent"}, {"total_equity", "total_equity_parent"}]
+
+
+def _align_periods(truth: set[str], pred: set[str]) -> dict[str, str]:
+    """Truth periods with no exact match, paired with a predicted period of the same length that
+    ends within 10 days (52/53-week fiscal years end on a weekday near the month end)."""
+    from datetime import date
+
+    def parse(k: str) -> tuple[date, str] | None:
+        try:
+            end, kind = k.split("/")
+            return date.fromisoformat(end), kind
+        except ValueError:
+            return None
+
+    out: dict[str, str] = {}
+    for t in truth - pred:
+        pt = parse(t)
+        if pt is None:
+            continue
+        near = [p for p in pred if (pp := parse(p)) and pp[1] == pt[1] and abs((pp[0] - pt[0]).days) <= 10]
+        if len(near) == 1:
+            out[t] = near[0]
+    return out
 
 
 def _equivalent(a: str | None, b: str | None) -> bool:

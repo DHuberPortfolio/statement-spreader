@@ -74,6 +74,7 @@ class DocumentIR(BaseModel):
     format: SourceFormat
     tables: list[RawTable]
     warnings: list[str] = Field(default_factory=list)
+    preface: str = ""  # visible text before the first table (a filing's cover page)
 
 
 class StatementType(str, Enum):

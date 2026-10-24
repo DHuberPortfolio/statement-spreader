@@ -998,15 +998,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2024-12-31/12M",
-   "value": "59248000000",
+   "period": "2025-12-31/12M",
+   "value": "77670000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-12-31/12M",
-   "value": "77670000000",
+   "period": "2024-12-31/12M",
+   "value": "59248000000",
    "precision": "1000000"
   },
   {
@@ -1019,15 +1019,15 @@
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2024-12-31/I",
-   "value": "285970000000",
+   "period": "2025-12-31/I",
+   "value": "411065000000",
    "precision": "1000000"
   },
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2025-12-31/I",
-   "value": "411065000000",
+   "period": "2024-12-31/I",
+   "value": "285970000000",
    "precision": "1000000"
   }
  ],
@@ -1039,7 +1039,7 @@
    "value": "78779000000",
    "line": "cash",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[6]/*[3]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[6]/td[3]"
   },
   {
    "statement": "balance_sheet",
@@ -1048,7 +1048,7 @@
    "value": "86810000000",
    "line": "cash",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[6]/*[7]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[6]/td[7]"
   },
   {
    "statement": "balance_sheet",
@@ -1057,7 +1057,7 @@
    "value": "22423000000",
    "line": "st_investments",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[7]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[7]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1066,7 +1066,7 @@
    "value": "36219000000",
    "line": "st_investments",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[7]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[7]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1075,7 +1075,7 @@
    "value": "34214000000",
    "line": "inventory",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[8]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[8]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1084,7 +1084,7 @@
    "value": "38325000000",
    "line": "inventory",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[8]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[8]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1093,7 +1093,7 @@
    "value": "55451000000",
    "line": "receivables",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[9]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[9]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1102,7 +1102,7 @@
    "value": "67729000000",
    "line": "receivables",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[9]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[9]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1111,7 +1111,7 @@
    "value": "190867000000",
    "line": "total_current_assets",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[10]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[10]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1120,7 +1120,7 @@
    "value": "229083000000",
    "line": "total_current_assets",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[10]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[10]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1129,7 +1129,7 @@
    "value": "252665000000",
    "line": "ppe_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[11]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[11]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1138,7 +1138,7 @@
    "value": "357025000000",
    "line": "ppe_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[11]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[11]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1147,7 +1147,7 @@
    "value": "76141000000",
    "line": "operating_lease_rou",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[12]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[12]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1156,7 +1156,7 @@
    "value": "86054000000",
    "line": "operating_lease_rou",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[12]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[12]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1165,7 +1165,7 @@
    "value": "23074000000",
    "line": "goodwill",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[13]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[13]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1174,7 +1174,7 @@
    "value": "23273000000",
    "line": "goodwill",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[13]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[13]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1183,7 +1183,7 @@
    "value": "82147000000",
    "line": "other_noncurrent_assets",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[14]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[14]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1192,7 +1192,7 @@
    "value": "122607000000",
    "line": "other_noncurrent_assets",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[14]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[14]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1201,7 +1201,7 @@
    "value": "624894000000",
    "line": "total_assets",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[15]/*[3]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[15]/td[3]"
   },
   {
    "statement": "balance_sheet",
@@ -1210,7 +1210,7 @@
    "value": "818042000000",
    "line": "total_assets",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[15]/*[7]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[15]/td[7]"
   },
   {
    "statement": "balance_sheet",
@@ -1219,7 +1219,7 @@
    "value": "94363000000",
    "line": "payables",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[18]/*[3]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[18]/td[3]"
   },
   {
    "statement": "balance_sheet",
@@ -1228,7 +1228,7 @@
    "value": "121909000000",
    "line": "payables",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[18]/*[7]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[18]/td[7]"
   },
   {
    "statement": "balance_sheet",
@@ -1237,7 +1237,7 @@
    "value": "66965000000",
    "line": "accrued_liabilities",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[19]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[19]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1246,7 +1246,7 @@
    "value": "75520000000",
    "line": "accrued_liabilities",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[19]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[19]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1255,7 +1255,7 @@
    "value": "18103000000",
    "line": "deferred_revenue_current",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[20]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[20]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1264,7 +1264,7 @@
    "value": "20576000000",
    "line": "deferred_revenue_current",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[20]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[20]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1273,7 +1273,7 @@
    "value": "179431000000",
    "line": "total_current_liabilities",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[21]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[21]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1282,7 +1282,7 @@
    "value": "218005000000",
    "line": "total_current_liabilities",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[21]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[21]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1291,7 +1291,7 @@
    "value": "78277000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[22]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[22]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1300,7 +1300,7 @@
    "value": "87339000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[22]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[22]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1309,7 +1309,7 @@
    "value": "52623000000",
    "line": "lt_debt",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[23]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[23]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1318,7 +1318,7 @@
    "value": "65648000000",
    "line": "lt_debt",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[23]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[23]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1327,7 +1327,7 @@
    "value": "28593000000",
    "line": "other_noncurrent_liabilities",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[24]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[24]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1336,7 +1336,7 @@
    "value": "35985000000",
    "line": "other_noncurrent_liabilities",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[24]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[24]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1345,7 +1345,7 @@
    "value": "0",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[25]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[25]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1354,7 +1354,7 @@
    "value": "0",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[25]/*[4]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[25]/td[4]"
   },
   {
    "statement": "balance_sheet",
@@ -1363,7 +1363,7 @@
    "value": "0.01",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1372,7 +1372,7 @@
    "value": "0.01",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1381,7 +1381,7 @@
    "value": "500000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1390,7 +1390,7 @@
    "value": "500000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1399,7 +1399,7 @@
    "value": "0",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1408,7 +1408,7 @@
    "value": "0",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1417,7 +1417,7 @@
    "value": "0",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1426,7 +1426,7 @@
    "value": "0",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1435,7 +1435,7 @@
    "value": "0",
    "line": "common_stock_apic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1444,7 +1444,7 @@
    "value": "0",
    "line": "common_stock_apic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[27]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[27]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1453,7 +1453,7 @@
    "value": "0.01",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1462,7 +1462,7 @@
    "value": "0.01",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1471,7 +1471,7 @@
    "value": "100000000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1480,7 +1480,7 @@
    "value": "100000000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1489,7 +1489,7 @@
    "value": "11108000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1498,7 +1498,7 @@
    "value": "11246000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1507,7 +1507,7 @@
    "value": "10593000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1516,7 +1516,7 @@
    "value": "10731000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[1]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[1]"
   },
   {
    "statement": "balance_sheet",
@@ -1525,7 +1525,7 @@
    "value": "111000000",
    "line": "common_stock_apic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1534,7 +1534,7 @@
    "value": "112000000",
    "line": "common_stock_apic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[28]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[28]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1543,7 +1543,7 @@
    "value": "-7837000000",
    "line": "treasury_stock",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[29]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[29]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1552,7 +1552,7 @@
    "value": "-7837000000",
    "line": "treasury_stock",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[29]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[29]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1561,7 +1561,7 @@
    "value": "120864000000",
    "line": "common_stock_apic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[30]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[30]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1570,7 +1570,7 @@
    "value": "140024000000",
    "line": "common_stock_apic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[30]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[30]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1579,7 +1579,7 @@
    "value": "-34000000",
    "line": "aoci",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[31]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[31]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1588,7 +1588,7 @@
    "value": "28230000000",
    "line": "aoci",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[31]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[31]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1597,7 +1597,7 @@
    "value": "172866000000",
    "line": "retained_earnings",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[32]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[32]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1606,7 +1606,7 @@
    "value": "250536000000",
    "line": "retained_earnings",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[32]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[32]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1615,7 +1615,7 @@
    "value": "285970000000",
    "line": "total_equity_parent",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[33]/*[2]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[33]/td[2]"
   },
   {
    "statement": "balance_sheet",
@@ -1624,7 +1624,7 @@
    "value": "411065000000",
    "line": "total_equity_parent",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[33]/*[5]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[33]/td[5]"
   },
   {
    "statement": "balance_sheet",
@@ -1633,7 +1633,7 @@
    "value": "624894000000",
    "line": "total_liabilities_equity",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[34]/*[3]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[34]/td[3]"
   },
   {
    "statement": "balance_sheet",
@@ -1642,7 +1642,7 @@
    "value": "818042000000",
    "line": "total_liabilities_equity",
    "role": "detail",
-   "xpath": "/*/*[2]/*[592]/*/*[34]/*[7]"
+   "xpath": "/html[1]/body[1]/div[550]/table[1]/tr[34]/td[7]"
   },
   {
    "statement": "income_statement",
@@ -1705,7 +1705,7 @@
    "value": "574785000000",
    "line": "revenue",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[6]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[6]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1714,7 +1714,7 @@
    "value": "637959000000",
    "line": "revenue",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[6]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[6]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1723,7 +1723,7 @@
    "value": "716924000000",
    "line": "revenue",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[6]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[6]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1732,7 +1732,7 @@
    "value": "304739000000",
    "line": "cogs",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[8]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[8]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1741,7 +1741,7 @@
    "value": "326288000000",
    "line": "cogs",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[8]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[8]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1750,7 +1750,7 @@
    "value": "356414000000",
    "line": "cogs",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[8]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[8]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1759,7 +1759,7 @@
    "value": "90619000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[9]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[9]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1768,7 +1768,7 @@
    "value": "98505000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[9]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[9]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1777,7 +1777,7 @@
    "value": "109074000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[9]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[9]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1786,7 +1786,7 @@
    "value": "85622000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[10]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[10]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1795,7 +1795,7 @@
    "value": "88544000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[10]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[10]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1804,7 +1804,7 @@
    "value": "108521000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[10]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[10]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1813,7 +1813,7 @@
    "value": "44370000000",
    "line": "sga",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[11]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[11]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1822,7 +1822,7 @@
    "value": "43907000000",
    "line": "sga",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[11]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[11]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1831,7 +1831,7 @@
    "value": "47129000000",
    "line": "sga",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[11]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[11]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1840,7 +1840,7 @@
    "value": "11816000000",
    "line": "sga",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[12]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[12]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1849,7 +1849,7 @@
    "value": "11359000000",
    "line": "sga",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[12]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[12]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1858,7 +1858,7 @@
    "value": "11172000000",
    "line": "sga",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[12]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[12]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1867,7 +1867,7 @@
    "value": "767000000",
    "line": "other_opex",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[13]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[13]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1876,7 +1876,7 @@
    "value": "763000000",
    "line": "other_opex",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[13]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[13]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1885,7 +1885,7 @@
    "value": "4639000000",
    "line": "other_opex",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[13]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[13]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1894,7 +1894,7 @@
    "value": "537933000000",
    "line": "total_costs",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[14]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[14]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1903,7 +1903,7 @@
    "value": "569366000000",
    "line": "total_costs",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[14]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[14]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1912,7 +1912,7 @@
    "value": "636949000000",
    "line": "total_costs",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[14]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[14]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1921,7 +1921,7 @@
    "value": "36852000000",
    "line": "operating_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[15]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[15]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1930,7 +1930,7 @@
    "value": "68593000000",
    "line": "operating_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[15]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[15]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1939,7 +1939,7 @@
    "value": "79975000000",
    "line": "operating_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[15]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[15]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1948,7 +1948,7 @@
    "value": "2949000000",
    "line": "interest_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[16]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[16]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1957,7 +1957,7 @@
    "value": "4677000000",
    "line": "interest_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[16]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[16]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1966,7 +1966,7 @@
    "value": "4381000000",
    "line": "interest_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[16]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[16]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -1975,7 +1975,7 @@
    "value": "-3182000000",
    "line": "interest_expense",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[17]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[17]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -1984,7 +1984,7 @@
    "value": "-2406000000",
    "line": "interest_expense",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[17]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[17]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -1993,7 +1993,7 @@
    "value": "-2274000000",
    "line": "interest_expense",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[17]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[17]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2002,7 +2002,7 @@
    "value": "938000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[18]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[18]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2011,7 +2011,7 @@
    "value": "-2250000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[18]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[18]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2020,7 +2020,7 @@
    "value": "15229000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[18]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[18]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2029,7 +2029,7 @@
    "value": "705000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[19]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[19]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2038,7 +2038,7 @@
    "value": "21000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[19]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[19]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2047,7 +2047,7 @@
    "value": "17336000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[19]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[19]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2056,7 +2056,7 @@
    "value": "37557000000",
    "line": "pretax_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[20]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[20]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2065,7 +2065,7 @@
    "value": "68614000000",
    "line": "pretax_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[20]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[20]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2074,7 +2074,7 @@
    "value": "97311000000",
    "line": "pretax_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[20]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[20]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2083,7 +2083,7 @@
    "value": "-7120000000",
    "line": "income_tax",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[21]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[21]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2092,7 +2092,7 @@
    "value": "-9265000000",
    "line": "income_tax",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[21]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[21]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2101,7 +2101,7 @@
    "value": "-19087000000",
    "line": "income_tax",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[21]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[21]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2110,7 +2110,7 @@
    "value": "-12000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[22]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[22]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2119,7 +2119,7 @@
    "value": "-101000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[22]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[22]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2128,7 +2128,7 @@
    "value": "-554000000",
    "line": "other_nonoperating",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[22]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[22]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2137,7 +2137,7 @@
    "value": "30425000000",
    "line": "net_income_parent",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[23]/*[3]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[23]/td[3]"
   },
   {
    "statement": "income_statement",
@@ -2146,7 +2146,7 @@
    "value": "59248000000",
    "line": "net_income_parent",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[23]/*[7]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[23]/td[7]"
   },
   {
    "statement": "income_statement",
@@ -2155,7 +2155,7 @@
    "value": "77670000000",
    "line": "net_income_parent",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[23]/*[11]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[23]/td[11]"
   },
   {
    "statement": "income_statement",
@@ -2164,7 +2164,7 @@
    "value": "2.95",
    "line": "eps_basic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[24]/*[3]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[24]/td[3]"
   },
   {
    "statement": "income_statement",
@@ -2173,7 +2173,7 @@
    "value": "5.66",
    "line": "eps_basic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[24]/*[7]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[24]/td[7]"
   },
   {
    "statement": "income_statement",
@@ -2182,7 +2182,7 @@
    "value": "7.29",
    "line": "eps_basic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[24]/*[11]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[24]/td[11]"
   },
   {
    "statement": "income_statement",
@@ -2191,7 +2191,7 @@
    "value": "2.90",
    "line": "eps_diluted",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[25]/*[3]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[25]/td[3]"
   },
   {
    "statement": "income_statement",
@@ -2200,7 +2200,7 @@
    "value": "5.53",
    "line": "eps_diluted",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[25]/*[7]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[25]/td[7]"
   },
   {
    "statement": "income_statement",
@@ -2209,7 +2209,7 @@
    "value": "7.17",
    "line": "eps_diluted",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[25]/*[11]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[25]/td[11]"
   },
   {
    "statement": "income_statement",
@@ -2218,7 +2218,7 @@
    "value": "10304000000",
    "line": "shares_basic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[27]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[27]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2227,7 +2227,7 @@
    "value": "10473000000",
    "line": "shares_basic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[27]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[27]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2236,7 +2236,7 @@
    "value": "10656000000",
    "line": "shares_basic",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[27]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[27]/td[8]"
   },
   {
    "statement": "income_statement",
@@ -2245,7 +2245,7 @@
    "value": "10492000000",
    "line": "shares_diluted",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[28]/*[2]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[28]/td[2]"
   },
   {
    "statement": "income_statement",
@@ -2254,7 +2254,7 @@
    "value": "10721000000",
    "line": "shares_diluted",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[28]/*[5]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[28]/td[5]"
   },
   {
    "statement": "income_statement",
@@ -2263,7 +2263,7 @@
    "value": "10827000000",
    "line": "shares_diluted",
    "role": "detail",
-   "xpath": "/*/*[2]/*[574]/*/*[28]/*[8]"
+   "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[28]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2272,7 +2272,7 @@
    "value": "54253000000",
    "line": "cash_end",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[4]/*[3]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[4]/td[3]"
   },
   {
    "statement": "cash_flow",
@@ -2281,7 +2281,7 @@
    "value": "73890000000",
    "line": "cash_end",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[4]/*[7]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[4]/td[7]"
   },
   {
    "statement": "cash_flow",
@@ -2290,7 +2290,7 @@
    "value": "82312000000",
    "line": "cash_end",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[4]/*[11]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[4]/td[11]"
   },
   {
    "statement": "cash_flow",
@@ -2299,7 +2299,7 @@
    "value": "30425000000",
    "line": "cf_net_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[6]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[6]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2308,7 +2308,7 @@
    "value": "59248000000",
    "line": "cf_net_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[6]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[6]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2317,7 +2317,7 @@
    "value": "77670000000",
    "line": "cf_net_income",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[6]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[6]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2326,7 +2326,7 @@
    "value": "48663000000",
    "line": "cf_dna",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[8]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[8]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2335,7 +2335,7 @@
    "value": "52795000000",
    "line": "cf_dna",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[8]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[8]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2344,7 +2344,7 @@
    "value": "65756000000",
    "line": "cf_dna",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[8]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[8]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2353,7 +2353,7 @@
    "value": "24023000000",
    "line": "cf_sbc",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[9]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[9]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2362,7 +2362,7 @@
    "value": "22011000000",
    "line": "cf_sbc",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[9]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[9]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2371,7 +2371,7 @@
    "value": "19467000000",
    "line": "cf_sbc",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[9]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[9]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2380,7 +2380,7 @@
    "value": "-748000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[11]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[11]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2389,7 +2389,7 @@
    "value": "2012000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[11]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[11]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2398,7 +2398,7 @@
    "value": "-14880000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[11]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[11]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2407,7 +2407,7 @@
    "value": "-5876000000",
    "line": "cf_deferred_tax",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[12]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[12]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2416,7 +2416,7 @@
    "value": "-4648000000",
    "line": "cf_deferred_tax",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[12]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[12]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2425,7 +2425,7 @@
    "value": "11470000000",
    "line": "cf_deferred_tax",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[12]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[12]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2434,7 +2434,7 @@
    "value": "1449000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[14]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[14]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2443,7 +2443,7 @@
    "value": "-1884000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[14]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[14]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2452,7 +2452,7 @@
    "value": "-3002000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[14]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[14]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2461,7 +2461,7 @@
    "value": "-8348000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[15]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[15]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2470,7 +2470,7 @@
    "value": "-3249000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[15]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[15]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2479,7 +2479,7 @@
    "value": "-7333000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[15]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[15]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2488,7 +2488,7 @@
    "value": "-12265000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[16]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[16]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2497,7 +2497,7 @@
    "value": "-14483000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[16]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[16]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2506,7 +2506,7 @@
    "value": "-15632000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[16]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[16]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2515,7 +2515,7 @@
    "value": "5473000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[17]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[17]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2524,7 +2524,7 @@
    "value": "2972000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[17]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[17]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2533,7 +2533,7 @@
    "value": "11231000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[17]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[17]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2542,7 +2542,7 @@
    "value": "-2428000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[18]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[18]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2551,7 +2551,7 @@
    "value": "-2904000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[18]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[18]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2560,7 +2560,7 @@
    "value": "-5019000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[18]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[18]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2569,7 +2569,7 @@
    "value": "4578000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[19]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[19]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2578,7 +2578,7 @@
    "value": "4007000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[19]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[19]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2587,7 +2587,7 @@
    "value": "-214000000",
    "line": "cf_working_capital",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[19]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[19]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2596,7 +2596,7 @@
    "value": "84946000000",
    "line": "cfo",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[20]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[20]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2605,7 +2605,7 @@
    "value": "115877000000",
    "line": "cfo",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[20]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[20]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2614,7 +2614,7 @@
    "value": "139514000000",
    "line": "cfo",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[20]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[20]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2623,7 +2623,7 @@
    "value": "-52729000000",
    "line": "capex",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[22]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[22]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2632,7 +2632,7 @@
    "value": "-82999000000",
    "line": "capex",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[22]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[22]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2641,7 +2641,7 @@
    "value": "-131819000000",
    "line": "capex",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[22]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[22]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2650,7 +2650,7 @@
    "value": "4596000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[23]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[23]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2659,7 +2659,7 @@
    "value": "5341000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[23]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[23]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2668,7 +2668,7 @@
    "value": "3499000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[23]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[23]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2677,7 +2677,7 @@
    "value": "-5839000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[24]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[24]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2686,7 +2686,7 @@
    "value": "-7082000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[24]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[24]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2695,7 +2695,7 @@
    "value": "-3841000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[24]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[24]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2704,7 +2704,7 @@
    "value": "5627000000",
    "line": "cf_investments_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[25]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[25]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2713,7 +2713,7 @@
    "value": "16403000000",
    "line": "cf_investments_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[25]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[25]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2722,7 +2722,7 @@
    "value": "44386000000",
    "line": "cf_investments_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[25]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[25]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2731,7 +2731,7 @@
    "value": "-1488000000",
    "line": "cf_investments_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[26]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[26]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2740,7 +2740,7 @@
    "value": "-26005000000",
    "line": "cf_investments_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[26]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[26]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2749,7 +2749,7 @@
    "value": "-54770000000",
    "line": "cf_investments_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[26]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[26]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2758,7 +2758,7 @@
    "value": "-49833000000",
    "line": "cfi",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[27]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[27]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2767,7 +2767,7 @@
    "value": "-94342000000",
    "line": "cfi",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[27]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[27]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2776,7 +2776,7 @@
    "value": "-142545000000",
    "line": "cfi",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[27]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[27]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2785,7 +2785,7 @@
    "value": "18129000000",
    "line": "cf_commercial_paper_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[30]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[30]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2794,7 +2794,7 @@
    "value": "5142000000",
    "line": "cf_commercial_paper_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[30]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[30]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2803,7 +2803,7 @@
    "value": "9320000000",
    "line": "cf_commercial_paper_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[30]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[30]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2812,7 +2812,7 @@
    "value": "-25677000000",
    "line": "cf_commercial_paper_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[31]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[31]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2821,7 +2821,7 @@
    "value": "-5060000000",
    "line": "cf_commercial_paper_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[31]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[31]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2830,7 +2830,7 @@
    "value": "-8426000000",
    "line": "cf_commercial_paper_net",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[31]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[31]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2839,7 +2839,7 @@
    "value": "0",
    "line": "debt_issued",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[32]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[32]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2848,7 +2848,7 @@
    "value": "0",
    "line": "debt_issued",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[32]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[32]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2857,7 +2857,7 @@
    "value": "15673000000",
    "line": "debt_issued",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[32]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[32]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2866,7 +2866,7 @@
    "value": "-3676000000",
    "line": "debt_repaid",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[33]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[33]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2875,7 +2875,7 @@
    "value": "-9182000000",
    "line": "debt_repaid",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[33]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[33]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2884,7 +2884,7 @@
    "value": "-5021000000",
    "line": "debt_repaid",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[33]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[33]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2893,7 +2893,7 @@
    "value": "-4384000000",
    "line": "cf_other_financing",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[34]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[34]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2902,7 +2902,7 @@
    "value": "-2043000000",
    "line": "cf_other_financing",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[34]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[34]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2911,7 +2911,7 @@
    "value": "-1557000000",
    "line": "cf_other_financing",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[34]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[34]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2920,7 +2920,7 @@
    "value": "-271000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[35]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[35]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2929,7 +2929,7 @@
    "value": "-669000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[35]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[35]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2938,7 +2938,7 @@
    "value": "-328000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[35]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[35]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2947,7 +2947,7 @@
    "value": "-15879000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[36]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[36]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2956,7 +2956,7 @@
    "value": "-11812000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[36]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[36]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2965,7 +2965,7 @@
    "value": "9661000000",
    "line": null,
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[36]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[36]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -2974,7 +2974,7 @@
    "value": "403000000",
    "line": "fx_effect",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[37]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[37]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -2983,7 +2983,7 @@
    "value": "-1301000000",
    "line": "fx_effect",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[37]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[37]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -2992,7 +2992,7 @@
    "value": "1164000000",
    "line": "fx_effect",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[37]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[37]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -3001,7 +3001,7 @@
    "value": "19637000000",
    "line": "net_change_cash",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[38]/*[2]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[38]/td[2]"
   },
   {
    "statement": "cash_flow",
@@ -3010,7 +3010,7 @@
    "value": "8422000000",
    "line": "net_change_cash",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[38]/*[5]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[38]/td[5]"
   },
   {
    "statement": "cash_flow",
@@ -3019,7 +3019,7 @@
    "value": "7794000000",
    "line": "net_change_cash",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[38]/*[8]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[38]/td[8]"
   },
   {
    "statement": "cash_flow",
@@ -3028,7 +3028,7 @@
    "value": "73890000000",
    "line": "cash_end",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[39]/*[3]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[39]/td[3]"
   },
   {
    "statement": "cash_flow",
@@ -3037,7 +3037,7 @@
    "value": "82312000000",
    "line": "cash_end",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[39]/*[7]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[39]/td[7]"
   },
   {
    "statement": "cash_flow",
@@ -3046,7 +3046,7 @@
    "value": "90106000000",
    "line": "cash_end",
    "role": "detail",
-   "xpath": "/*/*[2]/*[565]/*/*[39]/*[11]"
+   "xpath": "/html[1]/body[1]/div[526]/table[1]/tr[39]/td[11]"
   }
  ],
  "expect_review": [],

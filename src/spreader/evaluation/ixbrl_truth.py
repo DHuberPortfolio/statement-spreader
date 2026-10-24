@@ -29,6 +29,7 @@ from decimal import Decimal, InvalidOperation
 
 from lxml import etree
 
+from ..ingest.paths import element_path
 from ..profile import Profile
 from .truth import AnswerKey, TruthCell, TruthValue
 
@@ -317,7 +318,7 @@ def read_facts(data: bytes) -> tuple[list[Fact], int]:
     root = etree.fromstring(data, parser=parser)
     if root is None:
         raise ValueError("not an XML (inline XBRL) document")
-    tree = root.getroottree()
+
     contexts = _contexts(root)
     tables = list(root.iter("{http://www.w3.org/1999/xhtml}table"))
     t_index = {id(t): i for i, t in enumerate(tables)}
@@ -344,7 +345,7 @@ def read_facts(data: bytes) -> tuple[list[Fact], int]:
         prefix, concept = _local(el.get("name") or "")
         rows = [r for r in table.iter("{http://www.w3.org/1999/xhtml}tr")]
         facts.append(Fact(concept=concept, prefix=prefix, context=ctx, value=value, printed=printed,
-                          decimals=None if dec in (None, "INF") else int(dec), td_xpath=tree.getpath(td),
+                          decimals=None if dec in (None, "INF") else int(dec), td_xpath=element_path(td),
                           row_label=_row_label(tr), table_index=t_index[id(table)], row_index=rows.index(tr)))
     return facts, len(tables)
 

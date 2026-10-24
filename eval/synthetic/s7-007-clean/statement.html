@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Emberfield Components Inc. financial statements</title>
+<style>
+@page { size: Letter; margin: 0.5in; }
+body { font-family: "Times New Roman", Times, serif; font-size: 10pt; color: #000; background: #fff; margin: 24px; }
+.statement { margin-bottom: 36px; }
+.statement.break { page-break-after: always; }
+p.co, p.ti { text-align: center; font-weight: bold; margin: 2px 0; }
+p.unit { text-align: center; margin: 2px 0 8px 0; }
+p.fn, p.after { font-size: 8.5pt; margin: 4px 0; }
+table.fs { border-collapse: collapse; width: 100%; }
+table.fs td, table.fs th { padding: 1px 4px; vertical-align: bottom; }
+table.fs .num { text-align: right; white-space: nowrap; }
+table.fs .cur { text-align: left; width: 1%; padding-right: 0; }
+table.fs .close { text-align: left; width: 1%; padding-left: 0; }
+table.fs th { font-weight: bold; text-align: center; }
+</style>
+</head>
+<body>
+<!-- Synthetic test document s7-007-clean (statement-spreader 2026.10.24-1); the company is fictional. -->
+<div class="statement break">
+<p class="co">Emberfield Components Inc.</p>
+<p class="ti">Consolidated Statements of Operations</p>
+<p class="unit">(Dollars in thousands, except per share data)</p>
+<table class="fs">
+<tr><td></td><td colspan="3" style="text-align:center;border-bottom:1px solid #000">Year Ended</td></tr>
+<tr><td></td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 27, 2025</td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 28, 2024</td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 30, 2023</td></tr>
+<tr><td>Net sales:</td><td></td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Products</td><td class="num">$ 31,566</td><td class="num">$ 29,102</td><td class="num">$ 23,814</td></tr>
+<tr><td style="text-indent:15px">Services (b)</td><td class="num">21,358</td><td class="num">18,067</td><td class="num">17,120</td></tr>
+<tr><td style="text-indent:30px">Total net sales</td><td class="num" style="border-top:1px solid #000">52,924</td><td class="num" style="border-top:1px solid #000">47,169</td><td class="num" style="border-top:1px solid #000">40,934</td></tr>
+<tr><td>Costs and expenses:</td><td></td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Cost of goods sold</td><td class="num">28,525</td><td class="num">25,227</td><td class="num">21,906</td></tr>
+<tr><td style="text-indent:15px">Selling, general and administrative expenses</td><td class="num">26,752</td><td class="num">15,431</td><td class="num">16,048</td></tr>
+<tr><td style="text-indent:30px">Total costs and expenses</td><td class="num" style="border-top:1px solid #000">55,277</td><td class="num" style="border-top:1px solid #000">40,658</td><td class="num" style="border-top:1px solid #000">37,954</td></tr>
+<tr><td>Income (loss) from operations (a)</td><td class="num" style="border-top:1px solid #000">(2,353)</td><td class="num" style="border-top:1px solid #000">6,511</td><td class="num" style="border-top:1px solid #000">2,980</td></tr>
+<tr><td>Other income (expense):</td><td></td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Interest expense</td><td class="num">411</td><td class="num">380</td><td class="num">417</td></tr>
+<tr><td>Income (loss) before income taxes</td><td class="num" style="border-top:1px solid #000">(2,764)</td><td class="num" style="border-top:1px solid #000">6,131</td><td class="num" style="border-top:1px solid #000">2,563</td></tr>
+<tr><td>Provision for (benefit from) income taxes</td><td class="num">(20)</td><td class="num">1,354</td><td class="num">566</td></tr>
+<tr><td><b>Net income (loss)</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ (2,744)</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 4,777</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 1,997</b></td></tr>
+<tr><td>Basic earnings per share</td><td class="num">$ (1.87)</td><td class="num">$ 3.18</td><td class="num">$ 1.29</td></tr>
+<tr><td>Diluted earnings per share</td><td class="num">$ (1.87)</td><td class="num">$ 3.15</td><td class="num">$ 1.28</td></tr>
+<tr><td>Weighted average common shares outstanding — basic</td><td class="num">1,464</td><td class="num">1,503</td><td class="num">1,543</td></tr>
+<tr><td>Weighted average common shares outstanding — diluted</td><td class="num">1,464</td><td class="num">1,516</td><td class="num">1,558</td></tr>
+</table>
+<p class="fn">(a) Includes amounts from transactions with a related party.</p>
+<p class="fn">(b) See the accompanying notes, which are an integral part of these statements.</p>
+</div>
+<div class="statement break">
+<p class="co">Emberfield Components Inc.</p>
+<p class="ti">Consolidated Balance Sheets</p>
+<p class="unit">(Dollars in thousands)</p>
+<table class="fs">
+<tr><td></td><td colspan="2" style="text-align:center;border-bottom:1px solid #000">As of</td></tr>
+<tr><td></td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 27, 2025</td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 28, 2024</td></tr>
+<tr><td>Assets</td><td></td><td></td></tr>
+<tr><td>Current assets:</td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Cash (2)</td><td class="num">$ 7,256</td><td class="num">$ 7,935</td></tr>
+<tr><td style="text-indent:15px">Marketable securities</td><td class="num">2,803</td><td class="num">2,237</td></tr>
+<tr><td style="text-indent:15px">Receivables, net (1)</td><td class="num">5,814</td><td class="num">4,350</td></tr>
+<tr><td style="text-indent:15px">Other current assets</td><td class="num">635</td><td class="num">750</td></tr>
+<tr><td style="text-indent:30px">Total current assets</td><td class="num" style="border-top:1px solid #000">16,508</td><td class="num" style="border-top:1px solid #000">15,272</td></tr>
+<tr><td>Property and equipment, net</td><td class="num">13,895</td><td class="num">13,025</td></tr>
+<tr><td>Other assets</td><td class="num">1,416</td><td class="num">1,489</td></tr>
+<tr><td><b>Total assets</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 31,819</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 29,786</b></td></tr>
+<tr><td>Current liabilities:</td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Trade accounts payable</td><td class="num">$ 3,506</td><td class="num">$ 2,713</td></tr>
+<tr><td style="text-indent:15px">Accrued liabilities</td><td class="num">2,831</td><td class="num">2,519</td></tr>
+<tr><td style="text-indent:15px">Short-term debt</td><td class="num">1,600</td><td class="num">513</td></tr>
+<tr><td style="text-indent:30px">Total current liabilities</td><td class="num" style="border-top:1px solid #000">7,937</td><td class="num" style="border-top:1px solid #000">5,745</td></tr>
+<tr><td style="text-indent:15px">Long-term debt, net of current portion</td><td class="num">9,335</td><td class="num">7,235</td></tr>
+<tr><td style="text-indent:15px">Other long-term liabilities</td><td class="num">1,609</td><td class="num">1,609</td></tr>
+<tr><td style="text-indent:30px">Total liabilities</td><td class="num" style="border-top:1px solid #000">18,881</td><td class="num" style="border-top:1px solid #000">14,589</td></tr>
+<tr><td>Shareholders&#x27; equity:</td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Common stock and paid-in capital</td><td class="num">5,015</td><td class="num">4,530</td></tr>
+<tr><td style="text-indent:15px">Retained earnings</td><td class="num">7,923</td><td class="num">10,667</td></tr>
+<tr><td style="text-indent:30px">Total equity</td><td class="num" style="border-top:1px solid #000">12,938</td><td class="num" style="border-top:1px solid #000">15,197</td></tr>
+<tr><td><b>Total liabilities and equity</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 31,819</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 29,786</b></td></tr>
+</table>
+<p class="fn">(1) Includes amounts from transactions with a related party.</p>
+<p class="fn">(2) See the accompanying notes, which are an integral part of these statements.</p>
+</div>
+<div class="statement">
+<p class="co">Emberfield Components Inc.</p>
+<p class="ti">Consolidated Statements of Cash Flows</p>
+<p class="unit">(Dollars in thousands)</p>
+<table class="fs">
+<tr><td></td><td colspan="3" style="text-align:center;border-bottom:1px solid #000">Year Ended</td></tr>
+<tr><td></td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 27, 2025</td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 28, 2024</td><td style="text-align:center;font-weight:bold;border-bottom:1px solid #000">September 30, 2023</td></tr>
+<tr><td>Cash flows from operating activities:</td><td></td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Net income (loss)</td><td class="num">$ (2,744)</td><td class="num">$ 4,777</td><td class="num">$ 1,997</td></tr>
+<tr><td style="text-indent:15px">Depreciation and amortization</td><td class="num">1,630</td><td class="num">1,436</td><td class="num">827</td></tr>
+<tr><td style="text-indent:15px">Stock-based compensation</td><td class="num">485</td><td class="num">1,170</td><td class="num">546</td></tr>
+<tr><td style="text-indent:15px">Changes in operating assets and liabilities</td><td class="num">(244)</td><td class="num">70</td><td class="num">108</td></tr>
+<tr><td style="text-indent:15px">Net cash provided by (used in) operating activities</td><td class="num" style="border-top:1px solid #000">(873)</td><td class="num" style="border-top:1px solid #000">7,453</td><td class="num" style="border-top:1px solid #000">3,478</td></tr>
+<tr><td>Cash flows from investing activities:</td><td></td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Purchases of property, plant and equipment</td><td class="num">(2,500)</td><td class="num">(2,555)</td><td class="num">(3,208)</td></tr>
+<tr><td style="text-indent:15px">Purchases of investments, net</td><td class="num">(566)</td><td class="num">(469)</td><td class="num">(163)</td></tr>
+<tr><td style="text-indent:15px">Other investing activities</td><td class="num">73</td><td class="num">109</td><td class="num">(173)</td></tr>
+<tr><td style="text-indent:15px">Net cash used in investing activities</td><td class="num" style="border-top:1px solid #000">(2,993)</td><td class="num" style="border-top:1px solid #000">(2,915)</td><td class="num" style="border-top:1px solid #000">(3,544)</td></tr>
+<tr><td>Cash flows from financing activities:</td><td></td><td></td><td></td></tr>
+<tr><td style="text-indent:15px">Proceeds from term loan</td><td class="num">3,700</td><td class="num">1,500</td><td class="num">—</td></tr>
+<tr><td style="text-indent:15px">Repayments of long-term debt</td><td class="num">(513)</td><td class="num">(916)</td><td class="num">(697)</td></tr>
+<tr><td style="text-indent:15px">Repurchases of common stock</td><td class="num">—</td><td class="num">—</td><td class="num">(896)</td></tr>
+<tr><td style="text-indent:15px">Net cash provided by (used in) financing activities</td><td class="num" style="border-top:1px solid #000">3,187</td><td class="num" style="border-top:1px solid #000">584</td><td class="num" style="border-top:1px solid #000">(1,593)</td></tr>
+<tr><td>Net increase (decrease) in cash and cash equivalents</td><td class="num" style="border-top:1px solid #000">(679)</td><td class="num" style="border-top:1px solid #000">5,122</td><td class="num" style="border-top:1px solid #000">(1,659)</td></tr>
+<tr><td>Cash, beginning of period</td><td class="num">7,935</td><td class="num">2,813</td><td class="num">4,472</td></tr>
+<tr><td><b>Cash, end of period</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 7,256</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 7,935</b></td><td class="num" style="border-top:1px solid #000;border-bottom:3px double #000"><b>$ 2,813</b></td></tr>
+</table>
+</div>
+</body>
+</html>

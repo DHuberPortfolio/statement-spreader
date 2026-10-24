@@ -35,6 +35,9 @@ class LineDef(BaseModel):
     label: str
     kind: str
     critical: bool = False
+    # An "either" line that a statement printing costs in parentheses also prints as a deduction
+    # (income tax): flipped with the costs, so a tax expense is positive and a benefit negative.
+    deduction: bool = False
     aliases: list[str] = Field(default_factory=list)
     sections: list[SectionRule] = Field(default_factory=list)
     parts: list[str] = Field(default_factory=list)

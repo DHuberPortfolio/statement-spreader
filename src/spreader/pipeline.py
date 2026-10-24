@@ -68,7 +68,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     values = []
     built = {stype: timer.run("structure", build_statement, table, layout, stype, doc.doc_id, det.score)
              for stype, (table, layout, det) in picked.items()}
-    harmonize_periods(list(built.values()))
+    harmonize_periods(list(built.values()), doc.preface)
     for stype, st in built.items():
         mappings = timer.run("map", map_table, st, profile, memory, model)
         statements[stype.value] = StatementResult(table=st, mappings=mappings)

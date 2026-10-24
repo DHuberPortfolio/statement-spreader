@@ -101,7 +101,12 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
             if len(parts) > 1:
                 steps.append(ProvenanceStep(kind="sum", detail=f"Added {len(parts)} rows: {_fmt(total)}"))
             status = ValueStatus.EXTRACTED if len(parts) == 1 else ValueStatus.NORMALIZED
-            if ldef.kind == "cost" and total < 0:
+            if ldef.deduction and flip_costs:
+                total = -total
+                steps.append(ProvenanceStep(kind="sign", detail="This statement prints costs and tax in parentheses; "
+                                                                "spread with tax expense positive"))
+                status = ValueStatus.NORMALIZED
+            elif ldef.kind == "cost" and total < 0:
                 parents = {parent_total[i].label for i, _ in parts if i in parent_total}
                 if flip_costs:
                     total = -total

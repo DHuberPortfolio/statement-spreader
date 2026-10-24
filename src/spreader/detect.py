@@ -246,6 +246,15 @@ def detect_scale(texts: list[str]) -> tuple[Scale, Scale | None]:
         if money is not None:
             break
     if money is None:
+        # "(In U.S. dollars)" states the unit just as clearly as "(In thousands)": whole dollars.
+        for text in texts[:3]:
+            m = _WHOLE_DOLLARS.search(clean_text(text or ""))
+            if m:
+                return Scale(multiplier=1, evidence=m.group(0).strip()), None
         return Scale(multiplier=1, evidence="No unit statement (such as 'in thousands') was found near the table.",
                      assumed=True), None
     return money, shares
+
+
+_WHOLE_DOLLARS = re.compile(r"\(?\s*(?:in|expressed in|amounts in|stated in)\s+(?:u\.?s\.?\s+)?dollars\b(?!\s+in)\s*\)?|"
+                            r"\(\s*(?:u\.?s\.?\s+)?dollars\s*\)|\(\s*(?:in\s+)?usd\s*\)", re.I)
