@@ -169,7 +169,7 @@ def _likely_causes(c: CheckResult, statements: dict[str, StatementResult], profi
     hints: list[str] = []
     # The most useful pointer: a printed row whose amount equals the difference.
     if c.difference not in (None, Decimal(0)):
-        for skey, res in statements.items():
+        for res in statements.values():
             mult = Decimal(res.table.scale.multiplier)
             maps = {m.row_index: m for m in res.mappings}
             for r in res.table.rows:

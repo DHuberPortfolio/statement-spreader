@@ -6,9 +6,9 @@ import io
 from decimal import Decimal
 
 import pytest
-from conftest import statement_html
 from openpyxl import load_workbook
 
+from conftest import statement_html
 from spreader.export import to_csv, to_xlsx
 from spreader.service import ActionError, Service
 from spreader.store import Store

@@ -5,8 +5,8 @@ from __future__ import annotations
 from decimal import Decimal
 
 import pytest
-from conftest import statement_html
 
+from conftest import statement_html
 from spreader.ingest import read_document
 from spreader.pipeline import spread_document
 from spreader.profile import PROFILE_DIR, load_profile

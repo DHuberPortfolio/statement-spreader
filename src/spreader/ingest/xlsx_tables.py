@@ -34,6 +34,14 @@ _TITLE = re.compile(r"\b(statements?|balance\s+sheets?)\s+of\b|\bbalance\s+sheet
 _YEARISH = re.compile(r"^(19|20)\d\d$")
 
 
+def _format_scaling(fmt: str) -> int:
+    """Thousands scaling a number format applies on screen: "#,##0," -> 1, "#,##0,," -> 2."""
+    section = fmt.split(";")[0]
+    section = re.sub(r'"[^"]*"|\\.|\[[^\]]*\]', "", section)  # drop quoted text, escaped characters, [colors]
+    m = re.search(r"[0#?](,+)(?![0#?])", section)
+    return len(m.group(1)) if m else 0
+
+
 def _number_text(v: float | int | Decimal) -> str:
     d = v if isinstance(v, Decimal) else Decimal(repr(v)) if isinstance(v, float) else Decimal(v)
     if d == d.to_integral_value():
@@ -69,6 +77,7 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
         for rng in ws.merged_cells.ranges:
             merged[(rng.min_row, rng.min_col)] = rng.max_col
         rows: list[tuple[int, RawRow]] = []
+        scaled_cells: list[str] = []
         max_row = min(ws.max_row or 0, MAX_ROWS)
         max_col = min(ws.max_column or 0, MAX_COLS)
         if (ws.max_row or 0) > MAX_ROWS:
@@ -102,6 +111,13 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
                     # A year typed as a number near the top of the sheet is a column header, not 2,022.
                     text = str(v)
                 elif isinstance(v, int | float | Decimal):
+                    # A format like "#,##0,," shows the stored 1,234,000,000 as "1,234". The unit line
+                    # ("in millions") describes what is shown, so read the number as shown.
+                    k = _format_scaling(cell.number_format or "")
+                    if k:
+                        d = Decimal(repr(v)) if isinstance(v, float) else Decimal(v)
+                        v = d / (Decimal(1000) ** k)
+                        scaled_cells.append(f"{ws.title}!{get_column_letter(c)}{r}")
                     text = _number_text(v)
                 else:
                     text = clean_text(str(v))
@@ -117,6 +133,9 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
                 tokens.append(Token(text=text, x0=float(c), x1=float(x1), ref=ref))
             if tokens:
                 rows.append((r, RawRow(index=r, tokens=tokens, indent=indent, bold=bold)))
+        if scaled_cells:
+            warnings.append(f"{len(scaled_cells)} cells on sheet '{ws.title}' display a scaled number through their "
+                            f"format (e.g. {scaled_cells[0]}); they were read as displayed.")
         for seg in _segments(rows):
             numbers = sum(1 for _, rr in seg for t in rr.tokens if is_amount_like(t.text))
             if numbers < 4:

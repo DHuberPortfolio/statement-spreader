@@ -77,3 +77,23 @@ def test_formula_without_saved_value_is_not_guessed(profile) -> None:  # type: i
 def test_damaged_workbook_is_refused() -> None:
     with pytest.raises(IngestError):
         read_document("x.xlsx", b"PK\x03\x04" + b"\x00" * 100)
+
+
+def test_number_format_scaling_is_read_as_displayed(profile) -> None:  # type: ignore[no-untyped-def]
+    wb = Workbook()
+    ws = wb.active
+    for r in [["Consolidated Balance Sheets"], ["(In millions)"], [None, "December 31, 2025", "December 31, 2024"],
+              ["Cash and cash equivalents", 100_000_000, 80_000_000], ["Total assets", 400_000_000, 340_000_000],
+              ["Total liabilities", 200_000_000, 180_000_000], ["Total stockholders' equity", 200_000_000, 160_000_000],
+              ["Total liabilities and stockholders' equity", 400_000_000, 340_000_000]]:
+        ws.append(r)
+    for row in ws.iter_rows(min_row=4, min_col=2, max_col=3):
+        for cell in row:
+            cell.number_format = "#,##0,,"  # shows 100 for 100,000,000
+    buf = io.BytesIO()
+    wb.save(buf)
+    ir = read_document("bs.xlsx", buf.getvalue())
+    spread, _ = spread_document(ir, profile)
+    # Shown as 100 "in millions": 100 million, not 100 million million.
+    assert spread.value("cash", "2025-12-31/I").value == Decimal(100_000_000)
+    assert any("display a scaled number" in w for w in ir.warnings)

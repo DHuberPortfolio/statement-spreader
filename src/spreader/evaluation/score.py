@@ -94,11 +94,31 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
         truth_by_line.setdefault(t.line, {})[t.period] = t.value
 
     open_items = [i for i in spread.review if not i.resolved and i.severity is not Severity.INFO]
+    # A missing value counts as caught when the run says so for that statement and period (the
+    # statement is missing, a check failed, a number was unreadable, a total did not foot), or when
+    # a row printing that very number carries an open review item (left unplaced, or placed with
+    # low confidence): a reviewer looking at that item finds the value.
     flagged_periods_unmapped: dict[str, set[str]] = {}
     for it in open_items:
-        if it.kind in {ReviewKind.UNMAPPED_ROW, ReviewKind.FAILED_CHECK, ReviewKind.MISSING_STATEMENT, ReviewKind.UNREADABLE,
+        if it.kind in {ReviewKind.FAILED_CHECK, ReviewKind.MISSING_STATEMENT, ReviewKind.UNREADABLE,
                        ReviewKind.FOOTING} and it.statement is not None:
             flagged_periods_unmapped.setdefault(it.statement.value, set()).update(it.periods or ["*"])
+    flagged_amounts: dict[tuple[str, str], list[Decimal]] = {}
+    for it in open_items:
+        if it.kind not in {ReviewKind.UNMAPPED_ROW, ReviewKind.LOW_CONFIDENCE} or it.statement is None:
+            continue
+        res = spread.statements.get(it.statement.value)
+        if res is None:
+            continue
+        mult = Decimal(res.table.scale.multiplier)
+        for r in res.table.rows:
+            if r.index in it.rows:
+                for pk, pv in r.values.items():
+                    if pv.displayed is not None:
+                        flagged_amounts.setdefault((it.statement.value, pk), []).append(abs(pv.displayed * mult))
+
+    def _flagged_by_row(t: TruthValue) -> bool:
+        return any(abs(a - abs(t.value)) <= _tolerance(t, 1) for a in flagged_amounts.get((t.statement, t.period), []))
 
     # Rows the key cannot place (a company-specific concept): what the pipeline added from them to
     # each line. A spread value that equals the key's total plus these is not provably wrong; the
@@ -139,7 +159,7 @@ def score(spread: Spread, key: AnswerKey) -> DocScore:
             continue
         if v is None or v.value is None:
             fl = flagged_periods_unmapped.get(t.statement, set())
-            bucket = "missing_flagged" if (t.period in fl or "*" in fl) else "missing_silent"
+            bucket = "missing_flagged" if (t.period in fl or "*" in fl or _flagged_by_row(t)) else "missing_silent"
             ds.values.append(ValueOutcome(t.line, t.period, t.value, None, bucket))
             continue
         n_terms = 3 if v.status is ValueStatus.CALCULATED else len(v.source_rows)

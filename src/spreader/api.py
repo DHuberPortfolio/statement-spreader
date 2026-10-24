@@ -43,7 +43,6 @@ def service() -> Service:
     global _service
     if _service is None:
         from .llm import configured_model
-
         from .profile import load_profile
 
         model, model_id = configured_model()

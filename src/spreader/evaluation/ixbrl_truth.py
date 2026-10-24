@@ -400,6 +400,10 @@ def build_key(document: str, data: bytes, profile: Profile) -> tuple[AnswerKey, 
                 line = "cf_dna"
             if stmt == "income_statement" and line in {"cf_dna"}:
                 line = "dna_opex"
+            if (f.concept == "NonoperatingIncomeExpense" and stmt == "income_statement"
+                    and {"OtherNonoperatingIncomeExpense", "InterestExpense", "InterestExpenseNonoperating",
+                         "InvestmentIncomeInterest", "InterestIncomeOther"} & {g.concept for g in st.facts}):
+                line = None
             if line is not None and line not in profile.lines:
                 line = None
             if line is not None and profile.line_statement[line].value != stmt:
