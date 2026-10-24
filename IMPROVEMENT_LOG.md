@@ -21,3 +21,21 @@ Known measurement limitation (fixed in #4): when a filing tags a row with a
 company-specific concept, the answer key does not know which template line that row feeds, so the
 key's total for that line can be incomplete and a correct spread value is scored wrong (seen on
 Apple's working-capital line: the key misses "vendor non-trade receivables").
+
+## Next (ranked by expected value per hour)
+
+1. **Measure ROI for real.** Time 3+ documents spread by hand and 3+ reviewed in the tool (the ROI page's timer), by an
+   analyst, on documents like the organisation's own. Until then, time saved is "not measured" on purpose.
+2. **Cut reviewer workload without hiding errors.** A failed check flags every line it touches (bs_assets_parts flags
+   ~28 correct values per wrong one on the dev split). Narrow the flags to the lines the hint implicates (the row whose
+   amount equals the difference), measured on dev: the catch rate must not fall.
+3. **Mapping recall on unseen filings** (holdout 73.5% vs dev 80.0%): the gap is mostly long-tail labels. Options:
+   grow aliases from reviewer memory across documents; run the local model on catch-all mappings too (not only
+   unplaced rows) as a second opinion.
+4. **PDF silent errors** (7.0% on printed 10-Ks vs 2.7% for the same filings in HTML): partly the scorer (PDFs cannot
+   use the "unjudged" correction because it matches HTML cell paths; match on label, period and value instead), partly
+   real (sign and section cues are weaker in PDFs).
+5. **OCR for scanned statements** (refused today): an open-source OCR model behind the same `DocumentIR`.
+6. **Deployment basics**: SSO and roles, retention and deletion, a server database, a connector to the organisation's
+   document store, the model behind the organisation's approved endpoint.
+7. **Restatement detection across filings**: compare a prior-year column with last year's approved spread.

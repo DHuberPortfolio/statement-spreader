@@ -23,23 +23,22 @@ ROI layer that separates what was measured from what is assumed.
 | Config | `config/profiles/us-commercial.yaml` | Template lines, aliases, section rules, checks, derived lines, ratios |
 | Web | `web/` | React + TypeScript review workspace; `npm run build` -> `web/dist`, served by the API |
 
-## Status (2026-10-24, 11:35 ET)
+## Status (2026-10-24, 12:20 ET)
 
-- [x] HTML pipeline; SEC dev split 79.4% right, silent error rate 2.9% (dev-v3); holdout measured once (holdout-v2: 73.3%, 3.4%)
-- [x] Excel reader; synthetic corpus (40 cases x 3 formats): 94.7% right, 0.1% silent (syn-v3)
-- [x] Service, store, API, exports, ROI; 762 tests pass (59 product tests + 703 generator tests)
-- [x] Frontend built and checked in a browser by its agent; I checked documents + workspace pages myself
-- [x] Local model tier + ablation on dev (83.2% right, 2.2% silent with the model)
-- [ ] PDF reader rework: parallel agent owns `ingest/pdf_tables.py`, `tests/test_pdf_reader.py`, `scripts/print_sec_pdfs.py` (uncommitted until its report)
-- [ ] Red-team review: parallel agent, report pending; fix confirmed findings with regression tests
-- [ ] Final evaluations running in background -> `eval/reports/dev-v3-model`, `holdout-v3`, `holdout-v3-model` (log: `var/final-evals.log`)
-- [ ] README with verified results; PORTFOLIO.md row; memory note; handoff
+- [x] HTML, PDF and Excel readers; SEC answer keys from inline XBRL (dev/holdout by ticker hash); synthetic corpus
+- [x] Service, store, API, exports, ROI, overlays with covenants; React review workspace (browser-checked)
+- [x] Local model tier (Qwen3-4B, llama.cpp) with ablation; red team: 15 findings fixed with regression tests
+- [x] PDF reader rewrite (printed SEC 10-Ks 43% -> 77% of values right)
+- [x] Final evaluations: `eval/reports/*-final*.json`, SEC PDFs `eval/sec/pdf/eval-sec-pdf-final.json`; table via
+      `scripts/results_table.py dev-final dev-final-model holdout-final holdout-final-model syn-final`
+- [ ] Waits on Devin: repo visibility (nothing pushed); timed sessions so ROI can be measured (3 by hand + 3 assisted)
+- Next ideas (ranked) in IMPROVEMENT_LOG.md "Next" section
 
 ## Running services (local only)
 - llama-server: `C:\Users\devin\tools\llama.cpp\b11853\bin\llama-server.exe` on 127.0.0.1:8088 with
   `C:\Users\devin\tools\models\Qwen3-4B-Instruct-2507-Q4_K_M.gguf` (log `C:\Users\devin\tools\llama-server.log`)
 - Demo app: `SPREADER_DATA=var/demo` uvicorn on 127.0.0.1:8766 (`scripts/load_demo.py var/demo` loads it)
-- The frontend agent left a backend on 8765 (`var/dev-ui`) and Vite on 5173; stop them at the end.
+- (The frontend agent's servers on 8765 and 5173 were stopped at 11:40.)
 
 ## How to resume
 
