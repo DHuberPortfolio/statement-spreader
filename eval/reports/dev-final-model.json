@@ -2,96 +2,96 @@
  "name": "dev-final-model",
  "documents": 33,
  "crashed": 0,
- "seconds": 121.6,
- "profile": "us-commercial 2026.10.24-1+189ff92e3b46",
+ "seconds": 95.2,
+ "profile": "us-commercial 2026.10.24-1+0ad0af213be8",
  "buckets": {
-  "correct_auto": 2411,
+  "correct_auto": 2432,
   "unjudged": 279,
   "correct_review": 1176,
   "wrong_review": 205,
   "missing_flagged": 339,
-  "wrong_auto": 52,
-  "missing_silent": 150
+  "wrong_auto": 53,
+  "missing_silent": 128
  },
  "error_kinds": {
-  "value": 231,
+  "value": 232,
   "sign": 10,
   "period": 3,
   "scale": 13
  },
  "rates": {
   "accuracy": {
-   "n": 3587,
+   "n": 3608,
    "d": 4333,
-   "rate": 0.8278329102238634,
-   "low": 0.8163026590679899,
-   "high": 0.8387823687089065
+   "rate": 0.83267943687976,
+   "low": 0.8212716374336531,
+   "high": 0.8434978574909482
   },
   "silent_error_rate": {
-   "n": 52,
-   "d": 2463,
-   "rate": 0.021112464474218433,
-   "low": 0.01613631405306446,
-   "high": 0.027580153189907287
+   "n": 53,
+   "d": 2485,
+   "rate": 0.021327967806841045,
+   "low": 0.016342817831283277,
+   "high": 0.027790806421863243
   },
   "silent_omission_rate": {
-   "n": 150,
+   "n": 128,
    "d": 4333,
-   "rate": 0.03461804754211863,
-   "low": 0.029573798302903097,
-   "high": 0.04048677296628967
+   "rate": 0.029540733902607894,
+   "low": 0.024900986260251258,
+   "high": 0.035013952758964934
   },
   "review_rate": {
    "n": 1381,
-   "d": 3844,
-   "rate": 0.35926118626430803,
-   "low": 0.3442412570435499,
-   "high": 0.3745621365264974
+   "d": 3866,
+   "rate": 0.3572167615106053,
+   "low": 0.34226024614753026,
+   "high": 0.3724567593237015
   },
   "catch_rate": {
    "n": 205,
-   "d": 257,
-   "rate": 0.7976653696498055,
-   "low": 0.744330415581692,
-   "high": 0.8422324639589948
+   "d": 258,
+   "rate": 0.7945736434108527,
+   "low": 0.7411249578845405,
+   "high": 0.8393786748460876
   },
   "unnecessary_review_rate": {
    "n": 1176,
-   "d": 3587,
-   "rate": 0.32785057150822416,
-   "low": 0.3126793799956102,
-   "high": 0.3433901052192207
+   "d": 3608,
+   "rate": 0.3259423503325942,
+   "low": 0.310839768436844,
+   "high": 0.34141519202432336
   },
   "coverage": {
-   "n": 3844,
+   "n": 3866,
    "d": 4333,
-   "rate": 0.8871451650126932,
-   "low": 0.8773786806787804,
-   "high": 0.8962257783819332
+   "rate": 0.892222478652204,
+   "low": 0.882639182912504,
+   "high": 0.9011109083981863
   }
  },
  "cells": {
   "found": {
-   "ok": 6870,
+   "ok": 6912,
    "total": 7675
   },
   "value": {
-   "ok": 6834,
-   "total": 6870
+   "ok": 6876,
+   "total": 6912
   },
   "period": {
-   "ok": 6412,
-   "total": 6870
+   "ok": 6454,
+   "total": 6912
   },
   "mapping": {
-   "ok": 4657,
-   "total": 5096
+   "ok": 4696,
+   "total": 5138
   }
  },
  "documents_detail": [
   {
    "doc": "sec:AAPL",
-   "ms": 1290,
+   "ms": 1298,
    "error": null,
    "statements": [
     "income_statement",
@@ -111,7 +111,7 @@
   },
   {
    "doc": "sec:ADBE",
-   "ms": 2233,
+   "ms": 2172,
    "error": null,
    "statements": [
     "cash_flow",
@@ -134,7 +134,7 @@
   },
   {
    "doc": "sec:AMD",
-   "ms": 1990,
+   "ms": 1956,
    "error": null,
    "statements": [
     "cash_flow",
@@ -158,7 +158,7 @@
   },
   {
    "doc": "sec:AMZN",
-   "ms": 1619,
+   "ms": 1566,
    "error": null,
    "statements": [
     "cash_flow",
@@ -180,7 +180,7 @@
   },
   {
    "doc": "sec:BA",
-   "ms": 3067,
+   "ms": 2895,
    "error": null,
    "statements": [
     "income_statement",
@@ -204,7 +204,7 @@
   },
   {
    "doc": "sec:BOOT",
-   "ms": 896,
+   "ms": 817,
    "error": null,
    "statements": [
     "income_statement",
@@ -212,24 +212,23 @@
     "cash_flow"
    ],
    "buckets": {
-    "correct_auto": 82,
+    "correct_auto": 103,
     "correct_review": 6,
-    "missing_silent": 22,
-    "wrong_auto": 2,
+    "wrong_auto": 3,
     "unjudged": 6,
     "wrong_review": 3,
     "missing_flagged": 3
    },
    "checks_failed": 0,
-   "checks_run": 30,
-   "review_items": 23,
+   "checks_run": 37,
+   "review_items": 13,
    "blockers": 0,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:CAT",
-   "ms": 8910,
+   "ms": 8500,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -252,7 +251,7 @@
   },
   {
    "doc": "sec:CHRW",
-   "ms": 1918,
+   "ms": 1820,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -275,7 +274,7 @@
   },
   {
    "doc": "sec:CMG",
-   "ms": 1443,
+   "ms": 1405,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -298,7 +297,7 @@
   },
   {
    "doc": "sec:COST",
-   "ms": 1176,
+   "ms": 1119,
    "error": null,
    "statements": [
     "income_statement",
@@ -322,7 +321,7 @@
   },
   {
    "doc": "sec:DIS",
-   "ms": 5456,
+   "ms": 5254,
    "error": null,
    "statements": [
     "income_statement",
@@ -346,7 +345,7 @@
   },
   {
    "doc": "sec:DPZ",
-   "ms": 1701,
+   "ms": 1692,
    "error": null,
    "statements": [
     "income_statement",
@@ -364,14 +363,14 @@
    },
    "checks_failed": 9,
    "checks_run": 34,
-   "review_items": 33,
+   "review_items": 32,
    "blockers": 7,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:DUOL",
-   "ms": 2200,
+   "ms": 2109,
    "error": null,
    "statements": [
     "income_statement",
@@ -388,18 +387,18 @@
    },
    "checks_failed": 8,
    "checks_run": 37,
-   "review_items": 26,
+   "review_items": 25,
    "blockers": 6,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:ETSY",
-   "ms": 3059,
+   "ms": 2937,
    "error": null,
    "statements": [
-    "income_statement",
     "balance_sheet",
+    "income_statement",
     "cash_flow"
    ],
    "buckets": {
@@ -418,7 +417,7 @@
   },
   {
    "doc": "sec:EXPD",
-   "ms": 1023,
+   "ms": 1007,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -441,7 +440,7 @@
   },
   {
    "doc": "sec:F",
-   "ms": 11274,
+   "ms": 10597,
    "error": null,
    "statements": [
     "income_statement",
@@ -464,11 +463,11 @@
   },
   {
    "doc": "sec:FAST",
-   "ms": 1646,
+   "ms": 1578,
    "error": null,
    "statements": [
-    "income_statement",
     "balance_sheet",
+    "income_statement",
     "cash_flow"
    ],
    "buckets": {
@@ -486,7 +485,7 @@
   },
   {
    "doc": "sec:HAS",
-   "ms": 2673,
+   "ms": 2557,
    "error": null,
    "statements": [
     "income_statement",
@@ -510,7 +509,7 @@
   },
   {
    "doc": "sec:KO",
-   "ms": 4627,
+   "ms": 4096,
    "error": null,
    "statements": [
     "income_statement",
@@ -534,7 +533,7 @@
   },
   {
    "doc": "sec:LULU",
-   "ms": 3289,
+   "ms": 2197,
    "error": null,
    "statements": [
     "income_statement",
@@ -557,7 +556,7 @@
   },
   {
    "doc": "sec:MAT",
-   "ms": 4421,
+   "ms": 2758,
    "error": null,
    "statements": [
     "income_statement",
@@ -580,7 +579,7 @@
   },
   {
    "doc": "sec:MCD",
-   "ms": 3199,
+   "ms": 1997,
    "error": null,
    "statements": [
     "income_statement",
@@ -605,7 +604,7 @@
   },
   {
    "doc": "sec:MMM",
-   "ms": 5210,
+   "ms": 3223,
    "error": null,
    "statements": [
     "income_statement",
@@ -628,7 +627,7 @@
   },
   {
    "doc": "sec:ORCL",
-   "ms": 4268,
+   "ms": 2647,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -653,7 +652,7 @@
   },
   {
    "doc": "sec:PEP",
-   "ms": 5963,
+   "ms": 3655,
    "error": null,
    "statements": [
     "income_statement",
@@ -676,7 +675,7 @@
   },
   {
    "doc": "sec:PFE",
-   "ms": 8644,
+   "ms": 5303,
    "error": null,
    "statements": [
     "income_statement",
@@ -700,12 +699,12 @@
   },
   {
    "doc": "sec:PG",
-   "ms": 3693,
+   "ms": 2239,
    "error": null,
    "statements": [
     "income_statement",
-    "cash_flow",
-    "balance_sheet"
+    "balance_sheet",
+    "cash_flow"
    ],
    "buckets": {
     "correct_auto": 71,
@@ -724,7 +723,7 @@
   },
   {
    "doc": "sec:POOL",
-   "ms": 2331,
+   "ms": 1537,
    "error": null,
    "statements": [
     "income_statement",
@@ -749,7 +748,7 @@
   },
   {
    "doc": "sec:SHAK",
-   "ms": 5513,
+   "ms": 3615,
    "error": null,
    "statements": [
     "income_statement",
@@ -773,7 +772,7 @@
   },
   {
    "doc": "sec:SNA",
-   "ms": 8395,
+   "ms": 5239,
    "error": null,
    "statements": [
     "income_statement",
@@ -796,7 +795,7 @@
   },
   {
    "doc": "sec:ULTA",
-   "ms": 1761,
+   "ms": 1133,
    "error": null,
    "statements": [
     "income_statement",
@@ -819,7 +818,7 @@
   },
   {
    "doc": "sec:UNP",
-   "ms": 3124,
+   "ms": 1905,
    "error": null,
    "statements": [
     "income_statement",
@@ -843,7 +842,7 @@
   },
   {
    "doc": "sec:WMT",
-   "ms": 3561,
+   "ms": 2306,
    "error": null,
    "statements": [
     "cash_flow",
@@ -1485,61 +1484,6 @@
   },
   {
    "doc": "sec:BOOT",
-   "line": "revenue",
-   "period": "2024-03-30/12M",
-   "truth": "1667009000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "cogs",
-   "period": "2024-03-30/12M",
-   "truth": "1052585000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "gross_profit",
-   "period": "2024-03-30/12M",
-   "truth": "614424000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "sga",
-   "period": "2024-03-30/12M",
-   "truth": "416210000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "operating_income",
-   "period": "2024-03-30/12M",
-   "truth": "198214000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
    "line": "other_nonoperating",
    "period": "2026-03-28/12M",
    "truth": "4498000",
@@ -1565,175 +1509,10 @@
    "line": "other_nonoperating",
    "period": "2024-03-30/12M",
    "truth": "3634000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "pretax_income",
-   "period": "2024-03-30/12M",
-   "truth": "197372000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "income_tax",
-   "period": "2024-03-30/12M",
-   "truth": "50376000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "net_income",
-   "period": "2024-03-30/12M",
-   "truth": "146996000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "eps_basic",
-   "period": "2026-03-28/12M",
-   "truth": "7.40",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "eps_basic",
-   "period": "2025-03-29/12M",
-   "truth": "5.93",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "eps_basic",
-   "period": "2024-03-30/12M",
-   "truth": "4.87",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "eps_diluted",
-   "period": "2026-03-28/12M",
-   "truth": "7.35",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "eps_diluted",
-   "period": "2025-03-29/12M",
-   "truth": "5.88",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "eps_diluted",
-   "period": "2024-03-30/12M",
-   "truth": "4.80",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "shares_basic",
-   "period": "2026-03-28/12M",
-   "truth": "30505000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "shares_basic",
-   "period": "2025-03-29/12M",
-   "truth": "30524000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "shares_basic",
-   "period": "2024-03-30/12M",
-   "truth": "30167000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "shares_diluted",
-   "period": "2026-03-28/12M",
-   "truth": "30735000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "shares_diluted",
-   "period": "2025-03-29/12M",
-   "truth": "30773000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "shares_diluted",
-   "period": "2024-03-30/12M",
-   "truth": "30611000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
+   "predicted": "1396000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
    "flags": []
   },
   {
@@ -1782,17 +1561,6 @@
     "confidence:cash_flow:36",
     "suspicious:jump:cf_other_financing:2024-03-30/12M:2025-03-29/12M"
    ]
-  },
-  {
-   "doc": "sec:BOOT",
-   "line": "net_income_parent",
-   "period": "2024-03-30/12M",
-   "truth": "146996000",
-   "predicted": null,
-   "bucket": "missing_silent",
-   "kind": "",
-   "status": "",
-   "flags": []
   },
   {
    "doc": "sec:CAT",
@@ -6025,14 +5793,14 @@
   }
  ],
  "review_items_per_document": {
-  "median": 26,
-  "mean": 27.0,
+  "median": 25,
+  "mean": 26.6,
   "median_blockers": 6
  },
  "mapping_by_method": {
   "alias": [
-   3936,
-   4132
+   3975,
+   4174
   ],
   "structure": [
    451,
