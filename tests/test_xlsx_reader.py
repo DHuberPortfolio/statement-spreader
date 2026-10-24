@@ -97,3 +97,16 @@ def test_number_format_scaling_is_read_as_displayed(profile) -> None:  # type: i
     # Shown as 100 "in millions": 100 million, not 100 million million.
     assert spread.value("cash", "2025-12-31/I").value == Decimal(100_000_000)
     assert any("display a scaled number" in w for w in ir.warnings)
+
+
+def test_a_data_row_of_year_sized_numbers_is_not_a_header(profile) -> None:  # type: ignore[no-untyped-def]
+    wb = Workbook()
+    ws = wb.active
+    for r in [["Balance sheet"], ["(In thousands)"], [None, "December 31, 2025", "December 31, 2024"], ["Cash", 100, 80],
+              ["Inventories", 2021, 1987], ["Total current assets", 2121, 2067], ["Total assets", 2121, 2067],
+              ["Total liabilities", 1000, 1000], ["Total equity", 1121, 1067], ["Total liabilities and equity", 2121, 2067]]:
+        ws.append(r)
+    buf = io.BytesIO()
+    wb.save(buf)
+    spread, _ = spread_document(read_document("y.xlsx", buf.getvalue()), profile)
+    assert spread.value("inventory", "2025-12-31/I").value == Decimal(2_021_000)

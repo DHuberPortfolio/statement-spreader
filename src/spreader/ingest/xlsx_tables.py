@@ -32,6 +32,8 @@ MAX_COLS = 60
 MAX_SHEETS = 50
 _TITLE = re.compile(r"\b(statements?|balance\s+sheets?)\s+of\b|\bbalance\s+sheets?\b", re.I)
 _YEARISH = re.compile(r"^(19|20)\d\d$")
+_PERIOD_WORDS = re.compile(r"year|fiscal|ended|ending|period|as of|as at|months|weeks|quarter|december|june|september|march",
+                           re.I)
 
 
 def _format_scaling(fmt: str) -> int:
@@ -77,6 +79,7 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
         for rng in ws.merged_cells.ranges:
             merged[(rng.min_row, rng.min_col)] = rng.max_col
         rows: list[tuple[int, RawRow]] = []
+        data_seen = False  # a data row has appeared since the last statement title
         scaled_cells: list[str] = []
         max_row = min(ws.max_row or 0, MAX_ROWS)
         max_col = min(ws.max_column or 0, MAX_COLS)
@@ -88,6 +91,20 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
             tokens: list[Token] = []
             indent = 0.0
             bold = False
+            # A row whose only numbers are two or more whole years is a column-header row, wherever
+            # it sits on the sheet: write its years as "2024", not as the amount "2,024".
+            nums = [ws.cell(row=r, column=c).value for c in range(2, max_col + 1)]
+            nums = [x for x in nums if isinstance(x, int | float | Decimal) and not isinstance(x, bool)]
+            first = ws.cell(row=r, column=1).value
+            if first is not None and _TITLE.search(str(first)):
+                data_seen = False
+            header_label = first is None or bool(_PERIOD_WORDS.search(str(first)))
+            all_years = len(nums) >= 2 and all(float(x).is_integer() and 1900 <= x <= 2100 for x in nums)
+            # Before any data in a statement block, or labelled with period words. "Inventories
+            # 2,021 | 1,987" after the data has started is data, not a header.
+            year_row = all_years and (header_label or not data_seen)
+            if len(nums) >= 2 and not year_row:
+                data_seen = True
             for c in range(1, max_col + 1):
                 letter = get_column_letter(c)
                 if letter in hidden_cols:
@@ -107,7 +124,8 @@ def read_xlsx(filename: str, data: bytes) -> DocumentIR:
                 elif isinstance(v, datetime | date):
                     # A header typed as a real Excel date: write it the way a statement prints it.
                     text = f"{v:%B} {v.day}, {v.year}"
-                elif isinstance(v, int) and 1900 <= v <= 2100 and r <= 12 and c > 1:
+                elif isinstance(v, int | float) and c > 1 and year_row:
+                    v = int(v)
                     # A year typed as a number near the top of the sheet is a column header, not 2,022.
                     text = str(v)
                 elif isinstance(v, int | float | Decimal):
