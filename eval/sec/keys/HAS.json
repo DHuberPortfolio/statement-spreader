@@ -544,21 +544,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-12-28/12M",
-   "value": "91400000.0",
+   "value": "-21700000.0",
    "precision": "100000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-12-29/12M",
-   "value": "262100000.0",
+   "value": "69100000.0",
    "precision": "100000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2023-12-31/12M",
-   "value": "177300000.0",
+   "value": "7000000.0",
    "precision": "100000"
   },
   {
@@ -2150,7 +2150,7 @@
    "row_label": "Total non-operating expense, net",
    "period": "2025-12-28/12M",
    "value": "113100000.0",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[734]/table[1]/tr[20]/td[2]"
   },
@@ -2159,7 +2159,7 @@
    "row_label": "Total non-operating expense, net",
    "period": "2024-12-29/12M",
    "value": "193000000.0",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[734]/table[1]/tr[20]/td[5]"
   },
@@ -2168,7 +2168,7 @@
    "row_label": "Total non-operating expense, net",
    "period": "2023-12-31/12M",
    "value": "170300000.0",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[734]/table[1]/tr[20]/td[8]"
   },
@@ -3546,6 +3546,7 @@
   "us-gaap:InterestPaidNet",
   "us-gaap:InventoryWriteDown",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherNoncashIncomeExpense",
   "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
   "us-gaap:PaymentsOfFinancingCosts",

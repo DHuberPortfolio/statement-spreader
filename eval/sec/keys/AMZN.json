@@ -488,21 +488,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2023-12-31/12M",
-   "value": "1631000000",
+   "value": "926000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-12-31/12M",
-   "value": "-2330000000",
+   "value": "-2351000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-12-31/12M",
-   "value": "32011000000",
+   "value": "14675000000",
    "precision": "1000000"
   },
   {
@@ -1019,15 +1019,15 @@
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2025-12-31/I",
-   "value": "411065000000",
+   "period": "2024-12-31/I",
+   "value": "285970000000",
    "precision": "1000000"
   },
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2024-12-31/I",
-   "value": "285970000000",
+   "period": "2025-12-31/I",
+   "value": "411065000000",
    "precision": "1000000"
   }
  ],
@@ -2027,7 +2027,7 @@
    "row_label": "Total non-operating income",
    "period": "2023-12-31/12M",
    "value": "705000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[19]/td[2]"
   },
@@ -2036,7 +2036,7 @@
    "row_label": "Total non-operating income",
    "period": "2024-12-31/12M",
    "value": "21000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[19]/td[5]"
   },
@@ -2045,7 +2045,7 @@
    "row_label": "Total non-operating income",
    "period": "2025-12-31/12M",
    "value": "17336000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[534]/table[1]/tr[19]/td[8]"
   },
@@ -3066,6 +3066,7 @@
   "us-gaap:IncreaseDecreaseInAccountsReceivableAndOtherOperatingAssets",
   "us-gaap:IncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherNoncashIncomeExpense",
   "us-gaap:PreferredStockParOrStatedValuePerShare",
   "us-gaap:PreferredStockSharesAuthorized",

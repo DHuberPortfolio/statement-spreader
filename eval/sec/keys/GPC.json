@@ -530,21 +530,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-12-31/12M",
-   "value": "911493000",
+   "value": "3010000",
    "precision": "1000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-12-31/12M",
-   "value": "9669000",
+   "value": "-43579000",
    "precision": "1000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2023-12-31/12M",
-   "value": "-55059000",
+   "value": "-59764000",
    "precision": "1000"
   },
   {
@@ -977,15 +977,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2024-12-31/12M",
-   "value": "904076000",
+   "period": "2025-12-31/12M",
+   "value": "65945000",
    "precision": "1000"
   },
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-12-31/12M",
-   "value": "65945000",
+   "period": "2024-12-31/12M",
+   "value": "904076000",
    "precision": "1000"
   },
   {
@@ -1983,7 +1983,7 @@
    "row_label": "Total non-operating expenses",
    "period": "2025-12-31/12M",
    "value": "908483000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[603]/table[1]/tr[17]/td[2]"
   },
@@ -1992,7 +1992,7 @@
    "row_label": "Total non-operating expenses",
    "period": "2024-12-31/12M",
    "value": "53248000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[603]/table[1]/tr[17]/td[5]"
   },
@@ -2001,7 +2001,7 @@
    "row_label": "Total non-operating expenses",
    "period": "2023-12-31/12M",
    "value": "4705000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[603]/table[1]/tr[17]/td[8]"
   },
@@ -3135,6 +3135,7 @@
   "us-gaap:IncreaseDecreaseInAccountsPayableTrade",
   "us-gaap:InterestPaidNet",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherOperatingActivitiesCashFlowStatement",
   "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
   "us-gaap:PaymentsToAcquireBusinessesAndInterestInAffiliates",

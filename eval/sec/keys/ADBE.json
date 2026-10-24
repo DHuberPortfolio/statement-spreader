@@ -558,21 +558,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-11-28/12M",
-   "value": "319000000",
+   "value": "291000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-11-29/12M",
-   "value": "549000000",
+   "value": "359000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2023-12-01/12M",
-   "value": "411000000",
+   "value": "262000000",
    "precision": "1000000"
   },
   {
@@ -1096,15 +1096,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-11-28/12M",
-   "value": "7130000000",
+   "period": "2023-12-01/12M",
+   "value": "5428000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2023-12-01/12M",
-   "value": "5428000000",
+   "period": "2025-11-28/12M",
+   "value": "7130000000",
    "precision": "1000000"
   },
   {
@@ -2415,7 +2415,7 @@
    "row_label": "Total non-operating income (expense), net",
    "period": "2025-11-28/12M",
    "value": "28000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[711]/table[1]/tr[28]/td[2]"
   },
@@ -2424,7 +2424,7 @@
    "row_label": "Total non-operating income (expense), net",
    "period": "2024-11-29/12M",
    "value": "190000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[711]/table[1]/tr[28]/td[5]"
   },
@@ -2433,7 +2433,7 @@
    "row_label": "Total non-operating income (expense), net",
    "period": "2023-12-01/12M",
    "value": "149000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[711]/table[1]/tr[28]/td[8]"
   },
@@ -3558,6 +3558,7 @@
   "us-gaap:IncomeTaxesPaidNet",
   "us-gaap:InterestPaidNet",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OperatingLeaseImpairmentLoss",
   "us-gaap:OtherIntangibleAssetsNet",
   "us-gaap:OtherNoncashIncomeExpense",

@@ -586,21 +586,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2026-07-25/12M",
-   "value": "1886000000",
+   "value": "1245000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-07-26/12M",
-   "value": "-728000000",
+   "value": "-68000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-07-27/12M",
-   "value": "-253000000",
+   "value": "-306000000",
    "precision": "1000000"
   },
   {
@@ -1117,8 +1117,8 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-07-26/12M",
-   "value": "10180000000",
+   "period": "2024-07-27/12M",
+   "value": "10320000000",
    "precision": "1000000"
   },
   {
@@ -1131,8 +1131,8 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2024-07-27/12M",
-   "value": "10320000000",
+   "period": "2025-07-26/12M",
+   "value": "10180000000",
    "precision": "1000000"
   },
   {
@@ -2371,7 +2371,7 @@
    "row_label": "Interest and other income (loss), net",
    "period": "2026-07-25/12M",
    "value": "641000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[798]/table[1]/tr[23]/td[2]"
   },
@@ -2380,7 +2380,7 @@
    "row_label": "Interest and other income (loss), net",
    "period": "2025-07-26/12M",
    "value": "-660000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[798]/table[1]/tr[23]/td[5]"
   },
@@ -2389,7 +2389,7 @@
    "row_label": "Interest and other income (loss), net",
    "period": "2024-07-27/12M",
    "value": "53000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[798]/table[1]/tr[23]/td[8]"
   },
@@ -3663,6 +3663,7 @@
   "us-gaap:GainLossOnInvestments",
   "us-gaap:IncreaseDecreaseInFinanceReceivables",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:NotesAndLoansReceivableNetCurrent",
   "us-gaap:NotesAndLoansReceivableNetNoncurrent",
   "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",

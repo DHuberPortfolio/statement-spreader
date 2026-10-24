@@ -369,21 +369,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2026-05-31/12M",
-   "value": "308000000",
+   "value": "-22000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-05-31/12M",
-   "value": "161000000",
+   "value": "-63000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-05-31/12M",
-   "value": "207000000",
+   "value": "-70000000",
    "precision": "1000000"
   },
   {
@@ -809,13 +809,6 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2026-05-31/12M",
-   "value": "4433000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "net_income",
    "period": "2024-05-31/12M",
    "value": "4331000000",
    "precision": "1000000"
@@ -828,10 +821,10 @@
    "precision": "1000000"
   },
   {
-   "statement": "balance_sheet",
-   "line": "total_equity",
-   "period": "2026-05-31/I",
-   "value": "31647000000",
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2026-05-31/12M",
+   "value": "4433000000",
    "precision": "1000000"
   },
   {
@@ -839,6 +832,13 @@
    "line": "total_equity",
    "period": "2025-05-31/I",
    "value": "28074000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity",
+   "period": "2026-05-31/I",
+   "value": "31647000000",
    "precision": "1000000"
   }
  ],
@@ -1847,7 +1847,7 @@
    "row_label": "TOTAL OTHER INCOME (EXPENSE)",
    "period": "2026-05-31/12M",
    "value": "330000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[900]/table[1]/tr[23]/td[2]"
   },
@@ -1856,7 +1856,7 @@
    "row_label": "TOTAL OTHER INCOME (EXPENSE)",
    "period": "2025-05-31/12M",
    "value": "224000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[900]/table[1]/tr[23]/td[5]"
   },
@@ -1865,7 +1865,7 @@
    "row_label": "TOTAL OTHER INCOME (EXPENSE)",
    "period": "2024-05-31/12M",
    "value": "277000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[900]/table[1]/tr[23]/td[8]"
   },
@@ -2893,6 +2893,7 @@
   "us-gaap:LiabilitiesOtherThanLongtermDebtNoncurrent",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
   "us-gaap:NetPeriodicDefinedBenefitsExpenseReversalOfExpenseExcludingServiceCostComponent",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherNoncashIncomeExpense",
   "us-gaap:PensionAndOtherPostretirementAndPostemploymentBenefitPlansLiabilitiesNoncurrent",
   "us-gaap:PreferredStockSharesAuthorized",

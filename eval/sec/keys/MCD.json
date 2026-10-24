@@ -430,27 +430,6 @@
   },
   {
    "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2025-12-31/12M",
-   "value": "-87000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2024-12-31/12M",
-   "value": "-139000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2023-12-31/12M",
-   "value": "-236000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
    "line": "income_tax",
    "period": "2025-12-31/12M",
    "value": "2334000000",
@@ -963,15 +942,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2024-12-31/12M",
-   "value": "8223000000",
+   "period": "2025-12-31/12M",
+   "value": "8563000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-12-31/12M",
-   "value": "8563000000",
+   "period": "2024-12-31/12M",
+   "value": "8223000000",
    "precision": "1000000"
   },
   {
@@ -984,15 +963,15 @@
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2025-12-31/I",
-   "value": "-1791000000",
+   "period": "2024-12-31/I",
+   "value": "-3797000000",
    "precision": "1000000"
   },
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2024-12-31/I",
-   "value": "-3797000000",
+   "period": "2025-12-31/I",
+   "value": "-1791000000",
    "precision": "1000000"
   }
  ],
@@ -2190,7 +2169,7 @@
    "row_label": "Nonoperating (income) expense, net",
    "period": "2025-12-31/12M",
    "value": "-87000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[652]/table[1]/tr[22]/td[2]"
   },
@@ -2199,7 +2178,7 @@
    "row_label": "Nonoperating (income) expense, net",
    "period": "2024-12-31/12M",
    "value": "-139000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[652]/table[1]/tr[22]/td[5]"
   },
@@ -2208,7 +2187,7 @@
    "row_label": "Nonoperating (income) expense, net",
    "period": "2023-12-31/12M",
    "value": "-236000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[652]/table[1]/tr[22]/td[8]"
   },
@@ -3332,6 +3311,7 @@
   "us-gaap:InterestPayableCurrent",
   "us-gaap:InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherExpenses",
   "us-gaap:OtherNoncashIncomeExpense",
   "us-gaap:OtherSellingGeneralAndAdministrativeExpense",

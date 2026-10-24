@@ -488,21 +488,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2023-12-31/12M",
-   "value": "-189000000",
+   "value": "414000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-12-31/12M",
-   "value": "3129000000",
+   "value": "678000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-12-31/12M",
-   "value": "-1407000000",
+   "value": "-3153000000",
    "precision": "1000000"
   },
   {
@@ -2085,7 +2085,7 @@
    "row_label": "Other income/(loss), net (Note 5)",
    "period": "2023-12-31/12M",
    "value": "-603000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[2023]/table[1]/tr[16]/td[2]"
   },
@@ -2094,7 +2094,7 @@
    "row_label": "Other income/(loss), net (Note 5)",
    "period": "2024-12-31/12M",
    "value": "2451000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[2023]/table[1]/tr[16]/td[5]"
   },
@@ -2103,7 +2103,7 @@
    "row_label": "Other income/(loss), net (Note 5)",
    "period": "2025-12-31/12M",
    "value": "1746000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[2023]/table[1]/tr[16]/td[8]"
   },
@@ -3456,6 +3456,7 @@
   "us-gaap:IncreaseDecreaseInFinanceReceivables",
   "us-gaap:InvestmentIncomeNetAmortizationOfDiscountAndPremium",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:NotesAndLoansReceivableNetCurrent",
   "us-gaap:NotesAndLoansReceivableNetNoncurrent",
   "us-gaap:OtherOperatingActivitiesCashFlowStatement",

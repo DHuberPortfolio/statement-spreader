@@ -591,27 +591,6 @@
   },
   {
    "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2026-02-01/12M",
-   "value": "2288000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2025-02-02/12M",
-   "value": "2120000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2024-01-28/12M",
-   "value": "1765000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
    "line": "pretax_income",
    "period": "2026-02-01/12M",
    "value": "18602000000",
@@ -1103,15 +1082,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2024-01-28/12M",
-   "value": "15143000000",
+   "period": "2025-02-02/12M",
+   "value": "14806000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-02-02/12M",
-   "value": "14806000000",
+   "period": "2024-01-28/12M",
+   "value": "15143000000",
    "precision": "1000000"
   },
   {
@@ -1124,15 +1103,15 @@
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2026-02-01/I",
-   "value": "12813000000",
+   "period": "2025-02-02/I",
+   "value": "6640000000",
    "precision": "1000000"
   },
   {
    "statement": "balance_sheet",
    "line": "total_equity",
-   "period": "2025-02-02/I",
-   "value": "6640000000",
+   "period": "2026-02-01/I",
+   "value": "12813000000",
    "precision": "1000000"
   }
  ],
@@ -2087,7 +2066,7 @@
    "row_label": "Interest and other, net",
    "period": "2026-02-01/12M",
    "value": "2288000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[533]/table[1]/tr[16]/td[2]"
   },
@@ -2096,7 +2075,7 @@
    "row_label": "Interest and other, net",
    "period": "2025-02-02/12M",
    "value": "2120000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[533]/table[1]/tr[16]/td[5]"
   },
@@ -2105,7 +2084,7 @@
    "row_label": "Interest and other, net",
    "period": "2024-01-28/12M",
    "value": "1765000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[533]/table[1]/tr[16]/td[8]"
   },
@@ -3177,6 +3156,7 @@
   "us-gaap:IncreaseDecreaseInRetailRelatedInventories",
   "us-gaap:InterestPaidNet",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherAccruedLiabilitiesCurrent",
   "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
   "us-gaap:ProceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet",

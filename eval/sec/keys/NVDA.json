@@ -551,21 +551,21 @@
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2026-01-25/12M",
-   "value": "20085000000",
+   "value": "9022000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2025-01-26/12M",
-   "value": "3607000000",
+   "value": "1034000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "other_nonoperating",
    "period": "2024-01-28/12M",
-   "value": "1083000000",
+   "value": "237000000",
    "precision": "1000000"
   },
   {
@@ -1061,15 +1061,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2024-01-28/12M",
-   "value": "29760000000",
+   "period": "2025-01-26/12M",
+   "value": "72880000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-01-26/12M",
-   "value": "72880000000",
+   "period": "2024-01-28/12M",
+   "value": "29760000000",
    "precision": "1000000"
   },
   {
@@ -2036,7 +2036,7 @@
    "row_label": "Total other income, net",
    "period": "2026-01-25/12M",
    "value": "11063000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[841]/table[1]/tr[15]/td[2]"
   },
@@ -2045,7 +2045,7 @@
    "row_label": "Total other income, net",
    "period": "2025-01-26/12M",
    "value": "2573000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[841]/table[1]/tr[15]/td[5]"
   },
@@ -2054,7 +2054,7 @@
    "row_label": "Total other income, net",
    "period": "2024-01-28/12M",
    "value": "846000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[841]/table[1]/tr[15]/td[8]"
   },
@@ -3208,6 +3208,7 @@
   "us-gaap:IncomeTaxesPaidNet",
   "us-gaap:IncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherNoncashIncomeExpense",
   "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
   "us-gaap:PaymentsToAcquireBusinessTwoNetOfCashAcquired",

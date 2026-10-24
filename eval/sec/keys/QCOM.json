@@ -543,27 +543,6 @@
   },
   {
    "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2025-09-28/12M",
-   "value": "972000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2024-09-29/12M",
-   "value": "962000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "other_nonoperating",
-   "period": "2023-09-24/12M",
-   "value": "349000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
    "line": "pretax_income",
    "period": "2025-09-28/12M",
    "value": "12663000000",
@@ -1055,15 +1034,15 @@
   {
    "statement": "balance_sheet",
    "line": "total_equity_parent",
-   "period": "2024-09-29/I",
-   "value": "26274000000",
+   "period": "2025-09-28/I",
+   "value": "21206000000",
    "precision": "1000000"
   },
   {
    "statement": "balance_sheet",
    "line": "total_equity_parent",
-   "period": "2025-09-28/I",
-   "value": "21206000000",
+   "period": "2024-09-29/I",
+   "value": "26274000000",
    "precision": "1000000"
   }
  ],
@@ -1991,7 +1970,7 @@
    "row_label": "Investment and other income, net",
    "period": "2025-09-28/12M",
    "value": "972000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[768]/table[1]/tr[16]/td[9]"
   },
@@ -2000,7 +1979,7 @@
    "row_label": "Investment and other income, net",
    "period": "2024-09-29/12M",
    "value": "962000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[768]/table[1]/tr[16]/td[12]"
   },
@@ -2009,7 +1988,7 @@
    "row_label": "Investment and other income, net",
    "period": "2023-09-24/12M",
    "value": "349000000",
-   "line": "other_nonoperating",
+   "line": null,
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[768]/table[1]/tr[16]/td[15]"
   },
@@ -3506,6 +3485,7 @@
   "us-gaap:IncomeLossFromContinuingOperations",
   "us-gaap:IncreaseDecreaseInAccountsPayableTrade",
   "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NonoperatingIncomeExpense",
   "us-gaap:OtherLiabilities",
   "us-gaap:OtherNoncashIncomeExpense",
   "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
