@@ -1,7 +1,9 @@
 # Improvement log
 
 Each entry: what was wrong, the hypothesis, the change, and the measured effect on the SEC dev split
-(33 filings, 4,618 answer-key values). The holdout split is not used for tuning.
+(33 filings, 4,618 answer-key values). The holdout split was never used to design a change, but it was used to
+confirm two decisions (#9 kept the model tier, #14 reverted an experiment), so it is no longer perfectly untouched;
+a fresh set of filings would be the cleanest next measurement.
 
 | # | Change | Accuracy | Silent error rate | Silent omissions | Kept? |
 |---|---|---|---|---|---|
