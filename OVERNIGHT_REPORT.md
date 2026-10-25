@@ -390,7 +390,7 @@ they were). No value went from caught to silent on either split.
 
 ## Decisions left for a person
 
-1. **Whether to merge** `overnight-2026-10-25` into `main` (12 commits; CI green on each pushed commit, see the end).
+1. **Whether to merge** `overnight-2026-10-25` into `main` (13 commits; CI green on the head of every push, see the end).
 2. **The automation bars**: 0.80 / 0.90 on the lower bound for statements, 0.98 for reconciliation. A credit or audit
    function may want its own, and they trade review time for safety.
 3. **Whether company memory should be on by default** for companies with an approved prior year. It is the biggest
@@ -419,7 +419,7 @@ they were). No value went from caught to silent on either split.
 
 Every push ran the four jobs (Python 3.11, Python 3.13, Python 3.11 with the oldest allowed lxml 5.2, and web). Each
 Python job also runs the manifest check and the release gate, so the synthetic statement corpus and every in-repo set
-were re-measured on Linux at each push. Some commits went up together, so 8 runs cover the 12 commits; the head of
+were re-measured on Linux at each push. Some commits went up together, so 8 runs cover the first 12 commits; the head of
 every push passed all four jobs:
 
 | Head commit | Result |
