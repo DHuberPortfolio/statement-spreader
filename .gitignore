@@ -35,3 +35,7 @@ eval/sec/cal-prior/
 
 # Filings for the industry and IFRS overlays (scripts/fetch_coverage.py); re-downloadable
 eval/coverage/raw/
+
+# Bank and insurer filings and calculation links for their answer keys (scripts/fetch_industry.py); re-downloadable
+eval/industry/*/raw/
+eval/industry/*/cal/

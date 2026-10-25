@@ -1,0 +1,174 @@
+{
+ "name": "bank-dev",
+ "source": "files: SEC 10-K filings listed in eval/industry/bank/manifest.json (downloaded by scripts/fetch_industry.py)",
+ "version": "68cdb39e53db043f",
+ "key_version": "e56d289df1cbdf74",
+ "files": 33,
+ "entries": [
+  {
+   "path": "eval/industry/bank/raw/BAC-0000070858-26-000157.htm",
+   "sha256": "08f0c38aa2bdb1762d2e61a8de546441da1706cac3ae855e537380a320e0f31c",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/BAC_cal.xml",
+   "sha256": "4850addb84e444bd224fa9dfdc5c34fed8541c4f6e38b4f0374aa979d7cf6e58",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/BAC.json",
+   "sha256": "e3aaade50bad3c26ed1c67f331082f4a226ed806e4ba6857d15b52bd89755259",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/BPOP-0001193125-26-085756.htm",
+   "sha256": "62ce780b28c658f09d01686231ad514c3ecd0889d800df253b13a8e67c5fd8c1",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/BPOP_cal.xml",
+   "sha256": "9b4351575d89277ffd3a5cc3c5428500592ea213d1c314c914dc423c6a254ddf",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/BPOP.json",
+   "sha256": "79dd53becc8827288f1d69566ecfdb12a965e871c13624ddd7a37331d431a39e",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/CFR-0000039263-26-000011.htm",
+   "sha256": "9b318135efa43b031426145282edaa98fa7ff1c74d71fe99f06c1421441962fd",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/CFR_cal.xml",
+   "sha256": "c61c6c818e845f3f5c61bee6827fac918c622085c9fce328b3fbbe051a45deea",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/CFR.json",
+   "sha256": "4944ced157a4ae46da9271216ef65d038da7b97e11028cfce6d3a0a5626911d8",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/FHN-0000036966-26-000051.htm",
+   "sha256": "3db2248b5b3606d877fac3f0d1c37c43e2e0aa2e754faca028e1a9da93bda83a",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/FHN_cal.xml",
+   "sha256": "eb8d20d308592f7a820dfc3fa8e89497aefc2a08d6a6b787227be62d6e15ad84",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/FHN.json",
+   "sha256": "0f806d1d99975970dfed92b80d868e19e5d5411f00f6ae6541002287de168a67",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/ONB-0000707179-26-000010.htm",
+   "sha256": "0c67f9af2a55f21e921a0a0bac715c2520f4b8ed05f5ea6d730e780c4a99a6fc",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/ONB_cal.xml",
+   "sha256": "0377a8d77be90ef5e92bb8559a9e0cdb5c9b81f3354bc90adc11bcdf185571f8",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/ONB.json",
+   "sha256": "08a9b01bdbad3649d9416e6394b74634dfe5c60f9f4d5483a7bbd1d4f76fe067",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/RF-0001281761-26-000019.htm",
+   "sha256": "4a02c296e5f7c002b0ee6cc355bfdc97998038a92b394b7193764ea9d6d2ecec",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/RF_cal.xml",
+   "sha256": "cbf2192afe52fcd889bc296ae2b298f25b0a68a2402fd0a1c4b804e155a32446",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/RF.json",
+   "sha256": "6cb2c3bc837dfc1883418fce5e507f307ef25ccb99d142ee80bb4f74f5354f85",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/SSB-0001104659-26-017884.htm",
+   "sha256": "e21d510cec6bffb48e3154033d389d81012cfef118c3ee2d04d5a89f60c64fa5",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/SSB_cal.xml",
+   "sha256": "eaf65f5640df1b343404939910db9e167cd20230484ebe20a362554ed1ad1f7a",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/SSB.json",
+   "sha256": "d04ca867482691bb6f6f50e7e29e1f7a072acc80636cf49e4f4261d78da116c7",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/USB-0000036104-26-000011.htm",
+   "sha256": "19db593d1ac54b80865eff25d53ac224270ec7bc3af6e0246e39cc652b1b4c8d",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/USB_cal.xml",
+   "sha256": "2dfe147a0f15b7ccf291f2680493777aee6a5c92ceba6f29b2034a11fbdbfb39",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/USB.json",
+   "sha256": "6015c1c67d92d780e39397b5d9cf886fdfdaa1d7608cee491fd808ace7ac2717",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/WAL-0001628280-26-010336.htm",
+   "sha256": "066d1f0531c9df323e60f25ad6786fe68b8b08177dcf84d23b9f64b91928ed5c",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/WAL_cal.xml",
+   "sha256": "bc02b6d2aee8b0f2a02a2d20afb95af51b112f3e79b5796b9ae5461a5d98de1f",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/WAL.json",
+   "sha256": "54734cdcf5638e62a28ccb4241f7dd91be68f65de7108037edff5af33c18c6ce",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/WFC-0000072971-26-000133.htm",
+   "sha256": "36334dd3274872d91d8ec89d70cf2fbea099e1c1d3dfc37f545df96e3e4b6a0e",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/WFC_cal.xml",
+   "sha256": "4572a1ee14e537190f4a30168484b2c5504c7b20caa8569417d7bd71007c34d2",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/WFC.json",
+   "sha256": "c3d6d988eaf2d0cd761c2fbca6c957dccfbaf2d1376c2c04c2a399aa9dedd07e",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/ZION-0000109380-26-000046.htm",
+   "sha256": "1a92e1f4e8a7484b7011ff515142ce88f296c9b838e940a2d94a085d67340fd5",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/ZION_cal.xml",
+   "sha256": "c61fbbfc1a3336a487ccf82d2d9dbb33e319dee984fc755c60553bd80e677331",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/keys/ZION.json",
+   "sha256": "2af067abcaffcf222c8642261224b31389a60b511016efa01c01e18752017ada",
+   "role": "key"
+  }
+ ]
+}

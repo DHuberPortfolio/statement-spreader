@@ -1,0 +1,109 @@
+{
+ "name": "bank-holdout",
+ "source": "files: SEC 10-K filings listed in eval/industry/bank/manifest.json (downloaded by scripts/fetch_industry.py)",
+ "version": "115c64b745801a53",
+ "key_version": "2937edc2a672fee1",
+ "files": 20,
+ "entries": [
+  {
+   "path": "eval/industry/bank/raw/C-0000831001-26-000011.htm",
+   "sha256": "47d03019cfa2ddb927ab68eee2b87123ef31e959a1994524c08754f373d0dd69",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/C_cal.xml",
+   "sha256": "546a78093faf38809c6656cce456be45ad1966e08faf074dbb303882319b04ab",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/CFG-0000759944-26-000028.htm",
+   "sha256": "f09ce52c4cbade425f78928e3333a42bca3ef4ff7d2074f05fa49abb7c40558b",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/CFG_cal.xml",
+   "sha256": "646dc20c3d188b71390dcc361d8d02f20e06e3d09df795c98140660c558af313",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/EWBC-0001069157-26-000009.htm",
+   "sha256": "a1a696598e3fa9d097bebffcfe21e304502947c3d15f43a0a4c85338a1d45787",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/EWBC_cal.xml",
+   "sha256": "9b93cf915e3fc82c310d485302ce1b2606b77b7c5327acccd0e61311d7507e23",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/FCNCA-0000798941-26-000015.htm",
+   "sha256": "c049a7abfab4dd7b063d10b455c0a0c19a1b9575ef8256ca437a672e6e65a363",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/FCNCA_cal.xml",
+   "sha256": "3094614a484dc1cf91d07be13e48ddcc9af3606986daa622651f307d7bebd393",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/HWC-0001193125-26-077903.htm",
+   "sha256": "2357eb01eab04d0f82d6ea0a5aead61b684377a9d1429f9f0935eba02591236f",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/HWC_cal.xml",
+   "sha256": "9a0578c902f9ae32dc2186f6cc6b0cf2c9d63a67bfe8163dd8a9899f805e9e57",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/JPM-0001628280-26-008131.htm",
+   "sha256": "ca1cb42648d56947022801852ec4ca866f187f631923e417eae76486e4d54287",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/JPM_cal.xml",
+   "sha256": "fc64d14d2f39175cf6bcce94937d78c914622f7d48a6f109386fad1088a83929",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/MTB-0000036270-26-000010.htm",
+   "sha256": "26ace6c7c74ef64686784003cae2d5b4a7cfa693f22211257bf8f41095f95abe",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/MTB_cal.xml",
+   "sha256": "2deb406f0a98cfd2bf4b0232e340379e50619b329026b343d650d3789f529136",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/PB-0001193125-26-077437.htm",
+   "sha256": "d553093a241beac852a215aae0f6ac0a5dffa3b5e2c114c8655a8500df7c125f",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/PB_cal.xml",
+   "sha256": "37112e9511e4431f3e75c063f6d5dd647ecfdaaf2d99fc9166f10373ef9d1c81",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/PNC-0000713676-26-000020.htm",
+   "sha256": "86157e470ce74fe8e1afa8aaff80e323983f078c7f1418b7d19d229bbc8bfa77",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/PNC_cal.xml",
+   "sha256": "995dc6f110f4cde54278a289df8f09a21fe7bde03229924b0473e9b060830c4c",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/bank/raw/TFC-0000092230-26-000030.htm",
+   "sha256": "95b766568e5c7febe342478bdf1f27abc174c3afbde84ed069d3b361937674a2",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/bank/cal/TFC_cal.xml",
+   "sha256": "1950e294764becefc1110997209b312df250bb95305a1510fd333722e3432a37",
+   "role": "key"
+  }
+ ]
+}

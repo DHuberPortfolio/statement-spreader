@@ -1,0 +1,159 @@
+{
+ "name": "insurer-dev",
+ "source": "files: SEC 10-K filings listed in eval/industry/insurer/manifest.json (downloaded by scripts/fetch_industry.py)",
+ "version": "081b20ffb7a0eac6",
+ "key_version": "7c374f4774e24f5f",
+ "files": 30,
+ "entries": [
+  {
+   "path": "eval/industry/insurer/raw/ACGL-0000947484-26-000017.htm",
+   "sha256": "04e2f88b95dcb8435a3f72ddaa946b943cc15ebfd1738f651128f56581bb1e90",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/ACGL_cal.xml",
+   "sha256": "9c57ea0afcf5244581a9483330d65bb87ed03680b82f16357995f3911ab750b8",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/ACGL.json",
+   "sha256": "2ebbac6f32ecb2b6bbb90f8fcd37ffda703461acf0864dd852ab855cc0abb1b2",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/AIG-0000005272-26-000023.htm",
+   "sha256": "987e2dd50a398eae8a9af00a6833450b5d2e670423cee01697d6e8971625fe01",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/AIG_cal.xml",
+   "sha256": "bafca7984fd796a5cdc4843f849bcff98191d508d1897c9eb0705ac56d1de99b",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/AIG.json",
+   "sha256": "7338f82ee98c441ab94bf92356d98bd130cbd1d1c50bac8a25c9656f6faad6be",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/CINF-0000020286-26-000008.htm",
+   "sha256": "80f9fba3ccaa626044f04cab7463adeabc0eadc18ddd0dcaee415adf02992752",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/CINF_cal.xml",
+   "sha256": "1043715078ad74bd2da187c2946434ea6e6a8e6840152a96bc0741933483d3f8",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/CINF.json",
+   "sha256": "4da231df57c02fb36fe2d58f0796de0b7b532f6f927cee1932f2b62d43dc5718",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/EIG-0001379041-26-000011.htm",
+   "sha256": "23f10c18ffba084272c01bf89930a8cf1aeed426d051d10670c797e5aca5bffd",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/EIG_cal.xml",
+   "sha256": "04a2b471356483a89369e8efb877a3f0a731863bde4e03398d21ae3a1391aca5",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/EIG.json",
+   "sha256": "22aba0991a9fc98ade62cf15feb641ae8656027973fccb1b376d9c5d4089dcd4",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/GL-0000320335-26-000090.htm",
+   "sha256": "faacca2e246653967ef96b5df2decc336594711481f777385a51c942c75ddc3d",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/GL_cal.xml",
+   "sha256": "cae9b822d9fa8641a0c2f85cdcf033a046a296a0e0efba10572b14c561a77f06",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/GL.json",
+   "sha256": "cfffae8778e0c5e5efc5247a9e7073b4598acd01e5a6737fb41d7c47ee6b40cd",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/L-0000060086-26-000008.htm",
+   "sha256": "23cadc544318740fd86c95db6fa449ee708baf445723a9cbfe2c52e2d3511f01",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/L_cal.xml",
+   "sha256": "7f16f3192a7b48012c579c3e4cccc649d7a80c30d469c919f4162f933179474b",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/L.json",
+   "sha256": "7b52ebff449da826dcfd3ca69d4b7711731fe113dae51b455ff04aa27d15a283",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/MET-0001099219-26-000013.htm",
+   "sha256": "fb9a24c6032e44c0d74deddee5c899c831b922e76699ab26ff345017c0e096f7",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/MET_cal.xml",
+   "sha256": "13e69018e250c06dca5648b38a41f95e11b394853476a0eb945cb6026dc8e008",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/MET.json",
+   "sha256": "3efeb9a723e83b9f705bfaeafb5dea80f66426f2f385c8f1f53571aaba29082a",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/PFG-0001104659-26-017031.htm",
+   "sha256": "e4feaccf8c81885090933a4e238179d49533c4031bafaf8eff28d000b4f6b7df",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/PFG_cal.xml",
+   "sha256": "fceb276252871adca7e025896b1103ca745d3e468399c455e2dca82b010e3d30",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/PFG.json",
+   "sha256": "298d53d5d6d9f85ba70448f413fcb66ce128bff377fd109fbbdcf8326374b9d4",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/RGA-0000898174-26-000006.htm",
+   "sha256": "a1f4092d3a42d6730c6c0b951508a7bd61d379c804066305af9f9c3aa61cbc75",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/RGA_cal.xml",
+   "sha256": "52bc93656bac47ab7a3dc16636b927dcd54b79f352d872a34fbc3d12be91a9d5",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/RGA.json",
+   "sha256": "c6cbc000ee9af851b6bb5b15dc284391042467f4476588dbca287277c7518429",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/raw/THG-0001193125-26-060983.htm",
+   "sha256": "0d55e37c09ff51d0a4b20fa61bb0cb42ec4c28b6bb8c5f6ff649c82503aedcf9",
+   "role": "input"
+  },
+  {
+   "path": "eval/industry/insurer/cal/THG_cal.xml",
+   "sha256": "fbc97c04b800ac0b16eb8594722413fa3e550e43b04f6a9b31925a35cec99163",
+   "role": "key"
+  },
+  {
+   "path": "eval/industry/insurer/keys/THG.json",
+   "sha256": "749b0d72b93ab17a10c580f55ac1702755ff1178af7ae0c736e5aab3bfe3a79b",
+   "role": "key"
+  }
+ ]
+}

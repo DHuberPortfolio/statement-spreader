@@ -448,15 +448,94 @@ def drop_fallbacks(fs: list[Fact]) -> list[Fact]:
     return main or fs
 
 
-def _template_line(name: str) -> str | None:
+# Industry overlays on the crosswalk, for the profiles that add an industry's lines (DECISIONS D41). Same rule as the
+# base: only concepts whose meaning for the template line is unambiguous. A concept can be moved to an industry line
+# (a bank's InterestExpense is its interest expense on deposits and borrowings, the overlay's bank_interest_expense,
+# not the commercial template's non-operating interest expense) or left unjudged (None) where its base meaning is
+# wrong for the industry (a bank tags "service charges on deposit accounts", one revenue component, with the revenue
+# concept). Written from the dev filings' tags only (scripts/fetch_industry.py).
+INDUSTRY_CROSSWALK: dict[str, dict[str, str | None]] = {
+    "us-bank": {
+        # income statement
+        "InterestAndDividendIncomeOperating": "bank_interest_income", "InterestIncomeOperating": "bank_interest_income",
+        "InterestExpense": "bank_interest_expense", "InterestExpenseOperating": "bank_interest_expense",
+        "InterestIncomeExpenseNet": "net_interest_income",
+        "ProvisionForLoanLeaseAndOtherLosses": "provision_credit_losses",
+        "ProvisionForLoanLossesExpensed": "provision_credit_losses", "ProvisionForCreditLosses": "provision_credit_losses",
+        "FinancingReceivableExcludingAccruedInterestCreditLossExpenseReversal": "provision_credit_losses",
+        "InterestIncomeExpenseAfterProvisionForLoanLoss": "nii_after_provision",
+        "NoninterestIncome": "noninterest_income",
+        "NoninterestExpense": "noninterest_expense",
+        "PreferredStockDividendsIncomeStatementImpact": "preferred_dividends",
+        "PreferredStockDividendsAndOtherAdjustments": "preferred_dividends",
+        "NetIncomeLossAvailableToCommonStockholdersBasic": "net_income_common",
+        "RevenueFromContractWithCustomerExcludingAssessedTax": None,
+        "RevenueFromContractWithCustomerIncludingAssessedTax": None,
+        # balance sheet
+        "InterestBearingDepositsInBanks": "st_investments",
+        "FederalFundsSold": "st_investments", "SecuritiesPurchasedUnderAgreementsToResell": "st_investments",
+        "FederalFundsSoldAndSecuritiesPurchasedUnderAgreementsToResell": "st_investments",
+        "AvailableForSaleSecuritiesDebtSecurities": "bank_securities",
+        "DebtSecuritiesAvailableForSaleExcludingAccruedInterest": "bank_securities",
+        "HeldToMaturitySecurities": "bank_securities",
+        "DebtSecuritiesHeldToMaturityExcludingAccruedInterestAfterAllowanceForCreditLoss": "bank_securities",
+        "DebtSecuritiesHeldToMaturityAmortizedCostAfterAllowanceForCreditLoss": "bank_securities",
+        "TradingSecurities": "bank_securities", "EquitySecuritiesFvNi": "bank_securities",
+        "MarketableSecurities": "bank_securities",
+        "LoansReceivableHeldForSaleNetNotPartOfDisposalGroup": "loans_held_for_sale",
+        "LoansReceivableHeldForSaleAmount": "loans_held_for_sale",
+        "FinancingReceivableExcludingAccruedInterestBeforeAllowanceForCreditLoss": "loans_gross",
+        "LoansAndLeasesReceivableNetOfDeferredIncome": "loans_gross",
+        "FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest": "allowance_loan_losses",
+        "LoansAndLeasesReceivableAllowance": "allowance_loan_losses",
+        "FinancingReceivableExcludingAccruedInterestAfterAllowanceForCreditLoss": "loans_net",
+        "LoansAndLeasesReceivableNetReportedAmount": "loans_net",
+        "Deposits": "deposits",
+        "PreferredStockValue": "preferred_equity", "PreferredStockValueOutstanding": "preferred_equity",
+        # cash flow
+        "IncreaseDecreaseInDeposits": "cf_deposits_net",
+    },
+    "us-insurer": {
+        # income statement
+        "PremiumsEarnedNet": "premiums_earned", "PremiumsEarnedNetPropertyAndCasualty": "premiums_earned",
+        "NetInvestmentIncome": "net_investment_income",
+        "RealizedInvestmentGainsLosses": "realized_investment_gains", "GainLossOnInvestments": "realized_investment_gains",
+        "PolicyholderBenefitsAndClaimsIncurredNet": "losses_lae",
+        "DeferredPolicyAcquisitionCostAmortizationExpense": "acquisition_costs",
+        "BenefitsLossesAndExpenses": "total_insurance_expenses", "OperatingExpenses": "total_insurance_expenses",
+        # balance sheet
+        "Investments": "insurer_investments",
+        "PremiumsReceivableAtCarryingValue": "premiums_receivable", "PremiumsAndOtherReceivablesNet": "premiums_receivable",
+        "ReinsuranceRecoverables": "reinsurance_recoverables",
+        "ReinsuranceRecoverableForPaidAndUnpaidClaimsAndClaimsAdjustments": "reinsurance_recoverables",
+        "DeferredPolicyAcquisitionCosts": "deferred_acquisition_costs",
+        "DeferredPolicyAcquisitionCostsAndValueOfBusinessAcquired": "deferred_acquisition_costs",
+        "LiabilityForClaimsAndClaimsAdjustmentExpense": "loss_reserves",
+        "UnearnedPremiums": "unearned_premiums",
+        "LiabilityForFuturePolicyBenefits": "future_policy_benefits",
+        "PolicyholderContractDeposits": "future_policy_benefits",
+        "PreferredStockValue": None,  # the insurer template has no preferred line; preferred is not common equity
+    },
+}
+
+
+def crosswalk_for(profile: Profile) -> dict[str, str | None]:
+    """The base crosswalk with the profile's industry overlay applied (unchanged for any other profile)."""
+    cw: dict[str, str | None] = dict(CROSSWALK)
+    cw.update(INDUSTRY_CROSSWALK.get(profile.id, {}))
+    return cw
+
+
+def _template_line(name: str, crosswalk: dict[str, str | None] | None = None) -> str | None:
     prefix, _, local = name.partition(":")
-    return CROSSWALK.get(local) if prefix == "us-gaap" else None
+    return (CROSSWALK if crosswalk is None else crosswalk).get(local) if prefix == "us-gaap" else None
 
 
 def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | None = None
               ) -> tuple[AnswerKey, dict[str, StatementTruth]]:
     """`calc_xml`: the filing's calculation linkbase. Without it, distinct facts on one line are added unless one is
     visibly the sum of the others, which double counts a total and a part tagged under two mapped concepts."""
+    cw = crosswalk_for(profile)
     calc = calc_descendants(calc_xml) if calc_xml else {}
     facts, _ = read_facts(data)
     statements = find_statements(facts)
@@ -468,12 +547,12 @@ def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | No
         for f in st.facts:
             if f.context.dimensional:
                 # A segment's part of a line (Products, Services): a component, not the line's total.
-                line = CROSSWALK.get(f.concept) if f.prefix == "us-gaap" else None
+                line = cw.get(f.concept) if f.prefix == "us-gaap" else None
                 key.cells.append(TruthCell(statement=stmt, row_label=f.row_label, period=period_key(f.context),
                                            value=f.printed, line=line, role="component"))
                 continue
             pk = period_key(f.context)
-            line = CROSSWALK.get(f.concept) if f.prefix == "us-gaap" else None
+            line = cw.get(f.concept) if f.prefix == "us-gaap" else None
             if f.concept in CASH_ROLL and stmt == "cash_flow" and f.prefix == "us-gaap":
                 line = "cash_end"  # resolved to cash_begin below when its date is a period start
             if stmt == "cash_flow" and line in {"cash", "st_investments"}:
@@ -525,7 +604,8 @@ def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | No
                 # The cross-line case (one caption = two template lines, e.g. cash and short-term investments) is a
                 # balance-sheet one. On flow statements the template's lines are the printed totals (net income
                 # includes the minority share even though that share is its own line), so the total is kept.
-                fs = drop_parts_of_totals(fs, calc, line if stmt == "balance_sheet" else None, _template_line)
+                fs = drop_parts_of_totals(fs, calc, line if stmt == "balance_sheet" else None,
+                                          lambda n: _template_line(n, cw))
             ldef = profile.lines[line]
             vals = [(f.value if ldef.kind == "cost" else f.printed) for f in fs]
             uniq = list(dict.fromkeys(vals))

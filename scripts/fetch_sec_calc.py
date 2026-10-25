@@ -24,6 +24,28 @@ USER_AGENT = "StatementSpreader/0.1 research prototype (devinhuber.com)"
 PAUSE = 0.2
 
 
+def calc_linkbase(client: httpx.Client, cik: int, accession: str) -> tuple[bytes | None, str]:
+    """A filing's calculation linkbase: (its bytes, its URL), or (None, why not)."""
+    folder = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession.replace('-', '')}"
+    r = client.get(f"{folder}/index.json")
+    time.sleep(PAUSE)
+    if r.status_code != 200:
+        return None, f"index HTTP {r.status_code}"
+    names = [i["name"] for i in r.json().get("directory", {}).get("item", [])]
+    # Most filers ship the links as <name>_cal.xml; some embed them in the taxonomy schema (.xsd) instead.
+    cal = next((n for n in names if n.lower().endswith("_cal.xml")), None) or next(
+        (n for n in names if n.lower().endswith(".xsd")), None)
+    if cal is None:
+        return None, "neither _cal.xml nor a schema in the filing"
+    r = client.get(f"{folder}/{cal}")
+    time.sleep(PAUSE)
+    if r.status_code != 200:
+        return None, f"{cal} HTTP {r.status_code}"
+    if b"calculationArc" not in r.content:
+        return None, f"{cal} holds no calculation links"
+    return r.content, f"{folder}/{cal}"
+
+
 def main(prior: bool = False) -> None:
     """prior=True: the prior-year filings (eval/sec/manifest-prior.json, cached in eval/sec/cal-prior)."""
     cal_dir = CAL.parent / "cal-prior" if prior else CAL
@@ -37,29 +59,12 @@ def main(prior: bool = False) -> None:
         if out.exists() and m.get("cal", {}).get("sha256") == hashlib.sha256(out.read_bytes()).hexdigest():
             got += 1
             continue
-        folder = f"https://www.sec.gov/Archives/edgar/data/{m['cik']}/{m['accession'].replace('-', '')}"
-        r = client.get(f"{folder}/index.json")
-        time.sleep(PAUSE)
-        if r.status_code != 200:
-            missing.append(f"{t}: index HTTP {r.status_code}")
+        content, where = calc_linkbase(client, m["cik"], m["accession"])
+        if content is None:
+            missing.append(f"{t}: {where}")
             continue
-        names = [i["name"] for i in r.json().get("directory", {}).get("item", [])]
-        # Most filers ship the links as <name>_cal.xml; some embed them in the taxonomy schema (.xsd) instead.
-        cal = next((n for n in names if n.lower().endswith("_cal.xml")), None) or next(
-            (n for n in names if n.lower().endswith(".xsd")), None)
-        if cal is None:
-            missing.append(f"{t}: neither _cal.xml nor a schema in the filing")
-            continue
-        r = client.get(f"{folder}/{cal}")
-        time.sleep(PAUSE)
-        if r.status_code != 200:
-            missing.append(f"{t}: {cal} HTTP {r.status_code}")
-            continue
-        if b"calculationArc" not in r.content:
-            missing.append(f"{t}: {cal} holds no calculation links")
-            continue
-        out.write_bytes(r.content)
-        m["cal"] = {"file": out.name, "url": f"{folder}/{cal}", "sha256": hashlib.sha256(r.content).hexdigest()}
+        out.write_bytes(content)
+        m["cal"] = {"file": out.name, "url": where, "sha256": hashlib.sha256(content).hexdigest()}
         got += 1
     manifest_path.write_text(json.dumps(manifest, indent=1, sort_keys=True))
     print(f"{got} calculation linkbases cached; missing: {missing or 'none'}")
