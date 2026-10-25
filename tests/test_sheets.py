@@ -553,3 +553,20 @@ def test_roi_quotes_the_first_scorings() -> None:
 
     sheets = compute(ROOT / "eval" / "reports")["engines"]["sheets"]
     assert "first-score" in sheets["source"] and sheets["precision"]["value"] < 1
+
+def test_roi_reads_named_reports_whatever_their_file_times(tmp_path: Path) -> None:
+    """The page used the newest recon-*/invoice-*/dq-* file. After a clone file times are arbitrary, and CI picked a
+    multi-seed report with another shape (KeyError: 'runs'); locally it quoted an intermediate regression run."""
+    import os
+    import shutil
+
+    from finops import roi
+
+    for f in (ROOT / "eval" / "reports").glob("*.json"):
+        shutil.copy(f, tmp_path / f.name)
+    for i, name in enumerate(["recon-multiseed-v1.json", "recon-v1.json", "invoice-v1.json", "dq-check.json"]):
+        os.utime(tmp_path / name, (2_000_000_000 + i, 2_000_000_000 + i))  # newer than everything else
+    engines = roi.compute(tmp_path)["engines"]
+    expected = {"recon": "recon-final.json", "invoice": "invoice-final.json", "dq": "dq-first-score-independent-2.json"}
+    for engine, name in expected.items():
+        assert engines[engine]["source"] == name

@@ -58,14 +58,18 @@ DEFAULTS: dict[str, dict[str, tuple[float, str]]] = {
 }
 
 
-def _latest(reports: Path, prefix: str) -> dict[str, Any] | None:
-    files = sorted(reports.glob(f"{prefix}*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
-    for f in files:
-        try:
-            return {**json.loads(f.read_text(encoding="utf-8")), "_file": f.name}
-        except (OSError, json.JSONDecodeError):
-            continue
-    return None
+# The report each engine's figures come from, named, never "the newest file": file times are arbitrary after a
+# clone, and eval/reports also holds intermediate and multi-seed reports with other shapes. These are the reports the
+# README quotes; change one here when a new run replaces it.
+SOURCES = {"recon": "recon-final.json", "invoice": "invoice-final.json", "dq": "dq-first-score-independent-2.json"}
+
+
+def _named(reports: Path, engine: str) -> dict[str, Any] | None:
+    f = reports / SOURCES[engine]
+    try:
+        return {**json.loads(f.read_text(encoding="utf-8")), "_file": f.name}
+    except (OSError, json.JSONDecodeError):
+        return None
 
 
 def _rate(d: dict[str, Any] | None) -> tuple[int, int] | None:
@@ -96,7 +100,7 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
     out["assumptions"] = {k: n.as_dict() for k, n in assumptions.items()}
     rate, cash = A["analyst_hourly_cost"], A["cash_realization_share"]
 
-    rec = _latest(reports, "recon-")
+    rec = _named(reports, "recon")
     if rec:
         run = rec["runs"].get("holdout:component") or next(iter(rec["runs"].values()))
         counts = run["counts"]
@@ -126,7 +130,7 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
                                     "Released hours x hourly cost x cash-realisation share (default 0).")
         out["engines"]["recon"] = {k: v.as_dict() for k, v in nums.items()} | {"source": rec["_file"]}
 
-    inv = _latest(reports, "invoice-")
+    inv = _named(reports, "invoice")
     if inv:
         s = inv["sets"].get("holdout") or next(iter(inv["sets"].values()))
         touch = _rate(s["rates"]["touchless_rate"])
@@ -151,7 +155,7 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
                                     "Released hours x hourly cost x cash-realisation share (default 0).")
         out["engines"]["invoice"] = {k: v.as_dict() for k, v in nums.items()} | {"source": inv["_file"]}
 
-    dq = _latest(reports, "dq-")
+    dq = _named(reports, "dq")
     if dq and dq.get("sets"):
         # The worst of the measured sets, never a pooled or best figure (the sets repeat similar records).
         scored = [s[part] for s in dq["sets"].values() for part in ("vendors", "purchase_orders") if part in s]
@@ -187,7 +191,7 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         except (OSError, json.JSONDecodeError):
             continue
     sh: dict[str, Any] | None = {"sets": {k: v for r in firsts for k, v in r.get("sets", {}).items()},
-          "_file": ", ".join(f.name for f in sorted(reports.glob("sheets-first-score-*.json")))} if firsts else _latest(reports, "sheets-")
+          "_file": ", ".join(f.name for f in sorted(reports.glob("sheets-first-score-*.json")))} if firsts else None
     if sh and sh.get("sets"):
         precisions = [_rate(s["rates"]["precision"]) for s in sh["sets"].values()]
         recalls = [_rate(s["rates"]["recall"]) for s in sh["sets"].values()]
