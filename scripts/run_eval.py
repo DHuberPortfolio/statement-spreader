@@ -21,6 +21,7 @@ import sys
 import time
 from collections import Counter
 from pathlib import Path
+from typing import Any
 
 from finops.core.evaluation import provenance, provenance_lines
 from spreader.evaluation.ixbrl_truth import build_key
@@ -177,12 +178,13 @@ def main() -> None:
                     "status": v.status, "flags": v.flags} for d, v in wrong],
     }
     # Provenance after the run: --rebuild-keys rewrites the keys it records.
-    sets: list[str | dict] = {"dev": ["sec-dev"], "holdout": ["sec-holdout"], "all": ["sec-dev", "sec-holdout"], "none": []}[args.split]
+    sets: list[Any] = {"dev": ["sec-dev"], "holdout": ["sec-holdout"], "all": ["sec-dev", "sec-holdout"], "none": []}[args.split]
     sets += ["statements-synthetic"] if args.synthetic else []
     if args.only:  # a subset is not the registered set: say so instead of quoting the whole set's version
         sets = [{"name": n, "version": None, "note": f"subset: {args.only}"} for n in sets]
-    report["provenance"] = provenance(sets, {"profile": report["profile"], **({"model": args.model} if args.model else {}),
+    prov = provenance(sets, {"profile": str(report["profile"]), **({"model": args.model} if args.model else {}),
                                              **({"keys": "rebuilt without calculation links"} if args.no_calc else {})})
+    report["provenance"] = prov
     (REPORTS / f"{name}.json").write_text(json.dumps(report, indent=1, default=str))
     latest = f"latest-{args.split}{'-syn' if args.synthetic else ''}"
     if name != latest and not args.only and not args.model:
@@ -231,7 +233,7 @@ def main() -> None:
     lines += ["", "Wrong values by kind: " + (", ".join(f"{k} {n}" for k, n in summ.kinds.most_common()) or "none"), ""]
     misses = Counter((v.line, v.bucket) for _, v in wrong)
     lines += ["Most frequent problems (line, outcome):", ""] + [f"- {ln} {b}: {n}" for (ln, b), n in misses.most_common(25)]
-    lines += provenance_lines(report["provenance"])
+    lines += provenance_lines(prov)
     (REPORTS / f"{name}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines[:16]))
 

@@ -263,3 +263,37 @@ noisy warnings", so where precision and recall conflict, the choices below take 
 - No AI. The mandate allowed a model where it adds measurable value; nothing here is a language problem. A model
   could word the explanations better than the template sentences, but a person can check a template sentence
   against the cell, and a model's sentence would need that same check.
+
+## One uncertainty policy (2026-10-25, overnight)
+
+**D35. Nothing is accepted without a person on a confidence nobody measured.** Each engine used to decide in its own
+way: statement mappings carried hand-set confidences (D5's numbers, typed into the code and the profile), reconciliation
+auto-accepted whatever rules the profile listed, and the other engines had no confidences at all. The shared policy
+(`finops.core.policy`) now says:
+- **Every finding has one shape**: blocking or informational, the reason, the evidence, the required action, and the
+  rule, check or method that produced it. Each engine has an adapter (`as_findings`, or `from_exception` for the
+  shared exception item). "Blocking" means it stops automatic acceptance of what it is about (a statement warning or
+  blocker, an invoice exception above info, a held or rejected record, a spreadsheet error or risk); approval itself is
+  still stopped only by blockers (D10).
+- **Automatic acceptance has three possible bases.** *Calibrated*: the method's measured accuracy, whose 95% Wilson
+  lower bound must clear the engine's bar (statements: the old 0.80, and 0.90 for critical lines; reconciliation: 0.98
+  precision). *Person*: a named reviewer decided this exact case before (mapping memory). *Derived*: a total of rows
+  that each cleared their bar takes their lowest confidence. A method never measured is reviewed: the policy fails
+  closed. A model's own stated confidence is never a basis, and a model's suggestion is always reviewed whatever its
+  measured accuracy (D8 stands). Deterministic checks are not confidences and are untouched.
+- **The lower bound, not the point estimate.** A rule right 1 of 1 times is not a 100% rule. The point estimate would
+  have let `catchall:revenue` (1 of 1) settle values alone; the lower bound (21%) does not, and a rule earns automation
+  as its outcomes accumulate.
+- **Calibration is a script, and records its data.** `scripts/calibrate.py` refits each method from labelled outcomes
+  (the SEC dev answer keys for statement mapping, one outcome per mapped row; 30 generated reconciliation sets no
+  evaluation uses) and writes `config/calibration/<engine>.json` with the datasets and their versions, the commit and
+  the outcome count per source. Reviewer decisions can be added as labelled outcomes (`--outcomes`, JSONL) once there
+  are enough.
+- **Measured** (IMPROVEMENT_LOG #19, O4, O5): statements on dev, silent errors 60 -> 59, wrong values caught 162 -> 163
+  of 222, at the cost of 48 more right values sent to review (median open items per filing 21 -> 24); the holdout,
+  measured once: silent errors 55 of 2,139 -> 49 of 2,101, caught 366 -> 372 of 421. Reconciliation: every report
+  identical (every configured rule clears 0.98 today); what changes is that a newly configured rule proposes until
+  it is measured. The bar of 0.98 was chosen after seeing that the current rules clear it, which is said here rather
+  than presented as an independent choice.
+- **What would change it**: reviewer decisions in volume (calibrate on the organisation's own outcomes, not the SEC
+  dev split), or a bar a credit or audit function sets for itself.

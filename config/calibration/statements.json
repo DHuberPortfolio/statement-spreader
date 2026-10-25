@@ -1,0 +1,196 @@
+{
+ "derived_methods": [
+  "structure.total_of_children"
+ ],
+ "engine": "statements",
+ "fitted": {
+  "commit": "63b9bb0c64d43fcc3a6396510d3617563d68cbf0",
+  "config": {},
+  "created": "2026-10-25T06:18:33+00:00",
+  "datasets": [
+   {
+    "files": 99,
+    "key_version": "256a779d1b24dd7d",
+    "matches_manifest": true,
+    "name": "sec-dev",
+    "version": "83478e9b205ab8ac"
+   }
+  ],
+  "dirty": true,
+  "documents": 33,
+  "extra_outcome_files": [],
+  "fitted_by": "scripts/calibrate.py",
+  "model": "not used (the model tier is calibrated only when --model is given)",
+  "outcomes": 1875,
+  "profile": "us-commercial 2026.10.24-1+0ad0af213be8"
+ },
+ "methods": {
+  "alias.exact": {
+   "high": 0.985270270020436,
+   "low": 0.9616185999010388,
+   "rate": 0.9761549925484352,
+   "right": 655,
+   "sources": {
+    "sec-dev answer keys": 671
+   },
+   "total": 671
+  },
+  "alias.pattern": {
+   "high": 0.9517217437962999,
+   "low": 0.9171812603682559,
+   "rate": 0.9366106080206986,
+   "right": 724,
+   "sources": {
+    "sec-dev answer keys": 773
+   },
+   "total": 773
+  },
+  "alias.section": {
+   "high": 0.9693546060345927,
+   "low": 0.8940001151393694,
+   "rate": 0.9423076923076923,
+   "right": 147,
+   "sources": {
+    "sec-dev answer keys": 156
+   },
+   "total": 156
+  },
+  "alias.total": {
+   "high": 1.0,
+   "low": 0.9433739770288436,
+   "rate": 1.0,
+   "right": 64,
+   "sources": {
+    "sec-dev answer keys": 64
+   },
+   "total": 64
+  },
+  "catchall:cf_other_financing": {
+   "high": 0.4166538714598967,
+   "low": 0.17474014357680362,
+   "rate": 0.28,
+   "right": 14,
+   "sources": {
+    "sec-dev answer keys": 50
+   },
+   "total": 50
+  },
+  "catchall:cf_other_investing": {
+   "high": 0.6576280471103807,
+   "low": 0.0,
+   "rate": 0.0,
+   "right": 0,
+   "sources": {
+    "sec-dev answer keys": 2
+   },
+   "total": 2
+  },
+  "catchall:cf_other_noncash": {
+   "high": 0.5615060804490177,
+   "low": 0.0,
+   "rate": 0.0,
+   "right": 0,
+   "sources": {
+    "sec-dev answer keys": 3
+   },
+   "total": 3
+  },
+  "catchall:cf_working_capital": {
+   "high": 1.0,
+   "low": 0.9712974142568529,
+   "rate": 1.0,
+   "right": 130,
+   "sources": {
+    "sec-dev answer keys": 130
+   },
+   "total": 130
+  },
+  "catchall:other_current_assets": {
+   "high": 0.7923450448735121,
+   "low": 0.0614903152761605,
+   "rate": 0.3333333333333333,
+   "right": 1,
+   "sources": {
+    "sec-dev answer keys": 3
+   },
+   "total": 3
+  },
+  "catchall:other_current_liabilities": {
+   "high": 0.48990002040399916,
+   "low": 0.0,
+   "rate": 0.0,
+   "right": 0,
+   "sources": {
+    "sec-dev answer keys": 4
+   },
+   "total": 4
+  },
+  "catchall:other_noncurrent_assets": {
+   "high": 1.0,
+   "low": 0.20654329147389294,
+   "rate": 1.0,
+   "right": 1,
+   "sources": {
+    "sec-dev answer keys": 1
+   },
+   "total": 1
+  },
+  "catchall:other_noncurrent_liabilities": {
+   "high": 0.7934567085261071,
+   "low": 0.0,
+   "rate": 0.0,
+   "right": 0,
+   "sources": {
+    "sec-dev answer keys": 1
+   },
+   "total": 1
+  },
+  "catchall:other_nonoperating": {
+   "high": 0.7923450448735121,
+   "low": 0.0614903152761605,
+   "rate": 0.3333333333333333,
+   "right": 1,
+   "sources": {
+    "sec-dev answer keys": 3
+   },
+   "total": 3
+  },
+  "catchall:other_opex": {
+   "high": 0.6942621454161981,
+   "low": 0.13684175946152105,
+   "rate": 0.375,
+   "right": 3,
+   "sources": {
+    "sec-dev answer keys": 8
+   },
+   "total": 8
+  },
+  "catchall:revenue": {
+   "high": 1.0,
+   "low": 0.20654329147389294,
+   "rate": 1.0,
+   "right": 1,
+   "sources": {
+    "sec-dev answer keys": 1
+   },
+   "total": 1
+  },
+  "fuzzy": {
+   "high": 0.8823817688407467,
+   "low": 0.23071993220883708,
+   "rate": 0.6,
+   "right": 3,
+   "sources": {
+    "sec-dev answer keys": 5
+   },
+   "total": 5
+  }
+ },
+ "never_auto": [
+  "model"
+ ],
+ "person_methods": [
+  "memory"
+ ],
+ "unit": "a mapped statement row (all its periods right)"
+}

@@ -27,7 +27,9 @@ KINDS = {"income", "cost", "result", "either", "asset", "liability", "equity", "
 class SectionRule(BaseModel):
     section: list[str]
     labels: list[str]
-    confidence: float | None = None  # for a catch-all ("*") rule; default 0.75
+    # Hand-set confidence for a catch-all ("*") rule. No longer used: every rule's confidence is measured
+    # (config/calibration/statements.json, finops.core.policy). Kept so existing overlays still load.
+    confidence: float | None = None
 
 
 class LineDef(BaseModel):

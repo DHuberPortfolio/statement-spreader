@@ -107,6 +107,51 @@ stops.
 - **One test changed:** `test_dq.py::test_synthetic_sets_are_scored_and_stable` replaces `write_report` with a stub;
   the stub now accepts the new keyword arguments. No assertion changed.
 
+## Task 3: one uncertainty policy (done)
+
+### Plan (written before starting)
+
+Find where each engine decides "accept without a person". Statements: hand-set confidences per mapping path and a
+review threshold. Reconciliation: a configured list of rules that auto-accept. Invoices, data quality, spreadsheets:
+no confidences at all; deterministic checks decide. So only two engines have something to calibrate; all five need
+the common finding shape. Measure statements on dev and the synthetic corpus before and after, holdout once;
+reconciliation through its reports and the gate. Revert if silent errors rise anywhere.
+
+### Result
+
+- **The policy** (`src/finops/core/policy.py`, DECISIONS D35): a `Finding` shape for everything an engine asks a person
+  to look at; automatic acceptance only on a *calibrated* method (95% lower bound of its measured accuracy clears the
+  engine's bar), a *person*'s earlier decision (mapping memory) or a *derived* result (a total of rows that each
+  passed). A never-measured method is reviewed; a model is always reviewed and its stated confidence is ignored.
+- **Calibration** (`scripts/calibrate.py statements|recon`, files in `config/calibration/`): records the datasets and
+  versions, commit, profile and outcome counts. Reviewer decisions can be added later as JSONL outcomes.
+- **Statements** (IMPROVEMENT_LOG #19): one outcome per mapped row on the dev keys. What it found: the hand-set
+  confidences were mostly optimistic. `catchall:cf_other_noncash` (0.82 by hand) was right 0 of 3 times and had been
+  settling values alone; `alias.section` (0.97 by hand) measures 94.2%, at least 89.4%, below the 0.90 bar for critical
+  lines. Dev: silent errors 60 of 2,536 (2.4%, 1.8-3.0%) -> 59 of 2,487 (2.4%, 1.8-3.0%); wrong values caught 162 ->
+  163 of 222; accuracy and omissions unchanged; cost: right values sent to review 1,132 -> 1,180, median review items
+  per filing 21 -> 24. Holdout, once: silent errors 55 of 2,139 (2.6%, 2.0-3.3%) -> 49 of 2,101 (2.3%, 1.8-3.1%);
+  caught 366 -> 372 of 421 (86.9% -> 88.4%). Synthetic corpus: 6 silent errors before and after. Reports:
+  `stmt-dev-before-policy`, `stmt-dev-policy`, `stmt-holdout-policy`.
+- **Reconciliation** (O5): calibrated on 30 generated sets no evaluation uses (registered as `recon-calibration`).
+  Every configured rule clears 0.98, so every report is reproduced exactly; the change is that a newly configured rule
+  proposes until measured. One mistake caught on the way: the first fit counted proposals too and rated
+  `one_to_many` at 60.9% (sums without a reference are proposed by design); the unit is now "what the rule settles
+  alone".
+- **Invoices, data quality, spreadsheets**: nothing confidence-driven to migrate (their decisions are deterministic
+  checks); they and the other two now give findings in the shared shape (O6).
+- **Tests** (`tests/test_policy.py`, 9): the policy's rules; the committed calibrations record their data; mapping
+  confidence is the measured bound; with no calibration every rule-placed row is reviewed; an over-confident model
+  is reviewed; an uncalibrated reconciliation rule proposes; every engine's findings have all five parts. Reverting
+  each of the three decision points (review, mapping, matcher) makes at least one test fail.
+
+### Choices worth a second look
+
+- The bar is compared with the **lower bound**, not the point estimate D5 used. That is the cautious reading of
+  "calibrated against measured outcomes"; it costs about three review items per filing.
+- The reconciliation bar of 0.98 was picked after seeing that every current rule clears it. DECISIONS D35 says so.
+- The profile's `confidence:` on catch-all rules is now ignored (kept so overlays load).
+
 ## Assumptions made without anyone to ask
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the

@@ -20,13 +20,23 @@ from dataclasses import dataclass
 
 from rapidfuzz import fuzz, process
 
+from finops.core import policy
+
 from .contracts import MapMethod, RowMapping, RowRole, StatementRow, StatementTable, ValueUnit
 from .profile import LineDef, Profile, matches
 
 FUZZY_ACCEPT = 93.0
 FUZZY_CANDIDATE = 82.0
-CONFIDENCE_REVIEW = 0.80  # a value-bearing row below this goes to review
+CONFIDENCE_REVIEW = 0.80  # a value-bearing row whose rule's measured lower bound is below this goes to review
 CONFIDENCE_REVIEW_CRITICAL = 0.90
+
+
+def calibrated(rule: str) -> float:
+    """A mapping rule's confidence: the lower end of its measured accuracy (config/calibration/statements.json,
+    scripts/calibrate.py), or 0 when it was never measured. Replaces the hand-set constants of D5; the policy is
+    finops.core.policy."""
+    c = policy.load("statements").confidence(rule)
+    return 0.0 if c is None else c
 
 
 @dataclass(frozen=True)
@@ -64,49 +74,49 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
                 target = memory[key]
                 if target == "":
                     return RowMapping(row_index=row.index, canonical=None, method=MapMethod.MEMORY, confidence=0.99,
-                                      excluded=True, reason="A reviewer excluded this label before.")
+                                      excluded=True, reason="A reviewer excluded this label before.", rule="memory")
                 if target in profile.lines:
                     return RowMapping(row_index=row.index, canonical=target, method=MapMethod.MEMORY, confidence=0.99,
-                                      reason="A reviewer mapped this label before.")
+                                      reason="A reviewer mapped this label before.", rule="memory")
 
     if not lab:
         return RowMapping(row_index=row.index, canonical=None, method=MapMethod.NONE, confidence=0.0,
-                          reason="The row has no label.")
+                          reason="The row has no label.", rule="none")
 
     if row.role is RowRole.TOTAL:
         for ln in lines:
             if any(matches(p, lab) for p in ln.total_aliases):
-                return RowMapping(row_index=row.index, canonical=ln.id, method=MapMethod.ALIAS, confidence=0.97,
-                                  reason=f"'{lab}' is a total (its rows add up to it) worded like {ln.label}.")
+                return RowMapping(row_index=row.index, canonical=ln.id, method=MapMethod.ALIAS, confidence=calibrated("alias.total"),
+                                  reason=f"'{lab}' is a total (its rows add up to it) worded like {ln.label}.", rule="alias.total")
 
     for sec in sections:
         if any(matches(p, sec) for p in sdef.ignore_sections):
             return RowMapping(row_index=row.index, canonical=None, method=MapMethod.STRUCTURE, confidence=0.95,
-                              excluded=True, reason=f"Under '{sec}', a disclosure that is not part of the statement.")
+                              excluded=True, reason=f"Under '{sec}', a disclosure that is not part of the statement.", rule="structure.ignored_section")
 
     # Section rules with explicit labels come first: "marketable securities" under "Non-current
     # assets" is long-term even though the same words alone mean short-term, and "Other" under
     # "Investing activities" is other investing, not other operating.
-    for depth, sec in enumerate(sections):
+    for sec in sections:
         for ln in lines:
             for rule in ln.sections:
                 if "*" in rule.labels:
                     continue
                 if any(matches(s, sec) for s in rule.section) and any(matches(p, lab) for p in rule.labels):
                     return RowMapping(row_index=row.index, canonical=ln.id, method=MapMethod.ALIAS,
-                                      confidence=0.97 - 0.02 * depth,
-                                      reason=f"'{lab}' under '{sec}' is {ln.label}.")
+                                      confidence=calibrated("alias.section"),
+                                      reason=f"'{lab}' under '{sec}' is {ln.label}.", rule="alias.section")
 
     exact = [ln for ln in lines if lab in ln.aliases]
     if len(exact) == 1:
-        return RowMapping(row_index=row.index, canonical=exact[0].id, method=MapMethod.ALIAS, confidence=1.0,
-                          reason=f"'{lab}' is an alias of {exact[0].label}.")
+        return RowMapping(row_index=row.index, canonical=exact[0].id, method=MapMethod.ALIAS, confidence=calibrated("alias.exact"),
+                          reason=f"'{lab}' is an alias of {exact[0].label}.", rule="alias.exact")
 
     if len(exact) > 1:
         # The same alias on two lines ("basic" for EPS and for shares); the section decides.
         return RowMapping(row_index=row.index, canonical=None, method=MapMethod.NONE, confidence=0.0,
                           candidates=[(ln.id, 0.5) for ln in exact],
-                          reason=f"'{lab}' could be {', '.join(ln.label for ln in exact)}.")
+                          reason=f"'{lab}' could be {', '.join(ln.label for ln in exact)}.", rule="none")
 
     wild: list[tuple[int, LineDef]] = []
     for ln in lines:
@@ -118,33 +128,32 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
         best_len, best = wild[0]
         rivals = {ln.id for n, ln in wild if n == best_len and ln.id != best.id}
         if not rivals:
-            return RowMapping(row_index=row.index, canonical=best.id, method=MapMethod.ALIAS, confidence=0.95,
+            return RowMapping(row_index=row.index, canonical=best.id, method=MapMethod.ALIAS, confidence=calibrated("alias.pattern"),
                               candidates=[(ln.id, 0.9) for _, ln in wild[1:4]],
-                              reason=f"'{lab}' matches an alias pattern of {best.label}.")
+                              reason=f"'{lab}' matches an alias pattern of {best.label}.", rule="alias.pattern")
 
     choices = {(ln.id, a): a for ln in lines for a in ln.aliases if "*" not in a}
     if choices:
         hits = process.extract(lab, choices, scorer=fuzz.token_sort_ratio, limit=3)
         if hits and hits[0][1] >= FUZZY_ACCEPT:
             (line_id, alias) = hits[0][2]
-            return RowMapping(row_index=row.index, canonical=line_id, method=MapMethod.FUZZY, confidence=0.7,
+            return RowMapping(row_index=row.index, canonical=line_id, method=MapMethod.FUZZY, confidence=calibrated("fuzzy"),
                               candidates=[(h[2][0], round(h[1] / 100, 2)) for h in hits],
-                              reason=f"'{lab}' is spelled almost like '{alias}' ({hits[0][1]:.0f}/100).")
+                              reason=f"'{lab}' is spelled almost like '{alias}' ({hits[0][1]:.0f}/100).", rule="fuzzy")
         cands = [(h[2][0], round(h[1] / 100, 2)) for h in hits if h[1] >= FUZZY_CANDIDATE]
     else:
         cands = []
 
-    for depth, sec in enumerate(sections):
+    for sec in sections:
         for ln in lines:
             for rule in ln.sections:
                 if "*" in rule.labels and any(matches(s, sec) for s in rule.section):
-                    base = rule.confidence if rule.confidence is not None else 0.75
                     return RowMapping(row_index=row.index, canonical=ln.id, method=MapMethod.STRUCTURE,
-                                      confidence=base - 0.03 * depth, candidates=cands,
-                                      reason=f"'{lab}' sits under '{sec}', which feeds {ln.label}.")
+                                      confidence=calibrated(f"catchall:{ln.id}"), candidates=cands,
+                                      reason=f"'{lab}' sits under '{sec}', which feeds {ln.label}.", rule=f"catchall:{ln.id}")
 
     return RowMapping(row_index=row.index, canonical=None, method=MapMethod.NONE, confidence=0.0, candidates=cands,
-                      reason=f"No alias or rule matches '{lab}'.")
+                      reason=f"No alias or rule matches '{lab}'.", rule="none")
 
 
 def map_table(table: StatementTable, profile: Profile, memory: Memory | None = None,
@@ -171,7 +180,7 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
             out[row.index] = RowMapping(row_index=row.index, canonical=None, method=MapMethod.STRUCTURE, confidence=0.95,
                                         excluded=True,
                                         reason=f"A subtotal of rows already placed on {names}; left out so they are "
-                                               "not counted twice (its footing is still checked).")
+                                               "not counted twice (its footing is still checked).", rule="structure.cross_line_subtotal")
 
     # Structure: a total whose rows all feed one line feeds it too (when nothing else placed it).
     for row in table.rows:
@@ -184,7 +193,7 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
             target = targets.pop()
             out[row.index] = RowMapping(row_index=row.index, canonical=target, method=MapMethod.STRUCTURE,
                                         confidence=min(cm.confidence for cm in child_maps),
-                                        reason=f"It is the total of rows that all feed {profile.lines[target].label}.")
+                                        reason=f"It is the total of rows that all feed {profile.lines[target].label}.", rule="structure.total_of_children")
         # "Total costs and expenses" that includes cost of revenue is not operating expenses.
         elif m.canonical == "total_opex" and any(cm.canonical == "cogs" for cm in child_maps) and "total_costs" in profile.lines:
             out[row.index] = m.model_copy(update={"canonical": "total_costs", "confidence": min(m.confidence, 0.95),

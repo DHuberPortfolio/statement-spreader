@@ -8,6 +8,9 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from finops.core import policy
+from finops.core.policy import Finding
+
 from .contracts import (
     CheckResult,
     CheckStatus,
@@ -17,6 +20,7 @@ from .contracts import (
     RowMapping,
     RowRole,
     Severity,
+    Spread,
     SpreadValue,
     StatementResult,
     StatementType,
@@ -126,13 +130,16 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                 continue
             critical = profile.lines[m.canonical].critical
             threshold = CONFIDENCE_REVIEW_CRITICAL if critical else CONFIDENCE_REVIEW
-            if m.confidence < threshold:
+            # One policy for every engine (finops.core.policy): a rule's measured accuracy, a reviewer's earlier
+            # decision, or a total of rows that each passed; never a model's own confidence.
+            decision = policy.load("statements").decide(m.rule or m.method.value, threshold, m.confidence)
+            if not decision.auto:
                 items.append(ReviewItem(
                     id=f"confidence:{skey}:{row.index}", kind=ReviewKind.LOW_CONFIDENCE,
                     severity=Severity.WARNING, statement=stype, rows=[row.index], lines=[m.canonical],
                     periods=list(row.values),
-                    message=(f"'{row.label}' was placed on {profile.lines[m.canonical].label} with {m.confidence:.0%} "
-                             f"confidence ({m.method.value}): {m.reason}")))
+                    message=(f"'{row.label}' was placed on {profile.lines[m.canonical].label} ({m.method.value}): "
+                             f"{m.reason} {decision.reason}")))
 
     for c in checks:
         if c.status is not CheckStatus.FAIL:
@@ -258,3 +265,37 @@ def mapping_for(statements: dict[str, StatementResult], stype: str, row_index: i
     if res is None:
         return None
     return next((m for m in res.mappings if m.row_index == row_index), None)
+
+
+ACTION = {
+    ReviewKind.UNMAPPED_ROW: "Place the row on a template line, or exclude it, with your name.",
+    ReviewKind.LOW_CONFIDENCE: "Confirm the line the row was placed on, or move it.",
+    ReviewKind.FAILED_CHECK: "Find the value that breaks the check (the hint names candidates) and correct it, or accept "
+                             "the difference with a note.",
+    ReviewKind.FOOTING: "Compare the total with its rows in the document; correct the misread value or note the "
+                        "document's own error.",
+    ReviewKind.ASSUMED_SCALE: "Confirm the unit (thousands, millions) in a note.",
+    ReviewKind.ASSUMED_PERIOD: "Confirm the period end dates of the columns.",
+    ReviewKind.MISSING_STATEMENT: "Find the statement in the document, or note that it is not there.",
+    ReviewKind.CONFLICT: "Choose which row's value the line should take.",
+    ReviewKind.SUSPICIOUS: "Check the value against the document (scale and sign).",
+    ReviewKind.UNREADABLE: "Read the number from the document and enter it with a note.",
+}
+
+
+def as_findings(spread: Spread) -> list[Finding]:
+    """The spread's review items in the shared shape (finops.core.policy). Blocking: anything that stops a value being
+    accepted without a person (a warning or a blocker); approval itself is stopped only by blockers (D10)."""
+    rule_of = {(skey, m.row_index): m.rule or m.method.value for skey, res in spread.statements.items() for m in res.mappings}
+    out = []
+    for it in spread.review:
+        skey = it.statement.value if it.statement else ""
+        if it.kind is ReviewKind.LOW_CONFIDENCE and it.rows:
+            produced = f"mapping rule {rule_of.get((skey, it.rows[0]), '?')}"
+        else:
+            produced = it.id.split(":")[0] + (f" {it.id.split(':')[1]}" if it.id.startswith("check:") else "")
+        out.append(Finding(engine="statements", code=it.kind.value, blocking=it.severity is not Severity.INFO,
+                           reason=it.message, evidence={"statement": skey, "lines": it.lines, "rows": it.rows, "periods": it.periods},
+                           required_action=ACTION.get(it.kind, "Look at it and resolve it with your name."),
+                           produced_by=produced, subjects=[it.id], severity=it.severity.value))
+    return out

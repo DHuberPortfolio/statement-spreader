@@ -129,6 +129,15 @@ What the Python tests cover:
 - `test_invoice_suggest.py` (5 tests): value shapes; label candidates (unknown labels with values, not item rows);
   closed-list answers with a misbehaving fake model; an empty draft when no model server answers; the reviewed
   layout-E overlay reading the held-out set.
+- `test_release_gate.py` (13 tests): every gate rule fires on a planted defect (a changed dataset, a new crash, a rate
+  above the range, one more wrong value, a value moving from caught to silent), improvements pass, the greedy matcher
+  fails the committed baseline; every set matches its manifest; an edited key changes its version; generated
+  workbooks hash by content; reports carry provenance.
+- `test_policy.py` (9 tests): the shared uncertainty policy (D35): lower bound against the bar, never-measured methods
+  reviewed, a model never auto even at 100%, reviewer outcomes as calibration data, the committed calibrations name
+  their data; statement confidences are measured bounds, no calibration means every rule-placed row is reviewed, an
+  over-confident model is reviewed; an uncalibrated reconciliation rule proposes; every engine's findings carry
+  blocking, reason, evidence, required action and the producing rule.
 
 ## Evaluation against answer keys
 
@@ -209,6 +218,18 @@ per filing:
 ```bash
 .venv/Scripts/python scripts/compare_keys.py <old keys dir> eval/sec/keys --reports <old report> <new report>
 ```
+
+## Calibration (the shared uncertainty policy, DECISIONS D35)
+
+```bash
+.venv/Scripts/python scripts/calibrate.py statements     # mapping rules, from the SEC dev keys (needs the filings)
+.venv/Scripts/python scripts/calibrate.py recon          # reconciliation rules, from 30 generated sets (recon-calibration)
+.venv/Scripts/python scripts/calibrate.py statements --outcomes reviewer-decisions.jsonl   # add labelled outcomes
+```
+
+The files land in `config/calibration/` and record their data. Recalibrating changes what is accepted without a person,
+so treat it like any engine change: dev and synthetic before and after, the release gate, and a log entry. Never fit
+on the holdout split.
 
 ## The local model tier (optional)
 

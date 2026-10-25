@@ -6,7 +6,8 @@ Safety by construction, not by prompt:
 - The answer is constrained by a JSON schema (llama-server turns it into a grammar) to one of the
   statement's line ids or "none". Text in a document that says "ignore your instructions" can at
   worst produce a wrong line id from the list.
-- Its confidence is capped below the review threshold: every model-placed row goes to a person.
+- Its own stated confidence is ignored. The row shows the tier's measured accuracy, and the shared policy
+  (finops.core.policy) sends every model-placed row to a person.
   A reviewer's confirmation is saved to mapping memory, so the same label is then placed by
   memory, deterministically, without the model.
 - Responses are cached by (model, prompt) so evaluation runs are repeatable and cheap.
@@ -23,9 +24,9 @@ from pathlib import Path
 import httpx
 
 from ..contracts import MapMethod, RowMapping, StatementRow, StatementTable
+from ..mapping import calibrated
 from ..profile import LineDef
 
-MODEL_CONFIDENCE_CAP = 0.7  # below mapping.CONFIDENCE_REVIEW (0.8): always reviewed
 CACHE = Path(__file__).resolve().parents[3] / "var" / "llm-cache.sqlite3"
 
 SYSTEM = (
@@ -100,11 +101,9 @@ class LocalModelMapper:
         line = answer.get("line")
         if line not in {ln.id for ln in lines}:
             return None  # "none", or anything outside the closed list
-        try:
-            conf = float(answer.get("confidence", 0))
-        except (TypeError, ValueError):
-            conf = 0.0
-        conf = max(0.0, min(conf, 1.0)) * MODEL_CONFIDENCE_CAP
+        # The model's own stated confidence is not used (finops.core.policy): what is shown is the tier's measured
+        # accuracy, and the policy sends every model suggestion to a person whatever that is (D8).
+        conf = calibrated("model")
         label = next(ln.label for ln in lines if ln.id == line)
         return RowMapping(row_index=row.index, canonical=line, method=MapMethod.MODEL, confidence=round(conf, 3),
-                          reason=f"A local model ({self.model_name}) suggested {label}; a reviewer must confirm it.")
+                          reason=f"A local model ({self.model_name}) suggested {label}; a reviewer must confirm it.", rule="model")

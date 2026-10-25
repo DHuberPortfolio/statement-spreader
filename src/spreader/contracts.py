@@ -167,6 +167,7 @@ class RowMapping(BaseModel):
     excluded: bool = False  # deliberately left out (e.g. a memo line)
     candidates: list[tuple[str, float]] = Field(default_factory=list)
     reason: str = ""
+    rule: str = ""  # the exact path that placed the row (calibration is per rule: finops.core.policy)
 
 
 class ValueStatus(str, Enum):
