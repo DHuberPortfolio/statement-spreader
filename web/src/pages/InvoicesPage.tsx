@@ -4,7 +4,7 @@ import { useState } from "react";
 import { errorText, finops, needsName, type FieldValue, type InvoiceDetail } from "../api/finops";
 import { Layout } from "../components/Layout";
 import { EmptyState, ErrorState, InlineMessage, Loading } from "../components/States";
-import { formatDateTime } from "../lib/format";
+import { formatDateTime, humanizeCode } from "../lib/format";
 import { Link, navigate } from "../lib/router";
 import { useApi } from "../lib/useApi";
 import { AuditList, Checks, ExceptionCard, NameReminder, StatusPill, money } from "./finopsShared";
@@ -101,7 +101,15 @@ export function InvoiceListPage() {
                   <StatusPill s={i.eligibility} />
                   {i.touchless && <div className="small muted">touchless</div>}
                 </td>
-                <td className="small">{i.open.join(", ")}</td>
+                <td>
+                  <span className="reason-list">
+                    {i.open.map((c) => (
+                      <span key={c} className="reason-chip" title={c}>
+                        {humanizeCode(c)}
+                      </span>
+                    ))}
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>

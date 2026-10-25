@@ -5,8 +5,10 @@
 import { getActor } from "../lib/actor";
 import type {
   AuditEvent,
+  CompanyRow,
   DocumentRow,
   EvalReport,
+  OutcomeSummary,
   Profile,
   RoiReport,
   RunPayload,
@@ -92,6 +94,9 @@ export const api = {
   health: () => getJson<{ ok: boolean; version: string; profile: string; model: string }>("/api/health"),
   profile: () => getJson<Profile>("/api/profile"),
   documents: () => getJson<DocumentRow[]>("/api/documents"),
+  companies: () => getJson<CompanyRow[]>("/api/companies"),
+  setCompany: (docId: string, company_id: string) => sendJson<RunPayload>(`/api/documents/${docId}/company`, "POST", { company_id }),
+  outcomes: () => getJson<OutcomeSummary>("/api/outcomes"),
   run: (id: number, signal?: AbortSignal) => getJson<RunPayload>(`/api/runs/${id}`, signal),
   rerun: (docId: string) => sendJson<RunPayload>(`/api/documents/${docId}/runs`, "POST", {}),
   act: (runId: number, action: Record<string, unknown>) => sendJson<RunPayload>(`/api/runs/${runId}/actions`, "POST", action),
@@ -109,7 +114,7 @@ export const api = {
 };
 
 /** Upload with progress (fetch has no upload progress, so this uses XMLHttpRequest). */
-export function uploadDocument(file: File, onProgress: (fraction: number) => void): Promise<RunPayload> {
+export function uploadDocument(file: File, onProgress: (fraction: number) => void, companyId = ""): Promise<RunPayload> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/documents");
@@ -147,6 +152,7 @@ export function uploadDocument(file: File, onProgress: (fraction: number) => voi
     };
     const form = new FormData();
     form.append("file", file);
+    if (companyId.trim()) form.append("company_id", companyId.trim());
     xhr.send(form);
   });
 }

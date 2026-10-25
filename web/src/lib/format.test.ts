@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  humanizeCode,
   decToString,
   cleanEvidence,
   formatAmount,
@@ -157,5 +158,13 @@ describe("cleanEvidence", () => {
     expect(cleanEvidence("(In millions")).toBe("In millions");
     expect(cleanEvidence("(in thousands, except per share data)")).toBe("in thousands, except per share data");
     expect(cleanEvidence("In millions")).toBe("In millions");
+  });
+});
+
+describe("humanizeCode", () => {
+  it("turns reason codes into words", () => {
+    expect(humanizeCode("QTY_EXCEEDS_ORDERED")).toBe("Quantity exceeds ordered");
+    expect(humanizeCode("EXACT_DUPLICATE")).toBe("Exact duplicate");
+    expect(humanizeCode("PO_NOT_FOUND")).toBe("PO not found");
   });
 });

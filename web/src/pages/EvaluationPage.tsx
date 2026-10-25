@@ -184,18 +184,79 @@ function ReportView({ r }: { r: EvalReport }) {
   );
 }
 
+const ENGINE_NAMES: Record<string, string> = {
+  statements: "Statement rows placed on a line",
+  units: "Statement units (thousands, millions)",
+  recon: "Reconciliation matches (recorded, not yet learned from)",
+};
+
+/** What reviewers' decisions have recorded so far: the outcomes calibration learns from (DECISIONS D40). */
+function LearningSection() {
+  const o = useApi(() => api.outcomes(), []);
+  const engines = Object.entries(o.data?.engines ?? {});
+  return (
+    <section aria-labelledby="learning-title">
+      <h2 id="learning-title" className="section-title">
+        What reviewers have taught it
+      </h2>
+      <p className="muted">
+        Every approval, remap and match decision is written down as evidence about the rule that made the call. When the
+        rules are re-measured, this evidence counts alongside the answer keys, so a rule earns or loses automatic
+        acceptance from your own reviewers' decisions.
+      </p>
+      {o.error && <ErrorState error={o.error} onRetry={o.reload} />}
+      {o.data && engines.length === 0 && (
+        <EmptyState title="No reviewer decisions recorded yet">
+          <p>Approve a spread or decide a match, and its evidence appears here.</p>
+        </EmptyState>
+      )}
+      {engines.length > 0 && (
+        <div className="grid-scroll">
+          <table className="data-table learning-table">
+            <thead>
+              <tr>
+                <th scope="col">Rule</th>
+                <th scope="col">What it decides</th>
+                <th scope="col" className="num">Right</th>
+                <th scope="col" className="num">Wrong</th>
+              </tr>
+            </thead>
+            <tbody>
+              {engines.flatMap(([engine, e]) =>
+                Object.entries(e.methods).map(([method, c]) => (
+                  <tr key={`${engine}:${method}`}>
+                    <td>{method}</td>
+                    <td>{ENGINE_NAMES[engine] ?? engine}</td>
+                    <td className="num">{c.right ?? 0}</td>
+                    <td className="num">{c.wrong ? <span className="count-bad">{c.wrong}</span> : 0}</td>
+                  </tr>
+                )),
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {o.data && <p className="muted small">Kept in {o.data.folder}.</p>}
+    </section>
+  );
+}
+
 export function EvaluationPage() {
   const ev = useApi(() => api.evaluation(), []);
   return (
     <Layout>
       <div className="page page-eval">
         <header className="page-head">
-          <h1>Evaluation</h1>
+          <p className="eyebrow">Results</p>
+          <h1>Accuracy</h1>
           <p className="lede">
-            How the spreader does against answer keys: for SEC filings, the filings' own inline XBRL tags; for synthetic statements, the values
-            they were generated from. Every rate comes with the range it likely falls in; a small sample gives a wide range.
+            How often each part is right, measured against answer keys: for SEC filings, the filings' own inline XBRL
+            tags; for synthetic statements, the values they were generated from. Every rate comes with the range it likely
+            falls in; a small sample gives a wide range.
           </p>
         </header>
+        <LearningSection />
+        <h2 className="section-title">Evaluation reports</h2>
         {ev.loading && !ev.data && <Loading label="Loading evaluation reports" />}
         {ev.error && <ErrorState error={ev.error} onRetry={ev.reload} />}
         {ev.data && ev.data.reports.length === 0 && (

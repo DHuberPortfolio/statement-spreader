@@ -15,8 +15,86 @@ type UploadPhase =
   | { phase: "uploading"; name: string; fraction: number; index: number; total: number }
   | { phase: "processing"; name: string; index: number; total: number };
 
+function CompanyField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const companies = useApi(() => api.companies(), []);
+  return (
+    <div className="company-field">
+      <label htmlFor="company-input">Company</label>
+      <input
+        id="company-input"
+        type="text"
+        list="company-options"
+        value={value}
+        maxLength={100}
+        placeholder="e.g. Acme Corp or the borrower's ID"
+        onChange={(e) => onChange(e.target.value)}
+        aria-describedby="company-hint"
+      />
+      <datalist id="company-options">
+        {(companies.data ?? []).map((c) => (
+          <option key={c.company_id} value={c.company_id}>
+            {`${c.documents} document${c.documents === 1 ? "" : "s"}, ${c.approved_spreads} approved`}
+          </option>
+        ))}
+      </datalist>
+      <p id="company-hint" className="muted small">
+        Optional, but worth it: last year's approved spread for the same company is used to check this one. SEC filings
+        are recognised by their CIK without it.
+      </p>
+    </div>
+  );
+}
+
+function CompanyCell({ doc, onSaved }: { doc: DocumentRow; onSaved: () => void }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(doc.company_id ?? "");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  if (!editing) {
+    return (
+      <span className="company-cell">
+        {doc.company_id ? <span>{doc.company_id}</span> : <span className="muted">not set</span>}
+        {!doc.approved && (
+          <button type="button" className="btn btn-quiet btn-small" onClick={() => setEditing(true)}>
+            {doc.company_id ? "Change" : "Set"}
+          </button>
+        )}
+      </span>
+    );
+  }
+  return (
+    <form
+      className="form-inline"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        setBusy(true);
+        setError(null);
+        try {
+          await api.setCompany(doc.id, draft);
+          setEditing(false);
+          onSaved();
+        } catch (err) {
+          setError(err instanceof Error ? err.message : String(err));
+        } finally {
+          setBusy(false);
+        }
+      }}
+    >
+      <input type="text" value={draft} onChange={(e) => setDraft(e.target.value)} aria-label="Company" list="company-options" />
+      <button type="submit" className="btn btn-primary btn-small" disabled={busy || !draft.trim()}>
+        {busy ? "Re-running…" : "Save"}
+      </button>
+      <button type="button" className="btn btn-small" onClick={() => setEditing(false)}>
+        Cancel
+      </button>
+      {error && <span className="text-bad small">{error}</span>}
+    </form>
+  );
+}
+
 function UploadZone({ onUploaded }: { onUploaded: () => void }) {
   const input = useRef<HTMLInputElement>(null);
+  const [company, setCompany] = useState("");
   const [drag, setDrag] = useState(false);
   const [state, setState] = useState<UploadPhase>({ phase: "idle" });
   const [error, setError] = useState<string | null>(null);
@@ -31,13 +109,17 @@ function UploadZone({ onUploaded }: { onUploaded: () => void }) {
       const f = files[i]!;
       setState({ phase: "uploading", name: f.name, fraction: 0, index: i, total: files.length });
       try {
-        const payload = await uploadDocument(f, (fraction) => {
-          setState(
-            fraction >= 1
-              ? { phase: "processing", name: f.name, index: i, total: files.length }
-              : { phase: "uploading", name: f.name, fraction, index: i, total: files.length },
-          );
-        });
+        const payload = await uploadDocument(
+          f,
+          (fraction) => {
+            setState(
+              fraction >= 1
+                ? { phase: "processing", name: f.name, index: i, total: files.length }
+                : { phase: "uploading", name: f.name, fraction, index: i, total: files.length },
+            );
+          },
+          company,
+        );
         results.push({ name: f.name, runId: payload.run.id, status: payload.run.status });
         if (files.length === 1) {
           setState({ phase: "idle" });
@@ -67,6 +149,7 @@ function UploadZone({ onUploaded }: { onUploaded: () => void }) {
   const busy = state.phase !== "idle";
   return (
     <section className="upload" aria-labelledby="upload-title">
+      <CompanyField value={company} onChange={setCompany} />
       <div
         className={`dropzone ${drag ? "is-drag" : ""} ${busy ? "is-busy" : ""}`}
         onDragOver={(e) => {
@@ -77,7 +160,7 @@ function UploadZone({ onUploaded }: { onUploaded: () => void }) {
         onDrop={onDrop}
       >
         <h2 id="upload-title" className="dropzone-title">
-          Add a statement package
+          Add financial statements
         </h2>
         {state.phase === "idle" && (
           <>
@@ -186,10 +269,11 @@ export function DocumentsPage() {
   return (
     <div className="page page-documents">
       <header className="page-head">
-        <h1>Documents</h1>
+        <p className="eyebrow">Daily work</p>
+        <h1>Statements</h1>
         <p className="lede">
-          Each document is spread into the standard template. Every value keeps a trail to the printed cell it came from;
-          checks and a review queue show what needs a person.
+          Upload a company's financial statements and they are spread into the standard template. Every value links back
+          to the printed cell it came from; anything the checks doubt goes to the review queue for a person.
         </p>
       </header>
 
@@ -224,6 +308,7 @@ export function DocumentsPage() {
               <thead>
                 <tr>
                   <th scope="col">Document</th>
+                  <th scope="col">Company</th>
                   <th scope="col">Uploaded</th>
                   <th scope="col">Run</th>
                   <th scope="col">Approval</th>
@@ -246,6 +331,9 @@ export function DocumentsPage() {
                           {d.format.toUpperCase()} · {formatBytes(d.size)}
                         </span>
                       </th>
+                      <td>
+                        <CompanyCell doc={d} onSaved={docs.reload} />
+                      </td>
                       <td className="nowrap">{formatDateTime(d.uploaded_at)}</td>
                       <td>
                         <RunStatus doc={d} />

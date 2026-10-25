@@ -190,6 +190,20 @@ export interface DocumentRow {
   run_status?: Run["status"] | null;
   run_at?: string | null;
   approved?: boolean;
+  company_id?: string | null;
+  summary?: { blocker: number; warning: number; info: number; values: number; auto_accepted: number } | null;
+}
+
+export interface CompanyRow {
+  company_id: string;
+  documents: number;
+  approved_spreads: number;
+  last_upload: string;
+}
+
+export interface OutcomeSummary {
+  folder: string;
+  engines: Record<string, { outcomes: number; last: string | null; methods: Record<string, { right?: number; wrong?: number }> }>;
 }
 
 export interface LineInfo {

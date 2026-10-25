@@ -1,87 +1,102 @@
-/* Design tokens. Light: a well-kept working paper (off-white paper, deep ink, one ink-blue accent).
-   Dark: the same roles on a dark desk. Every colour in the app comes from here. */
+/* Design tokens. Light: a clean workspace (cool grey canvas, white cards, slate ink, one blue accent).
+   Dark: the same roles on a deep slate. Every colour in the app comes from here. */
 
 :root {
   color-scheme: light dark;
 
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-sans); /* headings share the body face: one calm voice */
   --font-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, Menlo, monospace;
 
-  --paper: #f5f3ec;
-  --sheet: #fdfcf8;
-  --sheet-2: #efece3;
-  --ink: #1a1f26;
-  --ink-2: #39414b;
-  --muted: #5a616a;
-  --rule: #dcd7ca;
-  --rule-faint: #e9e5da;
-  --rule-strong: #b3ac9c;
+  --paper: #f4f6f9; /* the canvas behind cards */
+  --sheet: #ffffff; /* cards, tables, panels */
+  --sheet-2: #f1f4f8; /* table heads, quiet fills */
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #5b6678;
+  --rule: #e2e7ee;
+  --rule-faint: #edf0f5;
+  --rule-strong: #c4ccd8;
 
-  --accent: #1d3f6e;
+  --accent: #2459d6;
   --accent-ink: #ffffff;
-  --accent-wash: #e2e9f3;
-  --accent-soft: #a9bcd6;
-  --focus: #2457a8;
+  --accent-wash: #e8effd;
+  --accent-soft: #a8c0f2;
+  --focus: #2459d6;
 
-  --ok: #2b6838;
-  --ok-wash: #e1eee1;
-  --bad: #a12f29;
-  --bad-wash: #f8e2de;
-  --warn: #7d5200;
-  --warn-mark: #c58610;
-  --warn-wash: #f8ebcc;
-  --info: #4b5b6f;
-  --violet: #6f45a8;
+  --ok: #1d7a46;
+  --ok-wash: #e3f4ea;
+  --bad: #c0352b;
+  --bad-wash: #fde8e6;
+  --warn: #8a5a00;
+  --warn-mark: #d18a0b;
+  --warn-wash: #fdf1d8;
+  --info: #475569;
+  --violet: #6d46c1;
 
-  --st-extracted: #6b727c;
-  --st-normalized: #23706f;
-  --st-calculated: #44598a;
-  --st-ai_mapped: #7a45b5;
-  --st-human: #1d3f6e;
-  --st-assumed: #b37400;
-  --st-missing: #a12f29;
+  --st-extracted: #64748b;
+  --st-normalized: #0f7a76;
+  --st-calculated: #3f5bb0;
+  --st-ai_mapped: #7c4ccc;
+  --st-human: #2459d6;
+  --st-assumed: #b87400;
+  --st-missing: #c0352b;
 
-  --radius: 3px;
-  --shadow: 0 1px 0 rgba(26, 31, 38, 0.04);
+  --sidebar: #0f1b33;
+  --sidebar-ink: #c9d3e5;
+  --sidebar-muted: #8494b2;
+  --sidebar-active: #ffffff;
+  --sidebar-active-bg: rgba(255, 255, 255, 0.1);
+
+  --radius: 8px;
+  --radius-small: 6px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 1px rgba(15, 23, 42, 0.03);
+  --shadow-raised: 0 6px 18px rgba(15, 23, 42, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #13161a;
-    --sheet: #1a1e23;
-    --sheet-2: #22272e;
-    --ink: #e6e3da;
-    --ink-2: #c3c6cb;
-    --muted: #9ba2ab;
-    --rule: #2f353d;
-    --rule-faint: #252a31;
-    --rule-strong: #4a535e;
+    --paper: #0d1320;
+    --sheet: #151d2c;
+    --sheet-2: #1b2435;
+    --ink: #e8edf5;
+    --ink-2: #c4cddb;
+    --muted: #93a0b5;
+    --rule: #263247;
+    --rule-faint: #1e293b;
+    --rule-strong: #3b4a63;
 
-    --accent: #8fb5e9;
-    --accent-ink: #0d1520;
-    --accent-wash: #1c2939;
-    --accent-soft: #3f5a7e;
-    --focus: #9cc1f2;
+    --accent: #7ea6f6;
+    --accent-ink: #0b1220;
+    --accent-wash: #1a2a48;
+    --accent-soft: #34507f;
+    --focus: #9dbcf8;
 
-    --ok: #7fc68c;
-    --ok-wash: #1b2e20;
-    --bad: #f0877d;
-    --bad-wash: #3a211f;
-    --warn: #e6b65f;
-    --warn-mark: #e0aa45;
-    --warn-wash: #33291a;
-    --info: #a6b4c6;
-    --violet: #b996ea;
+    --ok: #6ccf93;
+    --ok-wash: #14301f;
+    --bad: #f08a80;
+    --bad-wash: #3b1d1b;
+    --warn: #ebbd62;
+    --warn-mark: #e6a93b;
+    --warn-wash: #332816;
+    --info: #a9b6c9;
+    --violet: #b79af0;
 
-    --st-extracted: #a1a8b1;
-    --st-normalized: #5fc0bd;
-    --st-calculated: #9bb0e0;
-    --st-ai_mapped: #bf95f0;
-    --st-human: #8fb5e9;
-    --st-assumed: #e6b65f;
-    --st-missing: #f0877d;
+    --st-extracted: #a3afc0;
+    --st-normalized: #5cc6c0;
+    --st-calculated: #9db2ec;
+    --st-ai_mapped: #bf9af2;
+    --st-human: #7ea6f6;
+    --st-assumed: #ebbd62;
+    --st-missing: #f08a80;
+
+    --sidebar: #0a101c;
+    --sidebar-ink: #c4cddb;
+    --sidebar-muted: #7d8aa3;
+    --sidebar-active: #ffffff;
+    --sidebar-active-bg: rgba(126, 166, 246, 0.14);
 
     --shadow: none;
+    --shadow-raised: 0 6px 18px rgba(0, 0, 0, 0.35);
   }
 }

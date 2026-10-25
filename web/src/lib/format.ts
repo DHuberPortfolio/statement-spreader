@@ -267,3 +267,15 @@ export function formatDuration(seconds: number): string {
   const sec = s % 60;
   return h > 0 ? `${h}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}` : `${m}:${String(sec).padStart(2, "0")}`;
 }
+
+/** A machine reason code as words a person reads ("QTY_EXCEEDS_ORDERED" -> "Qty exceeds ordered"); common
+ *  abbreviations spelled out. The code itself stays visible where an item is opened. */
+export function humanizeCode(code: string): string {
+  const words = code
+    .toLowerCase()
+    .split(/[_\s]+/)
+    .filter(Boolean)
+    .map((w) => ({ qty: "quantity", po: "PO", gl: "ledger", vat: "VAT", fx: "FX" })[w] ?? w);
+  const text = words.join(" ");
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}

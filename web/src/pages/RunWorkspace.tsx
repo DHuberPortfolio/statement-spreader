@@ -109,7 +109,7 @@ function RunHeader({
       <div className="run-title-row">
         <div className="run-title">
           <p className="eyebrow">
-            <Link to="/">Documents</Link> / run #{run.id}
+            <Link to="/statements">Statements</Link> / run #{run.id}
             {run.parent_run && (
               <>
                 {" "}
@@ -484,7 +484,7 @@ function FailedRun({ payload }: { payload: RunPayload }) {
   return (
     <div className="state state-error" role="alert">
       <p className="eyebrow">
-        <Link to="/">Documents</Link> / run #{payload.run.id}
+        <Link to="/statements">Statements</Link> / run #{payload.run.id}
       </p>
       <h1>{payload.document?.filename ?? "Document"}</h1>
       <h2>This run did not produce a spread</h2>

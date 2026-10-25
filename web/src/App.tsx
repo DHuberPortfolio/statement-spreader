@@ -5,6 +5,7 @@ import { DataQualityListPage, DataQualityRunPage } from "./pages/DataQualityPage
 import { DocumentsPage } from "./pages/DocumentsPage";
 import { EvaluationPage } from "./pages/EvaluationPage";
 import { InvoiceDetailPage, InvoiceListPage } from "./pages/InvoicesPage";
+import { OverviewPage } from "./pages/OverviewPage";
 import { ReconListPage, ReconRunPage } from "./pages/ReconPage";
 import { RoiPage } from "./pages/RoiPage";
 import { RunWorkspace } from "./pages/RunWorkspace";
@@ -13,9 +14,10 @@ import { Link, match, useLocation } from "./lib/router";
 
 const TITLES: [RegExp, string][] = [
   [/^\/runs\//, "Run"],
-  [/^\/roi/, "ROI"],
+  [/^\/statements/, "Statements"],
+  [/^\/roi/, "Time saved"],
   [/^\/sessions\//, "Baseline session"],
-  [/^\/evaluation/, "Evaluation"],
+  [/^\/evaluation/, "Accuracy"],
   [/^\/recon/, "Reconciliation"],
   [/^\/invoices/, "Invoices"],
   [/^\/data-quality/, "Data quality"],
@@ -26,7 +28,7 @@ export function App() {
   const { path } = useLocation();
 
   useEffect(() => {
-    const t = TITLES.find(([re]) => re.test(path))?.[1] ?? "Statements";
+    const t = TITLES.find(([re]) => re.test(path))?.[1] ?? "Overview";
     document.title = `${t} · Finance Operations`;
   }, [path]);
 
@@ -48,10 +50,16 @@ export function App() {
   const sheetScan = match(/^\/spreadsheets\/scans\/(\d+)\/?$/, path);
   if (sheetScan) return <SheetScanPage key={sheetScan[0]} scanId={Number(sheetScan[0])} />;
   if (path === "/spreadsheets" || path === "/spreadsheets/") return <SpreadsheetsPage />;
-  if (path === "/" || path === "/index.html")
+  if (path === "/statements" || path === "/statements/")
     return (
       <Layout>
         <DocumentsPage />
+      </Layout>
+    );
+  if (path === "/" || path === "/index.html")
+    return (
+      <Layout>
+        <OverviewPage />
       </Layout>
     );
   return (
@@ -59,7 +67,7 @@ export function App() {
       <div className="state state-empty">
         <h1>Page not found</h1>
         <p>
-          <Link to="/">Back to the documents</Link>
+          <Link to="/">Back to the overview</Link>
         </p>
       </div>
     </Layout>
