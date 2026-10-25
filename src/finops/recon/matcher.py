@@ -47,6 +47,7 @@ from rapidfuzz import fuzz
 from finops.core.exceptions import ExceptionItem, Severity, exception_id
 from finops.core.fingerprint import content_hash
 from finops.core.money import Tolerance
+from finops.core.policy import AutoDecision, Calibration
 
 from .config import ReconProfile
 from .model import MatchGroup, MatchStatus, Txn
@@ -154,9 +155,11 @@ def money(x: Decimal) -> str:
 
 class Matcher:
     def __init__(self, profile: ReconProfile, records: dict[str, Txn], locked: set[str],
-                 forbidden: set[frozenset[str]]):
+                 forbidden: set[frozenset[str]], calibration: Calibration | None = None):
         self.p = profile
         self.m = profile.matching
+        self.calibration = calibration  # None: rules as configured, uncalibrated (only to fit the calibration)
+        self.auto_basis: dict[str, AutoDecision] = {}
         self.recs = records
         self.used: set[str] = set(locked)
         self.forbidden = forbidden
@@ -181,6 +184,8 @@ class Matcher:
     def _add(self, left: list[Txn], right: list[Txn], rule: str, status: MatchStatus, why: list[str]) -> MatchGroup:
         diff = sum((t.amount for t in left), Decimal(0)) - sum((t.amount for t in right), Decimal(0))
         gap = max(_gap(a, b) for a in left for b in right)
+        if rule in self.auto_basis:  # say why the rule may (or may not) settle matches on its own
+            why = [*why, self.auto_basis[rule].reason]
         g = MatchGroup(id=group_id([t.id for t in left], [t.id for t in right]), left=sorted(t.id for t in left),
                        right=sorted(t.id for t in right), rule=rule, status=status, difference=diff,
                        date_gap_days=gap, explanation=why)
@@ -192,7 +197,12 @@ class Matcher:
         return g
 
     def _auto(self, rule: str) -> MatchStatus:
-        return MatchStatus.AUTO if rule in self.m.auto_accept else MatchStatus.PROPOSED
+        if rule not in self.m.auto_accept:
+            return MatchStatus.PROPOSED
+        if self.calibration is None:
+            return MatchStatus.AUTO
+        d = self.auto_basis.setdefault(rule, self.calibration.decide(rule, self.m.auto_accept_min_precision))
+        return MatchStatus.AUTO if d.auto else MatchStatus.PROPOSED
 
     def _flag(self, code: str, sev: Severity, title: str, detail: str, recs: list[Txn], evidence: dict | None = None,
               action: str = "") -> None:

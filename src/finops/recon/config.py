@@ -74,6 +74,9 @@ class MatchingRules(BaseModel):
     require_corroboration: bool = True
     strategy: Literal["component", "greedy"] = "component"
     auto_accept: list[str] = sorted(AUTO_RULES)
+    # A rule on auto_accept settles a match without a person only if its measured precision clears this bar (the
+    # 95% lower bound, config/calibration/recon.json, finops.core.policy). A rule never measured is proposed.
+    auto_accept_min_precision: float = Field(default=0.98, ge=0.5, le=1.0)
     one_to_many: GroupRule = GroupRule()
     many_to_one: GroupRule = GroupRule()
     references: ReferenceRules = ReferenceRules()

@@ -23,6 +23,7 @@ from decimal import Decimal
 from typing import Any
 
 from finops import __version__
+from finops.core import policy
 from finops.core.exceptions import ExceptionStatus, Resolution, Severity
 
 from .classify import classify
@@ -44,7 +45,9 @@ class Decisions:
 
 
 def reconcile(left_name: str, left_data: bytes, right_name: str, right_data: bytes, profile: ReconProfile,
-              config_version: str, decisions: Decisions | None = None) -> ReconResult:
+              config_version: str, decisions: Decisions | None = None, calibrated: bool = True) -> ReconResult:
+    """calibrated=False runs the rules exactly as configured, without the measured-precision bar: only
+    scripts/calibrate.py does that, to measure what each rule would do."""
     t0 = time.perf_counter()
     decisions = decisions or Decisions()
     left, bad_l = load_source(left_name, left_data, profile.left, profile)
@@ -80,7 +83,7 @@ def reconcile(left_name: str, left_data: bytes, right_name: str, right_data: byt
     forbidden = {frozenset(r["members"]) for r in decisions.rejected
                  if all(m in records and records[m].content_hash == r["hashes"].get(m) for m in r["members"])}
 
-    matcher = Matcher(profile, records, locked, forbidden)
+    matcher = Matcher(profile, records, locked, forbidden, policy.load("recon") if calibrated else None)
     out = matcher.run()
     groups += out.groups
     exceptions += out.exceptions

@@ -28,6 +28,7 @@ from openpyxl.utils.cell import column_index_from_string, coordinate_from_string
 from pydantic import BaseModel, Field
 
 from finops.core.fingerprint import content_hash
+from finops.core.policy import Finding as PolicyFinding
 
 from .config import KINDS, ScanSpec, Severity
 from .formula import Ref, parse
@@ -798,3 +799,18 @@ def scan_workbook(wb: Workbook, spec: ScanSpec) -> tuple[list[Finding], list[str
     if wb.external_links:
         notes.append(f"Links to {len(wb.external_links)} other workbook(s): {', '.join(sorted(set(wb.external_links.values())))[:300]}.")
     return findings, notes
+
+
+SHEETS_ACTION = {"error": "Fix the formula in the workbook: it is broken whatever the author meant.",
+                 "risk": "Compare the cell with what its neighbours imply, then fix it or dismiss the finding with a reason.",
+                 "anomaly": "Nothing required: confirm it is deliberate."}
+
+
+def as_findings(findings: list[Finding]) -> list[PolicyFinding]:
+    """Scanner findings in the shared shape (finops.core.policy): errors and risks block, anomalies inform."""
+    return [PolicyFinding(engine="sheets", code=f.kind, blocking=f.severity != "anomaly", reason=f"{f.title}. {f.detail}",
+                          evidence={"sheet": f.sheet, "cell": f.cell, "cells": f.cells, "group": f.group, "formula": f.formula,
+                                    "expected": f.expected, "precedents": f.precedents, "feeds": f.feeds, **f.evidence},
+                          required_action=SHEETS_ACTION.get(str(f.severity), SHEETS_ACTION["risk"]),
+                          produced_by=f"sheets check {f.kind} ({ENGINE_VERSION})", subjects=[f.id], severity=str(f.severity))
+            for f in findings]

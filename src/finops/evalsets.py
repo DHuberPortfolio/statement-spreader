@@ -32,6 +32,9 @@ RECON_SCALE = 300
 DQ_SEEDS = {"dev": 21, "holdout": 22}
 SHEETS_SEEDS = [31, 32]
 INVOICE_SETS = ["dev", "holdout", "unseen", "unseen-e", "messy-31", "messy-32", "messy-33"]
+# Calibration data for reconciliation rules (scripts/calibrate.py): seeds no evaluation uses, three kinds each.
+RECON_CALIBRATION_SEEDS = range(2001, 2011)
+RECON_CALIBRATION_KINDS = {"clean": (0.0, False), "stress": (0.4, False), "messy": (0.2, True)}
 KEY_NAMES = {"truth.json", "key.json"}
 
 
@@ -153,6 +156,20 @@ def recon(split: str) -> DataSet:
                       {"bank.csv": bank, "ledger.csv": ledger}, {"truth.json": truth})
 
 
+def recon_calibration() -> DataSet:
+    from finops.recon.synthetic import generate
+
+    files: dict[str, bytes] = {}
+    keys: dict[str, Any] = {}
+    for seed in RECON_CALIBRATION_SEEDS:
+        for kind, (share, messy) in RECON_CALIBRATION_KINDS.items():
+            bank, ledger, truth = generate(seed, RECON_SCALE, round_share=share, messy=messy)
+            files[f"{seed}-{kind}/bank.csv"], files[f"{seed}-{kind}/ledger.csv"] = bank, ledger
+            keys[f"{seed}-{kind}/truth.json"] = truth
+    return _generated("recon-calibration", f"finops.recon.synthetic.generate(seeds {RECON_CALIBRATION_SEEDS.start}-"
+                      f"{RECON_CALIBRATION_SEEDS.stop - 1}, scale={RECON_SCALE}, kinds {RECON_CALIBRATION_KINDS})", files, keys)
+
+
 def invoice(folder: str) -> DataSet:
     return _folder(f"invoice-{folder}", EVAL / "invoice" / folder)
 
@@ -185,6 +202,7 @@ def registry() -> dict[str, Callable[[], DataSet]]:
                                                "statements-synthetic": statements_synthetic}
     for split in RECON_SEEDS:
         sets[f"recon-{split}"] = lambda s=split: recon(s)  # type: ignore[misc]
+    sets["recon-calibration"] = recon_calibration
     for f in INVOICE_SETS:
         if (EVAL / "invoice" / f).exists():
             sets[f"invoice-{f}"] = lambda f=f: invoice(f)  # type: ignore[misc]

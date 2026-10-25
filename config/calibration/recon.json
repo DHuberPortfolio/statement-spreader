@@ -1,0 +1,87 @@
+{
+ "derived_methods": [],
+ "engine": "recon",
+ "fitted": {
+  "commit": "63b9bb0c64d43fcc3a6396510d3617563d68cbf0",
+  "config": {},
+  "created": "2026-10-25T06:12:56+00:00",
+  "datasets": [
+   {
+    "files": 90,
+    "key_version": "67d7d9e88126d9f2",
+    "matches_manifest": true,
+    "name": "recon-calibration",
+    "version": "3d4e807789a28c94"
+   }
+  ],
+  "dirty": true,
+  "extra_outcome_files": [],
+  "fitted_by": "scripts/calibrate.py",
+  "outcomes": 6604,
+  "profile": "bank-vs-gl e71b551878cb0de4"
+ },
+ "methods": {
+  "assignment": {
+   "high": 0.999666865691691,
+   "low": 0.9893905625791669,
+   "rate": 0.9981132075471698,
+   "right": 529,
+   "sources": {
+    "recon-calibration messy": 350,
+    "recon-calibration stress": 180
+   },
+   "total": 530
+  },
+  "many_to_one": {
+   "high": 0.9999999999999999,
+   "low": 0.9851009301834924,
+   "rate": 1.0,
+   "right": 254,
+   "sources": {
+    "recon-calibration clean": 90,
+    "recon-calibration messy": 74,
+    "recon-calibration stress": 90
+   },
+   "total": 254
+  },
+  "one_to_many": {
+   "high": 1.0,
+   "low": 0.9911246978109314,
+   "rate": 1.0,
+   "right": 429,
+   "sources": {
+    "recon-calibration clean": 150,
+    "recon-calibration messy": 129,
+    "recon-calibration stress": 150
+   },
+   "total": 429
+  },
+  "reference": {
+   "high": 0.9999999999999999,
+   "low": 0.9988766731184274,
+   "rate": 1.0,
+   "right": 3416,
+   "sources": {
+    "recon-calibration clean": 1200,
+    "recon-calibration messy": 1016,
+    "recon-calibration stress": 1200
+   },
+   "total": 3416
+  },
+  "unique_amount_date": {
+   "high": 0.9999999999999999,
+   "low": 0.9980586621991371,
+   "rate": 1.0,
+   "right": 1975,
+   "sources": {
+    "recon-calibration clean": 690,
+    "recon-calibration messy": 796,
+    "recon-calibration stress": 489
+   },
+   "total": 1975
+  }
+ },
+ "never_auto": [],
+ "person_methods": [],
+ "unit": "a match a rule produced (right: a true pairing that needs no person)"
+}

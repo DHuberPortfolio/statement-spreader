@@ -1,0 +1,459 @@
+{
+ "name": "recon-calibration",
+ "source": "finops.recon.synthetic.generate(seeds 2001-2010, scale=300, kinds {'clean': (0.0, False), 'stress': (0.4, False), 'messy': (0.2, True)})",
+ "version": "3d4e807789a28c94",
+ "key_version": "67d7d9e88126d9f2",
+ "files": 90,
+ "entries": [
+  {
+   "path": "<generated>/recon-calibration/2001-clean/bank.csv",
+   "sha256": "4e69bf32ddf7c13ff23c3fbe8d981274b72d935969ded45dd85e0b6ea3e6c72a",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-clean/ledger.csv",
+   "sha256": "5989193d307dc80b2606f2d1f7ae45a4bfe59ae14e43fdd258aa249c3440f960",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-messy/bank.csv",
+   "sha256": "75a67f9ef46c9313bf4ff043490324d824d2e1bc9183862eaf4c9806e3e9d14d",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-messy/ledger.csv",
+   "sha256": "7d820695bcb787dc73392ef13647a2bff9ff05e30d875a7359a8e388d34edce3",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-stress/bank.csv",
+   "sha256": "baa81ad9b44c667d55de0b892f0e0a5fdf5c938d2c6e0a89b16098714ed1b46f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-stress/ledger.csv",
+   "sha256": "97bc064875e13b50596387643673fcd972ac8b1ace0ee86a61b9868485d26d45",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-clean/bank.csv",
+   "sha256": "a9ca250cf359337ebea28be30a8654f568b38fb0e08e7cd2eb5d48fb3b0e2376",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-clean/ledger.csv",
+   "sha256": "363b99a7d6b7f88f5a0782baf13d9f447dd7be1b0734c4464cbab8152712cb3d",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-messy/bank.csv",
+   "sha256": "c757f3b454b4e6da05eac55fe01fdbcca6ae1470bb8686271952c17106640469",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-messy/ledger.csv",
+   "sha256": "11e4d17256eb097905ea190bd6cc75b0949220a6bf73e6356b49799492052099",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-stress/bank.csv",
+   "sha256": "622d3c4118bb91e0d41f9191f39e41efd43a8bcdd35bc67908d76df61d5f88d0",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-stress/ledger.csv",
+   "sha256": "3a54b83c132f6dce6607ed03deb363a39bdf3f1cc6f8de4a9cb4ec57de0ff622",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-clean/bank.csv",
+   "sha256": "9ffcafc5ef56ce9040b22f53ab27673edd18f33319bc88c7510cd31e4c0cbcfa",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-clean/ledger.csv",
+   "sha256": "d0089409c289b7d1fd8e6708e2be3a8501779f03348b7a2785658ec8e24ed6ff",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-messy/bank.csv",
+   "sha256": "4dbb87591e56286e313452c8c8ee626964cfec34224ce5e2b21379ecfa149933",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-messy/ledger.csv",
+   "sha256": "696d422d02b8d2c3aa1a8ddf9a7b9856e58e273ab16ad358e9fdea9d8b8c249c",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-stress/bank.csv",
+   "sha256": "c46d56de89d96a4557edca26cde1caa79491497db525c91a0a0ae0ac6243dd56",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-stress/ledger.csv",
+   "sha256": "4336dd720f1dacf251ccea641fea093c578e672107b494734b7f4458f995de98",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-clean/bank.csv",
+   "sha256": "6328088a126e8e6b6c4de74d4798d16da94b1138c7ba1616f038a5b23dee5786",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-clean/ledger.csv",
+   "sha256": "675adad4306acfdc2aea32fe244da665cb9b203a53120b773b995bf7503a0aaf",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-messy/bank.csv",
+   "sha256": "5cc3cb6ae7b7d49ac7fdac340dacf5627085e75ee0ccc4343a33ba683e27df94",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-messy/ledger.csv",
+   "sha256": "19476b2a1a7b1c8b71e8ed5986c4488419e87115a5f1bcd040e4128797d346cf",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-stress/bank.csv",
+   "sha256": "c4e720404f54b0f08add8601df7b5c639b56df6cd47f49e81dd2972159bddc63",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-stress/ledger.csv",
+   "sha256": "12947168d6159bb652bf99e47691711ec1b72bb4ffa2be48e988905ba0342847",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-clean/bank.csv",
+   "sha256": "fa45c3c8016d552af925d3d4528c8746990447e347455b1550b8283d067ab1eb",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-clean/ledger.csv",
+   "sha256": "0b9ffed8816b7839abde1b881c2111b6f6e57ac937ea05a910d22719ac8d0df0",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-messy/bank.csv",
+   "sha256": "55ac2a33a37735b9c4a58b12ef858469d708e9ece4e27d61c37cccd3e6818917",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-messy/ledger.csv",
+   "sha256": "b2894580ab9cb02017a67a74977b9620865c10919a17466e06b1e87d405fc0c4",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-stress/bank.csv",
+   "sha256": "0cd63126e816e7015b5ac65d1a418f617df3ec12a8d2400b0635200ede22dec8",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-stress/ledger.csv",
+   "sha256": "cd629cc3ee1dde810d8485543dc21f6787f558b68d7a047b7c322939df82642f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-clean/bank.csv",
+   "sha256": "4514348f1f867cdfd09fd2a255f2e25a3ce3343d849014215ddc34b9713e4d15",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-clean/ledger.csv",
+   "sha256": "5f6f85fe951a7e31175ce832707566d966b32b2655b799e7e02c4356e9a53d98",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-messy/bank.csv",
+   "sha256": "6f4aea1ed55c0a247c74b5480f3abe9115fe09196e595e860bfca9b60be47247",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-messy/ledger.csv",
+   "sha256": "ee9e942488f1ff656e4995ad164533be9730825aa01fae0d846152026c754916",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-stress/bank.csv",
+   "sha256": "e64bd5879ac0cc755bd98f34718f7fea1363c4e90f7f64d3de6a2bc3abbf4c3a",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-stress/ledger.csv",
+   "sha256": "e320c2ae10bbc94dea26235efa1c4535356991d4e3be91c0d037c9ea23a76dea",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-clean/bank.csv",
+   "sha256": "458944952a57b9b9516bb7eac7773932d5e3303566e86720bc50208cd5460805",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-clean/ledger.csv",
+   "sha256": "3a3d08ceae8530d2c77dd4d027bf68f372fc4eee12a5ab448a5c4fe103c9e3f0",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-messy/bank.csv",
+   "sha256": "91f9d0c0631c7b3eeacee7948e15307c2b42c468031bb879160aeaa3edc7539b",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-messy/ledger.csv",
+   "sha256": "efc0cc62a871524cb1d1e9f8b558d7f85e117feace421217187d9b37c044ade5",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-stress/bank.csv",
+   "sha256": "909cd2f77950d303252f8ee608218c9fd737c35914416891cfa59b174807b773",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-stress/ledger.csv",
+   "sha256": "9a198877a3ab5d184b8124974851ed6e28ce641ec5b178cc2cdd0fd40ea1644f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-clean/bank.csv",
+   "sha256": "75eb130d601efb329de501370b27f1701c8738e03c524b738459adb1e062c0ab",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-clean/ledger.csv",
+   "sha256": "1d50ccf523c0bb13e8cdf5d1add6bb4c3295ecc62a5f77a82b5e2cc3a4a79a9d",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-messy/bank.csv",
+   "sha256": "f27236c3d86a89317eeddd8ca5a7d1783089cd867e1972c4d1c2e47ff8e1a2f2",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-messy/ledger.csv",
+   "sha256": "934c5dded91740784d7652a63eb26df9eebe445a82b367c18e6024709b4d0702",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-stress/bank.csv",
+   "sha256": "46a32ce7d8f72158273d41719cd9ee47e0dd26552815aa63455e9853e6bfd9fd",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-stress/ledger.csv",
+   "sha256": "7d6d6b3c93782535b914f0ee12bb199595f2e90c7139eb406ac59e668bc9a8ca",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-clean/bank.csv",
+   "sha256": "b0e07ac21e65e1633e49dfb1303649ec25675ec21d7177d818802185e5ade0b8",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-clean/ledger.csv",
+   "sha256": "16034674f36e293e8924a8a77077b5233dec4b8cd35de1418a9e391ebe9d4b0f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-messy/bank.csv",
+   "sha256": "3353961f002f7b89f4d1e15ed48db37794dc3da95c8e9e528b8df1f2d57d1237",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-messy/ledger.csv",
+   "sha256": "de364e91a59612ae5c11b76224923c8cbcc7e7e9d09df7cae6fc489a59b8744c",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-stress/bank.csv",
+   "sha256": "c76830380e8bfa7c6d16a4a3b1066ebbc8f4b8d43c3eb5402fd7514f61f82618",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-stress/ledger.csv",
+   "sha256": "9dfd2340efbbd92ac7c50666ef0865474ac0ed57332b582cd9de9ae0302a8b2c",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-clean/bank.csv",
+   "sha256": "7137f58521d69ce72eff25b4c73050d0b9926f85d3474f7ec255c68227122311",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-clean/ledger.csv",
+   "sha256": "d2a4353a87fd7de39acf7bb540d5af4db1c275e9213d478772009ca999bb3dfb",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-messy/bank.csv",
+   "sha256": "8d41d56ba36ee9827a5f9c7d0ee831b6c67b2d88ce25e996e29e2425de843cd2",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-messy/ledger.csv",
+   "sha256": "141683e11ceb5e46f44fb980b9cfc3ae895a00e63f93569e052ce6e884d58f80",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-stress/bank.csv",
+   "sha256": "60e1d3859706509ba3bfaa5670be9417d7a389c462fe7c9b926f08a545699da6",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-stress/ledger.csv",
+   "sha256": "f07d5831ef2c83247ce730a4efad67538dbfc65a5520e029ad8c16d28077cff3",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-clean/truth.json",
+   "sha256": "771fb70b37c2cc98ab1f1706549df3951d9ea80814d55632ca217e057526ca65",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-messy/truth.json",
+   "sha256": "28960cae1a5de9021e00f8306c11c39c841d380e862e77e762f2b9ff7833970a",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2001-stress/truth.json",
+   "sha256": "197382702d50b9d319eff9498be2ac9d01ce2657443b49b19cf198730cbf1f73",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-clean/truth.json",
+   "sha256": "b598eb6632f061181d0db5e060c4b568c8a99eee388c0b4277eb9c881cb60384",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-messy/truth.json",
+   "sha256": "89bc252bf485d96553a42389b322bdc264ad834fadc52e9200f281ac806cd5d9",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2002-stress/truth.json",
+   "sha256": "d15e8efe03ca415f0911f476e670c19cd2310df34b6fcf6f16bc047d81a938c7",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-clean/truth.json",
+   "sha256": "05f6cfcfbf3acda31124bd2177bad353e6ffc32b2177b5b5b8b1175155f41882",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-messy/truth.json",
+   "sha256": "7ad9d6f8edc0bc0c62b633d3e161965e433cde03d08fa6444dcf5d17d0c51f23",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2003-stress/truth.json",
+   "sha256": "9fd95d2b000dac760cc033c77bf1d842acc45c7a6aaca300c7c75c50daa84476",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-clean/truth.json",
+   "sha256": "cb98692897611f25d25d078be51f28f0536f8c0b2dd9cb0c0c03a7a288c25da2",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-messy/truth.json",
+   "sha256": "adc9d5be74e3f12eb6f9c1a3b661bcaf3df45c4634164ab77276abef09eda152",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2004-stress/truth.json",
+   "sha256": "82577aa72f960d250398619200dbfb74b478d668bd0266477e0056a355e2aa8b",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-clean/truth.json",
+   "sha256": "a7c929e3f32a9c1601bcc7807c413e74d6786face8b69bc66062181d61dce397",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-messy/truth.json",
+   "sha256": "1783b77687a08c711a5c668d36767bcd54ebf5122e082b85149f95aadaff4ba2",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2005-stress/truth.json",
+   "sha256": "91ea839771ffff9774e00e882dc3c6d4034723b9e1ebdf19ec526e9ccfb30b28",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-clean/truth.json",
+   "sha256": "9e3d62e6123102c03f4f8c90de14800a0b4588cc9408a846811e689b151875a5",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-messy/truth.json",
+   "sha256": "458eaf38e85782bc0b56d6fc696f49b174afd66d8088f9dad7a165d46938bafe",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2006-stress/truth.json",
+   "sha256": "6cd2adaa17ec949c27e3378e457b761df32400ba44beed8f341d96ce421d7c64",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-clean/truth.json",
+   "sha256": "d002a8b37d67d9419657b00b806609f616f0d4858d93e3c41d0c090d170ece50",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-messy/truth.json",
+   "sha256": "07bac133f468ede45ebd363c6c7b98b673741b60ddf5e856cc1cda271bd5f9d0",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2007-stress/truth.json",
+   "sha256": "6f34deaa5ac2e13ecb73bbf9028495ec7914c35ce8a673322d55426bf866b80b",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-clean/truth.json",
+   "sha256": "71d2e65c0de31cb88454ced5a561bfde005280dc1f38ef2dab2db7ab4471ba91",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-messy/truth.json",
+   "sha256": "6c6e7f505d6ae652ec3cb1c33a30e0a19631300c83256d68ef618ac01d579851",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2008-stress/truth.json",
+   "sha256": "64d2f111d715d11ebc00a99ca83284a37fc83be16c571cd80c0b11b5e1b05140",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-clean/truth.json",
+   "sha256": "000a2542cb801a4ce2b2053147bfda1fb7399643604d9ce9ae48e2e6a05ae2a5",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-messy/truth.json",
+   "sha256": "5d6bd1e3448189a37302c2070aff33fd6926aa8ecdf5c325e82f9081a1ee57b5",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2009-stress/truth.json",
+   "sha256": "2143a11e492086e471ecaa0664e1bdccd4b20617caf85c92dca3fb5eabf2a11f",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-clean/truth.json",
+   "sha256": "427c3bf22246d7e6ed394b62819c97d4622acfec77ac4829cc8194eb85ab8fc3",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-messy/truth.json",
+   "sha256": "0d9934a22d13a337d9bd2546fc02b6d1f904ea4328b19d7cd2065d2127ce0d84",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/recon-calibration/2010-stress/truth.json",
+   "sha256": "8d95cf408bcbbcf5c0fc8af4836c6659087772fc817ebb5a5e23e68586a3b888",
+   "role": "key"
+  }
+ ]
+}

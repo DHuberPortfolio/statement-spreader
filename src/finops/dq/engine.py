@@ -29,6 +29,7 @@ from pydantic import BaseModel, PrivateAttr
 from rapidfuzz import fuzz
 
 from finops.core.fingerprint import content_hash
+from finops.core.policy import Finding
 from finops.core.tabular import TableError, read_table
 
 from .config import DatasetSpec, FieldSpec, Rule, SourceSpec
@@ -673,3 +674,21 @@ def _decide(rec: Record, decisions: Decisions) -> None:
         fp, actor, _ = decisions.releases[rec.id]
         if fp == rec.review_fingerprint():
             rec.decision, rec.decided_by = "accepted", actor
+
+
+DQ_ACTION = {"reject": "Correct the record in the source system (or here, with a reason) and run the gate again.",
+             "review": "A named person releases it with a reason, or corrects it.",
+             "info": "Nothing to do: recorded for the audit trail."}
+
+
+def as_findings(result: GateResult) -> list[Finding]:
+    """Every issue on every record in the shared shape (finops.core.policy). Values are the masked ones a report shows."""
+    out = []
+    for r in result.records:
+        for i in r.issues:
+            out.append(Finding(engine="dq", code=i.code, blocking=i.severity != "info", reason=i.message,
+                               evidence={"source": r.source_label, "file": r.file, "row": r.row, "field": i.field,
+                                         "related": i.related},
+                               required_action=DQ_ACTION[i.severity], produced_by=f"dq check {i.code} ({result.dataset})",
+                               subjects=[r.id, *i.related], severity=i.severity))
+    return out
