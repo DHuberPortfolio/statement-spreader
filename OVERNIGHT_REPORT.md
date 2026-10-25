@@ -255,6 +255,26 @@ they were). No value went from caught to silent on either split.
 - **One comparison bug fixed on the way:** opening and closing cash disagreed on "period" in every filing, because
   they are tagged as balances at a date (found on dev, Walmart).
 
+## Task 6: narrow what a failed check flags (done; small gain)
+
+- **What the data says (dev).** Values flagged *only* by failed checks: 716 right, 53 wrong. By check:
+  `bs_assets_parts` 268 right / 10 wrong, `bs_liabilities_parts` 119 / 6, `bs_current_liabilities` 88 / 12,
+  `is_pretax` 81 / 12.
+- **Rule tried and rejected.** "An input confirmed by a passing check that shares no other input is not flagged"
+  would unflag 219 right values and 3 wrong ones (Domino's closing cash and Oracle's net income to the company, each
+  confirmed only by a check inside its own statement). Silent errors would rise, so no.
+- **Rule kept** (IMPROVEMENT_LOG #22, `review._confirmed_elsewhere`): only confirmation against a *different
+  statement* counts, and only if the confirming check's other inputs are not themselves in doubt. Dev: right values
+  sent to review 1,180 -> 1,151, silent errors 59 (unchanged), caught 163 of 222 (unchanged). Holdout, once: 896 ->
+  889, silent 49, caught 372 of 421 (both unchanged). Reports `stmt-dev-confirmed`, `stmt-holdout-confirmed`.
+- **The honest result.** The gain is small (about 1 value per filing). The big source of over-flagging, the
+  balance-sheet sum checks, is untouched: those lines have no check against another statement, and every rule I could
+  justify for them would unflag a value that could be the cause. The work order allows "no such rule exists", and for
+  the balance sheet that is my finding.
+- **The 59 remaining dev silent errors**: 47 wrong values, 7 signs, 5 scales; mostly other non-operating income (9),
+  common stock and APIC (8), commercial paper (5); mostly AMD and Walmart (7 each), Amazon and Oracle (6 each). The
+  company-memory mode (task 4) brings them to 20.
+
 ## Assumptions made without anyone to ask
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the

@@ -146,6 +146,9 @@ What the Python tests cover:
   next year's filing gets exactly the one item, a correction resolves it, reopening withdraws the approval, other
   companies are never compared; the upload route takes a company id.
 - `test_undated_columns.py` (1 test): columns without headings beside a dated balance sheet no longer crash a filing.
+- `test_check_flags.py` (4 tests): a failed check does not flag an input confirmed against another statement; it
+  still flags one confirmed only inside its own statement, one whose confirming check has a doubtful other side,
+  and one confirmed in another period.
 - `test_second_reader.py` (5 tests): the opt-in XBRL check (D37): agreeing tags add nothing; opening cash tagged
   at the start of the year agrees, two years back does not; a scale disagreement is a warning on that one value;
   off by default (and switching it on is a new run); documents without tags compare nothing.

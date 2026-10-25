@@ -147,9 +147,14 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
         cdef = next(cd for cd in profile.checks if cd.id == c.id)
         sev = Severity.BLOCKER if cdef.severity == "blocker" else Severity.WARNING
         hint = _likely_causes(c, statements, profile)
+        confirmed = _confirmed_elsewhere(c, checks, profile)
+        lines = [ln for ln in c.lines if ln not in confirmed] or c.lines
+        spared = "; ".join(f"{profile.lines[ln].label} ({t})" for ln, t in confirmed.items() if ln not in lines)
         items.append(ReviewItem(id=f"check:{c.id}:{c.period}", kind=ReviewKind.FAILED_CHECK, severity=sev,
-                                statement=cdef.statement, lines=c.lines, periods=[c.period],
-                                message=f"{c.title}: failed. {c.explanation}{(' ' + hint) if hint else ''}"))
+                                statement=cdef.statement, lines=lines, periods=[c.period],
+                                message=f"{c.title}: failed. {c.explanation}{(' ' + hint) if hint else ''}"
+                                        + (f" Not flagged, because a check against another statement confirms them: {spared}."
+                                           if spared else "")))
 
     # Covenant and policy limits on ratios.
     for r in ratios or []:
@@ -199,6 +204,28 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                             message=(f"{ldef.label} changes {ratio:.1f}x between {a.period} ({a.value:,}) and "
                                      f"{b.period} ({b.value:,}). Real, or a scale or column mix-up?")))
     return items
+
+
+def _confirmed_elsewhere(c: CheckResult, checks: list[CheckResult], profile: Profile) -> dict[str, str]:
+    """Inputs of a failed check that a passing check confirms against numbers printed in another statement.
+
+    Such a value could only be the failed check's cause if the other statement's printed number were wrong in exactly
+    the same way, so it is not flagged by this check (IMPROVEMENT_LOG #22). Deliberately narrow: the confirming check
+    must tie the value to a different statement (a row placed on the wrong line moves amounts within one statement,
+    which a check inside that statement cannot see: the reverted #12), and none of its other inputs may be in a failed
+    check of the same period. Same-statement confirmation was measured and rejected: it unflagged 3 wrong values."""
+    suspects = {ln for x in checks if x.status is CheckStatus.FAIL and x.period == c.period for ln in x.lines}
+    own = profile.line_statement
+    out: dict[str, str] = {}
+    for ln in c.lines:
+        for x in checks:
+            if x.status is not CheckStatus.PASS or x.period != c.period or ln not in x.lines:
+                continue
+            others = set(x.lines) - {ln}
+            if others and not others & suspects and any(o in own and ln in own and own[o] != own[ln] for o in others):
+                out[ln] = x.title
+                break
+    return out
 
 
 def _likely_causes(c: CheckResult, statements: dict[str, StatementResult], profile: Profile) -> str:

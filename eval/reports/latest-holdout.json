@@ -1,13 +1,13 @@
 {
- "name": "stmt-holdout-policy",
+ "name": "stmt-holdout-confirmed",
  "documents": 30,
  "crashed": 0,
- "seconds": 140.5,
+ "seconds": 136.4,
  "profile": "us-commercial 2026.10.24-1+0ad0af213be8",
  "buckets": {
-  "correct_review": 896,
+  "correct_review": 889,
   "wrong_review": 372,
-  "correct_auto": 2052,
+  "correct_auto": 2059,
   "unjudged": 164,
   "missing_flagged": 459,
   "missing_silent": 150,
@@ -29,10 +29,10 @@
   },
   "silent_error_rate": {
    "n": 49,
-   "d": 2101,
-   "rate": 0.023322227510709188,
-   "low": 0.017686061642992863,
-   "high": 0.03069838685897517
+   "d": 2108,
+   "rate": 0.023244781783681213,
+   "low": 0.01762718663533041,
+   "high": 0.03059688471547544
   },
   "silent_omission_rate": {
    "n": 150,
@@ -42,11 +42,11 @@
    "high": 0.044086906174411626
   },
   "review_rate": {
-   "n": 1268,
+   "n": 1261,
    "d": 3369,
-   "rate": 0.3763728109231226,
-   "low": 0.3601625623922381,
-   "high": 0.39286467730973906
+   "rate": 0.3742950430394776,
+   "low": 0.35810519372502164,
+   "high": 0.3907712432828711
   },
   "catch_rate": {
    "n": 372,
@@ -56,11 +56,11 @@
    "high": 0.9108334240268459
   },
   "unnecessary_review_rate": {
-   "n": 896,
+   "n": 889,
    "d": 2948,
-   "rate": 0.3039348710990502,
-   "low": 0.28759507951814395,
-   "high": 0.32078499074036865
+   "rate": 0.30156037991858886,
+   "low": 0.28526040264885666,
+   "high": 0.31837686569237145
   },
   "coverage": {
    "n": 3369,
@@ -91,7 +91,7 @@
  "documents_detail": [
   {
    "doc": "sec:CROX",
-   "ms": 3046,
+   "ms": 3102,
    "error": null,
    "statements": [
     "income_statement",
@@ -113,7 +113,7 @@
   },
   {
    "doc": "sec:CSCO",
-   "ms": 5839,
+   "ms": 5918,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -137,7 +137,7 @@
   },
   {
    "doc": "sec:CVX",
-   "ms": 13637,
+   "ms": 13225,
    "error": null,
    "statements": [
     "income_statement",
@@ -161,7 +161,7 @@
   },
   {
    "doc": "sec:DE",
-   "ms": 5332,
+   "ms": 5050,
    "error": null,
    "statements": [
     "cash_flow",
@@ -183,7 +183,7 @@
   },
   {
    "doc": "sec:DECK",
-   "ms": 2169,
+   "ms": 2108,
    "error": null,
    "statements": [
     "income_statement",
@@ -207,7 +207,7 @@
   },
   {
    "doc": "sec:FDX",
-   "ms": 6316,
+   "ms": 5995,
    "error": null,
    "statements": [
     "cash_flow",
@@ -231,7 +231,7 @@
   },
   {
    "doc": "sec:GOOGL",
-   "ms": 4726,
+   "ms": 4389,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -255,7 +255,7 @@
   },
   {
    "doc": "sec:GPC",
-   "ms": 3363,
+   "ms": 3212,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -279,7 +279,7 @@
   },
   {
    "doc": "sec:HD",
-   "ms": 2872,
+   "ms": 2860,
    "error": null,
    "statements": [
     "income_statement",
@@ -304,7 +304,7 @@
   },
   {
    "doc": "sec:HON",
-   "ms": 8002,
+   "ms": 7810,
    "error": null,
    "statements": [
     "income_statement",
@@ -329,7 +329,7 @@
   },
   {
    "doc": "sec:IBM",
-   "ms": 322,
+   "ms": 310,
    "error": null,
    "statements": [],
    "buckets": {},
@@ -342,7 +342,7 @@
   },
   {
    "doc": "sec:INTC",
-   "ms": 6565,
+   "ms": 6620,
    "error": null,
    "statements": [
     "income_statement",
@@ -366,7 +366,7 @@
   },
   {
    "doc": "sec:JNJ",
-   "ms": 5127,
+   "ms": 4998,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -390,7 +390,7 @@
   },
   {
    "doc": "sec:LMT",
-   "ms": 3992,
+   "ms": 3914,
    "error": null,
    "statements": [
     "income_statement",
@@ -415,7 +415,7 @@
   },
   {
    "doc": "sec:LOW",
-   "ms": 4615,
+   "ms": 4505,
    "error": null,
    "statements": [
     "cash_flow",
@@ -437,7 +437,7 @@
   },
   {
    "doc": "sec:META",
-   "ms": 5641,
+   "ms": 5420,
    "error": null,
    "statements": [
     "income_statement",
@@ -460,7 +460,7 @@
   },
   {
    "doc": "sec:MRK",
-   "ms": 9130,
+   "ms": 8710,
    "error": null,
    "statements": [
     "income_statement",
@@ -484,7 +484,7 @@
   },
   {
    "doc": "sec:MSFT",
-   "ms": 4345,
+   "ms": 4135,
    "error": null,
    "statements": [
     "income_statement",
@@ -505,7 +505,7 @@
   },
   {
    "doc": "sec:NFLX",
-   "ms": 3364,
+   "ms": 3222,
    "error": null,
    "statements": [
     "income_statement",
@@ -513,8 +513,8 @@
     "balance_sheet"
    ],
    "buckets": {
-    "correct_review": 31,
-    "correct_auto": 101,
+    "correct_review": 28,
+    "correct_auto": 104,
     "unjudged": 6
    },
    "checks_failed": 9,
@@ -526,7 +526,7 @@
   },
   {
    "doc": "sec:NKE",
-   "ms": 4744,
+   "ms": 4645,
    "error": null,
    "statements": [
     "income_statement",
@@ -547,7 +547,7 @@
   },
   {
    "doc": "sec:NVDA",
-   "ms": 3445,
+   "ms": 3269,
    "error": null,
    "statements": [
     "income_statement",
@@ -570,7 +570,7 @@
   },
   {
    "doc": "sec:ODFL",
-   "ms": 1370,
+   "ms": 1344,
    "error": null,
    "statements": [
     "income_statement",
@@ -594,7 +594,7 @@
   },
   {
    "doc": "sec:QCOM",
-   "ms": 2474,
+   "ms": 2617,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -617,7 +617,7 @@
   },
   {
    "doc": "sec:ROKU",
-   "ms": 3900,
+   "ms": 3915,
    "error": null,
    "statements": [
     "income_statement",
@@ -625,8 +625,8 @@
     "balance_sheet"
    ],
    "buckets": {
-    "correct_auto": 81,
-    "correct_review": 45,
+    "correct_auto": 82,
+    "correct_review": 44,
     "missing_flagged": 5,
     "missing_silent": 6,
     "unjudged": 10
@@ -640,7 +640,7 @@
   },
   {
    "doc": "sec:SBUX",
-   "ms": 5370,
+   "ms": 5292,
    "error": null,
    "statements": [
     "income_statement",
@@ -664,7 +664,7 @@
   },
   {
    "doc": "sec:TGT",
-   "ms": 3859,
+   "ms": 3657,
    "error": null,
    "statements": [
     "income_statement",
@@ -687,7 +687,7 @@
   },
   {
    "doc": "sec:TSLA",
-   "ms": 3701,
+   "ms": 3660,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -712,7 +712,7 @@
   },
   {
    "doc": "sec:TXN",
-   "ms": 2475,
+   "ms": 2381,
    "error": null,
    "statements": [
     "income_statement",
@@ -737,7 +737,7 @@
   },
   {
    "doc": "sec:UPS",
-   "ms": 7505,
+   "ms": 7068,
    "error": null,
    "statements": [
     "cash_flow",
@@ -761,7 +761,7 @@
   },
   {
    "doc": "sec:YETI",
-   "ms": 3171,
+   "ms": 3003,
    "error": null,
    "statements": [
     "income_statement",
@@ -769,8 +769,8 @@
     "cash_flow"
    ],
    "buckets": {
-    "correct_review": 12,
-    "correct_auto": 110,
+    "correct_review": 9,
+    "correct_auto": 113,
     "unjudged": 12,
     "wrong_auto": 2,
     "wrong_review": 1,
@@ -8016,8 +8016,8 @@
   }
  ],
  "provenance": {
-  "created": "2026-10-25T06:25:56+00:00",
-  "commit": "63b9bb0c64d43fcc3a6396510d3617563d68cbf0",
+  "created": "2026-10-25T08:14:34+00:00",
+  "commit": "a42ce9d554abcf5b075ca3a0b94ac73082b7c5c5",
   "dirty": true,
   "datasets": [
    {
