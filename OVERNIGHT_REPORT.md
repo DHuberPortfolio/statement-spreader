@@ -5,7 +5,40 @@ stops.
 
 ## Summary
 
-(Filled in at the end of the night.)
+All eight tasks were reached; seven are done and one (task 7, coverage) is done as a smoke test with partial
+coverage, which is what a few hand-checked filings can honestly support. The flaky test was fixed, and so was CI's
+actual failure: the ROI page picked its source reports by file time. Every evaluation set is now versioned, every
+report records what produced it, and a release gate runs in CI. One uncertainty policy now governs automatic
+acceptance in every engine. Auto-acceptance needs measured accuracy: it lowered silent errors on the never-tuned
+holdout from 55 to 49, at about three more review items per filing. Company memory cuts silent errors on the SEC
+holdout from 2.3% to 0.4% (47 of 2,053 to 10 of 2,334, measured once). The XBRL second reader is opt-in, measured
+without the circular keys, and its gain is small. Flag narrowing gave a small, safe gain; no safe rule was found
+for the balance-sheet sums. Bank, insurer and IFRS overlays were added with an honest smoke test. The README was
+rewritten with a use-case summary and an architecture diagram.
+
+Reverted or rejected along the way, each logged:
+- a reconciliation calibration that mixed proposals in;
+- a cover-page restatement signal that flagged every filing;
+- remembering the rows behind corrected lines (three values went silent);
+- same-statement confirmation for failed checks (three wrong values would have lost their flag).
+
+Two general engine flaws were found and fixed: undated columns crashed a filing, and a parent-company-only
+statement was spread as if consolidated. All work is on branch `overnight-2026-10-25`; nothing touched `main`.
+
+## Task 8: README (done)
+
+- New top: who uses it, which manual work it replaces, and what stays human, per engine. Then a Mermaid architecture
+  diagram: the engines, the shared controls, the data flow, and the human decision points (it parses with Mermaid
+  11.4; a deliberately broken copy is rejected, so the check works).
+- The statement results table is replaced with tonight's measurements, each row naming its report: dev and holdout
+  (`stmt-*-confirmed`, holdout on all 30 filings), printed PDFs (`eval/sec/pdf/eval-overnight.json`) and the synthetic
+  corpus (`syn-overnight`). Added the company-memory table, the second-reader figures labelled as not independent,
+  and a pointer to the overlay smoke test. The honest limits are kept.
+- The step-by-step description of the statement engine moved to ARCHITECTURE.md, which also gained a section on
+  tonight's shared controls. The other engines' tables, the harder-tests section, "Run it", "Adapting" and "Limits"
+  are kept verbatim.
+- One overclaim caught in my own draft: "nothing becomes eligible without a person" is false. Touchless invoices
+  reach "eligible for approval" alone, and calibrated rules settle matches alone. Corrected.
 
 ## Task 1: flaky tests (done)
 
@@ -317,16 +350,67 @@ they were). No value went from caught to silent on either split.
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the
    ROI one as the CI failure to explain.
+2. **The calibration bar is the lower bound of a 95% range, not the point estimate.** The work order says
+   "calibrated against measured outcomes"; I took the cautious reading. It costs about three review items per filing.
+3. **The reconciliation bar is 0.98 precision.** I chose it after seeing that every current rule clears it (DECISIONS
+   D35 says so). Its job is to stop a newly configured rule from auto-accepting before it is measured.
+4. **Reconciliation was calibrated on 30 new generated sets** (seeds 2001-2010), not on dev or holdout, so the
+   evaluation sets stay untouched.
+5. **The stand-in approval for company memory** takes the key's value wherever the key has one and keeps the
+   engine's value elsewhere, as an analyst correcting before approval would. A line whose value was corrected confirms
+   no mapping behind it.
+6. **Fixing a crash found on a holdout filing is not tuning.** I fixed it with a hand-built test and did not re-run
+   the holdout. The Home Depot silent misdating found by the second reader is a holdout finding and is *not* fixed:
+   it needs reproducing on a dev filing first.
+7. **"A few hand-checked documents" means 2 unseen filings per overlay**, plus the one the wording came from. That
+   is reported as a smoke test, not a rate.
+8. **Pushing the branch counts as authorised by the work order.** Nothing was merged, deployed or published; `main`
+   is unchanged.
+9. **Sharing names with SEC filings.** Company names and tickers of public SEC filers appear in reports and logs, as
+   they already did. No client names are involved (checked against the list in the site's `build_site.py`).
 
 ## Surprises and things I think are wrong
 
 1. The ROI page has been quoting intermediate regression reports on this machine (same figures as the final ones,
-   by luck, not by design).
+   by luck, not by design). Fixed (task 1).
+2. **The hand-set mapping confidences were mostly optimistic.** A catch-all set to 0.82 was right 0 of 3 times and
+   was settling values alone. A section rule set to 0.97 measures 94.2%.
+3. **Last year's approved spread is worth more than any rule tonight.** It took silent errors on the holdout from
+   47 to 10, and much of that gain comes from mappings that carry forward.
+4. **The XBRL tags were right in 29 of 30 sampled disagreements**, but the default engine had already flagged every
+   one of them. The tags rarely tell the reviewer something new.
+5. **Real engine weaknesses the night exposed, not fixed:**
+   - columns dated a year off in 52/53-week and "Fiscal 2023" years (Home Depot unflagged; Snap-on, Target and Disney
+     flagged);
+   - unit statements printed once for the whole document (Deere), or in other currencies;
+   - a fair-value table read as a statement (Merck);
+   - wording that differs between insurers.
+6. **The ROI page's statement figure** now comes from the newest `latest-*` report by the time it records. After
+   tonight that is the policy-era holdout run (49 of 2,108).
 
 ## Decisions left for a person
 
-(None yet.)
+1. **Whether to merge** `overnight-2026-10-25` into `main` (12 commits; CI green on each pushed commit, see the end).
+2. **The automation bars**: 0.80 / 0.90 on the lower bound for statements, 0.98 for reconciliation. A credit or audit
+   function may want its own, and they trade review time for safety.
+3. **Whether company memory should be on by default** for companies with an approved prior year. It is the biggest
+   safety gain of the night, but it changes what an approval means: approving now also teaches the next year's run.
+4. **Whether to build answer keys for banks and insurers** (the SEC tags exist) to turn the overlay smoke test into a
+   measurement.
 
-## Next steps (ranked)
+## Next steps (ranked by expected value per hour)
 
-(Filled in at the end of the night.)
+1. **Turn company memory on by default for returning companies**, and add a company-id field to the upload screen
+   (today it is API-only). Then measure it on reviewer-approved spreads, not key-approved ones.
+2. **Fix period dating for 52/53-week and "Fiscal YYYY" years** (Home Depot, Target, Snap-on, Disney), after
+   reproducing it on a dev filing or a synthetic case. Re-measure dev and the synthetic corpus, then the holdout once.
+3. **Unit statements**: document-level units ("All amounts are presented in millions of U.S. dollars") and other
+   currencies ("EUR million", "$ million"). Today they are assumed and flagged.
+4. **Answer keys for 20-30 banks and insurers** from their tags, so the overlays can be measured like the
+   commercial template, and their wording grown from many companies rather than one.
+5. **Feed reviewer decisions into calibration** (`scripts/calibrate.py --outcomes`) once there are a few hundred.
+6. **OCR for scanned statements**: the next ingestion step (out of scope tonight).
+7. Groundwork noticed for the next phase:
+   - The finding shape (`policy.Finding`) is what a job queue or a case-management connector would carry.
+   - The append-only approval tables are what sign-in and roles would attach identities to.
+   - `finops.gate` is the release check a deployment pipeline would run.

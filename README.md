@@ -1,37 +1,113 @@
 # Finance Operations Platform (statement-spreader)
 
-A local, $0 portfolio build of three finance engines on one shared core:
+A local, $0 platform that does the keying and ticking finance teams do by hand, checks it, and sends only what it is
+unsure of to a person. Built as the foundation for a real deployment at a company whose clients include a large share
+of the biggest US companies: trustworthy before fast, every number traceable to where it was printed, every change
+measured, and adaptable to a company's own data through configuration. **A tested prototype, not a production
+system**: no sign-in, one machine, measured on public filings and synthetic data only.
 
-1. **Financial statement spreading**: statements (HTML, PDF, Excel) in, a standard spread out, every number traced
-   to the printed cell, checked by accounting identities. (The original engine; details below.)
-2. **Reconciliation and exception management**: two sources (a bank statement and the cash ledger) matched by
-   layered, deterministic rules; everything uncertain proposed to a person; every leftover given a reason; every
-   decision recorded and replayed safely on reruns.
-3. **Invoice intake and three-way matching**: invoices (PDF with a text layer, or JSON) read with field-level
-   evidence, checked arithmetically, matched to purchase orders and goods receipts, screened for duplicates,
-   vendor impersonation and changed bank details. The best status an invoice can reach is *eligible for
-   approval*; nothing here approves or pays.
+## Who uses it, what it replaces, what stays human
 
-And in front of them, a **data-quality gate** (2026-10-24, night): records moving from one system into another
-(vendor master, purchase orders) are mapped from each source's own columns into one record, checked, and either
-accepted, held for a person, or rejected with a reason, before anything loads them. Its accepted export is the
-invoice engine's master data. See [Data-quality gate](#data-quality-gate-2026-10-24-night) below.
+| Who | Manual work it replaces | What a person still decides |
+|---|---|---|
+| Credit analysts, FP&A, audit | Keying a borrower's income statement, balance sheet and cash flow into a standard spread, then checking that it adds up | Every value the engine doubts (failed check, assumed unit or period, low-confidence mapping, a difference from last year's approved spread); corrections and remaps; **approval**, refused while a blocker is open |
+| Accounts payable | Keying invoices, matching them to purchase orders and goods receipts, spotting duplicates and changed bank details | Every exception; **bank-detail changes**, by a second person after a call-back; nothing here approves or pays |
+| Treasury and accounting | Ticking bank lines off against the ledger | Every proposed match and every exception; automatic matches only by rules whose precision was measured |
+| Master-data owners | Checking vendor and PO exports before another system loads them | **Releasing** held records (with a reason); a changed bank account needs a second person |
+| Model owners, reviewers | Hunting for broken formulas in workbooks and between versions | Confirming or dismissing each finding with a reason; definite errors cannot be dismissed |
 
-And beside them, a **spreadsheet risk scanner** (2026-10-24, night): a workbook (and optionally its earlier
-version) in, definite errors, likely risks and low-confidence anomalies out, each with the sheet, cell, formula,
-what its neighbours imply and what depends on it. It never changes or calculates the workbook. See
-[Spreadsheet risk scanner](#spreadsheet-risk-scanner-2026-10-24-night) below.
+No language model decides anything. A local model may suggest a mapping or draft wording configuration; a person
+confirms both, and its own stated confidence is never used (DECISIONS D8, D27, D35).
 
-They share money handling, configuration overlays, the exception queue, an append-only audit log, the evaluation
-format and the ROI conventions ([ARCHITECTURE.md](ARCHITECTURE.md)). Deterministic code does arithmetic, matching
-and policy; a local language model is used only where language is the problem (placing unusual statement rows,
-drafting wording for an unknown invoice layout), always behind a closed list and a person's review.
+## How it fits together
 
-It measures itself: every rate below comes from a command in [TESTING.md](TESTING.md), against answer keys the
-code under test never writes, with a 95% range. **This is a tested portfolio prototype, not a production system**:
-it has no sign-in, runs on one machine, and has only been measured on public filings and synthetic data.
+```mermaid
+flowchart LR
+  subgraph IN[Documents and exports]
+    D1[10-K, 20-F, PDF, Excel statements]
+    D2[Bank and ledger exports]
+    D3[Invoices, POs, receipts]
+    D4[Vendor and PO exports]
+    D5[Workbooks]
+  end
+  subgraph CORE[Shared controls: finops.core]
+    P[Uncertainty policy: calibrated confidence only]
+    X[Exception queue: named reviewer, written reasons]
+    A[Append-only audit log]
+    C[Configuration overlays, content-hashed]
+    G[Versioned evaluation sets and release gate]
+  end
+  D4 --> DQ[Data-quality gate] -->|accepted master data| INV
+  D1 --> ST[Statement spreading]
+  D2 --> RC[Reconciliation]
+  D3 --> INV[Invoice matching]
+  D5 --> SH[Spreadsheet risk scanner]
+  ST -. company memory: approved spreads .-> ST
+  ST & RC & INV & DQ & SH --> P --> X
+  X --> H1{{Reviewer: corrects, remaps, resolves}}
+  H1 --> H2{{Approver: approves a spread, releases a record, accepts a match}}
+  H2 --> OUT[Approved spread, reconciliation, eligible invoice, clean master data, scan report]
+  H2 --> A
+  OUT -.-> NEXT[Downstream systems: never written to by this platform]
+```
 
-## Reconciliation results (synthetic, 2026-10-24)
+Each hexagon is a human decision, taken by a named person with a reason. What the platform does alone is narrow: it
+accepts a value or settles a match only on a rule whose accuracy was measured (DECISIONS D35), and the furthest an
+invoice goes without a person is "eligible for approval" (D21). A spread is approved, a held record released and a
+changed bank account accepted only by a person, and approval is refused while a blocking item is open. Internals:
+[ARCHITECTURE.md](ARCHITECTURE.md); why each choice: [DECISIONS.md](DECISIONS.md); how every number below was
+produced: [TESTING.md](TESTING.md).
+
+## Financial statement spreading: results (2026-10-25)
+
+Statements in (an SEC 10-K, a PDF, an Excel workbook), a standard spread out: every line mapped to one template, each
+number traced to the printed cell it came from, checked by accounting identities, auto-accepted only when nothing
+doubts it. SEC set: 63 recent 10-Ks of non-financial companies, split by ticker hash into a **dev** half (changes are
+tuned on it) and a **holdout** half (measured, never tuned on). Answer keys come from each filing's inline XBRL tags
+through an independent crosswalk and its calculation links (DECISIONS D12, D30). Synthetic set: 40 generated
+private-company packages in HTML, Excel and PDF, with exact keys.
+
+| Set | Documents | Values right | **Silent error rate** | Silent omissions | Wrong values caught | Review items per filing (median) | Source |
+|---|---|---|---|---|---|---|---|
+| SEC dev, HTML (tuned on) | 33 | 81.5% (3,608 of 4,428; 80.3-82.6%) | 2.3% (59 of 2,516; 1.8-3.0%) | 2.2% (97 of 4,428; 1.8-2.7%) | 73.4% (163 of 222; 67.2-78.8%) | 24 | `eval/reports/stmt-dev-confirmed` |
+| **SEC holdout, HTML (never tuned on)** | 30 | 74.1% (2,948 of 3,978; 72.7-75.4%) | 2.3% (49 of 2,108; 1.8-3.1%) | 3.8% (150 of 3,978; 3.2-4.4%) | 88.4% (372 of 421; 84.9-91.1%) | 24 | `eval/reports/stmt-holdout-confirmed` |
+| SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,623; 2.4-3.7%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-overnight.json` |
+| Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-overnight` |
+
+The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out without a person
+looking, how much is wrong. The holdout was measured at most once per kept change and never used to design one;
+IMPROVEMENT_LOG records each measurement, and the times it was used to confirm a decision.
+
+**With last year's approved spread** (opt-in company memory, DECISIONS D36): the prior-year 10-K is approved against its
+own key as a stand-in for an analyst, then the current one is spread with what that approval left behind.
+
+| Set | Silent error rate | Wrong values caught | Values right | Review items per filing (median) | Source |
+|---|---|---|---|---|---|
+| SEC dev, 33 companies | 0.7% (20 of 2,913; 0.4-1.1%) | 81.8% (90 of 110; 73.6-87.9%) | 92.3% (4,051 of 4,391; 91.4-93.0%) | 24 | `eval/reports/company-memory-dev` |
+| SEC holdout, 29 companies (measured once) | 0.4% (10 of 2,334; 0.2-0.8%) | 97.2% (350 of 360; 95.0-98.5%) | 81.7% (3,154 of 3,859; 80.5-82.9%) | 26 | `eval/reports/company-memory-holdout` |
+
+The stand-in approval is perfect (the key), so these are an upper bound on what a real analyst's approvals carry
+forward. A difference from an approved value is a warning that says whether it is likely a misread or a restatement;
+"misread" is usually right (120 of 129 judged on the holdout), "restatement" is not reliable (6 of 16).
+
+**XBRL tags as a second reader** (opt-in, DECISIONS D37) are *not* graded against the keys, which come from the same
+tags. The two readers agree on 96.8% (dev) and 91.7% (holdout) of tagged printed numbers; in a hand-checked random
+sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`).
+
+**Banks, insurers and IFRS** are configuration overlays (DECISIONS D38), smoke-tested on a few filings each, not
+measured: see `eval/coverage/checks.json`.
+
+What these numbers do **not** show:
+- SEC filings are cleaner than a borrower's scanned PDF; scanned PDFs (no text layer) are refused.
+- The synthetic corpus was written by the same author as the pipeline.
+- Non-financial US companies only, for every measured figure; unit statements in other currencies are not recognised
+  (assumed and flagged).
+- ROI: no time savings have been measured yet. The ROI page reports "not measured" until at least three documents are
+  spread by hand and three reviewed in assisted mode by a real analyst.
+
+## The other engines: results
+
+### Reconciliation results (synthetic, 2026-10-24)
 
 Generated bank-vs-ledger sets (about 690 records each) with planted problems: missing entries, duplicates, fees
 deducted, keying errors, partial payments, reversals, timing differences, batch deposits, split settlements,
@@ -53,7 +129,7 @@ Scale: 6,898 records in 2.81 s, completeness checks failed: 0. Source: `eval/rep
 The headline is the false-match rate: a wrong automatic match hides a real discrepancy. On the stress set the
 greedy baseline makes them; the default does not, at the cost of sending more pairings to a person.
 
-## Invoice results (synthetic, 2026-10-24)
+### Invoice results (synthetic, 2026-10-24)
 
 81 invoices per set, about half with a planted problem (arithmetic, price over PO, quantity over receipt, missing
 receipt, closed or unknown PO, wrong vendor, tax, exact and re-typed duplicates, changed or unverifiable bank
@@ -80,7 +156,7 @@ The headline is **false touchless**: a problem invoice that would reach "eligibl
 involved. It is 0 on every set. Touchless rates are on sets where about half the invoices carry a planted problem,
 so they say nothing about a real inbox.
 
-## Data-quality gate (2026-10-24, night)
+### Data-quality gate (2026-10-24, night)
 
 The engines above trusted their inputs: the invoice engine loaded its vendor master and purchase orders with no
 checks, so a duplicate vendor id silently replaced another and one unreadable cell stopped the whole load. The gate
@@ -117,7 +193,7 @@ Run it on files: `spreader gate --dataset config/finops/dq/vendors.yaml --source
 --previous last-accepted.csv --out out` (`--strict` exits 1 when anything is held), or open **Data quality** in the
 app and press "Try sample data". Synthetic data only: no real company's records have been through it.
 
-## Spreadsheet risk scanner (2026-10-24, night)
+### Spreadsheet risk scanner (2026-10-24, night)
 
 Finance runs on workbooks nothing checks. The scanner (`src/finops/sheets`, settings in
 `config/finops/sheets/default.yaml`) reads one and reports:
@@ -166,7 +242,7 @@ Run it: `spreader scan model-v2.xlsx --previous model-v1.xlsx` (`--strict` exits
 reason; a dismissal carries to the next version of the same model until the formula or its labels change, and a
 definite error cannot be dismissed.
 
-## Harder tests and an independent scorer (2026-10-24, late)
+## Harder tests and an independent scorer
 
 - **Reconciliation, 10 random seeds x 3 kinds of set** (`eval/reports/recon-multiseed-v4.md`; *messy* adds truncated and
   abbreviated bank descriptions, dropped and mistyped references and same-day payroll bursts): false automatic matches 0 of
@@ -182,8 +258,7 @@ definite error cannot be dismissed.
 - **Statement answer keys** (a scorer fix, engine unchanged): the key builder now reads each filing's own calculation
   links, so a total and its part tagged on one line are no longer added together (Walmart's revenue key was about twice
   its revenue). Same engine output, old keys against new: silent errors 70 -> 60 on dev, 66 -> 55 on the holdout, 87 -> 77
-  on the printed PDFs. The engine-one table below predates both statement changes; IMPROVEMENT_LOG #15 and #16 have
-  the current figures.
+  on the printed PDFs. The statement table above is measured on the current code (2026-10-25).
 - **An outside test run on a fresh Linux install** found that lxml's Linux wheels stop reading at the first `</html>`
   (a second statement in the same file vanished) and that the reader hid Deckers' entire 10-K behind a `font-size:0`
   page wrapper, so the holdout had scored 29 of 30 filings. Both are fixed and measured (IMPROVEMENT_LOG #17-#18:
@@ -193,77 +268,7 @@ definite error cannot be dismissed.
 What these numbers do **not** show: the synthetic data and the engines were written by the same author; real
 exports are messier; minutes saved are not measured (the ROI page labels them placeholders).
 
-# Engine one: Statement Spreader
-
-Financial statements in (an SEC 10-K, a PDF, an Excel workbook); a standard **spread** out: every
-income-statement, balance-sheet and cash-flow line mapped to one template, per period, with each
-number traced to the exact printed cell it came from, checked by accounting identities, and either
-auto-accepted or sent to a reviewer with a reason. Built as a reusable foundation for an internal AI
-pilot in credit, FP&A or audit: a new organisation adapts it with a configuration overlay, not code.
-
-It measures itself. Every rate below comes from a command in [TESTING.md](TESTING.md), against
-answer keys the pipeline never sees, and carries a 95% range.
-
-### What it does
-
-1. **Reads** HTML (including inline-XBRL filings, ignoring the tags and anything hidden), PDFs with
-   a text layer (words rebuilt into rows, with page and box for every number) and Excel (cell
-   references, hidden rows and sheets skipped, formulas without saved values refused).
-2. **Finds the statements**, their periods (from headers, titles, other statements or the cover
-   page) and their unit ("in millions, except per share").
-3. **Finds totals by footing**: a row is a total when it equals the rows above it in every period.
-4. **Maps each row** to the template with a confidence and a reason: reviewer memory, aliases,
-   section rules, spelling, structure, and optionally a local language model that only ever picks
-   a line id from a closed list and never sees a number.
-5. **Assembles** one value per line and period with its provenance trail (read, scale, sum, sign,
-   map, calculate, correct), and a status: extracted, normalized, calculated, AI-mapped, human,
-   assumed or missing.
-6. **Checks**: balance sheet balances, subtotals, cash-flow roll-forward, cross-statement and
-   cross-period ties, EPS x shares vs net income, with rounding tolerance from the printed scale.
-7. **Sends to review** whatever it doubts: failed checks, assumed units or periods, low-confidence
-   mappings, unplaced rows, unreadable or ambiguous numbers, suspicious jumps, covenant breaches.
-8. **Lets a reviewer** inspect any value back to its source, correct it with a reason, remap rows
-   (remembered for next time), resolve items with notes, and approve: approval is refused while a
-   blocking item is open. Everything is an audit event.
-9. **Exports** Excel (spread, sources, checks, review, ratios; never live formulas), CSV and JSON.
-10. **Measures ROI** from timed work sessions (by hand vs assisted, active time only), labelling
-    every number observed, estimated, hypothetical or assumption, and keeping released capacity
-    apart from cash saved.
-
-### Measured results (2026-10-24)
-
-SEC set: 63 recent 10-K filings of non-financial companies, split by ticker hash into a **dev** half
-(tuned on) and a **holdout** half (measured, never tuned on). Answer keys come from each filing's
-inline XBRL tags through an independent crosswalk. Synthetic set: 40 generated private-company
-statement packages (30 clean, 10 adversarial) in HTML, Excel and PDF, with exact keys.
-
-| Set | Documents | Values right | Silent error rate | Silent omissions | Wrong values caught | Review items per document (median) |
-|---|---|---|---|---|---|---|
-| SEC dev, HTML (tuned on) | 33 | 80.0% (3,542 of 4,425; 78.8-81.2%) | 2.8% (70 of 2,542; 2.2-3.5%) | 3.9% (171 of 4,425; 3.3-4.5%) | 68.2% (150 of 220; 61.8-74.0%) | 21 |
-| SEC dev, HTML, + local model | 33 | 83.3% (3,608 of 4,333; 82.1-84.3%) | 2.1% (53 of 2,485; 1.6-2.8%) | 3.0% (128 of 4,333; 2.5-3.5%) | 79.5% (205 of 258; 74.1-83.9%) | 25 |
-| **SEC holdout, HTML (never tuned on)** | 30 (29 scored) | 73.5% (2,858 of 3,890; 72.1-74.8%) | 3.2% (68 of 2,100; 2.6-4.1%) | 5.3% (208 of 3,890; 4.7-6.1%) | 81.7% (304 of 372; 77.5-85.3%) | 20 |
-| SEC holdout, HTML, + local model | 30 (29 scored) | 75.0% (2,870 of 3,827; 73.6-76.3%) | 2.8% (59 of 2,086; 2.2-3.6%) | 3.8% (144 of 3,827; 3.2-4.4%) | 86.9% (392 of 451; 83.5-89.7%) | 24 |
-| Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,452; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0.0% (0 of 6; 0.0-39.0%) | 1 |
-| SEC dev printed to PDF | 33 | 80.5% (3,572 of 4,438; 79.3-81.6%) | 3.3% (87 of 2,650; 2.7-4.0%) | 2.6% (115 of 4,438; 2.2-3.1%) | - | - |
-
-Sources: `eval/reports/{dev,holdout}-final[-model].json`, `eval/reports/syn-final.json`, `eval/sec/pdf/eval-sec-pdf-unjudged.json`; regenerate with `scripts/run_eval.py`, `scripts/print_sec_pdfs.py --eval` and `scripts/results_table.py`. For PDFs the scorer finds the answer key's unplaceable rows by label, period and value instead of HTML cell paths, so the PDF row is comparable with the HTML dev rows. "Review items per document" is the reviewer's workload: one failed check flags several values but is resolved once.
-
-**One holdout filing was never scored.** Deckers (DECK) crashed in both holdout runs above ("no tables with numbers
-found"), so those rows score 29 of the 30 filings. The reader took the `font-size:0` wrapper around each of its pages
-as hidden text, although the text inside sets its own size. Fixed on 2026-10-24 (evening); the holdout measured with
-Deckers included is in [IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md) #17.
-
-The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out
-without a person looking, how much is wrong. Every improvement and every reverted idea is in
-[IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md).
-
-What these numbers do **not** show:
-- SEC filings are cleaner than a borrower's scanned PDF; scanned PDFs (no text layer) are refused.
-- The synthetic corpus was written by the same team that wrote the pipeline.
-- ROI: no time savings have been measured yet. The ROI page reports "not measured" until at least
-  three documents are spread by hand and three reviewed in assisted mode by a real analyst.
-
-### Run it
+## Run it
 
 ```bash
 py -3.11 -m venv .venv
@@ -286,7 +291,7 @@ llama.cpp's `llama-server` on 127.0.0.1 and set `SPREADER_MODEL_URL=http://127.0
 Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier
 (measured on an RTX 3060 Ti: about 0.35 s per row, 4.8 GB of GPU memory).
 
-### Adapting it to an organisation
+## Adapting it to an organisation
 
 - **Template, aliases, checks, ratios, covenants**: `config/profiles/*.yaml`; an overlay
   (`extends:`) adds an organisation's labels, detection patterns, checks and covenant limits
@@ -304,7 +309,7 @@ Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the 
 - **Model provider**: `llm/` is optional and isolated; replacing the local server with an
   organisation's approved model endpoint changes one class.
 
-### Limits and what production would need
+## Limits and what production would need
 
 Sign-in and roles (the reviewer name is an unverified header), a retention and deletion policy,
 encryption at rest, OCR for scanned statements, multi-user concurrency on a server database, and,

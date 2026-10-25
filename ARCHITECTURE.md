@@ -1,6 +1,6 @@
 # Architecture: one platform, three engines, a data-quality gate and a spreadsheet scanner
 
-Last updated 2026-10-24. Status of each piece and how it was measured: [README.md](README.md),
+Last updated 2026-10-25. Status of each piece and how it was measured: [README.md](README.md),
 [IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md). Why it is built this way: [DECISIONS.md](DECISIONS.md) (D16 onward).
 
 ## The idea in one paragraph
@@ -20,7 +20,11 @@ filing system, the same sign-off rules, the same auditor.
   fingerprint.py  stable ids for files, settings, records (reruns are recognisable)
   exceptions.py   the exception item every engine raises; who may resolve it, and how
   audit.py        SQLite with append-only, hash-chained audit events (triggers refuse UPDATE/DELETE)
-  evaluation.py   Wilson-interval rates and the shared report format (eval/reports/*.md, *.json)
+  evaluation.py   Wilson-interval rates, the shared report format (eval/reports/*.md, *.json) and every report's
+                  provenance (commit, dataset versions, configuration)
+  policy.py       one uncertainty policy: the shared Finding shape, and automatic acceptance only on a calibrated
+                  method, a person's earlier decision, or parts that each passed (DECISIONS D35)
+  finops/evalsets.py, finops/gate.py   every evaluation set versioned by hash; the release gate (TESTING.md)
 
   spreader/           finops.recon/                 finops.invoice/
   statement           reconciliation and            invoice intake and
@@ -48,7 +52,49 @@ What is shared and what is not, on purpose:
 
 The statement engine keeps its own store and review model (it predates the core and is measured; moving it
 is a refactor with regression risk and no user value yet). It already shares the amount parser, the Wilson
-rates and the report format with the core.
+rates and the report format with the core, and since 2026-10-25 the uncertainty policy too.
+
+## Shared controls added 2026-10-25
+
+- **Calibrated confidence** (`finops.core.policy`, `config/calibration/<engine>.json`, `scripts/calibrate.py`): a
+  statement mapping rule or a reconciliation rule settles something alone only if the lower bound of its measured
+  accuracy clears the engine's bar; the calibration file records the data, commit and counts it was fitted on.
+- **Findings in one shape** (`as_findings` in each engine, `policy.from_exception`): blocking or informational, reason,
+  evidence, required action, producing rule.
+- **Company memory** (`spreader.company`, store schema 3): approved values and confirmed mappings per company,
+  append-only; reused (calibrated) and compared on the next document of the same company (DECISIONS D36).
+- **Opt-in second reader** (`spreader.second_reader`): the inline XBRL tag on each printed cell, compared, never
+  trusted alone (DECISIONS D37).
+- **Industry overlays** (`config/profiles/us-bank.yaml`, `us-insurer.yaml`, `ifrs-commercial.yaml`): overlays may add
+  lines, never remove them (DECISIONS D38).
+- **Versioned evaluation and a release gate** (`finops.evalsets`, `finops.gate`, `eval/manifests`, `eval/baseline`):
+  see TESTING.md.
+
+## Engine one: statement spreading (`src/spreader`), step by step
+
+1. **Reads** HTML (including inline-XBRL filings, ignoring the tags and anything hidden), PDFs with
+   a text layer (words rebuilt into rows, with page and box for every number) and Excel (cell
+   references, hidden rows and sheets skipped, formulas without saved values refused).
+2. **Finds the statements**, their periods (from headers, titles, other statements or the cover
+   page) and their unit ("in millions, except per share").
+3. **Finds totals by footing**: a row is a total when it equals the rows above it in every period.
+4. **Maps each row** to the template with a confidence and a reason: reviewer memory, aliases,
+   section rules, spelling, structure, and optionally a local language model that only ever picks
+   a line id from a closed list and never sees a number.
+5. **Assembles** one value per line and period with its provenance trail (read, scale, sum, sign,
+   map, calculate, correct), and a status: extracted, normalized, calculated, AI-mapped, human,
+   assumed or missing.
+6. **Checks**: balance sheet balances, subtotals, cash-flow roll-forward, cross-statement and
+   cross-period ties, EPS x shares vs net income, with rounding tolerance from the printed scale.
+7. **Sends to review** whatever it doubts: failed checks, assumed units or periods, low-confidence
+   mappings, unplaced rows, unreadable or ambiguous numbers, suspicious jumps, covenant breaches.
+8. **Lets a reviewer** inspect any value back to its source, correct it with a reason, remap rows
+   (remembered for next time), resolve items with notes, and approve: approval is refused while a
+   blocking item is open. Everything is an audit event.
+9. **Exports** Excel (spread, sources, checks, review, ratios; never live formulas), CSV and JSON.
+10. **Measures ROI** from timed work sessions (by hand vs assisted, active time only), labelling
+    every number observed, estimated, hypothetical or assumption, and keeping released capacity
+    apart from cash saved.
 
 ## Engine two: reconciliation (`src/finops/recon`)
 
