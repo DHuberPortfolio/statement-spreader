@@ -209,5 +209,12 @@ def run_report(name: str, profile_path: str, seeds: dict[str, int], scale: int, 
                            "checks_failed": sum(1 for c in big.checks if c["status"] != "pass")}
     lines += ["## Scale", "", f"{len(big.records)} records reconciled in {report['scale_run']['seconds']} s "
               f"(one run, this machine); completeness checks failed: {report['scale_run']['checks_failed']}.", ""]
-    write_report(name, report, lines)
+    from finops.evalsets import RECON_ROUND_SHARE, RECON_SCALE, RECON_SEEDS
+
+    registered = scale == RECON_SCALE and all(RECON_SEEDS.get(sp) == sd and (round_share or {}).get(sp, 0.0) == RECON_ROUND_SHARE.get(sp, 0.0)
+                                              for sp, sd in seeds.items())
+    datasets: list[str | dict[str, Any]] = ([f"recon-{sp}" for sp in seeds] if registered else
+                                            [{"name": f"recon-seed-{sd}", "version": None, "note": f"generated: seed {sd}, scale {scale}"}
+                                             for sd in seeds.values()])
+    write_report(name, report, lines, datasets=datasets, config={"profile": f"{base.id} {version}"})
     return lines

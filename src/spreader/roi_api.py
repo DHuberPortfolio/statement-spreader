@@ -31,8 +31,14 @@ def silent_error_rate() -> tuple[tuple[int, int] | None, str]:
     The holdout half (never tuned on) from whichever run measured it last, else the dev half, labelled as such. The
     page used to read latest-dev only, which named runs never refreshed, so it showed a figure from the first day."""
     def load(name: str) -> tuple[float, dict[str, Any]] | None:
+        # "Which run is newer" comes from the time the report records; file times are arbitrary after a clone
+        # (IMPROVEMENT_LOG O1). Reports from before provenance existed fall back to the file time.
         p = REPORTS / f"{name}.json"
-        return (p.stat().st_mtime, json.loads(p.read_text())) if p.exists() else None
+        if not p.exists():
+            return None
+        data = json.loads(p.read_text())
+        created = (data.get("provenance") or {}).get("created")
+        return (datetime.fromisoformat(created).timestamp() if created else p.stat().st_mtime), data
 
     holdout: list[tuple[float, tuple[int, int], str]] = []
     if h := load("latest-holdout"):

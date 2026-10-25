@@ -1,0 +1,814 @@
+{
+ "name": "invoice-messy-33",
+ "source": "files",
+ "version": "6a87260ced969608",
+ "key_version": "014e068e34b92f73",
+ "files": 161,
+ "entries": [
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-001-price_within_tol.html",
+   "sha256": "1dac351d6c34acddf51fbc26258c08caf65c050753160cd773cd77084f0a7ad4",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-001-price_within_tol.pdf",
+   "sha256": "d86505d54a2c119a17b995ef7281ed91c7c7a6501dcba10ba4b099d90fddb2c6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-002-bank_changed.html",
+   "sha256": "b855bd87acb4096db30670fbcbabb29780988b0a3a0c5dc385ffa229753f88cb",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-002-bank_changed.pdf",
+   "sha256": "7f76d124ff98a45f90f23f2ef7ad7af022914647a3d8eb805467c632eda55aa2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-003-clean.html",
+   "sha256": "0695e3cb96bef89e706aab0b6e48126cf36c957b1a9d2c56530144f5dce72aa3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-003-clean.pdf",
+   "sha256": "514b3f25d4ff8de3b246a187215ed255fc1849301135b2882261695a99df312c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-004-tax_wrong.html",
+   "sha256": "d1d8e58154bfc957fa6694a033b63ec7039872384aad16a694507c2f166b9f44",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-004-tax_wrong.pdf",
+   "sha256": "274a96c22466ef5d930e52d02f591818539177f0b6816feb08a7ba0c049ce42c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-005-vendor_mismatch.html",
+   "sha256": "2a8621b0c537d1ea019667b519ca7f304eed586c7730e29c6c1b3dc59fe8e42c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-005-vendor_mismatch.pdf",
+   "sha256": "7bbdfa663c9fcadfe9e5b5cd91fbf161ec1edefa644a7ac97850fdc9280e1d27",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-006-bank_unverified.html",
+   "sha256": "0464433e7db3a0e66770bbf18a19767c757e56d00577698972b323ac9cb42a5b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-006-bank_unverified.pdf",
+   "sha256": "b0ee3bfa3b24b74fbd7ef7196e13a08bb54bde0641b731f63a4ae3d59f328e06",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-007-total_math.html",
+   "sha256": "777fab06c42aaed45831eb7aa3b646cfe87efd6c2f801fd733f0d6ce7173934f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-007-total_math.pdf",
+   "sha256": "fcc8589f8fc1393ff212bfe0ab5205eb7251cde1cbae6f38935ebbc1c7ac2a87",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-008-clean.html",
+   "sha256": "9b79b6e48221db5d9186e8f5bc0d169d7adebd518b7813e1f00e154a412f6c2b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-008-clean.pdf",
+   "sha256": "15d95b43f10bbe02fd633ccf10c6cfed02831b5c3e9e223c223409576c87b44d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-009-clean.html",
+   "sha256": "716aefcb2a1295f617c09889524e72ba731a38b492140cc0fe16e738354626b1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-009-clean.pdf",
+   "sha256": "f8979f7c5e3bafc26cfdf7cef9f5ec21a8bb2180e4e4e538178d52885f116fca",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-010-clean.html",
+   "sha256": "753189d755cf0510ec1ae2c109c3af795300e997342cc8b707a46d6ddf27b36b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-010-clean.pdf",
+   "sha256": "40c9a5104923be0884443f5983cdf571ddabb5713cad8ea8102135e433d5671e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-011-clean.html",
+   "sha256": "5ebe57d11ff0bd006f51cb17f511142afd29142f393698219f20d04d7c334495",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-011-clean.pdf",
+   "sha256": "b72635629b94ba072b96cec8a2086facc0992aa9bb407a7c1c571817b751500b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-012-exact_dup.html",
+   "sha256": "af6e8d1b30c52c8d3e551607e5d9fcbe8ce4c008fa787c74a817be545a6f4881",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-012-exact_dup.pdf",
+   "sha256": "fd747119f1a5c89255d529bd753ea954a4fe9d002815bee6133e0e3d37c8fd1e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-013-no_po_ref.html",
+   "sha256": "7a326e56bb2e9a9f5ab7fa1542deb12a6da3b32832e21b1482947c02251be21e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-013-no_po_ref.pdf",
+   "sha256": "36516923bd3f0f95f6f82643f1ced622dbccee2c935059463963c6e77090acc3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-014-missing_receipt.html",
+   "sha256": "46dd040ac6f12e7088a5ae431c1cb9fd6ef8aee1dc63db2d7c09653f64ed0b49",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-014-missing_receipt.pdf",
+   "sha256": "a048a510c66c1fe5eed2a4be67c1ff4a5ea4faf073f2c14d34c1b7b8be6997de",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-015-clean.html",
+   "sha256": "3de0224c872deeeefc45c3357a95f168f7cace1be403ab63ceb326b64dd9e444",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-015-clean.pdf",
+   "sha256": "91c5ab85843c6275306517b1f316a7295856b5973944dc67c1b895558ecc7bd3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-016-exact_dup.html",
+   "sha256": "15043110a62d26bc2305d45627f3bed324c069162ff6e60901b76e894bebe731",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-016-exact_dup.pdf",
+   "sha256": "d56458f1e085cad5481150792a96332a9ae0f658dead4fe8243caa25d1aa145c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-017-clean.html",
+   "sha256": "6b6ef059cd0e2e9298fffb772fb045b8fd73ab320d202c2f419d6e2c7e13a7bf",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-017-clean.pdf",
+   "sha256": "08448f8dcab3aa86c73ba91b7b565a3a69bbf068a8b14bc3ca9db0812e6f887c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-018-over_receipt.html",
+   "sha256": "59906a371dcafe2ceae67bd39168248c466b87ed13403952bb311d180687eb92",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-018-over_receipt.pdf",
+   "sha256": "7f63a7c1d4493c321bf73568e0bec086bb13e859c8ba8426eed71cd92ffdafb1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-019-no_po_ref.html",
+   "sha256": "005c2d53d3590e781ae505e9e994de893f8d1045478444750d6922c3b1c9c29c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-019-no_po_ref.pdf",
+   "sha256": "b8071670cd7a03f14f77dbf99a4e510547da49401a056bb54bb236db438eba7c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-020-bank_changed.html",
+   "sha256": "7c53d1a4177006bb4cabccc222fc2f87d0bb793a1c48f14b578d320fc7fc929d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-020-bank_changed.pdf",
+   "sha256": "352d2eab3f2bd5ffb5fbc418c16a65aa0bb56da5016fd6e3205784589c8a6c9d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-021-json_clean.json",
+   "sha256": "70068dfa4b129d9175ad0ee5750ba83c301db3fb0ba0129d7589cd4c7ea779a9",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-022-price_over.html",
+   "sha256": "f6afe4a571e787caf6b51dcfba4db1f9f873905b0aa2d124ac46c9e6789ed7a0",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-022-price_over.pdf",
+   "sha256": "0dab687d321b3afc35c443044e984fec21288b090ca7ddbd3089b31e669ca5cf",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-023-sequential.html",
+   "sha256": "32b9169885edd6e7ef8708efe2e505305ebf8e274c820ef1c19debf0e9383c73",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-023-sequential.pdf",
+   "sha256": "06025586b749dc36a33ce099a5263d202adf2866368ad41f2afa4b771463f002",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-024-sequential.html",
+   "sha256": "0b282ed96c4dc7c85b45560407e2c5ade4c22b5dd42aa468c81ee5c101f9647f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-024-sequential.pdf",
+   "sha256": "25e9fe184cc7293424e14d3c4797526e3db007a86b520b5e4646e5b55898ba65",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-025-clean.html",
+   "sha256": "f26f3ab4f10d0f0a62f9d547b16d56bdd6fc7f748233697a31d8e84f72a95dec",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-025-clean.pdf",
+   "sha256": "be7dbd738737bdc07da102d7d6b656eca2edf5c9528dc91c0071fbee85c0e38a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-027-bank_changed.html",
+   "sha256": "e92a3484a7cf650c21635518c2efa15e6362577b5679fe4b2846a326c0559675",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-027-bank_changed.pdf",
+   "sha256": "0581678945304db2529d332ba0e622fc46f267831d1e7c59b028ceb9ff92dc3e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-028-service_2way.html",
+   "sha256": "38a4fc21be2518edc11a156331fe77826b38cacb82713d9824ce865f491036a7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-028-service_2way.pdf",
+   "sha256": "c3dc05ffb2994c5862e6ea947dae2bd1d361e988bb7e8d673da00458f92ae501",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-029-vendor_mismatch.html",
+   "sha256": "62e81d5c8c6bc0f5c20de8591677cba0f8b4f603fb5d4024e90db7ed5c632973",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-029-vendor_mismatch.pdf",
+   "sha256": "4ef041f191506e48f80717849f97dc349f0888990f1c8a913feb657907e47a96",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-030-closed_po.html",
+   "sha256": "7b8bded77d385e4acee5afdcaf477061ed83060a842d98901bb59c60016bfb1a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-030-closed_po.pdf",
+   "sha256": "c6c73c20bd191795697f5704c2ec6eef8d01b4c80c5bb23d72601efe95c6af4a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-031-sequential.html",
+   "sha256": "432f21a24c21a2e76c766507498f3e19701e2d0a9c1e423815131f399625eba2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-031-sequential.pdf",
+   "sha256": "833a0a76f9382451cda91b3906762792ee3f6e7c51bdea45d58d0cb7c40949c6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-032-sequential.html",
+   "sha256": "e4dbb11fd2f5370df082e88afbdcfd8112104a953d0fffbddbdb52b18bb84975",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-032-sequential.pdf",
+   "sha256": "ba50df00a9c6c06aae3bdd6b7962a02b5d8c340fb2ed8ce683d632850370bd1f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-033-vendor_alias.html",
+   "sha256": "96231126735391260299dd7a9e9450da2c81ee3bfe99a82d56716593d0eb86ed",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-033-vendor_alias.pdf",
+   "sha256": "9a31aaa68b880c082e17d19a974084c24d4536071424dbdfd82c218cfc268174",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-034-clean.html",
+   "sha256": "0dd538be38759e7f385a4a0369f8eae442094d62d4ef8a685889c853585b3be2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-034-clean.pdf",
+   "sha256": "1cd28810104c380ec873a71d9cdd9354f89de6b705d7154a09dcc298e94215aa",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-035-total_math.html",
+   "sha256": "02adb4815d29c975c4b2973cbcae07b151c5a5ed9b86f47a11b9612ea4925783",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-035-total_math.pdf",
+   "sha256": "f364850af93b6753aae8e3c6431c298b22a60e00db4c3af1732101e86bdcfac5",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-036-bank_unverified.html",
+   "sha256": "bbca257291a3aace093f92e787b531b3aeeea9376453b97f184104fc88dd0138",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-036-bank_unverified.pdf",
+   "sha256": "f634ea08a2a620598c67cce5af9202a9919d24e13a596109ebca8bd2bdd747d9",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-037-over_receipt.html",
+   "sha256": "e7ce1b7fdaa1e2c2b450d8d4e0b3152caeced8609ce5d004e4f308b94a2cfac4",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-037-over_receipt.pdf",
+   "sha256": "e878207d91c054d7cb9e04cbc1bb3735940f0a393fa746188c48cab198966923",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-038-tax_unverified.html",
+   "sha256": "f5a769333525f4707d1890c9c22c53a9210986c79d55b74d2be13f562b169327",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-038-tax_unverified.pdf",
+   "sha256": "64961a16808b47db1f31f8b84632b4921b2b33994310a95cede199e11b29ac69",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-039-over_receipt.html",
+   "sha256": "1110527a38835e1dc13317ccacfa3bda679c8aff16684b245c3e7b977d0ffd71",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-039-over_receipt.pdf",
+   "sha256": "549247841efcd76550d5f618ddfcbb8dfc5af6fcd6e7907397495e0b23c514a5",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-040-clean.html",
+   "sha256": "53418ab4253230eafda544897ccceeb9201cc3a4621f28ecb08fa2300ed6b8f1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-040-clean.pdf",
+   "sha256": "d71b2f00f60e02b02eb633c8cfd4ea675d08f875d0ab6f1a54221fd1d898fa75",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-041-clean.html",
+   "sha256": "10cefd0a5778fd7b0994ccf8605af461153188f18bc8d8295fd87924050fb27c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-041-clean.pdf",
+   "sha256": "69c89b2d83644fd62123397ead6368c05b7d63291c4a115e6b5b17a8abe4d74f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-042-similar_distinct.html",
+   "sha256": "5994e9bff764b0ff89b2357b1246a0fc423d5d4c5546ae22f883b6b1dd6cc99d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-042-similar_distinct.pdf",
+   "sha256": "6643e8f8dd5fed084f071ce04be493fc1309c481300e622765b06c10a37cf075",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-043-json_clean.json",
+   "sha256": "798a9338060a4b16af73355368d34e4ade3607ef0f02b77f30e8531687a23456",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-044-clean.html",
+   "sha256": "a2f7d2500ee05c55686707258948ced1646ca58918049f06dac797f1ca2a5656",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-044-clean.pdf",
+   "sha256": "4e4a41ef96d697f24082af9bf05bcc481e98cfe2b1b97440843cd7e233c26c70",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-045-clean.html",
+   "sha256": "e1902f7a0eacf21ebb37e0439c2b83d0358e39f1c63f8318ab81e527a99be9d1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-045-clean.pdf",
+   "sha256": "1e2862e5eda6c672ab4d2a5a4c16ae6397d6dbe92ffdb1b67ea2f54fe1fd06a5",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-046-service_2way.html",
+   "sha256": "0c0818cd1b092ff16020c104fe5165c6b9e7a71ef5302134e844b148a3a4a80a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-046-service_2way.pdf",
+   "sha256": "162daaec71a7d42d32f5310333a6f62c535f292b90f23af9e7a63d9dd37b7803",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-047-sequential.html",
+   "sha256": "2a8280bddab1ee536996cfb5811f02bb83098714a81c24c7a49183ab87b34a77",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-047-sequential.pdf",
+   "sha256": "06624eb30faa38c7b69776e3fd5f6c762bd5fbcf9371b4bb16647baf5de02926",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-048-sequential.html",
+   "sha256": "201901e7742a622306e34ee5f3f431c321f344e92c47733b3938c3c4715d3d3e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-048-sequential.pdf",
+   "sha256": "2ecd1b58e4eefa90f2dcf0312f49bdf62616c89ea41b81647cf9dacfb3c20395",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-049-multipage.html",
+   "sha256": "2c5dbb2f5933fc22a929f8ccd96128319f6d8c3e7c7dc96c6b7de87b4eaa9bb6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-049-multipage.pdf",
+   "sha256": "fa0e3bb759e73d2c7728d20489546c12e68ca6081b93b4c563efb6b10d7df69e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-050-price_over.html",
+   "sha256": "3f243794c61b63de28341f218982e18071431805e15cc04617629c2ac9a6c95e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-050-price_over.pdf",
+   "sha256": "715e74758a01882ba8c3d7f462b769b8bbf9debc9bc4400bd58d56e6eb53d326",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-051-po_not_found.html",
+   "sha256": "bf335b54459c05cafc886ee69f46ea34f8dc51049f7342f82466cb23cde3a8be",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-051-po_not_found.pdf",
+   "sha256": "751a9c9b9adc9dcc984dbc402e4e29b63e75f5d33e731f0255c3c4a89f1e98a6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-052-price_within_tol.html",
+   "sha256": "ab9da520c8d8d9b518dea122841db02efe88a1b5a6cd130549eb2560e83f84c3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-052-price_within_tol.pdf",
+   "sha256": "dceb505666881da2961153e13ffaba46422c13801eb9b291afa392311740658f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-053-tax_wrong.html",
+   "sha256": "92f0e22c0303259ff6a42ac24fc7a46270d02889a06c56b0a1bac0b1f4026c34",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-053-tax_wrong.pdf",
+   "sha256": "4c07079ab53cce6fe5f661f4af99102b90abd98b64d2d65ff0281b2a501a9993",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-054-clean.html",
+   "sha256": "8c877c8927752b50b89fdf5e8376bfc3f4dee818223d19072c35d13bfb2eaa97",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-054-clean.pdf",
+   "sha256": "78e17f69d2d353554db22792cb9c4fa4495d57f10a31b65ee2b340c76dc81507",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-055-exact_dup.html",
+   "sha256": "12b0cc58e25eafd93b1865370c3cc70145353f9cd56c709d298e0dd39938b7e5",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-055-exact_dup.pdf",
+   "sha256": "95d3a65948b057bdbe16f17f98af171f1049e0fbe7a62f8ce4dc4e9ed781774e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-056-clean.html",
+   "sha256": "33c678c7256e4d396e5f175bd56d1ab95608d0f16606c4cce449e4002babaf1d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-056-clean.pdf",
+   "sha256": "d674f5a48304a74a9f514036eab16ee7760e45fde5fb84a0ba6ea88cf32bf7de",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-057-possible_dup.html",
+   "sha256": "0f8bfda6d2793e55cbd25622e9eddacfd2af0813b7cab7336ff8e769339907ce",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-057-possible_dup.pdf",
+   "sha256": "37e528274a8b91949a7d51377013076a3a594905ff48f5a786c9a073f0d5111c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-058-missing_receipt.html",
+   "sha256": "e101b998830bbb21275d3f267e44da7c18df70daa859f7eb9b2aa3433547945a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-058-missing_receipt.pdf",
+   "sha256": "ec2e83ba844388b91295e4f38831368f7281b80b3ae3cc75fddae8a66375435c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-059-clean.html",
+   "sha256": "82af3f9faa831b95ba5b68f2f2904fdfca818028a8e67ee49db9ab78c0287d4d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-059-clean.pdf",
+   "sha256": "8c3247490b9364a6c8e2e00d0e89ca093b52c10aac8b6afa904748e6935dd78a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-060-clean.html",
+   "sha256": "8fdf7d557965e68197a6a81c8e31d5dccea29574766ee0f5be995a3856391059",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-060-clean.pdf",
+   "sha256": "c4118266d0c2e42d5ddf236cc791b4b3c2804beac7d4efaa5960569837b7d5cc",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-061-multipage.html",
+   "sha256": "0bda0eb4472140a2e06e6144cbcba9610894cc7fba7c3e787dd67743f9499955",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-061-multipage.pdf",
+   "sha256": "87780e403cff863408a97b6bb8c9d119d3b3bf5229ca998f9bf70f991b755483",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-062-clean.html",
+   "sha256": "530608e8b9868c46a1786f9d6b8127fb57237ac2e34fbfb16306bb8e665359da",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-062-clean.pdf",
+   "sha256": "3c2f2085e18776b757238c1525298e3f660dfd1359c9a28ebf5c930022a3ca1b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-063-clean.html",
+   "sha256": "b30ca4d9598d0f60d7afcba080bfee3b2761f54d146a646f4e83716ba8a3df34",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-063-clean.pdf",
+   "sha256": "27ada2e1e8454286a7e10fa051e95270090131410289c13928117ccd9f6c5a3a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-064-similar_distinct.html",
+   "sha256": "2cad48c9c20c02ae38cb91e09618f96af402315c6421d3aadf1ff3df77977639",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-064-similar_distinct.pdf",
+   "sha256": "d30482c71f697d822aac503c2b41d95188edbe71b8004122e5b2591d88050d70",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-065-po_not_found.html",
+   "sha256": "0561d2baef1795f536fbe51b05606d93b678e99177f6c1d0b64c90cd2fe42e62",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-065-po_not_found.pdf",
+   "sha256": "f22e7e98d8cffaa80d84728fc9f64d2b64e9474aad8ddf348329586110d76bb2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-066-clean.html",
+   "sha256": "b5f878b3eba434c93fa42c9426f3a757b6467143eeaa0606b9e5aebe2e8eda4e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-066-clean.pdf",
+   "sha256": "f32d77efc073082ac3c518582477ee758801c711b9a10c132741cfb36d533c84",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-067-clean.html",
+   "sha256": "bb6fbc9af75a5df57c97a476929299811c7a7c5d9f1afb523006b8e49a7ba7e0",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-067-clean.pdf",
+   "sha256": "27cbd7fba0f5962cd984669345ae522c42f626abe982b5a8d3da9ae5a9815eda",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-068-possible_dup.html",
+   "sha256": "a046c52e8235ec9b180be4ef186ebb5c402cb8250279f5910a4997e9f88acec7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-068-possible_dup.pdf",
+   "sha256": "4781e7eddfcf69a2aa4a0b1231a4954a99b76df44fb88281402f7b3ec333838f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-069-vendor_alias.html",
+   "sha256": "2ef056fdfcff5e1c83af41db8d4e8c3c0c10bbd1e32a1e591b8139a6703024b6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-069-vendor_alias.pdf",
+   "sha256": "510ceca9846b0002dce5a01a7b1ea2702aed767bd46afb9b3944cbbd2f6fb8fa",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-070-service_2way.html",
+   "sha256": "3a97bb3c9b8dbca945437f49391261c348ec31befec85eb55596ee4024db8132",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-070-service_2way.pdf",
+   "sha256": "080353604f53d66c3488f28c7a916e8eb2117f4ef36987d60e002c08d3329658",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-071-price_over.html",
+   "sha256": "49ec06053495c71bdc5667869716b61cb843f056381aa4ccb8899bb9b96a501d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-071-price_over.pdf",
+   "sha256": "af4b5f0fb03e40f2b08bdb1568534f918abe0d6ce0c47c38d337154c5a812314",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-072-tax_unverified.html",
+   "sha256": "adccfd33277d4e431a4a8bd8e430eddd8fa49ae192c15e54ae72d0ee16b11919",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-072-tax_unverified.pdf",
+   "sha256": "785b9a4c1bead797ca966e28873db3b6874def331e3506f8e84e6ca885691ebf",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-073-price_within_tol.html",
+   "sha256": "982f4b8246b08e3b57ac86d87077883ff26cb65f47103263b3f0fdf5a2533e17",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-073-price_within_tol.pdf",
+   "sha256": "e6e5e152d3a1cb3126dfff19de8b8152f4f95c374a668476a5aa2ca57810f95a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-074-missing_receipt.html",
+   "sha256": "6597148d6205780ded4732b43a2c9709668a62d31c91b5b06b7df911d24c3822",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-074-missing_receipt.pdf",
+   "sha256": "a45c619a2415d6c934c3858fafb23b4c0da6e21f712506c1253c4025a7709969",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-075-line_math.html",
+   "sha256": "21fbec2a5c4df28234ef9afa95e251a3090e9382500635393d506be1504a84f2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-075-line_math.pdf",
+   "sha256": "5e8fa5a45068394440213c40862bf5cefa823766cafdd42172272c63c774acda",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-076-clean.html",
+   "sha256": "49b58e4b3f12a11528b3ac295f5cb1ac6da644e03445f8e3ef4887df66b786cd",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-076-clean.pdf",
+   "sha256": "ff532db43cb678d5b7b459b689207f28714dafc49ef0242214579f5072b9c3e6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-077-json_clean.json",
+   "sha256": "4a075d045ff80af140f71f0a8f736a442af524b5f506d1b1ba7c9c25b87ab5f7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-078-service_2way.html",
+   "sha256": "18b58b2a574a68e0b2f0662c88014d6e5aa5be3ad98099ad6e94bcd58eabeb49",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-078-service_2way.pdf",
+   "sha256": "e18f975c650676ac14b2f5b10465ff9d17e1fd176935a4b3d95017622c94ad5e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-079-line_math.html",
+   "sha256": "ef90f7a28156c50d11a854437984002f8c16b12f98f27e4d537d89c8fa307854",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-079-line_math.pdf",
+   "sha256": "a6de0cd24ea51cbbb94ddfeab54c36208614f3496110141dd0edcfa903eee9bd",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-080-line_math.html",
+   "sha256": "69f87766e91d9eceb0958b536e307a178a9932f7cc8e4960c92bcf170ce7041b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-080-line_math.pdf",
+   "sha256": "90da9a5b7880ea3fbb59002ec0210fccc3729f22c4c08438815425066fd540d8",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-081-closed_po.html",
+   "sha256": "6ab1a9ad2bb227f7b5493530be93e77b17ae5e8a9b32c62a0c7ab5b537b3846d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/invoices/inv-081-closed_po.pdf",
+   "sha256": "dbebb3ef4a0c3cbea210341b8ec32cfc5d3494b78601f329389f183f80188f5a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/master/purchase_orders.csv",
+   "sha256": "c2e41af6dfcc774b802daf1d01fea65b6696149566cdf3d6e7538d83ce2999ae",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/master/receipts.csv",
+   "sha256": "da5e8135e3fb23bea7a1a9455780069586e06b4e3faa005b864d8100f0c90b67",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/master/vendors.csv",
+   "sha256": "e92c5a051368ea886bebb1e8a1ef879fda6829735bc01ed2cefb2b8d2624ea78",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/messy-33/truth.json",
+   "sha256": "f5d24d0f7e31e2569fd24ea3f118bc74de3b8dae8ab93aa75a221353018d8ae0",
+   "role": "key"
+  }
+ ]
+}

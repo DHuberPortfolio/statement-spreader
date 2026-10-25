@@ -327,4 +327,10 @@ def run_report(name: str, seeds: list[int], folders: list[Path], spec: ScanSpec 
     lines += ["## Hostile files", "", "| File | Expected | Result | Message |", "|---|---|---|---|"]
     lines += [f"| {h['file']} | {h['expected']} | {h['result']} | {h['message']} |" for h in report["hostile"]]
     lines += ["", f"Same findings on a second scan of the same bytes: {report['stable']}."]
-    return write_report(name, report, lines)
+    from finops.core.fingerprint import content_hash
+    from finops.evalsets import SHEETS_SEEDS
+
+    datasets: list[str | dict[str, Any]] = [f"sheets-synthetic-{s}" if s in SHEETS_SEEDS else
+                                            {"name": f"sheets-seed-{s}", "version": None, "note": "generated, unregistered seed"} for s in seeds]
+    datasets += [f"sheets-{f.name}" if f.parent.name == "sheets" else {"name": str(f), "version": None} for f in folders]
+    return write_report(name, report, lines, datasets=datasets, config={"scan_spec": content_hash(spec.model_dump())})

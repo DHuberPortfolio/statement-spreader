@@ -1,0 +1,24 @@
+{
+ "name": "recon-dev",
+ "source": "finops.recon.synthetic.generate(seed=7, scale=300, round_share=0.0)",
+ "version": "5d843ed1b995183b",
+ "key_version": "bc7e4f4c2140eec3",
+ "files": 3,
+ "entries": [
+  {
+   "path": "<generated>/recon-dev/bank.csv",
+   "sha256": "057db46c30b9090f32245b1d5b3d31e32e772cdbfeede422e5850a51997d9e0d",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-dev/ledger.csv",
+   "sha256": "e9dcbff1e51f25d8a2a1a0aa8358906496d689820a07bc12a04f390bb9a0451f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-dev/truth.json",
+   "sha256": "db37e683d05120e34d4813ed5b70e28d40b5d6a8dfb70f43992a403a083cfff2",
+   "role": "key"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "name": "dq-dev",
+ "source": "finops.dq.synthetic.generate(21)",
+ "version": "31ceab9cb3a36c3d",
+ "key_version": "05b857ce30adb8a4",
+ "files": 6,
+ "entries": [
+  {
+   "path": "<generated>/dq-dev/erp.xlsx",
+   "sha256": "a1ae06f8d6e169d0dec33cc528c3c3f6766ca1c2066be185739b4c704884c5db",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-dev/po.csv",
+   "sha256": "4e85dafea2d6640884d79098c77f9cb3276f0e30cabfa6248d47b8be79760ee0",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-dev/portal.csv",
+   "sha256": "881620efb05c6dafc6a39fe738ebbbdaa12673dc854ecec65c5cd4ead0c0f1e6",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-dev/previous.csv",
+   "sha256": "7de13770c5551a5a76b25c31d4f2198a02dc3eb48522fe2bf51079f000d789ec",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-dev/po_truth.json",
+   "sha256": "07467a01b8a19502d8f762f28dc70dbb1694328f3ee1af0d59587cf5508bb494",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/dq-dev/vendor_truth.json",
+   "sha256": "8862dadb2e6ca999090b390dc74447e0c0edc6cdef9970e334490baa6c0404f9",
+   "role": "key"
+  }
+ ]
+}

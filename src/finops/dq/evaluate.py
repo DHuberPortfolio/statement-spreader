@@ -228,7 +228,13 @@ def run_report(name: str, root: Path, seeds: dict[str, int]) -> list[str]:
                   "labels give decisions only.", ""]
         _blocks(lines, (("Vendors", ind["vendors"]), ("Purchase-order lines", ind["purchase_orders"])), reasons=False)
     _hostile(report, lines, vspec, vver, seeds)
-    write_report(name, report, lines)
+    from finops.evalsets import DQ_SEEDS
+
+    datasets: list[str | dict[str, Any]] = [f"dq-{sp}" if DQ_SEEDS.get(sp) == sd else
+                                            {"name": f"dq-seed-{sd}", "version": None, "note": "generated, unregistered seed"}
+                                            for sp, sd in seeds.items()]
+    datasets += [f"dq-{f.name}" for f in sorted((root / "eval" / "dq").glob("independent-*"))] if (root / "eval" / "dq").exists() else []
+    write_report(name, report, lines, datasets=datasets, config={"vendors": vver, "purchase_orders": pver})
     return lines
 
 

@@ -1,0 +1,24 @@
+{
+ "name": "recon-stress",
+ "source": "finops.recon.synthetic.generate(seed=13, scale=300, round_share=0.4)",
+ "version": "a05d7aca4a4168b5",
+ "key_version": "e9001ca0a068d2e8",
+ "files": 3,
+ "entries": [
+  {
+   "path": "<generated>/recon-stress/bank.csv",
+   "sha256": "f01222d22360b736eafbc33053ad6439920c4ba50ec58dfcb791a09fa67c90cb",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-stress/ledger.csv",
+   "sha256": "8537006cd0195dabce63f5ffb119df0f97e2041a9f0dbf46d8b38220a00fce66",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-stress/truth.json",
+   "sha256": "ec24ac61668e1c60a6d6be98e0140fc1e7c4f14b06caf2ed1392fc2b8ac96538",
+   "role": "key"
+  }
+ ]
+}

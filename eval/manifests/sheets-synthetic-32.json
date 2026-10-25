@@ -1,0 +1,64 @@
+{
+ "name": "sheets-synthetic-32",
+ "source": "finops.sheets.synthetic.generate(32)",
+ "version": "0f7b5a98f3d16f1a",
+ "key_version": "01ca26908b5a7f99",
+ "files": 11,
+ "entries": [
+  {
+   "path": "<generated>/sheets-synthetic-32/budget-32-a.xlsx",
+   "sha256": "c616fd7dc6d776d54000ff752958d36a25a1fb0ceabe61ee3d6c823afc1dfc2a",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/budget-32-b.xlsx",
+   "sha256": "849710e5c4fc1250b77bb7f0e3864115807555fb455fb932c43d83ada93a4b4a",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/budget-32-clean.xlsx",
+   "sha256": "baf7606747ef9952cf35eda4a839edda6073a185ee7eaf293de7479b420cded8",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/commission-32.xlsx",
+   "sha256": "6ac23e85b4d80c6849d940aa9a23e572d05a0548016224a3aefbfbb7275d6e9e",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/consolidation-32.xlsx",
+   "sha256": "e7af8177dad97856ea9e24ee5fba5e8afd0d9abf5524af050d1f6a2584d0e4f0",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/forecast-32-x-v1.xlsx",
+   "sha256": "05cd24035b5fc472a53e55711e6fba02e77381e239e38acaaf7e2951295233f9",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/forecast-32-x-v2.xlsx",
+   "sha256": "06713a8480234bee6ca6b0d5f7cd9efd1a714ec8ba16ca55ff04d286e305fa76",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/forecast-32-y-v1.xlsx",
+   "sha256": "c524690bdf4b2c585a13b4e12cbd305ef169b4d94bbd03859af0077302af96ab",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/forecast-32-y-v2.xlsx",
+   "sha256": "02f857d065dd66374bc6a13dd77a6c0c84eac80bd2d174df2f774013b6838c0f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/loan-32.xlsx",
+   "sha256": "19fd449f05d2448ba36e371161cf78fd092728049e537cb830ed3dea80780d5e",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/sheets-synthetic-32/truth.json",
+   "sha256": "5cab0a75b2ce772298f31515cd8c7c70eeed278e89189757caa11bab05587599",
+   "role": "key"
+  }
+ ]
+}

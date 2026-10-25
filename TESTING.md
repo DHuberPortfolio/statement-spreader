@@ -20,7 +20,47 @@ cd web && npm run typecheck && npm test && npm run build
 CI (`.github/workflows/tests.yml`) runs the Python tests on every push after a fresh install of the newest allowed
 dependencies on Linux, with Python 3.11 and 3.13, and once more with the oldest lxml the pin allows (5.2), then the
 web tests. Linux matters because lxml's Linux wheels use a newer libxml2 than the Windows wheel (see
-`test_html_reader_fixes.py`). Tests that need the downloaded SEC filings skip themselves there.
+`test_html_reader_fixes.py`). Tests that need the downloaded SEC filings skip themselves there. Each Python job then
+checks the evaluation manifests and runs the release gate (next section).
+
+## Versioned evaluation sets and the release gate
+
+Every evaluation set has a name, a **dataset version** and a **key version** (`src/finops/evalsets.py`): a hash of
+every input and answer-key file, or, for generated sets, of what the generator writes for its seed (generated
+workbooks are hashed by content, not by their zip bytes, which depend on the openpyxl version). The committed
+manifests in `eval/manifests/` list every file and its SHA-256.
+
+```bash
+.venv/Scripts/python scripts/eval_manifest.py check            # every set against its manifest (CI runs this)
+.venv/Scripts/python scripts/eval_manifest.py check --files    # also hash the downloaded SEC filings
+.venv/Scripts/python scripts/eval_manifest.py write --only <set>   # after a deliberate change to a set or key
+```
+
+A change to a set or its answer key is allowed, but only on purpose: rewrite its manifest in the same commit and say
+why. Every report (`eval/reports/*.json`) written from now on carries a `provenance` block: when it was made, the git
+commit and whether the tree had uncommitted changes, each dataset's version and whether it matched its manifest, and
+the configuration or profile version; the Markdown report ends with the same line. Reports written before 2026-10-25
+have no such block.
+
+The **release gate** runs every set that lives in the repository (the synthetic statement corpus in all three formats;
+reconciliation dev, holdout and stress; nine invoice runs; the data-quality synthetic and independent sets; the
+spreadsheet synthetic and independent sets: about 50 s) and compares it with `eval/baseline/release-gate.json`:
+
+```bash
+.venv/Scripts/python scripts/release_gate.py                    # exit 1 if anything got worse
+.venv/Scripts/python scripts/release_gate.py --write-baseline   # after a change that was measured and kept
+```
+
+It fails when, on any set: the dataset version is not the baseline's; a document crashes that did not; a bad rate
+(silent errors, silent omissions, false automatic matches, false touchless, faults missed, false quarantines, wrong
+claims, ...) rises above the baseline's 95% upper bound; or any item that was right is now wrong (per value for
+statements, where a value that moves from caught to silent counts too; per listed failure for the other engines; a
+rising count where an engine reports only a count). The last rule is exact, not statistical, because every set is
+deterministic: on the synthetic corpus the rate rule alone would let about a dozen new silent errors through.
+Improvements pass and are listed; refresh the baseline to lock them in. The SEC filings are not in the repository, so
+the gate does not cover them: changes to the statement engine are still measured on the dev split by hand (below).
+`tests/test_release_gate.py` plants a defect for each rule, including the naive greedy matcher run against the
+committed baseline.
 
 What the Python tests cover:
 - `test_numbers.py`, `test_formulas.py`: number parsing (property-based round trip), refusal of European

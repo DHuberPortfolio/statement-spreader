@@ -1,0 +1,39 @@
+{
+ "name": "dq-holdout",
+ "source": "finops.dq.synthetic.generate(22)",
+ "version": "3b2c874fe59765c2",
+ "key_version": "5c8bca3a4b53624a",
+ "files": 6,
+ "entries": [
+  {
+   "path": "<generated>/dq-holdout/erp.xlsx",
+   "sha256": "1c856c4da1a16cd558bce030642284b9625efe5ef6d4aeb54dc6a710c4b751a8",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-holdout/po.csv",
+   "sha256": "3f477fa736d9fb3ee1fcd79f4be01d0b4a8a74298fea0583308b93148e871769",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-holdout/portal.csv",
+   "sha256": "40d5b4cb1356392876d4eef40481879af9a4fa682a0bbe19003de1c818c3274f",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-holdout/previous.csv",
+   "sha256": "fd279f192865c2c6bf7bee309f89c233b9c94caf6f0190089ecc51e40a63f4e7",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/dq-holdout/po_truth.json",
+   "sha256": "d7959cd61d275ae43a6a3df1c99b657675c79633f2e7462f9fa1d12134692f49",
+   "role": "key"
+  },
+  {
+   "path": "<generated>/dq-holdout/vendor_truth.json",
+   "sha256": "4d0a6f1b8cb1d4d710e3a9e948bf0c225566c000b91a5352b74a68130164f914",
+   "role": "key"
+  }
+ ]
+}

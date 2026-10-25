@@ -1,0 +1,504 @@
+{
+ "name": "sec-dev",
+ "source": "files: SEC 10-K filings listed in eval/sec/manifest.json (downloaded by scripts/fetch_sec.py)",
+ "version": "83478e9b205ab8ac",
+ "key_version": "256a779d1b24dd7d",
+ "files": 99,
+ "entries": [
+  {
+   "path": "eval/sec/raw/AAPL-0000320193-25-000079.htm",
+   "sha256": "63b505bf2242116033a99c4d96f43539e6081207f0d8e84aae78986d2941e93a",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/AAPL_cal.xml",
+   "sha256": "314091ba88cd58f392874866c19010ed9facdd643f34f0afbcf37137192c5f05",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/AAPL.json",
+   "sha256": "154363f560bf8edd496e613b659bb6d3895165f84a17e73484f1974f1f2617bc",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/ADBE-0000796343-26-000003.htm",
+   "sha256": "f0ef42b552087dcfaf3d7295e393955434fa16d675c435bf9d134b236a4d4b96",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/ADBE_cal.xml",
+   "sha256": "f786a23c5204abd3906bf7bb3653dc75f58ca68dd7ef35f4ef3edcae54dfdcca",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/ADBE.json",
+   "sha256": "54b298a5b4dba60ad08ef751a87b5252b5c45643712153bf51dd01f316470768",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/AMD-0000002488-26-000018.htm",
+   "sha256": "b3d41b40d91d0e9761165e57414bfb9691352c02a6b6300823966c22457a539c",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/AMD_cal.xml",
+   "sha256": "b992fa9f6cf84e5ca7084e0ae9aa1192814f95fe84878f74c8b75e32fb1281f4",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/AMD.json",
+   "sha256": "7240310b8ee1d357d848a543e95df6b0c684aa192fce245064b3abcd7128fc24",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/AMZN-0001018724-26-000004.htm",
+   "sha256": "16b4b8c13a07f7253b02fcc2b6fdab54faaca50eb8652fda1dc139fe38dac1e8",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/AMZN_cal.xml",
+   "sha256": "0218c615344f15541ea2b3380dc3a07a70ad04463d55cdf9a7b35b6c8242eb83",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/AMZN.json",
+   "sha256": "50b4eb1def930bf2ef5ad36fdd97ee3b19e420ca842227f551becafff0399f20",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/BA-0001628280-26-004357.htm",
+   "sha256": "31ca4be510d312738448ccc2425da52bf55bdf5bc505da29548493c6c2a7542c",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/BA_cal.xml",
+   "sha256": "6bb97e7e2d1e34b98c1183c9e217c947b4171823eb4b0aac738954a90aed8af3",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/BA.json",
+   "sha256": "e7cacca719dc407c6accc63137d20d51d1fe6232485a7e7ae1a42cbb44c59bfb",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/BOOT-0001104659-26-061346.htm",
+   "sha256": "652fa262004d9b41cc7fb567aee90ae5f885b4c15c261ef07fa0a81158655513",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/BOOT_cal.xml",
+   "sha256": "e0a99624da1ebdfeac10f2bdd0c95a795ac4c81cfa6dbf6f6002d758e1cf1ae5",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/BOOT.json",
+   "sha256": "3b4ed8286368384de943b9781008e86db432d5c9589f23121eafbb3fc61ecf4c",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/CAT-0000018230-26-000008.htm",
+   "sha256": "5cd3bae35bedc4808b9147d30091c3a1c765d286c0b22b674525fd955a7dec96",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/CAT_cal.xml",
+   "sha256": "f3b96518f6cc4fc30c90df75a53234c4fee1e2d002abab0bef180f0d63fd2728",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/CAT.json",
+   "sha256": "98c24508080d395264aadab4e6e4d920a9bb6b6dbfa3ba20b16f54c6f508cf05",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/CHRW-0001043277-26-000009.htm",
+   "sha256": "ca6c23a0aacce63094e729c88cc1672c015c3a7ddb158984d9dead80f054aa81",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/CHRW_cal.xml",
+   "sha256": "a43f35f71eafe0d17280f9b8d408fcd8ec3324ba73fe0d2c686bcee4860e2f11",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/CHRW.json",
+   "sha256": "8379aa88cef8fe836cb52c20fdbe08649032b911d57402abe16c74c3ab2ee9b3",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/CMG-0001058090-26-000009.htm",
+   "sha256": "e98a36f278289a2cda8ba09e2cad5e01da1e2afdb2b432d3353ded716a390d08",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/CMG_cal.xml",
+   "sha256": "86e8a451f3b6b3adb488637f82f79655f514304e8ee5dfbd5df35ea04b6034a9",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/CMG.json",
+   "sha256": "c898c56871ff54388513ca68f5d4262ace95df68660b22e5b7c01428b8251ace",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/COST-0000909832-26-000093.htm",
+   "sha256": "8d0db00be7020a71a9a563ad7f86b92eb9e0b00133490c8a80d5360d7a9fb185",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/COST_cal.xml",
+   "sha256": "b57d18ea2ea54b25cb1963539fe7e6dc0f28ab44c2db447042bc6b4d6c5fc396",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/COST.json",
+   "sha256": "64209e0f2a1489b8b075e400e8df35189d0b4db2d3accc8e82c0213efece3471",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/DIS-0001744489-25-000155.htm",
+   "sha256": "13f2e5046f1c19c838d27de6794e5d77f290f3d5a176776b7115adcffb8aba3c",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/DIS_cal.xml",
+   "sha256": "6ec82288c28955784e3f1631eda15a4cfb6d2173dc9f4b5803b482381239e53e",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/DIS.json",
+   "sha256": "3912212a240ed282e1d4e7ba317c84427f036cb64b4d694262e194a19150d8c9",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/DPZ-0001193125-26-062321.htm",
+   "sha256": "e910a226e010131a25d3ccf514cd6f0c6553a948ba7128727916fd204b106814",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/DPZ_cal.xml",
+   "sha256": "273f700d8935940196a74124c478cf01a3a68e44ea9facab3bbe3be93ce1e0df",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/DPZ.json",
+   "sha256": "95cfa03836e0bdf8d33bd13adc1cea8d16031b18301fc451f30cfceffa9ab566",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/DUOL-0001628280-26-012494.htm",
+   "sha256": "505c66a4c987c04a57e24c2bb1ffa71fb2793db200832b87058dc574ae31d94e",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/DUOL_cal.xml",
+   "sha256": "cce288e83d6b5fde1184f24e86c0084f2258697c9fe58e29fb96402d53cee5a8",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/DUOL.json",
+   "sha256": "19326124634cb9df9f115560395b2fb0636c64bb537917a4329a8bb3acd43e32",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/ETSY-0001370637-26-000019.htm",
+   "sha256": "d588f4b171e922a3c191ba027c03e1eded9db7e5cbb55b6d351d6e016de2a79e",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/ETSY_cal.xml",
+   "sha256": "6a626a68ba915aa678a05f26ae158dd2bbf87a50eee90df6e65efd8cf24c2a6a",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/ETSY.json",
+   "sha256": "089caba77ff9a0d5d1b6a3b6a4e996edae0b9d736f752f4ba918c4d1374fad0c",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/EXPD-0001193125-26-071569.htm",
+   "sha256": "fb25a242e701ce990e8101a785d890cd8c5cea118a45ddbeacd8a5ecad9aff51",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/EXPD_cal.xml",
+   "sha256": "8391f61189fdeb0d728b4360785170ee68afd395b6538c7b22f5e143453d11f9",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/EXPD.json",
+   "sha256": "027aa621d111595dd08370ac023356d12b6f237a94d270716ff62724f75eefb4",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/F-0000037996-26-000015.htm",
+   "sha256": "4f8d90fd612a4db0749bfd18cd597b8d3ef696b572fcb0de612a60c29cae4f44",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/F_cal.xml",
+   "sha256": "19e0a604942bf5c12423519bf61ebe281abaf9a18d627f353882953c385394ed",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/F.json",
+   "sha256": "5d5fe75c7a54d1399d1fffa729aa2fdcab8b3a1a92f4e5f08e13d5a9ac9d49bd",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/FAST-0000815556-26-000009.htm",
+   "sha256": "7b34c126e805f60d0ecbcc98e843ed5bd04fd0989e93a9280b2b8b0e955fd3ae",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/FAST_cal.xml",
+   "sha256": "36923dc3571869fe50aafcb6845bd20494ce80d45dfb9bd58260dd92bc6864b2",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/FAST.json",
+   "sha256": "085992b107e20f489249d7f74a9b503688045a248e8c81860366a8f5cd0ff18a",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/HAS-0000046080-26-000011.htm",
+   "sha256": "8b3c02432fbe08cf4485e059ea45201243e97fa738efaa80846e7d61e32f4dc3",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/HAS_cal.xml",
+   "sha256": "c32bbf38da5dd9c0ab7cd60a952d6c4c1f629cac3fd5bfcdfe2352d1193be352",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/HAS.json",
+   "sha256": "1d54cbcf3e31b16ce744dc406bd8d73e04503d27cf332681b8ac7ce8448b5118",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/KO-0001628280-26-010047.htm",
+   "sha256": "f6210117a42106da830149b9af35e041d06445feb05d1eb8c0cf47e97d8c0990",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/KO_cal.xml",
+   "sha256": "3d3105517ae1b00bc4efe7d8c15bbea1a6845e8ba45d125d09dfee3c3b16b301",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/KO.json",
+   "sha256": "1c5383e86ba0a6265feb31a4e93be490399b45671145d5e34701e6e41930aa16",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/LULU-0001397187-26-000020.htm",
+   "sha256": "744b9588a1224664d9a9b1458c400cdc3372ae24f30fcc424b48cc81e3947514",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/LULU_cal.xml",
+   "sha256": "e94961c1c6ab80b050d26918eee54389dabab2014228c034c47a6363f18f198a",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/LULU.json",
+   "sha256": "b8640ab835ca3d107d62fe2edf58587407b1df52a15fc3043d3b39fa1105269c",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/MAT-0001628280-26-010716.htm",
+   "sha256": "731b582130d13fe16500b164c7414620f199b838366a155bd1b1421b67506dbc",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/MAT_cal.xml",
+   "sha256": "9a95f1e583d576faaaf3d990cbb55eed1987d35bbd23d4cce4a2cb42181c6ef4",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/MAT.json",
+   "sha256": "52417e1a465c9c4409f5e7cc61c38f5de83bc5cafc8b45ab26c3eaaf5c949f4d",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/MCD-0000063908-26-000035.htm",
+   "sha256": "bd9da9ed9987be26d645f547ffe9bb9eb067290578d050675eb15ecaa78e72f2",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/MCD_cal.xml",
+   "sha256": "003da29dec4e510a912d110e8ae0d9db1bb5bb0d8c35c7bdceafa80240f065c2",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/MCD.json",
+   "sha256": "fabd9c72e9284415a16b88368712a7bdc429563427ef4e2843a72c4fed146637",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/MMM-0000066740-26-000014.htm",
+   "sha256": "d6540d031c3026dcdcaa3449490a0645dafdc872c9bedc9352269b0a71b572a9",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/MMM_cal.xml",
+   "sha256": "a31834de127f15936dc7d6f59d1c97f9e59408870606d6f3f715af30d48bc648",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/MMM.json",
+   "sha256": "48cb8cedee9ab458046c974b300960e55bcf1466a6d82f442f8f86266a13bee4",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/ORCL-0001193125-26-277521.htm",
+   "sha256": "0c303f39bc81eb33cc11ef8642dad04b6862bab91db0121b3a33f809d4ef57e7",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/ORCL_cal.xml",
+   "sha256": "d109086a238fe66c8744a9882be7a3508c31cad8dcba1b17fb9a14d861d6a8ee",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/ORCL.json",
+   "sha256": "8d7f2fe0926ec403cd525ee4d5b9113c1bb6ceb6414a9067074f976ad1634c1e",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/PEP-0000077476-26-000007.htm",
+   "sha256": "903b6a8d54f0ac92a793f1039ac0b68866598f3fa507736885bc44c852b2ebe1",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/PEP_cal.xml",
+   "sha256": "e9ca987b5d3b4155d31862034a6f12684d121e191572b8a6abee2e3b81b0bfc5",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/PEP.json",
+   "sha256": "4bc730431fec652a5f485eb3324a14d67bf809276433edefffd0a752e2987e92",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/PFE-0000078003-26-000026.htm",
+   "sha256": "c134d831c82d782ec34309ad60fccbc4bb344b5bad143b42f24996905bf88801",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/PFE_cal.xml",
+   "sha256": "fe33881c74dd3d4b2e74207bd1c28470b67c90db43f1c7128f052aee7012b4b1",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/PFE.json",
+   "sha256": "4bfd6d48673244e58cd077955a1ed3b16d6088795b4de15a9fd25b829dff675e",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/PG-0000080424-26-000103.htm",
+   "sha256": "9bfae86d0b4bc7ba6151a1b6e3ba7fdaa262917ab474e01786fb5ada928c079c",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/PG_cal.xml",
+   "sha256": "6fa38aa37aebee439f97c89fa708840c030bd61b967afa0eeb52b87f5bb3e1f0",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/PG.json",
+   "sha256": "b8edf3268bd781d90ecf8372df3a2f30c26df1c47a4332760a6085bc7adfad50",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/POOL-0001193125-26-074833.htm",
+   "sha256": "756912d34c405ac931b5bde87059b6b1b2ddb171bc6777c128d0634f1b968da2",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/POOL_cal.xml",
+   "sha256": "8493335987893cd0c38ad718919e21e86237c4ac78c925de32ba7117731074f7",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/POOL.json",
+   "sha256": "ad7b4d1ddaa5ae1addaf05233a4454fff58f013f497e0ffd49af2200f3d0bb1f",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/SHAK-0001620533-26-000018.htm",
+   "sha256": "c01f4dbd3ae0f66799021273225b4626a500258563cf3c1a76880726447b15c7",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/SHAK_cal.xml",
+   "sha256": "21494c75044fa1a5196f90da2004f5106b6b93bf97dfdf8decd683ea43ef1e8d",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/SHAK.json",
+   "sha256": "fd3eb3c9be21bbc0f3817bbd08a0c435090d78dc4bb8de3efbdeb03675f92868",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/SNA-0000091440-26-000045.htm",
+   "sha256": "33e9e2d05e4ca739989262c0b23a08221b091dc2682f02666d30139be2b20dc9",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/SNA_cal.xml",
+   "sha256": "27ad306eb6d97cb4625b4b130ab21bbdbdc660829bcb45a5317d2dde9fddb1d3",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/SNA.json",
+   "sha256": "9147c707cb5d9ad40fbe0ec07c363a672ef35c1a04a36f270befb9afb86149fc",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/ULTA-0001104659-26-035243.htm",
+   "sha256": "72dac71224f04afe3bfdf114b0b81b42f12867b09f4f1f80ae7226d300b3770a",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/ULTA_cal.xml",
+   "sha256": "8e50243ac9dc6ee095516e0be8f78b8e98610b4056719c36d24d5c6b7e703983",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/ULTA.json",
+   "sha256": "f104137ee4b37affc1b62cbbcf62b641a385ab55cedaab7d123ba0238a2b8320",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/UNP-0000100885-26-000037.htm",
+   "sha256": "ecb6f55571c01d96ce0701ddae2699dfc11526338123a1e5ae4653e5f72b444d",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/UNP_cal.xml",
+   "sha256": "796fc16a1d26a9cfdd6834c09c5cbeef2db7cc058e2cfdbfa23a440aa73aca14",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/UNP.json",
+   "sha256": "fc63c044f7cbbe96cef1609aa7c7260ff93a6f43f9c94b89e1a7c2613df3b06c",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw/WMT-0000104169-26-000055.htm",
+   "sha256": "22cb67d065ffa7f13ba030960eb7a87cec38cbc97b8e592ddd48281c402843f7",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal/WMT_cal.xml",
+   "sha256": "fc75342dbc3c3705b528a4d04a8cab46cecdd078cd58b37cfc5c74f0f986c178",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys/WMT.json",
+   "sha256": "70c03d00f1dc48419f41b6af1ec85774b5584c8a83c630c7032962e78f78c4d1",
+   "role": "key"
+  }
+ ]
+}

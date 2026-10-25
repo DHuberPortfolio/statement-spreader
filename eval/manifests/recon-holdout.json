@@ -1,0 +1,24 @@
+{
+ "name": "recon-holdout",
+ "source": "finops.recon.synthetic.generate(seed=11, scale=300, round_share=0.0)",
+ "version": "54f73ed990aef9c3",
+ "key_version": "53d8c1d37174972f",
+ "files": 3,
+ "entries": [
+  {
+   "path": "<generated>/recon-holdout/bank.csv",
+   "sha256": "b7404951935535c5fbfa6ea71f20052d33e3d255a2f987ee7b37972d7b1f37c2",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-holdout/ledger.csv",
+   "sha256": "c26ea71195ddf77243ac97eeb363240ce211a448072aee39bad509b9bf6ecf27",
+   "role": "input"
+  },
+  {
+   "path": "<generated>/recon-holdout/truth.json",
+   "sha256": "f6a196a5214439c1bcc972d44f1ab2b5640923a9a0dd1a26c7b332d73fd78bc2",
+   "role": "key"
+  }
+ ]
+}

@@ -1,0 +1,814 @@
+{
+ "name": "invoice-unseen",
+ "source": "files",
+ "version": "aee78e2ee7aee16b",
+ "key_version": "3ed3a656523407be",
+ "files": 161,
+ "entries": [
+  {
+   "path": "eval/invoice/unseen/invoices/inv-001-tax_wrong.html",
+   "sha256": "70cf31e873d00a5aa4f4a228363f6e0d993584a025ae9a255bc0a52a4acdb549",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-001-tax_wrong.pdf",
+   "sha256": "af0eae4ebabda110eb66e0ffb612e2bc0db858ac81aeb428c2ae8eec3c2e9ca2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-002-clean.html",
+   "sha256": "4bbad56e56d32e91423cb14ea20d582f9761ceec643d8145f66b9ca150db134d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-002-clean.pdf",
+   "sha256": "9bf04d88a502e4543a2c29718e9224d3e92825dad8bda20633e172d2174545e9",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-004-clean.html",
+   "sha256": "5bb6e067056d250c80bef2bb9aa7b4aa48882a2485ae0c819e3b0566a67e7c4d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-004-clean.pdf",
+   "sha256": "bf8a8fc18958b53e8905902a57df1d44b62ed3d08554588ca001e9b53a987295",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-005-possible_dup.html",
+   "sha256": "23aa81ae03b06d82c3bb828a465248f9bdeecb1726873b83c0a9ad1216e04c97",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-005-possible_dup.pdf",
+   "sha256": "d939fc3fb5f87a9e105a193dd7a35cf95d5c9f8eb75e4112d31303adfb5fd30f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-006-line_math.html",
+   "sha256": "1c080831054e8fcb5aa3a5cb30c1274b9ba7eea6e4f45e3d5db7eb2ed164354f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-006-line_math.pdf",
+   "sha256": "8a8df52641c3504f89d6a928e01c3cb3dd7e81532137d95098148c9c970de268",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-007-vendor_alias.html",
+   "sha256": "c31c73c5197db2e463750cac411eff1457c382fcf3ec105fe048e8e9e65dd011",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-007-vendor_alias.pdf",
+   "sha256": "ddc4945719c8a510448e06376f1bf3e55c718e3799df2c56c0db37b990019505",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-008-price_over.html",
+   "sha256": "64495d94cb5591d50975f573c5e9a3742b2e834de96102bbec131cf3f9736171",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-008-price_over.pdf",
+   "sha256": "6130846a7ee4f8da9502d7b86cc9bf7301f164b13c1a80a7795a56304359c42c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-009-clean.html",
+   "sha256": "6bacd528656990d29ddb7c8d200f862378513ed491ad7fce4248acd3531d9296",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-009-clean.pdf",
+   "sha256": "7157434fd5d253fa839ae6d1524cbbe407b21ff462fd2fbbc4930f1a659ebd05",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-010-price_within_tol.html",
+   "sha256": "07142aa88a157842feee7ea1cfe749faf6781e2d8f6846a628109a05cf63361a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-010-price_within_tol.pdf",
+   "sha256": "97595dba4699be35a42c8ed4cec91634a59cac357cb9afbfab42583467198305",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-011-missing_receipt.html",
+   "sha256": "7622de7e19e6f510f92a7fe2f3940f1e36875b4a39a06aa92441ba20d7870aaf",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-011-missing_receipt.pdf",
+   "sha256": "6614f41fa4e5344ec9dfd4bf1b35d41fcc39acbc5a10cc26a4802fb7ddba54c9",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-012-vendor_mismatch.html",
+   "sha256": "ce5f7229806156b95b986dd4b0fcd630763f5266d8fc325cb62eedb13e4b419b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-012-vendor_mismatch.pdf",
+   "sha256": "d3fed5e1a366361637199ff685ed05f026da51842a3a50daa67f7211e368d2d0",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-013-clean.html",
+   "sha256": "8aae5cc7f42713db50ad25a5622e55e5cae4ad607dfa6bae19d2b86c8a2d3f25",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-013-clean.pdf",
+   "sha256": "aea89416964ff9691297bd1511e1636d33ef3418cee5421123bb9c50954677c6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-014-clean.html",
+   "sha256": "4bae5a7789fbec33e831d31b39a613b2b6ed86397363b5197c0710a24ee815d7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-014-clean.pdf",
+   "sha256": "47b9df169b8fb9f08d73e85cb0c4c313df9b37dcdce077247b99d9acc0b9f07d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-015-bank_changed.html",
+   "sha256": "846f07bb9c6ef0e9fd055b679898e236216aa785b2659e58d01f64124d6fd534",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-015-bank_changed.pdf",
+   "sha256": "8e494a7e5329216bbce61f10af436b6699d04d5fe97c5bfa492a58dd809580fd",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-016-tax_unverified.html",
+   "sha256": "a3a87db7210eab78fb70f466b7e0f0818ac20c5f683fa67ebca16a18eac89dd8",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-016-tax_unverified.pdf",
+   "sha256": "26f699c818bed5e30b4905726deb3c1694a1c46675e362c2aae2b3593252afee",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-017-tax_unverified.html",
+   "sha256": "230a763ad7e507971b58646120965e636ab400f2be7fe93cebeb18baa6baf7e9",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-017-tax_unverified.pdf",
+   "sha256": "d2898b42c92ad168cd50c7dc9cb71cd15b7f569fd70b39012b40d77e1c890f96",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-018-clean.html",
+   "sha256": "d6bd2c0252b5916831fafbc1cf0df6112db3044487df820338f1f2df4c2a6f83",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-018-clean.pdf",
+   "sha256": "2a02fcb6f41b11f1f1320b3ccbc5c1e55a3deddddf51d154b9fcc241bffcec82",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-019-line_math.html",
+   "sha256": "0e85f82c4325af7bddc865fc066730f4ce887c9995f2c100795fae3d024a23d5",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-019-line_math.pdf",
+   "sha256": "1fe994745e050a0701dc1296eaaf90a1a2173fc41c27ea9f7d7d84c3a2946b63",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-020-clean.html",
+   "sha256": "58d0fb9cc61ad280b55c269e85f8defe7b36dc3e205223d202ce2121aadab217",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-020-clean.pdf",
+   "sha256": "ab361a124a3e50febbe029db946af977955f14a31448b547f43ec61c11a90242",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-021-clean.html",
+   "sha256": "91af88586a3c74a1f1eeff3553aab860fe042552a17e3782680c05f02b09a6a2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-021-clean.pdf",
+   "sha256": "210d3fc2487ed5afd910d6da2c5499b797862995fcbfbb739557126a752dc70f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-022-clean.html",
+   "sha256": "b23b5bba33ddba6c037b366b8911a666ad812a08fba94c854242c7aba88faae3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-022-clean.pdf",
+   "sha256": "1847613490950333f99408ffee45012387ae5edc2f034d388588ba6a547a331e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-023-no_po_ref.html",
+   "sha256": "6979603eaf8be52de2eda62c372689ee6e1d1798e2b03a46a4e2d00a0fdc6e7b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-023-no_po_ref.pdf",
+   "sha256": "5abcf000de80cefd9b91b5257ebaa00b97425b296c04eee1a2977a364b6e1fdf",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-024-over_receipt.html",
+   "sha256": "b59bf783d0810be44d9dd39098dd98ff0af83a6d3618637e36b088191a85c9ec",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-024-over_receipt.pdf",
+   "sha256": "7cb40a3dfd738e3a36ac978070229684f79e80c5453c77e5c4c5072a3f3a79e3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-025-clean.html",
+   "sha256": "b346b0baa2dc7b9d66eb1faa903d4755b7ad115aede5e24417b08abe9ecb31b1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-025-clean.pdf",
+   "sha256": "24260ac9a5bfbfb42fbb550445fd60274b411729101c2ab0d96f666aec00e7da",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-026-json_clean.json",
+   "sha256": "47f0b2534ddfe61e9257f0621df2d2a10deefc674f0f8d57082175ac2aae0f89",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-027-total_math.html",
+   "sha256": "499edabfdeb3d033cb6dc334e7bf6661e41e29a6e7a787927c776e33d423c66b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-027-total_math.pdf",
+   "sha256": "c57b7ec06a5a76c942341aa3c69f8d3541dc694a540cdadffd060e5e2283bfc7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-028-service_2way.html",
+   "sha256": "10d679eb21a5e5b9148d37a2ea218ccdc84bd9789733828dd831fc29cfa12797",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-028-service_2way.pdf",
+   "sha256": "10246f9d148676abb28f7fe05f734c6bb10885f56aa5708035dd31eb847bd5c6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-029-clean.html",
+   "sha256": "a974a8286ac8ce9713c84ffe0d1d0cb3c30ac9448dc99d7347e66707ec2b4b74",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-029-clean.pdf",
+   "sha256": "7f0aff19ae21a2c86c436b8f27786f6ae922679c42061a89bf510c52db32103c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-030-exact_dup.html",
+   "sha256": "510065dfa7b6260ecae19b607aebe07d0eaae0de12db63ebff558a879bee3900",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-030-exact_dup.pdf",
+   "sha256": "a8e518203bc7ddae12ccc4e04e588a8f06965b7c61d46d1c0f6e35327fc8a2c1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-031-closed_po.html",
+   "sha256": "761d6b3cb2e1e3d1e608764079ecdceb82a60afd86a6d2e866aa2db8ea55bddd",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-031-closed_po.pdf",
+   "sha256": "02239168a61b95a3d73e849ec04e054b1d1c307ef8bbdc6b684e235e5d477478",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-032-price_over.html",
+   "sha256": "b3c9cdf3418236bfa4df2195393f3236b1b33e6aeb9dc439656287a11df23006",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-032-price_over.pdf",
+   "sha256": "41c696995c69a0f2c9308ce35ff0e064ba3cef5884b3c31526ae72fa73d8d9df",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-033-clean.html",
+   "sha256": "0b042bb9bb88a88db36efc6de2a449fae2dedc89c29c913f6f14d089cd7aeb81",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-033-clean.pdf",
+   "sha256": "6bfdab7cd755e91bd1f8f678641345d8c539538bedf6616cfa5d8aecf45e308f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-034-line_math.html",
+   "sha256": "fafedb3b7ad2e6779b02fcc32e090e576d87b3ecffb743c13e14c575cd7b20f1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-034-line_math.pdf",
+   "sha256": "9cb8c987983d6e0db7ae601ca74a7000ba60cf0203809068852066c50cb2d162",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-035-multipage.html",
+   "sha256": "d1b0513f4402c2af7f19995268e85410ac891cf35a5e84e39b482c598199ba58",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-035-multipage.pdf",
+   "sha256": "5a75cb29326c7aeca4a1a47204b01212f9b02a210bbb77dd962509925f169253",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-036-vendor_alias.html",
+   "sha256": "9d81745fa496968f900978d84b888230d144b4142afd9d02c6b7625bfbfe2cd7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-036-vendor_alias.pdf",
+   "sha256": "c2d6b760d80e2f43aa17643c4aaf9e639893cdcf675937ded19a4275dce50540",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-037-over_receipt.html",
+   "sha256": "65211a90966326841ec783570f16af4521878452a7fcadfe91ff5ec8e58706b8",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-037-over_receipt.pdf",
+   "sha256": "c62656a5e38620aa31c464ae1da3fef3d2038678a20a74be6cc01c409cf40c44",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-038-bank_changed.html",
+   "sha256": "6bbd899ef7945a99a6120bf87848786b40cff04caa546e8ad38b63ce6e31a28d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-038-bank_changed.pdf",
+   "sha256": "f9bc67051b91565de6ab68af9101236544b5d1b0a42b58e479c20737be76c5c4",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-039-clean.html",
+   "sha256": "b7fd69a1c204f6944216e9e3a1a8cd79e2b2fc90b03e9a5688409fcf5cfb22d0",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-039-clean.pdf",
+   "sha256": "ef6a21ad6728d9538a91e19e35ca763dd4487b9338bad8124aa95d5b9b6924f8",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-040-exact_dup.html",
+   "sha256": "b58b1d0cf65d5f85daf5179e17cd57ed0f4594bd1266b1443405dfe037e38a32",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-040-exact_dup.pdf",
+   "sha256": "e3d1059132c692808b18cdc696b194dc7a133e0a163fe29eefc3ba12ba80eaaa",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-041-multipage.html",
+   "sha256": "b12f029a3325e5e8c6c3a599e3c27c81bbc72229f5c4ecba8561235390a3459f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-041-multipage.pdf",
+   "sha256": "da7edcadd32a1a42f1dd8c750e9adfd98b81763bc9edd01a5867098842f757bc",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-042-vendor_mismatch.html",
+   "sha256": "1877319edc5a7a1c501c607a6299b699d321c37ed8c9749231ba87d515537562",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-042-vendor_mismatch.pdf",
+   "sha256": "5f41b5972471bd70bf3ef48d6d9b35dd19fe24604bdec20f3e37bf7fcb025416",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-043-sequential.html",
+   "sha256": "1a4aea5df014f3aa4d360e96b0dced5583dc9ef1f7e31b6fb252eec443d50759",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-043-sequential.pdf",
+   "sha256": "4ac4eaf544e1e12ed8fd5a280ffa8a30b896ae9ed4b8b4820e4e3e4bfa26286a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-044-sequential.html",
+   "sha256": "d93beead246563f67024633206c295885d10916f690e5d34f58ddc80ed01427f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-044-sequential.pdf",
+   "sha256": "c3a8543577b26380ecee0dd4b8b637ff52e773458ebcb012cf9dd79160a64927",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-045-sequential.html",
+   "sha256": "eee438f9428acb3db750f33e0c14537439c6a3fb9d6d5fea240c44ee182c3b99",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-045-sequential.pdf",
+   "sha256": "44e9007c31f9dc08058332e7bbb4254ab12d38e5eb632c86683526a56dc0a33b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-046-sequential.html",
+   "sha256": "54d9d312a585a809c1904473fd80f29dc7aa777600db350cea2e38e1ec559929",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-046-sequential.pdf",
+   "sha256": "84fc7c5551e654fa16be986eddc28bc1187777e4bb8ebc55897a7b160ed8e084",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-047-bank_unverified.html",
+   "sha256": "9f27a7bf2a81e1c049a7ba8651a403b86bf178d875766c3d292b9b5e67b3ff63",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-047-bank_unverified.pdf",
+   "sha256": "d16e2c4a9bc252c96dae74e841d2d73884a539d695c2dc80160c5f4892d49ea6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-048-bank_changed.html",
+   "sha256": "f1359158c91a39ac4e783eea5d52d6a85ea035284aed7eac868a52367eaca2fc",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-048-bank_changed.pdf",
+   "sha256": "d18cfd2ac8359e2a56eaa1b8af548b30440a4046277021e36571d0ea9359710d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-049-price_over.html",
+   "sha256": "f9629ab9e7eba680a9d3c7a5c6b4610943173d67fa609c9ff9bce7c12bd8a7b8",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-049-price_over.pdf",
+   "sha256": "dce0355c09686b9bec1f494ee62dcf65556f48fc4a59d495cf57c1d9be9e4fa2",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-050-clean.html",
+   "sha256": "e3daa066dbaf9701c507abb817803d41df71994d2093d72b2e9220ee85d9ebfc",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-050-clean.pdf",
+   "sha256": "5ca40199cd522561eaeb7be68528dc07f8bf5f617b19c0d06c55753bc01e360c",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-051-missing_receipt.html",
+   "sha256": "2fe2359faa39f2632ce125261ecf03d0e4391162403d2a1b8ffe5b4d313eb08e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-051-missing_receipt.pdf",
+   "sha256": "9374b57d50e1816bc5f81881a09b8193a9ec34b7429a0412d48fe883027186bf",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-052-price_within_tol.html",
+   "sha256": "62b3bebb6892a76d5df1bb0c4dd50e2f217e66ba9a02d9d6562ea0250ed4ad80",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-052-price_within_tol.pdf",
+   "sha256": "2b13838ac9c280291943e3f939055d144157a1b2e3dc35ba8bc842cab3a4a961",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-053-json_clean.json",
+   "sha256": "a9ce1a9c2423a4c320000614a1b7836ff2e36f0e2218e75ae3b4dd71f93eb208",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-054-service_2way.html",
+   "sha256": "d3aecc4af028b3cffe19114eb4ff0955d96da4c7aa8b834b0239af2bdb8d3350",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-054-service_2way.pdf",
+   "sha256": "4400dda53ea2bf5b3c5e554b986eb1b1820e460a4d115f53bdc78797610afd9f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-055-clean.html",
+   "sha256": "7c6c84504171de9934af7f35a55432f2cb688346c971bd6c00c7d362dda6943f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-055-clean.pdf",
+   "sha256": "b287b4411e60940f59eac3f845636b4f0db6be43d23b8f845a6b450e1205c171",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-056-service_2way.html",
+   "sha256": "a72e91c39581d35f0cf6a080e23c20da227ac6c2b5fbdbba56a2a8ead2404806",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-056-service_2way.pdf",
+   "sha256": "72a9304e5b167ee59a778175fb8d222c4b39d0d772216f2f18e8ff261d26e875",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-057-sequential.html",
+   "sha256": "6df63bf681a42f255517e924fa59a47f2225a58a5b82c43147104f287f05e675",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-057-sequential.pdf",
+   "sha256": "45722ef7a60765092ca2d7c58d5127a56b53572d5d96681e4af437a4b7f65d4d",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-058-sequential.html",
+   "sha256": "17fbcd9e94dd255d11d73bea80260fefeb3e1058d9018ff3ffeb7502a12b3570",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-058-sequential.pdf",
+   "sha256": "4cfa1edc5f56869f7b4e6dce6eedc832c3b943bae3f0a19ff0ef07fced6cb241",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-059-clean.html",
+   "sha256": "e242745a8207cb0d7f76706bf26b29c79f9d29763f5188d071f6e124d3955954",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-059-clean.pdf",
+   "sha256": "2db36e11cab80204394dd09584104c42034a08181730e3600adaca0ef1c707db",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-060-similar_distinct.html",
+   "sha256": "debc845f050cb2f2e6b254462cffd0dad5e3c2c18e89bdcf894ee0388be94c7a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-060-similar_distinct.pdf",
+   "sha256": "ba14f1757403ea3f348c39c6cd5418503d58d3819cb0a9fd05d631b78f801a20",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-061-po_not_found.html",
+   "sha256": "99b615516358668b146f5777f0642e82caaff4bf2befcad2f8cbdfed19cdb027",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-061-po_not_found.pdf",
+   "sha256": "7182e501953e9738d192e29b61c19fb2e1f722ce5edeee29dfb9af8e07b549a1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-062-clean.html",
+   "sha256": "1b5c53890d12b1a4e6e375814da8356bf0569cc2e6a1c92baec149b4919f1a4b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-062-clean.pdf",
+   "sha256": "e1b6d09eb253c75a22267d0d510ba42f4d1d4019c96ecd90aa6958d65146b6fb",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-063-no_po_ref.html",
+   "sha256": "e0a6c202f5bd2008322f87055204095e6f0c05f271d7e6ba0200bf55142018ab",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-063-no_po_ref.pdf",
+   "sha256": "b4d58baaadd12d193bf03b60f3f3b98b2e77d72598699b3c722dfd4758665b77",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-064-tax_wrong.html",
+   "sha256": "73807ac889cb745a2febe41d25743ca53b08454624fb4e67cbc0a753c401d0d5",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-064-tax_wrong.pdf",
+   "sha256": "a14c987b7885737f52ddec5a2e75020da4f71ff492e2a79ea3a449bc041c0c2e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-065-po_not_found.html",
+   "sha256": "cc2ed00dc5435d28f3acfa8344739c635714ca057ad67a34b36d9576b581bfe1",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-065-po_not_found.pdf",
+   "sha256": "2f3b765399003a142e97e1d6a951f099a34c749bdf83818d20203970d6ab317a",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-066-bank_unverified.html",
+   "sha256": "5dc20beb15e1e3279c6a5143d06836a2925c4894db8e8f0022f741bf38149d2e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-066-bank_unverified.pdf",
+   "sha256": "c97043c1a81f850179be2ca0d8fe566fd211a2b624e30a69459da0b7e231ac35",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-067-closed_po.html",
+   "sha256": "36859665caa82d1cbb9cb8d96d5a49f9ebc9534733d925413868d06fcd80fe23",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-067-closed_po.pdf",
+   "sha256": "590920f0384256dbfd471338c679aa7ad39343056cec6c48024614f3ac6a4f6b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-068-price_within_tol.html",
+   "sha256": "605c2aa8dd0e0c405ec05bfa61bb3730f4ae655cea500f90e1fccb9cb075e707",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-068-price_within_tol.pdf",
+   "sha256": "31513af30f56d4ee0b709b472f41fdd361d1578ccb285a8e94e7ba202c5bddf3",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-069-service_2way.html",
+   "sha256": "01d99a0626531e756d52be37e3bd1a41e7c758211ed562e1e65f108589ae86ba",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-069-service_2way.pdf",
+   "sha256": "3a90420755122a1fe79343c270de37ec7022c8a0e7f800ea5d4fb94ea0a988da",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-070-total_math.html",
+   "sha256": "71b66ca3943da320afb689955645f9ee42cb7da33f68dcd6414dd6b9e8db3328",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-070-total_math.pdf",
+   "sha256": "8328c6e1f71090dd5b0981f5a5ddcdf74fcd248869b383da784f8fabd5c48b39",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-071-json_clean.json",
+   "sha256": "6a0b4f89299145e67868d7b5080d96c9d3e8c1cfd6ef7e0f605f39deb57d1fec",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-072-clean.html",
+   "sha256": "2c3b2c94511b8b4870d468d428d2f09652683ea6176dfad5449c8debbe52b8f6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-072-clean.pdf",
+   "sha256": "07e78cec0693e03ef3a0e8e5a7c554c9543436f528a7dea78154c9238f964b58",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-073-clean.html",
+   "sha256": "c0b65b9643d8a1e16f5a152b7995a0e0530ccd168ac10f588168d938f03ac589",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-073-clean.pdf",
+   "sha256": "8755894daa7da678f41aa154993bc97e08c5ce9780a18759374b26716940e551",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-074-possible_dup.html",
+   "sha256": "926a7493a31dcc6660d154798484359530519cc54b4fa8bcee41d3c73179f667",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-074-possible_dup.pdf",
+   "sha256": "e450a71dcd37b79d1f68190bd66295e129e29694bb163902b25eb0324d1ffb84",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-075-clean.html",
+   "sha256": "3105228d3febb0964045d8cd21db85f172b89a065bfbd48655059b625889da25",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-075-clean.pdf",
+   "sha256": "e97d407cacfa24f8e788f89aab1dba23c22c3e0bd7ba770b279d208f7046bbe9",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-076-similar_distinct.html",
+   "sha256": "137b252134c186ddfb574ea101f19071d01ef200cf68e8514e7498edc996c2cd",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-076-similar_distinct.pdf",
+   "sha256": "61d8c2d67db04b0115ba7a457d2152fc4ad4f744c90908645ea9001d1fd566cb",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-077-over_receipt.html",
+   "sha256": "065036858cd015b90a89642675bcb966955dad3ee5e9334c15cb0ca708543eba",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-077-over_receipt.pdf",
+   "sha256": "254fb9b7d07ef16de3d1fab7ac420fed825e2f59e917fd97fa3810c7fc24eae0",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-078-clean.html",
+   "sha256": "52e8498c19141f3ba984932a06ce8b932513ef0244e75cf0701593e86ecf7071",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-078-clean.pdf",
+   "sha256": "6be1f474ea1e0b03d3523fb9c0251e921ddad574ae3adfc859b4daf9218f4b7f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-079-missing_receipt.html",
+   "sha256": "7a7be1b6496bc6e0eab5fcea87c5a6ef8a66d47c37abe68e9fc55681da858df6",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-079-missing_receipt.pdf",
+   "sha256": "1ef408cd566f50c72e979eaf2001ec8e6853a329fd361ef80fca7981c83c875f",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-080-clean.html",
+   "sha256": "e38634cb58521bbc60b668aa0c3b4f0d822f457993213cedfcc2678f213880f7",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-080-clean.pdf",
+   "sha256": "4b804eac7f311edfa93b7f2f93f54c79b44bdf561bd029724d5b1b6080184f48",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-081-exact_dup.html",
+   "sha256": "9bc3a86f6fe7a5e49110fa6c27bb5056c0f0f4cc0a007ca2aa98ad241705066b",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/invoices/inv-081-exact_dup.pdf",
+   "sha256": "6b712f41197d0bb1b0d3cc752b29144e9e3498f928af11cba62ecd8824961bd4",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/master/purchase_orders.csv",
+   "sha256": "f95e2f429b305d5ae897c17059d2401cac73263c4dbfec4a642dfc55f8951714",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/master/receipts.csv",
+   "sha256": "d7b2e0b75fd6d3c3bae196f3e225fb7542989fd82657c0299aba708521c20a5e",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/master/vendors.csv",
+   "sha256": "8c8d8e05a8078b6f3f5b1de1b2b412b320bf77b2b1c36d947f59ff3da5a9b8e4",
+   "role": "input"
+  },
+  {
+   "path": "eval/invoice/unseen/truth.json",
+   "sha256": "079897cd31685bfd519d5036b363ed0e26cd00e6ff33d1049e088f2d816478f6",
+   "role": "key"
+  }
+ ]
+}

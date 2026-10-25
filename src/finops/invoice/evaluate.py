@@ -26,6 +26,7 @@ from typing import Any
 
 from finops.core.evaluation import Rate, write_report
 from finops.core.exceptions import Severity
+from finops.core.fingerprint import content_hash
 
 from .config import APPolicy
 from .engine import history_entry, process
@@ -212,5 +213,7 @@ def run_report(name: str, root: Path, scale: int = 0) -> list[str]:
             lines += ["", "Failures to investigate (first 15):", ""] + [f"- {f['doc']}: {f['what']} (got {f.get('got')}, want {f.get('want', '')})"
                                                                        for f in r["failures"][:15]]
         lines.append("")
-    write_report(name, report, lines)
+    used = sorted({folder for _, folder, _, _ in runs if (root / "eval" / "invoice" / folder / "truth.json").exists()})
+    write_report(name, report, lines, datasets=[f"invoice-{f}" for f in used],
+                 config={split: f"{pol.id} {content_hash(pol.model_dump(mode='json'))}" for split, _, pol, _ in runs})
     return lines

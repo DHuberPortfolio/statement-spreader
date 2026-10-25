@@ -451,7 +451,7 @@ def test_a_bank_change_in_the_source_system_no_longer_reaches_the_invoice_engine
 def test_synthetic_sets_are_scored_and_stable(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     import finops.dq.evaluate as ev
 
-    monkeypatch.setattr(ev, "write_report", lambda name, report, lines: tmp_path / "r.md")
+    monkeypatch.setattr(ev, "write_report", lambda name, report, lines, **kw: tmp_path / "r.md")
     s = generate(5, clean=30, per_fault=1, per_legit=1)
     assert len(s.vendor_truth) > 40 and len(s.po_truth) > 40
     lines = run_report("t", ROOT, {"t": 5})

@@ -37,6 +37,13 @@ jobs:
         run: python -c "import lxml.etree as e; print('lxml', e.LXML_VERSION, 'libxml2', e.LIBXML_VERSION)"
       - name: Tests
         run: python -m pytest
+      - name: Evaluation sets match their manifests
+        run: python scripts/eval_manifest.py check
+      - name: Release gate (every in-repo set against eval/baseline/release-gate.json)
+        run: python scripts/release_gate.py --out gate.md
+      - name: Release gate summary
+        if: always()
+        run: test -f gate.md && cat gate.md >> "$GITHUB_STEP_SUMMARY" || true
       - name: The spreader command
         run: spreader --help
 

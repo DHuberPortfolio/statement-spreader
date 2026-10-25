@@ -1,0 +1,39 @@
+{
+ "name": "dq-independent-1",
+ "source": "files",
+ "version": "92116bb48ac878a0",
+ "key_version": "cd699d0751693456",
+ "files": 6,
+ "entries": [
+  {
+   "path": "eval/dq/independent-1/build_set.py",
+   "sha256": "54c181ae6e4f555b02e68da288174680177eea0ea568c8c257999f255bd11c3d",
+   "role": "input"
+  },
+  {
+   "path": "eval/dq/independent-1/erp.xlsx",
+   "sha256": "ea5f0c7d1a6a43ac32c712ce244b349970e7f5037a6cbab4b443326fb44538a6",
+   "role": "input"
+  },
+  {
+   "path": "eval/dq/independent-1/po.csv",
+   "sha256": "a9bd3bec6041f12f62fad78e82a2cd84469031aa59fc75bac5e23449de4f6fe6",
+   "role": "input"
+  },
+  {
+   "path": "eval/dq/independent-1/portal.csv",
+   "sha256": "231e799f205624ef297ec38855024503cca521cce7d734c4f9e1d5e5f7838f21",
+   "role": "input"
+  },
+  {
+   "path": "eval/dq/independent-1/previous.csv",
+   "sha256": "1f3869e7903d8e54740eee2b32d4c9537f4eba24c8984e4ef9428e657ae077af",
+   "role": "input"
+  },
+  {
+   "path": "eval/dq/independent-1/truth.json",
+   "sha256": "0e028d3bfeb55dadf7234cf89ff674e46e2d643dbf147b32d97bcd6c9a5aa7de",
+   "role": "key"
+  }
+ ]
+}
