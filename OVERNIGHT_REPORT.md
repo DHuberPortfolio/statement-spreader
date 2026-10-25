@@ -25,21 +25,6 @@ Reverted or rejected along the way, each logged:
 Two general engine flaws were found and fixed: undated columns crashed a filing, and a parent-company-only
 statement was spread as if consolidated. All work is on branch `overnight-2026-10-25`; nothing touched `main`.
 
-## Task 8: README (done)
-
-- New top: who uses it, which manual work it replaces, and what stays human, per engine. Then a Mermaid architecture
-  diagram: the engines, the shared controls, the data flow, and the human decision points (it parses with Mermaid
-  11.4; a deliberately broken copy is rejected, so the check works).
-- The statement results table is replaced with tonight's measurements, each row naming its report: dev and holdout
-  (`stmt-*-confirmed`, holdout on all 30 filings), printed PDFs (`eval/sec/pdf/eval-overnight.json`) and the synthetic
-  corpus (`syn-overnight`). Added the company-memory table, the second-reader figures labelled as not independent,
-  and a pointer to the overlay smoke test. The honest limits are kept.
-- The step-by-step description of the statement engine moved to ARCHITECTURE.md, which also gained a section on
-  tonight's shared controls. The other engines' tables, the harder-tests section, "Run it", "Adapting" and "Limits"
-  are kept verbatim.
-- One overclaim caught in my own draft: "nothing becomes eligible without a person" is false. Touchless invoices
-  reach "eligible for approval" alone, and calibrated rules settle matches alone. Corrected.
-
 ## Task 1: flaky tests (done)
 
 **What CI actually showed.** The only CI run on `main` (run 40148515260, commit 8e644a7) failed one job,
@@ -346,6 +331,21 @@ they were). No value went from caught to silent on either split.
   Unilever's and BP's values carry an assumed unit and a blocker. That is safe, but it is review work on every IFRS
   filer. It is the next ingestion step after OCR.
 
+## Task 8: README (done)
+
+- New top: who uses it, which manual work it replaces, and what stays human, per engine. Then a Mermaid architecture
+  diagram: the engines, the shared controls, the data flow, and the human decision points (it parses with Mermaid
+  11.4; a deliberately broken copy is rejected, so the check works).
+- The statement results table is replaced with tonight's measurements, each row naming its report: dev and holdout
+  (`stmt-*-confirmed`, holdout on all 30 filings), printed PDFs (`eval/sec/pdf/eval-overnight.json`) and the synthetic
+  corpus (`syn-overnight`). Added the company-memory table, the second-reader figures labelled as not independent,
+  and a pointer to the overlay smoke test. The honest limits are kept.
+- The step-by-step description of the statement engine moved to ARCHITECTURE.md, which also gained a section on
+  tonight's shared controls. The other engines' tables, the harder-tests section, "Run it", "Adapting" and "Limits"
+  are kept verbatim.
+- One overclaim caught in my own draft: "nothing becomes eligible without a person" is false. Touchless invoices
+  reach "eligible for approval" alone, and calibrated rules settle matches alone. Corrected.
+
 ## Assumptions made without anyone to ask
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the
@@ -414,3 +414,23 @@ they were). No value went from caught to silent on either split.
    - The finding shape (`policy.Finding`) is what a job queue or a case-management connector would carry.
    - The append-only approval tables are what sign-in and roles would attach identities to.
    - `finops.gate` is the release check a deployment pipeline would run.
+
+## CI on the branch
+
+Every push ran the four jobs (Python 3.11, Python 3.13, Python 3.11 with the oldest allowed lxml 5.2, and web). Each
+Python job also runs the manifest check and the release gate, so the synthetic statement corpus and every in-repo set
+were re-measured on Linux at each push. Some commits went up together, so 8 runs cover the 12 commits; the head of
+every push passed all four jobs:
+
+| Head commit | Result |
+|---|---|
+| 414f41f (flaky test, after the ROI fix) | success |
+| 63b9bb0 (versioned evaluation and release gate) | success |
+| 342cddd (uncertainty policy) | success |
+| 2a4d973 (company memory, after the crash fix) | success |
+| a42ce9d (XBRL second reader) | success |
+| a4d0019 (narrower failed-check flags) | success |
+| 7c1009e (bank, insurer, IFRS overlays) | success |
+| cd69c53 (README) | success |
+
+The commit that adds this section is checked the same way; its result is in the commit's CI run on GitHub.
