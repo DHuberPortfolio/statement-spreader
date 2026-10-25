@@ -1,0 +1,28 @@
+{
+ "vendor": {
+  "name": "Fabrikam Tools",
+  "tax_id": "89-4624638"
+ },
+ "invoice_number": "INV-007070",
+ "invoice_date": "2026-03-08",
+ "due_date": "2026-04-07",
+ "po_number": "PO-4564",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "1384.32",
+ "tax": "83.06",
+ "total": "1467.38",
+ "lines": [
+  {
+   "item_code": "FAB-114",
+   "description": "Hydraulic hose 2m",
+   "quantity": "24",
+   "unit_price": "57.68",
+   "amount": "1384.32"
+  }
+ ],
+ "remit_to": {
+  "account_number": "291804274612",
+  "routing_number": "058693187"
+ }
+}

@@ -4,6 +4,10 @@
     .venv/Scripts/python scripts/run_eval.py --split holdout       # SEC held-out split
     .venv/Scripts/python scripts/run_eval.py --synthetic           # synthetic corpus (all formats)
     .venv/Scripts/python scripts/run_eval.py --split all --save baseline-2026-10-24
+    .venv/Scripts/python scripts/run_eval.py --engine recon        # reconciliation (synthetic, dev + holdout seeds)
+    .venv/Scripts/python scripts/run_eval.py --engine invoice      # invoice intake and three-way matching
+    .venv/Scripts/python scripts/run_eval.py --engine dq           # data-quality gate
+    .venv/Scripts/python scripts/run_eval.py --engine sheets       # spreadsheet risk scanner
 
 Writes eval/reports/<name>.md and .json. Tuning must only ever look at the dev split; the
 holdout split is for measuring, so its numbers are not fitted to.
@@ -80,7 +84,29 @@ def main() -> None:
     ap.add_argument("--only", default=None, help="comma-separated document ids")
     ap.add_argument("--rebuild-keys", action="store_true", help="rebuild SEC answer keys from the filings")
     ap.add_argument("--model", default=None, help="URL of a local llama-server for the mapping tier")
+    ap.add_argument("--engine", default="statements", choices=["statements", "recon", "invoice", "dq", "sheets"])
+    ap.add_argument("--no-calc", action="store_true", help="rebuild SEC keys without the calculation links (the old key)")
+    ap.add_argument("--scale", type=int, default=300, help="recon/invoice: synthetic set size")
     args = ap.parse_args()
+    if args.engine != "statements":
+        name = args.save or f"{args.engine}-latest"
+        if args.engine == "recon":
+            from finops.recon.evaluate import run_report
+            lines = run_report(name, str(ROOT / "config" / "finops" / "recon" / "bank-vs-gl.yaml"),
+                               {"dev": 7, "holdout": 11, "stress": 13}, args.scale, ["greedy", "component"],
+                               round_share={"stress": 0.4})
+        elif args.engine == "sheets":
+            from finops.sheets.evaluate import run_report as sheets_report
+            path = sheets_report(name, [31, 32], sorted((ROOT / "eval" / "sheets").glob("independent-*")))
+            lines = path.read_text(encoding="utf-8").splitlines()
+        elif args.engine == "dq":
+            from finops.dq.evaluate import run_report as dq_report
+            lines = dq_report(name, ROOT, {"dev": 21, "holdout": 22})
+        else:
+            from finops.invoice.evaluate import run_report as invoice_report
+            lines = invoice_report(name, ROOT, args.scale)
+        print("\n".join(lines[:60] if args.engine != "dq" else lines))
+        return
 
     profile = load_profile()
     model = None
@@ -109,7 +135,8 @@ def main() -> None:
             if key_path.exists() and not (args.rebuild_keys and doc_id.startswith("sec:")):
                 key = AnswerKey.load(key_path)
             else:
-                key, _ = build_key(path.name, data, profile)
+                cal = SEC / "cal" / f"{doc_id.split(':', 1)[1]}_cal.xml"
+                key, _ = build_key(path.name, data, profile, cal.read_bytes() if cal.exists() and not args.no_calc else None)
                 key_path.parent.mkdir(parents=True, exist_ok=True)
                 key.save(key_path)
             ir = read_document(path.name, data)
@@ -149,6 +176,10 @@ def main() -> None:
                     "status": v.status, "flags": v.flags} for d, v in wrong],
     }
     (REPORTS / f"{name}.json").write_text(json.dumps(report, indent=1, default=str))
+    latest = f"latest-{args.split}{'-syn' if args.synthetic else ''}"
+    if name != latest and not args.only and not args.model:
+        # The app's ROI page reads latest-*: a full run of the default pipeline refreshes it whatever it is saved as.
+        (REPORTS / f"{latest}.json").write_text(json.dumps(report, indent=1, default=str))
     lines = [f"# Evaluation: {name}", "", f"{len(scores)} documents ({report['crashed']} crashed), profile {report['profile']}, "
              f"{report['seconds']} s.", "", "| Measure | Result |", "|---|---|"]
     labels = {"accuracy": "Spread values right (of all values in the answer keys)",

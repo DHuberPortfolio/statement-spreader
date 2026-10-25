@@ -22,6 +22,38 @@ from .store import now
 router = APIRouter()
 MAX_HEARTBEAT_SECONDS = 30.0
 REPORTS = Path(__file__).resolve().parents[2] / "eval" / "reports"
+MANIFEST = REPORTS.parent / "sec" / "manifest.json"
+
+
+def silent_error_rate() -> tuple[tuple[int, int] | None, str]:
+    """The tool's silent error rate for the ROI page, from the latest-* reports every full evaluation run writes.
+
+    The holdout half (never tuned on) from whichever run measured it last, else the dev half, labelled as such. The
+    page used to read latest-dev only, which named runs never refreshed, so it showed a figure from the first day."""
+    def load(name: str) -> tuple[float, dict[str, Any]] | None:
+        p = REPORTS / f"{name}.json"
+        return (p.stat().st_mtime, json.loads(p.read_text())) if p.exists() else None
+
+    holdout: list[tuple[float, tuple[int, int], str]] = []
+    if h := load("latest-holdout"):
+        r = h[1]["rates"]["silent_error_rate"]
+        holdout.append((h[0], (int(r["n"]), int(r["d"])), f"evaluation '{h[1]['name']}', {h[1]['documents']} holdout filings, never tuned on"))
+    if (a := load("latest-all")) and MANIFEST.exists():
+        split = {t: v.get("split") for t, v in json.loads(MANIFEST.read_text()).items()}
+        docs = [d for d in a[1]["documents_detail"] if split.get(d["doc"].split(":", 1)[-1]) == "holdout"]
+        wrong = sum(d["buckets"].get("wrong_auto", 0) for d in docs)
+        auto = wrong + sum(d["buckets"].get("correct_auto", 0) for d in docs)
+        crashed = sum(1 for d in docs if d.get("error"))
+        if auto:
+            holdout.append((a[0], (wrong, auto), f"holdout half of evaluation '{a[1]['name']}', {len(docs)} filings"
+                            + (f" ({crashed} crashed)" if crashed else "") + ", never tuned on"))
+    if holdout:
+        _, rate, source = max(holdout, key=lambda x: x[0])
+        return rate, source
+    if d := load("latest-dev"):
+        r = d[1]["rates"]["silent_error_rate"]
+        return (int(r["n"]), int(r["d"])), f"evaluation '{d[1]['name']}', {d[1]['documents']} dev filings (tuned on)"
+    return None, ""
 
 
 def _svc():  # imported lazily to avoid a cycle with api.py
@@ -178,16 +210,7 @@ def report() -> dict[str, Any]:
     for r in svc.store.query("SELECT timings FROM runs WHERE status='succeeded' AND timings IS NOT NULL"):
         t = json.loads(r["timings"])
         compute.append(sum(t.values()) / 1000)
-    silent = None
-    source = ""
-    for name in ("latest-holdout", "latest-all", "latest-dev"):
-        p = REPORTS / f"{name}.json"
-        if p.exists():
-            rep = json.loads(p.read_text())
-            r = rep["rates"]["silent_error_rate"]
-            silent = (int(r["n"]), int(r["d"]))
-            source = f"evaluation '{rep['name']}', {rep['documents']} documents"
-            break
+    silent, source = silent_error_rate()
     synthetic = any(r["note"] and "demo" in (r["note"] or "").lower() for r in rows)
     inp = roi.RoiInputs(assumptions=_assumptions(svc), sessions=sessions, compute_seconds=compute, silent_error=silent,
                         silent_error_source=source, synthetic_sessions=synthetic)

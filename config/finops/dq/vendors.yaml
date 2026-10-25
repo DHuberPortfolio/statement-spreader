@@ -1,0 +1,112 @@
+# Vendor master: two source systems into one canonical record, gated before anything loads it.
+#
+# The canonical fields start with exactly the columns the invoice engine's vendor master expects (vendors.csv), so
+# the gate's accepted export can be handed to it unchanged. A company adapts this file: its own column names under
+# `sources`, its own codes under `value_maps`, its own rules. See ARCHITECTURE.md, "Data-quality gate".
+
+id: vendors
+name: Vendor master
+key: [vendor_id]
+
+fields:
+  vendor_id: {type: string, required: true, normalize: [trim, upper], pattern: 'V\d{3,8}'}
+  name: {type: string, required: true, max_length: 120}
+  aliases: {type: string, max_length: 400}
+  tax_id: {type: string, normalize: [trim, ein], description: "US EIN as NN-NNNNNNN; other countries' ids as printed"}
+  tax_rate: {type: decimal, min: 0, max: 0.25, description: "sales tax as a fraction (0.0825)"}
+  bank_account: {type: string, normalize: [trim, digits_only], pattern: '\d{6,17}', sensitive: true}
+  routing_number: {type: aba_routing, sensitive: true}
+  status: {type: enum, required: true, values: [active, inactive, blocked]}
+  country: {type: enum, required: true, values: [US, CA, GB, DE, FR, MX], normalize: [trim, upper]}
+  email: {type: email}
+  currency: {type: enum, values: [USD, CAD, GBP, EUR, MXN], normalize: [trim, upper]}
+  payment_terms_days: {type: integer, min: 0, max: 120}
+  onboarded_date: {type: date}
+
+sources:
+  portal:
+    label: Procurement portal export
+    columns:
+      vendor_id: Supplier ID
+      name: Supplier Name
+      aliases: Also Known As
+      tax_id: EIN
+      tax_rate: Sales Tax %
+      bank_account: Bank Acct
+      routing_number: ABA
+      status: Status
+      country: Country
+      email: Contact Email
+      payment_terms_days: Terms (days)
+      onboarded_date: Onboarded
+    defaults: {currency: USD}
+    value_maps:
+      status: {A: active, I: inactive, B: blocked}
+      country: {USA: US, United States: US, Canada: CA, United Kingdom: GB, Germany: DE, France: FR, Mexico: MX}
+    decimal_scale: {tax_rate: 0.01}
+    date_formats: ['%m/%d/%Y']
+  erp:
+    label: Legacy ERP vendor export
+    columns:
+      vendor_id: VENDOR_NO
+      name: VENDOR_NAME
+      aliases: ALT_NAMES
+      tax_id: TAX_ID
+      tax_rate: VAT_RATE
+      bank_account: BANK_ACCOUNT
+      routing_number: ROUTING
+      status: STAT
+      country: CTRY
+      email: EMAIL
+      currency: CCY
+      payment_terms_days: PAY_TERMS
+      onboarded_date: CREATED
+    value_maps:
+      status: {ACTIVE: active, INACTIVE: inactive, HOLD: blocked}
+    replace: {aliases: {'|': ';'}}
+    strip_patterns: {payment_terms_days: '^NET\s*'}
+    date_formats: ['%Y-%m-%d', '%d.%m.%Y']
+
+rules:
+  - id: us_vendor_needs_ein
+    when: {equals: {country: [US]}}
+    require: [tax_id]
+    pattern: {tax_id: '\d{2}-\d{7}'}
+    message: A US vendor needs an EIN (NN-NNNNNNN)
+  - id: us_bank_needs_routing
+    when: {equals: {country: [US]}, present: [bank_account]}
+    require: [routing_number]
+    message: A US bank account needs its routing number
+  - id: routing_needs_account
+    when: {present: [routing_number]}
+    require: [bank_account]
+    message: A routing number without an account number cannot be paid
+  - id: active_vendor_needs_contact
+    when: {equals: {status: [active]}}
+    require: [email]
+    severity: review
+    message: An active vendor has no contact e-mail to confirm payment details with
+
+duplicates:
+  - id: same_tax_id
+    fields: [tax_id]
+    message: Another vendor has the same tax id
+  - id: shared_bank_account
+    fields: [bank_account, routing_number]
+    required: [bank_account]  # most countries have no routing number: an account alone still matches
+    message: Another vendor is paid into the same bank account
+  - id: similar_name
+    fields: [name]
+    match: fuzzy
+    threshold: 92
+    block_on: [country]
+    unless_different: [tax_id]
+    message: A vendor with a very similar name and no conflicting tax id exists
+
+change_control:
+  fields: [bank_account, routing_number, tax_id]
+
+# While a vendor is held, last month's accepted version keeps AP working, unless the held version blocks or
+# deactivates the vendor: that is never undone from an old file.
+carry_forward:
+  never_when: {status: [blocked, inactive]}

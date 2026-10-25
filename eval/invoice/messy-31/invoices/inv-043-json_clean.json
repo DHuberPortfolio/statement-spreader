@@ -1,0 +1,35 @@
+{
+ "vendor": {
+  "name": "Adventure Works",
+  "tax_id": "43-6637313"
+ },
+ "invoice_number": "INV-007042",
+ "invoice_date": "2026-03-11",
+ "due_date": "2026-04-10",
+ "po_number": "P.O. 4539",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "5271.44",
+ "tax": null,
+ "total": "5271.44",
+ "lines": [
+  {
+   "item_code": "ADV-100",
+   "description": "Hard hat, white",
+   "quantity": "2",
+   "unit_price": "208.84",
+   "amount": "417.68"
+  },
+  {
+   "item_code": "ADV-121",
+   "description": "Pallet wrap film",
+   "quantity": "24",
+   "unit_price": "202.24",
+   "amount": "4853.76"
+  }
+ ],
+ "remit_to": {
+  "account_number": "145020251829",
+  "routing_number": "049375895"
+ }
+}

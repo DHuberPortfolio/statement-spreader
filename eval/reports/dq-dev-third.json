@@ -1,0 +1,790 @@
+{
+ "name": "dq-dev-third",
+ "vendors_config": "58ff26c29b4a426f",
+ "po_config": "e2f696152b929c15",
+ "sets": {
+  "dev": {
+   "seed": 21,
+   "vendors": {
+    "rates": {
+     "faults_caught": {
+      "n": 56,
+      "d": 56,
+      "rate": 1.0,
+      "low": 0.9358038555118846,
+      "high": 1.0
+     },
+     "faults_missed": {
+      "n": 0,
+      "d": 56,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.06419614448811528
+     },
+     "reason_right": {
+      "n": 56,
+      "d": 56,
+      "rate": 1.0,
+      "low": 0.9358038555118846,
+      "high": 1.0
+     },
+     "exact_decision_of_faults": {
+      "n": 56,
+      "d": 56,
+      "rate": 1.0,
+      "low": 0.9358038555118846,
+      "high": 1.0
+     },
+     "false_quarantine": {
+      "n": 1,
+      "d": 93,
+      "rate": 0.010752688172043012,
+      "low": 0.001900593097955601,
+      "high": 0.05842059118648415
+     },
+     "legit_oddities_quarantined": {
+      "n": 1,
+      "d": 23,
+      "rate": 0.043478260869565216,
+      "low": 0.0077164669621267445,
+      "high": 0.20991586494059142
+     },
+     "quarantine_precision": {
+      "n": 54,
+      "d": 55,
+      "rate": 0.9818181818181818,
+      "low": 0.9039399953951678,
+      "high": 0.9967833024077472
+     }
+    },
+    "counts": {
+     "faults": 56,
+     "caught": 56,
+     "reason_right": 56,
+     "exact": 56,
+     "valid": 93,
+     "legit": 23,
+     "false_quarantine": 1,
+     "legit_quarantined": 1
+    },
+    "decisions": {
+     "accepted": 92,
+     "review": 25,
+     "rejected": 30,
+     "duplicate": 2
+    },
+    "cases": {
+     "active_without_email": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_account_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_date": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_routing_checksum": {
+      "n": 2,
+      "right": 2
+     },
+     "bank_changed_since_last_load": {
+      "n": 2,
+      "right": 2
+     },
+     "bank_without_routing": {
+      "n": 2,
+      "right": 2
+     },
+     "clean": {
+      "n": 70,
+      "right": 70
+     },
+     "conflicting_key_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "exact_duplicate_first": {
+      "n": 2,
+      "right": 2
+     },
+     "exact_duplicate_repeat": {
+      "n": 2,
+      "right": 2
+     },
+     "formula_in_name": {
+      "n": 2,
+      "right": 2
+     },
+     "invalid_email": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_ein_without_hyphen": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_foreign_no_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_immediate_terms": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_inactive_without_email": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_messy_spacing_and_codes": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_name_starts_with_at": {
+      "n": 1,
+      "wrong": 1
+     },
+     "legit_no_bank_card_paid": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_percent_sign": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_similar_name_distinct": {
+      "n": 4,
+      "right": 4
+     },
+     "legit_unusual_name": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_id": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_name": {
+      "n": 2,
+      "right": 2
+     },
+     "routing_leading_zero_lost": {
+      "n": 2,
+      "right": 2
+     },
+     "routing_without_account": {
+      "n": 2,
+      "right": 2
+     },
+     "same_tax_id_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "shared_bank_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "short_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "similar_name_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "tax_rate_not_number": {
+      "n": 2,
+      "right": 2
+     },
+     "terms_out_of_range": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_country": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_status": {
+      "n": 2,
+      "right": 2
+     },
+     "unsaved_formula_in_optional_field": {
+      "n": 2,
+      "right": 2
+     }
+    },
+    "misses": [
+     {
+      "source": "portal",
+      "row": 38,
+      "case": "legit_name_starts_with_at",
+      "expect": "accepted",
+      "codes": [
+       "FORMULA_LIKE_TEXT"
+      ],
+      "got": "review"
+     }
+    ],
+    "files": {}
+   },
+   "purchase_orders": {
+    "rates": {
+     "faults_caught": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "faults_missed": {
+      "n": 0,
+      "d": 30,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.113517091390478
+     },
+     "reason_right": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "exact_decision_of_faults": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "false_quarantine": {
+      "n": 0,
+      "d": 108,
+      "rate": 0.0,
+      "low": 3.469446951953614e-18,
+      "high": 0.03434857870416731
+     },
+     "legit_oddities_quarantined": {
+      "n": 0,
+      "d": 6,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.3903430336530645
+     },
+     "quarantine_precision": {
+      "n": 28,
+      "d": 28,
+      "rate": 1.0,
+      "low": 0.8793527963418923,
+      "high": 1.0
+     }
+    },
+    "counts": {
+     "faults": 30,
+     "caught": 30,
+     "reason_right": 30,
+     "exact": 30,
+     "valid": 108,
+     "legit": 6
+    },
+    "decisions": {
+     "accepted": 108,
+     "review": 8,
+     "rejected": 20,
+     "duplicate": 2
+    },
+    "cases": {
+     "bad_line_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_po_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_receipt_flag": {
+      "n": 2,
+      "right": 2
+     },
+     "clean": {
+      "n": 102,
+      "right": 102
+     },
+     "conflicting_line_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "exact_duplicate_first": {
+      "n": 2,
+      "right": 2
+     },
+     "exact_duplicate_repeat": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_expensive_item": {
+      "n": 4,
+      "right": 4
+     },
+     "missing_item": {
+      "n": 2,
+      "right": 2
+     },
+     "mixed_currency_po": {
+      "n": 6,
+      "right": 6
+     },
+     "negative_price": {
+      "n": 2,
+      "right": 2
+     },
+     "price_ten_times": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_vendor": {
+      "n": 2,
+      "right": 2
+     },
+     "vendor_not_active": {
+      "n": 2,
+      "right": 2
+     },
+     "zero_quantity": {
+      "n": 2,
+      "right": 2
+     }
+    },
+    "misses": [],
+    "files": {}
+   },
+   "unstable_records": [],
+   "carried_forward": 40,
+   "missing_from_source": 1
+  },
+  "holdout": {
+   "seed": 22,
+   "vendors": {
+    "rates": {
+     "faults_caught": {
+      "n": 56,
+      "d": 56,
+      "rate": 1.0,
+      "low": 0.9358038555118846,
+      "high": 1.0
+     },
+     "faults_missed": {
+      "n": 0,
+      "d": 56,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.06419614448811528
+     },
+     "reason_right": {
+      "n": 56,
+      "d": 56,
+      "rate": 1.0,
+      "low": 0.9358038555118846,
+      "high": 1.0
+     },
+     "exact_decision_of_faults": {
+      "n": 56,
+      "d": 56,
+      "rate": 1.0,
+      "low": 0.9358038555118846,
+      "high": 1.0
+     },
+     "false_quarantine": {
+      "n": 1,
+      "d": 93,
+      "rate": 0.010752688172043012,
+      "low": 0.001900593097955601,
+      "high": 0.05842059118648415
+     },
+     "legit_oddities_quarantined": {
+      "n": 1,
+      "d": 23,
+      "rate": 0.043478260869565216,
+      "low": 0.0077164669621267445,
+      "high": 0.20991586494059142
+     },
+     "quarantine_precision": {
+      "n": 54,
+      "d": 55,
+      "rate": 0.9818181818181818,
+      "low": 0.9039399953951678,
+      "high": 0.9967833024077472
+     }
+    },
+    "counts": {
+     "valid": 93,
+     "legit": 23,
+     "faults": 56,
+     "caught": 56,
+     "reason_right": 56,
+     "exact": 56,
+     "false_quarantine": 1,
+     "legit_quarantined": 1
+    },
+    "decisions": {
+     "accepted": 92,
+     "review": 25,
+     "rejected": 30,
+     "duplicate": 2
+    },
+    "cases": {
+     "active_without_email": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_account_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_date": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_routing_checksum": {
+      "n": 2,
+      "right": 2
+     },
+     "bank_changed_since_last_load": {
+      "n": 2,
+      "right": 2
+     },
+     "bank_without_routing": {
+      "n": 2,
+      "right": 2
+     },
+     "clean": {
+      "n": 70,
+      "right": 70
+     },
+     "conflicting_key_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "exact_duplicate_first": {
+      "n": 2,
+      "right": 2
+     },
+     "exact_duplicate_repeat": {
+      "n": 2,
+      "right": 2
+     },
+     "formula_in_name": {
+      "n": 2,
+      "right": 2
+     },
+     "invalid_email": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_ein_without_hyphen": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_foreign_no_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_immediate_terms": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_inactive_without_email": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_messy_spacing_and_codes": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_name_starts_with_at": {
+      "n": 1,
+      "wrong": 1
+     },
+     "legit_no_bank_card_paid": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_percent_sign": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_similar_name_distinct": {
+      "n": 4,
+      "right": 4
+     },
+     "legit_unusual_name": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_id": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_name": {
+      "n": 2,
+      "right": 2
+     },
+     "routing_leading_zero_lost": {
+      "n": 2,
+      "right": 2
+     },
+     "routing_without_account": {
+      "n": 2,
+      "right": 2
+     },
+     "same_tax_id_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "shared_bank_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "short_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "similar_name_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "tax_rate_not_number": {
+      "n": 2,
+      "right": 2
+     },
+     "terms_out_of_range": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_country": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_status": {
+      "n": 2,
+      "right": 2
+     },
+     "unsaved_formula_in_optional_field": {
+      "n": 2,
+      "right": 2
+     }
+    },
+    "misses": [
+     {
+      "source": "portal",
+      "row": 57,
+      "case": "legit_name_starts_with_at",
+      "expect": "accepted",
+      "codes": [
+       "FORMULA_LIKE_TEXT"
+      ],
+      "got": "review"
+     }
+    ],
+    "files": {}
+   },
+   "purchase_orders": {
+    "rates": {
+     "faults_caught": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "faults_missed": {
+      "n": 0,
+      "d": 30,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.113517091390478
+     },
+     "reason_right": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "exact_decision_of_faults": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "false_quarantine": {
+      "n": 0,
+      "d": 109,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.03404418228738337
+     },
+     "legit_oddities_quarantined": {
+      "n": 0,
+      "d": 6,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.3903430336530645
+     },
+     "quarantine_precision": {
+      "n": 28,
+      "d": 28,
+      "rate": 1.0,
+      "low": 0.8793527963418923,
+      "high": 1.0
+     }
+    },
+    "counts": {
+     "faults": 30,
+     "caught": 30,
+     "reason_right": 30,
+     "exact": 30,
+     "valid": 109,
+     "legit": 6
+    },
+    "decisions": {
+     "accepted": 109,
+     "review": 8,
+     "rejected": 20,
+     "duplicate": 2
+    },
+    "cases": {
+     "bad_line_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_po_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_receipt_flag": {
+      "n": 2,
+      "right": 2
+     },
+     "clean": {
+      "n": 103,
+      "right": 103
+     },
+     "conflicting_line_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "exact_duplicate_first": {
+      "n": 2,
+      "right": 2
+     },
+     "exact_duplicate_repeat": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_expensive_item": {
+      "n": 4,
+      "right": 4
+     },
+     "missing_item": {
+      "n": 2,
+      "right": 2
+     },
+     "mixed_currency_po": {
+      "n": 6,
+      "right": 6
+     },
+     "negative_price": {
+      "n": 2,
+      "right": 2
+     },
+     "price_ten_times": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_vendor": {
+      "n": 2,
+      "right": 2
+     },
+     "vendor_not_active": {
+      "n": 2,
+      "right": 2
+     },
+     "zero_quantity": {
+      "n": 2,
+      "right": 2
+     }
+    },
+    "misses": [],
+    "files": {}
+   },
+   "unstable_records": [],
+   "carried_forward": 39,
+   "missing_from_source": 2
+  }
+ },
+ "hostile": {
+  "crashes": [],
+  "handled": [
+   [
+    "empty file",
+    "refused: a.csv is empty"
+   ],
+   [
+    "header only",
+    "gated"
+   ],
+   [
+    "missing a mapped column",
+    "refused: a.csv (Procurement portal export) has no column 'Supplier Name'; its columns are 'Supplier"
+   ],
+   [
+    "duplicate header",
+    "refused: a.csv: column 'EIN' appears twice in the header"
+   ],
+   [
+    "binary garbage",
+    "refused: a.csv is not a text file (it contains binary data)"
+   ],
+   [
+    "not a workbook",
+    "refused: a.xlsx is not a readable Excel workbook (BadZipFile)"
+   ],
+   [
+    "windows-1252 text",
+    "gated"
+   ],
+   [
+    "byte-order mark",
+    "gated"
+   ],
+   [
+    "ragged rows",
+    "gated"
+   ],
+   [
+    "huge cell",
+    "refused: a.csv is not a readable CSV (field larger than field limit (131072))"
+   ],
+   [
+    "unsupported type",
+    "refused: a.pdf: only .csv and .xlsx files are read"
+   ],
+   [
+    "quotes and newlines",
+    "gated"
+   ]
+  ]
+ }
+}

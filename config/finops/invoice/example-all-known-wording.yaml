@@ -1,0 +1,21 @@
+# Evaluation overlay: the default policy plus the wording of both "unseen" supplier layouts (D and E),
+# for test sets that mix all five layouts. A company would keep one overlay per supplier group instead.
+extends: default-ap.yaml
+id: example-all-known-wording
+name: Default AP policy + layout D and E wording
+
+extra_labels:
+  invoice_number: ["Document No.", "Our Ref."]
+  invoice_date: ["Document Date", "Dated"]
+  po_number: ["Customer Order", "Your Ref."]
+  due_date: ["Payment Due", "Settle By"]
+  terms: ["Terms of Payment", "Conditions"]
+  subtotal: ["Net Total", "Goods Value"]
+  total: ["Gross Total", "Balance Payable"]
+
+extra_columns:
+  description: ["Item", "Particulars"]
+  quantity: ["Units"]
+  unit_price: ["Each"]
+  amount: ["Net", "Line Value"]
+  item_code: ["Ref"]

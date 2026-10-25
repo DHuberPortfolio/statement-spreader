@@ -1,0 +1,52 @@
+# Purchase-order lines from the ERP, gated against the accepted vendor master before the invoice engine uses them.
+# The canonical fields are exactly the invoice engine's purchase_orders.csv columns.
+
+id: purchase_orders
+name: Purchase-order lines
+key: [po_number, line_no]
+
+fields:
+  po_number: {type: string, required: true, normalize: [trim, upper], pattern: 'PO-\d{3,10}'}
+  vendor_id: {type: string, required: true, normalize: [trim, upper]}
+  status: {type: enum, required: true, values: [open, closed, cancelled]}
+  currency: {type: enum, required: true, values: [USD, CAD, GBP, EUR, MXN], normalize: [trim, upper]}
+  line_no: {type: integer, required: true, min: 1, max: 999}
+  item_code: {type: string, required: true, normalize: [trim, upper]}
+  description: {type: string, max_length: 200}
+  quantity: {type: decimal, required: true, min: 0.001}
+  unit_price: {type: decimal, required: true, min: 0}
+  receipt_required: {type: bool, required: true}
+
+sources:
+  erp:
+    label: ERP purchase-order export
+    columns:
+      po_number: PO_NUMBER
+      vendor_id: VENDOR_NO
+      status: PO_STATUS
+      currency: CCY
+      line_no: LINE
+      item_code: ITEM
+      description: ITEM_DESC
+      quantity: QTY
+      unit_price: UNIT_PRICE
+      receipt_required: GR_REQUIRED
+    value_maps:
+      status: {O: open, C: closed, X: cancelled}
+
+references:
+  - field: vendor_id
+    dataset: vendors
+    key: vendor_id
+    status_field: status
+    allowed_status: [active]
+
+group_consistency:
+  - group_by: [po_number]
+    fields: [vendor_id, currency, status]
+
+outliers:
+  - field: unit_price
+    group_by: [item_code]
+    factor: 8
+    min_group: 4

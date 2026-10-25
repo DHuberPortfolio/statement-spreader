@@ -1,0 +1,38 @@
+{
+ "vendor": {
+  "name": "Northwind Traders",
+  "tax_id": "90-4912743"
+ },
+ "invoice_number": "INV-007021",
+ "invoice_date": "2026-03-15",
+ "due_date": "2026-04-14",
+ "po_number": "PO-4519",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "18666.64",
+ "tax": null,
+ "total": "18666.64",
+ "lines": [
+  {
+   "item_code": "NOR-107",
+   "description": "Hard hat, white",
+   "quantity": "20",
+   "unit_price": "331.40",
+   "amount": "6628.00"
+  },
+  {
+   "item_code": "NOR-114",
+   "description": "Copy paper, case",
+   "quantity": "24",
+   "unit_price": "211.86",
+   "amount": "5084.64"
+  },
+  {
+   "item_code": "NOR-121",
+   "description": "Bolt set M8",
+   "quantity": "20",
+   "unit_price": "347.700",
+   "amount": "6954.00"
+  }
+ ]
+}

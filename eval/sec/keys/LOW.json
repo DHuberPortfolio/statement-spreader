@@ -1082,13 +1082,6 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2026-01-30/12M",
-   "value": "6654000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "net_income",
    "period": "2024-02-02/12M",
    "value": "7726000000",
    "precision": "1000000"
@@ -1101,10 +1094,10 @@
    "precision": "1000000"
   },
   {
-   "statement": "balance_sheet",
-   "line": "total_equity",
-   "period": "2026-01-30/I",
-   "value": "-9917000000",
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2026-01-30/12M",
+   "value": "6654000000",
    "precision": "1000000"
   },
   {
@@ -1112,6 +1105,13 @@
    "line": "total_equity",
    "period": "2025-01-31/I",
    "value": "-14231000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity",
+   "period": "2026-01-30/I",
+   "value": "-9917000000",
    "precision": "1000000"
   }
  ],

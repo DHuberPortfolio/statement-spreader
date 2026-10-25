@@ -1,0 +1,20 @@
+# Example overlay: invoices from suppliers whose template the extractor was never developed on
+# ("Document No.", "Customer Order", a "Net" column, "Gross Total"). Adapting to it is wording in
+# configuration, not code. Measured in eval/reports/invoice-*.md (the "unseen" set).
+extends: default-ap.yaml
+id: example-supplier-layout-d
+name: Default AP policy + wording for layout-D suppliers
+
+extra_labels:
+  invoice_number: ["Document No."]
+  invoice_date: ["Document Date"]
+  po_number: ["Customer Order"]
+  due_date: ["Payment Due"]
+  terms: ["Terms of Payment"]
+  subtotal: ["Net Total"]
+  total: ["Gross Total"]
+
+extra_columns:
+  description: ["Item"]
+  quantity: ["Units"]
+  amount: ["Net"]

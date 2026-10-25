@@ -1,0 +1,38 @@
+{
+ "vendor": {
+  "name": "Contoso Supply",
+  "tax_id": "31-9242814"
+ },
+ "invoice_number": "INV-007046",
+ "invoice_date": "2026-03-15",
+ "due_date": "2026-04-14",
+ "po_number": "PO-4542",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "3380.64",
+ "tax": "278.90",
+ "total": "3659.54",
+ "lines": [
+  {
+   "item_code": "CON-114",
+   "description": "Shipping cartons, bundle of 25",
+   "quantity": "4",
+   "unit_price": "215.71",
+   "amount": "862.84"
+  },
+  {
+   "item_code": "CON-100",
+   "description": "Torque wrench 1/2in",
+   "quantity": "10",
+   "unit_price": "167.90",
+   "amount": "1679.00"
+  },
+  {
+   "item_code": "CON-107",
+   "description": "Pallet wrap film",
+   "quantity": "8",
+   "unit_price": "104.85",
+   "amount": "838.80"
+  }
+ ]
+}

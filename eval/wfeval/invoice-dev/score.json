@@ -1,0 +1,2949 @@
+{
+  "tool": "workflow-eval-harness",
+  "version": "0.1.0",
+  "generated_at": "2026-10-24T20:12:00.356Z",
+  "inputs": {
+    "predictions": "eval/wfeval/invoice-dev/pred.jsonl",
+    "key": "eval/wfeval/invoice-dev/key.jsonl",
+    "mode": "strict",
+    "wrong_when": "gold_route"
+  },
+  "routing": {
+    "total": 81,
+    "by_class": {
+      "auto": 44,
+      "review": 37,
+      "block": 0,
+      "exclude": 0
+    },
+    "by_route": {
+      "eligible_for_approval": 44,
+      "blocked": 35,
+      "needs_review": 2
+    },
+    "straight_through": {
+      "n": 44,
+      "d": 81,
+      "pct": 54.3,
+      "low_pct": 43.5,
+      "high_pct": 64.7
+    },
+    "silent_errors": {
+      "rate": {
+        "n": 0,
+        "d": 44,
+        "pct": 0,
+        "low_pct": 0,
+        "high_pct": 8
+      },
+      "one_record_moves_pct": 2.3,
+      "by_severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      },
+      "by_type": {},
+      "records": []
+    },
+    "safeguard_failures": {
+      "records": 0,
+      "by_type": {},
+      "detail": []
+    },
+    "silent_omissions": {
+      "basis": "gold_route",
+      "rate": {
+        "n": 0,
+        "d": 81,
+        "pct": 0,
+        "low_pct": 0,
+        "high_pct": 4.5
+      },
+      "by_type": {},
+      "records": []
+    },
+    "review_queue": {
+      "precision": {
+        "n": 37,
+        "d": 37,
+        "pct": 100,
+        "low_pct": 90.6,
+        "high_pct": 100
+      },
+      "wasted": []
+    },
+    "block": {
+      "precision": {
+        "n": 0,
+        "d": 0,
+        "pct": null,
+        "low_pct": null,
+        "high_pct": null
+      },
+      "wrongly_blocked": []
+    },
+    "not_measured": [
+      {
+        "what": "SP-INVALID",
+        "why": "no allowed_values list"
+      },
+      {
+        "what": "SG-GATE",
+        "why": "no thresholds.auto_publish"
+      },
+      {
+        "what": "SG-FLOOR",
+        "why": "no thresholds.floor"
+      }
+    ]
+  },
+  "quality": {
+    "population": 81,
+    "left_out": {
+      "model_failed": [],
+      "suppressed_duplicates": []
+    },
+    "outputs": {
+      "codes": {
+        "type": "set",
+        "tp": 37,
+        "fp": 10,
+        "fn": 0,
+        "precision": {
+          "n": 37,
+          "d": 47,
+          "pct": 78.7,
+          "low_pct": 65.1,
+          "high_pct": 88
+        },
+        "recall": {
+          "n": 37,
+          "d": 37,
+          "pct": 100,
+          "low_pct": 90.6,
+          "high_pct": 100
+        },
+        "f1": 0.881,
+        "exact_match": {
+          "n": 76,
+          "d": 81,
+          "pct": 93.8,
+          "low_pct": 86.4,
+          "high_pct": 97.3
+        },
+        "by_value": {
+          "BANK_DETAILS_CHANGED": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "BANK_DETAILS_UNVERIFIED": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "EXACT_DUPLICATE": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 4,
+              "d": 4,
+              "pct": 100,
+              "low_pct": 51,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 4,
+              "d": 4,
+              "pct": 100,
+              "low_pct": 51,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "LINE_EXTENSION_MISMATCH": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "MISSING_RECEIPT": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "NO_PO_REFERENCE": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "POSSIBLE_DUPLICATE": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "PO_NOT_FOUND": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "PO_NOT_OPEN": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "PRICE_OVER_PO": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "QTY_EXCEEDS_ORDERED": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 0,
+            "precision": {
+              "n": 0,
+              "d": 5,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 43.4
+            },
+            "recall": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "f1": 0
+          },
+          "QTY_EXCEEDS_RECEIVED": {
+            "tp": 3,
+            "fp": 5,
+            "fn": 0,
+            "precision": {
+              "n": 3,
+              "d": 8,
+              "pct": 37.5,
+              "low_pct": 13.7,
+              "high_pct": 69.4
+            },
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "f1": 0.545
+          },
+          "TAX_MISMATCH": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "TAX_UNVERIFIED": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "TOTAL_MISMATCH": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "VENDOR_MISMATCH": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          }
+        }
+      }
+    },
+    "overall": {
+      "tp": 37,
+      "fp": 10,
+      "fn": 0,
+      "precision": {
+        "n": 37,
+        "d": 47,
+        "pct": 78.7,
+        "low_pct": 65.1,
+        "high_pct": 88
+      },
+      "recall": {
+        "n": 37,
+        "d": 37,
+        "pct": 100,
+        "low_pct": 90.6,
+        "high_pct": 100
+      },
+      "f1": 0.881
+    }
+  },
+  "traps": {
+    "groups": [
+      {
+        "trap": "bank_changed",
+        "records": [
+          "inv-022-bank_changed",
+          "inv-025-bank_changed",
+          "inv-031-bank_changed"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "bank_unverified",
+        "records": [
+          "inv-014-bank_unverified",
+          "inv-042-bank_unverified"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "clean",
+        "records": [
+          "inv-001-clean",
+          "inv-002-clean",
+          "inv-008-clean",
+          "inv-010-clean",
+          "inv-015-clean",
+          "inv-028-clean",
+          "inv-032-clean",
+          "inv-034-clean",
+          "inv-037-clean",
+          "inv-040-clean",
+          "inv-045-clean",
+          "inv-049-clean",
+          "inv-054-clean",
+          "inv-055-clean",
+          "inv-065-clean",
+          "inv-068-clean",
+          "inv-069-clean",
+          "inv-071-clean",
+          "inv-074-clean",
+          "inv-076-clean",
+          "inv-079-clean",
+          "inv-081-clean"
+        ],
+        "routed_correctly": {
+          "n": 22,
+          "d": 22,
+          "pct": 100,
+          "low_pct": 85.1,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "closed_po",
+        "records": [
+          "inv-019-closed_po",
+          "inv-048-closed_po"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "exact_dup",
+        "records": [
+          "inv-011-exact_dup",
+          "inv-038-exact_dup",
+          "inv-080-exact_dup"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "json_clean",
+        "records": [
+          "inv-007-json_clean",
+          "inv-051-json_clean",
+          "inv-078-json_clean"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "line_math",
+        "records": [
+          "inv-005-line_math",
+          "inv-013-line_math",
+          "inv-067-line_math"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "missing_receipt",
+        "records": [
+          "inv-016-missing_receipt",
+          "inv-052-missing_receipt",
+          "inv-059-missing_receipt"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "multipage",
+        "records": [
+          "inv-033-multipage",
+          "inv-046-multipage"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "no_po_ref",
+        "records": [
+          "inv-029-no_po_ref",
+          "inv-050-no_po_ref"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "over_receipt",
+        "records": [
+          "inv-004-over_receipt",
+          "inv-020-over_receipt",
+          "inv-077-over_receipt"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "po_not_found",
+        "records": [
+          "inv-012-po_not_found",
+          "inv-062-po_not_found"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "possible_dup",
+        "records": [
+          "inv-035-possible_dup",
+          "inv-070-possible_dup"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "price_over",
+        "records": [
+          "inv-003-price_over",
+          "inv-006-price_over",
+          "inv-043-price_over"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "price_within_tol",
+        "records": [
+          "inv-027-price_within_tol",
+          "inv-047-price_within_tol",
+          "inv-058-price_within_tol"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "same_file_again",
+        "records": [
+          "inv-040-clean-again"
+        ],
+        "routed_correctly": {
+          "n": 1,
+          "d": 1,
+          "pct": 100,
+          "low_pct": 20.7,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "sequential",
+        "records": [
+          "inv-060-sequential",
+          "inv-063-sequential",
+          "inv-072-sequential",
+          "inv-061-sequential",
+          "inv-064-sequential",
+          "inv-073-sequential"
+        ],
+        "routed_correctly": {
+          "n": 6,
+          "d": 6,
+          "pct": 100,
+          "low_pct": 61,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "service_2way",
+        "records": [
+          "inv-023-service_2way",
+          "inv-024-service_2way",
+          "inv-036-service_2way",
+          "inv-057-service_2way"
+        ],
+        "routed_correctly": {
+          "n": 4,
+          "d": 4,
+          "pct": 100,
+          "low_pct": 51,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "similar_distinct",
+        "records": [
+          "inv-009-similar_distinct",
+          "inv-075-similar_distinct"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "tax_unverified",
+        "records": [
+          "inv-018-tax_unverified",
+          "inv-053-tax_unverified"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "tax_wrong",
+        "records": [
+          "inv-039-tax_wrong",
+          "inv-044-tax_wrong"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "total_math",
+        "records": [
+          "inv-026-total_math",
+          "inv-030-total_math"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "vendor_alias",
+        "records": [
+          "inv-017-vendor_alias",
+          "inv-066-vendor_alias"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "vendor_mismatch",
+        "records": [
+          "inv-021-vendor_mismatch",
+          "inv-056-vendor_mismatch"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      }
+    ],
+    "records_with_several_traps": 0,
+    "coverage": {
+      "min_per_trap": null,
+      "below": []
+    }
+  },
+  "calibration": {
+    "buckets": "distinct",
+    "overall": {
+      "n": 0,
+      "correct": 0,
+      "accuracy": {
+        "n": 0,
+        "d": 0,
+        "pct": null,
+        "low_pct": null,
+        "high_pct": null
+      },
+      "ece": null,
+      "buckets": []
+    },
+    "outputs": {},
+    "thresholds": [],
+    "left_out": {
+      "no_confidence": 47,
+      "inherited": 0,
+      "declined": 0
+    }
+  },
+  "records": [
+    {
+      "id": "inv-001-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-002-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-003-price_over",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "price_over"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-004-over_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "over_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-005-line_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "line_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-006-price_over",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "price_over"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-007-json_clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "json_clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-008-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-010-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-012-po_not_found",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "po_not_found"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-013-line_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "line_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-014-bank_unverified",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-015-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-016-missing_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "missing_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-017-vendor_alias",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "vendor_alias"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-018-tax_unverified",
+      "route": "needs_review",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-019-closed_po",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "closed_po"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-020-over_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "over_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-021-vendor_mismatch",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "vendor_mismatch"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-022-bank_changed",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_changed"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-023-service_2way",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-024-service_2way",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-025-bank_changed",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_changed"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-026-total_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "total_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-027-price_within_tol",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "price_within_tol"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-028-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-029-no_po_ref",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "no_po_ref"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-030-total_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "total_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-031-bank_changed",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_changed"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-032-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-033-multipage",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "multipage"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-034-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-036-service_2way",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-037-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-039-tax_wrong",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_wrong"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-040-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-042-bank_unverified",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-043-price_over",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "price_over"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-044-tax_wrong",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_wrong"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-045-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-046-multipage",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "multipage"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-047-price_within_tol",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "price_within_tol"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-048-closed_po",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "closed_po"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-049-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-050-no_po_ref",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "no_po_ref"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-051-json_clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "json_clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-052-missing_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "missing_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-053-tax_unverified",
+      "route": "needs_review",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-054-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-055-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-056-vendor_mismatch",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "vendor_mismatch"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-057-service_2way",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-058-price_within_tol",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "price_within_tol"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-059-missing_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "missing_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-060-sequential",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-062-po_not_found",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "po_not_found"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-063-sequential",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-065-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-066-vendor_alias",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "vendor_alias"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-067-line_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "line_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-068-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-069-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-071-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-072-sequential",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-074-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-076-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-077-over_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "over_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-078-json_clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "json_clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-079-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-081-clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-009-similar_distinct",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "similar_distinct"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-011-exact_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "exact_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "QTY_EXCEEDS_ORDERED",
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-035-possible_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "possible_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "QTY_EXCEEDS_ORDERED",
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-038-exact_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "exact_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "QTY_EXCEEDS_ORDERED",
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-040-clean-again",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "same_file_again"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-061-sequential",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-064-sequential",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-070-possible_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "possible_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "QTY_EXCEEDS_ORDERED",
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-073-sequential",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-075-similar_distinct",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "similar_distinct"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-080-exact_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "exact_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "QTY_EXCEEDS_ORDERED",
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    }
+  ],
+  "problems": []
+}

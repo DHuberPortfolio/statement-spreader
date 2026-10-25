@@ -103,7 +103,11 @@ function FlashArea() {
 export function Layout({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
   const loc = useLocation();
   const nav = [
-    { to: "/", label: "Documents", active: loc.path === "/" || loc.path.startsWith("/runs") },
+    { to: "/", label: "Statements", active: loc.path === "/" || loc.path.startsWith("/runs") },
+    { to: "/recon", label: "Reconciliation", active: loc.path.startsWith("/recon") },
+    { to: "/invoices", label: "Invoices", active: loc.path.startsWith("/invoices") },
+    { to: "/data-quality", label: "Data quality", active: loc.path.startsWith("/data-quality") },
+    { to: "/spreadsheets", label: "Spreadsheets", active: loc.path.startsWith("/spreadsheets") },
     { to: "/roi", label: "ROI", active: loc.path.startsWith("/roi") || loc.path.startsWith("/sessions") },
     { to: "/evaluation", label: "Evaluation", active: loc.path.startsWith("/evaluation") },
   ];
@@ -125,7 +129,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
             <path d="M2.5 8.2 L6 11.5 L13.5 3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             <path d="M2.5 14.2 H13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
-          <span>Statement Spreader</span>
+          <span>Finance Operations</span>
         </a>
         <nav aria-label="Main">
           <ul>

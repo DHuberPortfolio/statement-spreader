@@ -280,6 +280,22 @@ from . import roi_api  # noqa: E402  (registers the ROI routes)
 
 app.include_router(roi_api.router)
 
+from finops.api import router as finops_router  # noqa: E402  (reconciliation, invoice, data-quality and spreadsheet engines)
+from finops.dq.service import ActionError as DQActionError  # noqa: E402
+from finops.invoice.service import ActionError as InvoiceActionError  # noqa: E402
+from finops.recon.service import ActionError as ReconActionError  # noqa: E402
+from finops.sheets.service import ActionError as SheetsActionError  # noqa: E402
+
+app.include_router(finops_router)
+
+
+@app.exception_handler(ReconActionError)
+@app.exception_handler(InvoiceActionError)
+@app.exception_handler(DQActionError)
+@app.exception_handler(SheetsActionError)
+async def _finops_action_error(_: Request, exc: Exception) -> JSONResponse:
+    return JSONResponse(status_code=400, content={"error": str(exc)})
+
 if WEB_DIST.exists():
     app.mount("/assets", StaticFiles(directory=WEB_DIST / "assets"), name="assets")
 

@@ -1,0 +1,2317 @@
+{
+ "name": "recon-v2",
+ "profile": "bank-vs-gl e71b551878cb0de4",
+ "scale": 300,
+ "runs": {
+  "dev:greedy": {
+   "rates": {
+    "auto_precision": {
+     "n": 231,
+     "d": 231,
+     "rate": 1.0,
+     "low": 0.983641739793972,
+     "high": 1.0
+    },
+    "false_match_rate": {
+     "n": 0,
+     "d": 231,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.016358260206028232
+    },
+    "auto_recall": {
+     "n": 213,
+     "d": 213,
+     "rate": 1.0,
+     "low": 0.982283842214778,
+     "high": 1.0
+    },
+    "review_cases_reaching_review": {
+     "n": 33,
+     "d": 57,
+     "rate": 0.5789473684210527,
+     "low": 0.4497991014068138,
+     "high": 0.6981260024694814
+    },
+    "review_cases_auto_accepted": {
+     "n": 18,
+     "d": 57,
+     "rate": 0.3157894736842105,
+     "low": 0.2100412363168152,
+     "high": 0.44480018797182935
+    },
+    "any_recall": {
+     "n": 264,
+     "d": 270,
+     "rate": 0.9777777777777777,
+     "low": 0.9523738665541401,
+     "high": 0.9897766321283099
+    },
+    "proposal_precision": {
+     "n": 33,
+     "d": 39,
+     "rate": 0.8461538461538461,
+     "low": 0.7027023013426569,
+     "high": 0.9275262615494854
+    },
+    "left_alone_accuracy": {
+     "n": 75,
+     "d": 75,
+     "rate": 1.0,
+     "low": 0.9512744540953,
+     "high": 1.0
+    },
+    "exception_recall": {
+     "n": 93,
+     "d": 102,
+     "rate": 0.9117647058823529,
+     "low": 0.8407538217792032,
+     "high": 0.9528849743085355
+    },
+    "unnecessary_exceptions": {
+     "n": 0,
+     "d": 123,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.03028659367273828
+    },
+    "records_auto_settled": {
+     "n": 504,
+     "d": 690,
+     "rate": 0.7304347826086957,
+     "low": 0.6961164589021595,
+     "high": 0.7622014050022244
+    }
+   },
+   "by_kind": {
+    "ambiguous_twins": {
+     "cases": 9,
+     "auto_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 0
+    },
+    "bank_fee": {
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "batch_noref": {
+     "cases": 9,
+     "proposed_right": 9
+    },
+    "batch_ref": {
+     "cases": 15,
+     "auto_right": 15
+    },
+    "coincidental_sum": {
+     "alone_records": 18,
+     "alone_left_alone": 18,
+     "alone_proposed": 18,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "currency_mismatch": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 3,
+     "exc_raised": 3
+    },
+    "duplicate_ledger": {
+     "cases": 9,
+     "auto_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "fee_deducted": {
+     "cases": 12,
+     "proposed_right": 12,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "keying_error": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "late_clearing": {
+     "cases": 9,
+     "auto_right": 9
+    },
+    "missing_bank": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "missing_ledger": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "near_miss_ref": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "noref_1to1": {
+     "cases": 60,
+     "auto_right": 60
+    },
+    "noref_late": {
+     "cases": 6,
+     "missed": 6
+    },
+    "outstanding": {
+     "alone_records": 12,
+     "alone_left_alone": 12,
+     "alone_proposed": 0,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "partial_payment": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "ref_1to1": {
+     "cases": 102,
+     "auto_right": 102
+    },
+    "reversal": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "split_ref": {
+     "cases": 9,
+     "auto_right": 9
+    }
+   },
+   "exceptions_by_code": {
+    "AMBIGUOUS_CANDIDATES": {
+     "n": 0,
+     "d": 9,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.2991527535509594
+    },
+    "AMOUNT_DIFFERENCE": {
+     "n": 18,
+     "d": 18,
+     "rate": 1.0,
+     "low": 0.8241154494176252,
+     "high": 1.0
+    },
+    "CURRENCY_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "PARTIAL_MATCH": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "REVERSAL": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "TIMING_DIFFERENCE": {
+     "n": 12,
+     "d": 12,
+     "rate": 1.0,
+     "low": 0.7574992425007574,
+     "high": 1.0
+    },
+    "UNMATCHED": {
+     "n": 27,
+     "d": 27,
+     "rate": 1.0,
+     "low": 0.8754409628553641,
+     "high": 1.0
+    },
+    "UNRECORDED_FEE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    }
+   },
+   "amount_reconciled_share": 0.8501826554791032,
+   "false_matches": [],
+   "missed_exceptions": [
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00046"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00098"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00100"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00123"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00155"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00170"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00201"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00268"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00269"
+     ]
+    }
+   ],
+   "noisy_exceptions": [],
+   "counts": {
+    "auto": 231,
+    "proposed": 39,
+    "exceptions": 123,
+    "records": 690
+   },
+   "order_stable": true,
+   "exceptions_stable": true,
+   "seconds": 0.068,
+   "checks_failed": []
+  },
+  "dev:component": {
+   "rates": {
+    "auto_precision": {
+     "n": 213,
+     "d": 213,
+     "rate": 1.0,
+     "low": 0.982283842214778,
+     "high": 1.0
+    },
+    "false_match_rate": {
+     "n": 0,
+     "d": 213,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.017716157785222023
+    },
+    "auto_recall": {
+     "n": 213,
+     "d": 213,
+     "rate": 1.0,
+     "low": 0.982283842214778,
+     "high": 1.0
+    },
+    "review_cases_reaching_review": {
+     "n": 51,
+     "d": 57,
+     "rate": 0.8947368421052632,
+     "low": 0.7887695089206027,
+     "high": 0.9508560104608731
+    },
+    "review_cases_auto_accepted": {
+     "n": 0,
+     "d": 57,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.06314100878346394
+    },
+    "any_recall": {
+     "n": 264,
+     "d": 270,
+     "rate": 0.9777777777777777,
+     "low": 0.9523738665541401,
+     "high": 0.9897766321283099
+    },
+    "proposal_precision": {
+     "n": 51,
+     "d": 57,
+     "rate": 0.8947368421052632,
+     "low": 0.7887695089206027,
+     "high": 0.9508560104608731
+    },
+    "left_alone_accuracy": {
+     "n": 75,
+     "d": 75,
+     "rate": 1.0,
+     "low": 0.9512744540953,
+     "high": 1.0
+    },
+    "exception_recall": {
+     "n": 102,
+     "d": 102,
+     "rate": 1.0,
+     "low": 0.9637042523922542,
+     "high": 1.0
+    },
+    "unnecessary_exceptions": {
+     "n": 0,
+     "d": 133,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.028073334424619414
+    },
+    "records_auto_settled": {
+     "n": 468,
+     "d": 690,
+     "rate": 0.6782608695652174,
+     "low": 0.6425001646775844,
+     "high": 0.7120476168333539
+    }
+   },
+   "by_kind": {
+    "ambiguous_twins": {
+     "cases": 9,
+     "proposed_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "bank_fee": {
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "batch_noref": {
+     "cases": 9,
+     "proposed_right": 9
+    },
+    "batch_ref": {
+     "cases": 15,
+     "auto_right": 15
+    },
+    "coincidental_sum": {
+     "alone_records": 18,
+     "alone_left_alone": 18,
+     "alone_proposed": 18,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "currency_mismatch": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 3,
+     "exc_raised": 3
+    },
+    "duplicate_ledger": {
+     "cases": 9,
+     "proposed_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "fee_deducted": {
+     "cases": 12,
+     "proposed_right": 12,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "keying_error": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "late_clearing": {
+     "cases": 9,
+     "auto_right": 9
+    },
+    "missing_bank": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "missing_ledger": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "near_miss_ref": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "noref_1to1": {
+     "cases": 60,
+     "auto_right": 60
+    },
+    "noref_late": {
+     "cases": 6,
+     "missed": 6
+    },
+    "outstanding": {
+     "alone_records": 12,
+     "alone_left_alone": 12,
+     "alone_proposed": 0,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "partial_payment": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "ref_1to1": {
+     "cases": 102,
+     "auto_right": 102
+    },
+    "reversal": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "split_ref": {
+     "cases": 9,
+     "auto_right": 9
+    }
+   },
+   "exceptions_by_code": {
+    "AMBIGUOUS_CANDIDATES": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "AMOUNT_DIFFERENCE": {
+     "n": 18,
+     "d": 18,
+     "rate": 1.0,
+     "low": 0.8241154494176252,
+     "high": 1.0
+    },
+    "CURRENCY_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "PARTIAL_MATCH": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "REVERSAL": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "TIMING_DIFFERENCE": {
+     "n": 12,
+     "d": 12,
+     "rate": 1.0,
+     "low": 0.7574992425007574,
+     "high": 1.0
+    },
+    "UNMATCHED": {
+     "n": 27,
+     "d": 27,
+     "rate": 1.0,
+     "low": 0.8754409628553641,
+     "high": 1.0
+    },
+    "UNRECORDED_FEE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    }
+   },
+   "amount_reconciled_share": 0.8383646856943845,
+   "false_matches": [],
+   "missed_exceptions": [],
+   "noisy_exceptions": [],
+   "counts": {
+    "auto": 213,
+    "proposed": 57,
+    "exceptions": 133,
+    "records": 690
+   },
+   "order_stable": true,
+   "exceptions_stable": true,
+   "seconds": 0.061,
+   "checks_failed": []
+  },
+  "holdout:greedy": {
+   "rates": {
+    "auto_precision": {
+     "n": 231,
+     "d": 231,
+     "rate": 1.0,
+     "low": 0.983641739793972,
+     "high": 1.0
+    },
+    "false_match_rate": {
+     "n": 0,
+     "d": 231,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.016358260206028232
+    },
+    "auto_recall": {
+     "n": 213,
+     "d": 213,
+     "rate": 1.0,
+     "low": 0.982283842214778,
+     "high": 1.0
+    },
+    "review_cases_reaching_review": {
+     "n": 33,
+     "d": 57,
+     "rate": 0.5789473684210527,
+     "low": 0.4497991014068138,
+     "high": 0.6981260024694814
+    },
+    "review_cases_auto_accepted": {
+     "n": 18,
+     "d": 57,
+     "rate": 0.3157894736842105,
+     "low": 0.2100412363168152,
+     "high": 0.44480018797182935
+    },
+    "any_recall": {
+     "n": 264,
+     "d": 270,
+     "rate": 0.9777777777777777,
+     "low": 0.9523738665541401,
+     "high": 0.9897766321283099
+    },
+    "proposal_precision": {
+     "n": 33,
+     "d": 39,
+     "rate": 0.8461538461538461,
+     "low": 0.7027023013426569,
+     "high": 0.9275262615494854
+    },
+    "left_alone_accuracy": {
+     "n": 75,
+     "d": 75,
+     "rate": 1.0,
+     "low": 0.9512744540953,
+     "high": 1.0
+    },
+    "exception_recall": {
+     "n": 93,
+     "d": 102,
+     "rate": 0.9117647058823529,
+     "low": 0.8407538217792032,
+     "high": 0.9528849743085355
+    },
+    "unnecessary_exceptions": {
+     "n": 0,
+     "d": 123,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.03028659367273828
+    },
+    "records_auto_settled": {
+     "n": 508,
+     "d": 688,
+     "rate": 0.7383720930232558,
+     "low": 0.704270154058736,
+     "high": 0.7698268068641111
+    }
+   },
+   "by_kind": {
+    "ambiguous_twins": {
+     "cases": 9,
+     "auto_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 0
+    },
+    "bank_fee": {
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "batch_noref": {
+     "cases": 9,
+     "proposed_right": 9
+    },
+    "batch_ref": {
+     "cases": 15,
+     "auto_right": 15
+    },
+    "coincidental_sum": {
+     "alone_records": 18,
+     "alone_left_alone": 18,
+     "alone_proposed": 18,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "currency_mismatch": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 3,
+     "exc_raised": 3
+    },
+    "duplicate_ledger": {
+     "cases": 9,
+     "auto_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "fee_deducted": {
+     "cases": 12,
+     "proposed_right": 12,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "keying_error": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "late_clearing": {
+     "cases": 9,
+     "auto_right": 9
+    },
+    "missing_bank": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "missing_ledger": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "near_miss_ref": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "noref_1to1": {
+     "cases": 60,
+     "auto_right": 60
+    },
+    "noref_late": {
+     "cases": 6,
+     "missed": 6
+    },
+    "outstanding": {
+     "alone_records": 12,
+     "alone_left_alone": 12,
+     "alone_proposed": 0,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "partial_payment": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "ref_1to1": {
+     "cases": 102,
+     "auto_right": 102
+    },
+    "reversal": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "split_ref": {
+     "cases": 9,
+     "auto_right": 9
+    }
+   },
+   "exceptions_by_code": {
+    "AMBIGUOUS_CANDIDATES": {
+     "n": 0,
+     "d": 9,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.2991527535509594
+    },
+    "AMOUNT_DIFFERENCE": {
+     "n": 18,
+     "d": 18,
+     "rate": 1.0,
+     "low": 0.8241154494176252,
+     "high": 1.0
+    },
+    "CURRENCY_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "PARTIAL_MATCH": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "REVERSAL": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "TIMING_DIFFERENCE": {
+     "n": 12,
+     "d": 12,
+     "rate": 1.0,
+     "low": 0.7574992425007574,
+     "high": 1.0
+    },
+    "UNMATCHED": {
+     "n": 27,
+     "d": 27,
+     "rate": 1.0,
+     "low": 0.8754409628553641,
+     "high": 1.0
+    },
+    "UNRECORDED_FEE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    }
+   },
+   "amount_reconciled_share": 0.8569484722522303,
+   "false_matches": [],
+   "missed_exceptions": [
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00052"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00124"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00163"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00206"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00256"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00280"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00291"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00316"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00317"
+     ]
+    }
+   ],
+   "noisy_exceptions": [],
+   "counts": {
+    "auto": 231,
+    "proposed": 39,
+    "exceptions": 123,
+    "records": 688
+   },
+   "order_stable": true,
+   "exceptions_stable": true,
+   "seconds": 0.058,
+   "checks_failed": []
+  },
+  "holdout:component": {
+   "rates": {
+    "auto_precision": {
+     "n": 213,
+     "d": 213,
+     "rate": 1.0,
+     "low": 0.982283842214778,
+     "high": 1.0
+    },
+    "false_match_rate": {
+     "n": 0,
+     "d": 213,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.017716157785222023
+    },
+    "auto_recall": {
+     "n": 213,
+     "d": 213,
+     "rate": 1.0,
+     "low": 0.982283842214778,
+     "high": 1.0
+    },
+    "review_cases_reaching_review": {
+     "n": 51,
+     "d": 57,
+     "rate": 0.8947368421052632,
+     "low": 0.7887695089206027,
+     "high": 0.9508560104608731
+    },
+    "review_cases_auto_accepted": {
+     "n": 0,
+     "d": 57,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.06314100878346394
+    },
+    "any_recall": {
+     "n": 264,
+     "d": 270,
+     "rate": 0.9777777777777777,
+     "low": 0.9523738665541401,
+     "high": 0.9897766321283099
+    },
+    "proposal_precision": {
+     "n": 51,
+     "d": 57,
+     "rate": 0.8947368421052632,
+     "low": 0.7887695089206027,
+     "high": 0.9508560104608731
+    },
+    "left_alone_accuracy": {
+     "n": 75,
+     "d": 75,
+     "rate": 1.0,
+     "low": 0.9512744540953,
+     "high": 1.0
+    },
+    "exception_recall": {
+     "n": 102,
+     "d": 102,
+     "rate": 1.0,
+     "low": 0.9637042523922542,
+     "high": 1.0
+    },
+    "unnecessary_exceptions": {
+     "n": 0,
+     "d": 133,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.028073334424619414
+    },
+    "records_auto_settled": {
+     "n": 472,
+     "d": 688,
+     "rate": 0.686046511627907,
+     "low": 0.6504150609942233,
+     "high": 0.7196118353358038
+    }
+   },
+   "by_kind": {
+    "ambiguous_twins": {
+     "cases": 9,
+     "proposed_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "bank_fee": {
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "batch_noref": {
+     "cases": 9,
+     "proposed_right": 9
+    },
+    "batch_ref": {
+     "cases": 15,
+     "auto_right": 15
+    },
+    "coincidental_sum": {
+     "alone_records": 18,
+     "alone_left_alone": 18,
+     "alone_proposed": 18,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "currency_mismatch": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 3,
+     "exc_raised": 3
+    },
+    "duplicate_ledger": {
+     "cases": 9,
+     "proposed_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "fee_deducted": {
+     "cases": 12,
+     "proposed_right": 12,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "keying_error": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "late_clearing": {
+     "cases": 9,
+     "auto_right": 9
+    },
+    "missing_bank": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "missing_ledger": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "near_miss_ref": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "noref_1to1": {
+     "cases": 60,
+     "auto_right": 60
+    },
+    "noref_late": {
+     "cases": 6,
+     "missed": 6
+    },
+    "outstanding": {
+     "alone_records": 12,
+     "alone_left_alone": 12,
+     "alone_proposed": 0,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "partial_payment": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "ref_1to1": {
+     "cases": 102,
+     "auto_right": 102
+    },
+    "reversal": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "split_ref": {
+     "cases": 9,
+     "auto_right": 9
+    }
+   },
+   "exceptions_by_code": {
+    "AMBIGUOUS_CANDIDATES": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "AMOUNT_DIFFERENCE": {
+     "n": 18,
+     "d": 18,
+     "rate": 1.0,
+     "low": 0.8241154494176252,
+     "high": 1.0
+    },
+    "CURRENCY_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "PARTIAL_MATCH": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "REVERSAL": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "TIMING_DIFFERENCE": {
+     "n": 12,
+     "d": 12,
+     "rate": 1.0,
+     "low": 0.7574992425007574,
+     "high": 1.0
+    },
+    "UNMATCHED": {
+     "n": 27,
+     "d": 27,
+     "rate": 1.0,
+     "low": 0.8754409628553641,
+     "high": 1.0
+    },
+    "UNRECORDED_FEE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    }
+   },
+   "amount_reconciled_share": 0.8446923046636171,
+   "false_matches": [],
+   "missed_exceptions": [],
+   "noisy_exceptions": [],
+   "counts": {
+    "auto": 213,
+    "proposed": 57,
+    "exceptions": 133,
+    "records": 688
+   },
+   "order_stable": true,
+   "exceptions_stable": true,
+   "seconds": 0.059,
+   "checks_failed": []
+  },
+  "stress:greedy": {
+   "rates": {
+    "auto_precision": {
+     "n": 220,
+     "d": 232,
+     "rate": 0.9482758620689655,
+     "low": 0.9117803090043699,
+     "high": 0.9701675746599201
+    },
+    "false_match_rate": {
+     "n": 12,
+     "d": 232,
+     "rate": 0.05172413793103448,
+     "low": 0.02983242534007995,
+     "high": 0.08821969099563014
+    },
+    "auto_recall": {
+     "n": 202,
+     "d": 213,
+     "rate": 0.9483568075117371,
+     "low": 0.9099052323118143,
+     "high": 0.9709220628197474
+    },
+    "review_cases_reaching_review": {
+     "n": 27,
+     "d": 57,
+     "rate": 0.47368421052631576,
+     "low": 0.3498695765634663,
+     "high": 0.6008220554777685
+    },
+    "review_cases_auto_accepted": {
+     "n": 18,
+     "d": 57,
+     "rate": 0.3157894736842105,
+     "low": 0.2100412363168152,
+     "high": 0.44480018797182935
+    },
+    "any_recall": {
+     "n": 247,
+     "d": 270,
+     "rate": 0.9148148148148149,
+     "low": 0.8754234081718314,
+     "high": 0.942567722467195
+    },
+    "proposal_precision": {
+     "n": 27,
+     "d": 33,
+     "rate": 0.8181818181818182,
+     "low": 0.656114329507048,
+     "high": 0.9138934877430174
+    },
+    "left_alone_accuracy": {
+     "n": 73,
+     "d": 75,
+     "rate": 0.9733333333333334,
+     "low": 0.9078833515671513,
+     "high": 0.9926564649763995
+    },
+    "exception_recall": {
+     "n": 85,
+     "d": 102,
+     "rate": 0.8333333333333334,
+     "low": 0.7492107842584269,
+     "high": 0.8932587173364094
+    },
+    "unnecessary_exceptions": {
+     "n": 5,
+     "d": 120,
+     "rate": 0.041666666666666664,
+     "low": 0.017926452505837805,
+     "high": 0.0938421292954309
+    },
+    "records_auto_settled": {
+     "n": 481,
+     "d": 685,
+     "rate": 0.7021897810218978,
+     "low": 0.6668933636690123,
+     "high": 0.7352310144173285
+    }
+   },
+   "by_kind": {
+    "ambiguous_twins": {
+     "cases": 9,
+     "auto_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 0
+    },
+    "bank_fee": {
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "batch_noref": {
+     "cases": 9,
+     "missed": 5,
+     "proposed_right": 4,
+     "false_auto": 4
+    },
+    "batch_ref": {
+     "cases": 15,
+     "auto_right": 15
+    },
+    "coincidental_sum": {
+     "alone_records": 18,
+     "alone_left_alone": 18,
+     "alone_proposed": 12,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "currency_mismatch": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 3,
+     "exc_raised": 3
+    },
+    "duplicate_ledger": {
+     "cases": 9,
+     "auto_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 8
+    },
+    "fee_deducted": {
+     "cases": 12,
+     "proposed_right": 12,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "keying_error": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "late_clearing": {
+     "cases": 9,
+     "auto_right": 9
+    },
+    "missing_bank": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "missing_ledger": {
+     "false_auto": 1,
+     "alone_records": 6,
+     "alone_left_alone": 5,
+     "alone_proposed": 1,
+     "exc_expected": 6,
+     "exc_raised": 4
+    },
+    "near_miss_ref": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 6
+    },
+    "noref_1to1": {
+     "cases": 60,
+     "missed": 11,
+     "auto_right": 49,
+     "false_auto": 11
+    },
+    "noref_late": {
+     "cases": 6,
+     "missed": 6,
+     "false_auto": 1
+    },
+    "outstanding": {
+     "alone_records": 12,
+     "alone_left_alone": 12,
+     "alone_proposed": 0,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "partial_payment": {
+     "cases": 6,
+     "proposed_right": 5,
+     "missed": 1,
+     "exc_expected": 6,
+     "exc_raised": 5
+    },
+    "ref_1to1": {
+     "cases": 102,
+     "auto_right": 102
+    },
+    "reversal": {
+     "cases": 9,
+     "auto_right": 9,
+     "false_auto": 1,
+     "alone_records": 9,
+     "alone_left_alone": 8,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 8
+    },
+    "split_ref": {
+     "cases": 9,
+     "auto_right": 9
+    }
+   },
+   "exceptions_by_code": {
+    "AMBIGUOUS_CANDIDATES": {
+     "n": 0,
+     "d": 9,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.2991527535509594
+    },
+    "AMOUNT_DIFFERENCE": {
+     "n": 18,
+     "d": 18,
+     "rate": 1.0,
+     "low": 0.8241154494176252,
+     "high": 1.0
+    },
+    "CURRENCY_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "PARTIAL_MATCH": {
+     "n": 5,
+     "d": 6,
+     "rate": 0.8333333333333334,
+     "low": 0.43649056343635395,
+     "high": 0.9699474141282697
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 8,
+     "d": 9,
+     "rate": 0.8888888888888888,
+     "low": 0.5649937852319399,
+     "high": 0.9801096286728695
+    },
+    "REVERSAL": {
+     "n": 8,
+     "d": 9,
+     "rate": 0.8888888888888888,
+     "low": 0.5649937852319399,
+     "high": 0.9801096286728695
+    },
+    "TIMING_DIFFERENCE": {
+     "n": 12,
+     "d": 12,
+     "rate": 1.0,
+     "low": 0.7574992425007574,
+     "high": 1.0
+    },
+    "UNMATCHED": {
+     "n": 22,
+     "d": 27,
+     "rate": 0.8148148148148148,
+     "low": 0.6330094349480825,
+     "high": 0.9181941342571468
+    },
+    "UNRECORDED_FEE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    }
+   },
+   "amount_reconciled_share": 0.8022042271444502,
+   "false_matches": [
+    {
+     "id": "m-8dc5bc6da491",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00002"
+     ],
+     "right": [
+      "ledger:JE-10161"
+     ]
+    },
+    {
+     "id": "m-ba1a1503c96f",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00010"
+     ],
+     "right": [
+      "ledger:JE-10127"
+     ]
+    },
+    {
+     "id": "m-a4e318af6139",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00018"
+     ],
+     "right": [
+      "ledger:JE-10156"
+     ]
+    },
+    {
+     "id": "m-1134fc65a32a",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00029"
+     ],
+     "right": [
+      "ledger:JE-10073"
+     ]
+    },
+    {
+     "id": "m-cb61411709f8",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00033"
+     ],
+     "right": [
+      "ledger:JE-10002"
+     ]
+    },
+    {
+     "id": "m-c66b164b97c5",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00079"
+     ],
+     "right": [
+      "ledger:JE-10013"
+     ]
+    },
+    {
+     "id": "m-ce5ab7b5cb59",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00114"
+     ],
+     "right": [
+      "ledger:JE-10171"
+     ]
+    },
+    {
+     "id": "m-64c192adc745",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00140"
+     ],
+     "right": [
+      "ledger:JE-10136"
+     ]
+    },
+    {
+     "id": "m-edb44cf1facf",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00267"
+     ],
+     "right": [
+      "ledger:JE-10066"
+     ]
+    },
+    {
+     "id": "m-b8698eed245d",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00291"
+     ],
+     "right": [
+      "ledger:JE-10178"
+     ]
+    },
+    {
+     "id": "m-139d9993698e",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00301"
+     ],
+     "right": [
+      "ledger:JE-10134"
+     ]
+    },
+    {
+     "id": "m-06248342e6a2",
+     "rule": "greedy",
+     "left": [
+      "bank:BK-00311"
+     ],
+     "right": [
+      "ledger:JE-10324"
+     ]
+    }
+   ],
+   "missed_exceptions": [
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00028"
+     ]
+    },
+    {
+     "kind": "missing_ledger",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "bank:BK-00029"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00038"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00049"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00057"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00081"
+     ]
+    },
+    {
+     "kind": "near_miss_ref",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10138"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00139"
+     ]
+    },
+    {
+     "kind": "partial_payment",
+     "code": "PARTIAL_MATCH",
+     "codes": [
+      "PARTIAL_MATCH"
+     ],
+     "any_of": [
+      "bank:BK-00149",
+      "ledger:JE-10179"
+     ]
+    },
+    {
+     "kind": "near_miss_ref",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10201"
+     ]
+    },
+    {
+     "kind": "missing_ledger",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "bank:BK-00197"
+     ]
+    },
+    {
+     "kind": "near_miss_ref",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10240"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00225"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00244"
+     ]
+    },
+    {
+     "kind": "ambiguous_twins",
+     "code": "AMBIGUOUS_CANDIDATES",
+     "codes": [
+      "AMBIGUOUS_CANDIDATES"
+     ],
+     "any_of": [
+      "bank:BK-00268"
+     ]
+    },
+    {
+     "kind": "duplicate_ledger",
+     "code": "POSSIBLE_DUPLICATE",
+     "codes": [
+      "POSSIBLE_DUPLICATE"
+     ],
+     "any_of": [
+      "ledger:JE-10323",
+      "ledger:JE-10324"
+     ]
+    },
+    {
+     "kind": "reversal",
+     "code": "REVERSAL",
+     "codes": [
+      "REVERSAL"
+     ],
+     "any_of": [
+      "bank:BK-00291"
+     ]
+    }
+   ],
+   "noisy_exceptions": [
+    {
+     "code": "UNMATCHED",
+     "subjects": [
+      "ledger:JE-10364"
+     ]
+    },
+    {
+     "code": "UNMATCHED",
+     "subjects": [
+      "bank:BK-00050"
+     ]
+    },
+    {
+     "code": "UNMATCHED",
+     "subjects": [
+      "ledger:JE-10100"
+     ]
+    },
+    {
+     "code": "UNMATCHED",
+     "subjects": [
+      "bank:BK-00148"
+     ]
+    },
+    {
+     "code": "UNMATCHED",
+     "subjects": [
+      "ledger:JE-10310"
+     ]
+    }
+   ],
+   "counts": {
+    "auto": 232,
+    "proposed": 33,
+    "exceptions": 120,
+    "records": 685
+   },
+   "order_stable": true,
+   "exceptions_stable": true,
+   "seconds": 0.061,
+   "checks_failed": []
+  },
+  "stress:component": {
+   "rates": {
+    "auto_precision": {
+     "n": 196,
+     "d": 196,
+     "rate": 1.0,
+     "low": 0.9807767752059631,
+     "high": 1.0
+    },
+    "false_match_rate": {
+     "n": 0,
+     "d": 196,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.019223224794036875
+    },
+    "auto_recall": {
+     "n": 196,
+     "d": 213,
+     "rate": 0.92018779342723,
+     "low": 0.8759125961777019,
+     "high": 0.949574764181196
+    },
+    "review_cases_reaching_review": {
+     "n": 45,
+     "d": 57,
+     "rate": 0.7894736842105263,
+     "low": 0.6671363132153347,
+     "high": 0.875255734331081
+    },
+    "review_cases_auto_accepted": {
+     "n": 0,
+     "d": 57,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.06314100878346394
+    },
+    "any_recall": {
+     "n": 252,
+     "d": 270,
+     "rate": 0.9333333333333333,
+     "low": 0.8970907066012016,
+     "high": 0.9574178852270671
+    },
+    "proposal_precision": {
+     "n": 56,
+     "d": 70,
+     "rate": 0.8,
+     "low": 0.6918313531091291,
+     "high": 0.8769537219705008
+    },
+    "left_alone_accuracy": {
+     "n": 75,
+     "d": 75,
+     "rate": 1.0,
+     "low": 0.9512744540953,
+     "high": 1.0
+    },
+    "exception_recall": {
+     "n": 93,
+     "d": 102,
+     "rate": 0.9117647058823529,
+     "low": 0.8407538217792032,
+     "high": 0.9528849743085355
+    },
+    "unnecessary_exceptions": {
+     "n": 1,
+     "d": 131,
+     "rate": 0.007633587786259542,
+     "low": 0.0013487543306202332,
+     "high": 0.04197318785932708
+    },
+    "records_auto_settled": {
+     "n": 433,
+     "d": 685,
+     "rate": 0.6321167883211679,
+     "low": 0.5953602180876483,
+     "high": 0.6673997545969284
+    }
+   },
+   "by_kind": {
+    "ambiguous_twins": {
+     "cases": 9,
+     "proposed_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "bank_fee": {
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 9
+    },
+    "batch_noref": {
+     "cases": 9,
+     "missed": 5,
+     "proposed_right": 4
+    },
+    "batch_ref": {
+     "cases": 15,
+     "auto_right": 15
+    },
+    "coincidental_sum": {
+     "alone_records": 18,
+     "alone_left_alone": 18,
+     "alone_proposed": 12,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "currency_mismatch": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 3,
+     "exc_raised": 3
+    },
+    "duplicate_ledger": {
+     "cases": 9,
+     "proposed_right": 9,
+     "exc_expected": 9,
+     "exc_raised": 8
+    },
+    "fee_deducted": {
+     "cases": 12,
+     "proposed_right": 12,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "keying_error": {
+     "cases": 6,
+     "proposed_right": 6,
+     "exc_expected": 6,
+     "exc_raised": 6
+    },
+    "late_clearing": {
+     "cases": 9,
+     "auto_right": 9
+    },
+    "missing_bank": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 0,
+     "exc_expected": 6,
+     "exc_raised": 5
+    },
+    "missing_ledger": {
+     "alone_records": 6,
+     "alone_left_alone": 6,
+     "alone_proposed": 2,
+     "exc_expected": 6,
+     "exc_raised": 4
+    },
+    "near_miss_ref": {
+     "cases": 9,
+     "auto_right": 9,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 0,
+     "exc_expected": 9,
+     "exc_raised": 6
+    },
+    "noref_1to1": {
+     "cases": 60,
+     "missed": 6,
+     "auto_right": 46,
+     "proposed_right": 8
+    },
+    "noref_late": {
+     "cases": 6,
+     "missed": 6
+    },
+    "outstanding": {
+     "alone_records": 12,
+     "alone_left_alone": 12,
+     "alone_proposed": 0,
+     "exc_expected": 12,
+     "exc_raised": 12
+    },
+    "partial_payment": {
+     "cases": 6,
+     "proposed_right": 5,
+     "missed": 1,
+     "exc_expected": 6,
+     "exc_raised": 5
+    },
+    "ref_1to1": {
+     "cases": 102,
+     "auto_right": 102
+    },
+    "reversal": {
+     "cases": 9,
+     "proposed_right": 3,
+     "auto_right": 6,
+     "alone_records": 9,
+     "alone_left_alone": 9,
+     "alone_proposed": 1,
+     "exc_expected": 9,
+     "exc_raised": 8
+    },
+    "split_ref": {
+     "cases": 9,
+     "auto_right": 9
+    }
+   },
+   "exceptions_by_code": {
+    "AMBIGUOUS_CANDIDATES": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    },
+    "AMOUNT_DIFFERENCE": {
+     "n": 18,
+     "d": 18,
+     "rate": 1.0,
+     "low": 0.8241154494176252,
+     "high": 1.0
+    },
+    "CURRENCY_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "PARTIAL_MATCH": {
+     "n": 5,
+     "d": 6,
+     "rate": 0.8333333333333334,
+     "low": 0.43649056343635395,
+     "high": 0.9699474141282697
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 8,
+     "d": 9,
+     "rate": 0.8888888888888888,
+     "low": 0.5649937852319399,
+     "high": 0.9801096286728695
+    },
+    "REVERSAL": {
+     "n": 8,
+     "d": 9,
+     "rate": 0.8888888888888888,
+     "low": 0.5649937852319399,
+     "high": 0.9801096286728695
+    },
+    "TIMING_DIFFERENCE": {
+     "n": 12,
+     "d": 12,
+     "rate": 1.0,
+     "low": 0.7574992425007574,
+     "high": 1.0
+    },
+    "UNMATCHED": {
+     "n": 21,
+     "d": 27,
+     "rate": 0.7777777777777778,
+     "low": 0.5924270453692919,
+     "high": 0.8939290451059105
+    },
+    "UNRECORDED_FEE": {
+     "n": 9,
+     "d": 9,
+     "rate": 1.0,
+     "low": 0.7008472464490407,
+     "high": 1.0
+    }
+   },
+   "amount_reconciled_share": 0.7804610566082558,
+   "false_matches": [],
+   "missed_exceptions": [
+    {
+     "kind": "missing_ledger",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "bank:BK-00029"
+     ]
+    },
+    {
+     "kind": "near_miss_ref",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10138"
+     ]
+    },
+    {
+     "kind": "missing_bank",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10154"
+     ]
+    },
+    {
+     "kind": "partial_payment",
+     "code": "PARTIAL_MATCH",
+     "codes": [
+      "PARTIAL_MATCH"
+     ],
+     "any_of": [
+      "bank:BK-00149",
+      "ledger:JE-10179"
+     ]
+    },
+    {
+     "kind": "near_miss_ref",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10201"
+     ]
+    },
+    {
+     "kind": "missing_ledger",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "bank:BK-00197"
+     ]
+    },
+    {
+     "kind": "near_miss_ref",
+     "code": "UNMATCHED",
+     "codes": [
+      "UNMATCHED"
+     ],
+     "any_of": [
+      "ledger:JE-10240"
+     ]
+    },
+    {
+     "kind": "duplicate_ledger",
+     "code": "POSSIBLE_DUPLICATE",
+     "codes": [
+      "POSSIBLE_DUPLICATE"
+     ],
+     "any_of": [
+      "ledger:JE-10323",
+      "ledger:JE-10324"
+     ]
+    },
+    {
+     "kind": "reversal",
+     "code": "REVERSAL",
+     "codes": [
+      "REVERSAL"
+     ],
+     "any_of": [
+      "bank:BK-00291"
+     ]
+    }
+   ],
+   "noisy_exceptions": [
+    {
+     "code": "AMBIGUOUS_CANDIDATES",
+     "subjects": [
+      "bank:BK-00114",
+      "bank:BK-00140",
+      "bank:BK-00298",
+      "ledger:JE-10136",
+      "ledger:JE-10171",
+      "ledger:JE-10350"
+     ]
+    }
+   ],
+   "counts": {
+    "auto": 196,
+    "proposed": 70,
+    "exceptions": 131,
+    "records": 685
+   },
+   "order_stable": true,
+   "exceptions_stable": true,
+   "seconds": 0.062,
+   "checks_failed": []
+  }
+ },
+ "scale_run": {
+  "records": 6898,
+  "seconds": 2.62,
+  "checks_failed": 0
+ }
+}

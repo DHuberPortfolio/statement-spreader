@@ -1,0 +1,31 @@
+{
+ "vendor": {
+  "name": "Contoso Supply",
+  "tax_id": "18-3431389"
+ },
+ "invoice_number": "INV-007050",
+ "invoice_date": "2026-03-03",
+ "due_date": "2026-04-02",
+ "po_number": "PO-4547",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "11808.50",
+ "tax": "974.20",
+ "total": "12782.70",
+ "lines": [
+  {
+   "item_code": "CON-100",
+   "description": "Pallet wrap film",
+   "quantity": "40",
+   "unit_price": "268.08",
+   "amount": "10723.20"
+  },
+  {
+   "item_code": "CON-121",
+   "description": "Cable ties, pack of 100",
+   "quantity": "5",
+   "unit_price": "217.06",
+   "amount": "1085.30"
+  }
+ ]
+}

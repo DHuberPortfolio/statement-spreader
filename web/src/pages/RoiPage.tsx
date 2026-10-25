@@ -8,6 +8,7 @@ import { formatDateTime, formatDuration, formatNumber } from "../lib/format";
 import { Link, navigate } from "../lib/router";
 import { setSession, useSession } from "../lib/store";
 import { useApi } from "../lib/useApi";
+import { FinopsRoiSection } from "./FinopsRoi";
 
 // ---- labels ----
 
@@ -650,6 +651,7 @@ export function RoiPage() {
             <Loading />
           )}
         </section>
+        <FinopsRoiSection />
       </div>
     </Layout>
   );

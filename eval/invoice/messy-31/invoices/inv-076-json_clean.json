@@ -1,0 +1,42 @@
+{
+ "vendor": {
+  "name": "Coho Vineyard",
+  "tax_id": "98-9613429"
+ },
+ "invoice_number": "007075",
+ "invoice_date": "2026-03-12",
+ "due_date": "2026-04-11",
+ "po_number": "PO-4568",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "16807.28",
+ "tax": null,
+ "total": "16807.28",
+ "lines": [
+  {
+   "item_code": "COH-114",
+   "description": "Copy paper, case",
+   "quantity": "40",
+   "unit_price": "307.48",
+   "amount": "12299.20"
+  },
+  {
+   "item_code": "COH-121",
+   "description": "Air filter 20x25",
+   "quantity": "4",
+   "unit_price": "215.11",
+   "amount": "860.44"
+  },
+  {
+   "item_code": "COH-100",
+   "description": "Label printer rolls",
+   "quantity": "12",
+   "unit_price": "303.97",
+   "amount": "3647.64"
+  }
+ ],
+ "remit_to": {
+  "account_number": "711838927791",
+  "routing_number": "080381492"
+ }
+}

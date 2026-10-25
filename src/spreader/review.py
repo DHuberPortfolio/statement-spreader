@@ -37,19 +37,38 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                                     statement=stype,
                                     message=f"No {profile.statements[stype].title.lower()} was found in this document."))
 
+    # A year one period statement covers and another lacks is a gap a reviewer must see, not a silent omission.
+    years = {skey: {p.end[:4] for p in res.table.periods if p.months} for skey, res in statements.items()
+             if StatementType(skey) is not StatementType.BALANCE}
+    all_years = set().union(*years.values()) if years else set()
+    for skey, ys in years.items():
+        for y in sorted(all_years - ys):
+            other = next(k for k, v in years.items() if y in v)
+            per = next(p.key for p in statements[other].table.periods if p.end[:4] == y and p.months)
+            items.append(ReviewItem(id=f"missing-period:{skey}:{y}", kind=ReviewKind.MISSING_STATEMENT, severity=Severity.WARNING,
+                                    statement=StatementType(skey), periods=[per],
+                                    message=f"The {profile.statements[StatementType(skey)].title.lower()} has no column for "
+                                            f"fiscal {y}, though the {profile.statements[StatementType(other)].title.lower()} "
+                                            "does: that year's values are missing, not zero."))
+
     for skey, res in statements.items():
         t = res.table
         stype = StatementType(skey)
+        # Every line of the statement rests on an assumed unit or column, calculated lines included (Johnson &
+        # Johnson's derived net income to the company went out unscaled, and a derived net income in an assumed
+        # column undated, both without a flag).
+        stmt_lines = [ln for ln, st in profile.line_statement.items() if st is stype]
         if t.scale.assumed:
             items.append(ReviewItem(id=f"scale:{skey}", kind=ReviewKind.ASSUMED_SCALE, severity=Severity.BLOCKER, statement=stype,
                                     message=f"{t.scale.evidence} Values were taken as printed (units). Confirm the unit before approving.",
-                                    lines=[m.canonical for m in res.mappings if m.canonical],
+                                    lines=sorted({m.canonical for m in res.mappings if m.canonical} | set(stmt_lines)),
                                     periods=[p.key for p in t.periods]))
         for p in t.periods:
             if p.assumed:
                 items.append(ReviewItem(id=f"period:{skey}:{p.key}", kind=ReviewKind.ASSUMED_PERIOD, severity=Severity.WARNING,
                                         statement=stype, message=f"Column '{p.label}': " + " ".join(p.assumed),
-                                        lines=[m.canonical for m in res.mappings if m.canonical], periods=[p.key]))
+                                        lines=sorted({m.canonical for m in res.mappings if m.canonical} | set(stmt_lines)),
+                                        periods=[p.key]))
         for w in t.warnings:
             if w.startswith("DUPLICATE_PERIOD:"):
                 pk = w.split(":")[1]

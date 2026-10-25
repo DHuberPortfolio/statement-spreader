@@ -1,0 +1,345 @@
+{"id": "g0", "expected_route": "auto_matched", "partners": ["bank:BK-00001", "ledger:JE-10001"], "trap": "noref_1to1"}
+{"id": "g1", "expected_route": "auto_matched", "partners": ["bank:BK-00002", "ledger:JE-10002", "ledger:JE-10003", "ledger:JE-10004", "ledger:JE-10005"], "trap": "batch_ref"}
+{"id": "g2", "expected_route": "auto_matched", "partners": ["bank:BK-00003", "bank:BK-00004", "bank:BK-00005", "ledger:JE-10006"], "trap": "split_ref"}
+{"id": "g3", "expected_route": "auto_matched", "partners": ["bank:BK-00006", "ledger:JE-10007"], "trap": "noref_1to1"}
+{"id": "g4", "expected_route": "auto_matched", "partners": ["bank:BK-00007", "ledger:JE-10008"], "trap": "noref_1to1"}
+{"id": "g5", "expected_route": "auto_matched", "partners": ["bank:BK-00008", "ledger:JE-10009"], "trap": "noref_1to1"}
+{"id": "g6", "expected_route": "auto_matched", "partners": ["bank:BK-00009", "ledger:JE-10010"], "trap": "noref_1to1"}
+{"id": "g7", "expected_route": "auto_matched", "partners": ["bank:BK-00010", "ledger:JE-10012"], "trap": "near_miss_ref"}
+{"id": "g8", "expected_route": "auto_matched", "partners": ["bank:BK-00011", "ledger:JE-10014", "ledger:JE-10015", "ledger:JE-10016"], "trap": "batch_ref"}
+{"id": "g9", "expected_route": "auto_matched", "partners": ["bank:BK-00012", "ledger:JE-10017"], "trap": "noref_1to1"}
+{"id": "g10", "expected_route": "review", "partners": [], "trap": "noref_late"}
+{"id": "g11", "expected_route": "auto_matched", "partners": ["bank:BK-00015", "bank:BK-00016", "bank:BK-00017", "ledger:JE-10019"], "trap": "split_ref"}
+{"id": "g12", "expected_route": "auto_matched", "partners": ["bank:BK-00018", "ledger:JE-10020"], "trap": "ref_1to1"}
+{"id": "g13", "expected_route": "auto_matched", "partners": ["bank:BK-00020", "ledger:JE-10021"], "trap": "ref_1to1"}
+{"id": "g14", "expected_route": "auto_matched", "partners": ["bank:BK-00021", "ledger:JE-10022"], "trap": "noref_1to1"}
+{"id": "g15", "expected_route": "auto_matched", "partners": ["bank:BK-00022", "ledger:JE-10023"], "trap": "noref_1to1"}
+{"id": "g16", "expected_route": "auto_matched", "partners": ["bank:BK-00023", "ledger:JE-10024"], "trap": "ref_1to1"}
+{"id": "g17", "expected_route": "auto_matched", "partners": ["bank:BK-00025", "ledger:JE-10026"], "trap": "noref_1to1"}
+{"id": "g18", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g19", "expected_route": "auto_matched", "partners": ["bank:BK-00027", "ledger:JE-10028"], "trap": "ref_1to1"}
+{"id": "g20", "expected_route": "auto_matched", "partners": ["bank:BK-00028", "ledger:JE-10029"], "trap": "noref_1to1"}
+{"id": "g21", "expected_route": "auto_matched", "partners": ["bank:BK-00029", "ledger:JE-10030"], "trap": "ref_1to1"}
+{"id": "g22", "expected_route": "auto_matched", "partners": ["bank:BK-00030", "ledger:JE-10031"], "trap": "ref_1to1"}
+{"id": "g23", "expected_route": "review", "partners": [], "trap": "keying_error"}
+{"id": "g24", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g25", "expected_route": "auto_matched", "partners": ["bank:BK-00033", "ledger:JE-10035"], "trap": "ref_1to1"}
+{"id": "g26", "expected_route": "auto_matched", "partners": ["bank:BK-00034", "ledger:JE-10036"], "trap": "ref_1to1"}
+{"id": "g27", "expected_route": "auto_matched", "partners": ["bank:BK-00035", "ledger:JE-10037"], "trap": "late_clearing"}
+{"id": "g28", "expected_route": "auto_matched", "partners": ["bank:BK-00036", "bank:BK-00037", "ledger:JE-10038"], "trap": "split_ref"}
+{"id": "g29", "expected_route": "auto_matched", "partners": ["bank:BK-00038", "ledger:JE-10039"], "trap": "ref_1to1"}
+{"id": "g30", "expected_route": "auto_matched", "partners": ["bank:BK-00039", "ledger:JE-10040"], "trap": "ref_1to1"}
+{"id": "g31", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g32", "expected_route": "auto_matched", "partners": ["bank:BK-00041", "ledger:JE-10043"], "trap": "ref_1to1"}
+{"id": "g33", "expected_route": "auto_matched", "partners": ["bank:BK-00042", "ledger:JE-10044", "ledger:JE-10045", "ledger:JE-10046", "ledger:JE-10047"], "trap": "batch_ref"}
+{"id": "g34", "expected_route": "auto_matched", "partners": ["bank:BK-00043", "ledger:JE-10048"], "trap": "ref_1to1"}
+{"id": "g35", "expected_route": "auto_matched", "partners": ["bank:BK-00044", "ledger:JE-10051"], "trap": "ref_1to1"}
+{"id": "g36", "expected_route": "review", "partners": [], "trap": "keying_error"}
+{"id": "g37", "expected_route": "auto_matched", "partners": ["bank:BK-00046", "ledger:JE-10053"], "trap": "noref_1to1"}
+{"id": "g38", "expected_route": "auto_matched", "partners": ["bank:BK-00047", "ledger:JE-10054"], "trap": "ref_1to1"}
+{"id": "g39", "expected_route": "review", "partners": [], "trap": "keying_error"}
+{"id": "g40", "expected_route": "auto_matched", "partners": ["bank:BK-00049", "ledger:JE-10056"], "trap": "noref_1to1"}
+{"id": "g41", "expected_route": "auto_matched", "partners": ["bank:BK-00050", "ledger:JE-10057"], "trap": "noref_1to1"}
+{"id": "g42", "expected_route": "auto_matched", "partners": ["bank:BK-00051", "ledger:JE-10058"], "trap": "near_miss_ref"}
+{"id": "g43", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g44", "expected_route": "review", "partners": [], "trap": "noref_late"}
+{"id": "g45", "expected_route": "auto_matched", "partners": ["bank:BK-00054", "ledger:JE-10063"], "trap": "noref_1to1"}
+{"id": "g46", "expected_route": "auto_matched", "partners": ["bank:BK-00055", "ledger:JE-10064"], "trap": "reversal"}
+{"id": "g47", "expected_route": "auto_matched", "partners": ["bank:BK-00057", "ledger:JE-10065"], "trap": "noref_1to1"}
+{"id": "g48", "expected_route": "auto_matched", "partners": ["bank:BK-00058", "ledger:JE-10066"], "trap": "noref_1to1"}
+{"id": "g49", "expected_route": "auto_matched", "partners": ["bank:BK-00059", "ledger:JE-10068"], "trap": "reversal"}
+{"id": "g50", "expected_route": "auto_matched", "partners": ["bank:BK-00061", "ledger:JE-10069"], "trap": "noref_1to1"}
+{"id": "g51", "expected_route": "auto_matched", "partners": ["bank:BK-00062", "ledger:JE-10070"], "trap": "ref_1to1"}
+{"id": "g52", "expected_route": "auto_matched", "partners": ["bank:BK-00063", "ledger:JE-10071"], "trap": "ref_1to1"}
+{"id": "g53", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g54", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g55", "expected_route": "auto_matched", "partners": ["bank:BK-00066", "ledger:JE-10075"], "trap": "ref_1to1"}
+{"id": "g56", "expected_route": "auto_matched", "partners": ["bank:BK-00067", "bank:BK-00068", "bank:BK-00069", "ledger:JE-10076"], "trap": "split_ref"}
+{"id": "g57", "expected_route": "auto_matched", "partners": ["bank:BK-00070", "ledger:JE-10077"], "trap": "ref_1to1"}
+{"id": "g58", "expected_route": "auto_matched", "partners": ["bank:BK-00072", "ledger:JE-10079", "ledger:JE-10080", "ledger:JE-10081"], "trap": "batch_ref"}
+{"id": "g59", "expected_route": "auto_matched", "partners": ["bank:BK-00073", "ledger:JE-10082"], "trap": "reversal"}
+{"id": "g60", "expected_route": "auto_matched", "partners": ["bank:BK-00075", "ledger:JE-10083"], "trap": "ref_1to1"}
+{"id": "g61", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g62", "expected_route": "auto_matched", "partners": ["bank:BK-00077", "bank:BK-00078", "ledger:JE-10086"], "trap": "split_ref"}
+{"id": "g63", "expected_route": "auto_matched", "partners": ["bank:BK-00079", "ledger:JE-10087"], "trap": "ref_1to1"}
+{"id": "g64", "expected_route": "auto_matched", "partners": ["bank:BK-00080", "ledger:JE-10089"], "trap": "noref_1to1"}
+{"id": "g65", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g66", "expected_route": "auto_matched", "partners": ["bank:BK-00082", "ledger:JE-10091"], "trap": "noref_1to1"}
+{"id": "g67", "expected_route": "auto_matched", "partners": ["bank:BK-00083", "ledger:JE-10092"], "trap": "reversal"}
+{"id": "g68", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g69", "expected_route": "auto_matched", "partners": ["bank:BK-00086", "ledger:JE-10095"], "trap": "noref_1to1"}
+{"id": "g70", "expected_route": "review", "partners": [], "trap": "noref_late"}
+{"id": "g71", "expected_route": "auto_matched", "partners": ["bank:BK-00088", "ledger:JE-10098"], "trap": "late_clearing"}
+{"id": "g72", "expected_route": "auto_matched", "partners": ["bank:BK-00089", "ledger:JE-10099"], "trap": "ref_1to1"}
+{"id": "g73", "expected_route": "auto_matched", "partners": ["bank:BK-00090", "ledger:JE-10100"], "trap": "near_miss_ref"}
+{"id": "g74", "expected_route": "auto_matched", "partners": ["bank:BK-00091", "ledger:JE-10102"], "trap": "noref_1to1"}
+{"id": "g75", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g76", "expected_route": "auto_matched", "partners": ["bank:BK-00093", "ledger:JE-10104"], "trap": "ref_1to1"}
+{"id": "g77", "expected_route": "auto_matched", "partners": ["bank:BK-00094", "ledger:JE-10105"], "trap": "ref_1to1"}
+{"id": "g78", "expected_route": "auto_matched", "partners": ["bank:BK-00095", "ledger:JE-10106"], "trap": "late_clearing"}
+{"id": "g79", "expected_route": "auto_matched", "partners": ["bank:BK-00096", "ledger:JE-10107"], "trap": "noref_1to1"}
+{"id": "g80", "expected_route": "auto_matched", "partners": ["bank:BK-00097", "ledger:JE-10108"], "trap": "noref_1to1"}
+{"id": "g81", "expected_route": "auto_matched", "partners": ["bank:BK-00098", "ledger:JE-10109"], "trap": "ref_1to1"}
+{"id": "g82", "expected_route": "review", "partners": [], "trap": "keying_error"}
+{"id": "g83", "expected_route": "auto_matched", "partners": ["bank:BK-00100", "ledger:JE-10111"], "trap": "ref_1to1"}
+{"id": "g84", "expected_route": "auto_matched", "partners": ["bank:BK-00101", "ledger:JE-10112"], "trap": "noref_1to1"}
+{"id": "g85", "expected_route": "auto_matched", "partners": ["bank:BK-00102", "ledger:JE-10113"], "trap": "ref_1to1"}
+{"id": "g86", "expected_route": "auto_matched", "partners": ["bank:BK-00103", "ledger:JE-10114"], "trap": "noref_1to1"}
+{"id": "g87", "expected_route": "auto_matched", "partners": ["bank:BK-00104", "ledger:JE-10115"], "trap": "noref_1to1"}
+{"id": "g88", "expected_route": "auto_matched", "partners": ["bank:BK-00105", "ledger:JE-10116"], "trap": "ref_1to1"}
+{"id": "g89", "expected_route": "auto_matched", "partners": ["bank:BK-00106", "ledger:JE-10117", "ledger:JE-10118", "ledger:JE-10119"], "trap": "batch_ref"}
+{"id": "g90", "expected_route": "auto_matched", "partners": ["bank:BK-00107", "ledger:JE-10120"], "trap": "ref_1to1"}
+{"id": "g91", "expected_route": "auto_matched", "partners": ["bank:BK-00108", "ledger:JE-10121"], "trap": "ref_1to1"}
+{"id": "g92", "expected_route": "auto_matched", "partners": ["bank:BK-00109", "ledger:JE-10122"], "trap": "near_miss_ref"}
+{"id": "g93", "expected_route": "review", "partners": [], "trap": "keying_error"}
+{"id": "g94", "expected_route": "auto_matched", "partners": ["bank:BK-00111", "ledger:JE-10126"], "trap": "noref_1to1"}
+{"id": "g95", "expected_route": "auto_matched", "partners": ["bank:BK-00113", "ledger:JE-10127"], "trap": "ref_1to1"}
+{"id": "g96", "expected_route": "auto_matched", "partners": ["bank:BK-00114", "ledger:JE-10128"], "trap": "ref_1to1"}
+{"id": "g97", "expected_route": "auto_matched", "partners": ["bank:BK-00115", "ledger:JE-10129"], "trap": "ref_1to1"}
+{"id": "g98", "expected_route": "auto_matched", "partners": ["bank:BK-00116", "ledger:JE-10130"], "trap": "ref_1to1"}
+{"id": "g99", "expected_route": "auto_matched", "partners": ["bank:BK-00118", "ledger:JE-10132"], "trap": "ref_1to1"}
+{"id": "g100", "expected_route": "auto_matched", "partners": ["bank:BK-00119", "ledger:JE-10133"], "trap": "near_miss_ref"}
+{"id": "g101", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g102", "expected_route": "auto_matched", "partners": ["bank:BK-00121", "ledger:JE-10137"], "trap": "ref_1to1"}
+{"id": "g103", "expected_route": "auto_matched", "partners": ["bank:BK-00122", "ledger:JE-10138"], "trap": "ref_1to1"}
+{"id": "g104", "expected_route": "auto_matched", "partners": ["bank:BK-00123", "ledger:JE-10139"], "trap": "ref_1to1"}
+{"id": "g105", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g106", "expected_route": "review", "partners": [], "trap": "noref_late"}
+{"id": "g107", "expected_route": "auto_matched", "partners": ["bank:BK-00126", "ledger:JE-10143", "ledger:JE-10144", "ledger:JE-10145", "ledger:JE-10146"], "trap": "batch_ref"}
+{"id": "g108", "expected_route": "auto_matched", "partners": ["bank:BK-00127", "ledger:JE-10147"], "trap": "late_clearing"}
+{"id": "g109", "expected_route": "auto_matched", "partners": ["bank:BK-00128", "ledger:JE-10148"], "trap": "noref_1to1"}
+{"id": "g110", "expected_route": "auto_matched", "partners": ["bank:BK-00129", "ledger:JE-10149"], "trap": "noref_1to1"}
+{"id": "g111", "expected_route": "auto_matched", "partners": ["bank:BK-00131", "ledger:JE-10150"], "trap": "near_miss_ref"}
+{"id": "g112", "expected_route": "auto_matched", "partners": ["bank:BK-00132", "ledger:JE-10152"], "trap": "ref_1to1"}
+{"id": "g113", "expected_route": "auto_matched", "partners": ["bank:BK-00133", "ledger:JE-10153", "ledger:JE-10154", "ledger:JE-10155", "ledger:JE-10156"], "trap": "batch_ref"}
+{"id": "g114", "expected_route": "auto_matched", "partners": ["bank:BK-00134", "ledger:JE-10157"], "trap": "noref_1to1"}
+{"id": "g115", "expected_route": "auto_matched", "partners": ["bank:BK-00135", "ledger:JE-10158", "ledger:JE-10159", "ledger:JE-10160", "ledger:JE-10161"], "trap": "batch_ref"}
+{"id": "g116", "expected_route": "auto_matched", "partners": ["bank:BK-00136", "ledger:JE-10162"], "trap": "late_clearing"}
+{"id": "g117", "expected_route": "auto_matched", "partners": ["bank:BK-00137", "ledger:JE-10163"], "trap": "ref_1to1"}
+{"id": "g118", "expected_route": "auto_matched", "partners": ["bank:BK-00138", "ledger:JE-10164"], "trap": "ref_1to1"}
+{"id": "g119", "expected_route": "auto_matched", "partners": ["bank:BK-00139", "ledger:JE-10165"], "trap": "noref_1to1"}
+{"id": "g120", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g121", "expected_route": "auto_matched", "partners": ["bank:BK-00141", "ledger:JE-10168"], "trap": "noref_1to1"}
+{"id": "g122", "expected_route": "auto_matched", "partners": ["bank:BK-00142", "ledger:JE-10169", "ledger:JE-10170"], "trap": "batch_ref"}
+{"id": "g123", "expected_route": "auto_matched", "partners": ["bank:BK-00143", "ledger:JE-10171"], "trap": "noref_1to1"}
+{"id": "g124", "expected_route": "auto_matched", "partners": ["bank:BK-00144", "bank:BK-00145", "ledger:JE-10172"], "trap": "split_ref"}
+{"id": "g125", "expected_route": "auto_matched", "partners": ["bank:BK-00146", "ledger:JE-10173"], "trap": "ref_1to1"}
+{"id": "g126", "expected_route": "auto_matched", "partners": ["bank:BK-00147", "ledger:JE-10174"], "trap": "ref_1to1"}
+{"id": "g127", "expected_route": "auto_matched", "partners": ["bank:BK-00148", "ledger:JE-10175"], "trap": "noref_1to1"}
+{"id": "g128", "expected_route": "auto_matched", "partners": ["bank:BK-00149", "ledger:JE-10176"], "trap": "ref_1to1"}
+{"id": "g129", "expected_route": "auto_matched", "partners": ["bank:BK-00150", "ledger:JE-10177"], "trap": "ref_1to1"}
+{"id": "g130", "expected_route": "auto_matched", "partners": ["bank:BK-00151", "ledger:JE-10178"], "trap": "ref_1to1"}
+{"id": "g131", "expected_route": "auto_matched", "partners": ["bank:BK-00152", "ledger:JE-10179"], "trap": "ref_1to1"}
+{"id": "g132", "expected_route": "review", "partners": [], "trap": "noref_late"}
+{"id": "g133", "expected_route": "auto_matched", "partners": ["bank:BK-00154", "ledger:JE-10181"], "trap": "ref_1to1"}
+{"id": "g134", "expected_route": "auto_matched", "partners": ["bank:BK-00155", "ledger:JE-10182"], "trap": "late_clearing"}
+{"id": "g135", "expected_route": "auto_matched", "partners": ["bank:BK-00156", "ledger:JE-10183"], "trap": "ref_1to1"}
+{"id": "g136", "expected_route": "review", "partners": [], "trap": "partial_payment"}
+{"id": "g137", "expected_route": "auto_matched", "partners": ["bank:BK-00158", "ledger:JE-10185"], "trap": "noref_1to1"}
+{"id": "g138", "expected_route": "auto_matched", "partners": ["bank:BK-00159", "ledger:JE-10186"], "trap": "ref_1to1"}
+{"id": "g139", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g140", "expected_route": "auto_matched", "partners": ["bank:BK-00162", "ledger:JE-10188"], "trap": "ref_1to1"}
+{"id": "g141", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g142", "expected_route": "auto_matched", "partners": ["bank:BK-00164", "ledger:JE-10191"], "trap": "ref_1to1"}
+{"id": "g143", "expected_route": "review", "partners": [], "trap": "noref_late"}
+{"id": "g144", "expected_route": "auto_matched", "partners": ["bank:BK-00166", "ledger:JE-10193", "ledger:JE-10194"], "trap": "batch_ref"}
+{"id": "g145", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g146", "expected_route": "auto_matched", "partners": ["bank:BK-00168", "bank:BK-00169", "bank:BK-00170", "ledger:JE-10197"], "trap": "split_ref"}
+{"id": "g147", "expected_route": "auto_matched", "partners": ["bank:BK-00172", "ledger:JE-10200"], "trap": "noref_1to1"}
+{"id": "g148", "expected_route": "auto_matched", "partners": ["bank:BK-00173", "ledger:JE-10201"], "trap": "noref_1to1"}
+{"id": "g149", "expected_route": "auto_matched", "partners": ["bank:BK-00176", "ledger:JE-10206"], "trap": "noref_1to1"}
+{"id": "g150", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g151", "expected_route": "auto_matched", "partners": ["bank:BK-00178", "ledger:JE-10209"], "trap": "ref_1to1"}
+{"id": "g152", "expected_route": "auto_matched", "partners": ["bank:BK-00179", "ledger:JE-10210"], "trap": "late_clearing"}
+{"id": "g153", "expected_route": "auto_matched", "partners": ["bank:BK-00180", "ledger:JE-10211"], "trap": "noref_1to1"}
+{"id": "g154", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g155", "expected_route": "auto_matched", "partners": ["bank:BK-00182", "ledger:JE-10214"], "trap": "ref_1to1"}
+{"id": "g156", "expected_route": "auto_matched", "partners": ["bank:BK-00183", "ledger:JE-10215"], "trap": "ref_1to1"}
+{"id": "g157", "expected_route": "auto_matched", "partners": ["bank:BK-00184", "ledger:JE-10216"], "trap": "near_miss_ref"}
+{"id": "g158", "expected_route": "review", "partners": [], "trap": "partial_payment"}
+{"id": "g159", "expected_route": "auto_matched", "partners": ["bank:BK-00186", "ledger:JE-10219"], "trap": "ref_1to1"}
+{"id": "g160", "expected_route": "auto_matched", "partners": ["bank:BK-00187", "ledger:JE-10220"], "trap": "ref_1to1"}
+{"id": "g161", "expected_route": "auto_matched", "partners": ["bank:BK-00188", "ledger:JE-10221"], "trap": "noref_1to1"}
+{"id": "g162", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g163", "expected_route": "auto_matched", "partners": ["bank:BK-00190", "ledger:JE-10224"], "trap": "ref_1to1"}
+{"id": "g164", "expected_route": "auto_matched", "partners": ["bank:BK-00191", "ledger:JE-10225"], "trap": "noref_1to1"}
+{"id": "g165", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g166", "expected_route": "auto_matched", "partners": ["bank:BK-00193", "ledger:JE-10228"], "trap": "ref_1to1"}
+{"id": "g167", "expected_route": "auto_matched", "partners": ["bank:BK-00194", "ledger:JE-10229"], "trap": "ref_1to1"}
+{"id": "g168", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g169", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g170", "expected_route": "auto_matched", "partners": ["bank:BK-00198", "ledger:JE-10233"], "trap": "noref_1to1"}
+{"id": "g171", "expected_route": "auto_matched", "partners": ["bank:BK-00200", "ledger:JE-10234"], "trap": "ref_1to1"}
+{"id": "g172", "expected_route": "auto_matched", "partners": ["bank:BK-00201", "ledger:JE-10235"], "trap": "reversal"}
+{"id": "g173", "expected_route": "auto_matched", "partners": ["bank:BK-00203", "ledger:JE-10236"], "trap": "ref_1to1"}
+{"id": "g174", "expected_route": "auto_matched", "partners": ["bank:BK-00204", "ledger:JE-10237"], "trap": "ref_1to1"}
+{"id": "g175", "expected_route": "auto_matched", "partners": ["bank:BK-00205", "ledger:JE-10238"], "trap": "noref_1to1"}
+{"id": "g176", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g177", "expected_route": "auto_matched", "partners": ["bank:BK-00207", "ledger:JE-10241"], "trap": "reversal"}
+{"id": "g178", "expected_route": "auto_matched", "partners": ["bank:BK-00209", "ledger:JE-10242"], "trap": "reversal"}
+{"id": "g179", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g180", "expected_route": "auto_matched", "partners": ["bank:BK-00213", "ledger:JE-10246"], "trap": "ref_1to1"}
+{"id": "g181", "expected_route": "auto_matched", "partners": ["bank:BK-00214", "ledger:JE-10247"], "trap": "ref_1to1"}
+{"id": "g182", "expected_route": "auto_matched", "partners": ["bank:BK-00215", "ledger:JE-10248"], "trap": "late_clearing"}
+{"id": "g183", "expected_route": "auto_matched", "partners": ["bank:BK-00216", "ledger:JE-10249"], "trap": "near_miss_ref"}
+{"id": "g184", "expected_route": "auto_matched", "partners": ["bank:BK-00217", "ledger:JE-10251"], "trap": "ref_1to1"}
+{"id": "g185", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g186", "expected_route": "auto_matched", "partners": ["bank:BK-00219", "bank:BK-00220", "ledger:JE-10254"], "trap": "split_ref"}
+{"id": "g187", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g188", "expected_route": "auto_matched", "partners": ["bank:BK-00222", "ledger:JE-10257"], "trap": "noref_1to1"}
+{"id": "g189", "expected_route": "review", "partners": [], "trap": "partial_payment"}
+{"id": "g190", "expected_route": "auto_matched", "partners": ["bank:BK-00224", "ledger:JE-10259"], "trap": "noref_1to1"}
+{"id": "g191", "expected_route": "auto_matched", "partners": ["bank:BK-00225", "ledger:JE-10260", "ledger:JE-10261"], "trap": "batch_ref"}
+{"id": "g192", "expected_route": "auto_matched", "partners": ["bank:BK-00226", "ledger:JE-10262"], "trap": "ref_1to1"}
+{"id": "g193", "expected_route": "auto_matched", "partners": ["bank:BK-00227", "ledger:JE-10263"], "trap": "noref_1to1"}
+{"id": "g194", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g195", "expected_route": "auto_matched", "partners": ["bank:BK-00230", "ledger:JE-10267"], "trap": "ref_1to1"}
+{"id": "g196", "expected_route": "auto_matched", "partners": ["bank:BK-00231", "ledger:JE-10268", "ledger:JE-10269", "ledger:JE-10270"], "trap": "batch_ref"}
+{"id": "g197", "expected_route": "auto_matched", "partners": ["bank:BK-00232", "ledger:JE-10271"], "trap": "ref_1to1"}
+{"id": "g198", "expected_route": "auto_matched", "partners": ["bank:BK-00233", "ledger:JE-10272"], "trap": "reversal"}
+{"id": "g199", "expected_route": "auto_matched", "partners": ["bank:BK-00235", "bank:BK-00236", "bank:BK-00237", "ledger:JE-10274"], "trap": "split_ref"}
+{"id": "g200", "expected_route": "auto_matched", "partners": ["bank:BK-00238", "ledger:JE-10275"], "trap": "noref_1to1"}
+{"id": "g201", "expected_route": "auto_matched", "partners": ["bank:BK-00239", "ledger:JE-10276"], "trap": "ref_1to1"}
+{"id": "g202", "expected_route": "auto_matched", "partners": ["bank:BK-00240", "ledger:JE-10277"], "trap": "ref_1to1"}
+{"id": "g203", "expected_route": "auto_matched", "partners": ["bank:BK-00241", "ledger:JE-10278"], "trap": "ref_1to1"}
+{"id": "g204", "expected_route": "auto_matched", "partners": ["bank:BK-00242", "ledger:JE-10279"], "trap": "ref_1to1"}
+{"id": "g205", "expected_route": "auto_matched", "partners": ["bank:BK-00243", "ledger:JE-10280"], "trap": "ref_1to1"}
+{"id": "g206", "expected_route": "auto_matched", "partners": ["bank:BK-00244", "ledger:JE-10281"], "trap": "ref_1to1"}
+{"id": "g207", "expected_route": "auto_matched", "partners": ["bank:BK-00245", "ledger:JE-10282", "ledger:JE-10283"], "trap": "batch_ref"}
+{"id": "g208", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g209", "expected_route": "auto_matched", "partners": ["bank:BK-00247", "ledger:JE-10286"], "trap": "ref_1to1"}
+{"id": "g210", "expected_route": "auto_matched", "partners": ["bank:BK-00248", "ledger:JE-10288"], "trap": "noref_1to1"}
+{"id": "g211", "expected_route": "review", "partners": [], "trap": "partial_payment"}
+{"id": "g212", "expected_route": "auto_matched", "partners": ["bank:BK-00250", "ledger:JE-10290"], "trap": "noref_1to1"}
+{"id": "g213", "expected_route": "auto_matched", "partners": ["bank:BK-00251", "ledger:JE-10291"], "trap": "ref_1to1"}
+{"id": "g214", "expected_route": "auto_matched", "partners": ["bank:BK-00252", "ledger:JE-10292", "ledger:JE-10293", "ledger:JE-10294"], "trap": "batch_ref"}
+{"id": "g215", "expected_route": "auto_matched", "partners": ["bank:BK-00253", "ledger:JE-10295"], "trap": "ref_1to1"}
+{"id": "g216", "expected_route": "auto_matched", "partners": ["bank:BK-00254", "ledger:JE-10296"], "trap": "noref_1to1"}
+{"id": "g217", "expected_route": "auto_matched", "partners": ["bank:BK-00255", "ledger:JE-10297"], "trap": "ref_1to1"}
+{"id": "g218", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g219", "expected_route": "auto_matched", "partners": ["bank:BK-00258", "ledger:JE-10300"], "trap": "ref_1to1"}
+{"id": "g220", "expected_route": "auto_matched", "partners": ["bank:BK-00259", "ledger:JE-10301"], "trap": "ref_1to1"}
+{"id": "g221", "expected_route": "auto_matched", "partners": ["bank:BK-00260", "ledger:JE-10302"], "trap": "ref_1to1"}
+{"id": "g222", "expected_route": "auto_matched", "partners": ["bank:BK-00261", "ledger:JE-10303", "ledger:JE-10304", "ledger:JE-10305", "ledger:JE-10306"], "trap": "batch_ref"}
+{"id": "g223", "expected_route": "review", "partners": [], "trap": "keying_error"}
+{"id": "g224", "expected_route": "auto_matched", "partners": ["bank:BK-00263", "ledger:JE-10308"], "trap": "ref_1to1"}
+{"id": "g225", "expected_route": "auto_matched", "partners": ["bank:BK-00264", "ledger:JE-10309"], "trap": "ref_1to1"}
+{"id": "g226", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g227", "expected_route": "auto_matched", "partners": ["bank:BK-00266", "ledger:JE-10312"], "trap": "noref_1to1"}
+{"id": "g228", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g229", "expected_route": "auto_matched", "partners": ["bank:BK-00269", "ledger:JE-10314"], "trap": "ref_1to1"}
+{"id": "g230", "expected_route": "auto_matched", "partners": ["bank:BK-00270", "ledger:JE-10315"], "trap": "ref_1to1"}
+{"id": "g231", "expected_route": "auto_matched", "partners": ["bank:BK-00272", "ledger:JE-10316"], "trap": "noref_1to1"}
+{"id": "g232", "expected_route": "auto_matched", "partners": ["bank:BK-00274", "ledger:JE-10319"], "trap": "noref_1to1"}
+{"id": "g233", "expected_route": "auto_matched", "partners": ["bank:BK-00275", "ledger:JE-10320"], "trap": "noref_1to1"}
+{"id": "g234", "expected_route": "auto_matched", "partners": ["bank:BK-00276", "ledger:JE-10321"], "trap": "noref_1to1"}
+{"id": "g235", "expected_route": "auto_matched", "partners": ["bank:BK-00277", "ledger:JE-10322"], "trap": "ref_1to1"}
+{"id": "g236", "expected_route": "review", "partners": [], "trap": "fee_deducted"}
+{"id": "g237", "expected_route": "auto_matched", "partners": ["bank:BK-00279", "ledger:JE-10324"], "trap": "noref_1to1"}
+{"id": "g238", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g239", "expected_route": "auto_matched", "partners": ["bank:BK-00281", "ledger:JE-10327"], "trap": "ref_1to1"}
+{"id": "g240", "expected_route": "auto_matched", "partners": ["bank:BK-00282", "ledger:JE-10328"], "trap": "ref_1to1"}
+{"id": "g241", "expected_route": "auto_matched", "partners": ["bank:BK-00283", "ledger:JE-10329"], "trap": "reversal"}
+{"id": "g242", "expected_route": "auto_matched", "partners": ["bank:BK-00285", "ledger:JE-10330"], "trap": "noref_1to1"}
+{"id": "g243", "expected_route": "auto_matched", "partners": ["bank:BK-00286", "ledger:JE-10331"], "trap": "noref_1to1"}
+{"id": "g244", "expected_route": "auto_matched", "partners": ["bank:BK-00288", "ledger:JE-10332"], "trap": "ref_1to1"}
+{"id": "g245", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g246", "expected_route": "auto_matched", "partners": ["bank:BK-00290", "ledger:JE-10335"], "trap": "late_clearing"}
+{"id": "g247", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g248", "expected_route": "auto_matched", "partners": ["bank:BK-00292", "ledger:JE-10338"], "trap": "ref_1to1"}
+{"id": "g249", "expected_route": "auto_matched", "partners": ["bank:BK-00293", "ledger:JE-10339"], "trap": "noref_1to1"}
+{"id": "g250", "expected_route": "auto_matched", "partners": ["bank:BK-00295", "ledger:JE-10342"], "trap": "ref_1to1"}
+{"id": "g251", "expected_route": "auto_matched", "partners": ["bank:BK-00296", "ledger:JE-10343"], "trap": "ref_1to1"}
+{"id": "g252", "expected_route": "auto_matched", "partners": ["bank:BK-00297", "ledger:JE-10344"], "trap": "ref_1to1"}
+{"id": "g253", "expected_route": "auto_matched", "partners": ["bank:BK-00298", "ledger:JE-10346"], "trap": "ref_1to1"}
+{"id": "g254", "expected_route": "auto_matched", "partners": ["bank:BK-00299", "ledger:JE-10347"], "trap": "ref_1to1"}
+{"id": "g255", "expected_route": "review", "partners": [], "trap": "partial_payment"}
+{"id": "g256", "expected_route": "review", "partners": [], "trap": "batch_noref"}
+{"id": "g257", "expected_route": "auto_matched", "partners": ["bank:BK-00302", "ledger:JE-10351"], "trap": "ref_1to1"}
+{"id": "g258", "expected_route": "auto_matched", "partners": ["bank:BK-00303", "ledger:JE-10353"], "trap": "ref_1to1"}
+{"id": "g259", "expected_route": "auto_matched", "partners": ["bank:BK-00304", "ledger:JE-10354"], "trap": "ref_1to1"}
+{"id": "g260", "expected_route": "auto_matched", "partners": ["bank:BK-00305", "ledger:JE-10355"], "trap": "noref_1to1"}
+{"id": "g261", "expected_route": "review", "partners": [], "trap": "duplicate_ledger"}
+{"id": "g262", "expected_route": "auto_matched", "partners": ["bank:BK-00307", "ledger:JE-10358"], "trap": "ref_1to1"}
+{"id": "g263", "expected_route": "auto_matched", "partners": ["bank:BK-00308", "ledger:JE-10359"], "trap": "ref_1to1"}
+{"id": "g264", "expected_route": "auto_matched", "partners": ["bank:BK-00309", "ledger:JE-10360"], "trap": "near_miss_ref"}
+{"id": "g265", "expected_route": "auto_matched", "partners": ["bank:BK-00311", "ledger:JE-10362"], "trap": "ref_1to1"}
+{"id": "g266", "expected_route": "auto_matched", "partners": ["bank:BK-00312", "ledger:JE-10363"], "trap": "ref_1to1"}
+{"id": "g267", "expected_route": "review", "partners": [], "trap": "partial_payment"}
+{"id": "g268", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "g269", "expected_route": "review", "partners": [], "trap": "ambiguous_twins"}
+{"id": "n:ledger:JE-10011", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:ledger:JE-10013", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:bank:BK-00013", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:bank:BK-00019", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:bank:BK-00024", "expected_route": "review", "partners": [], "trap": "currency_mismatch"}
+{"id": "n:ledger:JE-10025", "expected_route": "review", "partners": [], "trap": "currency_mismatch"}
+{"id": "n:ledger:JE-10049", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:ledger:JE-10050", "expected_route": "review", "partners": [], "trap": "missing_bank"}
+{"id": "n:ledger:JE-10059", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:bank:BK-00056", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:ledger:JE-10067", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:bank:BK-00060", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:bank:BK-00071", "expected_route": "review", "partners": [], "trap": "currency_mismatch"}
+{"id": "n:ledger:JE-10078", "expected_route": "review", "partners": [], "trap": "currency_mismatch"}
+{"id": "n:bank:BK-00074", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:ledger:JE-10088", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:bank:BK-00084", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:ledger:JE-10097", "expected_route": "review", "partners": [], "trap": "missing_bank"}
+{"id": "n:ledger:JE-10101", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:ledger:JE-10123", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:ledger:JE-10124", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:bank:BK-00112", "expected_route": "review", "partners": [], "trap": "missing_ledger"}
+{"id": "n:bank:BK-00117", "expected_route": "review", "partners": [], "trap": "currency_mismatch"}
+{"id": "n:ledger:JE-10131", "expected_route": "review", "partners": [], "trap": "currency_mismatch"}
+{"id": "n:ledger:JE-10134", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:ledger:JE-10136", "expected_route": "review", "partners": [], "trap": "missing_bank"}
+{"id": "n:bank:BK-00130", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:ledger:JE-10151", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:bank:BK-00161", "expected_route": "review", "partners": [], "trap": "missing_ledger"}
+{"id": "n:bank:BK-00171", "expected_route": "review", "partners": [], "trap": "missing_ledger"}
+{"id": "n:ledger:JE-10198", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:ledger:JE-10199", "expected_route": "review", "partners": [], "trap": "missing_bank"}
+{"id": "n:bank:BK-00174", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10202", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10203", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:bank:BK-00175", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10204", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10205", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10217", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:bank:BK-00196", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:bank:BK-00199", "expected_route": "review", "partners": [], "trap": "missing_ledger"}
+{"id": "n:bank:BK-00202", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:bank:BK-00208", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:bank:BK-00210", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:bank:BK-00212", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10244", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10245", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10250", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:ledger:JE-10256", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:ledger:JE-10265", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:bank:BK-00229", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:ledger:JE-10266", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:bank:BK-00234", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:ledger:JE-10273", "expected_route": "review", "partners": [], "trap": "missing_bank"}
+{"id": "n:ledger:JE-10287", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:bank:BK-00257", "expected_route": "review", "partners": [], "trap": "missing_ledger"}
+{"id": "n:bank:BK-00267", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:bank:BK-00271", "expected_route": "review", "partners": [], "trap": "missing_ledger"}
+{"id": "n:bank:BK-00273", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10317", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10318", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:bank:BK-00284", "expected_route": "review", "partners": [], "trap": "reversal"}
+{"id": "n:bank:BK-00287", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:bank:BK-00294", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10340", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10341", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10345", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:ledger:JE-10352", "expected_route": "review", "partners": [], "trap": "outstanding"}
+{"id": "n:ledger:JE-10361", "expected_route": "review", "partners": [], "trap": "near_miss_ref"}
+{"id": "n:bank:BK-00310", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:bank:BK-00313", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10364", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:ledger:JE-10365", "expected_route": "review", "partners": [], "trap": "coincidental_sum"}
+{"id": "n:bank:BK-00314", "expected_route": "review", "partners": [], "trap": "bank_fee"}
+{"id": "n:ledger:JE-10369", "expected_route": "review", "partners": [], "trap": "missing_bank"}

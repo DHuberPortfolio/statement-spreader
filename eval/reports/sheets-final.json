@@ -1,0 +1,1362 @@
+{
+ "engine": "sheets",
+ "sets": {
+  "synthetic-31": {
+   "books": {
+    "budget-31-a.xlsx": {
+     "faults": 8,
+     "found": 8,
+     "kind_agrees": 8,
+     "claims": 8,
+     "right_claims": 8,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 39,
+     "seconds": 0.033
+    },
+    "budget-31-b.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 2,
+     "baseline_claims": 36,
+     "seconds": 0.022
+    },
+    "budget-31-clean.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 31,
+     "seconds": 0.022
+    },
+    "loan-31.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 3,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 301,
+     "seconds": 0.02
+    },
+    "consolidation-31.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 24,
+     "seconds": 0.014
+    },
+    "commission-31.xlsx": {
+     "faults": 2,
+     "found": 2,
+     "kind_agrees": 2,
+     "claims": 2,
+     "right_claims": 2,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 33,
+     "seconds": 0.008
+    }
+   },
+   "pairs": {
+    "forecast-31-x-v1.xlsx -> forecast-31-x-v2.xlsx": {
+     "changes": 4,
+     "found": 4,
+     "reported": 4,
+     "right": 4,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 12,
+      "sheets": {
+       "Assumptions": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Budget": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 4
+     }
+    },
+    "forecast-31-y-v1.xlsx -> forecast-31-y-v2.xlsx": {
+     "changes": 4,
+     "found": 4,
+     "reported": 4,
+     "right": 4,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 16,
+      "sheets": {
+       "Assumptions": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Budget": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 4
+     }
+    }
+   },
+   "counts": {
+    "faults": 22,
+    "found": 22,
+    "kind": 22,
+    "claims": 22,
+    "right": 22,
+    "baseline": 464,
+    "legit": 39,
+    "legit_flagged": 0,
+    "anomalies": 5,
+    "seconds": 0.12,
+    "pair_changes": 8,
+    "pair_found": 8,
+    "pair_reported": 8,
+    "pair_right": 8
+   },
+   "rates": {
+    "precision": {
+     "n": 22,
+     "d": 22,
+     "rate": 1.0,
+     "low": 0.8513404742740388,
+     "high": 1.0
+    },
+    "recall": {
+     "n": 22,
+     "d": 22,
+     "rate": 1.0,
+     "low": 0.8513404742740388,
+     "high": 1.0
+    },
+    "kind_agreement": {
+     "n": 22,
+     "d": 22,
+     "rate": 1.0,
+     "low": 0.8513404742740388,
+     "high": 1.0
+    },
+    "change_precision": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    },
+    "change_recall": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "CIRCULAR_REFERENCE": {
+     "found": 1,
+     "planted": 1
+    },
+    "DOUBLE_COUNT": {
+     "found": 1,
+     "planted": 1
+    },
+    "EXTERNAL_LINK": {
+     "found": 3,
+     "planted": 3
+    },
+    "HARDCODED_OVERRIDE": {
+     "found": 1,
+     "planted": 1
+    },
+    "HARDCODED_PLUG": {
+     "found": 3,
+     "planted": 3
+    },
+    "INCONSISTENT_FORMULA": {
+     "found": 3,
+     "planted": 3
+    },
+    "MISSING_SHEET": {
+     "found": 3,
+     "planted": 3
+    },
+    "REF_ERROR": {
+     "found": 2,
+     "planted": 2
+    },
+    "SUM_OMITS_ROW": {
+     "found": 3,
+     "planted": 3
+    },
+    "TEXT_NUMBER_IN_SUM": {
+     "found": 2,
+     "planted": 2
+    }
+   }
+  },
+  "synthetic-32": {
+   "books": {
+    "budget-32-a.xlsx": {
+     "faults": 6,
+     "found": 6,
+     "kind_agrees": 6,
+     "claims": 6,
+     "right_claims": 6,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 24,
+     "seconds": 0.02
+    },
+    "budget-32-b.xlsx": {
+     "faults": 9,
+     "found": 9,
+     "kind_agrees": 9,
+     "claims": 9,
+     "right_claims": 9,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 2,
+     "baseline_claims": 38,
+     "seconds": 0.021
+    },
+    "budget-32-clean.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 29,
+     "seconds": 0.022
+    },
+    "loan-32.xlsx": {
+     "faults": 2,
+     "found": 2,
+     "kind_agrees": 2,
+     "claims": 2,
+     "right_claims": 2,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 241,
+     "seconds": 0.017
+    },
+    "consolidation-32.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 22,
+     "seconds": 0.017
+    },
+    "commission-32.xlsx": {
+     "faults": 2,
+     "found": 2,
+     "kind_agrees": 2,
+     "claims": 2,
+     "right_claims": 2,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 33,
+     "seconds": 0.009
+    }
+   },
+   "pairs": {
+    "forecast-32-x-v1.xlsx -> forecast-32-x-v2.xlsx": {
+     "changes": 4,
+     "found": 4,
+     "reported": 4,
+     "right": 4,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 14,
+      "sheets": {
+       "Assumptions": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Budget": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 4
+     }
+    },
+    "forecast-32-y-v1.xlsx -> forecast-32-y-v2.xlsx": {
+     "changes": 4,
+     "found": 4,
+     "reported": 4,
+     "right": 4,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 22,
+      "sheets": {
+       "Assumptions": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Budget": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 4
+     }
+    }
+   },
+   "counts": {
+    "faults": 23,
+    "found": 23,
+    "kind": 23,
+    "claims": 23,
+    "right": 23,
+    "baseline": 387,
+    "legit": 38,
+    "legit_flagged": 0,
+    "anomalies": 5,
+    "seconds": 0.1,
+    "pair_changes": 8,
+    "pair_found": 8,
+    "pair_reported": 8,
+    "pair_right": 8
+   },
+   "rates": {
+    "precision": {
+     "n": 23,
+     "d": 23,
+     "rate": 1.0,
+     "low": 0.8568788745827374,
+     "high": 1.0
+    },
+    "recall": {
+     "n": 23,
+     "d": 23,
+     "rate": 1.0,
+     "low": 0.8568788745827374,
+     "high": 1.0
+    },
+    "kind_agreement": {
+     "n": 23,
+     "d": 23,
+     "rate": 1.0,
+     "low": 0.8568788745827374,
+     "high": 1.0
+    },
+    "change_precision": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    },
+    "change_recall": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "BROKEN_NAME": {
+     "found": 1,
+     "planted": 1
+    },
+    "CIRCULAR_REFERENCE": {
+     "found": 2,
+     "planted": 2
+    },
+    "EXTERNAL_LINK": {
+     "found": 3,
+     "planted": 3
+    },
+    "HARDCODED_OVERRIDE": {
+     "found": 2,
+     "planted": 2
+    },
+    "HARDCODED_PLUG": {
+     "found": 1,
+     "planted": 1
+    },
+    "INCONSISTENT_FORMULA": {
+     "found": 5,
+     "planted": 5
+    },
+    "MISSING_SHEET": {
+     "found": 1,
+     "planted": 1
+    },
+    "REF_ERROR": {
+     "found": 1,
+     "planted": 1
+    },
+    "SUM_OMITS_ROW": {
+     "found": 3,
+     "planted": 3
+    },
+    "TEXT_NUMBER_IN_SUM": {
+     "found": 2,
+     "planted": 2
+    },
+    "UNKNOWN_NAME": {
+     "found": 2,
+     "planted": 2
+    }
+   }
+  },
+  "independent-1": {
+   "books": {
+    "budget_fy25.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 24,
+     "seconds": 0.014
+    },
+    "loan_amortisation.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 299,
+     "seconds": 0.03
+    },
+    "three_statement_model.xlsx": {
+     "faults": 7,
+     "found": 7,
+     "kind_agrees": 7,
+     "claims": 7,
+     "right_claims": 7,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 17,
+     "seconds": 0.018
+    },
+    "sales_commission.xlsx": {
+     "faults": 6,
+     "found": 6,
+     "kind_agrees": 6,
+     "claims": 6,
+     "right_claims": 6,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 43,
+     "seconds": 0.012
+    },
+    "headcount_payroll.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 39,
+     "seconds": 0.022
+    },
+    "consolidation_fy25.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 25,
+     "seconds": 0.016
+    },
+    "capex_depreciation.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 28,
+     "seconds": 0.017
+    },
+    "accruals_rec.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 14,
+     "seconds": 0.01
+    },
+    "regional_sales_summary.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 35,
+     "seconds": 0.011
+    },
+    "opex_forecast_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 16,
+     "seconds": 0.013
+    },
+    "opex_forecast_v2.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 19,
+     "seconds": 0.015
+    },
+    "pricing_model_v1.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 47,
+     "seconds": 0.009
+    },
+    "pricing_model_v2.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 56,
+     "seconds": 0.012
+    },
+    "ar_aging_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 10,
+     "seconds": 0.007
+    },
+    "ar_aging_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 13,
+     "seconds": 0.008
+    }
+   },
+   "pairs": {
+    "opex_forecast_v1.xlsx -> opex_forecast_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Op Ex": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Summary": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    },
+    "pricing_model_v1.xlsx -> pricing_model_v2.xlsx": {
+     "changes": 4,
+     "found": 4,
+     "reported": 4,
+     "right": 4,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Price Build": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 4
+     }
+    },
+    "ar_aging_v1.xlsx -> ar_aging_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 2,
+      "sheets": {
+       "Aging": {
+        "rows_added": 2,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    }
+   },
+   "counts": {
+    "faults": 43,
+    "found": 43,
+    "kind": 43,
+    "claims": 43,
+    "right": 43,
+    "baseline": 685,
+    "legit": 114,
+    "legit_flagged": 0,
+    "anomalies": 6,
+    "seconds": 0.21,
+    "pair_changes": 8,
+    "pair_found": 8,
+    "pair_reported": 8,
+    "pair_right": 8
+   },
+   "rates": {
+    "precision": {
+     "n": 43,
+     "d": 43,
+     "rate": 1.0,
+     "low": 0.9179874299767729,
+     "high": 1.0
+    },
+    "recall": {
+     "n": 43,
+     "d": 43,
+     "rate": 1.0,
+     "low": 0.9179874299767729,
+     "high": 1.0
+    },
+    "kind_agreement": {
+     "n": 43,
+     "d": 43,
+     "rate": 1.0,
+     "low": 0.9179874299767729,
+     "high": 1.0
+    },
+    "change_precision": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    },
+    "change_recall": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "BROKEN_NAME": {
+     "found": 2,
+     "planted": 2
+    },
+    "CIRCULAR_REFERENCE": {
+     "found": 2,
+     "planted": 2
+    },
+    "DOUBLE_COUNT": {
+     "found": 2,
+     "planted": 2
+    },
+    "EXTERNAL_LINK": {
+     "found": 3,
+     "planted": 3
+    },
+    "HARDCODED_OVERRIDE": {
+     "found": 7,
+     "planted": 7
+    },
+    "HARDCODED_PLUG": {
+     "found": 4,
+     "planted": 4
+    },
+    "INCONSISTENT_FORMULA": {
+     "found": 9,
+     "planted": 9
+    },
+    "MISSING_SHEET": {
+     "found": 2,
+     "planted": 2
+    },
+    "REF_ERROR": {
+     "found": 2,
+     "planted": 2
+    },
+    "SUM_OMITS_ROW": {
+     "found": 4,
+     "planted": 4
+    },
+    "TEXT_NUMBER_IN_SUM": {
+     "found": 4,
+     "planted": 4
+    },
+    "UNKNOWN_NAME": {
+     "found": 2,
+     "planted": 2
+    }
+   }
+  },
+  "independent-2": {
+   "books": {
+    "cash_13wk.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 18,
+     "seconds": 0.028
+    },
+    "revenue_bridge.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 47,
+     "seconds": 0.012
+    },
+    "lease_ifrs16.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 326,
+     "seconds": 0.03
+    },
+    "bank_rec_sep.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 19,
+     "seconds": 0.01
+    },
+    "vat_return_q3.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 2,
+     "baseline_claims": 114,
+     "seconds": 0.027
+    },
+    "inventory_rollforward.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 2,
+     "baseline_claims": 24,
+     "seconds": 0.024
+    },
+    "board_pack_q.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 24,
+     "baseline_claims": 130,
+     "seconds": 0.025
+    },
+    "scenario_model.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 3,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 11,
+     "seconds": 0.019
+    },
+    "unit_economics.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 3,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 14,
+     "seconds": 0.024
+    },
+    "bva_variance.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 3,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 87,
+     "seconds": 0.02
+    },
+    "annual_forecast_3yr.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 3,
+     "baseline_claims": 10,
+     "seconds": 0.011
+    },
+    "rolling_fcst_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 6,
+     "seconds": 0.009
+    },
+    "debt_schedule_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 2,
+     "seconds": 0.009
+    },
+    "capex_plan_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 0,
+     "seconds": 0.009
+    },
+    "rolling_fcst_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 8,
+     "seconds": 0.01
+    },
+    "debt_schedule_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 1,
+     "seconds": 0.009
+    },
+    "capex_plan_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 1,
+     "seconds": 0.01
+    }
+   },
+   "pairs": {
+    "rolling_fcst_v1.xlsx -> rolling_fcst_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 3,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Opex": {
+        "rows_added": 2,
+        "rows_removed": 1,
+        "columns_added": 1,
+        "columns_removed": 0
+       },
+       "Summary": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    },
+    "debt_schedule_v1.xlsx -> debt_schedule_v2.xlsx": {
+     "changes": 3,
+     "found": 3,
+     "reported": 3,
+     "right": 3,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Debt": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 3
+     }
+    },
+    "capex_plan_v1.xlsx -> capex_plan_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 4,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Capex": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 1,
+        "columns_removed": 0
+       },
+       "Depreciation": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 1,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    }
+   },
+   "counts": {
+    "faults": 39,
+    "found": 39,
+    "kind": 39,
+    "claims": 42,
+    "right": 42,
+    "baseline": 818,
+    "legit": 206,
+    "legit_flagged": 0,
+    "anomalies": 34,
+    "seconds": 0.29,
+    "pair_changes": 7,
+    "pair_found": 7,
+    "pair_reported": 7,
+    "pair_right": 7
+   },
+   "rates": {
+    "precision": {
+     "n": 42,
+     "d": 42,
+     "rate": 1.0,
+     "low": 0.9161983874908382,
+     "high": 1.0
+    },
+    "recall": {
+     "n": 39,
+     "d": 39,
+     "rate": 1.0,
+     "low": 0.9103301463997611,
+     "high": 1.0
+    },
+    "kind_agreement": {
+     "n": 39,
+     "d": 39,
+     "rate": 1.0,
+     "low": 0.9103301463997611,
+     "high": 1.0
+    },
+    "change_precision": {
+     "n": 7,
+     "d": 7,
+     "rate": 1.0,
+     "low": 0.6456611570247934,
+     "high": 1.0
+    },
+    "change_recall": {
+     "n": 7,
+     "d": 7,
+     "rate": 1.0,
+     "low": 0.6456611570247934,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "BROKEN_NAME": {
+     "found": 2,
+     "planted": 2
+    },
+    "CIRCULAR_REFERENCE": {
+     "found": 2,
+     "planted": 2
+    },
+    "DOUBLE_COUNT": {
+     "found": 4,
+     "planted": 4
+    },
+    "EXTERNAL_LINK": {
+     "found": 3,
+     "planted": 3
+    },
+    "HARDCODED_OVERRIDE": {
+     "found": 6,
+     "planted": 6
+    },
+    "HARDCODED_PLUG": {
+     "found": 4,
+     "planted": 4
+    },
+    "INCONSISTENT_FORMULA": {
+     "found": 6,
+     "planted": 6
+    },
+    "MISSING_SHEET": {
+     "found": 2,
+     "planted": 2
+    },
+    "REF_ERROR": {
+     "found": 2,
+     "planted": 2
+    },
+    "SUM_OMITS_ROW": {
+     "found": 3,
+     "planted": 3
+    },
+    "TEXT_NUMBER_IN_SUM": {
+     "found": 3,
+     "planted": 3
+    },
+    "UNKNOWN_NAME": {
+     "found": 2,
+     "planted": 2
+    }
+   }
+  }
+ },
+ "hostile": [
+  {
+   "file": "empty.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "empty.xlsx is not an Excel workbook (.xlsx or .xlsm)"
+  },
+  {
+   "file": "old-format.xls",
+   "expected": "refused",
+   "result": "refused",
+   "message": "old-format.xls is an old-format (.xls) or password-protected workbook. Save it as .xlsx without a password and scan that copy."
+  },
+  {
+   "file": "not-a-workbook.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "not-a-workbook.xlsx is damaged: it is not a readable .xlsx package"
+  },
+  {
+   "file": "a-text-file.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "a-text-file.xlsx is not an Excel workbook (.xlsx or .xlsm)"
+  },
+  {
+   "file": "zip-not-excel.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "zip-not-excel.xlsx is a zip file but not an Excel workbook"
+  },
+  {
+   "file": "binary.xlsb",
+   "expected": "refused",
+   "result": "refused",
+   "message": "binary.xlsb is a binary workbook (.xlsb). Save it as .xlsx and scan that copy."
+  },
+  {
+   "file": "entities.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "entities.xlsx contains XML with a DOCTYPE or entity declaration (xl/worksheets/sheet1.xml); Excel never writes these, so the file was refused"
+  },
+  {
+   "file": "expands-to-450MB.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "expands-to-450MB.xlsx expands to 450 MB, over the 400 MB limit"
+  },
+  {
+   "file": "truncated.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "truncated.xlsx is damaged: it is not a readable .xlsx package"
+  },
+  {
+   "file": "formula-only.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "0 finding(s)"
+  },
+  {
+   "file": "odd-formulas.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "4 finding(s)"
+  },
+  {
+   "file": "empty-workbook.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "0 finding(s)"
+  }
+ ],
+ "stable": true
+}

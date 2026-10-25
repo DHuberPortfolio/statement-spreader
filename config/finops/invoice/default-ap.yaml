@@ -1,0 +1,29 @@
+# Accounts-payable policy: the default invoice profile. Conservative on purpose: anything the
+# rules cannot verify goes to a person. A company changes tolerances and wording in an overlay
+# (see example-company-strict.yaml), never in code.
+id: default-ap
+name: Default accounts-payable policy (three-way match)
+version: "1"
+base_currency: USD
+date_formats: ["%B %d, %Y", "%b %d, %Y", "%m/%d/%Y", "%Y-%m-%d", "%d %b %Y", "%d %B %Y"]
+arithmetic_tolerance: "0.01"
+
+master_data:
+  vendors: vendors.csv
+  purchase_orders: purchase_orders.csv
+  receipts: receipts.csv
+
+tax:
+  freight_taxable: false
+  use_vendor_rate: true      # check tax against the vendor master's rate when none is printed
+
+matching:
+  price_tolerance: {abs: "0.05", pct: "0.01", combine: max}   # unit price up to 1% or 5 cents over the PO
+  quantity_tolerance: "0"
+  description_similarity: 88
+  max_unmatched_freight: "0"
+
+duplicates:
+  window_days: 14
+
+extra_labels: {}

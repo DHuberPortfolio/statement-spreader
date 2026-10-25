@@ -1,0 +1,29 @@
+# DRAFT suggested by a local model (Qwen3-4B, 0 calls, 6 cached, 0 errors)
+# from 3 invoice(s): inv-001-tax_wrong.pdf, inv-002-clean.pdf, inv-004-clean.pdf
+# against policy default-ap 4a1df7e3bcf5208b. UNREVIEWED: check every line before using it.
+# What the model was asked and answered: {"labels": {"Document No.": {"invoice_number": 3}, "Document Date": {"invoice_date": 3}, "Customer Order": {"po_number": 3}, "Net Total": {"subtotal": 3}, "Gross Total": {"total": 3}}, "columns": {"Code": {"item_code": 3}, "Item": {"description": 3}, "Units": {"quantity": 3}, "Unit Cost": {"unit_price": 3}, "Net": {"amount": 3}}}
+extends: default-ap.yaml
+id: suggested-layout-d
+name: Draft wording for suggested-layout-d
+extra_labels:
+  po_number:
+  - Customer Order
+  invoice_date:
+  - Document Date
+  invoice_number:
+  - Document No.
+  total:
+  - Gross Total
+  subtotal:
+  - Net Total
+extra_columns:
+  item_code:
+  - Code
+  description:
+  - Item
+  amount:
+  - Net
+  unit_price:
+  - Unit Cost
+  quantity:
+  - Units

@@ -1,5 +1,10 @@
 # Plan and status
 
+Since 2026-10-24 afternoon this repository is a small finance operations platform: the statement spreader below
+(engine one, unchanged), plus reconciliation (engine two) and invoice intake with three-way matching (engine
+three) on a shared core. Platform architecture: [ARCHITECTURE.md](ARCHITECTURE.md). Platform status is at the end
+of this file.
+
 Statement Spreader: financial statements (HTML, PDF, Excel) in; a standard spread out, where every
 value is traced to its printed source, checked by accounting identities, and either auto-accepted
 or sent to review. Measured against answer keys (SEC inline XBRL and synthetic statements), with an
@@ -47,3 +52,21 @@ ROI layer that separates what was measured from what is assumed.
 1. `cd C:\Users\devin\Github\statement-spreader`; `git log --oneline`; read IMPROVEMENT_LOG.md.
 2. `.venv\Scripts\python -m pytest -o addopts=""` and `.venv\Scripts\python scripts\run_eval.py --split dev`.
 3. Compare with the latest saved report in `eval/reports/` before and after any change.
+
+## Platform status (2026-10-24, afternoon)
+
+| Piece | Where | State |
+|---|---|---|
+| Shared core | `src/finops/core/` | money and tolerances, tables, validated overlays, fingerprints, exceptions, hash-chained audit log, rates and reports |
+| Reconciliation | `src/finops/recon/`, `config/finops/recon/` | layered matcher, exception reasons, decisions, idempotent runs, completeness checks; 39 tests; dev, holdout and stress evaluations |
+| Invoices | `src/finops/invoice/`, `config/finops/invoice/` | PDF/JSON extraction with evidence, arithmetic, PO/receipt matching, duplicates, vendor and bank controls, inbox with corrections; 30 + 7 red-team tests; dev, holdout, unseen-layout evaluations |
+| API and UI | `src/finops/api.py` (mounted in `spreader/api.py`), `web/src/pages/ReconPage.tsx`, `InvoicesPage.tsx`, `FinopsRoi.tsx` | browser-checked on synthetic data (create, run, accept, refusal without a note, invoice detail with masked bank change) |
+| ROI | `src/finops/roi.py`, ROI page section | observed-on-synthetic rates, placeholder minutes, estimated hours; editable assumptions |
+| Evaluation | `scripts/run_eval.py --engine recon|invoice` | reports in `eval/reports/recon-*.md`, `invoice-*.md` |
+
+Waits on Devin: review and commit (nothing of the platform is committed); a sample of real, anonymised records to
+measure on; timed exception handling for ROI. Next steps ranked at the end of IMPROVEMENT_LOG.md.
+
+Run the platform locally: build the web (`cd web && npm run build`), then
+`SPREADER_DATA=var/demo .venv/Scripts/python -m uvicorn spreader.api:app --host 127.0.0.1 --port 8765` and open
+/recon or /invoices ("Try sample data" / "Load the sample inbox" use the synthetic sets in `eval/`).

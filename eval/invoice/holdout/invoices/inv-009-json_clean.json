@@ -1,0 +1,42 @@
+{
+ "vendor": {
+  "name": "Coho Vineyard",
+  "tax_id": "61-6773566"
+ },
+ "invoice_number": "INV-007008",
+ "invoice_date": "2026-03-17",
+ "due_date": "2026-04-16",
+ "po_number": "PO-4507",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "6705.48",
+ "tax": null,
+ "total": "6705.48",
+ "lines": [
+  {
+   "item_code": "COH-107",
+   "description": "Steel bracket 40mm",
+   "quantity": "8",
+   "unit_price": "135.96",
+   "amount": "1087.68"
+  },
+  {
+   "item_code": "COH-100",
+   "description": "Printer toner, black",
+   "quantity": "10",
+   "unit_price": "23.10",
+   "amount": "231.00"
+  },
+  {
+   "item_code": "COH-114",
+   "description": "LED panel 600x600",
+   "quantity": "40",
+   "unit_price": "134.67",
+   "amount": "5386.80"
+  }
+ ],
+ "remit_to": {
+  "account_number": "330289462148",
+  "routing_number": "025776592"
+ }
+}

@@ -1,0 +1,1603 @@
+{
+  "workbooks": {
+    "cash_13wk.xlsx": {
+      "description": "13-week cash-flow forecast, weeks across columns C:O with a total column P; assumptions sheet, hidden helper sheet, treasury tie-out row.",
+      "faults": [
+        {
+          "sheet": "Cash 13wk",
+          "cell": "F8",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "Other receipts week 4 pasted from the bank export as text '1,250.00'; F9 and P8 SUMs skip it."
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "J12",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Week 8 payroll references the monthly rent assumption ($B$6) instead of weekly payroll ($B$11)."
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "K14",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "Week 9 supplier payments typed (-118,400) in the middle of the formula row; no comment, black font."
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C26",
+          "kind": "EXTERNAL_LINK",
+          "severity": "risk",
+          "note": "Treasury tie-out reads another workbook [Treasury Positions.xlsx]."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Assumptions",
+          "cell": "B4:B9",
+          "what": "input block (blue font)"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "B11",
+          "what": "unit constant /52 converts annual payroll to weekly"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "B14",
+          "what": "annual input (blue)"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C3:O3",
+          "what": "year/period header row of typed week numbers 1-13 (also used by the rent MOD test)"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C7:D7",
+          "what": "actual weeks typed, then forecast formulas E7:O7"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "E7:O7",
+          "what": "forecast formulas after actual columns; the first forecast cell differs from the typed actuals on its left"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C8:E8",
+          "what": "input row (blue) inside a summed block"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "G8:O8",
+          "what": "input row (blue) inside a summed block"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "L12",
+          "what": "documented hardcoded override (blue font and a cell comment: bonus payroll)"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C13:O13",
+          "what": "rent formula returns rent or 0 by MOD on the week number; one consistent formula, values alternate"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C15:O15",
+          "what": "input row of one-off items; K15 carries a comment"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C20",
+          "what": "opening balance from Assumptions; D20:O20 take the prior week's closing (roll-forward)"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "D20:O20",
+          "what": "roll-forward: closing becomes next opening"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "P7:P18",
+          "what": "13-week total column at the end of the period run"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "P20",
+          "what": "total column opening = week 1 opening (not a sum of openings)"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "P24",
+          "what": "total column shows MIN of headroom, not a sum"
+        },
+        {
+          "sheet": "Cash 13wk",
+          "cell": "C27",
+          "what": "check cell: difference to treasury"
+        },
+        {
+          "sheet": "Lists",
+          "cell": "A1:A14",
+          "what": "hidden helper sheet, labels only"
+        }
+      ]
+    },
+    "revenue_bridge.xlsx": {
+      "description": "Revenue waterfall FY2025 to FY2026: product price/volume data sheet, a vertical bridge using defined names, and a P&L summary sheet with a space in its name.",
+      "faults": [
+        {
+          "sheet": "Product Data",
+          "cell": "D13",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "Totals stop at row 11 and miss the new product in row 12; copied across the revenue and effect columns.",
+          "group": [
+            "G13",
+            "H13",
+            "I13"
+          ]
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "B9",
+          "kind": "EXTERNAL_LINK",
+          "severity": "risk",
+          "note": "FX step reads the closing rate from [FX Rates 2026.xlsx]."
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "B12",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "Bridge total forced with +3200 to agree to the P&L."
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "B16",
+          "kind": "UNKNOWN_NAME",
+          "severity": "error",
+          "note": "CY_Revenue_Mgmt is not a defined name (only PY_Revenue and CY_Revenue exist)."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Bridge",
+          "cell": "B5:B8",
+          "what": "vertical bridge: each step row has its own formula (a list of different items, not a copied run)"
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "B10",
+          "what": "bridge step reading a quoted sheet name with a space and '&'"
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "B8",
+          "what": "mix is a residual balancing formula from defined names, with no typed number"
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "C6:C10",
+          "what": "% of PY anchored on $B$5"
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "C12",
+          "what": "growth % = total / PY - 1 (the -1 is not a plug)"
+        },
+        {
+          "sheet": "Bridge",
+          "cell": "B15",
+          "what": "ROUND check cell"
+        },
+        {
+          "sheet": "P&L Summary",
+          "cell": "C5",
+          "what": "input (blue)"
+        },
+        {
+          "sheet": "P&L Summary",
+          "cell": "C8:C10",
+          "what": "input block (blue)"
+        },
+        {
+          "sheet": "Product Data",
+          "cell": "B13",
+          "what": "units total correctly covers all eight products"
+        }
+      ]
+    },
+    "lease_ifrs16.xlsx": {
+      "description": "IFRS 16 / ASC 842 lease schedule: months down the rows (vertical orientation), liability and right-of-use roll-forwards, defined names, and a disclosure sheet built with SUMIFS.",
+      "faults": [
+        {
+          "sheet": "Schedule",
+          "cell": "D24",
+          "kind": "CIRCULAR_REFERENCE",
+          "severity": "error",
+          "note": "Month 20 interest computed on the closing liability F24, which itself includes D24.",
+          "cycle": [
+            "Schedule!D24",
+            "Schedule!F24"
+          ],
+          "also_ok": [
+            "INCONSISTENT_FORMULA"
+          ]
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "H29",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "Month 25 depreciation typed (stale value) between formula cells."
+        },
+        {
+          "sheet": "Disclosure",
+          "cell": "B13",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "Total liability forced with +0.42 to agree to the GL."
+        },
+        {
+          "sheet": "Disclosure",
+          "cell": "B15",
+          "kind": "MISSING_SHEET",
+          "severity": "error",
+          "note": "References sheet 'Lease Schedule', which was renamed to Schedule."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B4:B9",
+          "what": "input block (blue)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "A5:A40",
+          "what": "typed period counter column (not summed)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "B5",
+          "what": "first month from Inputs; B6:B40 use EDATE on the row above"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "C5",
+          "what": "opening liability = NPV of payments; C6:C40 take the prior closing (roll-forward)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "C6:C40",
+          "what": "roll-forward: prior closing becomes opening"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "D5:D23",
+          "what": "interest with unit constant /12 on the named annual rate"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "G5",
+          "what": "initial ROU asset = liability + initial direct costs; G6:G40 roll from prior closing"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "F40",
+          "what": "last period differs on purpose: ROUND to clear the residual (commented)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "H5:H28",
+          "what": "straight-line depreciation anchored on $G$5 and the defined name Lease_Term"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "J5:J40",
+          "what": "lease-year helper column, INT((period-1)/12)+1"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "D42:E42",
+          "what": "totals of flow columns only (balances are not totalled)"
+        },
+        {
+          "sheet": "Disclosure",
+          "cell": "A5:A7",
+          "what": "typed lease-year numbers used as SUMIFS criteria"
+        },
+        {
+          "sheet": "Disclosure",
+          "cell": "B5:B7",
+          "what": "SUMIFS summary by lease year"
+        },
+        {
+          "sheet": "Disclosure",
+          "cell": "B11",
+          "what": "current portion as a difference of two balances"
+        },
+        {
+          "sheet": "Disclosure",
+          "cell": "B17:B18",
+          "what": "SUMIFS over different schedule columns (interest vs depreciation)"
+        }
+      ]
+    },
+    "bank_rec_sep.xlsx": {
+      "description": "Bank reconciliation workpaper for September: deposits in transit in two batches, outstanding cheques looked up against a cheque register on a sheet named 'GL & Bank Data'.",
+      "faults": [
+        {
+          "sheet": "Rec",
+          "cell": "D15",
+          "kind": "DOUBLE_COUNT",
+          "severity": "risk",
+          "note": "Total deposits SUM(C7:C14) includes both batch subtotals (C10, C14) and their items."
+        },
+        {
+          "sheet": "Rec",
+          "cell": "C25",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "Cheque 10466 amount stored as text '845.20'; D17's SUM skips it."
+        },
+        {
+          "sheet": "Rec",
+          "cell": "D38",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "Adjusted GL balance forced with -37.50 to make the difference nil."
+        },
+        {
+          "sheet": "Rec",
+          "cell": "B22",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Payee lookup without the IFERROR wrapper used on every other row."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Rec",
+          "cell": "D3",
+          "what": "input: bank statement balance (blue)"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "C10",
+          "what": "batch subtotal"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "C14",
+          "what": "batch subtotal"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "D17",
+          "what": "total placed above its items (outstanding cheques listed below)"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "C19:C24",
+          "what": "SUM range with a blank separator row (row 24)"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "C26:C30",
+          "what": "SUM range continuing past a text memo row (row 27)"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "B19:B21",
+          "what": "IFERROR lookups against the register"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "B23:B30",
+          "what": "IFERROR lookups against the register (blank and memo rows skipped)"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "C35:C37",
+          "what": "typed reconciling items (blue inputs), not formulas"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "D34",
+          "what": "cross-sheet reference to a quoted sheet name containing '&'"
+        },
+        {
+          "sheet": "Rec",
+          "cell": "D40",
+          "what": "ROUND check cell"
+        }
+      ]
+    },
+    "vat_return_q3.xlsx": {
+      "description": "Quarterly VAT return working: sales and purchase ledgers with VAT looked up from a hidden rate table (defined name), the nine-box return, and a SUMIFS analysis by rate code.",
+      "faults": [
+        {
+          "sheet": "Return",
+          "cell": "C6",
+          "kind": "REF_ERROR",
+          "severity": "error",
+          "note": "Box 2 SUMIFS sum range is #REF! (the notional-VAT column was deleted)."
+        },
+        {
+          "sheet": null,
+          "cell": "name:Rates_2024",
+          "kind": "BROKEN_NAME",
+          "severity": "error",
+          "note": "Defined name Rates_2024 = #REF!."
+        },
+        {
+          "sheet": null,
+          "cell": "name:PY_Box1",
+          "kind": "BROKEN_NAME",
+          "severity": "error",
+          "note": "Defined name PY_Box1 points at sheet 'Return Q2', which does not exist."
+        },
+        {
+          "sheet": "Sales Ledger",
+          "cell": "F21",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "VAT typed at 20% instead of the rate lookup; the line is reduced-rate (R)."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "RateCodes",
+          "cell": "A4:B7",
+          "what": "hidden helper sheet holding the rate table behind the defined name VAT_Rates"
+        },
+        {
+          "sheet": "Sales Ledger",
+          "cell": "F5:F20",
+          "what": "ROUND(IFERROR(VLOOKUP(...))) rate lookups"
+        },
+        {
+          "sheet": "Sales Ledger",
+          "cell": "F22:F34",
+          "what": "ROUND(IFERROR(VLOOKUP(...))) rate lookups"
+        },
+        {
+          "sheet": "Purchase Ledger",
+          "cell": "F5:F29",
+          "what": "IFERROR lookup returns 0 for the RC code that is not in the rate table"
+        },
+        {
+          "sheet": "Return",
+          "cell": "A5:A13",
+          "what": "typed box numbers 1-9 (labels, not summed)"
+        },
+        {
+          "sheet": "Return",
+          "cell": "C7",
+          "what": "Box 3 = Box 1 + Box 2 (total of two boxes)"
+        },
+        {
+          "sheet": "Return",
+          "cell": "C9",
+          "what": "Box 5 = Box 3 - Box 4 (a difference, not a sum)"
+        },
+        {
+          "sheet": "Return",
+          "cell": "C10:C11",
+          "what": "ROUNDDOWN to whole units, as the return requires"
+        },
+        {
+          "sheet": "Return",
+          "cell": "C12:C13",
+          "what": "typed nil boxes (blue inputs)"
+        },
+        {
+          "sheet": "Return",
+          "cell": "B17:C20",
+          "what": "SUMIFS pivot-style summary by rate code"
+        },
+        {
+          "sheet": "Return",
+          "cell": "C22",
+          "what": "check cell"
+        }
+      ]
+    },
+    "inventory_rollforward.xlsx": {
+      "description": "Monthly inventory roll-forward (raw materials and finished goods blocks plus a total block) driven by a sales forecast sheet, and a September stock-count valuation by warehouse.",
+      "faults": [
+        {
+          "sheet": "Roll-forward",
+          "cell": "C18",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "FG closing SUM(C13:C16) stops above the customer-returns row 17; copied across every month and FY.",
+          "group": [
+            "D18",
+            "E18",
+            "F18",
+            "G18",
+            "H18",
+            "I18",
+            "J18",
+            "K18",
+            "L18",
+            "M18",
+            "N18",
+            "O18"
+          ]
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "J15",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "August cost of sales typed (-861,250) inside the formula row."
+        },
+        {
+          "sheet": "Valuation",
+          "cell": "E23",
+          "kind": "DOUBLE_COUNT",
+          "severity": "risk",
+          "note": "Total SUM(E6:E21) includes the three warehouse subtotals and their items."
+        },
+        {
+          "sheet": "Valuation",
+          "cell": "E25",
+          "kind": "UNKNOWN_NAME",
+          "severity": "error",
+          "note": "Obsolescence_Rate is not defined; the name is Obsolescence_Pct."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B4:B9",
+          "what": "input block (blue)"
+        },
+        {
+          "sheet": "Sales Forecast",
+          "cell": "C5:N5",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Sales Forecast",
+          "cell": "D6:N6",
+          "what": "standard cost carried forward from the prior month"
+        },
+        {
+          "sheet": "Sales Forecast",
+          "cell": "H6",
+          "what": "documented hardcoded override (blue font and comment: standard-cost revision)"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "C6",
+          "what": "opening balance from Inputs; D6:N6 take the prior closing"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "D6:N6",
+          "what": "roll-forward: closing becomes next opening"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "C13",
+          "what": "opening balance from Inputs; D13:N13 take the prior closing"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "D13:N13",
+          "what": "roll-forward: closing becomes next opening"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "O6",
+          "what": "FY column opening = January opening, not a sum"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "O13",
+          "what": "FY column opening = January opening, not a sum"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "O7:O9",
+          "what": "FY column sums the flows"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "O10",
+          "what": "FY closing = FY opening + FY flows (same SUM shape as the month columns)"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "C7:N7",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "C17:N17",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "C21:O23",
+          "what": "total block = sum of the two block subtotals (grand total of subtotals)"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "O25",
+          "what": "FY days-on-hand uses *365 while the months use *30 (unit constants)"
+        },
+        {
+          "sheet": "Roll-forward",
+          "cell": "C25:N25",
+          "what": "IFERROR ratio with unit constant *30"
+        },
+        {
+          "sheet": "Valuation",
+          "cell": "E10",
+          "what": "warehouse subtotal"
+        },
+        {
+          "sheet": "Valuation",
+          "cell": "E16",
+          "what": "warehouse subtotal"
+        },
+        {
+          "sheet": "Valuation",
+          "cell": "E21",
+          "what": "warehouse subtotal"
+        },
+        {
+          "sheet": "Valuation",
+          "cell": "E29",
+          "what": "check cell"
+        }
+      ]
+    },
+    "board_pack_q.xlsx": {
+      "description": "Quarterly board pack: P&L with Q1, Q2, H1, Q3, Q4, H2, FY columns interleaved, budget, variance and variance %; a KPI sheet with point-in-time half-year columns.",
+      "faults": [
+        {
+          "sheet": "P&L",
+          "cell": "C18",
+          "kind": "DOUBLE_COUNT",
+          "severity": "risk",
+          "note": "Total opex SUM(C13:C17) includes the People costs subtotal (row 15) and its items; copied to every quarter column.",
+          "group": [
+            "D18",
+            "F18",
+            "G18"
+          ]
+        },
+        {
+          "sheet": "P&L",
+          "cell": "I14",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "FY benefits = H1 + Q4 (E14+G14) instead of H1 + H2 (E14+H14)."
+        },
+        {
+          "sheet": "KPIs",
+          "cell": "I10",
+          "kind": "REF_ERROR",
+          "severity": "error",
+          "note": "Denominator is #REF! (headcount row was deleted and re-added)."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "P&L",
+          "cell": "C5:G5",
+          "what": "each quarter column reads a different 3-month block of Monthly Data, so every formula differs from its neighbours (same on each item row)"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "E5:E22",
+          "what": "H1 column = Q1 + Q2, interleaved between quarter columns"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "H5:H22",
+          "what": "H2 column = Q3 + Q4, interleaved between quarter columns"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "I5:I13",
+          "what": "FY column = H1 + H2"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "I15:I22",
+          "what": "FY column = H1 + H2"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C7:G7",
+          "what": "subtotal row sitting between item rows (column neighbours are item lookups)"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C15:G15",
+          "what": "subtotal row sitting between item rows (column neighbours are item lookups)"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C10:J10",
+          "what": "ratio row recomputed in H1/FY/budget columns rather than summed"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C20:J20",
+          "what": "ratio row recomputed in H1/FY/budget columns rather than summed"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "J5:J22",
+          "what": "budget column: blue inputs with subtotal formulas"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "K5:K22",
+          "what": "variance column (actual minus budget)"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "L5:L22",
+          "what": "variance % column with IF guard; blank on ratio rows"
+        },
+        {
+          "sheet": "KPIs",
+          "cell": "E5",
+          "what": "H1 headcount = Q2 period-end (point in time, not a sum)"
+        },
+        {
+          "sheet": "KPIs",
+          "cell": "H5:I5",
+          "what": "H2 and FY headcount = Q4 period-end"
+        },
+        {
+          "sheet": "KPIs",
+          "cell": "C6:I6",
+          "what": "annualisation constants *4 for quarters, *2 for halves, none for FY"
+        },
+        {
+          "sheet": "KPIs",
+          "cell": "B9",
+          "what": "opening customer count (blue input)"
+        },
+        {
+          "sheet": "KPIs",
+          "cell": "C9:I9",
+          "what": "customer roll-forward that skips the half-year column (F9 continues from D9)"
+        }
+      ]
+    },
+    "scenario_model.xlsx": {
+      "description": "Five-year scenario model with Base, Upside and Downside blocks side by side (blank separator columns), a CHOOSE-driven selected-scenario block, and an acquisition funding sheet named 'Funding & Fees'.",
+      "faults": [
+        {
+          "sheet": "Scenarios",
+          "cell": "Q5",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Downside FY2028 revenue grows at the Upside rate (Drivers!$D$8, not $E$8)."
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "K7",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "Upside FY2028 opex typed (-11,950,000), no comment, black font."
+        },
+        {
+          "sheet": "Funding & Fees",
+          "cell": "B9",
+          "kind": "CIRCULAR_REFERENCE",
+          "severity": "error",
+          "note": "Fee is a % of the total facility, and the facility includes the fee.",
+          "cycle": [
+            "Funding & Fees!B9",
+            "Funding & Fees!B10"
+          ]
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Drivers",
+          "cell": "C4",
+          "what": "scenario selector input (blue)"
+        },
+        {
+          "sheet": "Drivers",
+          "cell": "C7",
+          "what": "base-year revenue input"
+        },
+        {
+          "sheet": "Drivers",
+          "cell": "D7:E7",
+          "what": "Upside/Downside base year linked to $C$7 (same absolute formula)"
+        },
+        {
+          "sheet": "Drivers",
+          "cell": "C8:E12",
+          "what": "input block (blue), one column per scenario"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "C4:G4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "I4:M4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "O4:S4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "C5:G11",
+          "what": "Base block; same layout as the other blocks but anchored on Drivers column C"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "I5:M6",
+          "what": "Upside block anchored on Drivers column D (scenario blocks side by side with different drivers)"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "I8:M11",
+          "what": "Upside block anchored on Drivers column D"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "O5:P11",
+          "what": "Downside block anchored on Drivers column E"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "R5:S11",
+          "what": "Downside block anchored on Drivers column E"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "P7",
+          "what": "documented hardcoded override (cell comment: restructuring cost)"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "C13:S13",
+          "what": "cumulative FCF: first year differs from the running-total formula; blank separator columns H and N"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "C17:G23",
+          "what": "CHOOSE selected-scenario block"
+        },
+        {
+          "sheet": "Scenarios",
+          "cell": "C27:G27",
+          "what": "defined name Facility and quoted cross-sheet reference to 'Funding & Fees'"
+        },
+        {
+          "sheet": "Funding & Fees",
+          "cell": "B5:B6",
+          "what": "inputs (blue)"
+        }
+      ]
+    },
+    "unit_economics.xlsx": {
+      "description": "Customer cohort triangle (12 monthly cohorts by months since acquisition), retention % sheet with mixed anchors, and an LTV/CAC sheet named 'LTV & CAC'.",
+      "faults": [
+        {
+          "sheet": "Cohorts",
+          "cell": "E9",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "May-25 cohort month-3 count stored as text; N9 and E17 SUMs skip it."
+        },
+        {
+          "sheet": "Cohorts",
+          "cell": "N17",
+          "kind": "DOUBLE_COUNT",
+          "severity": "risk",
+          "note": "Grand total SUM(B5:N16) adds the row-total column N to the cells it totals."
+        },
+        {
+          "sheet": "LTV & CAC",
+          "cell": "B12",
+          "kind": "MISSING_SHEET",
+          "severity": "error",
+          "note": "References sheet 'CAC Detail', which is not in the workbook."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Cohorts",
+          "cell": "B4:M4",
+          "what": "header row of typed month numbers 0-11"
+        },
+        {
+          "sheet": "Cohorts",
+          "cell": "N5:N16",
+          "what": "row totals over a triangle with blank cells"
+        },
+        {
+          "sheet": "Cohorts",
+          "cell": "B17:M17",
+          "what": "column totals over a triangle with blank cells"
+        },
+        {
+          "sheet": "Retention",
+          "cell": "B4:M4",
+          "what": "header row of typed month numbers 0-11"
+        },
+        {
+          "sheet": "Retention",
+          "cell": "B5:M16",
+          "what": "mixed anchors (Cohorts!$B5) and IF(...=\"\",\"\") for the empty triangle"
+        },
+        {
+          "sheet": "Retention",
+          "cell": "B18:M18",
+          "what": "IFERROR(AVERAGE) over ranges with blank strings"
+        },
+        {
+          "sheet": "LTV & CAC",
+          "cell": "B4:B5",
+          "what": "inputs (blue)"
+        },
+        {
+          "sheet": "LTV & CAC",
+          "cell": "B8",
+          "what": "unit constant *12 (monthly to annual)"
+        },
+        {
+          "sheet": "LTV & CAC",
+          "cell": "B17",
+          "what": "unit constant *10000 (to basis points)"
+        },
+        {
+          "sheet": "LTV & CAC",
+          "cell": "B14:B16",
+          "what": "IFERROR-guarded ratios"
+        }
+      ]
+    },
+    "bva_variance.xlsx": {
+      "description": "Budget-vs-actual variance report (month and YTD side by side) from a trial-balance sheet via SUMIFS and a budget sheet via INDEX/MATCH, plus a SUMIFS department summary.",
+      "faults": [
+        {
+          "sheet": "BvA",
+          "cell": "C20",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "September cost total SUM(C13:C18) misses Training (row 19); budget total copied the same way.",
+          "group": [
+            "D20"
+          ]
+        },
+        {
+          "sheet": "BvA",
+          "cell": "F16",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Var % for Rent divides by actual (C16) instead of budget (D16)."
+        },
+        {
+          "sheet": "BvA",
+          "cell": "H22",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "YTD operating result forced with +1200 to agree to the management accounts."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "BvA",
+          "cell": "C6:C8",
+          "what": "SUMIFS actuals from the TB"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "C13:C19",
+          "what": "SUMIFS actuals from the TB"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "D6:D19",
+          "what": "IFERROR(INDEX/MATCH) budget lookups (blank rows 9-12 aside)"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "E6:E9",
+          "what": "revenue variance = actual - budget (positive = favourable)"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "E13:E20",
+          "what": "cost variance = budget - actual: sign convention flips by section on purpose"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "J13:J20",
+          "what": "cost variance = budget - actual (YTD block)"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "F6:F15",
+          "what": "variance % with IF guard against a zero budget"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "C10",
+          "what": "memo % row below the total, deliberately outside the SUM"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "H10",
+          "what": "memo % row below the total, deliberately outside the SUM"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "H20:I20",
+          "what": "YTD cost totals cover all seven cost rows"
+        },
+        {
+          "sheet": "BvA",
+          "cell": "E22",
+          "what": "operating-result variance = actual - budget"
+        },
+        {
+          "sheet": "Dept Summary",
+          "cell": "C5:D7",
+          "what": "SUMIFS pivot-style summary with two criteria"
+        },
+        {
+          "sheet": "Dept Summary",
+          "cell": "C10:D10",
+          "what": "check cells to the BvA totals"
+        },
+        {
+          "sheet": "Budget 2026",
+          "cell": "C5:D14",
+          "what": "budget input block (blue)"
+        }
+      ]
+    },
+    "annual_forecast_3yr.xlsx": {
+      "description": "Short annual forecast: two actual years then three forecast years (few columns), growth from per-year defined names, CAGR, ROUND to thousands. No injected faults (clean workbook).",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Forecast",
+          "cell": "B3:F3",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "B6:C6",
+          "what": "actual years typed, then forecast formulas (same for rows 8, 11, 13, 15, 17)"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "B8:C8",
+          "what": "actual years typed, then forecast formulas"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "D6:F6",
+          "what": "each forecast year reads a different named growth input, so every formula differs from its neighbours"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "C7:F7",
+          "what": "growth % starts in the second actual year (B7 blank); the -1 is not a plug"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "G6",
+          "what": "CAGR formula with exponent 1/3 and -1"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "E11",
+          "what": "documented hardcoded override (blue input font): board-approved FY2027 opex"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "D13:F13",
+          "what": "ROUND to thousands"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "B15:F15",
+          "what": "item row sitting between two subtotal rows (EBIT above, PBT below); typed actuals then formulas"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "B17:F17",
+          "what": "item row sitting between two subtotal rows (PBT above, net income below); typed actuals then formulas"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "D15:F15",
+          "what": "mixed absolute ($C$10) and relative references"
+        },
+        {
+          "sheet": "Forecast",
+          "cell": "B20:F20",
+          "what": "unit constant /1000"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "D5:F9",
+          "what": "per-year input block (blue)"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "C10:C11",
+          "what": "inputs (blue)"
+        }
+      ]
+    },
+    "rolling_fcst_v1.xlsx": {
+      "description": "Rolling monthly opex forecast, version 1. Jan-Jun, six cost lines.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B4:B8",
+          "what": "input block (blue)"
+        },
+        {
+          "sheet": "Opex",
+          "cell": "C6:C11",
+          "what": "base-month inputs (blue); later months are formulas"
+        },
+        {
+          "sheet": "Opex",
+          "cell": "D7:H7",
+          "what": "rent carried forward unchanged (=prior month)"
+        },
+        {
+          "sheet": "Opex",
+          "cell": "C12:H12",
+          "what": "total row"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "B6",
+          "what": "unit constant /6 (months in the half)"
+        }
+      ]
+    },
+    "debt_schedule_v1.xlsx": {
+      "description": "Term-loan schedule 2026-2030, version 1. Includes a covenant sheet; 2030 interest is a documented placeholder.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Covenants",
+          "cell": "C5:G5",
+          "what": "IFERROR-guarded leverage ratio"
+        },
+        {
+          "sheet": "Covenants",
+          "cell": "C6:G6",
+          "what": "covenant input row (blue)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "G10",
+          "what": "documented hardcoded placeholder (blue font and comment)"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "B4:B5",
+          "what": "inputs (blue)"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "C8:G8",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C4:G4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C5",
+          "what": "opening from Inputs; D5:G5 take the prior closing (roll-forward)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "D5:G5",
+          "what": "roll-forward: closing becomes next opening"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C6:G6",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C11:F11",
+          "what": "rate input row (blue)"
+        }
+      ]
+    },
+    "capex_plan_v1.xlsx": {
+      "description": "Capex and straight-line depreciation plan by asset class, version 1. 2026-2029, four asset classes.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B6:B9",
+          "what": "useful-life inputs (blue)"
+        },
+        {
+          "sheet": "Capex",
+          "cell": "C4:F4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Capex",
+          "cell": "C6:F9",
+          "what": "capex input block (blue)"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "C4:F4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "C6:D9",
+          "what": "expanding SUM range with a mixed anchor (Capex!$C6:D6) divided by a mixed-anchor life"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "F6:F9",
+          "what": "expanding SUM range with a mixed anchor"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "C10:F10",
+          "what": "total row"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "E6:E9",
+          "what": "expanding SUM range with a mixed anchor"
+        }
+      ]
+    },
+    "rolling_fcst_v2.xlsx": {
+      "description": "Rolling monthly opex forecast, version 2. Jan-Jul (new month added), Cloud hosting line inserted at row 9, efficiency factor on the H1 summary.",
+      "faults": [
+        {
+          "sheet": "Opex",
+          "cell": "F8",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "April software cost pasted as a value (23,100) between formula cells."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B4:B9",
+          "what": "input block (blue)"
+        },
+        {
+          "sheet": "Opex",
+          "cell": "C6:C12",
+          "what": "base-month inputs (blue); later months are formulas"
+        },
+        {
+          "sheet": "Opex",
+          "cell": "D7:I7",
+          "what": "rent carried forward unchanged (=prior month)"
+        },
+        {
+          "sheet": "Opex",
+          "cell": "C13:I13",
+          "what": "total row"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "B6",
+          "what": "unit constant /6 (months in the half)"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "B11",
+          "what": "input (blue)"
+        }
+      ]
+    },
+    "debt_schedule_v2.xlsx": {
+      "description": "Term-loan schedule 2026-2030, version 2. Covenant sheet removed, refinancing sheet added, 2030 interest now a formula.",
+      "faults": [
+        {
+          "sheet": "Refinancing",
+          "cell": "B6",
+          "kind": "EXTERNAL_LINK",
+          "severity": "risk",
+          "note": "New rate read from another workbook [Lender Term Sheet.xlsx]."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Refinancing",
+          "cell": "B4",
+          "what": "input (blue)"
+        },
+        {
+          "sheet": "Refinancing",
+          "cell": "B7",
+          "what": "input (blue)"
+        },
+        {
+          "sheet": "Refinancing",
+          "cell": "B8:B9",
+          "what": "ROUND calculations"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "B4:B5",
+          "what": "inputs (blue)"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "C8:G8",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C4:G4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C5",
+          "what": "opening from Inputs; D5:G5 take the prior closing (roll-forward)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "D5:G5",
+          "what": "roll-forward: closing becomes next opening"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C6:G6",
+          "what": "input row (blue)"
+        },
+        {
+          "sheet": "Debt",
+          "cell": "C11:G11",
+          "what": "rate input row (blue)"
+        }
+      ]
+    },
+    "capex_plan_v2.xlsx": {
+      "description": "Capex and straight-line depreciation plan by asset class, version 2. 2030 added, Software class inserted at row 8, a disposals adjustment on the summary.",
+      "faults": [
+        {
+          "sheet": "Depreciation",
+          "cell": "E7",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "2028 plant depreciation pasted as a value (216,000) between formula cells."
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B6:B10",
+          "what": "useful-life inputs (blue)"
+        },
+        {
+          "sheet": "Capex",
+          "cell": "C4:G4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Capex",
+          "cell": "C6:G10",
+          "what": "capex input block (blue)"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "C4:G4",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "C6:D10",
+          "what": "expanding SUM range with a mixed anchor (Capex!$C6:D6) divided by a mixed-anchor life"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "F6:G10",
+          "what": "expanding SUM range with a mixed anchor"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "C11:G11",
+          "what": "total row"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "B13",
+          "what": "input (blue)"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "E6",
+          "what": "expanding SUM range with a mixed anchor"
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "E8:E10",
+          "what": "expanding SUM range with a mixed anchor"
+        }
+      ]
+    }
+  },
+  "diffs": [
+    {
+      "before": "rolling_fcst_v1.xlsx",
+      "after": "rolling_fcst_v2.xlsx",
+      "changes": [
+        {
+          "sheet": "Opex",
+          "cell": "F8",
+          "before_cell": "F8",
+          "kind": "FORMULA_TO_VALUE",
+          "note": "April software cost: growth formula replaced by a pasted value 23,100."
+        },
+        {
+          "sheet": "Summary",
+          "cell": "B5",
+          "before_cell": "B5",
+          "kind": "FORMULA_CHANGED",
+          "note": "H1 total now multiplied by (1 - efficiency saving); the Opex!C12->C13 shift alone would not be material."
+        }
+      ],
+      "not_material": [
+        {
+          "sheet": "Opex",
+          "what": "row inserted at 9 (Cloud hosting); rows 9-12 moved to 10-13"
+        },
+        {
+          "sheet": "Opex",
+          "what": "column I added at the end (Jul-26, a new period)"
+        },
+        {
+          "sheet": "Opex",
+          "what": "total row SUM ranges grew from C6:C11 to C6:C12 with the inserted row"
+        },
+        {
+          "sheet": "Opex",
+          "what": "label reworded: 'Travel & subsistence' -> 'Travel and expenses' (A9 -> A10)"
+        },
+        {
+          "sheet": "Inputs",
+          "what": "input updated: salaries growth B4 0.4% -> 0.5%"
+        },
+        {
+          "sheet": "Inputs",
+          "what": "new input rows added: B9 cloud growth, B11 efficiency saving"
+        }
+      ]
+    },
+    {
+      "before": "debt_schedule_v1.xlsx",
+      "after": "debt_schedule_v2.xlsx",
+      "changes": [
+        {
+          "sheet": "Debt",
+          "cell": "G10",
+          "before_cell": "G10",
+          "kind": "VALUE_TO_FORMULA",
+          "note": "2030 interest placeholder 312,000 replaced by the ROUND(AVERAGE()*rate) formula."
+        },
+        {
+          "sheet": "Covenants",
+          "cell": null,
+          "before_cell": null,
+          "kind": "SHEET_REMOVED",
+          "note": "Covenant sheet removed."
+        },
+        {
+          "sheet": "Refinancing",
+          "cell": null,
+          "before_cell": null,
+          "kind": "SHEET_ADDED",
+          "note": "Refinancing sheet added."
+        }
+      ],
+      "not_material": [
+        {
+          "sheet": "Inputs",
+          "what": "input updated: scheduled amortisation B5 2,000,000 -> 2,250,000"
+        },
+        {
+          "sheet": "Debt",
+          "what": "label reworded: A7 'Repayments' -> 'Scheduled amortisation'"
+        },
+        {
+          "sheet": "Debt",
+          "what": "input filled in: 2030 rate G11 = 5.9%"
+        }
+      ]
+    },
+    {
+      "before": "capex_plan_v1.xlsx",
+      "after": "capex_plan_v2.xlsx",
+      "changes": [
+        {
+          "sheet": "Depreciation",
+          "cell": "E7",
+          "before_cell": "E7",
+          "kind": "FORMULA_TO_VALUE",
+          "note": "2028 plant depreciation formula replaced by a pasted value 216,000."
+        },
+        {
+          "sheet": "Depreciation",
+          "cell": "B13",
+          "before_cell": "B12",
+          "kind": "FORMULA_CHANGED",
+          "note": "4-year total now deducts Inputs!$B$13 (disposals release); the C10->C11 shift alone would not be material."
+        }
+      ],
+      "not_material": [
+        {
+          "sheet": "Inputs",
+          "what": "row inserted at 8 (Software useful life); rows 8-9 moved to 9-10"
+        },
+        {
+          "sheet": "Capex",
+          "what": "row inserted at 8 (Software); total moved from row 10 to 11"
+        },
+        {
+          "sheet": "Depreciation",
+          "what": "row inserted at 8 (Software); total moved from row 10 to 11"
+        },
+        {
+          "sheet": "Capex",
+          "what": "column G added at the end (2030, a new period)"
+        },
+        {
+          "sheet": "Depreciation",
+          "what": "column G added at the end (2030, a new period)"
+        },
+        {
+          "sheet": "Capex",
+          "what": "total row SUM ranges grew from C6:C9 to C6:C10 with the inserted row"
+        },
+        {
+          "sheet": "Capex",
+          "what": "input updated: plant & machinery 2027 (D7) 640,000 -> 720,000"
+        },
+        {
+          "sheet": "Inputs",
+          "what": "new input B13 (disposals release)"
+        }
+      ]
+    }
+  ]
+}

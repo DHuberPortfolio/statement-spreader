@@ -1,0 +1,434 @@
+{
+ "name": "dq-dev-first",
+ "vendors_config": "58ff26c29b4a426f",
+ "po_config": "e2f696152b929c15",
+ "sets": {
+  "dev": {
+   "seed": 21,
+   "vendors": {
+    "rates": {
+     "faults_caught": {
+      "n": 55,
+      "d": 55,
+      "rate": 1.0,
+      "low": 0.9347128562105721,
+      "high": 0.9999999999999999
+     },
+     "faults_missed": {
+      "n": 0,
+      "d": 55,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.06528714378942788
+     },
+     "reason_right": {
+      "n": 54,
+      "d": 55,
+      "rate": 0.9818181818181818,
+      "low": 0.9039399953951678,
+      "high": 0.9967833024077472
+     },
+     "exact_decision_of_faults": {
+      "n": 54,
+      "d": 55,
+      "rate": 0.9818181818181818,
+      "low": 0.9039399953951678,
+      "high": 0.9967833024077472
+     },
+     "false_quarantine": {
+      "n": 0,
+      "d": 92,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.04008280329209862
+     },
+     "legit_oddities_quarantined": {
+      "n": 0,
+      "d": 22,
+      "rate": 0.0,
+      "low": 1.3877787807814457e-17,
+      "high": 0.14865952572596125
+     },
+     "quarantine_precision": {
+      "n": 53,
+      "d": 53,
+      "rate": 1.0,
+      "low": 0.9324156955469234,
+      "high": 1.0
+     }
+    },
+    "counts": {
+     "faults": 55,
+     "caught": 55,
+     "reason_right": 54,
+     "exact": 54,
+     "valid": 92,
+     "legit": 22,
+     "caught_other_severity": 1
+    },
+    "decisions": {
+     "accepted": 92,
+     "review": 22,
+     "rejected": 31,
+     "duplicate": 2
+    },
+    "cases": {
+     "active_without_email": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_account_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_date": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_routing_checksum": {
+      "n": 2,
+      "right": 2
+     },
+     "bank_changed_since_last_load": {
+      "n": 2,
+      "right": 2
+     },
+     "bank_without_routing": {
+      "n": 2,
+      "right": 2
+     },
+     "clean": {
+      "n": 70,
+      "right": 70
+     },
+     "conflicting_key_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "exact_duplicate_first": {
+      "n": 2,
+      "right": 2
+     },
+     "exact_duplicate_repeat": {
+      "n": 2,
+      "right": 2
+     },
+     "formula_in_name": {
+      "n": 2,
+      "right": 1,
+      "other_severity": 1
+     },
+     "invalid_email": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_ein_without_hyphen": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_foreign_no_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_immediate_terms": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_inactive_without_email": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_messy_spacing_and_codes": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_name_starts_with_at": {
+      "n": 1,
+      "right": 1
+     },
+     "legit_no_bank_card_paid": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_percent_sign": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_similar_name_distinct": {
+      "n": 4,
+      "right": 4
+     },
+     "legit_unusual_name": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_id": {
+      "n": 2,
+      "right": 2
+     },
+     "missing_name": {
+      "n": 2,
+      "right": 2
+     },
+     "routing_leading_zero_lost": {
+      "n": 2,
+      "right": 2
+     },
+     "routing_without_account": {
+      "n": 2,
+      "right": 2
+     },
+     "same_tax_id_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "shared_bank_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "short_ein": {
+      "n": 2,
+      "right": 2
+     },
+     "similar_name_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "tax_rate_not_number": {
+      "n": 2,
+      "right": 2
+     },
+     "terms_out_of_range": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_country": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_status": {
+      "n": 2,
+      "right": 2
+     }
+    },
+    "misses": [
+     {
+      "source": "erp",
+      "row": 15,
+      "case": "formula_in_name",
+      "expect": "review",
+      "codes": [
+       "MISSING_REQUIRED"
+      ],
+      "got": "rejected",
+      "note": "caught, other reason"
+     },
+     {
+      "source": "erp",
+      "row": 15,
+      "case": "formula_in_name",
+      "expect": "review",
+      "codes": [
+       "MISSING_REQUIRED"
+      ],
+      "got": "rejected",
+      "note": "caught, other severity"
+     }
+    ],
+    "files": {}
+   },
+   "purchase_orders": {
+    "rates": {
+     "faults_caught": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "faults_missed": {
+      "n": 0,
+      "d": 30,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.113517091390478
+     },
+     "reason_right": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "exact_decision_of_faults": {
+      "n": 30,
+      "d": 30,
+      "rate": 1.0,
+      "low": 0.8864829086095221,
+      "high": 1.0
+     },
+     "false_quarantine": {
+      "n": 0,
+      "d": 115,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.03232538101136302
+     },
+     "legit_oddities_quarantined": {
+      "n": 0,
+      "d": 6,
+      "rate": 0.0,
+      "low": 0.0,
+      "high": 0.3903430336530645
+     },
+     "quarantine_precision": {
+      "n": 28,
+      "d": 28,
+      "rate": 1.0,
+      "low": 0.8793527963418923,
+      "high": 1.0
+     }
+    },
+    "counts": {
+     "valid": 115,
+     "faults": 30,
+     "caught": 30,
+     "reason_right": 30,
+     "exact": 30,
+     "legit": 6
+    },
+    "decisions": {
+     "accepted": 115,
+     "review": 8,
+     "rejected": 20,
+     "duplicate": 2
+    },
+    "cases": {
+     "bad_line_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_po_number": {
+      "n": 2,
+      "right": 2
+     },
+     "bad_receipt_flag": {
+      "n": 2,
+      "right": 2
+     },
+     "clean": {
+      "n": 109,
+      "right": 109
+     },
+     "conflicting_line_pair": {
+      "n": 4,
+      "right": 4
+     },
+     "exact_duplicate_first": {
+      "n": 2,
+      "right": 2
+     },
+     "exact_duplicate_repeat": {
+      "n": 2,
+      "right": 2
+     },
+     "legit_expensive_item": {
+      "n": 4,
+      "right": 4
+     },
+     "missing_item": {
+      "n": 2,
+      "right": 2
+     },
+     "mixed_currency_po": {
+      "n": 6,
+      "right": 6
+     },
+     "negative_price": {
+      "n": 2,
+      "right": 2
+     },
+     "price_ten_times": {
+      "n": 2,
+      "right": 2
+     },
+     "unknown_vendor": {
+      "n": 2,
+      "right": 2
+     },
+     "vendor_not_active": {
+      "n": 2,
+      "right": 2
+     },
+     "zero_quantity": {
+      "n": 2,
+      "right": 2
+     }
+    },
+    "misses": [],
+    "files": {}
+   },
+   "unstable_records": [],
+   "carried_forward": 36,
+   "missing_from_source": 1
+  }
+ },
+ "hostile": {
+  "crashes": [
+   [
+    "binary garbage",
+    "UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 129: character maps to <undefined>"
+   ]
+  ],
+  "handled": [
+   [
+    "empty file",
+    "refused: a.csv is empty"
+   ],
+   [
+    "header only",
+    "gated"
+   ],
+   [
+    "missing a mapped column",
+    "refused: a.csv (Procurement portal export) has no column 'Supplier Name'; its columns are 'Supplier"
+   ],
+   [
+    "duplicate header",
+    "refused: a.csv: column 'EIN' appears twice in the header"
+   ],
+   [
+    "not a workbook",
+    "refused: a.xlsx is not a readable Excel workbook (BadZipFile)"
+   ],
+   [
+    "windows-1252 text",
+    "gated"
+   ],
+   [
+    "byte-order mark",
+    "gated"
+   ],
+   [
+    "ragged rows",
+    "gated"
+   ],
+   [
+    "huge cell",
+    "refused: a.csv is not a readable CSV (field larger than field limit (131072))"
+   ],
+   [
+    "unsupported type",
+    "refused: a.pdf: only .csv and .xlsx files are read"
+   ],
+   [
+    "quotes and newlines",
+    "gated"
+   ]
+  ]
+ }
+}

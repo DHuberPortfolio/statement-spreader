@@ -1,0 +1,541 @@
+{
+ "engine": "sheets",
+ "sets": {
+  "independent-1": {
+   "books": {
+    "budget_fy25.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 24,
+     "seconds": 0.016
+    },
+    "loan_amortisation.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 299,
+     "seconds": 0.031
+    },
+    "three_statement_model.xlsx": {
+     "faults": 7,
+     "found": 6,
+     "kind_agrees": 5,
+     "claims": 6,
+     "right_claims": 6,
+     "missed": [
+      {
+       "sheet": "P&L",
+       "cell": "F10",
+       "kind": "INCONSISTENT_FORMULA",
+       "note": "FY2026 opex uses the FY2025 assumption (column E) instead of column F"
+      }
+     ],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 17,
+     "seconds": 0.019
+    },
+    "sales_commission.xlsx": {
+     "faults": 6,
+     "found": 6,
+     "kind_agrees": 6,
+     "claims": 6,
+     "right_claims": 6,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 43,
+     "seconds": 0.011
+    },
+    "headcount_payroll.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 7,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [
+      {
+       "cell": "payroll plan!C16",
+       "kinds": [
+        "SUM_OMITS_ROW"
+       ],
+       "ids": [
+        "SUM_OMITS_ROW:Payroll Plan!C16"
+       ]
+      },
+      {
+       "cell": "payroll plan!N16",
+       "kinds": [
+        "SUM_OMITS_ROW"
+       ],
+       "ids": [
+        "SUM_OMITS_ROW:Payroll Plan!N16"
+       ]
+      }
+     ],
+     "legit_flagged": [
+      {
+       "cell": "payroll plan!C16",
+       "kinds": [
+        "SUM_OMITS_ROW"
+       ],
+       "ids": [
+        "SUM_OMITS_ROW:Payroll Plan!C16"
+       ],
+       "legit": "SUM(C11:C15) over the subtotal, tax, benefits and contractor rows plus blank separator row 14; does not include rows 7-10, so no double count"
+      }
+     ],
+     "anomalies": 0,
+     "baseline_claims": 39,
+     "seconds": 0.029
+    },
+    "consolidation_fy25.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 25,
+     "seconds": 0.015
+    },
+    "capex_depreciation.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 4,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 28,
+     "seconds": 0.016
+    },
+    "accruals_rec.xlsx": {
+     "faults": 5,
+     "found": 5,
+     "kind_agrees": 5,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 14,
+     "seconds": 0.009
+    },
+    "regional_sales_summary.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 35,
+     "seconds": 0.011
+    },
+    "opex_forecast_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 16,
+     "seconds": 0.013
+    },
+    "opex_forecast_v2.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 19,
+     "seconds": 0.014
+    },
+    "pricing_model_v1.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 2,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [
+      {
+       "cell": "price build!H6",
+       "kinds": [
+        "HARDCODED_PLUG"
+       ],
+       "ids": [
+        "HARDCODED_PLUG:Price Build!H6"
+       ]
+      }
+     ],
+     "legit_flagged": [
+      {
+       "cell": "price build!H6",
+       "kinds": [
+        "HARDCODED_PLUG"
+       ],
+       "ids": [
+        "HARDCODED_PLUG:Price Build!H6"
+       ],
+       "legit": "charm pricing ROUND(...)-0.01 to end in .99; the 0.01 is a pricing rule, not a plug"
+      }
+     ],
+     "anomalies": 0,
+     "baseline_claims": 47,
+     "seconds": 0.011
+    },
+    "pricing_model_v2.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 1,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [
+      {
+       "cell": "price build!H6",
+       "kinds": [
+        "HARDCODED_PLUG"
+       ],
+       "ids": [
+        "HARDCODED_PLUG:Price Build!H6"
+       ]
+      }
+     ],
+     "legit_flagged": [
+      {
+       "cell": "price build!H6",
+       "kinds": [
+        "HARDCODED_PLUG"
+       ],
+       "ids": [
+        "HARDCODED_PLUG:Price Build!H6"
+       ],
+       "legit": "charm pricing ROUND(...)-0.01 to end in .99; the 0.01 is a pricing rule, not a plug"
+      }
+     ],
+     "anomalies": 0,
+     "baseline_claims": 56,
+     "seconds": 0.012
+    },
+    "ar_aging_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 10,
+     "seconds": 0.007
+    },
+    "ar_aging_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 13,
+     "seconds": 0.007
+    }
+   },
+   "pairs": {
+    "opex_forecast_v1.xlsx -> opex_forecast_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Op Ex": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Summary": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    },
+    "pricing_model_v1.xlsx -> pricing_model_v2.xlsx": {
+     "changes": 4,
+     "found": 4,
+     "reported": 4,
+     "right": 4,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Price Build": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 4
+     }
+    },
+    "ar_aging_v1.xlsx -> ar_aging_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 2,
+      "sheets": {
+       "Aging": {
+        "rows_added": 2,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    }
+   },
+   "counts": {
+    "faults": 43,
+    "found": 42,
+    "kind": 40,
+    "claims": 46,
+    "right": 42,
+    "baseline": 685,
+    "legit": 114,
+    "legit_flagged": 3,
+    "anomalies": 5,
+    "seconds": 0.22,
+    "pair_changes": 8,
+    "pair_found": 8,
+    "pair_reported": 8,
+    "pair_right": 8
+   },
+   "rates": {
+    "precision": {
+     "n": 42,
+     "d": 46,
+     "rate": 0.9130434782608695,
+     "low": 0.796750643647758,
+     "high": 0.9656646881232924
+    },
+    "recall": {
+     "n": 42,
+     "d": 43,
+     "rate": 0.9767441860465116,
+     "low": 0.8794073213878312,
+     "high": 0.9958830188225801
+    },
+    "kind_agreement": {
+     "n": 40,
+     "d": 42,
+     "rate": 0.9523809523809523,
+     "low": 0.8420986468452026,
+     "high": 0.9868427513607937
+    },
+    "change_precision": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    },
+    "change_recall": {
+     "n": 8,
+     "d": 8,
+     "rate": 1.0,
+     "low": 0.6755843804891231,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "BROKEN_NAME": {
+     "found": 2,
+     "planted": 2
+    },
+    "CIRCULAR_REFERENCE": {
+     "found": 2,
+     "planted": 2
+    },
+    "DOUBLE_COUNT": {
+     "found": 2,
+     "planted": 2
+    },
+    "EXTERNAL_LINK": {
+     "found": 3,
+     "planted": 3
+    },
+    "HARDCODED_OVERRIDE": {
+     "found": 7,
+     "planted": 7
+    },
+    "HARDCODED_PLUG": {
+     "found": 4,
+     "planted": 4
+    },
+    "INCONSISTENT_FORMULA": {
+     "found": 8,
+     "planted": 9
+    },
+    "MISSING_SHEET": {
+     "found": 2,
+     "planted": 2
+    },
+    "REF_ERROR": {
+     "found": 2,
+     "planted": 2
+    },
+    "SUM_OMITS_ROW": {
+     "found": 4,
+     "planted": 4
+    },
+    "TEXT_NUMBER_IN_SUM": {
+     "found": 4,
+     "planted": 4
+    },
+    "UNKNOWN_NAME": {
+     "found": 2,
+     "planted": 2
+    }
+   }
+  }
+ },
+ "hostile": [
+  {
+   "file": "empty.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "empty.xlsx is not an Excel workbook (.xlsx or .xlsm)"
+  },
+  {
+   "file": "old-format.xls",
+   "expected": "refused",
+   "result": "refused",
+   "message": "old-format.xls is an old-format (.xls) or password-protected workbook. Save it as .xlsx without a password and scan that copy."
+  },
+  {
+   "file": "not-a-workbook.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "not-a-workbook.xlsx is damaged: it is not a readable .xlsx package"
+  },
+  {
+   "file": "a-text-file.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "a-text-file.xlsx is not an Excel workbook (.xlsx or .xlsm)"
+  },
+  {
+   "file": "zip-not-excel.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "zip-not-excel.xlsx is a zip file but not an Excel workbook"
+  },
+  {
+   "file": "binary.xlsb",
+   "expected": "refused",
+   "result": "refused",
+   "message": "binary.xlsb is a binary workbook (.xlsb). Save it as .xlsx and scan that copy."
+  },
+  {
+   "file": "entities.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "entities.xlsx contains XML with a DOCTYPE or entity declaration (xl/worksheets/sheet1.xml); Excel never writes these, so the file was refused"
+  },
+  {
+   "file": "expands-to-450MB.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "expands-to-450MB.xlsx expands to 450 MB, over the 400 MB limit"
+  },
+  {
+   "file": "truncated.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "truncated.xlsx is damaged: it is not a readable .xlsx package"
+  },
+  {
+   "file": "formula-only.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "0 finding(s)"
+  },
+  {
+   "file": "odd-formulas.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "4 finding(s)"
+  },
+  {
+   "file": "empty-workbook.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "0 finding(s)"
+  }
+ ],
+ "stable": true
+}

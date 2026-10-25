@@ -49,10 +49,92 @@ reviewer's reproduction scripts were re-run against the fix.
 | Medium | A resolution survived a change to the numbers behind it | Resolutions fingerprint their item and reopen when it changes |
 | Low | Concurrent edits lost an update; non-ASCII digits accepted; NaN assumptions accepted | Edits checked inside the write transaction; other digit scripts refused; non-finite numbers refused |
 
+An outside test run on Linux (2026-10-24, evening) found two more reader problems, both now fixed with tests in
+`tests/test_html_reader_fixes.py`:
+
+| Severity | Finding | Fix |
+|---|---|---|
+| High | lxml 6 wheels built on libxml2 2.14 (Linux, macOS) stop at the first `</html>`: in a file holding several documents, every later statement vanished without a warning (a silent omission; the Windows wheel bundles libxml2 2.11, so it never showed in local runs) | Each document in a file is parsed on its own; CI installs fresh on Linux, plus the oldest lxml allowed |
+| High | "Zero size" hid whole subtrees, but font size is inherited and a child can set its own: Deckers' 10-K (a `font-size:0` wrapper around every page) had all 155 tables dropped and failed to read. Meanwhile `font-size:0.0pt` did not count as zero, so a statement hidden that way was read as real | A zero font size hides only text whose nearest declared size (inline or stylesheet) is zero; `0.0pt` counts as zero |
+| Medium | Found while demoing the app the same evening (T13): the ROI page showed the tool's silent error rate as an observed 3.9%, a first-day figure, because it read `latest-dev.json`, which named evaluation runs never refreshed | Every full evaluation run refreshes its `latest-*` report; the page prefers the holdout half of the newest run and names its source (`tests/test_roi.py`) |
+
 Still open (hypotheses, not reproduced): stale cached formula values in Excel files set to
 recalculate on open; reviewer mapping memory is shared across all companies under one profile
 (a wrong remap affects later documents until corrected); statement tables nested inside layout
 tables are not read.
+
+## Reconciliation and invoice engines (2026-10-24, afternoon)
+
+New assets: bank and ledger exports and invoices (`var/finops-files/`), the decision log and audit chain
+(`var/finops.sqlite3`), the bank-fingerprint key (`var/bank-fingerprint.key`, outside the repository), vendor
+master, PO and receipt exports.
+
+| # | Threat | Safeguard | Status |
+|---|---|---|---|
+| T15 | A false automatic match hides a real discrepancy | Hard constraints (currency, sign, window, tolerance) before any score; ambiguity proposed, never guessed; sums without a reference only proposed; completeness checks per run | Measured: 0 false matches on dev, holdout and the round-amount stress set (greedy baseline: 7 on stress) |
+| T16 | A record consumed twice, or a rerun duplicating matches | One group per record (runtime guard and a check); runs keyed by content; identical requests reuse the run | Tested |
+| T17 | A changed source file silently keeps or drops an approved match | Decisions carry the records' content hashes; a change raises DECISION_INVALIDATED (blocker) | Tested |
+| T18 | Invoice fraud: changed bank details | Blocker against the trusted vendor master; "cannot be verified" with no baseline; numbers masked, compared by keyed HMAC; resolution needs independent verification by someone other than the uploader; nothing pays or edits master data | Tested |
+| T19 | Duplicate payment (re-typed number, same file twice, look-alike) | Same bytes = one invoice; exact and possible duplicate rules beyond the number; both block eligibility | Tested; measured 6 of 6 caught on each set |
+| T20 | Hidden or tiny text steering extraction (a white account number, a 1.5 pt "Total $1.00") | Text under 3 pt ignored; white text reported (HIDDEN_TEXT); more than one account printed is a blocker | Tested (red-team fixtures) |
+| T21 | Vendor impersonation with a borrowed tax id | Tax id resolves the vendor only if the printed name agrees; otherwise VENDOR_IDENTITY_CONFLICT blocker | Tested |
+| T22 | Text addressed to an AI inside an invoice ("pre-approved, skip checks") | No model reads invoices or transactions; rules decide; test shows identical outcome | Tested |
+| T23 | An automated actor closes exceptions | Named reviewer required; "system", "model", "ai", "assistant", "local-user" refused; blockers need notes | Tested |
+| T24 | CSV formula injection from descriptions or file names | Exports prefix risky text with an apostrophe (shared with the statement engine) | Tested |
+| T25 | Credit notes or negative invoices reaching "eligible" | CREDIT_NOTE warning blocks touchless processing | Tested |
+| T26 | Reviewer identity is an unverified header (inherits T10) | Segregation of duties is only as strong as the names; needs SSO and roles | **Open** |
+
+### Independent red-team review of the platform (2026-10-24, afternoon)
+
+A separate agent with no part in writing the code probed `src/finops` with 15 scripts. Every reproduced finding is
+fixed and has a regression test in `tests/test_review_fixes.py` (named by finding number).
+
+| Severity | Finding | Fix |
+|---|---|---|
+| Critical | A line with no unit price, no quantity or an unreadable quantity was not checked, so an invoice billing 10x the PO value went through touchless | Such a line is a LINE_INCOMPLETE blocker; quantities must be plain numbers (no NaN, exponents) |
+| High | A tax rate printed on the invoice replaced the vendor master's | The master rate wins; a different printed rate is TAX_RATE_MISMATCH; a rate nobody trusts is TAX_UNVERIFIED |
+| High | Header freight and negative discounts were never compared with the PO | FREIGHT_NOT_ON_PO (warning), NEGATIVE_DISCOUNT (blocker) |
+| High | A held invoice did not reserve its quantity, so a second invoice for the same goods passed | Every invoice not rejected (and not an open exact duplicate) reserves its quantity; a decision re-checks later invoices |
+| High | "Bank Account:", "Account:", "A/C No.", "Beneficiary account" skipped the bank control | Wider label and in-text patterns; account and routing compared separately by keyed digest |
+| High | The uploader could resolve BANK_DETAILS_CONFLICT alone | Conflict and vendor-identity conflict join the segregated set: verified independently, by someone else, with a real note |
+| High | Reconciliation: "EUR 7,829.48" with a blank currency column was read as USD; a negative deposit's sign was flipped | A currency in the amount cell is used (or the row refused if it contradicts the column); negative numbers in in/out columns are refused unless the profile says how to read them |
+| Medium | Rejecting an invoice left its outcome "eligible" | "rejected" is an eligibility status of its own; rejected invoices release their quantities |
+| Medium | Full account numbers in other fields, grouped digits in the hidden-text warning, and in the audit log through a correction | Digit runs are masked in any text that talks about bank details, in evidence, in the hidden-text warning and in corrections |
+| Medium | Duplicate totals compared as text ("604.2" vs "604.20") | Compared as numbers |
+| Medium | An earlier invoice's change did not refresh later results (stale reuse) | The reuse key covers every earlier invoice's details, and decisions re-check later invoices |
+| Medium | Malformed uploads, corrections and oversized CSV cells gave 500 errors and half-registered rows | Refused with a 400 and a reason before anything is stored |
+| Medium | Contradicting party names (ACME vs BETA) did not stop automatic pairing | Names now count in the score, and a pair whose names contradict is only proposed (NAME_MISMATCH) |
+| Medium | Rejecting one of two equal candidates made the other "the only record" and automatic | Records a person rejected a pairing for are only proposed afterwards |
+| Medium | Invalidated decisions with all records gone shared one exception id | The id includes the decision |
+| Low | Amount-difference layer only searched within a cent; older files re-run returned a run nobody could decide on; concurrent runs; "System.", "AI assistant" passed as people; "alice." bypassed separation of duties | All fixed: correct search window; re-run becomes the latest run; runs serialised; automated-name check by word; names compared normalised |
+
+Not reproduced, closed anyway with tests: two decisions on the same run at once (the "latest run" check is now repeated
+inside the write transaction); an approved credit note freeing PO quantity (negative quantities no longer count).
+Still a hypothesis: invisible PDF text drawn off-page or in an invisible render mode.
+
+## The data-quality gate (2026-10-24, night)
+
+New assets: the source exports and last accepted snapshots (`var/finops-files/dq/`), the gate's runs and decisions
+(`var/finops.sqlite3`), and the accepted load files it writes, which hold real bank details by design.
+
+| # | Threat | Safeguard | Status |
+|---|---|---|---|
+| T27 | Vendor-master fraud: bank details changed in a source system, then invoices paid into the new account (the invoice engine's own check compares against the master, so it agrees with the fraud) | Bank account, routing number and tax id changes against the last accepted export are held; the last accepted version stays in force meanwhile; a person who corrected the record cannot release it | Tested end to end: without the gate the invoice passes the bank check, with it the invoice is blocked |
+| T28 | A bad record loads silently: corrupted by a spreadsheet (scientific notation, lost leading zeros), a duplicate id overwriting another, a PO for an unknown vendor | Field checks with named reasons; lossy normalisation refused; key conflicts held; references checked | Measured on synthetic and independently written sets (README, IMPROVEMENT_LOG) |
+| T29 | A source quietly drops a vendor that a held record's old version would revive (a blocked vendor paid again) | Carry-forward never applies when the held version blocks or deactivates the record; such keys are listed as withheld | Tested |
+| T30 | Bank details leaking into logs, the database or the browser | Masked in stored results, API responses, the screen, the quarantine report and the audit log; only the accepted load file holds them | Tested (every account number of the sample checked against the API response and the audit log) |
+| T31 | Formula injection through the quarantine report, or a record that runs a formula when opened | Formula-like text held for review; report cells written as plain text | Tested; costs one false hold on a company named "@Home Supply" (measured) |
+| T32 | Two people deciding on the same run at once, or on a stale screen | Decisions only on the dataset's latest run, checked again inside the write transaction | Tested |
+
+## The spreadsheet risk scanner (2026-10-24, night)
+
+| # | Threat | Safeguard | Status |
+|---|---|---|---|
+| T33 | The scan changes or runs the workbook (macros, external links, recalculation) | Bytes read into memory; openpyxl never runs macros or follows links; nothing is written back; nothing is calculated | Tested (the file's hash and modification time are unchanged after `spreader scan`; every evaluation workbook is hashed before and after) |
+| T34 | A hostile file: XML entity expansion, a zip that expands to gigabytes, a huge sheet, a damaged package | DOCTYPE/ENTITY refused before parsing (openpyxl uses the standard-library parser, and defusedxml is not installed); limits on file size, expanded size and filled cells; damaged files refused with a message | Tested (12 hostile files: 9 refused, 3 scanned, 0 crashes) |
+| T35 | Formula injection through the findings export | Text that starts like a formula is written as plain text | Tested |
+| T36 | A real problem dismissed as deliberate, or a dismissal reused on a changed formula | A named person and a written reason; errors cannot be dismissed; the review key includes the formula in relative form and the labels, so any change reopens it | Tested |
+| T37 | False confidence: a clean scan read as "the model is right" | The README says what is not checked (values without a saved calculation, logic that is consistent but wrong, VBA) | Documented |
 
 ## Not in scope for the prototype
 Multi-tenant isolation, encryption at rest, key management, and model-risk-management sign-off

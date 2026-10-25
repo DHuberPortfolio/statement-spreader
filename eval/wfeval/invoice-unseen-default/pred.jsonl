@@ -1,0 +1,81 @@
+{"id": "inv-001-tax_wrong", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-002-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-004-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-006-line_math", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-007-vendor_alias", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-008-price_over", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-009-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-010-price_within_tol", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-011-missing_receipt", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-012-vendor_mismatch", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-013-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-014-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-015-bank_changed", "route": "blocked", "codes": ["BANK_DETAILS_CHANGED", "CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-016-tax_unverified", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-017-tax_unverified", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-018-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-019-line_math", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-020-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-021-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-022-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-023-no_po_ref", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-024-over_receipt", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-025-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-026-json_clean", "route": "eligible_for_approval", "codes": []}
+{"id": "inv-027-total_math", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-028-service_2way", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-029-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-031-closed_po", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-032-price_over", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-033-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-034-line_math", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-035-multipage", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-036-vendor_alias", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-037-over_receipt", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-038-bank_changed", "route": "blocked", "codes": ["BANK_DETAILS_CHANGED", "CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-039-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-041-multipage", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-042-vendor_mismatch", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-043-sequential", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-045-sequential", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-047-bank_unverified", "route": "blocked", "codes": ["BANK_DETAILS_UNVERIFIED", "CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-048-bank_changed", "route": "blocked", "codes": ["BANK_DETAILS_CHANGED", "CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-049-price_over", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-050-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-051-missing_receipt", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-052-price_within_tol", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-053-json_clean", "route": "eligible_for_approval", "codes": []}
+{"id": "inv-054-service_2way", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-055-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-056-service_2way", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-057-sequential", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-059-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-061-po_not_found", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-062-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-063-no_po_ref", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-064-tax_wrong", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-065-po_not_found", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-066-bank_unverified", "route": "blocked", "codes": ["BANK_DETAILS_UNVERIFIED", "CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-067-closed_po", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-068-price_within_tol", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-069-service_2way", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-070-total_math", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-071-json_clean", "route": "eligible_for_approval", "codes": []}
+{"id": "inv-072-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-073-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-075-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-077-over_receipt", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-078-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-079-missing_receipt", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-080-clean", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-002-clean-again", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "EXACT_DUPLICATE", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-005-possible_dup", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-030-exact_dup", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-040-exact_dup", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-044-sequential", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-046-sequential", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-058-sequential", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}
+{"id": "inv-060-similar_distinct", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-074-possible_dup", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-076-similar_distinct", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE", "TAX_UNVERIFIED"]}
+{"id": "inv-081-exact_dup", "route": "blocked", "codes": ["CURRENCY_UNKNOWN", "MISSING_FIELD", "NO_LINE_ITEMS", "NO_PO_REFERENCE"]}

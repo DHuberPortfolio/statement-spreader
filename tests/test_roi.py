@@ -65,3 +65,29 @@ def test_review_time_counts_against_the_tool() -> None:
     rep = roi.compute(_inputs(s))
     assert rep.numbers["minutes_saved"].value == pytest.approx(-5.0)
     assert rep.numbers["capacity_hours"].value < 0
+
+
+def test_roi_silent_error_rate_comes_from_the_newest_run_and_the_holdout_half(tmp_path, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    """The page read latest-dev.json, which named evaluation runs never refreshed: it showed a first-day figure."""
+    import json
+    import os
+
+    from spreader import roi_api
+
+    def report(name: str, docs: dict[str, dict[str, int]], n: int, d: int) -> dict:  # type: ignore[type-arg]
+        return {"name": name, "documents": len(docs), "rates": {"silent_error_rate": {"n": n, "d": d}},
+                "documents_detail": [{"doc": f"sec:{t}", "error": None, "buckets": b} for t, b in docs.items()]}
+
+    (tmp_path / "manifest.json").write_text(json.dumps({"AAA": {"split": "dev"}, "BBB": {"split": "holdout"}}))
+    (tmp_path / "latest-dev.json").write_text(json.dumps(report("old", {"AAA": {}}, 96, 2451)))
+    os.utime(tmp_path / "latest-dev.json", (1, 1))
+    monkeypatch.setattr(roi_api, "REPORTS", tmp_path)
+    monkeypatch.setattr(roi_api, "MANIFEST", tmp_path / "manifest.json")
+    rate, source = roi_api.silent_error_rate()
+    assert rate == (96, 2451) and "dev filings (tuned on)" in source
+
+    both = {"AAA": {"correct_auto": 90, "wrong_auto": 10}, "BBB": {"correct_auto": 97, "wrong_auto": 3}}
+    (tmp_path / "latest-all.json").write_text(json.dumps(report("stmt-all-final", both, 13, 200)))
+    rate, source = roi_api.silent_error_rate()
+    assert rate == (3, 100)  # the holdout filing only, not the run's overall 13 of 200
+    assert "holdout half of evaluation 'stmt-all-final'" in source

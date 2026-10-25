@@ -1,0 +1,1290 @@
+[
+ {
+  "file": "portal.csv",
+  "row": 2,
+  "expect": "accepted",
+  "case": "plain_us_vendor_unchanged",
+  "why": "Clean US vendor, identical to the previous snapshot."
+ },
+ {
+  "file": "portal.csv",
+  "row": 3,
+  "expect": "accepted",
+  "case": "ein_without_hyphen_matches_previous",
+  "why": "EIN exported as 9 bare digits; ein normalisation gives NN-NNNNNNN, equal to the snapshot, so no tax-id change."
+ },
+ {
+  "file": "portal.csv",
+  "row": 4,
+  "expect": "accepted",
+  "case": "bank_hyphens_match_previous",
+  "why": "Bank account printed with hyphens (0045-1123-9987); digits_only makes it equal to the snapshot, leading zeros kept."
+ },
+ {
+  "file": "portal.csv",
+  "row": 5,
+  "expect": "accepted",
+  "case": "country_long_name_status_lowercase_code",
+  "why": "Country 'United States' and status 'a' both translate through the portal value_maps (case-insensitive)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 6,
+  "expect": "accepted",
+  "case": "vendor_id_lowercase_padded",
+  "why": "Supplier ID ' v1005 ' trims and upper-cases to V1005, matching the pattern and the snapshot."
+ },
+ {
+  "file": "portal.csv",
+  "row": 7,
+  "expect": "accepted",
+  "case": "tab_and_double_space_in_name",
+  "why": "Name contains a tab and a double space and a trailing space; whitespace collapses. Name is not change-controlled."
+ },
+ {
+  "file": "portal.csv",
+  "row": 8,
+  "expect": "accepted",
+  "case": "mexican_sa_de_cv_rfc",
+  "why": "Mexican vendor, legal suffix S.A. de C.V., RFC tax id (not an EIN, no pattern for MX), 16% tax, no bank details."
+ },
+ {
+  "file": "portal.csv",
+  "row": 9,
+  "expect": "accepted",
+  "case": "german_gmbh_umlaut_steuernummer",
+  "why": "German GmbH with an umlaut, Steuernummer with slashes, 19% tax, no bank details."
+ },
+ {
+  "file": "portal.csv",
+  "row": 10,
+  "expect": "accepted",
+  "case": "uk_ltd_bank_without_routing",
+  "why": "UK vendor: 8-digit account and no ABA routing is fine outside the US; VAT number with spaces kept as printed."
+ },
+ {
+  "file": "portal.csv",
+  "row": 11,
+  "expect": "accepted",
+  "case": "inactive_vendor_without_email",
+  "why": "No contact e-mail, but the contact rule only applies to active vendors."
+ },
+ {
+  "file": "portal.csv",
+  "row": 12,
+  "expect": "accepted",
+  "case": "tax_rate_at_max_boundary",
+  "why": "Sales Tax % 25 -> 0.25, exactly the maximum."
+ },
+ {
+  "file": "portal.csv",
+  "row": 13,
+  "expect": "accepted",
+  "case": "terms_at_max_and_tiny_tax",
+  "why": "Terms 120 is the maximum; Sales Tax % '0.5' -> 0.005, small but in range."
+ },
+ {
+  "file": "portal.csv",
+  "row": 14,
+  "expect": "accepted",
+  "case": "name_exactly_120_chars",
+  "why": "Name is exactly 120 characters (max_length 120)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 15,
+  "expect": "accepted",
+  "case": "aliases_exactly_400_chars",
+  "why": "Very long alias list, exactly 400 characters (max_length 400)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 16,
+  "expect": "accepted",
+  "case": "similar_name_but_different_ein_a",
+  "why": "Near-identical name to V1016 in the same country, but both tax ids are filled and different: not flagged."
+ },
+ {
+  "file": "portal.csv",
+  "row": 17,
+  "expect": "accepted",
+  "case": "similar_name_but_different_ein_b",
+  "why": "Pair of V1015; different EIN and different bank, so the similar-name check is suppressed by unless_different."
+ },
+ {
+  "file": "portal.csv",
+  "row": 18,
+  "expect": "accepted",
+  "case": "email_plus_tag_mixed_case",
+  "why": "Valid e-mail with a plus tag, mixed case, multi-part domain."
+ },
+ {
+  "file": "portal.csv",
+  "row": 19,
+  "expect": "accepted",
+  "case": "routing_number_with_spaces",
+  "why": "ABA printed as '0323 2456 3' (spaces only); the 9 digits have a valid checksum. UNSURE: see README."
+ },
+ {
+  "file": "portal.csv",
+  "row": 20,
+  "expect": "accepted",
+  "case": "canadian_business_number",
+  "why": "Canadian BN with RT suffix (not an EIN); 13% HST; no bank."
+ },
+ {
+  "file": "portal.csv",
+  "row": 21,
+  "expect": "accepted",
+  "case": "blocked_vendor_unchanged",
+  "why": "Status B -> blocked. A blocked vendor is a valid record; it is identical to the snapshot."
+ },
+ {
+  "file": "portal.csv",
+  "row": 22,
+  "expect": "accepted",
+  "case": "date_without_zero_padding_terms_zero",
+  "why": "Onboarded '3/7/2024' reads with %m/%d/%Y (single-digit month/day); Terms 0 (cash) is the minimum."
+ },
+ {
+  "file": "portal.csv",
+  "row": 23,
+  "expect": "accepted",
+  "case": "fullwidth_digits_in_terms",
+  "why": "Terms typed as full-width digits '３０' (30). UNSURE: see README."
+ },
+ {
+  "file": "portal.csv",
+  "row": 24,
+  "expect": "accepted",
+  "case": "zero_width_space_in_name",
+  "why": "Name contains a zero-width space between Blue and Heron; name has no pattern and nothing else is wrong."
+ },
+ {
+  "file": "portal.csv",
+  "row": 25,
+  "expect": "accepted",
+  "case": "apostrophe_comma_ampersand_in_name",
+  "why": "Name with apostrophe, ampersand and a comma (quoted CSV field). Apostrophe is inside, not a leading text marker."
+ },
+ {
+  "file": "portal.csv",
+  "row": 26,
+  "expect": "accepted",
+  "case": "first_of_exact_duplicate",
+  "why": "First of two V1027 rows that normalise to identical content."
+ },
+ {
+  "file": "portal.csv",
+  "row": 27,
+  "expect": "accepted",
+  "case": "similar_name_other_country",
+  "why": "Name very close to Alder Creek Supply Inc (V1015/V1016) and no tax id, but country CA vs US: blocking on country means no comparison. Country 'canada' maps case-insensitively."
+ },
+ {
+  "file": "portal.csv",
+  "row": 28,
+  "expect": "rejected",
+  "case": "us_vendor_missing_ein",
+  "why": "US vendor with an empty EIN fails rule us_vendor_needs_ein."
+ },
+ {
+  "file": "portal.csv",
+  "row": 29,
+  "expect": "rejected",
+  "case": "ein_trailing_letter",
+  "why": "EIN '90-6074627A' has a trailing letter: fails NN-NNNNNNN."
+ },
+ {
+  "file": "portal.csv",
+  "row": 30,
+  "expect": "rejected",
+  "case": "ein_with_space",
+  "why": "EIN '93 5674057' uses a space instead of the hyphen. UNSURE: see README."
+ },
+ {
+  "file": "portal.csv",
+  "row": 31,
+  "expect": "rejected",
+  "case": "tax_percent_decimal_comma",
+  "why": "Sales Tax % '7,5' (decimal comma): not a US number, and read as 75 it would be 0.75 > 0.25. In the snapshot, so its previous version stays in force."
+ },
+ {
+  "file": "portal.csv",
+  "row": 32,
+  "expect": "rejected",
+  "case": "bank_account_scientific_notation",
+  "why": "Bank Acct '6.70913E+11': spreadsheet scientific notation in an identifier. Previous version carried forward."
+ },
+ {
+  "file": "portal.csv",
+  "row": 33,
+  "expect": "rejected",
+  "case": "aba_bad_checksum",
+  "why": "ABA 066187892 has 9 digits but fails the checksum."
+ },
+ {
+  "file": "portal.csv",
+  "row": 34,
+  "expect": "rejected",
+  "case": "bank_account_leading_apostrophe",
+  "why": "Bank Acct \"'004417726351\": the Excel text-forcing apostrophe survived into the CSV; digits_only removes only spaces and hyphens, so the pattern \\d{6,17} fails."
+ },
+ {
+  "file": "portal.csv",
+  "row": 35,
+  "expect": "rejected",
+  "case": "country_uk_not_mapped",
+  "why": "Country 'UK' is not in the portal value_map nor an allowed code (GB)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 36,
+  "expect": "rejected",
+  "case": "iso_date_in_portal",
+  "why": "Onboarded '2024-03-15' is ISO; the portal only allows %m/%d/%Y."
+ },
+ {
+  "file": "portal.csv",
+  "row": 37,
+  "expect": "rejected",
+  "case": "email_double_at",
+  "why": "Contact Email has two @ signs."
+ },
+ {
+  "file": "portal.csv",
+  "row": 38,
+  "expect": "rejected",
+  "case": "us_bank_without_routing",
+  "why": "US vendor with a bank account but no ABA (us_bank_needs_routing)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 39,
+  "expect": "rejected",
+  "case": "net_prefix_in_portal_terms",
+  "why": "Terms 'NET30': only the ERP source strips NET; for the portal it is not an integer."
+ },
+ {
+  "file": "portal.csv",
+  "row": 40,
+  "expect": "rejected",
+  "case": "zero_width_space_in_vendor_id",
+  "why": "Supplier ID 'V1043' followed by a zero-width space (U+200B): not whitespace for trim, so the pattern fails."
+ },
+ {
+  "file": "portal.csv",
+  "row": 41,
+  "expect": "rejected",
+  "case": "iban_in_bank_account",
+  "why": "Bank Acct is an IBAN 'DE89 3704 0044 0532 0130 00': letters remain after digits_only, pattern \\d{6,17} fails."
+ },
+ {
+  "file": "portal.csv",
+  "row": 42,
+  "expect": "rejected",
+  "case": "name_121_chars",
+  "why": "Name is 121 characters, one over max_length 120."
+ },
+ {
+  "file": "portal.csv",
+  "row": 43,
+  "expect": "rejected",
+  "case": "tax_rate_above_max",
+  "why": "Sales Tax % 30 -> 0.30 > 0.25."
+ },
+ {
+  "file": "portal.csv",
+  "row": 44,
+  "expect": "rejected",
+  "case": "review_plus_reject_on_one_row",
+  "why": "Active with no e-mail (review) AND an ABA with a bad checksum (reject): reject wins."
+ },
+ {
+  "file": "portal.csv",
+  "row": 45,
+  "expect": "rejected",
+  "case": "name_empty",
+  "why": "Supplier Name is empty (required)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 46,
+  "expect": "review",
+  "case": "active_vendor_without_email",
+  "why": "Active vendor with no contact e-mail (review-severity rule)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 47,
+  "expect": "review",
+  "case": "bank_account_changed",
+  "why": "Bank account differs from the snapshot (change control)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 48,
+  "expect": "review",
+  "case": "routing_number_changed",
+  "why": "Routing number differs from the snapshot; account unchanged."
+ },
+ {
+  "file": "portal.csv",
+  "row": 49,
+  "expect": "review",
+  "case": "tax_id_removed",
+  "why": "UK vendor: tax id was 'GB 391 8820 47 002' in the snapshot and is now empty."
+ },
+ {
+  "file": "portal.csv",
+  "row": 50,
+  "expect": "review",
+  "case": "shared_bank_account_a",
+  "why": "Same bank account + routing as V1056 (different name, different EIN)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 51,
+  "expect": "review",
+  "case": "shared_bank_account_b",
+  "why": "Same bank account + routing as V1055; new vendor id."
+ },
+ {
+  "file": "portal.csv",
+  "row": 52,
+  "expect": "review",
+  "case": "renumbered_vendor_portal_side",
+  "why": "Same company exists in the ERP as V2040: same EIN and same bank. In the snapshot, so carried forward."
+ },
+ {
+  "file": "portal.csv",
+  "row": 53,
+  "expect": "review",
+  "case": "name_starts_with_at_sign",
+  "why": "Name starts with '@' and is not a number (formula-injection guard)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 54,
+  "expect": "review",
+  "case": "alias_is_formula_text",
+  "why": "Also Known As starts with '=' (a HYPERLINK formula as text)."
+ },
+ {
+  "file": "portal.csv",
+  "row": 55,
+  "expect": "review",
+  "case": "lookalike_name_original",
+  "why": "GB vendor without tax id; V1061 has the same name with a Cyrillic 'а' -> fuzzy match, tax ids not both filled."
+ },
+ {
+  "file": "portal.csv",
+  "row": 56,
+  "expect": "review",
+  "case": "lookalike_name_cyrillic_a",
+  "why": "Name uses Cyrillic U+0430 for the 'a' in Valley: looks identical to V1060, different bank, no tax id."
+ },
+ {
+  "file": "portal.csv",
+  "row": 57,
+  "expect": "review",
+  "case": "same_id_different_content_a",
+  "why": "V1062 appears twice with different e-mails: both rows held."
+ },
+ {
+  "file": "portal.csv",
+  "row": 58,
+  "expect": "review",
+  "case": "same_id_different_content_b",
+  "why": "Second V1062 row, e-mail differs from the first."
+ },
+ {
+  "file": "portal.csv",
+  "row": 59,
+  "expect": "review",
+  "case": "same_id_across_systems_conflict",
+  "why": "V1063 is also in erp.xlsx, identical except terms 45: same id, different content, both held."
+ },
+ {
+  "file": "portal.csv",
+  "row": 60,
+  "expect": "review",
+  "case": "bank_change_on_blocked_vendor",
+  "why": "Bank changed vs snapshot -> review. Held version is blocked, so the old active version is NOT carried forward."
+ },
+ {
+  "file": "portal.csv",
+  "row": 61,
+  "expect": "duplicate",
+  "case": "exact_duplicate_after_normalisation",
+  "why": "Second V1027 row: extra spaces in the name and status 'a' instead of 'A' normalise to identical content."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 2,
+  "expect": "accepted",
+  "case": "plain_erp_vendor_date_cell",
+  "why": "Clean ERP vendor; CREATED is a real Excel date cell; NET30."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 3,
+  "expect": "accepted",
+  "case": "german_gmbh_dotted_date_pipe_aliases",
+  "why": "Umlauts, CREATED '14.03.2023' (%d.%m.%Y), ALT_NAMES with '|' -> ';', VAT 0.19, EUR, no bank."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 4,
+  "expect": "accepted",
+  "case": "mexican_vendor_lowercase_ccy_net_space",
+  "why": "CCY 'mxn' upper-cases to MXN; PAY_TERMS 'NET 45' (NET\\s* is stripped)."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 5,
+  "expect": "accepted",
+  "case": "french_sarl_siret",
+  "why": "French SARL, SIRET with spaces kept as printed, VAT 0.2, EUR."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 6,
+  "expect": "accepted",
+  "case": "email_changed_not_controlled",
+  "why": "PAY_TERMS is a numeric cell 60; e-mail differs from the snapshot but only bank/routing/tax id are change-controlled."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 7,
+  "expect": "accepted",
+  "case": "status_hold_lowercase_newly_blocked",
+  "why": "STAT 'hold' maps case-insensitively to blocked. Was active in the snapshot; status is not change-controlled."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 8,
+  "expect": "accepted",
+  "case": "routing_text_cell_leading_zero",
+  "why": "ROUTING stored as a text cell (quote-prefixed in Excel) so the leading zero survives."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 9,
+  "expect": "accepted",
+  "case": "bank_account_numeric_cell",
+  "why": "BANK_ACCOUNT is a numeric cell (integer 482019375512, no leading zero to lose). UNSURE: see README."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 10,
+  "expect": "accepted",
+  "case": "canadian_transit_account_hyphens",
+  "why": "Canadian account '00123-004-1234567' (transit-institution-account) -> 15 digits; no ABA needed outside the US."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 11,
+  "expect": "accepted",
+  "case": "long_aliases_under_limit",
+  "why": "ALT_NAMES of 349 characters with pipes; under 400."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 12,
+  "expect": "accepted",
+  "case": "leap_day_iso_date",
+  "why": "CREATED '2024-02-29' is a real leap day."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 13,
+  "expect": "accepted",
+  "case": "erp_inactive_without_email",
+  "why": "INACTIVE vendor without e-mail: contact rule not triggered."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 14,
+  "expect": "accepted",
+  "case": "ein_numeric_cell",
+  "why": "TAX_ID is a numeric cell 451234567 (9 digits) -> ein gives 45-1234567. UNSURE: see README."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 15,
+  "expect": "accepted",
+  "case": "vat_zero_numeric",
+  "why": "VAT_RATE 0 (tax-exempt) is the minimum."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 16,
+  "expect": "accepted",
+  "case": "erp_first_of_exact_duplicate",
+  "why": "First of two V2016 rows with identical canonical content."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 17,
+  "expect": "accepted",
+  "case": "lowercase_country_empty_currency",
+  "why": "CTRY 'us' upper-cases to US; CCY empty is allowed (currency not required, no ERP default). 'Ltd' on a US vendor."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 18,
+  "expect": "accepted",
+  "case": "net0_terms",
+  "why": "PAY_TERMS 'NET0' -> 0."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 19,
+  "expect": "accepted",
+  "case": "net_space_60_date_cell",
+  "why": "PAY_TERMS 'NET 60', CREATED is a date cell."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 20,
+  "expect": "rejected",
+  "case": "status_is_excel_boolean",
+  "why": "STAT is an Excel boolean TRUE, not ACTIVE/INACTIVE/HOLD."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 21,
+  "expect": "rejected",
+  "case": "tax_id_formula_cell",
+  "why": "TAX_ID is a formula cell =TEXT(...) with no cached value: empty (US needs EIN) or '=...' text (fails pattern). Either way rejected."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 22,
+  "expect": "rejected",
+  "case": "erp_country_name_not_mapped",
+  "why": "CTRY 'Germany': the country-name map belongs to the portal only; the ERP has none."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 23,
+  "expect": "rejected",
+  "case": "erp_status_portal_code",
+  "why": "STAT 'A' is a portal code; the ERP map only knows ACTIVE/INACTIVE/HOLD. In the snapshot -> carried forward."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 24,
+  "expect": "rejected",
+  "case": "terms_net_45_eom",
+  "why": "PAY_TERMS 'NET 45 EOM' -> '45 EOM' after stripping: not an integer."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 25,
+  "expect": "rejected",
+  "case": "terms_mixed_case_net",
+  "why": "PAY_TERMS 'Net 30': strip pattern is '^NET\\s*' (upper-case). UNSURE: see README."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 26,
+  "expect": "rejected",
+  "case": "us_date_in_erp",
+  "why": "CREATED '03/15/2024' is not %Y-%m-%d or %d.%m.%Y."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 27,
+  "expect": "rejected",
+  "case": "impossible_dotted_date",
+  "why": "CREATED '31.04.2024': April has 30 days."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 28,
+  "expect": "rejected",
+  "case": "vat_as_whole_percent_in_erp",
+  "why": "VAT_RATE 19 (a percent): the ERP has no 0.01 scale, so 19 > 0.25."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 29,
+  "expect": "rejected",
+  "case": "routing_numeric_cell_lost_leading_zero",
+  "why": "ROUTING stored as a number 65508660: the leading zero of 065508660 is gone, 8 digits is not an ABA number."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 30,
+  "expect": "rejected",
+  "case": "currency_not_allowed",
+  "why": "CCY 'CHF' is not an allowed currency."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 31,
+  "expect": "rejected",
+  "case": "terms_above_max",
+  "why": "PAY_TERMS 'NET150' -> 150 > 120."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 32,
+  "expect": "rejected",
+  "case": "email_spelled_out",
+  "why": "EMAIL 'ap at kirkwood dot example' is not an e-mail address."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 33,
+  "expect": "rejected",
+  "case": "routing_without_account",
+  "why": "Canadian vendor with a routing number but no bank account."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 34,
+  "expect": "rejected",
+  "case": "vendor_id_missing_prefix",
+  "why": "VENDOR_NO '2035' lacks the V prefix: pattern V\\d{3,8} fails."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 35,
+  "expect": "rejected",
+  "case": "ein_too_short",
+  "why": "TAX_ID '29-38471' has 7 digits."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 36,
+  "expect": "rejected",
+  "case": "aliases_over_400",
+  "why": "ALT_NAMES is 450 characters, over max_length 400."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 37,
+  "expect": "review",
+  "case": "renumbered_vendor_erp_side",
+  "why": "ERP's number for the portal's V1057: same EIN and same bank account/routing (upper-case name)."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 38,
+  "expect": "review",
+  "case": "same_id_across_systems_conflict_erp",
+  "why": "ERP copy of V1063, identical to the portal row except terms NET45 vs 30: same id, different content."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 39,
+  "expect": "review",
+  "case": "name_starts_with_minus",
+  "why": "VENDOR_NAME starts with '-' and is not a number."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 40,
+  "expect": "review",
+  "case": "erp_bank_account_changed",
+  "why": "Bank account differs from the snapshot."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 41,
+  "expect": "review",
+  "case": "ein_transposed_digits",
+  "why": "EIN 38-4410257 vs 38-4410275 in the snapshot (two digits swapped)."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 42,
+  "expect": "review",
+  "case": "erp_shared_bank_a",
+  "why": "Same bank account + routing as V2041, different names and EINs."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 43,
+  "expect": "review",
+  "case": "erp_shared_bank_b",
+  "why": "Same bank account + routing as V2039."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 44,
+  "expect": "review",
+  "case": "erp_active_without_email",
+  "why": "ACTIVE vendor with no EMAIL."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 45,
+  "expect": "review",
+  "case": "erp_same_id_different_content_a",
+  "why": "V2043 twice with different VAT_RATE: both held."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 46,
+  "expect": "review",
+  "case": "erp_same_id_different_content_b",
+  "why": "Second V2043 row, VAT_RATE 0.05 vs 0.2."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 47,
+  "expect": "review",
+  "case": "bank_account_removed",
+  "why": "Canadian vendor: snapshot had account 004219874410392, now empty."
+ },
+ {
+  "file": "erp.xlsx",
+  "row": 48,
+  "expect": "duplicate",
+  "case": "erp_exact_duplicate_numeric_terms",
+  "why": "Second V2016 row: PAY_TERMS numeric 30 instead of 'NET30' and a trailing space in the name -> identical content."
+ },
+ {
+  "file": "po.csv",
+  "row": 2,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line; active vendor."
+ },
+ {
+  "file": "po.csv",
+  "row": 3,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 4,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 5,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 6,
+  "expect": "accepted",
+  "case": "decimal_qty_thousands_price",
+  "why": "Quantity 2.5 kg; price '1,234.50' uses a US thousands separator."
+ },
+ {
+  "file": "po.csv",
+  "row": 7,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 8,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 9,
+  "expect": "accepted",
+  "case": "lowercase_vendor_and_status_code",
+  "why": "Vendor 'v1003' upper-cases; status 'o' maps case-insensitively to open."
+ },
+ {
+  "file": "po.csv",
+  "row": 10,
+  "expect": "accepted",
+  "case": "lowercase_vendor_and_status_code",
+  "why": "Same PO, consistent."
+ },
+ {
+  "file": "po.csv",
+  "row": 11,
+  "expect": "accepted",
+  "case": "eur_lowercase_trailing_space",
+  "why": "CCY 'eur ' trims/upper-cases to EUR; German vendor."
+ },
+ {
+  "file": "po.csv",
+  "row": 12,
+  "expect": "accepted",
+  "case": "eur_lowercase_trailing_space",
+  "why": "Other line says 'EUR': after normalisation the PO is consistent."
+ },
+ {
+  "file": "po.csv",
+  "row": 13,
+  "expect": "accepted",
+  "case": "closed_po_currency_differs_from_vendor",
+  "why": "US vendor ordered in EUR on a closed PO: no rule ties PO currency to the vendor."
+ },
+ {
+  "file": "po.csv",
+  "row": 14,
+  "expect": "review",
+  "case": "vendor_blocked",
+  "why": "V1020 is blocked in the vendor reference."
+ },
+ {
+  "file": "po.csv",
+  "row": 15,
+  "expect": "review",
+  "case": "vendor_blocked",
+  "why": "V1020 is blocked."
+ },
+ {
+  "file": "po.csv",
+  "row": 16,
+  "expect": "review",
+  "case": "vendor_inactive",
+  "why": "V2012 is inactive."
+ },
+ {
+  "file": "po.csv",
+  "row": 17,
+  "expect": "accepted",
+  "case": "vendor_held_but_carried_forward",
+  "why": "V1052 is held for a bank change, but its previous accepted version is in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 18,
+  "expect": "accepted",
+  "case": "vendor_held_but_carried_forward",
+  "why": "Same."
+ },
+ {
+  "file": "po.csv",
+  "row": 19,
+  "expect": "accepted",
+  "case": "rejected_vendor_carried_forward_qty_thousands",
+  "why": "V1034's new row is rejected but its previous version stays in force; quantity '1,200' = 1200."
+ },
+ {
+  "file": "po.csv",
+  "row": 20,
+  "expect": "rejected",
+  "case": "vendor_held_not_in_force",
+  "why": "V1056 is new and held (shared bank): not in the reference."
+ },
+ {
+  "file": "po.csv",
+  "row": 21,
+  "expect": "rejected",
+  "case": "vendor_held_not_in_force",
+  "why": "Same."
+ },
+ {
+  "file": "po.csv",
+  "row": 22,
+  "expect": "rejected",
+  "case": "unknown_vendor",
+  "why": "V9999 does not exist."
+ },
+ {
+  "file": "po.csv",
+  "row": 23,
+  "expect": "rejected",
+  "case": "vendor_rejected_not_in_snapshot",
+  "why": "V1031 was rejected and has no previous version."
+ },
+ {
+  "file": "po.csv",
+  "row": 24,
+  "expect": "rejected",
+  "case": "po_vendor_inconsistent",
+  "why": "PO-5013 lines name two vendors (V1001, V1002)."
+ },
+ {
+  "file": "po.csv",
+  "row": 25,
+  "expect": "rejected",
+  "case": "po_vendor_inconsistent",
+  "why": "Same PO, different vendor."
+ },
+ {
+  "file": "po.csv",
+  "row": 26,
+  "expect": "rejected",
+  "case": "po_vendor_inconsistent",
+  "why": "Every line of the PO is rejected."
+ },
+ {
+  "file": "po.csv",
+  "row": 27,
+  "expect": "rejected",
+  "case": "po_currency_inconsistent",
+  "why": "PO-5014 mixes USD and CAD."
+ },
+ {
+  "file": "po.csv",
+  "row": 28,
+  "expect": "rejected",
+  "case": "po_currency_inconsistent",
+  "why": "Same."
+ },
+ {
+  "file": "po.csv",
+  "row": 29,
+  "expect": "rejected",
+  "case": "po_currency_inconsistent",
+  "why": "The CAD line."
+ },
+ {
+  "file": "po.csv",
+  "row": 30,
+  "expect": "rejected",
+  "case": "po_status_inconsistent",
+  "why": "PO-5015 is open on line 1 and closed on line 2."
+ },
+ {
+  "file": "po.csv",
+  "row": 31,
+  "expect": "rejected",
+  "case": "po_status_inconsistent",
+  "why": "Same."
+ },
+ {
+  "file": "po.csv",
+  "row": 32,
+  "expect": "accepted",
+  "case": "po_consistent_after_normalisation",
+  "why": "' V1003'/'v1003', 'usd'/'USD'/'Usd', 'O'/'open'/'o' all normalise to the same values."
+ },
+ {
+  "file": "po.csv",
+  "row": 33,
+  "expect": "accepted",
+  "case": "po_consistent_after_normalisation",
+  "why": "Same PO."
+ },
+ {
+  "file": "po.csv",
+  "row": 34,
+  "expect": "accepted",
+  "case": "po_consistent_after_normalisation",
+  "why": "Same PO."
+ },
+ {
+  "file": "po.csv",
+  "row": 35,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 36,
+  "expect": "rejected",
+  "case": "negative_price_credit_line",
+  "why": "unit_price -18.60 < min 0 (a credit entered as a negative price)."
+ },
+ {
+  "file": "po.csv",
+  "row": 37,
+  "expect": "rejected",
+  "case": "price_with_currency_symbol",
+  "why": "UNIT_PRICE '$1,250.00' has a currency symbol. UNSURE: see README."
+ },
+ {
+  "file": "po.csv",
+  "row": 38,
+  "expect": "accepted",
+  "case": "accented_description",
+  "why": "Spanish description with accents; clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 39,
+  "expect": "rejected",
+  "case": "quantity_zero",
+  "why": "QTY 0 < min 0.001."
+ },
+ {
+  "file": "po.csv",
+  "row": 40,
+  "expect": "rejected",
+  "case": "quantity_below_min",
+  "why": "QTY 0.0005 < 0.001."
+ },
+ {
+  "file": "po.csv",
+  "row": 41,
+  "expect": "accepted",
+  "case": "quantity_at_min",
+  "why": "QTY 0.001 is exactly the minimum."
+ },
+ {
+  "file": "po.csv",
+  "row": 42,
+  "expect": "accepted",
+  "case": "zero_price_sample",
+  "why": "Unit price 0 is allowed (min 0); item has no peers for the outlier check."
+ },
+ {
+  "file": "po.csv",
+  "row": 43,
+  "expect": "rejected",
+  "case": "receipt_flag_x",
+  "why": "GR_REQUIRED 'X' (SAP-style tick) is not a boolean. UNSURE: see README."
+ },
+ {
+  "file": "po.csv",
+  "row": 44,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 45,
+  "expect": "rejected",
+  "case": "line_zero",
+  "why": "LINE 0 < min 1."
+ },
+ {
+  "file": "po.csv",
+  "row": 46,
+  "expect": "accepted",
+  "case": "line_at_max",
+  "why": "LINE 999 is the maximum."
+ },
+ {
+  "file": "po.csv",
+  "row": 47,
+  "expect": "rejected",
+  "case": "line_above_max",
+  "why": "LINE 1000 > 999."
+ },
+ {
+  "file": "po.csv",
+  "row": 48,
+  "expect": "rejected",
+  "case": "po_number_missing_hyphen",
+  "why": "PO number 'PO5023' fails pattern PO-\\d{3,10}."
+ },
+ {
+  "file": "po.csv",
+  "row": 49,
+  "expect": "accepted",
+  "case": "lowercase_po_number",
+  "why": "'po-5024' upper-cases to PO-5024."
+ },
+ {
+  "file": "po.csv",
+  "row": 50,
+  "expect": "accepted",
+  "case": "lowercase_po_number",
+  "why": "Same PO."
+ },
+ {
+  "file": "po.csv",
+  "row": 51,
+  "expect": "rejected",
+  "case": "item_code_empty",
+  "why": "ITEM is empty (required)."
+ },
+ {
+  "file": "po.csv",
+  "row": 52,
+  "expect": "accepted",
+  "case": "plain_po_line",
+  "why": "Clean line."
+ },
+ {
+  "file": "po.csv",
+  "row": 53,
+  "expect": "rejected",
+  "case": "description_201_chars",
+  "why": "ITEM_DESC is 201 characters (max 200)."
+ },
+ {
+  "file": "po.csv",
+  "row": 54,
+  "expect": "accepted",
+  "case": "description_200_chars",
+  "why": "ITEM_DESC is exactly 200 characters."
+ },
+ {
+  "file": "po.csv",
+  "row": 55,
+  "expect": "accepted",
+  "case": "cancelled_po",
+  "why": "Status X -> cancelled is valid."
+ },
+ {
+  "file": "po.csv",
+  "row": 56,
+  "expect": "accepted",
+  "case": "cancelled_po",
+  "why": "Same."
+ },
+ {
+  "file": "po.csv",
+  "row": 57,
+  "expect": "accepted",
+  "case": "vendor_held_but_carried_forward",
+  "why": "V1053 held for routing change; previous version in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 58,
+  "expect": "review",
+  "case": "price_outlier_low",
+  "why": "GLV-L at 0.25 vs ~24-26 on four other lines (~100x below): decimal slip."
+ },
+ {
+  "file": "po.csv",
+  "row": 59,
+  "expect": "review",
+  "case": "description_starts_with_minus",
+  "why": "ITEM_DESC starts with '-' and is not a number."
+ },
+ {
+  "file": "po.csv",
+  "row": 60,
+  "expect": "review",
+  "case": "price_outlier_high",
+  "why": "BLT-M8 at 1045.00 vs 9.90-11.20 on five other lines (~100x): decimal slip."
+ },
+ {
+  "file": "po.csv",
+  "row": 61,
+  "expect": "rejected",
+  "case": "currency_code_with_symbol",
+  "why": "CCY 'US$' is not an allowed currency."
+ },
+ {
+  "file": "po.csv",
+  "row": 62,
+  "expect": "rejected",
+  "case": "item_code_scientific_notation",
+  "why": "ITEM '1.23E+05': a spreadsheet turned item 123000 into scientific notation. UNSURE: see README."
+ },
+ {
+  "file": "po.csv",
+  "row": 63,
+  "expect": "accepted",
+  "case": "outlier_but_group_too_small",
+  "why": "HRD-HAT has only 3 lines in total: below min_group 4, so no outlier check. V1057 carried forward."
+ },
+ {
+  "file": "po.csv",
+  "row": 64,
+  "expect": "review",
+  "case": "vendor_blocked_hold",
+  "why": "V2006 is blocked (ERP HOLD) in the reference."
+ },
+ {
+  "file": "po.csv",
+  "row": 65,
+  "expect": "rejected",
+  "case": "renumbered_vendor_not_in_force",
+  "why": "V2040 is the ERP duplicate of V1057, held and new: not in the reference."
+ },
+ {
+  "file": "po.csv",
+  "row": 66,
+  "expect": "accepted",
+  "case": "vendor_conflict_carried_forward",
+  "why": "V1062 held (two different rows) but its snapshot version is in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 67,
+  "expect": "review",
+  "case": "vendor_inactive_closed_po",
+  "why": "V1010 is inactive; the rule does not exempt closed POs."
+ },
+ {
+  "file": "po.csv",
+  "row": 68,
+  "expect": "accepted",
+  "case": "gbp_vendor_carried_forward",
+  "why": "V2043 held (same-id conflict); previous version in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 69,
+  "expect": "accepted",
+  "case": "gbp_vendor_carried_forward",
+  "why": "Decimal quantity."
+ },
+ {
+  "file": "po.csv",
+  "row": 70,
+  "expect": "accepted",
+  "case": "lookalike_original_carried_forward",
+  "why": "V1060 held (look-alike pair) but its previous version is in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 71,
+  "expect": "rejected",
+  "case": "lookalike_vendor_not_in_force",
+  "why": "V1061 (Cyrillic look-alike) is new and held: not in the reference."
+ },
+ {
+  "file": "po.csv",
+  "row": 72,
+  "expect": "accepted",
+  "case": "price_high_but_below_factor",
+  "why": "TNR-BK 1650 vs 270-295 on four other lines: ~5.8x, below factor 8."
+ },
+ {
+  "file": "po.csv",
+  "row": 73,
+  "expect": "accepted",
+  "case": "decimal_hours_carried_vendor",
+  "why": "Decimal quantity of hours; V1054 held but carried forward."
+ },
+ {
+  "file": "po.csv",
+  "row": 74,
+  "expect": "accepted",
+  "case": "vendor_tax_change_carried_forward",
+  "why": "V2038 held for EIN change; previous version in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 75,
+  "expect": "accepted",
+  "case": "vendor_tax_change_carried_forward",
+  "why": "Same."
+ },
+ {
+  "file": "po.csv",
+  "row": 76,
+  "expect": "accepted",
+  "case": "erp_rejected_vendor_carried_forward",
+  "why": "V2024 rejected today (STAT 'A') but its snapshot version is in force."
+ },
+ {
+  "file": "po.csv",
+  "row": 77,
+  "expect": "rejected",
+  "case": "blocked_held_vendor_not_carried",
+  "why": "V1065's held version is blocked, so its old version is not carried forward; not in the reference. UNSURE: see README."
+ },
+ {
+  "file": "po.csv",
+  "row": 78,
+  "expect": "accepted",
+  "case": "closed_po_thousands_qty",
+  "why": "Closed PO; quantity '1,000' = 1000."
+ }
+]

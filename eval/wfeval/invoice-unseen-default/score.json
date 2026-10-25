@@ -1,0 +1,3737 @@
+{
+  "tool": "workflow-eval-harness",
+  "version": "0.1.0",
+  "generated_at": "2026-10-24T20:12:00.679Z",
+  "inputs": {
+    "predictions": "eval/wfeval/invoice-unseen-default/pred.jsonl",
+    "key": "eval/wfeval/invoice-unseen-default/key.jsonl",
+    "mode": "strict",
+    "wrong_when": "gold_route"
+  },
+  "routing": {
+    "total": 81,
+    "by_class": {
+      "auto": 3,
+      "review": 78,
+      "block": 0,
+      "exclude": 0
+    },
+    "by_route": {
+      "blocked": 78,
+      "eligible_for_approval": 3
+    },
+    "straight_through": {
+      "n": 3,
+      "d": 81,
+      "pct": 3.7,
+      "low_pct": 1.3,
+      "high_pct": 10.3
+    },
+    "silent_errors": {
+      "rate": {
+        "n": 0,
+        "d": 3,
+        "pct": 0,
+        "low_pct": 0,
+        "high_pct": 56.2
+      },
+      "one_record_moves_pct": 33.3,
+      "by_severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      },
+      "by_type": {},
+      "records": []
+    },
+    "safeguard_failures": {
+      "records": 0,
+      "by_type": {},
+      "detail": []
+    },
+    "silent_omissions": {
+      "basis": "gold_route",
+      "rate": {
+        "n": 0,
+        "d": 81,
+        "pct": 0,
+        "low_pct": 0,
+        "high_pct": 4.5
+      },
+      "by_type": {},
+      "records": []
+    },
+    "review_queue": {
+      "precision": {
+        "n": 37,
+        "d": 78,
+        "pct": 47.4,
+        "low_pct": 36.7,
+        "high_pct": 58.4
+      },
+      "wasted": [
+        "inv-002-clean",
+        "inv-004-clean",
+        "inv-007-vendor_alias",
+        "inv-009-clean",
+        "inv-010-price_within_tol",
+        "inv-013-clean",
+        "inv-014-clean",
+        "inv-018-clean",
+        "inv-020-clean",
+        "inv-021-clean",
+        "inv-022-clean",
+        "inv-025-clean",
+        "inv-028-service_2way",
+        "inv-029-clean",
+        "inv-033-clean",
+        "inv-035-multipage",
+        "inv-036-vendor_alias",
+        "inv-039-clean",
+        "inv-041-multipage",
+        "inv-043-sequential",
+        "inv-045-sequential",
+        "inv-050-clean",
+        "inv-052-price_within_tol",
+        "inv-054-service_2way",
+        "inv-055-clean",
+        "inv-056-service_2way",
+        "inv-057-sequential",
+        "inv-059-clean",
+        "inv-062-clean",
+        "inv-068-price_within_tol",
+        "inv-069-service_2way",
+        "inv-072-clean",
+        "inv-073-clean",
+        "inv-075-clean",
+        "inv-078-clean",
+        "inv-080-clean",
+        "inv-044-sequential",
+        "inv-046-sequential",
+        "inv-058-sequential",
+        "inv-060-similar_distinct",
+        "inv-076-similar_distinct"
+      ]
+    },
+    "block": {
+      "precision": {
+        "n": 0,
+        "d": 0,
+        "pct": null,
+        "low_pct": null,
+        "high_pct": null
+      },
+      "wrongly_blocked": []
+    },
+    "not_measured": [
+      {
+        "what": "SP-INVALID",
+        "why": "no allowed_values list"
+      },
+      {
+        "what": "SG-GATE",
+        "why": "no thresholds.auto_publish"
+      },
+      {
+        "what": "SG-FLOOR",
+        "why": "no thresholds.floor"
+      }
+    ]
+  },
+  "quality": {
+    "population": 81,
+    "left_out": {
+      "model_failed": [],
+      "suppressed_duplicates": []
+    },
+    "outputs": {
+      "codes": {
+        "type": "set",
+        "tp": 10,
+        "fp": 342,
+        "fn": 27,
+        "precision": {
+          "n": 10,
+          "d": 352,
+          "pct": 2.8,
+          "low_pct": 1.6,
+          "high_pct": 5.1
+        },
+        "recall": {
+          "n": 10,
+          "d": 37,
+          "pct": 27,
+          "low_pct": 15.4,
+          "high_pct": 43
+        },
+        "f1": 0.051,
+        "exact_match": {
+          "n": 3,
+          "d": 81,
+          "pct": 3.7,
+          "low_pct": 1.3,
+          "high_pct": 10.3
+        },
+        "by_value": {
+          "BANK_DETAILS_CHANGED": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "pct": 100,
+              "low_pct": 43.8,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "BANK_DETAILS_UNVERIFIED": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 1
+          },
+          "CURRENCY_UNKNOWN": {
+            "tp": 0,
+            "fp": 78,
+            "fn": 0,
+            "precision": {
+              "n": 0,
+              "d": 78,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 4.7
+            },
+            "recall": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "f1": 0
+          },
+          "EXACT_DUPLICATE": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 3,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "pct": 100,
+              "low_pct": 20.7,
+              "high_pct": 100
+            },
+            "recall": {
+              "n": 1,
+              "d": 4,
+              "pct": 25,
+              "low_pct": 4.6,
+              "high_pct": 69.9
+            },
+            "f1": 0.4
+          },
+          "LINE_EXTENSION_MISMATCH": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 3,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 56.2
+            },
+            "f1": 0
+          },
+          "MISSING_FIELD": {
+            "tp": 0,
+            "fp": 78,
+            "fn": 0,
+            "precision": {
+              "n": 0,
+              "d": 78,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 4.7
+            },
+            "recall": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "f1": 0
+          },
+          "MISSING_RECEIPT": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 3,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 56.2
+            },
+            "f1": 0
+          },
+          "NO_LINE_ITEMS": {
+            "tp": 0,
+            "fp": 78,
+            "fn": 0,
+            "precision": {
+              "n": 0,
+              "d": 78,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 4.7
+            },
+            "recall": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "f1": 0
+          },
+          "NO_PO_REFERENCE": {
+            "tp": 2,
+            "fp": 76,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 78,
+              "pct": 2.6,
+              "low_pct": 0.7,
+              "high_pct": 8.9
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 0.05
+          },
+          "POSSIBLE_DUPLICATE": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 2,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 65.8
+            },
+            "f1": 0
+          },
+          "PO_NOT_FOUND": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 2,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 65.8
+            },
+            "f1": 0
+          },
+          "PO_NOT_OPEN": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 2,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 65.8
+            },
+            "f1": 0
+          },
+          "PRICE_OVER_PO": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 3,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 56.2
+            },
+            "f1": 0
+          },
+          "QTY_EXCEEDS_RECEIVED": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 3,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 56.2
+            },
+            "f1": 0
+          },
+          "TAX_MISMATCH": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 2,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 65.8
+            },
+            "f1": 0
+          },
+          "TAX_UNVERIFIED": {
+            "tp": 2,
+            "fp": 32,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 34,
+              "pct": 5.9,
+              "low_pct": 1.6,
+              "high_pct": 19.1
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "pct": 100,
+              "low_pct": 34.2,
+              "high_pct": 100
+            },
+            "f1": 0.111
+          },
+          "TOTAL_MISMATCH": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 2,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 65.8
+            },
+            "f1": 0
+          },
+          "VENDOR_MISMATCH": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": {
+              "n": 0,
+              "d": 0,
+              "pct": null,
+              "low_pct": null,
+              "high_pct": null
+            },
+            "recall": {
+              "n": 0,
+              "d": 2,
+              "pct": 0,
+              "low_pct": 0,
+              "high_pct": 65.8
+            },
+            "f1": 0
+          }
+        }
+      }
+    },
+    "overall": {
+      "tp": 10,
+      "fp": 342,
+      "fn": 27,
+      "precision": {
+        "n": 10,
+        "d": 352,
+        "pct": 2.8,
+        "low_pct": 1.6,
+        "high_pct": 5.1
+      },
+      "recall": {
+        "n": 10,
+        "d": 37,
+        "pct": 27,
+        "low_pct": 15.4,
+        "high_pct": 43
+      },
+      "f1": 0.051
+    }
+  },
+  "traps": {
+    "groups": [
+      {
+        "trap": "bank_changed",
+        "records": [
+          "inv-015-bank_changed",
+          "inv-038-bank_changed",
+          "inv-048-bank_changed"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "bank_unverified",
+        "records": [
+          "inv-047-bank_unverified",
+          "inv-066-bank_unverified"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "clean",
+        "records": [
+          "inv-002-clean",
+          "inv-004-clean",
+          "inv-009-clean",
+          "inv-013-clean",
+          "inv-014-clean",
+          "inv-018-clean",
+          "inv-020-clean",
+          "inv-021-clean",
+          "inv-022-clean",
+          "inv-025-clean",
+          "inv-029-clean",
+          "inv-033-clean",
+          "inv-039-clean",
+          "inv-050-clean",
+          "inv-055-clean",
+          "inv-059-clean",
+          "inv-062-clean",
+          "inv-072-clean",
+          "inv-073-clean",
+          "inv-075-clean",
+          "inv-078-clean",
+          "inv-080-clean"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 22,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 14.9
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-002-clean",
+          "inv-004-clean",
+          "inv-009-clean",
+          "inv-013-clean",
+          "inv-014-clean",
+          "inv-018-clean",
+          "inv-020-clean",
+          "inv-021-clean",
+          "inv-022-clean",
+          "inv-025-clean",
+          "inv-029-clean",
+          "inv-033-clean",
+          "inv-039-clean",
+          "inv-050-clean",
+          "inv-055-clean",
+          "inv-059-clean",
+          "inv-062-clean",
+          "inv-072-clean",
+          "inv-073-clean",
+          "inv-075-clean",
+          "inv-078-clean",
+          "inv-080-clean"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "closed_po",
+        "records": [
+          "inv-031-closed_po",
+          "inv-067-closed_po"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "exact_dup",
+        "records": [
+          "inv-030-exact_dup",
+          "inv-040-exact_dup",
+          "inv-081-exact_dup"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "json_clean",
+        "records": [
+          "inv-026-json_clean",
+          "inv-053-json_clean",
+          "inv-071-json_clean"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "line_math",
+        "records": [
+          "inv-006-line_math",
+          "inv-019-line_math",
+          "inv-034-line_math"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "missing_receipt",
+        "records": [
+          "inv-011-missing_receipt",
+          "inv-051-missing_receipt",
+          "inv-079-missing_receipt"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "multipage",
+        "records": [
+          "inv-035-multipage",
+          "inv-041-multipage"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 2,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 65.8
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-035-multipage",
+          "inv-041-multipage"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "no_po_ref",
+        "records": [
+          "inv-023-no_po_ref",
+          "inv-063-no_po_ref"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "over_receipt",
+        "records": [
+          "inv-024-over_receipt",
+          "inv-037-over_receipt",
+          "inv-077-over_receipt"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "po_not_found",
+        "records": [
+          "inv-061-po_not_found",
+          "inv-065-po_not_found"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "possible_dup",
+        "records": [
+          "inv-005-possible_dup",
+          "inv-074-possible_dup"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "price_over",
+        "records": [
+          "inv-008-price_over",
+          "inv-032-price_over",
+          "inv-049-price_over"
+        ],
+        "routed_correctly": {
+          "n": 3,
+          "d": 3,
+          "pct": 100,
+          "low_pct": 43.8,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "price_within_tol",
+        "records": [
+          "inv-010-price_within_tol",
+          "inv-052-price_within_tol",
+          "inv-068-price_within_tol"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 3,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 56.2
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-010-price_within_tol",
+          "inv-052-price_within_tol",
+          "inv-068-price_within_tol"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "same_file_again",
+        "records": [
+          "inv-002-clean-again"
+        ],
+        "routed_correctly": {
+          "n": 1,
+          "d": 1,
+          "pct": 100,
+          "low_pct": 20.7,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "sequential",
+        "records": [
+          "inv-043-sequential",
+          "inv-045-sequential",
+          "inv-057-sequential",
+          "inv-044-sequential",
+          "inv-046-sequential",
+          "inv-058-sequential"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 6,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 39
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-043-sequential",
+          "inv-045-sequential",
+          "inv-057-sequential",
+          "inv-044-sequential",
+          "inv-046-sequential",
+          "inv-058-sequential"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "service_2way",
+        "records": [
+          "inv-028-service_2way",
+          "inv-054-service_2way",
+          "inv-056-service_2way",
+          "inv-069-service_2way"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 4,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 49
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-028-service_2way",
+          "inv-054-service_2way",
+          "inv-056-service_2way",
+          "inv-069-service_2way"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "similar_distinct",
+        "records": [
+          "inv-060-similar_distinct",
+          "inv-076-similar_distinct"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 2,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 65.8
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-060-similar_distinct",
+          "inv-076-similar_distinct"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "tax_unverified",
+        "records": [
+          "inv-016-tax_unverified",
+          "inv-017-tax_unverified"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "tax_wrong",
+        "records": [
+          "inv-001-tax_wrong",
+          "inv-064-tax_wrong"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "total_math",
+        "records": [
+          "inv-027-total_math",
+          "inv-070-total_math"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "vendor_alias",
+        "records": [
+          "inv-007-vendor_alias",
+          "inv-036-vendor_alias"
+        ],
+        "routed_correctly": {
+          "n": 0,
+          "d": 2,
+          "pct": 0,
+          "low_pct": 0,
+          "high_pct": 65.8
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [
+          "inv-007-vendor_alias",
+          "inv-036-vendor_alias"
+        ],
+        "safeguard_failures": []
+      },
+      {
+        "trap": "vendor_mismatch",
+        "records": [
+          "inv-012-vendor_mismatch",
+          "inv-042-vendor_mismatch"
+        ],
+        "routed_correctly": {
+          "n": 2,
+          "d": 2,
+          "pct": 100,
+          "low_pct": 34.2,
+          "high_pct": 100
+        },
+        "silent_errors": [],
+        "silent_omissions": [],
+        "wasted_reviews": [],
+        "safeguard_failures": []
+      }
+    ],
+    "records_with_several_traps": 0,
+    "coverage": {
+      "min_per_trap": null,
+      "below": []
+    }
+  },
+  "calibration": {
+    "buckets": "distinct",
+    "overall": {
+      "n": 0,
+      "correct": 0,
+      "accuracy": {
+        "n": 0,
+        "d": 0,
+        "pct": null,
+        "low_pct": null,
+        "high_pct": null
+      },
+      "ece": null,
+      "buckets": []
+    },
+    "outputs": {},
+    "thresholds": [],
+    "left_out": {
+      "no_confidence": 352,
+      "inherited": 0,
+      "declined": 0
+    }
+  },
+  "records": [
+    {
+      "id": "inv-001-tax_wrong",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_wrong"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "TAX_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-002-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-004-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-006-line_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "line_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "LINE_EXTENSION_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-007-vendor_alias",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "vendor_alias"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-008-price_over",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "price_over"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PRICE_OVER_PO"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-009-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-010-price_within_tol",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "price_within_tol"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-011-missing_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "missing_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "MISSING_RECEIPT"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-012-vendor_mismatch",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "vendor_mismatch"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "VENDOR_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-013-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-014-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-015-bank_changed",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_changed"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-016-tax_unverified",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-017-tax_unverified",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-018-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-019-line_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "line_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "LINE_EXTENSION_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-020-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-021-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-022-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-023-no_po_ref",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "no_po_ref"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-024-over_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "over_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-025-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-026-json_clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "json_clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-027-total_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "total_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "TOTAL_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-028-service_2way",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-029-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-031-closed_po",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "closed_po"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PO_NOT_OPEN"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-032-price_over",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "price_over"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PRICE_OVER_PO"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-033-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-034-line_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "line_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "LINE_EXTENSION_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-035-multipage",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "multipage"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-036-vendor_alias",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "vendor_alias"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-037-over_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "over_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-038-bank_changed",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_changed"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-039-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-041-multipage",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "multipage"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-042-vendor_mismatch",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "vendor_mismatch"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "VENDOR_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-043-sequential",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-045-sequential",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-047-bank_unverified",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-048-bank_changed",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_changed"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-049-price_over",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "price_over"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PRICE_OVER_PO"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-050-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-051-missing_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "missing_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "MISSING_RECEIPT"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-052-price_within_tol",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "price_within_tol"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-053-json_clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "json_clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-054-service_2way",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-055-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-056-service_2way",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-057-sequential",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-059-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-061-po_not_found",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "po_not_found"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PO_NOT_FOUND"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-062-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-063-no_po_ref",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "no_po_ref"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-064-tax_wrong",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "tax_wrong"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "TAX_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-065-po_not_found",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "po_not_found"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PO_NOT_FOUND"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-066-bank_unverified",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "bank_unverified"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-067-closed_po",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "closed_po"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "PO_NOT_OPEN"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-068-price_within_tol",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "price_within_tol"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-069-service_2way",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "service_2way"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-070-total_math",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "total_math"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "TOTAL_MISMATCH"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-071-json_clean",
+      "route": "eligible_for_approval",
+      "route_class": "auto",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "json_clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {},
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-072-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-073-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-075-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-077-over_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "over_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "QTY_EXCEEDS_RECEIVED"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-078-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-079-missing_receipt",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "missing_receipt"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "MISSING_RECEIPT"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-080-clean",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "clean"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-002-clean-again",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "same_file_again"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-005-possible_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "possible_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "POSSIBLE_DUPLICATE"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-030-exact_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "exact_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "EXACT_DUPLICATE"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-040-exact_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "exact_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "EXACT_DUPLICATE"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-044-sequential",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-046-sequential",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-058-sequential",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "sequential"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-060-similar_distinct",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "similar_distinct"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-074-possible_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "possible_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "POSSIBLE_DUPLICATE"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-076-similar_distinct",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "eligible_for_approval",
+      "gold_class": "auto",
+      "traps": [
+        "similar_distinct"
+      ],
+      "needs_human": false,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": true,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE",
+            "TAX_UNVERIFIED"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {},
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    },
+    {
+      "id": "inv-081-exact_dup",
+      "route": "blocked",
+      "route_class": "review",
+      "gold_route": "needs_person",
+      "gold_class": "review",
+      "traps": [
+        "exact_dup"
+      ],
+      "needs_human": true,
+      "silent": null,
+      "omission": null,
+      "safeguards": [],
+      "wasted_review": false,
+      "differences": {
+        "wrong": {
+          "codes": [
+            "CURRENCY_UNKNOWN",
+            "MISSING_FIELD",
+            "NO_LINE_ITEMS",
+            "NO_PO_REFERENCE"
+          ]
+        },
+        "missing_rejected": {},
+        "missing": {
+          "codes": [
+            "EXACT_DUPLICATE"
+          ]
+        },
+        "invalid": {},
+        "near_miss": {},
+        "declined": {},
+        "should_decline": {}
+      }
+    }
+  ],
+  "problems": []
+}

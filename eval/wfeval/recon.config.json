@@ -1,0 +1,17 @@
+{
+  "id_field": "id",
+  "outputs": {
+    "partners": { "type": "set" }
+  },
+  "routing": {
+    "field": "route",
+    "gold_field": "expected_route",
+    "map": {
+      "auto_matched": "auto",
+      "review": "review",
+      "nothing": "exclude"
+    }
+  },
+  "wrong_when": "either",
+  "trap_field": "trap"
+}

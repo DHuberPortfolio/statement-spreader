@@ -23,6 +23,7 @@ What is compared, and how signs work:
 from __future__ import annotations
 
 import re
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import date
 from decimal import Decimal, InvalidOperation
@@ -373,7 +374,90 @@ def find_statements(facts: list[Fact]) -> dict[str, StatementTruth]:
     return out
 
 
-def build_key(document: str, data: bytes, profile: Profile) -> tuple[AnswerKey, dict[str, StatementTruth]]:
+def calc_descendants(xml: bytes) -> dict[str, set[str]]:
+    """From a filing's calculation linkbase: each concept ("us-gaap:Revenues") -> every concept that adds up into
+    it, directly or through intermediate totals. Works on a _cal.xml file or a schema that embeds the links."""
+    from collections import defaultdict
+
+    link, xl = "http://www.xbrl.org/2003/linkbase", "http://www.w3.org/1999/xlink"
+    root = etree.fromstring(xml, parser=etree.XMLParser(resolve_entities=False, no_network=True, huge_tree=True))
+    children: dict[str, set[str]] = defaultdict(set)
+    for cl in root.iter(f"{{{link}}}calculationLink"):
+        loc: dict[str, str] = {}
+        for el in cl.iter(f"{{{link}}}loc"):
+            frag = (el.get(f"{{{xl}}}href") or "").split("#")[-1]
+            prefix, _, local = frag.partition("_")
+            if local:
+                loc[el.get(f"{{{xl}}}label") or ""] = f"{prefix}:{local}"
+        for arc in cl.iter(f"{{{link}}}calculationArc"):
+            parent, child = loc.get(arc.get(f"{{{xl}}}from") or ""), loc.get(arc.get(f"{{{xl}}}to") or "")
+            if parent and child and parent != child:
+                children[parent].add(child)
+    out: dict[str, set[str]] = {}
+    for top in list(children):
+        seen: set[str] = set()
+        stack = list(children[top])
+        while stack:
+            c = stack.pop()
+            if c not in seen:
+                seen.add(c)
+                stack.extend(children.get(c, ()))
+        out[top] = seen
+    return out
+
+
+def drop_parts_of_totals(fs: list[Fact], calc: dict[str, set[str]], line: str | None = None,
+                         line_of: Callable[[str], str | None] | None = None) -> list[Fact]:
+    """Facts on one template line and period where the filing's own calculation links say one concept adds up into
+    another: keep one of them, so the key does not count the same money twice.
+
+    Usually the total is the line (total revenues = net sales + other income, where other income is no template
+    line). But a total that also adds a part belonging to ANOTHER template line is a subtotal across lines (cash
+    and short-term investments, when short-term investments is its own line): then the part is this line's value."""
+    names = {f"{f.prefix}:{f.concept}" for f in fs}
+    if len(names) < 2:
+        return fs
+    parts = {n for n in names for m in names if m != n and n in calc.get(m, set())}
+    if not parts or parts == names:
+        return fs
+    totals = names - parts
+    if line is not None and line_of is not None and line not in ROLL_FORWARD:
+        # What the total adds besides the kept part (and the part's own pieces): if any of that is another
+        # template line, the total spans lines and the part is this line's value.
+        inside = parts | {d for pt in parts for d in calc.get(pt, set())}
+        across = {t for t in totals
+                  if any((ln := line_of(d)) is not None and ln != line for d in calc.get(t, set()) - inside)}
+        if across and across == totals:
+            return [f for f in fs if f"{f.prefix}:{f.concept}" not in across]
+    return [f for f in fs if f"{f.prefix}:{f.concept}" not in parts]
+
+
+# The cash-flow statement reconciles total cash, restricted cash included: its beginning and ending balances
+# are the total even when cash and equivalents alone is another line.
+ROLL_FORWARD = {"cash_begin", "cash_end"}
+
+
+# Concepts that stand in for a line only when the filing does not tag the line's own concept for that period.
+# Net income available to common shareholders is net income less preferred dividends: the same number without
+# preferred stock, a different one with it (Oracle, Boeing). Its calculation link makes it look like the total.
+FALLBACK = {"NetIncomeLossAvailableToCommonStockholdersBasic"}
+
+
+def drop_fallbacks(fs: list[Fact]) -> list[Fact]:
+    main = [f for f in fs if not (f.prefix == "us-gaap" and f.concept in FALLBACK)]
+    return main or fs
+
+
+def _template_line(name: str) -> str | None:
+    prefix, _, local = name.partition(":")
+    return CROSSWALK.get(local) if prefix == "us-gaap" else None
+
+
+def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | None = None
+              ) -> tuple[AnswerKey, dict[str, StatementTruth]]:
+    """`calc_xml`: the filing's calculation linkbase. Without it, distinct facts on one line are added unless one is
+    visibly the sum of the others, which double counts a total and a part tagged under two mapped concepts."""
+    calc = calc_descendants(calc_xml) if calc_xml else {}
     facts, _ = read_facts(data)
     statements = find_statements(facts)
     key = AnswerKey(document=document, source="sec", description="Answer key from the filing's inline XBRL tags")
@@ -436,6 +520,12 @@ def build_key(document: str, data: bytes, profile: Profile) -> tuple[AnswerKey, 
                     fixed.setdefault((line, pk), []).extend(fs)
             line_values = fixed
         for (line, pk), fs in line_values.items():
+            if calc:
+                fs = drop_fallbacks(fs)
+                # The cross-line case (one caption = two template lines, e.g. cash and short-term investments) is a
+                # balance-sheet one. On flow statements the template's lines are the printed totals (net income
+                # includes the minority share even though that share is its own line), so the total is kept.
+                fs = drop_parts_of_totals(fs, calc, line if stmt == "balance_sheet" else None, _template_line)
             ldef = profile.lines[line]
             vals = [(f.value if ldef.kind == "cost" else f.printed) for f in fs]
             uniq = list(dict.fromkeys(vals))
@@ -486,7 +576,7 @@ def _equivalents(key: AnswerKey) -> None:
              ("total_equity", "total_equity_parent", "nci_equity")]
     for a, b, nci in pairs:
         periods = {v.period for v in key.spread if v.line in (a, b)}
-        for p in periods:
+        for p in sorted(periods):  # a set's order changes from run to run; the key file must not
             if (nci, p) in have:
                 continue
             if (a, p) in have and (b, p) not in have:

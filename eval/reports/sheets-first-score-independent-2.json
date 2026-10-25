@@ -1,0 +1,664 @@
+{
+ "engine": "sheets",
+ "sets": {
+  "independent-2": {
+   "books": {
+    "cash_13wk.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 18,
+     "seconds": 0.021
+    },
+    "revenue_bridge.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 47,
+     "seconds": 0.012
+    },
+    "lease_ifrs16.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 326,
+     "seconds": 0.03
+    },
+    "bank_rec_sep.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 19,
+     "seconds": 0.011
+    },
+    "vat_return_q3.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 4,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 2,
+     "baseline_claims": 114,
+     "seconds": 0.033
+    },
+    "inventory_rollforward.xlsx": {
+     "faults": 4,
+     "found": 4,
+     "kind_agrees": 4,
+     "claims": 5,
+     "right_claims": 5,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 2,
+     "baseline_claims": 24,
+     "seconds": 0.024
+    },
+    "board_pack_q.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 7,
+     "right_claims": 4,
+     "missed": [],
+     "false_alarms": [
+      {
+       "cell": "kpis!E6",
+       "kinds": [
+        "INCONSISTENT_FORMULA"
+       ],
+       "ids": [
+        "INCONSISTENT_FORMULA:KPIs!E6"
+       ]
+      },
+      {
+       "cell": "kpis!E9",
+       "kinds": [
+        "INCONSISTENT_FORMULA"
+       ],
+       "ids": [
+        "INCONSISTENT_FORMULA:KPIs!E9"
+       ]
+      },
+      {
+       "cell": "kpis!F9",
+       "kinds": [
+        "INCONSISTENT_FORMULA"
+       ],
+       "ids": [
+        "INCONSISTENT_FORMULA:KPIs!F9"
+       ]
+      }
+     ],
+     "legit_flagged": [
+      {
+       "cell": "kpis!E6",
+       "kinds": [
+        "INCONSISTENT_FORMULA"
+       ],
+       "ids": [
+        "INCONSISTENT_FORMULA:KPIs!E6"
+       ],
+       "legit": "annualisation constants *4 for quarters, *2 for halves, none for FY"
+      },
+      {
+       "cell": "kpis!E9",
+       "kinds": [
+        "INCONSISTENT_FORMULA"
+       ],
+       "ids": [
+        "INCONSISTENT_FORMULA:KPIs!E9"
+       ],
+       "legit": "customer roll-forward that skips the half-year column (F9 continues from D9)"
+      },
+      {
+       "cell": "kpis!F9",
+       "kinds": [
+        "INCONSISTENT_FORMULA"
+       ],
+       "ids": [
+        "INCONSISTENT_FORMULA:KPIs!F9"
+       ],
+       "legit": "customer roll-forward that skips the half-year column (F9 continues from D9)"
+      }
+     ],
+     "anomalies": 21,
+     "baseline_claims": 130,
+     "seconds": 0.022
+    },
+    "scenario_model.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 3,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 1,
+     "baseline_claims": 11,
+     "seconds": 0.019
+    },
+    "unit_economics.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 4,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [
+      {
+       "cell": "cohorts!B17",
+       "kinds": [
+        "SUM_OMITS_ROW"
+       ],
+       "ids": [
+        "SUM_OMITS_ROW:Cohorts!B17"
+       ]
+      }
+     ],
+     "legit_flagged": [
+      {
+       "cell": "cohorts!B17",
+       "kinds": [
+        "SUM_OMITS_ROW"
+       ],
+       "ids": [
+        "SUM_OMITS_ROW:Cohorts!B17"
+       ],
+       "legit": "column totals over a triangle with blank cells"
+      }
+     ],
+     "anomalies": 1,
+     "baseline_claims": 14,
+     "seconds": 0.024
+    },
+    "bva_variance.xlsx": {
+     "faults": 3,
+     "found": 3,
+     "kind_agrees": 3,
+     "claims": 3,
+     "right_claims": 3,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 87,
+     "seconds": 0.02
+    },
+    "annual_forecast_3yr.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 4,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [
+      {
+       "cell": "forecast!B15",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!B15"
+       ]
+      },
+      {
+       "cell": "forecast!B17",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!B17"
+       ]
+      },
+      {
+       "cell": "forecast!C15",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!C15"
+       ]
+      },
+      {
+       "cell": "forecast!C17",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!C17"
+       ]
+      }
+     ],
+     "legit_flagged": [
+      {
+       "cell": "forecast!B15",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!B15"
+       ],
+       "legit": "item row sitting between two subtotal rows (EBIT above, PBT below); typed actuals then formulas"
+      },
+      {
+       "cell": "forecast!B17",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!B17"
+       ],
+       "legit": "item row sitting between two subtotal rows (PBT above, net income below); typed actuals then formulas"
+      },
+      {
+       "cell": "forecast!C15",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!C15"
+       ],
+       "legit": "item row sitting between two subtotal rows (EBIT above, PBT below); typed actuals then formulas"
+      },
+      {
+       "cell": "forecast!C17",
+       "kinds": [
+        "HARDCODED_OVERRIDE"
+       ],
+       "ids": [
+        "HARDCODED_OVERRIDE:Forecast!C17"
+       ],
+       "legit": "item row sitting between two subtotal rows (PBT above, net income below); typed actuals then formulas"
+      }
+     ],
+     "anomalies": 3,
+     "baseline_claims": 10,
+     "seconds": 0.011
+    },
+    "rolling_fcst_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 6,
+     "seconds": 0.009
+    },
+    "debt_schedule_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 2,
+     "seconds": 0.01
+    },
+    "capex_plan_v1.xlsx": {
+     "faults": 0,
+     "found": 0,
+     "kind_agrees": 0,
+     "claims": 0,
+     "right_claims": 0,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 0,
+     "seconds": 0.008
+    },
+    "rolling_fcst_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 8,
+     "seconds": 0.011
+    },
+    "debt_schedule_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 1,
+     "seconds": 0.008
+    },
+    "capex_plan_v2.xlsx": {
+     "faults": 1,
+     "found": 1,
+     "kind_agrees": 1,
+     "claims": 1,
+     "right_claims": 1,
+     "missed": [],
+     "false_alarms": [],
+     "legit_flagged": [],
+     "anomalies": 0,
+     "baseline_claims": 1,
+     "seconds": 0.01
+    }
+   },
+   "pairs": {
+    "rolling_fcst_v1.xlsx -> rolling_fcst_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 3,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Opex": {
+        "rows_added": 2,
+        "rows_removed": 1,
+        "columns_added": 1,
+        "columns_removed": 0
+       },
+       "Summary": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    },
+    "debt_schedule_v1.xlsx -> debt_schedule_v2.xlsx": {
+     "changes": 3,
+     "found": 3,
+     "reported": 3,
+     "right": 3,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Debt": {
+        "rows_added": 0,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 3
+     }
+    },
+    "capex_plan_v1.xlsx -> capex_plan_v2.xlsx": {
+     "changes": 2,
+     "found": 2,
+     "reported": 2,
+     "right": 2,
+     "missed": [],
+     "false_alarms": [],
+     "not_material_reported": 0,
+     "summary": {
+      "typed_values_changed": 1,
+      "sheets": {
+       "Inputs": {
+        "rows_added": 4,
+        "rows_removed": 0,
+        "columns_added": 0,
+        "columns_removed": 0
+       },
+       "Capex": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 1,
+        "columns_removed": 0
+       },
+       "Depreciation": {
+        "rows_added": 1,
+        "rows_removed": 0,
+        "columns_added": 1,
+        "columns_removed": 0
+       }
+      },
+      "names_changed": [],
+      "material": 2
+     }
+    }
+   },
+   "counts": {
+    "faults": 39,
+    "found": 39,
+    "kind": 39,
+    "claims": 50,
+    "right": 42,
+    "baseline": 818,
+    "legit": 206,
+    "legit_flagged": 8,
+    "anomalies": 31,
+    "seconds": 0.28,
+    "pair_changes": 7,
+    "pair_found": 7,
+    "pair_reported": 7,
+    "pair_right": 7
+   },
+   "rates": {
+    "precision": {
+     "n": 42,
+     "d": 50,
+     "rate": 0.84,
+     "low": 0.7148551903823401,
+     "high": 0.9166267863791231
+    },
+    "recall": {
+     "n": 39,
+     "d": 39,
+     "rate": 1.0,
+     "low": 0.9103301463997611,
+     "high": 1.0
+    },
+    "kind_agreement": {
+     "n": 39,
+     "d": 39,
+     "rate": 1.0,
+     "low": 0.9103301463997611,
+     "high": 1.0
+    },
+    "change_precision": {
+     "n": 7,
+     "d": 7,
+     "rate": 1.0,
+     "low": 0.6456611570247934,
+     "high": 1.0
+    },
+    "change_recall": {
+     "n": 7,
+     "d": 7,
+     "rate": 1.0,
+     "low": 0.6456611570247934,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "BROKEN_NAME": {
+     "found": 2,
+     "planted": 2
+    },
+    "CIRCULAR_REFERENCE": {
+     "found": 2,
+     "planted": 2
+    },
+    "DOUBLE_COUNT": {
+     "found": 4,
+     "planted": 4
+    },
+    "EXTERNAL_LINK": {
+     "found": 3,
+     "planted": 3
+    },
+    "HARDCODED_OVERRIDE": {
+     "found": 6,
+     "planted": 6
+    },
+    "HARDCODED_PLUG": {
+     "found": 4,
+     "planted": 4
+    },
+    "INCONSISTENT_FORMULA": {
+     "found": 6,
+     "planted": 6
+    },
+    "MISSING_SHEET": {
+     "found": 2,
+     "planted": 2
+    },
+    "REF_ERROR": {
+     "found": 2,
+     "planted": 2
+    },
+    "SUM_OMITS_ROW": {
+     "found": 3,
+     "planted": 3
+    },
+    "TEXT_NUMBER_IN_SUM": {
+     "found": 3,
+     "planted": 3
+    },
+    "UNKNOWN_NAME": {
+     "found": 2,
+     "planted": 2
+    }
+   }
+  }
+ },
+ "hostile": [
+  {
+   "file": "empty.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "empty.xlsx is not an Excel workbook (.xlsx or .xlsm)"
+  },
+  {
+   "file": "old-format.xls",
+   "expected": "refused",
+   "result": "refused",
+   "message": "old-format.xls is an old-format (.xls) or password-protected workbook. Save it as .xlsx without a password and scan that copy."
+  },
+  {
+   "file": "not-a-workbook.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "not-a-workbook.xlsx is damaged: it is not a readable .xlsx package"
+  },
+  {
+   "file": "a-text-file.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "a-text-file.xlsx is not an Excel workbook (.xlsx or .xlsm)"
+  },
+  {
+   "file": "zip-not-excel.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "zip-not-excel.xlsx is a zip file but not an Excel workbook"
+  },
+  {
+   "file": "binary.xlsb",
+   "expected": "refused",
+   "result": "refused",
+   "message": "binary.xlsb is a binary workbook (.xlsb). Save it as .xlsx and scan that copy."
+  },
+  {
+   "file": "entities.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "entities.xlsx contains XML with a DOCTYPE or entity declaration (xl/worksheets/sheet1.xml); Excel never writes these, so the file was refused"
+  },
+  {
+   "file": "expands-to-450MB.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "expands-to-450MB.xlsx expands to 450 MB, over the 400 MB limit"
+  },
+  {
+   "file": "truncated.xlsx",
+   "expected": "refused",
+   "result": "refused",
+   "message": "truncated.xlsx is damaged: it is not a readable .xlsx package"
+  },
+  {
+   "file": "formula-only.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "0 finding(s)"
+  },
+  {
+   "file": "odd-formulas.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "4 finding(s)"
+  },
+  {
+   "file": "empty-workbook.xlsx",
+   "expected": "scanned",
+   "result": "scanned",
+   "message": "0 finding(s)"
+  }
+ ],
+ "stable": true
+}

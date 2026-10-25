@@ -181,7 +181,13 @@ def harmonize_periods(tables: list[StatementTable], preface: str = "") -> None:
 
     An income statement headed "2025 | 2024" next to a balance sheet headed "September 27, 2025"
     ends on September 27, not on an assumed December 31. Changes are recorded on the period.
+
+    The balance sheet's printed dates are the anchor: a full-year column whose end date falls within
+    75 days of a printed balance-sheet date in the same year ends on that balance-sheet date. If the
+    column's own date was an assumption, that resolves it; if it looked printed (often a filing or
+    audit date read from nearby text), the change itself is flagged for a reviewer.
     """
+    _redate_to_balance_sheet(tables)
     exact: dict[str, str] = {}
     for t in tables:
         for p in t.periods:
@@ -238,6 +244,81 @@ def harmonize_periods(tables: list[StatementTable], preface: str = "") -> None:
         if rename:
             for r in t.rows:
                 r.values = {rename.get(k, k): v for k, v in r.values.items()}
+    _follow_fiscal_pattern(tables)
+
+
+def _relabel(t: StatementTable, changes: dict[str, tuple[str, str, bool]]) -> None:
+    """changes: old key -> (new end date, note, still_assumed)."""
+    rename: dict[str, str] = {}
+    new_periods = []
+    for p in t.periods:
+        if p.key not in changes:
+            new_periods.append(p)
+            continue
+        end, note, still = changes[p.key]
+        key = f"{end}/{'I' if p.months is None else f'{p.months}M'}"
+        if key in {q.key for q in t.periods} or key in rename.values():
+            new_periods.append(p)  # never merge two columns into one period
+            continue
+        kept = [a for a in p.assumed if "Only the year" not in a and "assumed to end" not in a]
+        if still:
+            kept.append(note)
+        rename[p.key] = key
+        new_periods.append(p.model_copy(update={"key": key, "end": end, "assumed": kept,
+                                                "notes": p.notes + ([] if still else [note])}))
+    t.periods = new_periods
+    if rename:
+        for r in t.rows:
+            r.values = {rename.get(k, k): v for k, v in r.values.items()}
+
+
+def _redate_to_balance_sheet(tables: list[StatementTable]) -> None:
+    from datetime import date as _date
+
+    anchors = {p.end[:4]: p.end for t in tables if t.statement is StatementType.BALANCE
+               for p in t.periods if p.months is None and not p.assumed}
+    if not anchors:
+        return
+    for t in tables:
+        if t.statement is StatementType.BALANCE:
+            continue
+        changes: dict[str, tuple[str, str, bool]] = {}
+        for p in t.periods:
+            if p.months != 12:
+                continue
+            for y in (p.end[:4], str(int(p.end[:4]) - 1)):
+                bs = anchors.get(y)
+                if bs and bs != p.end and abs((_date.fromisoformat(p.end) - _date.fromisoformat(bs)).days) <= 75:
+                    if p.assumed:  # the column's own date was a guess: the printed balance-sheet date replaces it
+                        changes[p.key] = (bs, f"The column's end date ({p.end}) was not printed on it; the balance sheet's "
+                                              f"printed date {bs} is used.", False)
+                    else:  # read as if printed, yet off the year-end: likely a nearby date (filing, audit); flag it
+                        changes[p.key] = (bs, f"The column was dated {p.end}, which is not the balance sheet's year-end "
+                                              f"({bs}); {bs} is used and should be confirmed.", True)
+                    break
+        if changes:
+            _relabel(t, changes)
+
+
+def _follow_fiscal_pattern(tables: list[StatementTable]) -> None:
+    """Year-only columns still dated December 31 by assumption, in a document whose printed fiscal year-ends fall on
+    another day, take that day (52/53-week years can differ by a few days, so the date stays an assumption)."""
+    printed = sorted({p.end for t in tables for p in t.periods
+                      if not any("Only the year" in a or "assumed to end" in a for a in p.assumed)
+                      and not p.end.endswith("-12-31")}, reverse=True)
+    if not printed or any(p.end.endswith("-12-31") and not p.assumed for t in tables for p in t.periods):
+        return
+    if printed[0][5:7] == "12" and int(printed[0][8:10]) >= 24:
+        return  # a late-December 52/53-week year: December 31 is as likely as the latest year's day
+    month_day = printed[0][4:]
+    for t in tables:
+        changes = {p.key: (f"{p.end[:4]}{month_day}", f"The column prints only {p.end[:4]}; its end date is assumed to fall on "
+                                                     f"the document's fiscal year-end day ({printed[0][5:]}); 52/53-week years "
+                                                     "can differ by a few days.", True)
+                   for p in t.periods if any("Only the year" in a or "assumed to end" in a for a in p.assumed)
+                   and p.end.endswith("-12-31")}
+        if changes:
+            _relabel(t, changes)
 
 
 def _unit(lab: str, section: str, period_texts: list[str]) -> ValueUnit:

@@ -1,0 +1,4392 @@
+{
+ "seed": 21,
+ "mix": {
+  "clean": 14,
+  "service_2way": 4,
+  "sequential": 3,
+  "over_receipt": 3,
+  "missing_receipt": 3,
+  "price_over": 3,
+  "price_within_tol": 3,
+  "po_not_found": 2,
+  "no_po_ref": 2,
+  "closed_po": 2,
+  "vendor_mismatch": 2,
+  "line_math": 3,
+  "total_math": 2,
+  "tax_wrong": 2,
+  "tax_unverified": 2,
+  "exact_dup": 3,
+  "same_file_again": 1,
+  "possible_dup": 2,
+  "similar_distinct": 2,
+  "bank_changed": 3,
+  "bank_unverified": 2,
+  "vendor_alias": 2,
+  "multipage": 2,
+  "json_clean": 3
+ },
+ "inbox": [
+  {
+   "id": "inv-001-clean",
+   "kind": "clean",
+   "layout": "C",
+   "vendor_id": "V106",
+   "vendor_name": "Litware Labs",
+   "tax_id": "49-5123259",
+   "invoice_number": "INV-007001",
+   "invoice_date": "2026-03-03",
+   "due_date": "2026-04-02",
+   "terms": "Net 30",
+   "po_number": "PO-4501",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LIT-121",
+     "description": "Safety gloves, size L",
+     "quantity": "4",
+     "unit_price": "25.54",
+     "amount": "102.16",
+     "po_line": 1
+    },
+    {
+     "item_code": "LIT-100",
+     "description": "Printer toner, black",
+     "quantity": "24",
+     "unit_price": "282.46",
+     "amount": "6779.04",
+     "po_line": 2
+    },
+    {
+     "item_code": "LIT-114",
+     "description": "Bolt set M8",
+     "quantity": "40",
+     "unit_price": "106.28",
+     "amount": "4251.20",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "11132.40",
+   "tax": "667.94",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "11800.34",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4501"
+   },
+   "file": "invoices/inv-001-clean.pdf"
+  },
+  {
+   "id": "inv-002-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007002",
+   "invoice_date": "2026-03-04",
+   "due_date": "2026-04-03",
+   "terms": "Net 30",
+   "po_number": "PO-4502",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-121",
+     "description": "Hard hat, white",
+     "quantity": "4",
+     "unit_price": "164.41",
+     "amount": "657.64",
+     "po_line": 1
+    },
+    {
+     "item_code": "LUC-107",
+     "description": "Bolt set M8",
+     "quantity": "8",
+     "unit_price": "24.28",
+     "amount": "194.24",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "851.88",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "851.88",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4502"
+   },
+   "file": "invoices/inv-002-clean.pdf"
+  },
+  {
+   "id": "inv-003-price_over",
+   "kind": "price_over",
+   "layout": "C",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007003",
+   "invoice_date": "2026-03-16",
+   "due_date": "2026-04-15",
+   "terms": "Net 30",
+   "po_number": "PO-4503",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-114",
+     "description": "Bolt set M8",
+     "quantity": "20",
+     "unit_price": "131.55",
+     "amount": "2631.00",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "2631.00",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2631.00",
+   "bank_account": "560269953287",
+   "routing_number": "095228249",
+   "expect": {
+    "codes": [
+     "PRICE_OVER_PO"
+    ],
+    "touchless": false,
+    "po": "PO-4503"
+   },
+   "file": "invoices/inv-003-price_over.pdf"
+  },
+  {
+   "id": "inv-004-over_receipt",
+   "kind": "over_receipt",
+   "layout": "C",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007004",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-22",
+   "terms": "Net 30",
+   "po_number": "PO-4504",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-121",
+     "description": "Pallet wrap film",
+     "quantity": "24",
+     "unit_price": "225.12",
+     "amount": "5402.88",
+     "po_line": 1
+    },
+    {
+     "item_code": "TAI-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "8",
+     "unit_price": "255.78",
+     "amount": "2046.24",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "7449.12",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "7449.12",
+   "bank_account": "182613120944",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [
+     "QTY_EXCEEDS_RECEIVED"
+    ],
+    "touchless": false,
+    "po": "PO-4504"
+   },
+   "file": "invoices/inv-004-over_receipt.pdf"
+  },
+  {
+   "id": "inv-005-line_math",
+   "kind": "line_math",
+   "layout": "C",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007005",
+   "invoice_date": "2026-03-22",
+   "due_date": "2026-04-21",
+   "terms": "Net 30",
+   "po_number": "PO-4505",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-121",
+     "description": "Hard hat, white",
+     "quantity": "12",
+     "unit_price": "164.41",
+     "amount": "1982.92",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1982.92",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1982.92",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "LINE_EXTENSION_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4505"
+   },
+   "file": "invoices/inv-005-line_math.pdf"
+  },
+  {
+   "id": "inv-006-price_over",
+   "kind": "price_over",
+   "layout": "C",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007006",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4506",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-114",
+     "description": "Hydraulic hose 2m",
+     "quantity": "24",
+     "unit_price": "298.57",
+     "amount": "7165.68",
+     "po_line": 1
+    },
+    {
+     "item_code": "LUC-100",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "20",
+     "unit_price": "206.79",
+     "amount": "4135.80",
+     "po_line": 2
+    },
+    {
+     "item_code": "LUC-107",
+     "description": "Bolt set M8",
+     "quantity": "10",
+     "unit_price": "26.22",
+     "amount": "262.20",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "11563.68",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "11563.68",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "PRICE_OVER_PO"
+    ],
+    "touchless": false,
+    "po": "PO-4506"
+   },
+   "file": "invoices/inv-006-price_over.pdf"
+  },
+  {
+   "id": "inv-007-json_clean",
+   "kind": "json_clean",
+   "layout": "json",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": null,
+   "invoice_number": "INV-007007",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4507",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Bolt set M8",
+     "quantity": "8",
+     "unit_price": "121.81",
+     "amount": "974.48",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "974.48",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "974.48",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4507"
+   },
+   "file": "invoices/inv-007-json_clean.json"
+  },
+  {
+   "id": "inv-008-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": "18-3431389",
+   "invoice_number": "INV-007008",
+   "invoice_date": "2026-03-16",
+   "due_date": "2026-04-15",
+   "terms": "Net 30",
+   "po_number": "PO-4508",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "CON-107",
+     "description": "Extension cord 15m",
+     "quantity": "20",
+     "unit_price": "291.06",
+     "amount": "5821.20",
+     "po_line": 1
+    },
+    {
+     "item_code": "CON-100",
+     "description": "Pallet wrap film",
+     "quantity": "24",
+     "unit_price": "268.08",
+     "amount": "6433.92",
+     "po_line": 2
+    },
+    {
+     "item_code": "CON-121",
+     "description": "Cable ties, pack of 100",
+     "quantity": "4",
+     "unit_price": "217.06",
+     "amount": "868.24",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "13123.36",
+   "tax": "1082.68",
+   "tax_rate_printed": "0.0825",
+   "freight": null,
+   "total": "14206.04",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4508"
+   },
+   "file": "invoices/inv-008-clean.pdf"
+  },
+  {
+   "id": "inv-010-clean",
+   "kind": "clean",
+   "layout": "C",
+   "vendor_id": "V104",
+   "vendor_name": "Adventure Works",
+   "tax_id": "56-8571920",
+   "invoice_number": "INV-007010",
+   "invoice_date": "2026-03-11",
+   "due_date": "2026-04-10",
+   "terms": "Net 30",
+   "po_number": "PO-4510",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ADV-100",
+     "description": "Label printer rolls",
+     "quantity": "12",
+     "unit_price": "175.63",
+     "amount": "2107.56",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "2107.56",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2107.56",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4510"
+   },
+   "file": "invoices/inv-010-clean.pdf"
+  },
+  {
+   "id": "inv-012-po_not_found",
+   "kind": "po_not_found",
+   "layout": "B",
+   "vendor_id": "V111",
+   "vendor_name": "Alpine Ski House",
+   "tax_id": null,
+   "invoice_number": "INV-007012",
+   "invoice_date": "2026-03-17",
+   "due_date": "2026-04-16",
+   "terms": "Net 30",
+   "po_number": "PO-96581",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "LED panel 600x600",
+     "quantity": "5",
+     "unit_price": "267.31",
+     "amount": "1336.55",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Torque wrench 1/2in",
+     "quantity": "20",
+     "unit_price": "92.27",
+     "amount": "1845.40",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "Floor cleaner 5L",
+     "quantity": "24",
+     "unit_price": "170.05",
+     "amount": "4081.20",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "7263.15",
+   "tax": "599.21",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "7862.36",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "PO_NOT_FOUND"
+    ],
+    "touchless": false,
+    "po": null
+   },
+   "file": "invoices/inv-012-po_not_found.pdf"
+  },
+  {
+   "id": "inv-013-line_math",
+   "kind": "line_math",
+   "layout": "A",
+   "vendor_id": "V104",
+   "vendor_name": "Adventure Works",
+   "tax_id": "56-8571920",
+   "invoice_number": "INV-007013",
+   "invoice_date": "2026-03-04",
+   "due_date": "2026-04-03",
+   "terms": "Net 30",
+   "po_number": "PO-4512",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ADV-107",
+     "description": "Printer toner, black",
+     "quantity": "10",
+     "unit_price": "19.08",
+     "amount": "200.80",
+     "po_line": 1
+    },
+    {
+     "item_code": "ADV-114",
+     "description": "Pallet wrap film",
+     "quantity": "4",
+     "unit_price": "62.62",
+     "amount": "250.48",
+     "po_line": 2
+    },
+    {
+     "item_code": "ADV-121",
+     "description": "Cable ties, pack of 100",
+     "quantity": "8",
+     "unit_price": "105.66",
+     "amount": "845.28",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "1296.56",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1296.56",
+   "bank_account": "419586805782",
+   "routing_number": "077302016",
+   "expect": {
+    "codes": [
+     "LINE_EXTENSION_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4512"
+   },
+   "file": "invoices/inv-013-line_math.pdf"
+  },
+  {
+   "id": "inv-014-bank_unverified",
+   "kind": "bank_unverified",
+   "layout": "C",
+   "vendor_id": "V109",
+   "vendor_name": "Fourth Coffee",
+   "tax_id": "53-3451397",
+   "invoice_number": "INV-007014",
+   "invoice_date": "2026-03-17",
+   "due_date": "2026-04-16",
+   "terms": "Net 30",
+   "po_number": "PO-4513",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "FOU-100",
+     "description": "Hydraulic hose 2m",
+     "quantity": "40",
+     "unit_price": "33.87",
+     "amount": "1354.80",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1354.80",
+   "tax": "111.77",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1466.57",
+   "bank_account": "145440835264",
+   "routing_number": "063439030",
+   "expect": {
+    "codes": [
+     "BANK_DETAILS_UNVERIFIED"
+    ],
+    "touchless": false,
+    "po": "PO-4513"
+   },
+   "file": "invoices/inv-014-bank_unverified.pdf"
+  },
+  {
+   "id": "inv-015-clean",
+   "kind": "clean",
+   "layout": "B",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": null,
+   "invoice_number": "INV-007015",
+   "invoice_date": "2026-03-09",
+   "due_date": "2026-04-08",
+   "terms": "Net 30",
+   "po_number": "PO-4514",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "4",
+     "unit_price": "255.78",
+     "amount": "1023.12",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1023.12",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1023.12",
+   "bank_account": "182613120944",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4514"
+   },
+   "file": "invoices/inv-015-clean.pdf"
+  },
+  {
+   "id": "inv-016-missing_receipt",
+   "kind": "missing_receipt",
+   "layout": "A",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007016",
+   "invoice_date": "2026-03-12",
+   "due_date": "2026-04-11",
+   "terms": "Net 30",
+   "po_number": "PO-4515",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-107",
+     "description": "Pallet wrap film",
+     "quantity": "20",
+     "unit_price": "337.34",
+     "amount": "6746.80",
+     "po_line": 1
+    },
+    {
+     "item_code": "NOR-100",
+     "description": "Torque wrench 1/2in",
+     "quantity": "40",
+     "unit_price": "312.56",
+     "amount": "12502.40",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "19249.20",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "19249.20",
+   "bank_account": "560269953287",
+   "routing_number": "095228249",
+   "expect": {
+    "codes": [
+     "MISSING_RECEIPT"
+    ],
+    "touchless": false,
+    "po": "PO-4515"
+   },
+   "file": "invoices/inv-016-missing_receipt.pdf"
+  },
+  {
+   "id": "inv-017-vendor_alias",
+   "kind": "vendor_alias",
+   "layout": "C",
+   "vendor_id": "V107",
+   "vendor_name": "PROSEWARE INC LLC",
+   "tax_id": null,
+   "invoice_number": "INV-007017",
+   "invoice_date": "2026-03-09",
+   "due_date": "2026-04-08",
+   "terms": "Net 30",
+   "po_number": "PO-4516",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-107",
+     "description": "Copy paper, case",
+     "quantity": "2",
+     "unit_price": "162.63",
+     "amount": "325.26",
+     "po_line": 1
+    },
+    {
+     "item_code": "PRO-100",
+     "description": "Floor cleaner 5L",
+     "quantity": "4",
+     "unit_price": "163.51",
+     "amount": "654.04",
+     "po_line": 2
+    },
+    {
+     "item_code": "PRO-121",
+     "description": "Hard hat, white",
+     "quantity": "4",
+     "unit_price": "369.69",
+     "amount": "1478.76",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "2458.06",
+   "tax": "172.06",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2630.12",
+   "bank_account": "915878128343",
+   "routing_number": "056521133",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4516"
+   },
+   "file": "invoices/inv-017-vendor_alias.pdf"
+  },
+  {
+   "id": "inv-018-tax_unverified",
+   "kind": "tax_unverified",
+   "layout": "B",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": null,
+   "invoice_number": "INV-007018",
+   "invoice_date": "2026-03-12",
+   "due_date": "2026-04-11",
+   "terms": "Net 30",
+   "po_number": "PO-4517",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Hard hat, white",
+     "quantity": "5",
+     "unit_price": "164.41",
+     "amount": "822.05",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Bolt set M8",
+     "quantity": "10",
+     "unit_price": "24.28",
+     "amount": "242.80",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "Hydraulic hose 2m",
+     "quantity": "5",
+     "unit_price": "276.45",
+     "amount": "1382.25",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "2447.10",
+   "tax": "122.36",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2569.46",
+   "bank_account": "550135257686",
+   "routing_number": "048652127",
+   "expect": {
+    "codes": [
+     "TAX_UNVERIFIED"
+    ],
+    "touchless": false,
+    "po": "PO-4517"
+   },
+   "file": "invoices/inv-018-tax_unverified.pdf"
+  },
+  {
+   "id": "inv-019-closed_po",
+   "kind": "closed_po",
+   "layout": "C",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007019",
+   "invoice_date": "2026-03-06",
+   "due_date": "2026-04-05",
+   "terms": "Net 30",
+   "po_number": "PO-4518",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-100",
+     "description": "Torque wrench 1/2in",
+     "quantity": "5",
+     "unit_price": "312.56",
+     "amount": "1562.80",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1562.80",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1562.80",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "PO_NOT_OPEN"
+    ],
+    "touchless": false,
+    "po": "PO-4518"
+   },
+   "file": "invoices/inv-019-closed_po.pdf"
+  },
+  {
+   "id": "inv-020-over_receipt",
+   "kind": "over_receipt",
+   "layout": "A",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007020",
+   "invoice_date": "2026-03-21",
+   "due_date": "2026-04-20",
+   "terms": "Net 30",
+   "po_number": "PO-4519",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-114",
+     "description": "Copy paper, case",
+     "quantity": "2",
+     "unit_price": "133.27",
+     "amount": "266.54",
+     "po_line": 1
+    },
+    {
+     "item_code": "TAI-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "5",
+     "unit_price": "255.78",
+     "amount": "1278.90",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "1545.44",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1545.44",
+   "bank_account": "182613120944",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [
+     "QTY_EXCEEDS_RECEIVED"
+    ],
+    "touchless": false,
+    "po": "PO-4519"
+   },
+   "file": "invoices/inv-020-over_receipt.pdf"
+  },
+  {
+   "id": "inv-021-vendor_mismatch",
+   "kind": "vendor_mismatch",
+   "layout": "B",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": null,
+   "invoice_number": "INV-007021",
+   "invoice_date": "2026-03-20",
+   "due_date": "2026-04-19",
+   "terms": "Net 30",
+   "po_number": "PO-4520",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Floor cleaner 5L",
+     "quantity": "4",
+     "unit_price": "163.51",
+     "amount": "654.04",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "654.04",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "654.04",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "VENDOR_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4520"
+   },
+   "file": "invoices/inv-021-vendor_mismatch.pdf"
+  },
+  {
+   "id": "inv-022-bank_changed",
+   "kind": "bank_changed",
+   "layout": "A",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007022",
+   "invoice_date": "2026-03-14",
+   "due_date": "2026-04-13",
+   "terms": "Net 30",
+   "po_number": "PO-4521",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "4",
+     "unit_price": "255.78",
+     "amount": "1023.12",
+     "po_line": 1
+    },
+    {
+     "item_code": "TAI-114",
+     "description": "Copy paper, case",
+     "quantity": "12",
+     "unit_price": "133.27",
+     "amount": "1599.24",
+     "po_line": 2
+    },
+    {
+     "item_code": "TAI-121",
+     "description": "Pallet wrap film",
+     "quantity": "8",
+     "unit_price": "225.12",
+     "amount": "1800.96",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "4423.32",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "4423.32",
+   "bank_account": "650673713577",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [
+     "BANK_DETAILS_CHANGED"
+    ],
+    "touchless": false,
+    "po": "PO-4521"
+   },
+   "file": "invoices/inv-022-bank_changed.pdf"
+  },
+  {
+   "id": "inv-023-service_2way",
+   "kind": "service_2way",
+   "layout": "B",
+   "vendor_id": "V102",
+   "vendor_name": "Fabrikam Tools",
+   "tax_id": null,
+   "invoice_number": "INV-007023",
+   "invoice_date": "2026-03-18",
+   "due_date": "2026-04-17",
+   "terms": "Net 30",
+   "po_number": "PO-4522",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Equipment maintenance visit",
+     "quantity": "12",
+     "unit_price": "95.00",
+     "amount": "1140.00",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1140.00",
+   "tax": "68.40",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1208.40",
+   "bank_account": "267603471531",
+   "routing_number": "012623891",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4522"
+   },
+   "file": "invoices/inv-023-service_2way.pdf"
+  },
+  {
+   "id": "inv-024-service_2way",
+   "kind": "service_2way",
+   "layout": "C",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007024",
+   "invoice_date": "2026-03-04",
+   "due_date": "2026-04-03",
+   "terms": "Net 30",
+   "po_number": "PO-4523",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-SVC",
+     "description": "Equipment maintenance visit",
+     "quantity": "10",
+     "unit_price": "175.00",
+     "amount": "1750.00",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1750.00",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1750.00",
+   "bank_account": "550135257686",
+   "routing_number": "048652127",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4523"
+   },
+   "file": "invoices/inv-024-service_2way.pdf"
+  },
+  {
+   "id": "inv-025-bank_changed",
+   "kind": "bank_changed",
+   "layout": "C",
+   "vendor_id": "V111",
+   "vendor_name": "Alpine Ski House",
+   "tax_id": "26-1394275",
+   "invoice_number": "INV-007025",
+   "invoice_date": "2026-03-11",
+   "due_date": "2026-04-10",
+   "terms": "Net 30",
+   "po_number": "PO-4524",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ALP-100",
+     "description": "Hard hat, white",
+     "quantity": "8",
+     "unit_price": "277.47",
+     "amount": "2219.76",
+     "po_line": 1
+    },
+    {
+     "item_code": "ALP-107",
+     "description": "Floor cleaner 5L",
+     "quantity": "24",
+     "unit_price": "170.05",
+     "amount": "4081.20",
+     "po_line": 2
+    },
+    {
+     "item_code": "ALP-114",
+     "description": "LED panel 600x600",
+     "quantity": "12",
+     "unit_price": "267.31",
+     "amount": "3207.72",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "9508.68",
+   "tax": "784.47",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "10293.15",
+   "bank_account": "290490039028",
+   "routing_number": "045489989",
+   "expect": {
+    "codes": [
+     "BANK_DETAILS_CHANGED"
+    ],
+    "touchless": false,
+    "po": "PO-4524"
+   },
+   "file": "invoices/inv-025-bank_changed.pdf"
+  },
+  {
+   "id": "inv-026-total_math",
+   "kind": "total_math",
+   "layout": "C",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": "85-1239289",
+   "invoice_number": "INV-007026",
+   "invoice_date": "2026-03-12",
+   "due_date": "2026-04-11",
+   "terms": "Net 30",
+   "po_number": "PO-4525",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-107",
+     "description": "Copy paper, case",
+     "quantity": "8",
+     "unit_price": "162.63",
+     "amount": "1301.04",
+     "po_line": 1
+    },
+    {
+     "item_code": "PRO-100",
+     "description": "Floor cleaner 5L",
+     "quantity": "8",
+     "unit_price": "163.51",
+     "amount": "1308.08",
+     "po_line": 2
+    },
+    {
+     "item_code": "PRO-121",
+     "description": "Hard hat, white",
+     "quantity": "40",
+     "unit_price": "369.69",
+     "amount": "14787.60",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "17396.72",
+   "tax": "1217.77",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "18714.49",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "TOTAL_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4525"
+   },
+   "file": "invoices/inv-026-total_math.pdf"
+  },
+  {
+   "id": "inv-027-price_within_tol",
+   "kind": "price_within_tol",
+   "layout": "C",
+   "vendor_id": "V106",
+   "vendor_name": "Litware Labs",
+   "tax_id": "49-5123259",
+   "invoice_number": "INV-007027",
+   "invoice_date": "2026-03-08",
+   "due_date": "2026-04-07",
+   "terms": "Net 30",
+   "po_number": "PO-4526",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LIT-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "20",
+     "unit_price": "248.41",
+     "amount": "4968.20",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "4968.20",
+   "tax": "298.09",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "5266.29",
+   "bank_account": "756107158936",
+   "routing_number": "023861098",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4526"
+   },
+   "file": "invoices/inv-027-price_within_tol.pdf"
+  },
+  {
+   "id": "inv-028-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V106",
+   "vendor_name": "Litware Labs",
+   "tax_id": "49-5123259",
+   "invoice_number": "INV-007028",
+   "invoice_date": "2026-03-20",
+   "due_date": "2026-04-19",
+   "terms": "Net 30",
+   "po_number": "PO-4527",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LIT-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "2",
+     "unit_price": "247.17",
+     "amount": "494.34",
+     "po_line": 1
+    },
+    {
+     "item_code": "LIT-100",
+     "description": "Printer toner, black",
+     "quantity": "8",
+     "unit_price": "282.46",
+     "amount": "2259.68",
+     "po_line": 2
+    },
+    {
+     "item_code": "LIT-121",
+     "description": "Safety gloves, size L",
+     "quantity": "4",
+     "unit_price": "25.54",
+     "amount": "102.16",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "2856.18",
+   "tax": "171.37",
+   "tax_rate_printed": "0.06",
+   "freight": null,
+   "total": "3027.55",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4527"
+   },
+   "file": "invoices/inv-028-clean.pdf"
+  },
+  {
+   "id": "inv-029-no_po_ref",
+   "kind": "no_po_ref",
+   "layout": "C",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007029",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-22",
+   "terms": "Net 30",
+   "po_number": null,
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-100",
+     "description": "Bolt set M8",
+     "quantity": "8",
+     "unit_price": "203.33",
+     "amount": "1626.64",
+     "po_line": 1
+    },
+    {
+     "item_code": "COH-121",
+     "description": "Air filter 20x25",
+     "quantity": "20",
+     "unit_price": "387.12",
+     "amount": "7742.40",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "9369.04",
+   "tax": "655.83",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "10024.87",
+   "bank_account": "973449137050",
+   "routing_number": "090712606",
+   "expect": {
+    "codes": [
+     "NO_PO_REFERENCE"
+    ],
+    "touchless": false,
+    "po": null
+   },
+   "file": "invoices/inv-029-no_po_ref.pdf"
+  },
+  {
+   "id": "inv-030-total_math",
+   "kind": "total_math",
+   "layout": "A",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007030",
+   "invoice_date": "2026-03-16",
+   "due_date": "2026-04-15",
+   "terms": "Net 30",
+   "po_number": "PO-4529",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-107",
+     "description": "Bolt set M8",
+     "quantity": "10",
+     "unit_price": "24.28",
+     "amount": "242.80",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "242.80",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "342.80",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "TOTAL_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4529"
+   },
+   "file": "invoices/inv-030-total_math.pdf"
+  },
+  {
+   "id": "inv-031-bank_changed",
+   "kind": "bank_changed",
+   "layout": "A",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007031",
+   "invoice_date": "2026-03-04",
+   "due_date": "2026-04-03",
+   "terms": "Net 30",
+   "po_number": "PO-4530",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-121",
+     "description": "Pallet wrap film",
+     "quantity": "2",
+     "unit_price": "225.12",
+     "amount": "450.24",
+     "po_line": 1
+    },
+    {
+     "item_code": "TAI-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "40",
+     "unit_price": "255.78",
+     "amount": "10231.20",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "10681.44",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "10681.44",
+   "bank_account": "606199450883",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [
+     "BANK_DETAILS_CHANGED"
+    ],
+    "touchless": false,
+    "po": "PO-4530"
+   },
+   "file": "invoices/inv-031-bank_changed.pdf"
+  },
+  {
+   "id": "inv-032-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V106",
+   "vendor_name": "Litware Labs",
+   "tax_id": "49-5123259",
+   "invoice_number": "INV-007032",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4531",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LIT-121",
+     "description": "Safety gloves, size L",
+     "quantity": "8",
+     "unit_price": "25.54",
+     "amount": "204.32",
+     "po_line": 1
+    },
+    {
+     "item_code": "LIT-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "5",
+     "unit_price": "247.17",
+     "amount": "1235.85",
+     "po_line": 2
+    },
+    {
+     "item_code": "LIT-100",
+     "description": "Printer toner, black",
+     "quantity": "20",
+     "unit_price": "282.46",
+     "amount": "5649.20",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "7089.37",
+   "tax": "425.36",
+   "tax_rate_printed": "0.06",
+   "freight": null,
+   "total": "7514.73",
+   "bank_account": "756107158936",
+   "routing_number": "023861098",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4531"
+   },
+   "file": "invoices/inv-032-clean.pdf"
+  },
+  {
+   "id": "inv-033-multipage",
+   "kind": "multipage",
+   "layout": "A",
+   "vendor_id": "V111",
+   "vendor_name": "Alpine Ski House",
+   "tax_id": "26-1394275",
+   "invoice_number": "INV-007033",
+   "invoice_date": "2026-03-12",
+   "due_date": "2026-04-11",
+   "terms": "Net 30",
+   "po_number": "PO-4532",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ALP-L17",
+     "description": "Shipping cartons, bundle of 25 (lot 17)",
+     "quantity": "10",
+     "unit_price": "43.52",
+     "amount": "435.20",
+     "po_line": 1
+    },
+    {
+     "item_code": "ALP-L45",
+     "description": "Bolt set M8 (lot 45)",
+     "quantity": "8",
+     "unit_price": "33.16",
+     "amount": "265.28",
+     "po_line": 2
+    },
+    {
+     "item_code": "ALP-L27",
+     "description": "Extension cord 15m (lot 27)",
+     "quantity": "2",
+     "unit_price": "42.24",
+     "amount": "84.48",
+     "po_line": 3
+    },
+    {
+     "item_code": "ALP-L04",
+     "description": "Hydraulic hose 2m (lot 4)",
+     "quantity": "24",
+     "unit_price": "38.73",
+     "amount": "929.52",
+     "po_line": 4
+    },
+    {
+     "item_code": "ALP-L08",
+     "description": "Copy paper, case (lot 8)",
+     "quantity": "5",
+     "unit_price": "62.19",
+     "amount": "310.95",
+     "po_line": 5
+    },
+    {
+     "item_code": "ALP-L39",
+     "description": "Pallet wrap film (lot 39)",
+     "quantity": "8",
+     "unit_price": "37.19",
+     "amount": "297.52",
+     "po_line": 6
+    },
+    {
+     "item_code": "ALP-L42",
+     "description": "Hard hat, white (lot 42)",
+     "quantity": "5",
+     "unit_price": "87.12",
+     "amount": "435.60",
+     "po_line": 7
+    },
+    {
+     "item_code": "ALP-L33",
+     "description": "Shipping cartons, bundle of 25 (lot 33)",
+     "quantity": "2",
+     "unit_price": "37.25",
+     "amount": "74.50",
+     "po_line": 8
+    },
+    {
+     "item_code": "ALP-L02",
+     "description": "Safety gloves, size L (lot 2)",
+     "quantity": "5",
+     "unit_price": "33.76",
+     "amount": "168.80",
+     "po_line": 9
+    },
+    {
+     "item_code": "ALP-L15",
+     "description": "Floor cleaner 5L (lot 15)",
+     "quantity": "5",
+     "unit_price": "74.89",
+     "amount": "374.45",
+     "po_line": 10
+    },
+    {
+     "item_code": "ALP-L29",
+     "description": "Bolt set M8 (lot 29)",
+     "quantity": "8",
+     "unit_price": "25.44",
+     "amount": "203.52",
+     "po_line": 11
+    },
+    {
+     "item_code": "ALP-L32",
+     "description": "Steel bracket 40mm (lot 32)",
+     "quantity": "40",
+     "unit_price": "49.96",
+     "amount": "1998.40",
+     "po_line": 12
+    },
+    {
+     "item_code": "ALP-L41",
+     "description": "Torque wrench 1/2in (lot 41)",
+     "quantity": "4",
+     "unit_price": "56.40",
+     "amount": "225.60",
+     "po_line": 13
+    },
+    {
+     "item_code": "ALP-L35",
+     "description": "LED panel 600x600 (lot 35)",
+     "quantity": "5",
+     "unit_price": "35.40",
+     "amount": "177.00",
+     "po_line": 14
+    },
+    {
+     "item_code": "ALP-L24",
+     "description": "Copy paper, case (lot 24)",
+     "quantity": "40",
+     "unit_price": "56.09",
+     "amount": "2243.60",
+     "po_line": 15
+    },
+    {
+     "item_code": "ALP-L28",
+     "description": "Label printer rolls (lot 28)",
+     "quantity": "4",
+     "unit_price": "22.78",
+     "amount": "91.12",
+     "po_line": 16
+    },
+    {
+     "item_code": "ALP-L40",
+     "description": "Copy paper, case (lot 40)",
+     "quantity": "20",
+     "unit_price": "6.76",
+     "amount": "135.20",
+     "po_line": 17
+    },
+    {
+     "item_code": "ALP-L21",
+     "description": "Printer toner, black (lot 21)",
+     "quantity": "4",
+     "unit_price": "76.66",
+     "amount": "306.64",
+     "po_line": 18
+    },
+    {
+     "item_code": "ALP-L12",
+     "description": "Label printer rolls (lot 12)",
+     "quantity": "4",
+     "unit_price": "77.11",
+     "amount": "308.44",
+     "po_line": 19
+    },
+    {
+     "item_code": "ALP-L05",
+     "description": "Printer toner, black (lot 5)",
+     "quantity": "8",
+     "unit_price": "80.60",
+     "amount": "644.80",
+     "po_line": 20
+    },
+    {
+     "item_code": "ALP-L30",
+     "description": "Air filter 20x25 (lot 30)",
+     "quantity": "8",
+     "unit_price": "44.89",
+     "amount": "359.12",
+     "po_line": 21
+    },
+    {
+     "item_code": "ALP-L13",
+     "description": "Bolt set M8 (lot 13)",
+     "quantity": "40",
+     "unit_price": "59.55",
+     "amount": "2382.00",
+     "po_line": 22
+    },
+    {
+     "item_code": "ALP-L25",
+     "description": "Torque wrench 1/2in (lot 25)",
+     "quantity": "2",
+     "unit_price": "14.15",
+     "amount": "28.30",
+     "po_line": 23
+    },
+    {
+     "item_code": "ALP-L43",
+     "description": "Extension cord 15m (lot 43)",
+     "quantity": "4",
+     "unit_price": "61.82",
+     "amount": "247.28",
+     "po_line": 24
+    },
+    {
+     "item_code": "ALP-L31",
+     "description": "Floor cleaner 5L (lot 31)",
+     "quantity": "8",
+     "unit_price": "18.57",
+     "amount": "148.56",
+     "po_line": 25
+    },
+    {
+     "item_code": "ALP-L34",
+     "description": "Safety gloves, size L (lot 34)",
+     "quantity": "8",
+     "unit_price": "85.70",
+     "amount": "685.60",
+     "po_line": 26
+    },
+    {
+     "item_code": "ALP-L26",
+     "description": "Hard hat, white (lot 26)",
+     "quantity": "4",
+     "unit_price": "51.95",
+     "amount": "207.80",
+     "po_line": 27
+    },
+    {
+     "item_code": "ALP-L48",
+     "description": "Steel bracket 40mm (lot 48)",
+     "quantity": "8",
+     "unit_price": "10.96",
+     "amount": "87.68",
+     "po_line": 28
+    },
+    {
+     "item_code": "ALP-L19",
+     "description": "LED panel 600x600 (lot 19)",
+     "quantity": "8",
+     "unit_price": "62.92",
+     "amount": "503.36",
+     "po_line": 29
+    },
+    {
+     "item_code": "ALP-L44",
+     "description": "Label printer rolls (lot 44)",
+     "quantity": "20",
+     "unit_price": "3.00",
+     "amount": "60.00",
+     "po_line": 30
+    },
+    {
+     "item_code": "ALP-L22",
+     "description": "Cable ties, pack of 100 (lot 22)",
+     "quantity": "40",
+     "unit_price": "21.96",
+     "amount": "878.40",
+     "po_line": 31
+    },
+    {
+     "item_code": "ALP-L20",
+     "description": "Hydraulic hose 2m (lot 20)",
+     "quantity": "2",
+     "unit_price": "42.52",
+     "amount": "85.04",
+     "po_line": 32
+    },
+    {
+     "item_code": "ALP-L01",
+     "description": "Shipping cartons, bundle of 25 (lot 1)",
+     "quantity": "20",
+     "unit_price": "76.51",
+     "amount": "1530.20",
+     "po_line": 33
+    },
+    {
+     "item_code": "ALP-L14",
+     "description": "Air filter 20x25 (lot 14)",
+     "quantity": "10",
+     "unit_price": "65.30",
+     "amount": "653.00",
+     "po_line": 34
+    },
+    {
+     "item_code": "ALP-L11",
+     "description": "Extension cord 15m (lot 11)",
+     "quantity": "12",
+     "unit_price": "56.18",
+     "amount": "674.16",
+     "po_line": 35
+    },
+    {
+     "item_code": "ALP-L23",
+     "description": "Pallet wrap film (lot 23)",
+     "quantity": "12",
+     "unit_price": "34.06",
+     "amount": "408.72",
+     "po_line": 36
+    },
+    {
+     "item_code": "ALP-L47",
+     "description": "Floor cleaner 5L (lot 47)",
+     "quantity": "20",
+     "unit_price": "47.98",
+     "amount": "959.60",
+     "po_line": 37
+    },
+    {
+     "item_code": "ALP-L10",
+     "description": "Hard hat, white (lot 10)",
+     "quantity": "2",
+     "unit_price": "83.39",
+     "amount": "166.78",
+     "po_line": 38
+    },
+    {
+     "item_code": "ALP-L18",
+     "description": "Safety gloves, size L (lot 18)",
+     "quantity": "24",
+     "unit_price": "18.63",
+     "amount": "447.12",
+     "po_line": 39
+    },
+    {
+     "item_code": "ALP-L37",
+     "description": "Printer toner, black (lot 37)",
+     "quantity": "2",
+     "unit_price": "83.02",
+     "amount": "166.04",
+     "po_line": 40
+    },
+    {
+     "item_code": "ALP-L06",
+     "description": "Cable ties, pack of 100 (lot 6)",
+     "quantity": "20",
+     "unit_price": "10.50",
+     "amount": "210.00",
+     "po_line": 41
+    },
+    {
+     "item_code": "ALP-L36",
+     "description": "Hydraulic hose 2m (lot 36)",
+     "quantity": "24",
+     "unit_price": "23.43",
+     "amount": "562.32",
+     "po_line": 42
+    },
+    {
+     "item_code": "ALP-L09",
+     "description": "Torque wrench 1/2in (lot 9)",
+     "quantity": "5",
+     "unit_price": "23.16",
+     "amount": "115.80",
+     "po_line": 43
+    },
+    {
+     "item_code": "ALP-L46",
+     "description": "Air filter 20x25 (lot 46)",
+     "quantity": "2",
+     "unit_price": "24.60",
+     "amount": "49.20",
+     "po_line": 44
+    },
+    {
+     "item_code": "ALP-L16",
+     "description": "Steel bracket 40mm (lot 16)",
+     "quantity": "4",
+     "unit_price": "13.08",
+     "amount": "52.32",
+     "po_line": 45
+    },
+    {
+     "item_code": "ALP-L38",
+     "description": "Cable ties, pack of 100 (lot 38)",
+     "quantity": "10",
+     "unit_price": "82.63",
+     "amount": "826.30",
+     "po_line": 46
+    },
+    {
+     "item_code": "ALP-L03",
+     "description": "LED panel 600x600 (lot 3)",
+     "quantity": "24",
+     "unit_price": "81.12",
+     "amount": "1946.88",
+     "po_line": 47
+    },
+    {
+     "item_code": "ALP-L07",
+     "description": "Pallet wrap film (lot 7)",
+     "quantity": "10",
+     "unit_price": "5.93",
+     "amount": "59.30",
+     "po_line": 48
+    }
+   ],
+   "subtotal": "24211.50",
+   "tax": "1997.45",
+   "tax_rate_printed": "0.0825",
+   "freight": null,
+   "total": "26208.95",
+   "bank_account": "853261525837",
+   "routing_number": "045489989",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4532"
+   },
+   "file": "invoices/inv-033-multipage.pdf"
+  },
+  {
+   "id": "inv-034-clean",
+   "kind": "clean",
+   "layout": "C",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007034",
+   "invoice_date": "2026-03-05",
+   "due_date": "2026-04-04",
+   "terms": "Net 30",
+   "po_number": "PO-4533",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-114",
+     "description": "Hydraulic hose 2m",
+     "quantity": "2",
+     "unit_price": "276.45",
+     "amount": "552.90",
+     "po_line": 1
+    },
+    {
+     "item_code": "LUC-107",
+     "description": "Bolt set M8",
+     "quantity": "4",
+     "unit_price": "24.28",
+     "amount": "97.12",
+     "po_line": 2
+    },
+    {
+     "item_code": "LUC-121",
+     "description": "Hard hat, white",
+     "quantity": "10",
+     "unit_price": "164.41",
+     "amount": "1644.10",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "2294.12",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2294.12",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4533"
+   },
+   "file": "invoices/inv-034-clean.pdf"
+  },
+  {
+   "id": "inv-036-service_2way",
+   "kind": "service_2way",
+   "layout": "C",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": "85-1239289",
+   "invoice_number": "INV-007036",
+   "invoice_date": "2026-03-17",
+   "due_date": "2026-04-16",
+   "terms": "Net 30",
+   "po_number": "PO-4534",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-SVC",
+     "description": "Consulting services (hours)",
+     "quantity": "10",
+     "unit_price": "175.00",
+     "amount": "1750.00",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1750.00",
+   "tax": "122.50",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1872.50",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4534"
+   },
+   "file": "invoices/inv-036-service_2way.pdf"
+  },
+  {
+   "id": "inv-037-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007037",
+   "invoice_date": "2026-03-20",
+   "due_date": "2026-04-19",
+   "terms": "Net 30",
+   "po_number": "PO-4535",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-121",
+     "description": "LED panel 600x600",
+     "quantity": "4",
+     "unit_price": "332.51",
+     "amount": "1330.04",
+     "po_line": 1
+    },
+    {
+     "item_code": "NOR-114",
+     "description": "Bolt set M8",
+     "quantity": "24",
+     "unit_price": "121.81",
+     "amount": "2923.44",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "4253.48",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "4253.48",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4535"
+   },
+   "file": "invoices/inv-037-clean.pdf"
+  },
+  {
+   "id": "inv-039-tax_wrong",
+   "kind": "tax_wrong",
+   "layout": "A",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007039",
+   "invoice_date": "2026-03-19",
+   "due_date": "2026-04-18",
+   "terms": "Net 30",
+   "po_number": "PO-4536",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-121",
+     "description": "Air filter 20x25",
+     "quantity": "2",
+     "unit_price": "387.12",
+     "amount": "774.24",
+     "po_line": 1
+    },
+    {
+     "item_code": "COH-100",
+     "description": "Bolt set M8",
+     "quantity": "20",
+     "unit_price": "203.33",
+     "amount": "4066.60",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "4840.84",
+   "tax": "343.03",
+   "tax_rate_printed": "0.07",
+   "freight": null,
+   "total": "5183.87",
+   "bank_account": "973449137050",
+   "routing_number": "090712606",
+   "expect": {
+    "codes": [
+     "TAX_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4536"
+   },
+   "file": "invoices/inv-039-tax_wrong.pdf"
+  },
+  {
+   "id": "inv-040-clean",
+   "kind": "clean",
+   "layout": "B",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": null,
+   "invoice_number": "INV-007040",
+   "invoice_date": "2026-03-03",
+   "due_date": "2026-04-02",
+   "terms": "Net 30",
+   "po_number": "PO-4537",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Pallet wrap film",
+     "quantity": "5",
+     "unit_price": "337.34",
+     "amount": "1686.70",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1686.70",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1686.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4537"
+   },
+   "file": "invoices/inv-040-clean.pdf"
+  },
+  {
+   "id": "inv-042-bank_unverified",
+   "kind": "bank_unverified",
+   "layout": "A",
+   "vendor_id": "V105",
+   "vendor_name": "Wide World Importers",
+   "tax_id": "18-9760606",
+   "invoice_number": "INV-007041",
+   "invoice_date": "2026-03-14",
+   "due_date": "2026-04-13",
+   "terms": "Net 30",
+   "po_number": "PO-4538",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "WID-121",
+     "description": "Printer toner, black",
+     "quantity": "40",
+     "unit_price": "112.97",
+     "amount": "4518.80",
+     "po_line": 1
+    },
+    {
+     "item_code": "WID-100",
+     "description": "Pallet wrap film",
+     "quantity": "20",
+     "unit_price": "366.19",
+     "amount": "7323.80",
+     "po_line": 2
+    },
+    {
+     "item_code": "WID-107",
+     "description": "Torque wrench 1/2in",
+     "quantity": "8",
+     "unit_price": "75.36",
+     "amount": "602.88",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "12445.48",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "12445.48",
+   "bank_account": "870002179343",
+   "routing_number": "089760559",
+   "expect": {
+    "codes": [
+     "BANK_DETAILS_UNVERIFIED"
+    ],
+    "touchless": false,
+    "po": "PO-4538"
+   },
+   "file": "invoices/inv-042-bank_unverified.pdf"
+  },
+  {
+   "id": "inv-043-price_over",
+   "kind": "price_over",
+   "layout": "A",
+   "vendor_id": "V106",
+   "vendor_name": "Litware Labs",
+   "tax_id": "49-5123259",
+   "invoice_number": "INV-007042",
+   "invoice_date": "2026-03-12",
+   "due_date": "2026-04-11",
+   "terms": "Net 30",
+   "po_number": "PO-4539",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LIT-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "4",
+     "unit_price": "266.94",
+     "amount": "1067.76",
+     "po_line": 1
+    },
+    {
+     "item_code": "LIT-121",
+     "description": "Safety gloves, size L",
+     "quantity": "2",
+     "unit_price": "27.58",
+     "amount": "55.16",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "1122.92",
+   "tax": "67.38",
+   "tax_rate_printed": "0.06",
+   "freight": null,
+   "total": "1190.30",
+   "bank_account": "756107158936",
+   "routing_number": "023861098",
+   "expect": {
+    "codes": [
+     "PRICE_OVER_PO"
+    ],
+    "touchless": false,
+    "po": "PO-4539"
+   },
+   "file": "invoices/inv-043-price_over.pdf"
+  },
+  {
+   "id": "inv-044-tax_wrong",
+   "kind": "tax_wrong",
+   "layout": "A",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": "85-1239289",
+   "invoice_number": "INV-007043",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-22",
+   "terms": "Net 30",
+   "po_number": "PO-4540",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-121",
+     "description": "Hard hat, white",
+     "quantity": "2",
+     "unit_price": "369.69",
+     "amount": "739.38",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "739.38",
+   "tax": "55.93",
+   "tax_rate_printed": "0.07",
+   "freight": null,
+   "total": "795.31",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "TAX_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4540"
+   },
+   "file": "invoices/inv-044-tax_wrong.pdf"
+  },
+  {
+   "id": "inv-045-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V104",
+   "vendor_name": "Adventure Works",
+   "tax_id": "56-8571920",
+   "invoice_number": "INV-007044",
+   "invoice_date": "2026-03-09",
+   "due_date": "2026-04-08",
+   "terms": "Net 30",
+   "po_number": "PO-4541",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ADV-107",
+     "description": "Printer toner, black",
+     "quantity": "4",
+     "unit_price": "19.08",
+     "amount": "76.32",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "76.32",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "76.32",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4541"
+   },
+   "file": "invoices/inv-045-clean.pdf"
+  },
+  {
+   "id": "inv-046-multipage",
+   "kind": "multipage",
+   "layout": "C",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007045",
+   "invoice_date": "2026-03-19",
+   "due_date": "2026-04-18",
+   "terms": "Net 30",
+   "po_number": "PO-4542",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-L22",
+     "description": "Cable ties, pack of 100 (lot 22)",
+     "quantity": "20",
+     "unit_price": "30.43",
+     "amount": "608.60",
+     "po_line": 1
+    },
+    {
+     "item_code": "TAI-L03",
+     "description": "LED panel 600x600 (lot 3)",
+     "quantity": "24",
+     "unit_price": "28.82",
+     "amount": "691.68",
+     "po_line": 2
+    },
+    {
+     "item_code": "TAI-L11",
+     "description": "Extension cord 15m (lot 11)",
+     "quantity": "4",
+     "unit_price": "23.92",
+     "amount": "95.68",
+     "po_line": 3
+    },
+    {
+     "item_code": "TAI-L23",
+     "description": "Pallet wrap film (lot 23)",
+     "quantity": "40",
+     "unit_price": "85.11",
+     "amount": "3404.40",
+     "po_line": 4
+    },
+    {
+     "item_code": "TAI-L14",
+     "description": "Air filter 20x25 (lot 14)",
+     "quantity": "24",
+     "unit_price": "28.68",
+     "amount": "688.32",
+     "po_line": 5
+    },
+    {
+     "item_code": "TAI-L33",
+     "description": "Shipping cartons, bundle of 25 (lot 33)",
+     "quantity": "5",
+     "unit_price": "68.55",
+     "amount": "342.75",
+     "po_line": 6
+    },
+    {
+     "item_code": "TAI-L02",
+     "description": "Safety gloves, size L (lot 2)",
+     "quantity": "40",
+     "unit_price": "36.17",
+     "amount": "1446.80",
+     "po_line": 7
+    },
+    {
+     "item_code": "TAI-L47",
+     "description": "Floor cleaner 5L (lot 47)",
+     "quantity": "4",
+     "unit_price": "27.98",
+     "amount": "111.92",
+     "po_line": 8
+    },
+    {
+     "item_code": "TAI-L42",
+     "description": "Hard hat, white (lot 42)",
+     "quantity": "2",
+     "unit_price": "59.23",
+     "amount": "118.46",
+     "po_line": 9
+    },
+    {
+     "item_code": "TAI-L12",
+     "description": "Label printer rolls (lot 12)",
+     "quantity": "2",
+     "unit_price": "2.15",
+     "amount": "4.30",
+     "po_line": 10
+    },
+    {
+     "item_code": "TAI-L21",
+     "description": "Printer toner, black (lot 21)",
+     "quantity": "10",
+     "unit_price": "19.73",
+     "amount": "197.30",
+     "po_line": 11
+    },
+    {
+     "item_code": "TAI-L37",
+     "description": "Printer toner, black (lot 37)",
+     "quantity": "40",
+     "unit_price": "44.94",
+     "amount": "1797.60",
+     "po_line": 12
+    },
+    {
+     "item_code": "TAI-L36",
+     "description": "Hydraulic hose 2m (lot 36)",
+     "quantity": "5",
+     "unit_price": "52.71",
+     "amount": "263.55",
+     "po_line": 13
+    },
+    {
+     "item_code": "TAI-L15",
+     "description": "Floor cleaner 5L (lot 15)",
+     "quantity": "2",
+     "unit_price": "75.94",
+     "amount": "151.88",
+     "po_line": 14
+    },
+    {
+     "item_code": "TAI-L09",
+     "description": "Torque wrench 1/2in (lot 9)",
+     "quantity": "4",
+     "unit_price": "64.79",
+     "amount": "259.16",
+     "po_line": 15
+    },
+    {
+     "item_code": "TAI-L38",
+     "description": "Cable ties, pack of 100 (lot 38)",
+     "quantity": "24",
+     "unit_price": "58.71",
+     "amount": "1409.04",
+     "po_line": 16
+    },
+    {
+     "item_code": "TAI-L46",
+     "description": "Air filter 20x25 (lot 46)",
+     "quantity": "4",
+     "unit_price": "47.16",
+     "amount": "188.64",
+     "po_line": 17
+    },
+    {
+     "item_code": "TAI-L20",
+     "description": "Hydraulic hose 2m (lot 20)",
+     "quantity": "20",
+     "unit_price": "55.20",
+     "amount": "1104.00",
+     "po_line": 18
+    },
+    {
+     "item_code": "TAI-L25",
+     "description": "Torque wrench 1/2in (lot 25)",
+     "quantity": "12",
+     "unit_price": "74.56",
+     "amount": "894.72",
+     "po_line": 19
+    },
+    {
+     "item_code": "TAI-L07",
+     "description": "Pallet wrap film (lot 7)",
+     "quantity": "20",
+     "unit_price": "22.71",
+     "amount": "454.20",
+     "po_line": 20
+    },
+    {
+     "item_code": "TAI-L04",
+     "description": "Hydraulic hose 2m (lot 4)",
+     "quantity": "24",
+     "unit_price": "72.04",
+     "amount": "1728.96",
+     "po_line": 21
+    },
+    {
+     "item_code": "TAI-L06",
+     "description": "Cable ties, pack of 100 (lot 6)",
+     "quantity": "24",
+     "unit_price": "49.81",
+     "amount": "1195.44",
+     "po_line": 22
+    },
+    {
+     "item_code": "TAI-L24",
+     "description": "Copy paper, case (lot 24)",
+     "quantity": "10",
+     "unit_price": "49.96",
+     "amount": "499.60",
+     "po_line": 23
+    },
+    {
+     "item_code": "TAI-L10",
+     "description": "Hard hat, white (lot 10)",
+     "quantity": "5",
+     "unit_price": "9.43",
+     "amount": "47.15",
+     "po_line": 24
+    },
+    {
+     "item_code": "TAI-L44",
+     "description": "Label printer rolls (lot 44)",
+     "quantity": "10",
+     "unit_price": "27.87",
+     "amount": "278.70",
+     "po_line": 25
+    },
+    {
+     "item_code": "TAI-L34",
+     "description": "Safety gloves, size L (lot 34)",
+     "quantity": "8",
+     "unit_price": "43.63",
+     "amount": "349.04",
+     "po_line": 26
+    },
+    {
+     "item_code": "TAI-L32",
+     "description": "Steel bracket 40mm (lot 32)",
+     "quantity": "10",
+     "unit_price": "2.40",
+     "amount": "24.00",
+     "po_line": 27
+    },
+    {
+     "item_code": "TAI-L29",
+     "description": "Bolt set M8 (lot 29)",
+     "quantity": "4",
+     "unit_price": "20.48",
+     "amount": "81.92",
+     "po_line": 28
+    },
+    {
+     "item_code": "TAI-L13",
+     "description": "Bolt set M8 (lot 13)",
+     "quantity": "5",
+     "unit_price": "16.66",
+     "amount": "83.30",
+     "po_line": 29
+    },
+    {
+     "item_code": "TAI-L31",
+     "description": "Floor cleaner 5L (lot 31)",
+     "quantity": "5",
+     "unit_price": "58.66",
+     "amount": "293.30",
+     "po_line": 30
+    },
+    {
+     "item_code": "TAI-L30",
+     "description": "Air filter 20x25 (lot 30)",
+     "quantity": "20",
+     "unit_price": "47.25",
+     "amount": "945.00",
+     "po_line": 31
+    },
+    {
+     "item_code": "TAI-L40",
+     "description": "Copy paper, case (lot 40)",
+     "quantity": "12",
+     "unit_price": "88.32",
+     "amount": "1059.84",
+     "po_line": 32
+    },
+    {
+     "item_code": "TAI-L08",
+     "description": "Copy paper, case (lot 8)",
+     "quantity": "40",
+     "unit_price": "86.57",
+     "amount": "3462.80",
+     "po_line": 33
+    },
+    {
+     "item_code": "TAI-L05",
+     "description": "Printer toner, black (lot 5)",
+     "quantity": "10",
+     "unit_price": "63.88",
+     "amount": "638.80",
+     "po_line": 34
+    },
+    {
+     "item_code": "TAI-L27",
+     "description": "Extension cord 15m (lot 27)",
+     "quantity": "12",
+     "unit_price": "69.23",
+     "amount": "830.76",
+     "po_line": 35
+    },
+    {
+     "item_code": "TAI-L28",
+     "description": "Label printer rolls (lot 28)",
+     "quantity": "20",
+     "unit_price": "65.68",
+     "amount": "1313.60",
+     "po_line": 36
+    },
+    {
+     "item_code": "TAI-L35",
+     "description": "LED panel 600x600 (lot 35)",
+     "quantity": "40",
+     "unit_price": "77.40",
+     "amount": "3096.00",
+     "po_line": 37
+    },
+    {
+     "item_code": "TAI-L43",
+     "description": "Extension cord 15m (lot 43)",
+     "quantity": "4",
+     "unit_price": "35.05",
+     "amount": "140.20",
+     "po_line": 38
+    },
+    {
+     "item_code": "TAI-L19",
+     "description": "LED panel 600x600 (lot 19)",
+     "quantity": "12",
+     "unit_price": "13.70",
+     "amount": "164.40",
+     "po_line": 39
+    },
+    {
+     "item_code": "TAI-L17",
+     "description": "Shipping cartons, bundle of 25 (lot 17)",
+     "quantity": "40",
+     "unit_price": "79.05",
+     "amount": "3162.00",
+     "po_line": 40
+    },
+    {
+     "item_code": "TAI-L16",
+     "description": "Steel bracket 40mm (lot 16)",
+     "quantity": "40",
+     "unit_price": "19.68",
+     "amount": "787.20",
+     "po_line": 41
+    },
+    {
+     "item_code": "TAI-L18",
+     "description": "Safety gloves, size L (lot 18)",
+     "quantity": "2",
+     "unit_price": "9.44",
+     "amount": "18.88",
+     "po_line": 42
+    },
+    {
+     "item_code": "TAI-L26",
+     "description": "Hard hat, white (lot 26)",
+     "quantity": "4",
+     "unit_price": "49.23",
+     "amount": "196.92",
+     "po_line": 43
+    },
+    {
+     "item_code": "TAI-L45",
+     "description": "Bolt set M8 (lot 45)",
+     "quantity": "8",
+     "unit_price": "16.51",
+     "amount": "132.08",
+     "po_line": 44
+    },
+    {
+     "item_code": "TAI-L39",
+     "description": "Pallet wrap film (lot 39)",
+     "quantity": "8",
+     "unit_price": "23.63",
+     "amount": "189.04",
+     "po_line": 45
+    },
+    {
+     "item_code": "TAI-L41",
+     "description": "Torque wrench 1/2in (lot 41)",
+     "quantity": "24",
+     "unit_price": "58.02",
+     "amount": "1392.48",
+     "po_line": 46
+    },
+    {
+     "item_code": "TAI-L48",
+     "description": "Steel bracket 40mm (lot 48)",
+     "quantity": "12",
+     "unit_price": "2.09",
+     "amount": "25.08",
+     "po_line": 47
+    },
+    {
+     "item_code": "TAI-L01",
+     "description": "Shipping cartons, bundle of 25 (lot 1)",
+     "quantity": "24",
+     "unit_price": "85.69",
+     "amount": "2056.56",
+     "po_line": 48
+    }
+   ],
+   "subtotal": "38426.05",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "38426.05",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4542"
+   },
+   "file": "invoices/inv-046-multipage.pdf"
+  },
+  {
+   "id": "inv-047-price_within_tol",
+   "kind": "price_within_tol",
+   "layout": "C",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007046",
+   "invoice_date": "2026-03-21",
+   "due_date": "2026-04-20",
+   "terms": "Net 30",
+   "po_number": "PO-4543",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-114",
+     "description": "Torque wrench 1/2in",
+     "quantity": "12",
+     "unit_price": "353.44",
+     "amount": "4241.28",
+     "po_line": 1
+    },
+    {
+     "item_code": "COH-100",
+     "description": "Bolt set M8",
+     "quantity": "12",
+     "unit_price": "204.35",
+     "amount": "2452.20",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "6693.48",
+   "tax": "468.54",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "7162.02",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4543"
+   },
+   "file": "invoices/inv-047-price_within_tol.pdf"
+  },
+  {
+   "id": "inv-048-closed_po",
+   "kind": "closed_po",
+   "layout": "C",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007047",
+   "invoice_date": "2026-03-08",
+   "due_date": "2026-04-07",
+   "terms": "Net 30",
+   "po_number": "PO-4544",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-107",
+     "description": "Pallet wrap film",
+     "quantity": "10",
+     "unit_price": "92.46",
+     "amount": "924.60",
+     "po_line": 1
+    },
+    {
+     "item_code": "COH-114",
+     "description": "Torque wrench 1/2in",
+     "quantity": "8",
+     "unit_price": "351.68",
+     "amount": "2813.44",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "3738.04",
+   "tax": "261.66",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "3999.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "PO_NOT_OPEN"
+    ],
+    "touchless": false,
+    "po": "PO-4544"
+   },
+   "file": "invoices/inv-048-closed_po.pdf"
+  },
+  {
+   "id": "inv-049-clean",
+   "kind": "clean",
+   "layout": "B",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": null,
+   "invoice_number": "INV-007048",
+   "invoice_date": "2026-03-18",
+   "due_date": "2026-04-17",
+   "terms": "Net 30",
+   "po_number": "PO-4545",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Bolt set M8",
+     "quantity": "5",
+     "unit_price": "203.33",
+     "amount": "1016.65",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1016.65",
+   "tax": "71.17",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1087.82",
+   "bank_account": "973449137050",
+   "routing_number": "090712606",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4545"
+   },
+   "file": "invoices/inv-049-clean.pdf"
+  },
+  {
+   "id": "inv-050-no_po_ref",
+   "kind": "no_po_ref",
+   "layout": "C",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007049",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-22",
+   "terms": "Net 30",
+   "po_number": null,
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-107",
+     "description": "Pallet wrap film",
+     "quantity": "10",
+     "unit_price": "92.46",
+     "amount": "924.60",
+     "po_line": 1
+    },
+    {
+     "item_code": "COH-114",
+     "description": "Torque wrench 1/2in",
+     "quantity": "4",
+     "unit_price": "351.68",
+     "amount": "1406.72",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "2331.32",
+   "tax": "163.19",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2494.51",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "NO_PO_REFERENCE"
+    ],
+    "touchless": false,
+    "po": null
+   },
+   "file": "invoices/inv-050-no_po_ref.pdf"
+  },
+  {
+   "id": "inv-051-json_clean",
+   "kind": "json_clean",
+   "layout": "json",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": "18-3431389",
+   "invoice_number": "INV-007050",
+   "invoice_date": "2026-03-03",
+   "due_date": "2026-04-02",
+   "terms": "Net 30",
+   "po_number": "PO-4547",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "CON-100",
+     "description": "Pallet wrap film",
+     "quantity": "40",
+     "unit_price": "268.08",
+     "amount": "10723.20",
+     "po_line": 1
+    },
+    {
+     "item_code": "CON-121",
+     "description": "Cable ties, pack of 100",
+     "quantity": "5",
+     "unit_price": "217.06",
+     "amount": "1085.30",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "11808.50",
+   "tax": "974.20",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "12782.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4547"
+   },
+   "file": "invoices/inv-051-json_clean.json"
+  },
+  {
+   "id": "inv-052-missing_receipt",
+   "kind": "missing_receipt",
+   "layout": "C",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007051",
+   "invoice_date": "2026-03-08",
+   "due_date": "2026-04-07",
+   "terms": "Net 30",
+   "po_number": "PO-4548",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-107",
+     "description": "Pallet wrap film",
+     "quantity": "20",
+     "unit_price": "92.46",
+     "amount": "1849.20",
+     "po_line": 1
+    },
+    {
+     "item_code": "COH-114",
+     "description": "Torque wrench 1/2in",
+     "quantity": "20",
+     "unit_price": "351.68",
+     "amount": "7033.60",
+     "po_line": 2
+    },
+    {
+     "item_code": "COH-121",
+     "description": "Air filter 20x25",
+     "quantity": "10",
+     "unit_price": "387.12",
+     "amount": "3871.20",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "12754.00",
+   "tax": "892.78",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "13646.78",
+   "bank_account": "973449137050",
+   "routing_number": "090712606",
+   "expect": {
+    "codes": [
+     "MISSING_RECEIPT"
+    ],
+    "touchless": false,
+    "po": "PO-4548"
+   },
+   "file": "invoices/inv-052-missing_receipt.pdf"
+  },
+  {
+   "id": "inv-053-tax_unverified",
+   "kind": "tax_unverified",
+   "layout": "B",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": null,
+   "invoice_number": "INV-007052",
+   "invoice_date": "2026-03-12",
+   "due_date": "2026-04-11",
+   "terms": "Net 30",
+   "po_number": "PO-4549",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Bolt set M8",
+     "quantity": "8",
+     "unit_price": "121.81",
+     "amount": "974.48",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Pallet wrap film",
+     "quantity": "10",
+     "unit_price": "337.34",
+     "amount": "3373.40",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "LED panel 600x600",
+     "quantity": "20",
+     "unit_price": "332.51",
+     "amount": "6650.20",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "10998.08",
+   "tax": "549.90",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "11547.98",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "TAX_UNVERIFIED"
+    ],
+    "touchless": false,
+    "po": "PO-4549"
+   },
+   "file": "invoices/inv-053-tax_unverified.pdf"
+  },
+  {
+   "id": "inv-054-clean",
+   "kind": "clean",
+   "layout": "B",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": null,
+   "invoice_number": "INV-007053",
+   "invoice_date": "2026-03-13",
+   "due_date": "2026-04-12",
+   "terms": "Net 30",
+   "po_number": "PO-4550",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Copy paper, case",
+     "quantity": "10",
+     "unit_price": "133.27",
+     "amount": "1332.70",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1332.70",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1332.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4550"
+   },
+   "file": "invoices/inv-054-clean.pdf"
+  },
+  {
+   "id": "inv-055-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007054",
+   "invoice_date": "2026-03-08",
+   "due_date": "2026-04-07",
+   "terms": "Net 30",
+   "po_number": "PO-4551",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-114",
+     "description": "Torque wrench 1/2in",
+     "quantity": "5",
+     "unit_price": "351.68",
+     "amount": "1758.40",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1758.40",
+   "tax": "123.09",
+   "tax_rate_printed": "0.07",
+   "freight": null,
+   "total": "1881.49",
+   "bank_account": "973449137050",
+   "routing_number": "090712606",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4551"
+   },
+   "file": "invoices/inv-055-clean.pdf"
+  },
+  {
+   "id": "inv-056-vendor_mismatch",
+   "kind": "vendor_mismatch",
+   "layout": "C",
+   "vendor_id": "V111",
+   "vendor_name": "Alpine Ski House",
+   "tax_id": "26-1394275",
+   "invoice_number": "INV-007055",
+   "invoice_date": "2026-03-22",
+   "due_date": "2026-04-21",
+   "terms": "Net 30",
+   "po_number": "PO-4552",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-107",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "12",
+     "unit_price": "255.78",
+     "amount": "3069.36",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "3069.36",
+   "tax": "253.22",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "3322.58",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "VENDOR_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4552"
+   },
+   "file": "invoices/inv-056-vendor_mismatch.pdf"
+  },
+  {
+   "id": "inv-057-service_2way",
+   "kind": "service_2way",
+   "layout": "A",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007056",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4553",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-SVC",
+     "description": "Equipment maintenance visit",
+     "quantity": "5",
+     "unit_price": "95.00",
+     "amount": "475.00",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "475.00",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "475.00",
+   "bank_account": "560269953287",
+   "routing_number": "095228249",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4553"
+   },
+   "file": "invoices/inv-057-service_2way.pdf"
+  },
+  {
+   "id": "inv-058-price_within_tol",
+   "kind": "price_within_tol",
+   "layout": "C",
+   "vendor_id": "V104",
+   "vendor_name": "Adventure Works",
+   "tax_id": "56-8571920",
+   "invoice_number": "INV-007057",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4554",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ADV-100",
+     "description": "Label printer rolls",
+     "quantity": "5",
+     "unit_price": "176.51",
+     "amount": "882.55",
+     "po_line": 1
+    },
+    {
+     "item_code": "ADV-121",
+     "description": "Cable ties, pack of 100",
+     "quantity": "5",
+     "unit_price": "106.19",
+     "amount": "530.95",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "1413.50",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1413.50",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4554"
+   },
+   "file": "invoices/inv-058-price_within_tol.pdf"
+  },
+  {
+   "id": "inv-059-missing_receipt",
+   "kind": "missing_receipt",
+   "layout": "B",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": null,
+   "invoice_number": "INV-007058",
+   "invoice_date": "2026-03-06",
+   "due_date": "2026-04-05",
+   "terms": "Net 30",
+   "po_number": "PO-4555",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Hard hat, white",
+     "quantity": "20",
+     "unit_price": "164.41",
+     "amount": "3288.20",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "3288.20",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "3288.20",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "MISSING_RECEIPT"
+    ],
+    "touchless": false,
+    "po": "PO-4555"
+   },
+   "file": "invoices/inv-059-missing_receipt.pdf"
+  },
+  {
+   "id": "inv-060-sequential",
+   "kind": "sequential",
+   "layout": "B",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": null,
+   "invoice_number": "INV-007059",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-22",
+   "terms": "Net 30",
+   "po_number": "PO-4556",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "4",
+     "unit_price": "255.78",
+     "amount": "1023.12",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Safety gloves, size L",
+     "quantity": "1",
+     "unit_price": "367.80",
+     "amount": "367.80",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "Copy paper, case",
+     "quantity": "1",
+     "unit_price": "133.27",
+     "amount": "133.27",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "1524.19",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1524.19",
+   "bank_account": "182613120944",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4556"
+   },
+   "file": "invoices/inv-060-sequential.pdf"
+  },
+  {
+   "id": "inv-062-po_not_found",
+   "kind": "po_not_found",
+   "layout": "C",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": "85-1239289",
+   "invoice_number": "INV-007061",
+   "invoice_date": "2026-03-18",
+   "due_date": "2026-04-17",
+   "terms": "Net 30",
+   "po_number": "PO-95862",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-114",
+     "description": "Cable ties, pack of 100",
+     "quantity": "5",
+     "unit_price": "107.86",
+     "amount": "539.30",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "539.30",
+   "tax": "37.75",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "577.05",
+   "bank_account": "915878128343",
+   "routing_number": "056521133",
+   "expect": {
+    "codes": [
+     "PO_NOT_FOUND"
+    ],
+    "touchless": false,
+    "po": null
+   },
+   "file": "invoices/inv-062-po_not_found.pdf"
+  },
+  {
+   "id": "inv-063-sequential",
+   "kind": "sequential",
+   "layout": "B",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": null,
+   "invoice_number": "INV-007062",
+   "invoice_date": "2026-03-22",
+   "due_date": "2026-04-21",
+   "terms": "Net 30",
+   "po_number": "PO-4558",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Cable ties, pack of 100",
+     "quantity": "8",
+     "unit_price": "217.06",
+     "amount": "1736.48",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Extension cord 15m",
+     "quantity": "8",
+     "unit_price": "291.06",
+     "amount": "2328.48",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "4064.96",
+   "tax": "335.36",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "4400.32",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4558"
+   },
+   "file": "invoices/inv-063-sequential.pdf"
+  },
+  {
+   "id": "inv-065-clean",
+   "kind": "clean",
+   "layout": "B",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": null,
+   "invoice_number": "INV-007064",
+   "invoice_date": "2026-03-10",
+   "due_date": "2026-04-09",
+   "terms": "Net 30",
+   "po_number": "PO-4559",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Bolt set M8",
+     "quantity": "10",
+     "unit_price": "121.81",
+     "amount": "1218.10",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Torque wrench 1/2in",
+     "quantity": "10",
+     "unit_price": "312.56",
+     "amount": "3125.60",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "Pallet wrap film",
+     "quantity": "40",
+     "unit_price": "337.34",
+     "amount": "13493.60",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "17837.30",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "17837.30",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4559"
+   },
+   "file": "invoices/inv-065-clean.pdf"
+  },
+  {
+   "id": "inv-066-vendor_alias",
+   "kind": "vendor_alias",
+   "layout": "B",
+   "vendor_id": "V107",
+   "vendor_name": "PROSEWARE INC LLC",
+   "tax_id": null,
+   "invoice_number": "INV-007065",
+   "invoice_date": "2026-03-17",
+   "due_date": "2026-04-16",
+   "terms": "Net 30",
+   "po_number": "PO-4560",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Cable ties, pack of 100",
+     "quantity": "12",
+     "unit_price": "107.86",
+     "amount": "1294.32",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Floor cleaner 5L",
+     "quantity": "12",
+     "unit_price": "163.51",
+     "amount": "1962.12",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "3256.44",
+   "tax": "227.95",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "3484.39",
+   "bank_account": "915878128343",
+   "routing_number": "056521133",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4560"
+   },
+   "file": "invoices/inv-066-vendor_alias.pdf"
+  },
+  {
+   "id": "inv-067-line_math",
+   "kind": "line_math",
+   "layout": "C",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": "18-3431389",
+   "invoice_number": "INV-007066",
+   "invoice_date": "2026-03-18",
+   "due_date": "2026-04-17",
+   "terms": "Net 30",
+   "po_number": "PO-4561",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "CON-100",
+     "description": "Pallet wrap film",
+     "quantity": "4",
+     "unit_price": "268.08",
+     "amount": "1082.32",
+     "po_line": 1
+    },
+    {
+     "item_code": "CON-114",
+     "description": "Steel bracket 40mm",
+     "quantity": "24",
+     "unit_price": "23.82",
+     "amount": "571.68",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "1654.00",
+   "tax": "136.46",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1790.46",
+   "bank_account": "570665548041",
+   "routing_number": "041172431",
+   "expect": {
+    "codes": [
+     "LINE_EXTENSION_MISMATCH"
+    ],
+    "touchless": false,
+    "po": "PO-4561"
+   },
+   "file": "invoices/inv-067-line_math.pdf"
+  },
+  {
+   "id": "inv-068-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": "85-1239289",
+   "invoice_number": "INV-007067",
+   "invoice_date": "2026-03-07",
+   "due_date": "2026-04-06",
+   "terms": "Net 30",
+   "po_number": "PO-4562",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-121",
+     "description": "Hard hat, white",
+     "quantity": "40",
+     "unit_price": "369.69",
+     "amount": "14787.60",
+     "po_line": 1
+    },
+    {
+     "item_code": "PRO-100",
+     "description": "Floor cleaner 5L",
+     "quantity": "10",
+     "unit_price": "163.51",
+     "amount": "1635.10",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "16422.70",
+   "tax": "1149.59",
+   "tax_rate_printed": "0.07",
+   "freight": null,
+   "total": "17572.29",
+   "bank_account": "915878128343",
+   "routing_number": "056521133",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4562"
+   },
+   "file": "invoices/inv-068-clean.pdf"
+  },
+  {
+   "id": "inv-069-clean",
+   "kind": "clean",
+   "layout": "C",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": "18-3431389",
+   "invoice_number": "INV-007068",
+   "invoice_date": "2026-03-20",
+   "due_date": "2026-04-19",
+   "terms": "Net 30",
+   "po_number": "PO-4563",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "CON-114",
+     "description": "Steel bracket 40mm",
+     "quantity": "20",
+     "unit_price": "23.82",
+     "amount": "476.40",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "476.40",
+   "tax": "39.30",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "515.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4563"
+   },
+   "file": "invoices/inv-069-clean.pdf"
+  },
+  {
+   "id": "inv-071-clean",
+   "kind": "clean",
+   "layout": "C",
+   "vendor_id": "V110",
+   "vendor_name": "Coho Vineyard",
+   "tax_id": "29-7186739",
+   "invoice_number": "INV-007070",
+   "invoice_date": "2026-03-18",
+   "due_date": "2026-04-17",
+   "terms": "Net 30",
+   "po_number": "PO-4564",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "COH-100",
+     "description": "Bolt set M8",
+     "quantity": "20",
+     "unit_price": "203.33",
+     "amount": "4066.60",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "4066.60",
+   "tax": "284.66",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "4351.26",
+   "bank_account": "973449137050",
+   "routing_number": "090712606",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4564"
+   },
+   "file": "invoices/inv-071-clean.pdf"
+  },
+  {
+   "id": "inv-072-sequential",
+   "kind": "sequential",
+   "layout": "A",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007071",
+   "invoice_date": "2026-03-08",
+   "due_date": "2026-04-07",
+   "terms": "Net 30",
+   "po_number": "PO-4565",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-114",
+     "description": "Copy paper, case",
+     "quantity": "3",
+     "unit_price": "133.27",
+     "amount": "399.81",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "399.81",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "399.81",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4565"
+   },
+   "file": "invoices/inv-072-sequential.pdf"
+  },
+  {
+   "id": "inv-074-clean",
+   "kind": "clean",
+   "layout": "C",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": "85-1239289",
+   "invoice_number": "INV-007073",
+   "invoice_date": "2026-03-11",
+   "due_date": "2026-04-10",
+   "terms": "Net 30",
+   "po_number": "PO-4566",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "PRO-107",
+     "description": "Copy paper, case",
+     "quantity": "20",
+     "unit_price": "162.63",
+     "amount": "3252.60",
+     "po_line": 1
+    },
+    {
+     "item_code": "PRO-114",
+     "description": "Cable ties, pack of 100",
+     "quantity": "10",
+     "unit_price": "107.86",
+     "amount": "1078.60",
+     "po_line": 2
+    },
+    {
+     "item_code": "PRO-100",
+     "description": "Floor cleaner 5L",
+     "quantity": "4",
+     "unit_price": "163.51",
+     "amount": "654.04",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "4985.24",
+   "tax": "348.97",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "5334.21",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4566"
+   },
+   "file": "invoices/inv-074-clean.pdf"
+  },
+  {
+   "id": "inv-076-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007075",
+   "invoice_date": "2026-03-20",
+   "due_date": "2026-04-19",
+   "terms": "Net 30",
+   "po_number": "PO-4568",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-121",
+     "description": "LED panel 600x600",
+     "quantity": "10",
+     "unit_price": "332.51",
+     "amount": "3325.10",
+     "po_line": 1
+    },
+    {
+     "item_code": "NOR-114",
+     "description": "Bolt set M8",
+     "quantity": "2",
+     "unit_price": "121.81",
+     "amount": "243.62",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "3568.72",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "3568.72",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4568"
+   },
+   "file": "invoices/inv-076-clean.pdf"
+  },
+  {
+   "id": "inv-077-over_receipt",
+   "kind": "over_receipt",
+   "layout": "C",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007076",
+   "invoice_date": "2026-03-11",
+   "due_date": "2026-04-10",
+   "terms": "Net 30",
+   "po_number": "PO-4569",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-121",
+     "description": "LED panel 600x600",
+     "quantity": "24",
+     "unit_price": "332.51",
+     "amount": "7980.24",
+     "po_line": 1
+    },
+    {
+     "item_code": "NOR-107",
+     "description": "Pallet wrap film",
+     "quantity": "4",
+     "unit_price": "337.34",
+     "amount": "1349.36",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "9329.60",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "9329.60",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "QTY_EXCEEDS_RECEIVED"
+    ],
+    "touchless": false,
+    "po": "PO-4569"
+   },
+   "file": "invoices/inv-077-over_receipt.pdf"
+  },
+  {
+   "id": "inv-078-json_clean",
+   "kind": "json_clean",
+   "layout": "json",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV-007077",
+   "invoice_date": "2026-03-22",
+   "due_date": "2026-04-21",
+   "terms": "Net 30",
+   "po_number": "PO-4570",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-114",
+     "description": "Bolt set M8",
+     "quantity": "5",
+     "unit_price": "121.81",
+     "amount": "609.05",
+     "po_line": 1
+    },
+    {
+     "item_code": "NOR-107",
+     "description": "Pallet wrap film",
+     "quantity": "2",
+     "unit_price": "337.34",
+     "amount": "674.68",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "1283.73",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1283.73",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4570"
+   },
+   "file": "invoices/inv-078-json_clean.json"
+  },
+  {
+   "id": "inv-079-clean",
+   "kind": "clean",
+   "layout": "A",
+   "vendor_id": "V111",
+   "vendor_name": "Alpine Ski House",
+   "tax_id": "26-1394275",
+   "invoice_number": "INV-007078",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4571",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ALP-114",
+     "description": "LED panel 600x600",
+     "quantity": "40",
+     "unit_price": "267.31",
+     "amount": "10692.40",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "10692.40",
+   "tax": "882.12",
+   "tax_rate_printed": "0.0825",
+   "freight": null,
+   "total": "11574.52",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4571"
+   },
+   "file": "invoices/inv-079-clean.pdf"
+  },
+  {
+   "id": "inv-081-clean",
+   "kind": "clean",
+   "layout": "B",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": null,
+   "invoice_number": "INV-007080",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-22",
+   "terms": "Net 30",
+   "po_number": "PO-4572",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Steel bracket 40mm",
+     "quantity": "24",
+     "unit_price": "23.82",
+     "amount": "571.68",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Extension cord 15m",
+     "quantity": "10",
+     "unit_price": "291.06",
+     "amount": "2910.60",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "Cable ties, pack of 100",
+     "quantity": "4",
+     "unit_price": "217.06",
+     "amount": "868.24",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "4350.52",
+   "tax": "358.92",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "4709.44",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4572"
+   },
+   "file": "invoices/inv-081-clean.pdf"
+  },
+  {
+   "id": "inv-009-similar_distinct",
+   "kind": "similar_distinct",
+   "layout": "C",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": "18-3431389",
+   "invoice_number": "INV-007009",
+   "invoice_date": "2026-03-21",
+   "due_date": "2026-04-20",
+   "terms": "Net 30",
+   "po_number": "PO-4509",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "CON-114",
+     "description": "Steel bracket 40mm",
+     "quantity": "12",
+     "unit_price": "23.82",
+     "amount": "285.84",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "285.84",
+   "tax": "23.58",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "309.42",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4509"
+   },
+   "file": "invoices/inv-009-similar_distinct.pdf"
+  },
+  {
+   "id": "inv-011-exact_dup",
+   "kind": "exact_dup",
+   "layout": "C",
+   "vendor_id": "V104",
+   "vendor_name": "Adventure Works",
+   "tax_id": "56-8571920",
+   "invoice_number": "INV 007010",
+   "invoice_date": "2026-03-11",
+   "due_date": "2026-04-10",
+   "terms": "Net 30",
+   "po_number": "PO-4510",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ADV-100",
+     "description": "Label printer rolls",
+     "quantity": "12",
+     "unit_price": "175.63",
+     "amount": "2107.56",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "2107.56",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2107.56",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "EXACT_DUPLICATE"
+    ],
+    "touchless": false,
+    "po": "PO-4510"
+   },
+   "file": "invoices/inv-011-exact_dup.pdf"
+  },
+  {
+   "id": "inv-035-possible_dup",
+   "kind": "possible_dup",
+   "layout": "A",
+   "vendor_id": "V108",
+   "vendor_name": "Lucerne Publishing",
+   "tax_id": "71-1963531",
+   "invoice_number": "INV-007035",
+   "invoice_date": "2026-03-08",
+   "due_date": "2026-04-06",
+   "terms": "Net 30",
+   "po_number": "PO-4533",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "LUC-114",
+     "description": "Hydraulic hose 2m",
+     "quantity": "2",
+     "unit_price": "276.45",
+     "amount": "552.90",
+     "po_line": 1
+    },
+    {
+     "item_code": "LUC-107",
+     "description": "Bolt set M8",
+     "quantity": "4",
+     "unit_price": "24.28",
+     "amount": "97.12",
+     "po_line": 2
+    },
+    {
+     "item_code": "LUC-121",
+     "description": "Hard hat, white",
+     "quantity": "10",
+     "unit_price": "164.41",
+     "amount": "1644.10",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "2294.12",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2294.12",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "POSSIBLE_DUPLICATE"
+    ],
+    "touchless": false,
+    "po": "PO-4533"
+   },
+   "file": "invoices/inv-035-possible_dup.pdf"
+  },
+  {
+   "id": "inv-038-exact_dup",
+   "kind": "exact_dup",
+   "layout": "A",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": "98-8013380",
+   "invoice_number": "INV 007037",
+   "invoice_date": "2026-03-20",
+   "due_date": "2026-04-19",
+   "terms": "Net 30",
+   "po_number": "PO-4535",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "NOR-121",
+     "description": "LED panel 600x600",
+     "quantity": "4",
+     "unit_price": "332.51",
+     "amount": "1330.04",
+     "po_line": 1
+    },
+    {
+     "item_code": "NOR-114",
+     "description": "Bolt set M8",
+     "quantity": "24",
+     "unit_price": "121.81",
+     "amount": "2923.44",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "4253.48",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "4253.48",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "EXACT_DUPLICATE"
+    ],
+    "touchless": false,
+    "po": "PO-4535"
+   },
+   "file": "invoices/inv-038-exact_dup.pdf"
+  },
+  {
+   "id": "inv-040-clean-again",
+   "kind": "same_file_again",
+   "layout": "B",
+   "vendor_id": "V100",
+   "vendor_name": "Northwind Traders",
+   "tax_id": null,
+   "invoice_number": "INV-007040",
+   "invoice_date": "2026-03-03",
+   "due_date": "2026-04-02",
+   "terms": "Net 30",
+   "po_number": "PO-4537",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Pallet wrap film",
+     "quantity": "5",
+     "unit_price": "337.34",
+     "amount": "1686.70",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1686.70",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1686.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "EXACT_DUPLICATE"
+    ],
+    "touchless": false,
+    "po": "PO-4537"
+   },
+   "same_file_as": "inv-040-clean",
+   "file": "invoices/inv-040-clean.pdf"
+  },
+  {
+   "id": "inv-061-sequential",
+   "kind": "sequential",
+   "layout": "B",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": null,
+   "invoice_number": "INV-007060",
+   "invoice_date": "2026-03-21",
+   "due_date": "2026-04-20",
+   "terms": "Net 30",
+   "po_number": "PO-4556",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Shipping cartons, bundle of 25",
+     "quantity": "8",
+     "unit_price": "255.78",
+     "amount": "2046.24",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Safety gloves, size L",
+     "quantity": "1",
+     "unit_price": "367.80",
+     "amount": "367.80",
+     "po_line": 2
+    },
+    {
+     "item_code": "",
+     "description": "Copy paper, case",
+     "quantity": "3",
+     "unit_price": "133.27",
+     "amount": "399.81",
+     "po_line": 3
+    }
+   ],
+   "subtotal": "2813.85",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "2813.85",
+   "bank_account": "182613120944",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4556"
+   },
+   "file": "invoices/inv-061-sequential.pdf"
+  },
+  {
+   "id": "inv-064-sequential",
+   "kind": "sequential",
+   "layout": "B",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": null,
+   "invoice_number": "INV-007063",
+   "invoice_date": "2026-03-13",
+   "due_date": "2026-04-12",
+   "terms": "Net 30",
+   "po_number": "PO-4558",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Cable ties, pack of 100",
+     "quantity": "16",
+     "unit_price": "217.06",
+     "amount": "3472.96",
+     "po_line": 1
+    },
+    {
+     "item_code": "",
+     "description": "Extension cord 15m",
+     "quantity": "16",
+     "unit_price": "291.06",
+     "amount": "4656.96",
+     "po_line": 2
+    }
+   ],
+   "subtotal": "8129.92",
+   "tax": "670.72",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "8800.64",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4558"
+   },
+   "file": "invoices/inv-064-sequential.pdf"
+  },
+  {
+   "id": "inv-070-possible_dup",
+   "kind": "possible_dup",
+   "layout": "C",
+   "vendor_id": "V101",
+   "vendor_name": "Contoso Supply",
+   "tax_id": "18-3431389",
+   "invoice_number": "INV-007069",
+   "invoice_date": "2026-03-23",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4563",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "CON-114",
+     "description": "Steel bracket 40mm",
+     "quantity": "20",
+     "unit_price": "23.82",
+     "amount": "476.40",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "476.40",
+   "tax": "39.30",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "515.70",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "POSSIBLE_DUPLICATE"
+    ],
+    "touchless": false,
+    "po": "PO-4563"
+   },
+   "file": "invoices/inv-070-possible_dup.pdf"
+  },
+  {
+   "id": "inv-073-sequential",
+   "kind": "sequential",
+   "layout": "A",
+   "vendor_id": "V103",
+   "vendor_name": "Tailspin Freight",
+   "tax_id": "35-4499093",
+   "invoice_number": "INV-007072",
+   "invoice_date": "2026-03-07",
+   "due_date": "2026-04-06",
+   "terms": "Net 30",
+   "po_number": "PO-4565",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "TAI-114",
+     "description": "Copy paper, case",
+     "quantity": "5",
+     "unit_price": "133.27",
+     "amount": "666.35",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "666.35",
+   "tax": null,
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "666.35",
+   "bank_account": "182613120944",
+   "routing_number": "098314677",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4565"
+   },
+   "file": "invoices/inv-073-sequential.pdf"
+  },
+  {
+   "id": "inv-075-similar_distinct",
+   "kind": "similar_distinct",
+   "layout": "B",
+   "vendor_id": "V107",
+   "vendor_name": "Proseware Inc",
+   "tax_id": null,
+   "invoice_number": "INV-007074",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4567",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "",
+     "description": "Floor cleaner 5L",
+     "quantity": "8",
+     "unit_price": "163.51",
+     "amount": "1308.08",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "1308.08",
+   "tax": "91.57",
+   "tax_rate_printed": null,
+   "freight": null,
+   "total": "1399.65",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [],
+    "touchless": true,
+    "po": "PO-4567"
+   },
+   "file": "invoices/inv-075-similar_distinct.pdf"
+  },
+  {
+   "id": "inv-080-exact_dup",
+   "kind": "exact_dup",
+   "layout": "A",
+   "vendor_id": "V111",
+   "vendor_name": "Alpine Ski House",
+   "tax_id": "26-1394275",
+   "invoice_number": "INV 007078",
+   "invoice_date": "2026-03-15",
+   "due_date": "2026-04-14",
+   "terms": "Net 30",
+   "po_number": "PO-4571",
+   "currency": "USD",
+   "lines": [
+    {
+     "item_code": "ALP-114",
+     "description": "LED panel 600x600",
+     "quantity": "40",
+     "unit_price": "267.31",
+     "amount": "10692.40",
+     "po_line": 1
+    }
+   ],
+   "subtotal": "10692.40",
+   "tax": "882.12",
+   "tax_rate_printed": "0.0825",
+   "freight": null,
+   "total": "11574.52",
+   "bank_account": "",
+   "routing_number": "",
+   "expect": {
+    "codes": [
+     "EXACT_DUPLICATE"
+    ],
+    "touchless": false,
+    "po": "PO-4571"
+   },
+   "file": "invoices/inv-080-exact_dup.pdf"
+  }
+ ],
+ "print_failures": []
+}

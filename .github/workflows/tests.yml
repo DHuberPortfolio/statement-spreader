@@ -1,0 +1,54 @@
+name: tests
+
+# A fresh install on every push, so a dependency release that changes behaviour shows up here first.
+# Linux matters: its lxml 6 wheels use libxml2 2.14, which stops at the first </html>, while the Windows wheel
+# bundles libxml2 2.11. That difference once hid a reader bug. The oldest lxml the pin allows is tested too.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "3.11"
+          - python: "3.13"
+          - python: "3.11"
+            lxml: "lxml==5.2.*"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install (newest allowed versions)
+        env:
+          LXML: ${{ matrix.lxml || 'lxml' }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]" "$LXML"
+      - name: Library versions
+        run: python -c "import lxml.etree as e; print('lxml', e.LXML_VERSION, 'libxml2', e.LIBXML_VERSION)"
+      - name: Tests
+        run: python -m pytest
+      - name: The spreader command
+        run: spreader --help
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npm test

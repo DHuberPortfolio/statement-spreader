@@ -1,0 +1,15 @@
+# Example overlay: a company with exact price matching, a longer duplicate window, and
+# invoices from a supplier that labels its invoice number "Document No." and its PO "Order Ref".
+extends: default-ap.yaml
+id: example-company-strict
+name: Example Co - strict three-way match
+
+matching:
+  price_tolerance: {abs: "0.00"}
+
+duplicates:
+  window_days: 45
+
+extra_labels:
+  invoice_number: ["Document No."]
+  po_number: ["Order Ref"]

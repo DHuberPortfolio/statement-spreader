@@ -1,0 +1,46 @@
+# Bank statement vs general ledger cash account: the default reconciliation profile.
+# A company adapts it with a small overlay (see example-company-signed.yaml): column names,
+# tolerances, which rules may auto-accept. Signs: + money in, - money out, on both sides.
+id: bank-vs-gl
+name: Operating bank account vs general ledger cash
+version: "1"
+currency: USD
+
+left:
+  name: bank
+  label: Bank statement
+  id_field: Transaction ID
+  date_field: Posted Date
+  inflow_field: Deposits
+  outflow_field: Withdrawals
+  reference_field: Reference
+  description_field: Description
+  currency_field: Currency
+
+right:
+  name: ledger
+  label: General ledger (cash)
+  id_field: Entry No
+  date_field: Date
+  inflow_field: Debit        # a debit to cash is money in
+  outflow_field: Credit
+  reference_field: Ref
+  description_field: Memo
+  counterparty_field: Counterparty
+  currency_field: Currency
+
+matching:
+  date_window_days: 5
+  reference_date_window_days: 45
+  amount_tolerance: {abs: "0.00"}
+  review_tolerance: {abs: "50.00", pct: "0.05", combine: min}
+  description_similarity: 85
+  strategy: component
+  auto_accept: [reference, unique_amount_date, assignment, one_to_many, many_to_one]
+  one_to_many: {enabled: true, max_items: 4, max_candidates: 40}
+  many_to_one: {enabled: true, max_items: 4, max_candidates: 40}
+
+exceptions:
+  timing_days: 4
+  duplicate_date_days: 3
+  reversal_days: 10

@@ -411,21 +411,21 @@
    "statement": "income_statement",
    "line": "cogs",
    "period": "2025-12-27/12M",
-   "value": "33943000000",
+   "value": "17487000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "cogs",
    "period": "2024-12-28/12M",
-   "value": "25174000000",
+   "value": "13060000000",
    "precision": "1000000"
   },
   {
    "statement": "income_statement",
    "line": "cogs",
    "period": "2023-12-30/12M",
-   "value": "23498000000",
+   "value": "12220000000",
    "precision": "1000000"
   },
   {
@@ -852,7 +852,7 @@
    "statement": "cash_flow",
    "line": "cfo",
    "period": "2025-12-27/12M",
-   "value": "14202000000",
+   "value": "7709000000",
    "precision": "1000000"
   },
   {
@@ -915,7 +915,7 @@
    "statement": "cash_flow",
    "line": "cfi",
    "period": "2025-12-27/12M",
-   "value": "-12384000000",
+   "value": "-5533000000",
    "precision": "1000000"
   },
   {
@@ -1047,22 +1047,15 @@
   {
    "statement": "income_statement",
    "line": "net_income",
-   "period": "2025-12-27/12M",
-   "value": "4335000000",
-   "precision": "1000000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "net_income",
    "period": "2024-12-28/12M",
    "value": "1641000000",
    "precision": "1000000"
   },
   {
-   "statement": "balance_sheet",
-   "line": "total_equity",
-   "period": "2025-12-27/I",
-   "value": "62999000000",
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2025-12-27/12M",
+   "value": "4335000000",
    "precision": "1000000"
   },
   {
@@ -1070,6 +1063,13 @@
    "line": "total_equity",
    "period": "2024-12-28/I",
    "value": "57568000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity",
+   "period": "2025-12-27/I",
+   "value": "62999000000",
    "precision": "1000000"
   }
  ],

@@ -1,0 +1,31 @@
+# Example overlay: the model's draft (suggested-layout-e.yaml) after a person's review. One line changed:
+# the model read "Our Ref." (the supplier's own reference, i.e. the invoice number) as a PO number.
+extends: default-ap.yaml
+id: example-supplier-layout-e
+name: Default AP policy + wording for layout-E suppliers (reviewed model draft)
+extra_labels:
+  total:
+  - Balance Payable
+  terms:
+  - Conditions
+  invoice_date:
+  - Dated
+  subtotal:
+  - Goods Value
+  po_number:
+  - Your Ref.
+  due_date:
+  - Settle By
+  invoice_number:
+  - Our Ref.
+extra_columns:
+  unit_price:
+  - Each
+  amount:
+  - Line Value
+  description:
+  - Particulars
+  quantity:
+  - Qty
+  item_code:
+  - Ref

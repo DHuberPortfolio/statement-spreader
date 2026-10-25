@@ -1,0 +1,811 @@
+{
+ "name": "invoice-v1",
+ "policy": "default-ap 4a1df7e3bcf5208b",
+ "sets": {
+  "dev": {
+   "rates": {
+    "false_touchless": {
+     "n": 0,
+     "d": 37,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.09406095745514377
+    },
+    "touchless_rate": {
+     "n": 44,
+     "d": 81,
+     "rate": 0.5432098765432098,
+     "low": 0.43523822983845284,
+     "high": 0.6472684649904988
+    },
+    "touchless_recall": {
+     "n": 44,
+     "d": 44,
+     "rate": 1.0,
+     "low": 0.9197016822179859,
+     "high": 0.9999999999999999
+    },
+    "header_fields": {
+     "n": 729,
+     "d": 729,
+     "rate": 1.0,
+     "low": 0.9947579395056177,
+     "high": 1.0
+    },
+    "line_items": {
+     "n": 242,
+     "d": 242,
+     "rate": 1.0,
+     "low": 0.9843736780105564,
+     "high": 1.0
+    },
+    "po_precision": {
+     "n": 77,
+     "d": 77,
+     "rate": 1.0,
+     "low": 0.9524799113327793,
+     "high": 1.0
+    },
+    "po_recall": {
+     "n": 77,
+     "d": 77,
+     "rate": 1.0,
+     "low": 0.9524799113327793,
+     "high": 1.0
+    },
+    "po_line": {
+     "n": 234,
+     "d": 234,
+     "rate": 1.0,
+     "low": 0.9838480736759255,
+     "high": 1.0
+    },
+    "reason_codes": {
+     "n": 37,
+     "d": 37,
+     "rate": 1.0,
+     "low": 0.9059390425448564,
+     "high": 1.0
+    },
+    "false_exceptions": {
+     "n": 0,
+     "d": 44,
+     "rate": 0.0,
+     "low": 6.938893903907228e-18,
+     "high": 0.08029831778201396
+    },
+    "duplicate_precision": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    },
+    "duplicate_recall": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    }
+   },
+   "fields": {
+    "vendor_id": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "invoice_number": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "invoice_date": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "due_date": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "po_number": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "currency": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "subtotal": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "tax": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "total": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    }
+   },
+   "codes": {
+    "BANK_DETAILS_CHANGED": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "BANK_DETAILS_UNVERIFIED": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "EXACT_DUPLICATE": {
+     "n": 4,
+     "d": 4,
+     "rate": 1.0,
+     "low": 0.5100999795960008,
+     "high": 1.0
+    },
+    "LINE_EXTENSION_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "MISSING_RECEIPT": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "NO_PO_REFERENCE": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "PO_NOT_FOUND": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "PO_NOT_OPEN": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "PRICE_OVER_PO": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "QTY_EXCEEDS_RECEIVED": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "TAX_MISMATCH": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "TAX_UNVERIFIED": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "TOTAL_MISMATCH": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "VENDOR_MISMATCH": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "bank_changed": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "bank_unverified": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "clean": {
+     "n": 22,
+     "touchless": 22
+    },
+    "closed_po": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "exact_dup": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "json_clean": {
+     "n": 3,
+     "touchless": 3
+    },
+    "line_math": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "missing_receipt": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "multipage": {
+     "n": 2,
+     "touchless": 2
+    },
+    "no_po_ref": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "over_receipt": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "po_not_found": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "possible_dup": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "price_over": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "price_within_tol": {
+     "n": 3,
+     "touchless": 3
+    },
+    "same_file_again": {
+     "n": 1,
+     "codes_expected": 1,
+     "codes_raised": 1,
+     "touchless": 0
+    },
+    "sequential": {
+     "n": 6,
+     "touchless": 6
+    },
+    "service_2way": {
+     "n": 4,
+     "touchless": 4
+    },
+    "similar_distinct": {
+     "n": 2,
+     "touchless": 2
+    },
+    "tax_unverified": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "tax_wrong": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "total_math": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "vendor_alias": {
+     "n": 2,
+     "touchless": 2
+    },
+    "vendor_mismatch": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    }
+   },
+   "false_exceptions": [],
+   "failures": [],
+   "invoices": 81,
+   "lines_read": 242,
+   "seconds_per_invoice": {
+    "mean": 0.042,
+    "max": 0.217
+   }
+  },
+  "holdout": {
+   "rates": {
+    "false_touchless": {
+     "n": 0,
+     "d": 37,
+     "rate": 0.0,
+     "low": 0.0,
+     "high": 0.09406095745514377
+    },
+    "touchless_rate": {
+     "n": 43,
+     "d": 81,
+     "rate": 0.5308641975308642,
+     "low": 0.42326527260622987,
+     "high": 0.6356680808430215
+    },
+    "touchless_recall": {
+     "n": 43,
+     "d": 44,
+     "rate": 0.9772727272727273,
+     "low": 0.8819202086846235,
+     "high": 0.9959768516143629
+    },
+    "header_fields": {
+     "n": 729,
+     "d": 729,
+     "rate": 1.0,
+     "low": 0.9947579395056177,
+     "high": 1.0
+    },
+    "line_items": {
+     "n": 263,
+     "d": 263,
+     "rate": 1.0,
+     "low": 0.9856034441406437,
+     "high": 0.9999999999999999
+    },
+    "po_precision": {
+     "n": 77,
+     "d": 77,
+     "rate": 1.0,
+     "low": 0.9524799113327793,
+     "high": 1.0
+    },
+    "po_recall": {
+     "n": 77,
+     "d": 77,
+     "rate": 1.0,
+     "low": 0.9524799113327793,
+     "high": 1.0
+    },
+    "po_line": {
+     "n": 253,
+     "d": 253,
+     "rate": 1.0,
+     "low": 0.9850429213959109,
+     "high": 1.0
+    },
+    "reason_codes": {
+     "n": 37,
+     "d": 37,
+     "rate": 1.0,
+     "low": 0.9059390425448564,
+     "high": 1.0
+    },
+    "false_exceptions": {
+     "n": 1,
+     "d": 44,
+     "rate": 0.022727272727272728,
+     "low": 0.004023148385637013,
+     "high": 0.11807979131537633
+    },
+    "duplicate_precision": {
+     "n": 6,
+     "d": 7,
+     "rate": 0.8571428571428571,
+     "low": 0.48686549668097007,
+     "high": 0.9743210440510253
+    },
+    "duplicate_recall": {
+     "n": 6,
+     "d": 6,
+     "rate": 1.0,
+     "low": 0.6096569663469354,
+     "high": 0.9999999999999999
+    }
+   },
+   "fields": {
+    "vendor_id": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "invoice_number": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "invoice_date": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "due_date": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "po_number": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "currency": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "subtotal": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "tax": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    },
+    "total": {
+     "n": 81,
+     "d": 81,
+     "rate": 1.0,
+     "low": 0.954720325877871,
+     "high": 0.9999999999999999
+    }
+   },
+   "codes": {
+    "BANK_DETAILS_CHANGED": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "BANK_DETAILS_UNVERIFIED": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "EXACT_DUPLICATE": {
+     "n": 4,
+     "d": 4,
+     "rate": 1.0,
+     "low": 0.5100999795960008,
+     "high": 1.0
+    },
+    "LINE_EXTENSION_MISMATCH": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "MISSING_RECEIPT": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "NO_PO_REFERENCE": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "POSSIBLE_DUPLICATE": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "PO_NOT_FOUND": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "PO_NOT_OPEN": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "PRICE_OVER_PO": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "QTY_EXCEEDS_RECEIVED": {
+     "n": 3,
+     "d": 3,
+     "rate": 1.0,
+     "low": 0.43849391955098227,
+     "high": 1.0
+    },
+    "TAX_MISMATCH": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "TAX_UNVERIFIED": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "TOTAL_MISMATCH": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    },
+    "VENDOR_MISMATCH": {
+     "n": 2,
+     "d": 2,
+     "rate": 1.0,
+     "low": 0.34237195288961925,
+     "high": 1.0
+    }
+   },
+   "by_kind": {
+    "bank_changed": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "bank_unverified": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "clean": {
+     "n": 22,
+     "touchless": 22
+    },
+    "closed_po": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "exact_dup": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "json_clean": {
+     "n": 3,
+     "touchless": 3
+    },
+    "line_math": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "missing_receipt": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "multipage": {
+     "n": 2,
+     "touchless": 2
+    },
+    "no_po_ref": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "over_receipt": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "po_not_found": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "possible_dup": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "price_over": {
+     "n": 3,
+     "codes_expected": 3,
+     "codes_raised": 3,
+     "touchless": 0
+    },
+    "price_within_tol": {
+     "n": 3,
+     "touchless": 3
+    },
+    "same_file_again": {
+     "n": 1,
+     "codes_expected": 1,
+     "codes_raised": 1,
+     "touchless": 0
+    },
+    "sequential": {
+     "n": 6,
+     "touchless": 5,
+     "false_exceptions": 1
+    },
+    "service_2way": {
+     "n": 4,
+     "touchless": 4
+    },
+    "similar_distinct": {
+     "n": 2,
+     "touchless": 2
+    },
+    "tax_unverified": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "tax_wrong": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "total_math": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    },
+    "vendor_alias": {
+     "n": 2,
+     "touchless": 2
+    },
+    "vendor_mismatch": {
+     "n": 2,
+     "codes_expected": 2,
+     "codes_raised": 2,
+     "touchless": 0
+    }
+   },
+   "false_exceptions": [
+    {
+     "doc": "inv-080-sequential",
+     "kind": "sequential",
+     "codes": [
+      "POSSIBLE_DUPLICATE"
+     ]
+    }
+   ],
+   "failures": [],
+   "invoices": 81,
+   "lines_read": 263,
+   "seconds_per_invoice": {
+    "mean": 0.027,
+    "max": 0.15
+   }
+  }
+ }
+}

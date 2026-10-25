@@ -1,0 +1,35 @@
+{
+ "vendor": {
+  "name": "Northwind Traders",
+  "tax_id": "48-4989537"
+ },
+ "invoice_number": "007073",
+ "invoice_date": "2026-03-15",
+ "due_date": "2026-04-14",
+ "po_number": "PO-4565",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "2413.98",
+ "tax": null,
+ "total": "2413.98",
+ "lines": [
+  {
+   "item_code": "NOR-107",
+   "description": "Extension cord 15m",
+   "quantity": "2",
+   "unit_price": "335.03",
+   "amount": "670.06"
+  },
+  {
+   "item_code": "NOR-114",
+   "description": "Floor cleaner 5L",
+   "quantity": "8",
+   "unit_price": "217.99",
+   "amount": "1743.92"
+  }
+ ],
+ "remit_to": {
+  "account_number": "259831267102",
+  "routing_number": "076605882"
+ }
+}

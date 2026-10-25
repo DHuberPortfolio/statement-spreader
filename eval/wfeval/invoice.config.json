@@ -1,0 +1,19 @@
+{
+  "id_field": "id",
+  "outputs": {
+    "codes": { "type": "set" }
+  },
+  "routing": {
+    "field": "route",
+    "gold_field": "expected_route",
+    "map": {
+      "eligible_for_approval": "auto",
+      "needs_review": "review",
+      "blocked": "review",
+      "rejected": "block",
+      "needs_person": "review"
+    }
+  },
+  "wrong_when": "gold_route",
+  "trap_field": "trap"
+}

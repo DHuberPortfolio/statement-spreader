@@ -1,0 +1,1125 @@
+{
+  "workbooks": {
+    "budget_fy25.xlsx": {
+      "description": "Marketing department budget FY2025. Line items down rows 5-12, Jan-Dec across B:M (Jan typed base, Feb-Dec grow by a monthly rate in $B$2), FY total in N, total row 13.",
+      "faults": [
+        {
+          "sheet": "Budget",
+          "cell": "H8",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Events Jul grows from Paid media Jun (row 7) instead of Events Jun (row 8)"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "J6",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Contractors Sep drops the growth term: =I6 instead of =I6*(1+$B$2)"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "K10",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "typed 4200 in the Software Oct cell; Sep and Nov are growth formulas; no comment"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "F13",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "May total stops at row 11 and misses Print & collateral (row 12)",
+          "also_ok": [
+            "INCONSISTENT_FORMULA"
+          ]
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Budget",
+          "cell": "K12",
+          "what": "typed override in a formula run, documented with a cell comment and blue input font"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "B2",
+          "what": "growth assumption typed input (percentage)"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "B5:B12",
+          "what": "January base values typed (first period input), Feb-Dec are formulas"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "N5:N13",
+          "what": "FY2025 total column at the end of the monthly run (SUM across the row)"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "A1",
+          "what": "number inside a label ('FY2025')"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "A15",
+          "what": "text note with numbers in it"
+        }
+      ]
+    },
+    "loan_amortisation.xlsx": {
+      "description": "Equipment loan amortisation. Inputs sheet with defined names (LoanAmount, AnnualRate, TermMonths); Schedule sheet with 60 monthly periods down rows 7-66 starting in column B, totals in row 4 above the table.",
+      "faults": [
+        {
+          "sheet": "Inputs",
+          "cell": "B9",
+          "kind": "UNKNOWN_NAME",
+          "severity": "error",
+          "note": "uses AnnualRt; the defined name is AnnualRate"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "E40",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "period 34 interest uses a typed 6.5% instead of the AnnualRate name used by every other period"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "C30",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "opening balance for period 24 pasted as a value; rows above and below are =G(previous row)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "G66",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "final closing balance forced with +0.42 to show zero"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "B3:B6",
+          "what": "typed loan inputs"
+        },
+        {
+          "sheet": "Inputs",
+          "cell": "B7",
+          "what": "multiply by unit constant (*12 years to months)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "C7",
+          "what": "first opening balance pulls the loan amount; later rows take prior closing balance"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "B7",
+          "what": "period counter starts with a typed 1"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "B8:B66",
+          "what": "period counter =previous+1 (constant increment, not a plug)"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "D7:D66",
+          "what": "PMT with AnnualRate/12 (unit constant), identical every row"
+        },
+        {
+          "sheet": "Schedule",
+          "cell": "D4:F4",
+          "what": "totals placed above the table that correctly sum rows 7-66"
+        }
+      ]
+    },
+    "three_statement_model.xlsx": {
+      "description": "Small three-statement model, USD 000. Years across C:G (FY2023A-FY2024A typed actuals, FY2025E-FY2027E formulas). Sheets Assumptions, P&L, Balance Sheet, Cash Flow reference each other; hidden Calc sheet; defined names InterestRate and CreditorDays plus two broken names.",
+      "faults": [
+        {
+          "sheet": null,
+          "cell": "name:PriorYearRev",
+          "kind": "BROKEN_NAME",
+          "severity": "error",
+          "note": "defined name points at Assumptions!#REF! (row deleted)"
+        },
+        {
+          "sheet": null,
+          "cell": "name:FX_Rate",
+          "kind": "BROKEN_NAME",
+          "severity": "error",
+          "note": "defined name points at sheet 'Old FX', which no longer exists"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "F10",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "FY2026 opex uses the FY2025 assumption (column E) instead of column F"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "F11",
+          "kind": "REF_ERROR",
+          "severity": "error",
+          "note": "depreciation lost its PP&E reference after a Balance Sheet row was deleted",
+          "also_ok": [
+            "INCONSISTENT_FORMULA"
+          ]
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "C7",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "FY2023 receivables stored as text '5,940'; Total assets =SUM(C6:C8) skips it"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "G13",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "FY2027 equity has +1500 typed in to force the balance check"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "E18",
+          "kind": "MISSING_SHEET",
+          "severity": "error",
+          "note": "references sheet 'Covenants', which is not in the workbook"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Cover",
+          "cell": "A1",
+          "what": "numbers in label text (FY2023A, FY2027E)"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "E5:G11",
+          "what": "typed forecast assumptions (percentages and days)"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "C12:C13",
+          "what": "typed single-value assumptions used through defined names"
+        },
+        {
+          "sheet": "Assumptions",
+          "cell": "C3:G3",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C6:D7",
+          "what": "historical actual columns typed, forecast columns are formulas"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C10:D11",
+          "what": "historical actual columns typed, forecast columns are formulas"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C13:D13",
+          "what": "historical actual interest typed"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C15:D15",
+          "what": "historical actual tax typed"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "E15:G15",
+          "what": "tax row sits between PBT (=x12+x13) and net income (=x14+x15); those two happen to share a 'two rows above' pattern but are not a run the tax row breaks"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "C3:G3",
+          "what": "year header row of typed numbers"
+        },
+        {
+          "sheet": "P&L",
+          "cell": "E13:G13",
+          "what": "interest via the defined name InterestRate on opening debt"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "D6:D8",
+          "what": "FY2024 actual assets typed"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "C11:D13",
+          "what": "actual liabilities and equity typed"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "E7:G7",
+          "what": "receivables = revenue * debtor days / 365 (unit constant)"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "E11:G11",
+          "what": "payables via defined name CreditorDays / 365"
+        },
+        {
+          "sheet": "Balance Sheet",
+          "cell": "C16:G16",
+          "what": "balance check row (assets minus liabilities and equity)"
+        },
+        {
+          "sheet": "Cash Flow",
+          "cell": "E14:G14",
+          "what": "grand total adds only the three subtotals (operations, investing, debt)"
+        },
+        {
+          "sheet": "Cash Flow",
+          "cell": "E15:G15",
+          "what": "opening cash pulls prior-year closing cash from the Balance Sheet"
+        }
+      ]
+    },
+    "sales_commission.xlsx": {
+      "description": "Q3 sales commission calculator. Rates sheet with a tiered rate card; 'Commission Q3' sheet with 15 reps in rows 6-20 starting at column B, totals in row 22 and a bonus-pool block below.",
+      "faults": [
+        {
+          "sheet": "Rates",
+          "cell": "C12",
+          "kind": "EXTERNAL_LINK",
+          "severity": "risk",
+          "note": "pulls Q2 payout from another workbook Commission_Q2.xlsx"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "H22",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "commission total stops at row 19 and misses rep SR-115 (row 20)"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "E9",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "SR-104 sales stored as text '148,300'; E22 SUM skips it"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "H14",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "SR-109 commission uses the rate from row 13"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "G17",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "typed 6% rate for SR-112 with no note; rows above and below look up the rate card"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "D29",
+          "kind": "CIRCULAR_REFERENCE",
+          "severity": "error",
+          "note": "bonus pool is 10% of profit after the bonus pool: D29 -> D28 -> D27 -> D29",
+          "cycle": [
+            "Commission Q3!D29",
+            "Commission Q3!D28",
+            "Commission Q3!D27"
+          ]
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Rates",
+          "cell": "B5:C8",
+          "what": "typed tier table (thresholds and rates)"
+        },
+        {
+          "sheet": "Rates",
+          "cell": "C10",
+          "what": "typed percentage assumption"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "G11",
+          "what": "typed rate override documented with a cell comment and blue input font"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "D6:D20",
+          "what": "typed quota inputs"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "G6:G10",
+          "what": "IFERROR-wrapped VLOOKUP into the rate card"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "I6:I20",
+          "what": "text notes beside numbers"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "B2",
+          "what": "numbers in label text (Q3, FY2025)"
+        },
+        {
+          "sheet": "Commission Q3",
+          "cell": "D25",
+          "what": "typed input (gross margin from GL)"
+        }
+      ]
+    },
+    "headcount_payroll.xlsx": {
+      "description": "Headcount and payroll plan FY2025. Assumptions (defined names), Roster of 20 employees in rows 5-24 with totals in row 26, Payroll Plan with months across C:N by department, hidden Lookups sheet.",
+      "faults": [
+        {
+          "sheet": "Assumptions",
+          "cell": "C9",
+          "kind": "UNKNOWN_NAME",
+          "severity": "error",
+          "note": "uses BenefitPerHead; the defined name is BenefitsPerHead"
+        },
+        {
+          "sheet": "Roster",
+          "cell": "D26",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "salary total stops at row 22 and misses the last two employees (rows 23-24)"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "M16",
+          "kind": "DOUBLE_COUNT",
+          "severity": "risk",
+          "note": "Nov total payroll sums M7:M15, which holds the department rows M7:M10 and their subtotal M11",
+          "also_ok": [
+            "INCONSISTENT_FORMULA"
+          ]
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "G13",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "May benefits point at Roster!$E$25 (blank row) instead of the FTE total in $E$26"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "I9",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "Operations July salaries typed over the merit formula; no note"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Assumptions",
+          "cell": "C4:C7",
+          "what": "typed assumption inputs (percentages typed on an assumptions sheet)"
+        },
+        {
+          "sheet": "Roster",
+          "cell": "A5:A24",
+          "what": "numeric employee IDs (codes, not summed)"
+        },
+        {
+          "sheet": "Roster",
+          "cell": "D5:E24",
+          "what": "typed salary and FTE inputs"
+        },
+        {
+          "sheet": "Roster",
+          "cell": "F5:F24",
+          "what": "divide by unit constant (/12 annual to monthly)"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "C5:N5",
+          "what": "header row of typed month numbers above formula columns"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "C7:C10",
+          "what": "first month pulls from the roster with SUMIF; later months roll forward"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "C15:N15",
+          "what": "typed contractor input row in blue input font"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "O7:O16",
+          "what": "FY total column at the end of the monthly run"
+        },
+        {
+          "sheet": "Payroll Plan",
+          "cell": "C16:L16",
+          "what": "SUM(C11:C15) over the subtotal, tax, benefits and contractor rows plus blank separator row 14; does not include rows 7-10, so no double count"
+        }
+      ]
+    },
+    "consolidation_fy25.xlsx": {
+      "description": "Group consolidation FY2025, USD 000. Three entity sheets (names with spaces), an Eliminations sheet, an FX sheet with a defined name for EUR/USD, and a Consolidation sheet with entities across columns C:F and the group in G. Hidden Mapping sheet.",
+      "faults": [
+        {
+          "sheet": "Eliminations",
+          "cell": "C12",
+          "kind": "CIRCULAR_REFERENCE",
+          "severity": "error",
+          "note": "fee elimination is set to minus the group fee line, which itself includes this elimination",
+          "cycle": [
+            "Eliminations!C12",
+            "Consolidation!G12",
+            "Consolidation!F12"
+          ]
+        },
+        {
+          "sheet": "FX",
+          "cell": "C5",
+          "kind": "EXTERNAL_LINK",
+          "severity": "risk",
+          "note": "GBP rate linked to a treasury workbook on a shared drive"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "D11",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "Entity B rent pulls Entity B salaries (row 10)"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "G13",
+          "kind": "SUM_OMITS_ROW",
+          "severity": "risk",
+          "note": "group other opex omits the Eliminations column F",
+          "also_ok": [
+            "INCONSISTENT_FORMULA"
+          ]
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "G16",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "group EBITDA has -1250 typed in to agree to the reported figure"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Entity A",
+          "cell": "C6:C7",
+          "what": "typed trial-balance amounts"
+        },
+        {
+          "sheet": "Entity A",
+          "cell": "C10:C13",
+          "what": "typed trial-balance amounts"
+        },
+        {
+          "sheet": "Entity B",
+          "cell": "C6:C7",
+          "what": "typed trial-balance amounts"
+        },
+        {
+          "sheet": "Entity B",
+          "cell": "C10:C13",
+          "what": "typed trial-balance amounts"
+        },
+        {
+          "sheet": "Entity C",
+          "cell": "C6:C7",
+          "what": "typed trial-balance amounts"
+        },
+        {
+          "sheet": "Entity C",
+          "cell": "C10:C13",
+          "what": "typed trial-balance amounts"
+        },
+        {
+          "sheet": "Eliminations",
+          "cell": "C6:C7",
+          "what": "typed intercompany elimination entries"
+        },
+        {
+          "sheet": "FX",
+          "cell": "C4",
+          "what": "typed FX rate input, used through defined name FX_EURUSD"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "E6:E7",
+          "what": "EUR entity converted with the defined name FX_EURUSD"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "E10:E13",
+          "what": "EUR entity converted with the defined name FX_EURUSD"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "C16:F16",
+          "what": "EBITDA adds only the two subtotals (gross profit and total opex)"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "C14:F14",
+          "what": "total opex sums the opex lines"
+        },
+        {
+          "sheet": "Consolidation",
+          "cell": "C6:C13",
+          "what": "cross-sheet references to entity sheets whose names contain spaces (quoted)"
+        }
+      ]
+    },
+    "capex_depreciation.xlsx": {
+      "description": "Fixed asset register with straight-line depreciation forecast FY2025-FY2029. Two categories with subtotals (rows 14 and 22) and a grand total (row 24); Disposals and Summary sheets.",
+      "faults": [
+        {
+          "sheet": "Asset Register",
+          "cell": "E24",
+          "kind": "DOUBLE_COUNT",
+          "severity": "risk",
+          "note": "total cost sums E8:E22, which contains the IT items and their subtotal E14 (and E17:E21 with E22)"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "K11",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "FY2028 depreciation for IT-1004 uses row 10's annual charge ($G10)"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "J19",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "FY2027 depreciation for VP-1003 typed over the formula, no note"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "E18",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "forklift cost stored as text '36500'; subtotal E22 skips it"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "C7",
+          "kind": "REF_ERROR",
+          "severity": "error",
+          "note": "disposals gain/(loss) reference became #REF! after a column was deleted"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Asset Register",
+          "cell": "J9",
+          "what": "typed override documented with a cell comment and blue font"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "D8:F13",
+          "what": "typed asset inputs (in-service year, cost, life)"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "D17:D21",
+          "what": "typed in-service years"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "H6:L6",
+          "what": "header row of typed years above formula columns"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "G24:L24",
+          "what": "grand total adds only the two category subtotals"
+        },
+        {
+          "sheet": "Asset Register",
+          "cell": "B2",
+          "what": "number in label text (FY2025)"
+        },
+        {
+          "sheet": "Disposals",
+          "cell": "C8:E8",
+          "what": "totals over rows 5-7 including a blank row 7"
+        }
+      ]
+    },
+    "accruals_rec.xlsx": {
+      "description": "October month-end accruals workpaper and accrued-liabilities reconciliation. Accruals table at B7 with recurring accruals (rows 8-21), cut-off invoices (rows 26-31) and a total; GL Rec sheet.",
+      "faults": [
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "F29",
+          "kind": "TEXT_NUMBER_IN_SUM",
+          "severity": "error",
+          "note": "recruitment fee pasted as text '1,250.00'; F32 SUM skips it"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "F17",
+          "kind": "INCONSISTENT_FORMULA",
+          "severity": "risk",
+          "note": "temp staff accrual multiplies by row 16's months"
+        },
+        {
+          "sheet": "GL Rec",
+          "cell": "C5",
+          "kind": "EXTERNAL_LINK",
+          "severity": "risk",
+          "note": "TB balance linked to the trial balance export workbook"
+        },
+        {
+          "sheet": "GL Rec",
+          "cell": "C11",
+          "kind": "MISSING_SHEET",
+          "severity": "error",
+          "note": "references sheet 'Sep-25 Accruals', which is not in this workbook"
+        },
+        {
+          "sheet": "GL Rec",
+          "cell": "C14",
+          "kind": "HARDCODED_PLUG",
+          "severity": "risk",
+          "note": "-317.42 typed in to make the unexplained difference show zero"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "D8:E21",
+          "what": "typed monthly amounts and months accrued"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "C8:C21",
+          "what": "numeric GL account codes (not summed)"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "C26:C31",
+          "what": "numeric GL account codes (not summed)"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "G8:G21",
+          "what": "text notes beside numbers"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "F23",
+          "what": "subtotal SUM range includes blank separator row 22"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "F26:F28",
+          "what": "typed invoice amounts (cut-off list is a typed input block)"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "F34",
+          "what": "grand total adds only the two subtotals"
+        },
+        {
+          "sheet": "Accruals Oct-25",
+          "cell": "B2",
+          "what": "numbers in label text (October 2025)"
+        },
+        {
+          "sheet": "GL Rec",
+          "cell": "C10",
+          "what": "typed reconciling item with an explanatory note beside it"
+        },
+        {
+          "sheet": "GL Rec",
+          "cell": "C12:C13",
+          "what": "typed reconciling items with notes"
+        },
+        {
+          "sheet": "GL Rec",
+          "cell": "B2",
+          "what": "numbers in label text (GL 2100, Oct-25)"
+        }
+      ]
+    },
+    "regional_sales_summary.xlsx": {
+      "description": "Clean workbook (no faults). Regional sales FY2025 by quarter with the total row placed ABOVE the items, region group label rows inside the SUM range, a 'n/a' text row, mix % (*100) and an IFERROR growth calc against a typed FY2024 sheet.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Summary",
+          "cell": "C5:I5",
+          "what": "total row placed above its items, correctly summing rows 7-18"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "C8:F17",
+          "what": "typed quarterly actuals"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "C18:F18",
+          "what": "text 'n/a' (not a number) inside the SUM range"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "B11",
+          "what": "group label rows 7, 11, 15 sit inside the total's SUM range (blank in number columns)"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "H8:H18",
+          "what": "mix percentage times 100 (unit constant)"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "I8:I18",
+          "what": "IFERROR-wrapped growth calc; the '-1' is the growth formula, not a plug"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "C4:F4",
+          "what": "quarter labels Q1-Q4 (numbers in label text)"
+        },
+        {
+          "sheet": "FY2024",
+          "cell": "C8:F17",
+          "what": "typed prior-year actuals"
+        },
+        {
+          "sheet": "FY2024",
+          "cell": "C5:G5",
+          "what": "total row above items"
+        }
+      ]
+    },
+    "opex_forecast_v1.xlsx": {
+      "description": "Operating expense forecast FY2026, version 1. Sheet 'Op Ex' (name with a space) with months across B:M and FY total in N; Summary sheet references it.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Op Ex",
+          "cell": "B3",
+          "what": "growth assumption input"
+        },
+        {
+          "sheet": "Op Ex",
+          "cell": "B6:B13",
+          "what": "January base values typed"
+        },
+        {
+          "sheet": "Op Ex",
+          "cell": "N6:N14",
+          "what": "FY total column at the end of the monthly run"
+        }
+      ]
+    },
+    "opex_forecast_v2.xlsx": {
+      "description": "Operating expense forecast FY2026, version 2. Sheet 'Op Ex' (name with a space) with months across B:M and FY total in N; Summary sheet references it.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Op Ex",
+          "cell": "H13",
+          "what": "typed override documented with a cell comment and blue font"
+        },
+        {
+          "sheet": "Op Ex",
+          "cell": "B3",
+          "what": "growth assumption input"
+        },
+        {
+          "sheet": "Op Ex",
+          "cell": "B6:B14",
+          "what": "January base values typed"
+        },
+        {
+          "sheet": "Op Ex",
+          "cell": "N6:N15",
+          "what": "FY total column at the end of the monthly run"
+        }
+      ]
+    },
+    "pricing_model_v1.xlsx": {
+      "description": "Product pricing build, version 1. Inputs sheet, 'Price Build' with 8 SKUs in rows 6-13, and an unreferenced 'Old Scenarios' sheet.",
+      "faults": [
+        {
+          "sheet": "Price Build",
+          "cell": "G10",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "SKU-140 list price typed as 99.00 over the margin formula; no note"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "C3:C6",
+          "what": "typed pricing inputs"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "C6:C13",
+          "what": "typed cost multipliers"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "I6:I13",
+          "what": "typed unit forecasts"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "H6:H13",
+          "what": "charm pricing ROUND(...)-0.01 to end in .99; the 0.01 is a pricing rule, not a plug"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "D6:F13",
+          "what": "absolute $ anchoring to single input cells on the Inputs sheet"
+        }
+      ]
+    },
+    "pricing_model_v2.xlsx": {
+      "description": "Product pricing build, version 2. Inputs sheet, 'Price Build' with 8 SKUs in rows 6-13, a new Sensitivity sheet.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Inputs",
+          "cell": "C3:C6",
+          "what": "typed pricing inputs"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "C6:C13",
+          "what": "typed cost multipliers"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "I6:I13",
+          "what": "typed unit forecasts"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "H6:H13",
+          "what": "charm pricing ROUND(...)-0.01 to end in .99; the 0.01 is a pricing rule, not a plug"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "D6:F13",
+          "what": "absolute $ anchoring to single input cells on the Inputs sheet"
+        },
+        {
+          "sheet": "Sensitivity",
+          "cell": "C4:F4",
+          "what": "header row of typed margin percentages above formula columns"
+        }
+      ]
+    },
+    "ar_aging_v1.xlsx": {
+      "description": "Accounts receivable aging, version 1. Customers down rows from 6, aging buckets C:G, row total H, column totals below a blank row, provision block under the table, provision rates typed at K6:K7.",
+      "faults": [],
+      "legit": [
+        {
+          "sheet": "Aging",
+          "cell": "C6:G15",
+          "what": "typed customer balances by bucket"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "C17:D17",
+          "what": "column totals over rows 6-16, including blank row 16"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "K6:K7",
+          "what": "typed provision rate inputs"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "C21",
+          "what": "percentage times 100 (unit constant)"
+        }
+      ]
+    },
+    "ar_aging_v2.xlsx": {
+      "description": "Accounts receivable aging, version 2. Customers down rows from 6, aging buckets C:G, row total H, column totals below a blank row, provision block under the table, provision rates typed at K6:K7.",
+      "faults": [
+        {
+          "sheet": "Aging",
+          "cell": "E19",
+          "kind": "HARDCODED_OVERRIDE",
+          "severity": "risk",
+          "note": "31-60 bucket total typed as 61840 between SUM formulas in D and F; no note"
+        }
+      ],
+      "legit": [
+        {
+          "sheet": "Aging",
+          "cell": "C6:G17",
+          "what": "typed customer balances by bucket"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "C19:D19",
+          "what": "column totals over rows 6-18, including blank row 18"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "K6:K7",
+          "what": "typed provision rate inputs"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "C23",
+          "what": "percentage times 100 (unit constant)"
+        }
+      ]
+    }
+  },
+  "diffs": [
+    {
+      "before": "opex_forecast_v1.xlsx",
+      "after": "opex_forecast_v2.xlsx",
+      "changes": [
+        {
+          "sheet": "Op Ex",
+          "cell": "H13",
+          "before_cell": "H12",
+          "kind": "FORMULA_TO_VALUE",
+          "note": "Professional fees Jul growth formula replaced by a typed fixed fee (documented with a comment)"
+        },
+        {
+          "sheet": "Summary",
+          "cell": "C5",
+          "before_cell": "C5",
+          "kind": "FORMULA_CHANGED",
+          "note": "People costs now adds Benefits (N7) to Salaries (N6)"
+        }
+      ],
+      "not_material": [
+        {
+          "sheet": "Op Ex",
+          "what": "row inserted at 9 (Software subscriptions); every row below shifts down one, formulas keep their meaning"
+        },
+        {
+          "sheet": "Op Ex",
+          "what": "total row moved from 14 to 15; its SUM range grew from B6:B13 to B6:B14 to include the new row"
+        },
+        {
+          "sheet": "Summary",
+          "what": "C4 reference shifted from 'Op Ex'!N14 to 'Op Ex'!N15 (same total)"
+        },
+        {
+          "sheet": "Op Ex",
+          "what": "input B3 growth per month updated 0.30% -> 0.35%"
+        },
+        {
+          "sheet": "Op Ex",
+          "what": "label renamed 'Travel & Entertainment' -> 'Travel and entertainment' (A10 -> A11)"
+        }
+      ]
+    },
+    {
+      "before": "pricing_model_v1.xlsx",
+      "after": "pricing_model_v2.xlsx",
+      "changes": [
+        {
+          "sheet": "Old Scenarios",
+          "cell": null,
+          "kind": "SHEET_REMOVED",
+          "note": "archived scenarios sheet deleted"
+        },
+        {
+          "sheet": "Sensitivity",
+          "cell": null,
+          "kind": "SHEET_ADDED",
+          "note": "new margin sensitivity table"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "G10",
+          "before_cell": "G10",
+          "kind": "VALUE_TO_FORMULA",
+          "note": "SKU-140 typed 99.00 replaced by the margin formula"
+        },
+        {
+          "sheet": "Price Build",
+          "cell": "C16",
+          "before_cell": "C16",
+          "kind": "FORMULA_CHANGED",
+          "note": "simple AVERAGE replaced by a volume-weighted average"
+        }
+      ],
+      "not_material": [
+        {
+          "sheet": "Inputs",
+          "what": "C3 base unit cost input updated 42.50 -> 44.10"
+        },
+        {
+          "sheet": "Price Build",
+          "what": "B16 label 'Average price' unchanged; all other formulas identical"
+        }
+      ]
+    },
+    {
+      "before": "ar_aging_v1.xlsx",
+      "after": "ar_aging_v2.xlsx",
+      "changes": [
+        {
+          "sheet": "Aging",
+          "cell": "C22",
+          "before_cell": "C20",
+          "kind": "FORMULA_CHANGED",
+          "note": "provision now also covers the 61-90 bucket (adds F*$K$6)"
+        },
+        {
+          "sheet": "Aging",
+          "cell": "E19",
+          "before_cell": "E17",
+          "kind": "FORMULA_TO_VALUE",
+          "note": "31-60 bucket total SUM replaced by a typed number"
+        }
+      ],
+      "not_material": [
+        {
+          "sheet": "Aging",
+          "what": "two customer rows inserted at rows 12-13 inside the table; rows below shift down two"
+        },
+        {
+          "sheet": "Aging",
+          "what": "totals moved from row 17 to 19; SUM ranges grew from rows 6-16 to 6-18 to include the new customers"
+        },
+        {
+          "sheet": "Aging",
+          "what": "provision block moved from rows 20-21 to 22-23"
+        },
+        {
+          "sheet": "Aging",
+          "what": "input K6 provision rate for 61-90 days updated 10% -> 15%"
+        },
+        {
+          "sheet": "Aging",
+          "what": "Customer 003 current balance updated (typed input, C8)"
+        }
+      ]
+    }
+  ]
+}

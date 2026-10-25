@@ -1,7 +1,7 @@
 [project]
 name = "statement-spreader"
-version = "0.1.0"
-description = "Turns financial statements (HTML, PDF, Excel) into a standard spread with every number traced to its source, checked by accounting identities, and measured against answer keys."
+version = "0.2.0"
+description = "A local finance operations platform: statement spreading, reconciliation with an exception queue, and invoice intake with three-way matching; every number traced to its source and every engine measured against answer keys."
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115",
@@ -48,10 +48,11 @@ ignore = ["E501", "UP042"]  # (str, Enum) kept on purpose: it serialises the sam
 
 [tool.ruff.lint.per-file-ignores]
 "src/spreader/api.py" = ["B008"]  # FastAPI's File(...) default is its documented pattern
+"src/finops/api.py" = ["B008"]
 
 [tool.mypy]
 python_version = "3.11"
 strict_optional = true
 warn_unused_ignores = true
 ignore_missing_imports = true
-files = ["src/spreader"]
+files = ["src/spreader", "src/finops"]

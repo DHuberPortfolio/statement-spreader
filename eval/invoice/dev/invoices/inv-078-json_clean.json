@@ -1,0 +1,31 @@
+{
+ "vendor": {
+  "name": "Northwind Traders",
+  "tax_id": "98-8013380"
+ },
+ "invoice_number": "INV-007077",
+ "invoice_date": "2026-03-22",
+ "due_date": "2026-04-21",
+ "po_number": "PO-4570",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "1283.73",
+ "tax": null,
+ "total": "1283.73",
+ "lines": [
+  {
+   "item_code": "NOR-114",
+   "description": "Bolt set M8",
+   "quantity": "5",
+   "unit_price": "121.81",
+   "amount": "609.05"
+  },
+  {
+   "item_code": "NOR-107",
+   "description": "Pallet wrap film",
+   "quantity": "2",
+   "unit_price": "337.34",
+   "amount": "674.68"
+  }
+ ]
+}

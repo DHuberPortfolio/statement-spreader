@@ -19,14 +19,19 @@ from ..numbers import clean_text, is_amount_like
 from . import IngestError, doc_id_for
 from .paths import element_path
 
+# A zero font size is not here: font size is inherited and a child can set its own (see _zero_font).
 _HIDDEN = re.compile(
-    r"display\s*:\s*none|visibility\s*:\s*(hidden|collapse)|font-size\s*:\s*0(?![.\d])|opacity\s*:\s*0(?![.\d]*[1-9])"
+    r"display\s*:\s*none|visibility\s*:\s*(hidden|collapse)|opacity\s*:\s*0(?![.\d]*[1-9])"
     r"|(?:left|top|text-indent|margin-left|margin-top)\s*:\s*-\d{3,}|clip\s*:\s*rect\(\s*0|transform\s*:\s*scale\(\s*0\s*\)"
     r"|(?:max-)?height\s*:\s*0(?![.\d])[^;]*;?.*overflow\s*:\s*hidden|overflow\s*:\s*hidden.*(?:max-)?height\s*:\s*0(?![.\d])",
     re.I)
 _CSS_COMMENT = re.compile(r"/\*.*?\*/", re.S)
 _CSS_RULE = re.compile(r"([^{}]+)\{([^{}]*)\}")
+_FONT_SIZE = re.compile(r"(?<![\w-])font-size\s*:\s*([^;]+)", re.I)
+_HTML_END = re.compile(rb"</html\s*>", re.I)
 _HIDDEN_SELECTORS: set[str] = set()  # set per document from its <style> blocks (see read_html)
+_FONT_SELECTORS: dict[str, bool] = {}  # selector -> its font size is zero; set per document (see read_html)
+_ZERO_MEMO: dict[etree._Element, bool] = {}  # element -> its text has a zero font size; cleared per document
 
 
 def _normalise_css(style: str) -> str:
@@ -50,6 +55,66 @@ def _stylesheet_hidden(root: etree._Element) -> set[str]:
                     if last:
                         hidden.add(last.lower())
     return hidden
+
+
+def _zero_size(value: str) -> bool | None:
+    """True for a zero font size, False for any other, None for "inherit" or "unset" (the parent's size)."""
+    value = value.replace("!important", "").strip().lower()
+    if value in {"inherit", "unset"}:
+        return None
+    m = re.match(r"[+-]?(\d+\.?\d*|\.\d+)", value)
+    return m is not None and float(m.group(0)) <= 0
+
+
+def _stylesheet_fonts(root: etree._Element) -> dict[str, bool]:
+    """Class, id and tag selectors whose <style> rule sets a font size: True when that size is zero."""
+    sizes: dict[str, bool] = {}
+    for el in root.iter():
+        if _local(el.tag) != "style":
+            continue
+        css = _normalise_css("".join(el.itertext()))
+        for selectors, body in _CSS_RULE.findall(css):
+            found = _FONT_SIZE.findall(body)
+            zero = _zero_size(found[-1]) if found else None
+            if zero is None:
+                continue
+            for sel in selectors.split(","):
+                last = sel.strip().split()[-1].lower() if sel.strip() else ""
+                if last:
+                    sizes[last] = sizes.get(last, True) and zero  # also given a real size somewhere: not zero
+    return sizes
+
+
+def _declared_zero_font(el: etree._Element) -> bool | None:
+    """Whether an element sets a zero font size (True), a real one (False) or none of its own (None: inherited)."""
+    if not isinstance(el.tag, str):
+        return None
+    found = _FONT_SIZE.findall(_normalise_css(el.get("style") or ""))
+    if found and (zero := _zero_size(found[-1])) is not None:
+        return zero
+    if _FONT_SELECTORS:
+        hits = [v for n in _selector_names(el) if (v := _FONT_SELECTORS.get(n)) is not None]
+        if hits:
+            return all(hits)
+    return None
+
+
+def _zero_font(el: etree._Element) -> bool:
+    """Font size is inherited, so text is invisible when the nearest size set on it or an ancestor is zero. A page
+    wrapper at font-size 0 (a way to collapse whitespace) around text that sets its own size is ordinary content:
+    Deckers' 10-K wraps every page that way, and reading the wrapper as hidden lost all 155 of its tables."""
+    chain: list[etree._Element] = []
+    node: etree._Element | None = el
+    while node is not None and node not in _ZERO_MEMO:
+        chain.append(node)
+        node = node.getparent()
+    state = _ZERO_MEMO[node] if node is not None else False
+    for n in reversed(chain):
+        own = _declared_zero_font(n)
+        if own is not None:
+            state = own
+        _ZERO_MEMO[n] = state
+    return state
 _INDENT = re.compile(r"(padding-left|text-indent|margin-left)\s*:\s*(-?[\d.]+)\s*(pt|px|em|in|rem|%)?", re.I)
 _BOLD = re.compile(r"font-weight\s*:\s*(bold|[6-9]00)", re.I)
 _SKIP_TAGS = {"script", "style", "head", "title", "noscript", "template"}
@@ -63,16 +128,19 @@ def _local(tag: object) -> str:
     return tag.rsplit("}", 1)[-1].rsplit(":", 1)[-1].lower()
 
 
+def _selector_names(el: etree._Element) -> set[str]:
+    names = {f".{c.lower()}" for c in (el.get("class") or "").split()}
+    if el.get("id"):
+        names.add(f"#{el.get('id', '').lower()}")
+    names.add(_local(el.tag))
+    return names
+
+
 def _hidden(el: etree._Element) -> bool:
     style = _normalise_css(el.get("style") or "")
     tag = el.tag.lower() if isinstance(el.tag, str) else ""
-    if _HIDDEN_SELECTORS:
-        names = {f".{c.lower()}" for c in (el.get("class") or "").split()}
-        if el.get("id"):
-            names.add(f"#{el.get('id', '').lower()}")
-        names.add(_local(el.tag))
-        if names & _HIDDEN_SELECTORS:
-            return True
+    if _HIDDEN_SELECTORS and _selector_names(el) & _HIDDEN_SELECTORS:
+        return True
     # ix:header holds inline XBRL's hidden facts; an HTML5 <header> is ordinary visible content.
     return bool(_HIDDEN.search(style)) or el.get("hidden") is not None or tag.endswith("ix:header")
 
@@ -81,19 +149,23 @@ def _visible_text(el: etree._Element) -> str:
     """Text of an element, skipping hidden descendants (iXBRL puts its hidden facts in ix:header)."""
     parts: list[str] = []
 
-    def walk(node: etree._Element) -> None:
+    def walk(node: etree._Element, inherited: bool) -> None:
+        # `inherited`: the parent's text has a zero font size. A tail is the parent's text, in the parent's size.
         if _local(node.tag) in _SKIP_TAGS or _hidden(node):
-            if node.tail:
+            if node.tail and not inherited:
                 parts.append(node.tail)
             return
-        if node.text:
+        own = _declared_zero_font(node)
+        zero = inherited if own is None else own
+        if node.text and not zero:
             parts.append(node.text)
         for child in node:
-            walk(child)
-        if node is not el and node.tail:
+            walk(child, zero)
+        if node is not el and node.tail and not inherited:
             parts.append(node.tail)
 
-    walk(el)
+    parent = el.getparent()
+    walk(el, _zero_font(parent) if parent is not None else False)
     return clean_text(" ".join(parts))
 
 
@@ -204,17 +276,45 @@ def _table_rows(table: etree._Element, tree: etree._ElementTree, doc_id: str, t_
     return rows
 
 
+def _parse_documents(data: bytes, parser: html.HTMLParser) -> etree._Element:
+    """Every HTML document in the file, as one tree. A file can hold several, one after another (statements saved
+    separately and joined). lxml 6 wheels built on libxml2 2.14 stop at the first </html> and drop the rest without
+    a word, so each document is parsed on its own and the later ones are added to the first one's body. A file with
+    one document is parsed exactly as before."""
+    pieces: list[bytes] = []
+    start = 0
+    for m in _HTML_END.finditer(data):
+        pieces.append(data[start:m.end()])
+        start = m.end()
+    pieces = [p for p in [*pieces, data[start:]] if p.strip()]
+    if len(pieces) <= 1:
+        return html.document_fromstring(data, parser=parser)
+    root = html.document_fromstring(pieces[0], parser=parser)
+    body = root.find("body")
+    if body is None:
+        body = etree.SubElement(root, "body")
+    for piece in pieces[1:]:
+        try:
+            other = html.document_fromstring(piece, parser=parser)
+        except etree.ParserError:
+            continue  # only whitespace or comments
+        body.extend(list(other))
+    return root
+
+
 def read_html(filename: str, data: bytes) -> DocumentIR:
     doc_id = doc_id_for(data)
     parser = html.HTMLParser(remove_comments=True, remove_pis=True, no_network=True, huge_tree=True,
                              encoding="utf-8")
     try:
-        root = html.document_fromstring(data, parser=parser)
+        root = _parse_documents(data, parser)
     except (etree.ParserError, ValueError) as exc:
         raise IngestError(f"Could not parse HTML: {exc}") from exc
     tree = root.getroottree()
-    global _HIDDEN_SELECTORS
+    global _HIDDEN_SELECTORS, _FONT_SELECTORS
     _HIDDEN_SELECTORS = _stylesheet_hidden(root)
+    _FONT_SELECTORS = _stylesheet_fonts(root)
+    _ZERO_MEMO.clear()
     tables: list[RawTable] = []
     warnings: list[str] = []
     buffer: list[str] = []
@@ -237,18 +337,22 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
             while buffer_len > CONTEXT_CHARS * 3 and len(buffer) > 1:
                 buffer_len -= len(buffer.pop(0))
 
-    def walk(node: etree._Element) -> None:
+    def walk(node: etree._Element, inherited: bool = False) -> None:
+        # `inherited`: the parent's text has a zero font size; a tail is the parent's text.
         tag = _local(node.tag)
+        tail = None if inherited else node.tail
         if tag in _SKIP_TAGS or _hidden(node):
-            push(node.tail)
+            push(tail)
             return
+        own = _declared_zero_font(node)
+        zero = inherited if own is None else own
         if tag == "table":
             context = clean_text(" ".join(buffer))[-CONTEXT_CHARS:]
             try:
                 rows = _table_rows(node, tree, doc_id, len(tables))
             except IngestError as exc:
                 warnings.append(str(exc))
-                push(node.tail)
+                push(tail)
                 return
             value_tokens = sum(1 for r in rows for t in r.tokens if is_amount_like(t.text))
             if len(rows) >= 2 and value_tokens >= 2:
@@ -258,12 +362,13 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
                 reset_buffer()
             else:
                 push(_visible_text(node))  # a layout table: its text is context for what follows
-            push(node.tail)
+            push(tail)
             return
-        push(node.text)
+        if not zero:
+            push(node.text)
         for child in node:
-            walk(child)
-        push(node.tail)
+            walk(child, zero)
+        push(tail)
 
     walk(root)
     if not tables:

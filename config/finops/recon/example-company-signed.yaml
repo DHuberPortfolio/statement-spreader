@@ -1,0 +1,32 @@
+# Example overlay: a company whose bank export has one signed "Amount" column and whose ERP
+# export names columns differently. Only what differs is written; the rest comes from the base.
+# Stricter policy: amount-and-date pairs without a reference are proposed, never auto-accepted.
+extends: bank-vs-gl.yaml
+id: example-company-signed
+name: Example Co - bank (signed amounts) vs ERP cash ledger
+
+left:
+  id_field: Bank Ref No
+  date_field: Value Date
+  amount_field: Amount
+  inflow_field: null
+  outflow_field: null
+  reference_field: Customer Ref
+  description_field: Narrative
+  currency_field: null
+
+right:
+  id_field: Document Number
+  date_field: Posting Date
+  amount_field: Amount (LC)
+  inflow_field: null
+  outflow_field: null
+  amount_sign: negate          # this ERP exports cash credits as positive
+  reference_field: Assignment
+  description_field: Text
+  counterparty_field: null
+  currency_field: null
+
+matching:
+  auto_accept: [reference, one_to_many, many_to_one]
+  review_tolerance: {abs: "10.00"}

@@ -1,0 +1,17 @@
+# Spreadsheet risk scanner settings (finops.sheets.config.ScanSpec has every field and its meaning).
+# A company overlay starts with `extends: default.yaml` and changes only what differs, for example:
+#   input_font_colors: ["FF0000FF", "FF0070C0"]   # its own input colours
+#   severity: {EXTERNAL_LINK: anomaly}             # it links workbooks on purpose
+id: default
+name: Default spreadsheet checks
+max_file_mb: 25
+max_uncompressed_mb: 400
+max_cells: 2000000
+min_run: 2
+max_odd_group: 2
+input_font_colors: ["FF0000FF"]
+comment_documents_override: true
+allowed_addends: [0, 1]
+year_range: [1990, 2100]
+volatile_functions: [INDIRECT, OFFSET]
+severity: {}

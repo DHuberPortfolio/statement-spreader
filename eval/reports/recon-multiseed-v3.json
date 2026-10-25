@@ -1,0 +1,345 @@
+{
+ "name": "recon-multiseed-v3",
+ "seeds": 10,
+ "scale": 300,
+ "kinds": {
+  "clean": {
+   "false_match_rate": {
+    "n": 0,
+    "d": 2130,
+    "rate": 0.0,
+    "low": 0.0,
+    "high": 0.0018003210735042375
+   },
+   "review_cases_auto_accepted": {
+    "n": 0,
+    "d": 570,
+    "rate": 0.0,
+    "low": 0.0,
+    "high": 0.006694530337291683
+   },
+   "auto_recall": {
+    "n": 2130,
+    "d": 2130,
+    "rate": 1.0,
+    "low": 0.9981996789264957,
+    "high": 1.0
+   },
+   "review_cases_reaching_review": {
+    "n": 499,
+    "d": 570,
+    "rate": 0.875438596491228,
+    "low": 0.8457898484340591,
+    "high": 0.9000605744003953
+   },
+   "exception_recall": {
+    "n": 1015,
+    "d": 1020,
+    "rate": 0.9950980392156863,
+    "low": 0.9885762780605238,
+    "high": 0.9979044431760424
+   },
+   "left_alone_accuracy": {
+    "n": 750,
+    "d": 750,
+    "rate": 1.0,
+    "low": 0.9949039692158141,
+    "high": 1.0
+   },
+   "proposal_precision": {
+    "n": 499,
+    "d": 551,
+    "rate": 0.9056261343012704,
+    "low": 0.8783300182292072,
+    "high": 0.9273053198564735
+   },
+   "unnecessary_exceptions": {
+    "n": 0,
+    "d": 1325,
+    "rate": 0.0,
+    "low": 0.0,
+    "high": 0.002890938995287324
+   }
+  },
+  "stress": {
+   "false_match_rate": {
+    "n": 1,
+    "d": 2114,
+    "rate": 0.0004730368968779565,
+    "low": 8.35053605067102e-05,
+    "high": 0.0026747745788428617
+   },
+   "review_cases_auto_accepted": {
+    "n": 0,
+    "d": 570,
+    "rate": 0.0,
+    "low": 0.0,
+    "high": 0.006694530337291683
+   },
+   "auto_recall": {
+    "n": 2113,
+    "d": 2130,
+    "rate": 0.992018779342723,
+    "low": 0.9872550104420391,
+    "high": 0.9950109646893858
+   },
+   "review_cases_reaching_review": {
+    "n": 436,
+    "d": 570,
+    "rate": 0.7649122807017544,
+    "low": 0.7283974076882911,
+    "high": 0.7978802271154597
+   },
+   "exception_recall": {
+    "n": 929,
+    "d": 1020,
+    "rate": 0.9107843137254902,
+    "low": 0.8917141382028618,
+    "high": 0.9267718463478732
+   },
+   "left_alone_accuracy": {
+    "n": 748,
+    "d": 750,
+    "rate": 0.9973333333333333,
+    "low": 0.9903294004471079,
+    "high": 0.9992684142662216
+   },
+   "proposal_precision": {
+    "n": 450,
+    "d": 531,
+    "rate": 0.847457627118644,
+    "low": 0.8143881454792576,
+    "high": 0.875535749745048
+   },
+   "unnecessary_exceptions": {
+    "n": 5,
+    "d": 1296,
+    "rate": 0.0038580246913580245,
+    "low": 0.0016489848907853683,
+    "high": 0.008999697225558653
+   }
+  },
+  "messy": {
+   "false_match_rate": {
+    "n": 2,
+    "d": 2229,
+    "rate": 0.0008972633467922835,
+    "low": 0.0002460913170161949,
+    "high": 0.0032658461173275576
+   },
+   "review_cases_auto_accepted": {
+    "n": 0,
+    "d": 570,
+    "rate": 0.0,
+    "low": 0.0,
+    "high": 0.006694530337291683
+   },
+   "auto_recall": {
+    "n": 2227,
+    "d": 2571,
+    "rate": 0.8661999222092571,
+    "low": 0.8524924482097023,
+    "high": 0.8788146737507323
+   },
+   "review_cases_reaching_review": {
+    "n": 460,
+    "d": 570,
+    "rate": 0.8070175438596491,
+    "low": 0.7726074208691833,
+    "high": 0.8373169903272164
+   },
+   "exception_recall": {
+    "n": 946,
+    "d": 1020,
+    "rate": 0.9274509803921569,
+    "low": 0.9098772213017172,
+    "high": 0.9418170251520313
+   },
+   "left_alone_accuracy": {
+    "n": 747,
+    "d": 750,
+    "rate": 0.996,
+    "low": 0.9883059863917272,
+    "high": 0.9986387510703603
+   },
+   "proposal_precision": {
+    "n": 757,
+    "d": 838,
+    "rate": 0.9033412887828163,
+    "low": 0.8814548011775603,
+    "high": 0.9215466185669619
+   },
+   "unnecessary_exceptions": {
+    "n": 105,
+    "d": 1448,
+    "rate": 0.07251381215469613,
+    "low": 0.060256933958510395,
+    "high": 0.08703296323137588
+   }
+  }
+ },
+ "failures": {
+  "clean": [
+   "seed 101: missed UNMATCHED on ['bank:BK-00034'] (missing_ledger)",
+   "seed 102: missed UNMATCHED on ['ledger:JE-10005'] (near_miss_ref)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10162'] (near_miss_ref)",
+   "seed 110: missed UNMATCHED on ['ledger:JE-10062'] (missing_bank)",
+   "seed 110: missed UNMATCHED on ['ledger:JE-10328'] (near_miss_ref)"
+  ],
+  "stress": [
+   "seed 101: missed UNMATCHED on ['bank:BK-00019'] (missing_ledger)",
+   "seed 101: missed UNMATCHED on ['bank:BK-00033'] (missing_ledger)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10044'] (missing_bank)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10051'] (near_miss_ref)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10058'] (missing_bank)",
+   "seed 101: missed UNMATCHED on ['bank:BK-00168'] (missing_ledger)",
+   "seed 101: missed REVERSAL on ['bank:BK-00199'] (reversal)",
+   "seed 101: missed PARTIAL_MATCH on ['bank:BK-00287', 'ledger:JE-10332'] (partial_payment)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10341'] (near_miss_ref)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10357'] (near_miss_ref)",
+   "seed 102: missed UNMATCHED on ['bank:BK-00048'] (missing_ledger)",
+   "seed 102: missed UNMATCHED on ['ledger:JE-10076'] (missing_bank)",
+   "seed 102: missed PARTIAL_MATCH on ['bank:BK-00194', 'ledger:JE-10232'] (partial_payment)",
+   "seed 102: missed REVERSAL on ['bank:BK-00212'] (reversal)",
+   "seed 102: missed UNMATCHED on ['ledger:JE-10362'] (missing_bank)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10006'] (near_miss_ref)",
+   "seed 103: missed UNMATCHED on ['bank:BK-00006'] (missing_ledger)",
+   "seed 103: missed UNMATCHED on ['bank:BK-00008'] (missing_ledger)",
+   "seed 103: missed POSSIBLE_DUPLICATE on ['ledger:JE-10073', 'ledger:JE-10074'] (duplicate_ledger)",
+   "seed 103: missed UNMATCHED on ['bank:BK-00082'] (missing_ledger)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10111'] (near_miss_ref)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10136'] (near_miss_ref)",
+   "seed 103: missed PARTIAL_MATCH on ['bank:BK-00204', 'ledger:JE-10231'] (partial_payment)",
+   "seed 103: missed PARTIAL_MATCH on ['bank:BK-00214', 'ledger:JE-10244'] (partial_payment)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10256'] (near_miss_ref)",
+   "seed 103: missed PARTIAL_MATCH on ['bank:BK-00228', 'ledger:JE-10265'] (partial_payment)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10285'] (near_miss_ref)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10026'] (missing_bank)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10104'] (missing_bank)",
+   "seed 104: missed REVERSAL on ['bank:BK-00118'] (reversal)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10228'] (near_miss_ref)",
+   "seed 104: missed REVERSAL on ['bank:BK-00225'] (reversal)",
+   "seed 104: missed UNMATCHED on ['bank:BK-00227'] (missing_ledger)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10323'] (near_miss_ref)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10045'] (missing_bank)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10113'] (near_miss_ref)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10179'] (missing_bank)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10199'] (near_miss_ref)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10264'] (missing_bank)",
+   "seed 105: missed UNMATCHED on ['bank:BK-00261'] (missing_ledger)",
+   "seed 105: missed PARTIAL_MATCH on ['bank:BK-00304', 'ledger:JE-10355'] (partial_payment)",
+   "seed 106: missed UNMATCHED on ['bank:BK-00026'] (missing_ledger)",
+   "seed 106: missed UNMATCHED on ['ledger:JE-10080'] (near_miss_ref)",
+   "seed 106: missed UNMATCHED on ['bank:BK-00114'] (missing_ledger)",
+   "seed 106: missed UNMATCHED on ['ledger:JE-10171'] (missing_bank)",
+   "seed 106: missed UNMATCHED on ['bank:BK-00186'] (missing_ledger)",
+   "seed 106: missed PARTIAL_MATCH on ['bank:BK-00206', 'ledger:JE-10234'] (partial_payment)",
+   "seed 106: missed UNMATCHED on ['bank:BK-00247'] (missing_ledger)",
+   "seed 106: missed REVERSAL on ['bank:BK-00294'] (reversal)",
+   "seed 106: missed UNMATCHED on ['ledger:JE-10343'] (near_miss_ref)",
+   "seed 107: FALSE AUTO unique_amount_date ['bank:BK-00061'] + ['ledger:JE-10235']",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10011'] (near_miss_ref)",
+   "seed 107: missed UNMATCHED on ['bank:BK-00061'] (missing_ledger)",
+   "seed 107: missed PARTIAL_MATCH on ['bank:BK-00099', 'ledger:JE-10111'] (partial_payment)",
+   "seed 107: missed PARTIAL_MATCH on ['bank:BK-00123', 'ledger:JE-10138'] (partial_payment)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10166'] (missing_bank)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10186'] (missing_bank)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10226'] (missing_bank)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10280'] (missing_bank)",
+   "seed 107: missed UNMATCHED on ['bank:BK-00242'] (coincidental_sum)"
+  ],
+  "messy": [
+   "seed 101: FALSE AUTO unique_amount_date ['bank:BK-00031'] + ['ledger:JE-10133']",
+   "seed 101: missed UNMATCHED on ['bank:BK-00001'] (missing_ledger)",
+   "seed 101: missed REVERSAL on ['bank:BK-00016'] (reversal)",
+   "seed 101: missed UNMATCHED on ['bank:BK-00031'] (missing_ledger)",
+   "seed 101: missed UNRECORDED_FEE on ['bank:BK-00041'] (bank_fee)",
+   "seed 101: missed PARTIAL_MATCH on ['bank:BK-00055', 'ledger:JE-10057'] (partial_payment)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10149'] (missing_bank)",
+   "seed 101: missed UNMATCHED on ['bank:BK-00232'] (missing_ledger)",
+   "seed 101: missed TIMING_DIFFERENCE on ['ledger:JE-10269'] (outstanding)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10314'] (near_miss_ref)",
+   "seed 101: missed UNMATCHED on ['bank:BK-00280'] (missing_ledger)",
+   "seed 101: missed UNMATCHED on ['ledger:JE-10330'] (near_miss_ref)",
+   "seed 102: missed UNMATCHED on ['ledger:JE-10368'] (near_miss_ref)",
+   "seed 103: FALSE AUTO assignment ['bank:BK-00153'] + ['ledger:JE-10064']",
+   "seed 103: missed AMOUNT_DIFFERENCE on ['bank:BK-00007', 'ledger:JE-10008'] (fee_deducted)",
+   "seed 103: missed AMOUNT_DIFFERENCE on ['bank:BK-00065', 'ledger:JE-10075'] (fee_deducted)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10107'] (near_miss_ref)",
+   "seed 103: missed REVERSAL on ['bank:BK-00143'] (reversal)",
+   "seed 103: missed UNMATCHED on ['bank:BK-00208'] (missing_ledger)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10321'] (missing_bank)",
+   "seed 103: missed UNMATCHED on ['ledger:JE-10365'] (missing_bank)",
+   "seed 103: missed UNRECORDED_FEE on ['bank:BK-00325'] (bank_fee)",
+   "seed 103: missed CURRENCY_MISMATCH on ['bank:BK-00337', 'ledger:JE-10384'] (currency_mismatch)",
+   "seed 103: missed REVERSAL on ['bank:BK-00352'] (reversal)",
+   "seed 104: missed TIMING_DIFFERENCE on ['ledger:JE-10008'] (outstanding)",
+   "seed 104: missed CURRENCY_MISMATCH on ['bank:BK-00042', 'ledger:JE-10047'] (currency_mismatch)",
+   "seed 104: missed PARTIAL_MATCH on ['bank:BK-00078', 'ledger:JE-10089'] (partial_payment)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10145'] (near_miss_ref)",
+   "seed 104: missed UNMATCHED on ['bank:BK-00139'] (missing_ledger)",
+   "seed 104: missed PARTIAL_MATCH on ['bank:BK-00149', 'ledger:JE-10172'] (partial_payment)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10174'] (near_miss_ref)",
+   "seed 104: missed UNRECORDED_FEE on ['bank:BK-00159'] (bank_fee)",
+   "seed 104: missed PARTIAL_MATCH on ['bank:BK-00170', 'ledger:JE-10199'] (partial_payment)",
+   "seed 104: missed UNRECORDED_FEE on ['bank:BK-00265'] (bank_fee)",
+   "seed 104: missed UNMATCHED on ['ledger:JE-10338'] (missing_bank)",
+   "seed 104: missed UNMATCHED on ['bank:BK-00306'] (missing_ledger)",
+   "seed 105: missed UNRECORDED_FEE on ['bank:BK-00042'] (bank_fee)",
+   "seed 105: missed POSSIBLE_DUPLICATE on ['ledger:JE-10126', 'ledger:JE-10127'] (duplicate_ledger)",
+   "seed 105: missed UNMATCHED on ['bank:BK-00134'] (missing_ledger)",
+   "seed 105: missed UNMATCHED on ['ledger:JE-10158'] (near_miss_ref)",
+   "seed 105: missed POSSIBLE_DUPLICATE on ['ledger:JE-10222', 'ledger:JE-10223'] (duplicate_ledger)",
+   "seed 105: missed UNMATCHED on ['bank:BK-00233'] (missing_ledger)",
+   "seed 105: missed AMOUNT_DIFFERENCE on ['bank:BK-00245', 'ledger:JE-10284'] (fee_deducted)",
+   "seed 105: missed TIMING_DIFFERENCE on ['ledger:JE-10320'] (outstanding)",
+   "seed 105: missed AMOUNT_DIFFERENCE on ['bank:BK-00300', 'ledger:JE-10340'] (keying_error)",
+   "seed 105: missed UNRECORDED_FEE on ['bank:BK-00323'] (bank_fee)",
+   "seed 106: missed UNRECORDED_FEE on ['bank:BK-00005'] (bank_fee)",
+   "seed 106: missed CURRENCY_MISMATCH on ['bank:BK-00009', 'ledger:JE-10015'] (currency_mismatch)",
+   "seed 106: missed UNMATCHED on ['ledger:JE-10201'] (near_miss_ref)",
+   "seed 106: missed CURRENCY_MISMATCH on ['bank:BK-00249', 'ledger:JE-10286'] (currency_mismatch)",
+   "seed 107: missed PARTIAL_MATCH on ['bank:BK-00020', 'ledger:JE-10026'] (partial_payment)",
+   "seed 107: missed UNRECORDED_FEE on ['bank:BK-00031'] (bank_fee)",
+   "seed 107: missed AMOUNT_DIFFERENCE on ['bank:BK-00090', 'ledger:JE-10104'] (fee_deducted)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10199'] (near_miss_ref)",
+   "seed 107: missed POSSIBLE_DUPLICATE on ['ledger:JE-10300', 'ledger:JE-10301'] (duplicate_ledger)",
+   "seed 107: missed PARTIAL_MATCH on ['bank:BK-00264', 'ledger:JE-10306'] (partial_payment)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10317'] (near_miss_ref)",
+   "seed 107: missed AMOUNT_DIFFERENCE on ['bank:BK-00314', 'ledger:JE-10371'] (fee_deducted)",
+   "seed 107: missed UNMATCHED on ['ledger:JE-10414'] (near_miss_ref)",
+   "seed 108: missed PARTIAL_MATCH on ['bank:BK-00121', 'ledger:JE-10137'] (partial_payment)"
+  ]
+ },
+ "missed_by_kind": {
+  "clean": {
+   "missing_ledger / UNMATCHED": 1,
+   "near_miss_ref / UNMATCHED": 3,
+   "missing_bank / UNMATCHED": 1
+  },
+  "stress": {
+   "missing_ledger / UNMATCHED": 23,
+   "missing_bank / UNMATCHED": 19,
+   "near_miss_ref / UNMATCHED": 24,
+   "reversal / REVERSAL": 5,
+   "partial_payment / PARTIAL_MATCH": 15,
+   "duplicate_ledger / POSSIBLE_DUPLICATE": 4,
+   "coincidental_sum / UNMATCHED": 1
+  },
+  "messy": {
+   "missing_ledger / UNMATCHED": 10,
+   "reversal / REVERSAL": 3,
+   "bank_fee / UNRECORDED_FEE": 13,
+   "partial_payment / PARTIAL_MATCH": 11,
+   "missing_bank / UNMATCHED": 6,
+   "outstanding / TIMING_DIFFERENCE": 3,
+   "near_miss_ref / UNMATCHED": 13,
+   "fee_deducted / AMOUNT_DIFFERENCE": 6,
+   "currency_mismatch / CURRENCY_MISMATCH": 4,
+   "duplicate_ledger / POSSIBLE_DUPLICATE": 3,
+   "keying_error / AMOUNT_DIFFERENCE": 2
+  }
+ },
+ "unstable": [],
+ "checks_failed": 0
+}

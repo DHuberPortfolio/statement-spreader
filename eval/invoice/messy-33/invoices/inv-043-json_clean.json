@@ -1,0 +1,28 @@
+{
+ "vendor": {
+  "name": "Contoso Supply",
+  "tax_id": "91-2187365"
+ },
+ "invoice_number": "inv 007042",
+ "invoice_date": "2026-03-15",
+ "due_date": "2026-04-14",
+ "po_number": "4538",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "370.62",
+ "tax": "22.24",
+ "total": "392.86",
+ "lines": [
+  {
+   "item_code": "CON-121",
+   "description": "Pallet wrap film",
+   "quantity": "2",
+   "unit_price": "185.310",
+   "amount": "370.62"
+  }
+ ],
+ "remit_to": {
+  "account_number": "842786939212",
+  "routing_number": "050439057"
+ }
+}

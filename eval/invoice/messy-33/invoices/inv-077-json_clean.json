@@ -1,0 +1,42 @@
+{
+ "vendor": {
+  "name": "Fabrikam Tools",
+  "tax_id": "46-4579632"
+ },
+ "invoice_number": "INV-007076",
+ "invoice_date": "2026-03-07",
+ "due_date": "2026-04-06",
+ "po_number": "PO 4568",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "3069.92",
+ "tax": "214.89",
+ "total": "3284.81",
+ "lines": [
+  {
+   "item_code": "FAB-121",
+   "description": "Printer toner, black",
+   "quantity": "2",
+   "unit_price": "211.280",
+   "amount": "422.56"
+  },
+  {
+   "item_code": "FAB-100",
+   "description": "Extension cord 15m",
+   "quantity": "12",
+   "unit_price": "160.54",
+   "amount": "1926.48"
+  },
+  {
+   "item_code": "FAB-114",
+   "description": "Hard hat, white",
+   "quantity": "4",
+   "unit_price": "180.22",
+   "amount": "720.88"
+  }
+ ],
+ "remit_to": {
+  "account_number": "448132953127",
+  "routing_number": "018888976"
+ }
+}

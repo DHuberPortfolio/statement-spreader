@@ -1,0 +1,32 @@
+# DRAFT suggested by a local model (Qwen3-4B, 2 calls, 4 cached, 0 errors)
+# from 3 invoice(s): inv-001-line_math.pdf, inv-002-total_math.pdf, inv-003-vendor_alias.pdf
+# against policy default-ap 4a1df7e3bcf5208b. UNREVIEWED: check every line before using it.
+# What the model was asked and answered: {"labels": {"Our Ref.": {"po_number": 3}, "Dated": {"invoice_date": 3}, "Your Ref.": {"po_number": 3}, "Conditions": {"terms": 3}, "Settle By": {"due_date": 3}, "Goods Value": {"subtotal": 3}, "Balance Payable": {"total": 3}}, "columns": {"Ref": {"item_code": 3}, "Particulars": {"description": 3}, "Qty": {"quantity": 3}, "Each": {"unit_price": 3}, "Line Value": {"amount": 3}}}
+extends: default-ap.yaml
+id: suggested-layout-e
+name: Draft wording for suggested-layout-e
+extra_labels:
+  total:
+  - Balance Payable
+  terms:
+  - Conditions
+  invoice_date:
+  - Dated
+  subtotal:
+  - Goods Value
+  po_number:
+  - Our Ref.
+  - Your Ref.
+  due_date:
+  - Settle By
+extra_columns:
+  unit_price:
+  - Each
+  amount:
+  - Line Value
+  description:
+  - Particulars
+  quantity:
+  - Qty
+  item_code:
+  - Ref

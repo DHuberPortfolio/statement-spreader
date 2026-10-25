@@ -1,0 +1,38 @@
+{
+ "vendor": {
+  "name": "Northwind Traders",
+  "tax_id": "13-8501654"
+ },
+ "invoice_number": "INV-007073",
+ "invoice_date": "2026-03-06",
+ "due_date": "2026-04-05",
+ "po_number": "PO-4566",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "5884.48",
+ "tax": null,
+ "total": "5884.48",
+ "lines": [
+  {
+   "item_code": "NOR-107",
+   "description": "Extension cord 15m",
+   "quantity": "24",
+   "unit_price": "153.37",
+   "amount": "3680.88"
+  },
+  {
+   "item_code": "NOR-114",
+   "description": "Hard hat, white",
+   "quantity": "12",
+   "unit_price": "177.96",
+   "amount": "2135.52"
+  },
+  {
+   "item_code": "NOR-121",
+   "description": "Printer toner, black",
+   "quantity": "2",
+   "unit_price": "34.04",
+   "amount": "68.08"
+  }
+ ]
+}

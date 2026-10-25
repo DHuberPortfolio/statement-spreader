@@ -1,0 +1,42 @@
+{
+ "vendor": {
+  "name": "Proseware Inc",
+  "tax_id": "10-9375248"
+ },
+ "invoice_number": "INV-007042",
+ "invoice_date": "2026-03-03",
+ "due_date": "2026-04-02",
+ "po_number": "P.O. 4536",
+ "terms": "Net 30",
+ "currency": "USD",
+ "subtotal": "5917.11",
+ "tax": "414.20",
+ "total": "6331.31",
+ "lines": [
+  {
+   "item_code": "PRO-121",
+   "description": "Safety gloves, size L",
+   "quantity": "5",
+   "unit_price": "300.55",
+   "amount": "1502.75"
+  },
+  {
+   "item_code": "PRO-100",
+   "description": "LED panel 600x600",
+   "quantity": "8",
+   "unit_price": "208.47",
+   "amount": "1667.76"
+  },
+  {
+   "item_code": "PRO-107",
+   "description": "Steel bracket 40mm",
+   "quantity": "10",
+   "unit_price": "274.66",
+   "amount": "2746.60"
+  }
+ ],
+ "remit_to": {
+  "account_number": "373250948094",
+  "routing_number": "013675765"
+ }
+}
