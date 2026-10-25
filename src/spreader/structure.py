@@ -284,7 +284,9 @@ def _redate_to_balance_sheet(tables: list[StatementTable]) -> None:
             continue
         changes: dict[str, tuple[str, str, bool]] = {}
         for p in t.periods:
-            if p.months != 12:
+            # Only dated columns: a column with no heading has a placeholder ("col1") that carries no year to anchor
+            # (a prior-year 10-K crashed here); it stays assumed and flagged.
+            if p.months != 12 or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.end):
                 continue
             for y in (p.end[:4], str(int(p.end[:4]) - 1)):
                 bs = anchors.get(y)
