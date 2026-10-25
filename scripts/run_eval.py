@@ -31,6 +31,7 @@ from spreader.evaluation.truth import AnswerKey
 from spreader.ingest import read_document
 from spreader.pipeline import spread_document
 from spreader.profile import load_profile
+from spreader.second_reader import tagged_cells
 
 ROOT = Path(__file__).resolve().parents[1]
 SEC = ROOT / "eval" / "sec"
@@ -89,6 +90,7 @@ def main() -> None:
     ap.add_argument("--engine", default="statements", choices=["statements", "recon", "invoice", "dq", "sheets"])
     ap.add_argument("--no-calc", action="store_true", help="rebuild SEC keys without the calculation links (the old key)")
     ap.add_argument("--scale", type=int, default=300, help="recon/invoice: synthetic set size")
+    ap.add_argument("--xbrl-check", action="store_true", help="opt-in second reader (D37); NOT independent of the SEC keys")
     args = ap.parse_args()
     if args.engine != "statements":
         name = args.save or f"{args.engine}-latest"
@@ -142,7 +144,7 @@ def main() -> None:
                 key_path.parent.mkdir(parents=True, exist_ok=True)
                 key.save(key_path)
             ir = read_document(path.name, data)
-            spread, _ = spread_document(ir, profile, model=model)
+            spread, _ = spread_document(ir, profile, model=model, tags=tagged_cells(data) if args.xbrl_check else None)
             s = score(spread, key)
         except Exception as exc:  # a crash is a result too: record it, keep going
             s = DocScore(document=doc_id, source=doc_id.split(":")[0], error=f"{type(exc).__name__}: {exc}")
@@ -183,11 +185,13 @@ def main() -> None:
     if args.only:  # a subset is not the registered set: say so instead of quoting the whole set's version
         sets = [{"name": n, "version": None, "note": f"subset: {args.only}"} for n in sets]
     prov = provenance(sets, {"profile": str(report["profile"]), **({"model": args.model} if args.model else {}),
-                                             **({"keys": "rebuilt without calculation links"} if args.no_calc else {})})
+                                             **({"keys": "rebuilt without calculation links"} if args.no_calc else {}),
+                                             **({"second_reader": "XBRL check ON: not independent of the SEC keys"}
+                                                if args.xbrl_check else {})})
     report["provenance"] = prov
     (REPORTS / f"{name}.json").write_text(json.dumps(report, indent=1, default=str))
     latest = f"latest-{args.split}{'-syn' if args.synthetic else ''}"
-    if name != latest and not args.only and not args.model:
+    if name != latest and not args.only and not args.model and not args.xbrl_check:
         # The app's ROI page reads latest-*: a full run of the default pipeline refreshes it whatever it is saved as.
         (REPORTS / f"{latest}.json").write_text(json.dumps(report, indent=1, default=str))
     lines = [f"# Evaluation: {name}", "", f"{len(scores)} documents ({report['crashed']} crashed), profile {report['profile']}, "

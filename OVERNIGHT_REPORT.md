@@ -213,6 +213,48 @@ they were). No value went from caught to silent on either split.
   The headline gain comes mostly from mappings: last year's corrections carry forward. No UI field for the company id
   yet (API only).
 
+## Task 5: XBRL tags as a second reader (opt-in)
+
+### Plan (written before starting)
+
+- **What it compares.** For every printed number the spread uses, the inline XBRL fact tagged on the same table cell
+  (same cell path as the reader's provenance): the magnitude after scaling, and the period. The tag's sign is not
+  compared: it follows the concept's convention, not what is printed. Three kinds of disagreement: *scale* (a power of
+  ten apart), *value* (any other difference beyond rounding), *period* (same number, different period).
+- **What it does.** Off by default (`SPREADER_XBRL_CHECK=1`, `spread_document(..., tags=...)`, `run_eval.py
+  --xbrl-check`). A disagreement is a warning on the value's line and period, so that value is not accepted without a
+  person. Agreement adds nothing to automation: making agreement a basis for auto-acceptance would need calibration
+  against outcomes, and the only outcomes here come from the same tags.
+- **How it is measured.** Not against the answer keys for any headline: they are built from the same tags, so the
+  mode would look better than it is. Reported instead: how often the readers disagree on dev and the holdout, by kind,
+  and, for a fixed random sample of disagreements, which reader was right, checked by me against the printed filing,
+  each verdict recorded in `eval/xbrl-check/verdicts.json`. Labelled as not independent of the key source.
+
+### Result: done (off by default)
+
+**Not independent of the SEC answer keys** (same tags). Report `xbrl-check`.
+
+| | Dev (33 filings) | Holdout (30) |
+|---|---|---|
+| Printed numbers with a tag on their cell | 6,233 | 5,381 |
+| Readers agree | 96.8% (96.4-97.2%) | 91.7% (90.9-92.4%) |
+| Disagree: scale / period / other value | 27 / 171 / 0 | 240 / 208 / 0 |
+| Disagreements on values the tag-blind engine had not already sent to review | 5 | 19 |
+
+- **Hand check.** 30 disagreements drawn at random (seed 20261025) and checked against each filing's text: the tag
+  was right 29 times. The causes were unit statements printed once for the whole document (Deere), year-only and
+  "Fiscal 2023" columns dated a year off (Snap-on, Target, Home Depot, Disney), and a fair-value table read as a
+  statement (Merck). The printed reader was right once: McDonald's tags its share count as "713.4" with no scale.
+  The sample is clustered (8 filings; Deere 11 of 30), so read it as "the tags are usually right when they disagree",
+  not as a rate.
+- **The honest bottom line.** Every sampled disagreement was on a value already sent to review by the default
+  engine, and only 24 of 646 disagreements were new information. The mode is cheap insurance for public filers, not a
+  big safety gain. Its most useful find: Home Depot's "Fiscal 2023" columns are dated a year early *without a flag*
+  (19 values). That is a reader bug worth fixing, but it was found on the holdout, so it is in the next steps with
+  the rule to reproduce it on a dev filing first.
+- **One comparison bug fixed on the way:** opening and closing cash disagreed on "period" in every filing, because
+  they are tagged as balances at a date (found on dev, Walmart).
+
 ## Assumptions made without anyone to ask
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the

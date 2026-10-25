@@ -1,0 +1,67 @@
+{
+ "name": "xbrl-check",
+ "independent_of_keys": false,
+ "splits": {
+  "dev": {
+   "documents": 33,
+   "cells": 6233,
+   "agree": 6035,
+   "scale": 27,
+   "new_flags": 5,
+   "period": 171,
+   "disagree": {
+    "n": 198,
+    "d": 6233,
+    "rate": 0.03176640462056794,
+    "low": 0.027692679024717354,
+    "high": 0.03641694979766606
+   }
+  },
+  "holdout": {
+   "documents": 30,
+   "cells": 5381,
+   "agree": 4933,
+   "scale": 240,
+   "new_flags": 19,
+   "period": 208,
+   "disagree": {
+    "n": 448,
+    "d": 5381,
+    "rate": 0.08325590039026204,
+    "low": 0.07616816048812637,
+    "high": 0.09093825913246191
+   }
+  }
+ },
+ "sample_size": 30,
+ "seed": 20261025,
+ "verdicts": {
+  "tag": 29,
+  "printed": 1
+ },
+ "provenance": {
+  "created": "2026-10-25T07:59:29+00:00",
+  "commit": "2a4d9733eaf9757f96d6561df8128ab4cc34f739",
+  "dirty": true,
+  "datasets": [
+   {
+    "name": "sec-dev",
+    "version": "83478e9b205ab8ac",
+    "key_version": "256a779d1b24dd7d",
+    "files": 99,
+    "matches_manifest": true
+   },
+   {
+    "name": "sec-holdout",
+    "version": "8e7f8dff07628aa1",
+    "key_version": "a46739fb00bec15f",
+    "files": 90,
+    "matches_manifest": true
+   }
+  ],
+  "config": {
+   "profile": "us-commercial 2026.10.24-1+0ad0af213be8",
+   "second_reader": "on (measurement only)"
+  }
+ }
+}

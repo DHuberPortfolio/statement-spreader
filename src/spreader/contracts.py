@@ -232,6 +232,7 @@ class ReviewKind(str, Enum):
     SUSPICIOUS = "suspicious"  # passes the checks but looks wrong (scale, sign)
     UNREADABLE = "unreadable"
     PRIOR_PERIOD = "prior_period"  # differs from the company's approved spread for the same period (spreader.company)
+    SECOND_READER = "second_reader"  # the cell's inline XBRL tag disagrees with the printed number (opt-in, D37)
 
 
 class Severity(str, Enum):
@@ -285,6 +286,7 @@ class Spread(BaseModel):
     warnings: list[str] = Field(default_factory=list)
     company_id: str | None = None
     company_version: str | None = None  # what the run remembered about the company (spreader.company)
+    second_reader_items: list[ReviewItem] = Field(default_factory=list)  # opt-in XBRL comparison (spreader.second_reader)
     prior_items: list[ReviewItem] = Field(default_factory=list)  # differences from approved spreads, kept apart:
     # the review is rebuilt after every correction, and these come from the company's history, not from the document
 

@@ -322,3 +322,27 @@ every year, and last year's approved spread is the best evidence about this year
 - **What would change it**: reviewer decisions on these items (a calibrated classifier instead of rules), the notes to
   the financial statements (where restatements are explained), and a sign-in so the identity of the approver is
   verified (THREAT_MODEL T38).
+
+**D37. XBRL tags as a second reader: opt-in, a flag and never a vote, and never graded by its own source.** Public
+filings tag the printed numbers, and a printed number whose tag agrees is safer than either alone
+(`spreader.second_reader`).
+- **D1 still holds.** The printed-number reader is the reader. The tags are read only when `SPREADER_XBRL_CHECK=1` (or
+  `run_eval.py --xbrl-check`), and only to compare, cell by cell: the magnitude after scaling, and the period. The tag's
+  sign is not compared, because it follows the concept's convention rather than what is printed. Opening and closing
+  cash, printed in a full-year column and tagged as balances at a date, agree when the date is the column's end or
+  start.
+- **Disagreement flags; agreement does nothing.** A disagreement is a warning on that value. Agreement is not a basis
+  for accepting values alone (D35): that would need calibration against outcomes, and the only outcomes available are
+  the answer keys built from these same tags.
+- **Measured without the keys, and labelled so** (`scripts/eval_xbrl_check.py`, report `xbrl-check`). The readers agree
+  on 96.8% of tagged printed numbers on dev and 91.7% on the holdout. In a random sample of 30 disagreements, checked
+  against the printed filings (`eval/xbrl-check/verdicts.json`), the tag was right 29 times; the printed reader once
+  (McDonald's tags its share count without a scale). The sample is clustered: 8 filings, Deere alone 11. The marginal
+  value is small on these filings: all 30 sampled values had already been sent to review by the tag-blind engine, and
+  of 646 disagreements only 24 were on values it had not flagged (19 of them Home Depot's "Fiscal 2023" columns dated a
+  year early, a silent error worth fixing in the reader).
+- **Why not more.** Tags exist only for SEC filers' own filings; a borrower's PDF or management accounts have none,
+  and the product must work the same without them. The mode is an extra check for public filers, not a substitute for
+  reading.
+- **What would change it**: independent outcomes (reviewer decisions on flagged values) to calibrate agreement as
+  evidence; then agreement could become a basis for automation on SEC filings, measured like any other method.

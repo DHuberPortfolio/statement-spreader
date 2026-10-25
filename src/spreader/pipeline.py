@@ -24,6 +24,8 @@ from .layout import lay_out
 from .mapping import Memory, ModelMapper, map_table
 from .profile import Profile
 from .review import attach_flags, build_review
+from .second_reader import TagFact
+from .second_reader import compare as compare_tags
 from .spread import assemble_statement, merge_periods
 from .structure import build_statement, harmonize_periods
 
@@ -80,7 +82,8 @@ def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dic
 
 def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = None,
                     model: ModelMapper | None = None, company: CompanyContext | None = None,
-                    ) -> tuple[Spread, dict[str, float]]:
+                    tags: dict[str, list[TagFact]] | None = None) -> tuple[Spread, dict[str, float]]:
+    """tags: the opt-in second reader's inline XBRL facts by cell (spreader.second_reader); None leaves it off."""
     timer = StageTimer()
     picked = pick_statements(doc, profile, timer)
     statements: dict[str, StatementResult] = {}
@@ -119,13 +122,19 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
         text = " ".join([*(p.label for r in statements.values() for p in r.table.periods),
                          *(row.label for r in statements.values() for row in r.table.rows)])
         prior = timer.run("company", compare_with_approved, partial, company, profile, text)
-    attach_flags(values, review + prior)
+    second: list = []
+    if tags:
+        partial = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version="", statements=statements,
+                         periods=periods, values=values)
+        second = timer.run("second_reader", compare_tags, partial, tags).items
+    attach_flags(values, review + prior + second)
 
     order = {ln: i for i, ln in enumerate(profile.lines)}
     values.sort(key=lambda v: (order.get(v.line, 999), v.period))
     spread = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version=f"{profile.version}+{profile.content_hash}",
                     statements=statements, periods=periods, values=values, checks=checks, ratios=ratios,
-                    review=review + prior, warnings=list(doc.warnings), prior_items=prior,
+                    review=review + prior + second, warnings=list(doc.warnings), prior_items=prior,
+                    second_reader_items=second,
                     company_id=company.company_id if company else None,
                     company_version=company.version if company else None)
     return spread, timer.timings

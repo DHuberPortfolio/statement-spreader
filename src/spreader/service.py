@@ -15,6 +15,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from typing import Any
@@ -42,6 +43,7 @@ from .mapping import MemoryKey
 from .pipeline import spread_document
 from .profile import Profile, load_profile
 from .review import attach_flags, build_review, unresolved_blockers
+from .second_reader import tagged_cells
 from .store import Store, now
 
 log = logging.getLogger("spreader")
@@ -114,7 +116,7 @@ class Service:
         ctx = self.company_context(doc_id)
         parts = [doc_id, self.profile.id, f"{self.profile.version}+{self.profile.content_hash}",
                  str(self.store.memory_version(self.profile.id)), self.model_id, ENGINE_VERSION,
-                 ctx.version if ctx else "no-company"]
+                 ctx.version if ctx else "no-company", "xbrl-check" if os.environ.get("SPREADER_XBRL_CHECK") == "1" else ""]
         return hashlib.sha256("|".join(parts).encode()).hexdigest()[:32]
 
     def run(self, doc_id: str, actor: str, parent: int | None = None) -> RunView:
@@ -142,7 +144,9 @@ class Service:
         try:
             data = self.store.document_bytes(doc_id, doc["format"])
             ir = read_document(doc["filename"], data)
-            spread, timings = spread_document(ir, self.profile, self.memory(), self.model, self.company_context(doc_id))
+            tags = tagged_cells(data) if os.environ.get("SPREADER_XBRL_CHECK") == "1" else None  # opt-in (D37)
+            spread, timings = spread_document(ir, self.profile, self.memory(), self.model, self.company_context(doc_id),
+                                              tags)
         except IngestError as exc:
             return self._fail(run_id, f"Could not read the document: {exc}", actor)
         except Exception as exc:  # noqa: BLE001 - recorded as a failed run, never a half-written one
@@ -207,7 +211,7 @@ class Service:
         checks = run_checks(values, periods, self.profile, period_keys, scales, skip)
         ratios = run_ratios(values, periods, self.profile)
         review = build_review(spread.statements, values, checks, self.profile, ratios) + [
-            i.model_copy() for i in spread.prior_items]
+            i.model_copy() for i in spread.prior_items + spread.second_reader_items]
         human = {(v.line, v.period) for v in values if v.status is ValueStatus.HUMAN}
         for it in review:
             if it.id in resolved:

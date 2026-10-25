@@ -146,6 +146,9 @@ What the Python tests cover:
   next year's filing gets exactly the one item, a correction resolves it, reopening withdraws the approval, other
   companies are never compared; the upload route takes a company id.
 - `test_undated_columns.py` (1 test): columns without headings beside a dated balance sheet no longer crash a filing.
+- `test_second_reader.py` (5 tests): the opt-in XBRL check (D37): agreeing tags add nothing; opening cash tagged
+  at the start of the year agrees, two years back does not; a scale disagreement is a warning on that one value;
+  off by default (and switching it on is a new run); documents without tags compare nothing.
 
 ## Evaluation against answer keys
 
@@ -226,6 +229,15 @@ per filing:
 ```bash
 .venv/Scripts/python scripts/compare_keys.py <old keys dir> eval/sec/keys --reports <old report> <new report>
 ```
+
+## The opt-in XBRL second reader (DECISIONS D37)
+
+```bash
+.venv/Scripts/python scripts/eval_xbrl_check.py --sample 30    # disagreement rates, and the sample to hand-check
+```
+
+Never graded against the SEC answer keys (they are built from the same tags). The report gives how often the
+readers disagree and, from `eval/xbrl-check/verdicts.json`, who was right on the hand-checked sample.
 
 ## Calibration (the shared uncertainty policy, DECISIONS D35)
 
