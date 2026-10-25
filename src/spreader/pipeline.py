@@ -18,6 +18,7 @@ from typing import Any, TypeVar
 
 from .checks import add_derived, run_checks, run_ratios
 from .company import CompanyContext, compare_with_approved
+from .units import resolve_units
 from .contracts import DocumentIR, SourceFormat, Spread, StatementResult, StatementType
 from .detect import classify
 from .layout import lay_out
@@ -107,6 +108,10 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
                 f"{stype.value.replace('_', ' ')}; the pipeline used table {table.index + 1}. Confirm it is the audited "
                 "primary statement.")
     harmonize_periods(list(built.values()), doc.preface)
+    contexts = {stype: [layout.title_text + " " + layout.header_label_text,
+                        " ".join(" ".join(t.text for t in r.tokens) for r in layout.header_rows), table.context[-400:]]
+                for stype, (table, layout, _det) in picked.items()}
+    resolve_units(built, contexts, doc.unit_statements)
     for stype, st in built.items():
         mappings = timer.run("map", map_table, st, profile, memory, model, company.mappings if company else None)
         statements[stype.value] = StatementResult(table=st, mappings=mappings)

@@ -15,6 +15,7 @@ import re
 from lxml import etree, html
 
 from ..contracts import DocumentIR, RawRow, RawTable, SourceFormat, SourceRef, Token
+from ..detect import document_unit_statements
 from ..numbers import clean_text, is_amount_like
 from . import IngestError, doc_id_for
 from .paths import element_path
@@ -33,6 +34,9 @@ _HIDDEN_SELECTORS: set[str] = set()  # set per document from its <style> blocks 
 _FONT_SELECTORS: dict[str, bool] = {}  # selector -> its font size is zero; set per document (see read_html)
 _ZERO_MEMO: dict[etree._Element, bool] = {}  # element -> its text has a zero font size; cleared per document
 
+
+# A cheap test before the full pattern runs on every text node.
+_DOC_UNIT_HINT = re.compile(r"thousands|millions|billions", re.I)
 
 def _normalise_css(style: str) -> str:
     """Remove comments and escapes so "display:/**/none" and "d\\isplay:none" read as written."""
@@ -189,7 +193,7 @@ def _indent_and_bold(td: etree._Element) -> tuple[float, bool]:
         if _BOLD.search(style) or _local(node.tag) in {"b", "strong"}:
             bold = True
     text = td.text or ""
-    leading = len(text) - len(text.lstrip("  "))
+    leading = len(text) - len(text.lstrip("Â  "))
     return indent + leading * 3.0, bold
 
 
@@ -199,7 +203,7 @@ def _merge_fragments(tokens: list[Token]) -> list[Token]:
     pending_prefix: Token | None = None
     for tok in tokens:
         t = tok.text
-        if t in {"$", "€", "£", "(", "($", "$("}:
+        if t in {"$", "â‚¬", "Â£", "(", "($", "$("}:
             pending_prefix = tok if pending_prefix is None else _join(pending_prefix, tok, "")
             continue
         if pending_prefix is not None:
@@ -209,7 +213,7 @@ def _merge_fragments(tokens: list[Token]) -> list[Token]:
             out[-1] = _join(out[-1], tok, "")
             continue
         out.append(tok)
-    if pending_prefix is not None and pending_prefix.text not in {"$", "€", "£"}:
+    if pending_prefix is not None and pending_prefix.text not in {"$", "â‚¬", "Â£"}:
         out.append(pending_prefix)
     return out
 
@@ -321,6 +325,7 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
     buffer_len = 0
 
     preface: list[str] = []
+    unit_statements: list[str] = []  # units stated for the whole document, anywhere in it
 
     def reset_buffer() -> None:
         nonlocal buffer_len
@@ -330,6 +335,8 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
     def push(text: str | None) -> None:
         nonlocal buffer_len
         if text and text.strip():
+            if len(unit_statements) < 50 and _DOC_UNIT_HINT.search(text):
+                unit_statements.extend(document_unit_statements(text))
             if not tables and sum(len(x) for x in preface) < 6000:
                 preface.append(text)
             buffer.append(text)
@@ -378,4 +385,4 @@ def read_html(filename: str, data: bytes) -> DocumentIR:
         if t.index != i:  # pragma: no cover - indexes are assigned in order above
             t.index = i
     return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.HTML, tables=tables, warnings=warnings,
-                      preface=clean_text(" ".join(preface))[:6000])
+                      preface=clean_text(" ".join(preface))[:6000], unit_statements=unit_statements[:50])

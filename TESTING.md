@@ -269,6 +269,28 @@ The files land in `config/calibration/` and record their data. Recalibrating cha
 so treat it like any engine change: dev and synthetic before and after, the release gate, and a log entry. Never fit
 on the holdout split.
 
+## Units and currency (DECISIONS D39)
+
+```
+.venv/Scripts/python scripts/eval_units.py dev --calibrate   # truth from the XBRL tags; writes config/calibration/units.json
+.venv/Scripts/python scripts/eval_units.py holdout            # measure once per change; never fit on it
+```
+
+Each statement's unit is judged against the tagged values of its money cells; reports in `eval/units/`. The fallback
+rules are also asked of every statement as if its unit line were hidden, counted once per filing.
+
+## Reviewer decisions as outcomes (DECISIONS D40)
+
+```
+.venv/Scripts/python scripts/export_outcomes.py --summary                      # what the outcomes folder holds
+.venv/Scripts/python scripts/export_outcomes.py                                # rebuild from the audit log (separate folder)
+.venv/Scripts/python scripts/calibrate.py statements --outcomes-dir default    # refit with reviewers' outcomes
+```
+
+The folder is `var/outcomes/` unless `FINOPS_OUTCOMES_DIR` names another. `tests/test_outcomes.py` checks that an
+approval, a remap and a reconciliation verdict are recorded, that a failed write never stops a decision, and that the
+rebuild matches what was written live.
+
 ## Company memory across years (DECISIONS D36)
 
 ```bash

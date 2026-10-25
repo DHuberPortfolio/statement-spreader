@@ -50,9 +50,60 @@ _SCALE = re.compile(
     r"|\$\s*(000s?|000's)\b|\(\$000\)|(000s?|000's) omitted"
     r"|\$\s*in\s+(thousands|millions|billions)"
     r"|(?:^|[(\[|;:])\s*(?:u\.?s\.?\s+)?(?:\$|dollars|usd)?\s*(thousands|millions|billions)\b(?=\s*(?:,|\)|except|of|$))"
-    r"|\b(thousands|millions|billions)\s*,?\s*except\b",
+    r"|\b(thousands|millions|billions)\s*,?\s*except\b"
+    # "(Dollars and Shares in Millions ...)" (J&J), "(Dollars in Millions)", "(€ in millions)", "(EUR millions)"
+    r"|(?:dollars|euros?|pounds|francs|yen|amounts|€|£|¥|eur|gbp|chf|jpy|cad|usd)\s+(?:and\s+shares\s+)?in\s+"
+    r"(thousands|millions|billions)"
+    r"|\(\s*(?:eur|gbp|chf|jpy|cad|aud|usd|€|£|¥)\s*(thousands|millions|billions|000s?|'000)",
     re.I,
 )
+
+# Words naming a currency, read from unit statements and column headings (D39). "$" alone is a dollar of some country;
+# it is read as USD only because every figure here is a US filing, and is recorded as such.
+_CURRENCIES = [
+    ("EUR", re.compile(r"€|\beur\b|\beuros?\b", re.I)),
+    ("GBP", re.compile(r"£|\bgbp\b|\bpounds? sterling\b|\bsterling\b", re.I)),
+    ("CHF", re.compile(r"\bchf\b|\bswiss francs?\b", re.I)),
+    ("JPY", re.compile(r"¥|\bjpy\b|\byen\b", re.I)),
+    ("CAD", re.compile(r"\bc\$|\bcad\b|\bcanadian dollars?\b", re.I)),
+    ("AUD", re.compile(r"\ba\$|\baud\b|\baustralian dollars?\b", re.I)),
+    ("CNY", re.compile(r"\brmb\b|\bcny\b|\brenminbi\b", re.I)),
+    ("USD", re.compile(r"\bu\.?s\.? dollars?\b|\busd\b|\bus\$", re.I)),
+]
+
+
+# A unit stated once for the whole document ("All amounts are presented in millions of U.S. dollars", Deere; "Unless
+# otherwise indicated, all dollar amounts are in thousands"). Only sentences that claim the whole document count; a
+# table's own "(in millions)" does not.
+_DOC_UNIT = re.compile(
+    r"\b(?:all|unless\s+otherwise\s+(?:stated|noted|indicated|specified)[^.]{0,60}?)\s*(?:dollar\s+|monetary\s+|currency\s+)?"
+    r"(?:amounts|figures|numbers)\b[^.]{0,80}?\b(thousands|millions|billions)\b(?:[^.]|(?<=\bU)\.|(?<=\bS)\.){0,60}",
+    re.I,
+)
+
+
+def document_unit_statements(text: str) -> list[str]:
+    """Sentences that state the unit for the whole document, as printed (at most 200 characters each)."""
+    return [m.group(0).strip()[:200] for m in _DOC_UNIT.finditer(clean_text(text or ""))]
+
+
+def doc_unit_multiplier(statement: str) -> int:
+    m = _DOC_UNIT.search(statement)
+    return _SCALE_WORDS[m.group(1).lower()] if m else 1
+
+
+def detect_currency(texts: list[str]) -> tuple[str | None, str]:
+    """The currency the unit statement or headings name, nearest text first: (ISO code, the words it was read from).
+    Two different currencies in the same text are not resolved: (None, why)."""
+    for text in texts:
+        t = clean_text(text or "")
+        found = {code: m.group(0) for code, rx in _CURRENCIES if (m := rx.search(t))}
+        if len(found) == 1:
+            code, word = next(iter(found.items()))
+            return code, word
+        if len(found) > 1:
+            return None, f"several currencies named nearby ({', '.join(sorted(found))})"
+    return None, ""
 _SHARE_SCALE = re.compile(
     r"shares?\b[^.;)]{0,60}?\bin\s+(thousands|millions)"
     r"|(thousands|millions)\s+of\s+shares",
@@ -263,9 +314,9 @@ def detect_scale(texts: list[str]) -> tuple[Scale, Scale | None]:
         for text in texts[:3]:
             m = _WHOLE_DOLLARS.search(clean_text(text or ""))
             if m:
-                return Scale(multiplier=1, evidence=m.group(0).strip()), None
+                return Scale(multiplier=1, evidence=m.group(0).strip(), rule="scale.table"), None
         return Scale(multiplier=1, evidence="No unit statement (such as 'in thousands') was found near the table.",
-                     assumed=True), None
+                     assumed=True, rule="scale.none"), None
     return money, shares
 
 

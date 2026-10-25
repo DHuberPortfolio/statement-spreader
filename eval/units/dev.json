@@ -1,0 +1,3631 @@
+{
+ "split": "dev",
+ "statements": 190,
+ "without_truth": 3,
+ "by_rule": {
+  "scale.sibling": {
+   "right": 2,
+   "total": 2
+  },
+  "scale.table": {
+   "right": 188,
+   "total": 188
+  }
+ },
+ "unit_line_hidden": {
+  "scale.sibling": {
+   "right": 188,
+   "total": 188,
+   "filings": 66,
+   "wrong": []
+  },
+  "scale.document": {
+   "right": 24,
+   "total": 24,
+   "filings": 8,
+   "wrong": []
+  }
+ },
+ "hidden_rows": [
+  {
+   "filing": "AAPL",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AAPL",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AAPL",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ADBE",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ADBE",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ADBE",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMD",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMD",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMD",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMZN",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMZN",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMZN",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BA",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BA",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BA",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BOOT",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "BOOT",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "BOOT",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CAT",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "CHRW",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CHRW",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CMG",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CMG",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "COST",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "COST",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "COST",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DIS",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DIS",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DIS",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DPZ",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DPZ",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DPZ",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ETSY",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ETSY",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ETSY",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "F",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "F",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "F",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "HAS",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "HAS",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "HAS",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "KO",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "KO",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "KO",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "LULU",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MAT",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MAT",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MAT",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MCD",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MCD",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MCD",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MMM",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MMM",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MMM",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ORCL",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ORCL",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ORCL",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PEP",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PEP",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PEP",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PFE",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PFE",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PFE",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PG",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PG",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PG",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "POOL",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "POOL",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "POOL",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SHAK",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SHAK",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SHAK",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SNA",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "SNA",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "SNA",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ULTA",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "UNP",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "UNP",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "UNP",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "WMT",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "WMT",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "WMT",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AAPL-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AAPL-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AAPL-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ADBE-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ADBE-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ADBE-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMD-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMD-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMD-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMZN-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMZN-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "AMZN-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BA-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BA-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BA-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "BOOT-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "BOOT-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "BOOT-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CAT-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "CAT-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "CHRW-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CHRW-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CHRW-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CMG-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "CMG-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "COST-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "COST-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "COST-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DIS-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DIS-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DIS-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "DPZ-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DPZ-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DPZ-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ETSY-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ETSY-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ETSY-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "F-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "F-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "F-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "HAS-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "HAS-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "HAS-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "KO-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "KO-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "KO-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "LULU-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MAT-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MAT-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MAT-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "MCD-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MCD-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MCD-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MMM-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MMM-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "MMM-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ORCL-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ORCL-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ORCL-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PEP-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PEP-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PEP-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PFE-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PFE-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PFE-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PG-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PG-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "PG-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "POOL-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "POOL-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "POOL-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SHAK-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SHAK-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SHAK-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "SNA-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "SNA-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "SNA-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "income_statement",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "cash_flow",
+   "rule": "scale.document",
+   "guess": 1000,
+   "truth": 1000
+  },
+  {
+   "filing": "UNP-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "UNP-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "UNP-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "WMT-prior",
+   "statement": "cash_flow",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "WMT-prior",
+   "statement": "income_statement",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  },
+  {
+   "filing": "WMT-prior",
+   "statement": "balance_sheet",
+   "rule": "scale.sibling",
+   "guess": 1000000,
+   "truth": 1000000
+  }
+ ],
+ "wrong_unflagged": [],
+ "flagged": 0,
+ "rows": [
+  {
+   "filing": "AAPL",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 45
+  },
+  {
+   "filing": "AAPL",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "AAPL",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 86
+  },
+  {
+   "filing": "ADBE",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 95
+  },
+  {
+   "filing": "ADBE",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "ADBE",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 67
+  },
+  {
+   "filing": "AMD",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 102
+  },
+  {
+   "filing": "AMD",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": null,
+   "cells": 53
+  },
+  {
+   "filing": "AMD",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 55
+  },
+  {
+   "filing": "AMZN",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 85
+  },
+  {
+   "filing": "AMZN",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 57
+  },
+  {
+   "filing": "AMZN",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "BA",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 62
+  },
+  {
+   "filing": "BA",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 129
+  },
+  {
+   "filing": "BA",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 73
+  },
+  {
+   "filing": "BOOT",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 30
+  },
+  {
+   "filing": "BOOT",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 50
+  },
+  {
+   "filing": "BOOT",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 92
+  },
+  {
+   "filing": "CAT",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 71
+  },
+  {
+   "filing": "CHRW",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 73
+  },
+  {
+   "filing": "CHRW",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 114
+  },
+  {
+   "filing": "CMG",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "CMG",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 106
+  },
+  {
+   "filing": "CMG",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.sibling",
+   "flagged": false,
+   "evidence": "No unit statement at the table; the document's other statements are all in thousands.",
+   "currency": "USD",
+   "cells": 6
+  },
+  {
+   "filing": "COST",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "amounts in millions",
+   "currency": "USD",
+   "cells": 36
+  },
+  {
+   "filing": "COST",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "amounts in millions",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "COST",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "amounts in millions",
+   "currency": "USD",
+   "cells": 92
+  },
+  {
+   "filing": "DIS",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 50
+  },
+  {
+   "filing": "DIS",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 66
+  },
+  {
+   "filing": "DIS",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 102
+  },
+  {
+   "filing": "DPZ",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "DPZ",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 116
+  },
+  {
+   "filing": "DPZ",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 88
+  },
+  {
+   "filing": "DUOL",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "DUOL",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 58
+  },
+  {
+   "filing": "DUOL",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 73
+  },
+  {
+   "filing": "ETSY",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 62
+  },
+  {
+   "filing": "ETSY",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 49
+  },
+  {
+   "filing": "ETSY",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 98
+  },
+  {
+   "filing": "EXPD",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In thousands",
+   "currency": "USD",
+   "cells": 51
+  },
+  {
+   "filing": "EXPD",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In thousands",
+   "currency": "USD",
+   "cells": 66
+  },
+  {
+   "filing": "EXPD",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In thousands",
+   "currency": "USD",
+   "cells": 86
+  },
+  {
+   "filing": "F",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "F",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 68
+  },
+  {
+   "filing": "F",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 114
+  },
+  {
+   "filing": "FAST",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 51
+  },
+  {
+   "filing": "FAST",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 30
+  },
+  {
+   "filing": "FAST",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 90
+  },
+  {
+   "filing": "HAS",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of Dollars",
+   "currency": "USD",
+   "cells": 65
+  },
+  {
+   "filing": "HAS",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of Dollars",
+   "currency": "USD",
+   "cells": 50
+  },
+  {
+   "filing": "HAS",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of Dollars",
+   "currency": "USD",
+   "cells": 111
+  },
+  {
+   "filing": "KO",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "KO",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 68
+  },
+  {
+   "filing": "KO",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 100
+  },
+  {
+   "filing": "LULU",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 99
+  },
+  {
+   "filing": "MAT",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 39
+  },
+  {
+   "filing": "MAT",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "MAT",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 92
+  },
+  {
+   "filing": "MCD",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In millions",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "MCD",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In millions",
+   "currency": "USD",
+   "cells": 68
+  },
+  {
+   "filing": "MCD",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In millions",
+   "currency": "USD",
+   "cells": 94
+  },
+  {
+   "filing": "MMM",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions",
+   "currency": "USD",
+   "cells": 49
+  },
+  {
+   "filing": "MMM",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 72
+  },
+  {
+   "filing": "MMM",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions",
+   "currency": "USD",
+   "cells": 95
+  },
+  {
+   "filing": "ORCL",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "ORCL",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 64
+  },
+  {
+   "filing": "ORCL",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 99
+  },
+  {
+   "filing": "PEP",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 39
+  },
+  {
+   "filing": "PEP",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 91
+  },
+  {
+   "filing": "PEP",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 66
+  },
+  {
+   "filing": "PFE",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(MILLIONS",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "PFE",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(MILLIONS",
+   "currency": "USD",
+   "cells": 74
+  },
+  {
+   "filing": "PFE",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(MILLIONS",
+   "currency": "USD",
+   "cells": 111
+  },
+  {
+   "filing": "PG",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 37
+  },
+  {
+   "filing": "PG",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 62
+  },
+  {
+   "filing": "PG",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 88
+  },
+  {
+   "filing": "POOL",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 33
+  },
+  {
+   "filing": "POOL",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 58
+  },
+  {
+   "filing": "POOL",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 117
+  },
+  {
+   "filing": "SHAK",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "SHAK",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 102
+  },
+  {
+   "filing": "SHAK",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "SNA",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "SNA",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 80
+  },
+  {
+   "filing": "SNA",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 100
+  },
+  {
+   "filing": "ULTA",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 34
+  },
+  {
+   "filing": "ULTA",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "ULTA",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 102
+  },
+  {
+   "filing": "UNP",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "UNP",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Millions",
+   "currency": "USD",
+   "cells": 85
+  },
+  {
+   "filing": "UNP",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Millions",
+   "currency": "USD",
+   "cells": 52
+  },
+  {
+   "filing": "WMT",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 95
+  },
+  {
+   "filing": "WMT",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 51
+  },
+  {
+   "filing": "WMT",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 64
+  },
+  {
+   "filing": "AAPL-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 45
+  },
+  {
+   "filing": "AAPL-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "AAPL-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 86
+  },
+  {
+   "filing": "ADBE-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 98
+  },
+  {
+   "filing": "ADBE-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "ADBE-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 67
+  },
+  {
+   "filing": "AMD-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 49
+  },
+  {
+   "filing": "AMD-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 63
+  },
+  {
+   "filing": "AMD-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 97
+  },
+  {
+   "filing": "AMZN-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 86
+  },
+  {
+   "filing": "AMZN-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 57
+  },
+  {
+   "filing": "AMZN-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "BA-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "BA-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 122
+  },
+  {
+   "filing": "BA-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 73
+  },
+  {
+   "filing": "BOOT-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 30
+  },
+  {
+   "filing": "BOOT-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 50
+  },
+  {
+   "filing": "BOOT-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 91
+  },
+  {
+   "filing": "CAT-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 72
+  },
+  {
+   "filing": "CAT-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of dollars",
+   "currency": "USD",
+   "cells": 120
+  },
+  {
+   "filing": "CHRW-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 74
+  },
+  {
+   "filing": "CHRW-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "CHRW-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 113
+  },
+  {
+   "filing": "CMG-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "CMG-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 106
+  },
+  {
+   "filing": "CMG-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.sibling",
+   "flagged": false,
+   "evidence": "No unit statement at the table; the document's other statements are all in thousands.",
+   "currency": "USD",
+   "cells": 6
+  },
+  {
+   "filing": "COST-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "amounts in millions",
+   "currency": "USD",
+   "cells": 36
+  },
+  {
+   "filing": "COST-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "amounts in millions",
+   "currency": "USD",
+   "cells": 52
+  },
+  {
+   "filing": "COST-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "amounts in millions",
+   "currency": "USD",
+   "cells": 89
+  },
+  {
+   "filing": "DIS-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 72
+  },
+  {
+   "filing": "DIS-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 67
+  },
+  {
+   "filing": "DIS-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 107
+  },
+  {
+   "filing": "DPZ-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 59
+  },
+  {
+   "filing": "DPZ-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 115
+  },
+  {
+   "filing": "DPZ-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 88
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 68
+  },
+  {
+   "filing": "DUOL-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 53
+  },
+  {
+   "filing": "ETSY-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 62
+  },
+  {
+   "filing": "ETSY-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "ETSY-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 98
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In thousands",
+   "currency": "USD",
+   "cells": 50
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In thousands",
+   "currency": "USD",
+   "cells": 66
+  },
+  {
+   "filing": "EXPD-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In thousands",
+   "currency": "USD",
+   "cells": 86
+  },
+  {
+   "filing": "F-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "F-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 68
+  },
+  {
+   "filing": "F-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 114
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 50
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 30
+  },
+  {
+   "filing": "FAST-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 91
+  },
+  {
+   "filing": "HAS-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of Dollars",
+   "currency": "USD",
+   "cells": 64
+  },
+  {
+   "filing": "HAS-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of Dollars",
+   "currency": "USD",
+   "cells": 49
+  },
+  {
+   "filing": "HAS-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions of Dollars",
+   "currency": "USD",
+   "cells": 114
+  },
+  {
+   "filing": "KO-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "KO-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 64
+  },
+  {
+   "filing": "KO-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In millions",
+   "currency": "USD",
+   "cells": 99
+  },
+  {
+   "filing": "LULU-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in thousands",
+   "currency": "USD",
+   "cells": 102
+  },
+  {
+   "filing": "MAT-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 39
+  },
+  {
+   "filing": "MAT-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "MAT-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 104
+  },
+  {
+   "filing": "MCD-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In millions",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "MCD-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In millions",
+   "currency": "USD",
+   "cells": 69
+  },
+  {
+   "filing": "MCD-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "In millions",
+   "currency": "USD",
+   "cells": 97
+  },
+  {
+   "filing": "MMM-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions",
+   "currency": "USD",
+   "cells": 51
+  },
+  {
+   "filing": "MMM-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Dollars in millions",
+   "currency": "USD",
+   "cells": 82
+  },
+  {
+   "filing": "MMM-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(Millions",
+   "currency": "USD",
+   "cells": 98
+  },
+  {
+   "filing": "ORCL-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "ORCL-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 63
+  },
+  {
+   "filing": "ORCL-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 97
+  },
+  {
+   "filing": "PEP-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 40
+  },
+  {
+   "filing": "PEP-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 88
+  },
+  {
+   "filing": "PEP-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in millions",
+   "currency": "USD",
+   "cells": 66
+  },
+  {
+   "filing": "PFE-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(MILLIONS",
+   "currency": "USD",
+   "cells": 54
+  },
+  {
+   "filing": "PFE-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(MILLIONS",
+   "currency": "USD",
+   "cells": 76
+  },
+  {
+   "filing": "PFE-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(MILLIONS",
+   "currency": "USD",
+   "cells": 113
+  },
+  {
+   "filing": "PG-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 37
+  },
+  {
+   "filing": "PG-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 62
+  },
+  {
+   "filing": "PG-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 91
+  },
+  {
+   "filing": "POOL-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 33
+  },
+  {
+   "filing": "POOL-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 58
+  },
+  {
+   "filing": "POOL-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 117
+  },
+  {
+   "filing": "SHAK-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 60
+  },
+  {
+   "filing": "SHAK-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 103
+  },
+  {
+   "filing": "SHAK-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(in thousands",
+   "currency": "USD",
+   "cells": 61
+  },
+  {
+   "filing": "SNA-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "SNA-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 80
+  },
+  {
+   "filing": "SNA-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 101
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "income_statement",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 30
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "balance_sheet",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 58
+  },
+  {
+   "filing": "ULTA-prior",
+   "statement": "cash_flow",
+   "read": 1000,
+   "truth": 1000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "(In thousands",
+   "currency": "USD",
+   "cells": 94
+  },
+  {
+   "filing": "UNP-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Millions",
+   "currency": "USD",
+   "cells": 48
+  },
+  {
+   "filing": "UNP-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Millions",
+   "currency": "USD",
+   "cells": 75
+  },
+  {
+   "filing": "UNP-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Millions",
+   "currency": "USD",
+   "cells": 52
+  },
+  {
+   "filing": "WMT-prior",
+   "statement": "cash_flow",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 95
+  },
+  {
+   "filing": "WMT-prior",
+   "statement": "income_statement",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 51
+  },
+  {
+   "filing": "WMT-prior",
+   "statement": "balance_sheet",
+   "read": 1000000,
+   "truth": 1000000,
+   "rule": "scale.table",
+   "flagged": false,
+   "evidence": "Amounts in millions",
+   "currency": "USD",
+   "cells": 64
+  }
+ ],
+ "provenance": {
+  "created": "2026-10-25T22:49:12+00:00",
+  "commit": "feb91439b87a74358e2cfcf3a1d1f52971b2c6ef",
+  "dirty": true,
+  "datasets": [
+   {
+    "name": "sec-dev",
+    "version": "83478e9b205ab8ac",
+    "key_version": "256a779d1b24dd7d",
+    "files": 99,
+    "matches_manifest": true
+   },
+   {
+    "name": "sec-dev-prior",
+    "version": "bcf1e066df7150eb",
+    "key_version": "51a3709d46d4215c",
+    "files": 99,
+    "matches_manifest": true
+   }
+  ],
+  "config": {}
+ }
+}

@@ -366,3 +366,46 @@ rules (D35); a catch-all on a new line has no measured accuracy yet, so its rows
 - **What would change it**: a few dozen filings per industry with answer keys (the SEC tags exist for banks and
   insurers too), so these overlays can be measured like the commercial template; and wording grown from reviewer
   memory across many borrowers rather than one source filing.
+
+## Units, and learning from reviewers (2026-10-25, day)
+
+**D39. A statement's unit is decided from evidence, through the uncertainty policy, at a bar of 80%.** A unit read
+wrong by a factor of 1,000 makes every value in the statement wrong, so where the unit came from is a rule like any
+mapping rule, measured and calibrated (`spreader/units.py`, `config/calibration/units.json`):
+`scale.table` (a unit line at the table, in any wording), `scale.document` (a unit stated once for the whole
+document, used only when every such sentence agrees), `scale.sibling` (the other statements' printed unit), and
+`scale.none` (nothing found). A unit is accepted without a person only if its rule's 95% Wilson lower bound clears
+80% (Devin's bar, 2026-10-25); otherwise the statement keeps its best guess and a blocking item shows the guess, the
+evidence and the rule's record. `scale.none` is never accepted alone, however it measures.
+- **Truth** is the filers' inline XBRL: each tagged money cell's value against what was read, per statement
+  (`scripts/eval_units.py`). The fallback rules rarely fire for real, so each is also asked of every statement that
+  prints its own unit, as if that line were hidden; those outcomes count **once per filing** (statements of one filing
+  share their unit, so counting them separately would overstate the evidence). Dev: unit line at the table 188 of
+  188; others' unit 68 of 68 filings or statements (at least 94.7%: trusted); document-wide sentence 8 of 8 filings
+  (at least 67.6%: below the bar, so flagged with its guess until it has more evidence).
+- **Holdout, once:** 157 of 157 table units right; Deere's 6 statements (no unit line at any statement) now carry
+  "millions" from its notes, all right, still flagged; no wrong unit unflagged.
+- **Wordings are pooled within a rule.** "(In thousands)", "$ in millions", "000s omitted" and "(In U.S. dollars)"
+  are all a unit printed at the table: one rule. A first version gave "(In U.S. dollars)" a rule of its own; no dev
+  filing prints it, so it had no measurement, failed closed, and sent 15% more of the synthetic corpus's values to
+  review (6.2% -> 21.1%) for statements that state their unit plainly. Pooled, the synthetic review rate is back
+  (`syn-units`); no SEC statement used that wording, so the SEC figures are unchanged.
+- **Currency** is recorded, not converted: named in the unit line or headings ("EUR millions"), else a "$" in the cells
+  (read as USD; every measured document is a US filing). A non-USD currency is a warning, statements in different
+  currencies a blocker. A conversion needs a rate source and a rate date a person chooses, so none is made.
+
+**D40. Every reviewer decision that judges a rule is written to an outcomes folder that calibration reads.** One JSON
+line per outcome (`finops/core/outcomes.py`): engine, rule, right or wrong, how it was decided, who, when, and refs back
+to the run. Default folder `var/outcomes/`, or `FINOPS_OUTCOMES_DIR`: connecting an organisation is pointing that at a
+folder its own pipeline collects, and the line format is the contract. `scripts/calibrate.py --outcomes-dir` and
+`scripts/eval_units.py --calibrate --outcomes-dir` refit on it alongside the answer keys, reporting outcomes per source.
+- **Statements:** at approval, every row the reviewer left alone is right for its rule; a remapped or excluded row is
+  wrong for the rule that placed it; rows on corrected lines are not judged (reading or mapping may be at fault); a
+  statement's unit is wrong if a value in it was corrected by a power of ten. Rows placed by the reviewer's own memory
+  are not counted (they would only confirm the reviewer to themself).
+- **Reconciliation:** accepts and rejects are recorded but **not fitted on**: nothing confirms the automatic matches
+  nobody undid, so the feed would only ever lower a rule. It becomes usable once a reconciliation has a sign-off.
+- **Weak evidence is labelled:** approval without a change is weaker than a correction (a busy reviewer may approve
+  what they did not check); each outcome says how it was decided and the calibration file lists sources.
+- **Rebuildable:** the folder is written as decisions happen and never stops one; `scripts/export_outcomes.py` rebuilds
+  the statement outcomes from the store's append-only events.

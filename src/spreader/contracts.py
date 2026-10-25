@@ -75,6 +75,7 @@ class DocumentIR(BaseModel):
     tables: list[RawTable]
     warnings: list[str] = Field(default_factory=list)
     preface: str = ""  # visible text before the first table (a filing's cover page)
+    unit_statements: list[str] = Field(default_factory=list)  # units stated for the whole document (detect.py, D39)
 
 
 class StatementType(str, Enum):
@@ -104,7 +105,14 @@ class ValueUnit(str, Enum):
 class Scale(BaseModel):
     multiplier: int  # 1, 1_000, 1_000_000, 1_000_000_000
     evidence: str  # the words it was read from, or why it was assumed
-    assumed: bool = False
+    assumed: bool = False  # True: a person confirms it before approval (no rule cleared the bar)
+    # The rule that set it (spreader.units; calibrated in config/calibration/units.json): scale.table (a unit statement
+    # at the table, any wording, "(In U.S. dollars)" included), scale.document (one stated for the whole document),
+    # scale.sibling (the other statements' printed unit), scale.conflict, scale.none (nothing found).
+    rule: str = "scale.table"
+    confidence: float | None = None  # the rule's measured lower bound (None: never measured)
+    currency: str | None = None  # ISO code when the document names one ("EUR"); None when it names none
+    currency_evidence: str = ""
 
 
 class ParsedValue(BaseModel):
@@ -233,6 +241,7 @@ class ReviewKind(str, Enum):
     UNREADABLE = "unreadable"
     PRIOR_PERIOD = "prior_period"  # differs from the company's approved spread for the same period (spreader.company)
     SECOND_READER = "second_reader"  # the cell's inline XBRL tag disagrees with the printed number (opt-in, D37)
+    CURRENCY = "currency"  # not the profile's currency, or statements in different currencies (spreader.units, D39)
 
 
 class Severity(str, Enum):

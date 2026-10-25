@@ -27,6 +27,7 @@ from .contracts import (
 )
 from .mapping import CONFIDENCE_REVIEW, CONFIDENCE_REVIEW_CRITICAL
 from .profile import Profile
+from .units import REPORTING_CURRENCY, unit_reason
 
 JUMP_FACTOR = Decimal(10)  # a line changing more than 10x between adjacent periods is suspicious
 
@@ -64,7 +65,7 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
         stmt_lines = [ln for ln, st in profile.line_statement.items() if st is stype]
         if t.scale.assumed:
             items.append(ReviewItem(id=f"scale:{skey}", kind=ReviewKind.ASSUMED_SCALE, severity=Severity.BLOCKER, statement=stype,
-                                    message=f"{t.scale.evidence} Values were taken as printed (units). Confirm the unit before approving.",
+                                    message=f"{unit_reason(t)} Confirm the unit before approving.",
                                     lines=sorted({m.canonical for m in res.mappings if m.canonical} | set(stmt_lines)),
                                     periods=[p.key for p in t.periods]))
         for p in t.periods:
@@ -208,7 +209,28 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                             severity=Severity.WARNING, lines=[line], periods=[a.period, b.period],
                             message=(f"{ldef.label} changes {ratio:.1f}x between {a.period} ({a.value:,}) and "
                                      f"{b.period} ({b.value:,}). Real, or a scale or column mix-up?")))
+    items.extend(currency_items(statements))
     return items
+
+
+def currency_items(statements: dict[str, StatementResult]) -> list[ReviewItem]:
+    """Statements in different currencies stop approval; a currency other than the profile's is shown (nothing is
+    converted: that needs a rate source and a rate date a person chooses); no currency named at all is recorded."""
+    named = {skey: res.table.scale for skey, res in statements.items() if res.table.scale.currency}
+    found = {s.currency for s in named.values()}
+    where = "; ".join(f"{k.replace('_', ' ')}: {s.currency} ({s.currency_evidence})" for k, s in named.items())
+    if len(found) > 1:
+        return [ReviewItem(id="currency:mixed", kind=ReviewKind.CURRENCY, severity=Severity.BLOCKER,
+                           message=f"The statements name different currencies ({where}). Confirm the currency of each "
+                                   "before approving; nothing is converted.")]
+    if found and found != {REPORTING_CURRENCY}:
+        return [ReviewItem(id="currency:foreign", kind=ReviewKind.CURRENCY, severity=Severity.WARNING,
+                           message=f"Values are in {next(iter(found))}, not {REPORTING_CURRENCY} ({where}). They are "
+                                   "spread as printed; nothing is converted.")]
+    if not found and statements:
+        return [ReviewItem(id="currency:unstated", kind=ReviewKind.CURRENCY, severity=Severity.INFO,
+                           message=f"No currency is named in the statements; they are read as {REPORTING_CURRENCY}.")]
+    return []
 
 
 def _confirmed_elsewhere(c: CheckResult, checks: list[CheckResult], profile: Profile) -> dict[str, str]:

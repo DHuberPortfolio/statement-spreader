@@ -37,6 +37,7 @@ from dataclasses import dataclass, field
 import pdfplumber
 
 from ..contracts import DocumentIR, RawRow, RawTable, SourceFormat, SourceRef, Token
+from ..detect import document_unit_statements
 from ..numbers import DASHES, clean_text, is_amount_like
 from . import IngestError, doc_id_for
 
@@ -607,6 +608,7 @@ def read_pdf(filename: str, data: bytes) -> DocumentIR:
     except Exception as exc:  # pdfminer raises many types on a damaged file
         raise IngestError(f"Could not open the PDF: {type(exc).__name__}") from exc
     parts: list[_Part] = []
+    unit_statements: list[str] = []
     with pdf:
         n_pages = len(pdf.pages)
         if n_pages > MAX_PAGES:
@@ -621,12 +623,15 @@ def read_pdf(filename: str, data: bytes) -> DocumentIR:
             if scan is None and page.chars:
                 text_pages += 1
             parts.extend(_page_parts(page, i + 1, doc_id, len(parts)))
+            if len(unit_statements) < 50:
+                unit_statements.extend(document_unit_statements(page.extract_text() or ""))
         if scan is None and text_pages == 0:
             raise IngestError("The PDF has no text layer (it is probably a scan). OCR is not supported yet.")
     tables = _join_continued(parts, warnings)
     if not tables:
         raise IngestError("No pages with figures were found in this PDF")
-    return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.PDF, tables=tables, warnings=warnings)
+    return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.PDF, tables=tables, warnings=warnings,
+                      unit_statements=unit_statements[:50])
 
 
 def _value_columns(table: RawTable) -> list[int]:

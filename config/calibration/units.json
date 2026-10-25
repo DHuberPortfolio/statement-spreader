@@ -1,0 +1,64 @@
+{
+ "derived_methods": [],
+ "engine": "units",
+ "fitted": {
+  "commit": "feb91439b87a74358e2cfcf3a1d1f52971b2c6ef",
+  "config": {},
+  "created": "2026-10-25T22:49:13+00:00",
+  "datasets": [
+   {
+    "files": 99,
+    "key_version": "256a779d1b24dd7d",
+    "matches_manifest": true,
+    "name": "sec-dev",
+    "version": "83478e9b205ab8ac"
+   },
+   {
+    "files": 99,
+    "key_version": "51a3709d46d4215c",
+    "matches_manifest": true,
+    "name": "sec-dev-prior",
+    "version": "bcf1e066df7150eb"
+   }
+  ],
+  "dirty": true,
+  "fitted_by": "scripts/eval_units.py",
+  "statements": 190
+ },
+ "methods": {
+  "scale.document": {
+   "high": 1.0,
+   "low": 0.6755843804891231,
+   "rate": 1.0,
+   "right": 8,
+   "sources": {
+    "sec-dev tags, unit line hidden (per filing)": 8
+   },
+   "total": 8
+  },
+  "scale.sibling": {
+   "high": 1.0,
+   "low": 0.9465268034119508,
+   "rate": 1.0,
+   "right": 68,
+   "sources": {
+    "sec-dev tags": 2,
+    "sec-dev tags, unit line hidden (per filing)": 66
+   },
+   "total": 68
+  },
+  "scale.table": {
+   "high": 1.0,
+   "low": 0.9799751461622506,
+   "rate": 1.0,
+   "right": 188,
+   "sources": {
+    "sec-dev tags": 188
+   },
+   "total": 188
+  }
+ },
+ "never_auto": [],
+ "person_methods": [],
+ "unit": "a statement's unit (scale)"
+}
