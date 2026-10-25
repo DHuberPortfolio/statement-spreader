@@ -15,7 +15,6 @@ These workbooks are written by openpyxl, so they hold no calculated values: the 
 
 from __future__ import annotations
 
-import io
 import random
 from dataclasses import dataclass, field
 from typing import Any
@@ -25,6 +24,8 @@ from openpyxl.comments import Comment
 from openpyxl.styles import Font
 from openpyxl.utils.cell import get_column_letter as L
 from openpyxl.workbook.defined_name import DefinedName
+
+from finops.core.fingerprint import stable_xlsx
 
 BLUE = Font(color="FF0000FF")
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -53,9 +54,7 @@ class Pair:
 
 
 def _bytes(wb: Workbook) -> bytes:
-    b = io.BytesIO()
-    wb.save(b)
-    return b.getvalue()
+    return stable_xlsx(wb)  # same seed, same bytes (the evaluation manifests hash them)
 
 
 def _fault(sheet: str | None, cell: str, kind: str, note: str, group: list[str] | None = None, **kw: Any) -> dict[str, Any]:

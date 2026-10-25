@@ -24,6 +24,8 @@ from typing import Any
 
 from openpyxl import Workbook
 
+from finops.core.fingerprint import stable_xlsx
+
 PORTAL_HEADER = ["Supplier ID", "Supplier Name", "Also Known As", "EIN", "Sales Tax %", "Bank Acct", "ABA", "Status",
                  "Country", "Contact Email", "Terms (days)", "Onboarded"]
 ERP_HEADER = ["VENDOR_NO", "VENDOR_NAME", "ALT_NAMES", "TAX_ID", "VAT_RATE", "BANK_ACCOUNT", "ROUTING", "STAT", "CTRY",
@@ -336,15 +338,14 @@ def generate(seed: int, clean: int = 70, per_fault: int = 2, per_legit: int = 2)
                 cell.number_format = "@"
             if isinstance(x.cells[h], str) and x.cells[h].startswith("=") and x.case != "unsaved_formula_in_optional_field":
                 cell.data_type = "s"  # exported text that merely starts with "=", not a formula
-    xbuf = io.BytesIO()
-    wb.save(xbuf)
+    erp_bytes = stable_xlsx(wb)  # same seed, same bytes (the evaluation manifests hash them)
     prev_buf = io.StringIO()
     w = csv.DictWriter(prev_buf, fieldnames=CANON_VENDOR, lineterminator="\n")
     w.writeheader()
     for p in sorted(previous, key=lambda p: p["vendor_id"]):
         w.writerow(p)
     po_csv, po_truth = _purchase_orders(r, vendors_for_po, inactive_vendors)
-    return SyntheticSet(pbuf.getvalue().encode(), xbuf.getvalue(), prev_buf.getvalue().encode(), po_csv, truth, po_truth)
+    return SyntheticSet(pbuf.getvalue().encode(), erp_bytes, prev_buf.getvalue().encode(), po_csv, truth, po_truth)
 
 
 def _purchase_orders(r: random.Random, active: list[Vendor], inactive: list[Vendor]) -> tuple[bytes, list[dict[str, Any]]]:
