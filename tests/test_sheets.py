@@ -364,8 +364,11 @@ def _problem_book(value: int = 777) -> bytes:
 
 def test_scans_are_reused_and_reviews_follow_the_rules(tmp_path: Path) -> None:
     svc = _service(tmp_path)
-    s1 = svc.scan("Budget v1.xlsx", _problem_book(), "dana")
-    assert svc.scan("Budget v1.xlsx", _problem_book(), "dana") == s1  # same bytes, same scan
+    # Build the bytes once: openpyxl stamps the save time (to the second) into docProps/core.xml, so two builds
+    # in different seconds are different files, and this test failed whenever the clock ticked between them.
+    data = _problem_book()
+    s1 = svc.scan("Budget v1.xlsx", data, "dana")
+    assert svc.scan("Budget v1.xlsx", data, "dana") == s1  # same bytes, same scan
     got = svc.get(s1)
     assert got["model"] == "budget"
     risk = next(f for f in got["result"]["findings"] if f["kind"] == "HARDCODED_OVERRIDE")

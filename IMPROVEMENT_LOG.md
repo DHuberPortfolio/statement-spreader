@@ -178,3 +178,12 @@ the saved-error checks are tested only by unit tests; no real company's model ha
 3. Compare formulas across sheets that share a layout (twelve monthly tabs, entity tabs): today copies are only
    compared within one sheet.
 4. Defined names and table columns in the version comparison (today: a changed name is counted, not explained).
+
+## Overnight log (2026-10-25)
+
+Work order: OVERNIGHT_REPORT.md. Branch `overnight-2026-10-25`.
+
+| # | Change | Measured | Kept? |
+|---|---|---|---|
+| O1 | The platform ROI page took "the newest" `recon-*`, `invoice-*` and `dq-*` report by file time. After a clone file times are arbitrary: CI (run 40148515260, lxml 5.2 job) picked a multi-seed report of another shape and failed with `KeyError: 'runs'`; on this machine it quoted the intermediate `*-regress-dq` runs. Each engine now reads a named report, the one the README quotes (`finops.roi.SOURCES`) | The ROI figures do not move: `recon-final`/`invoice-final` have the same rates and counts as the regression runs the page had been reading. The new test fails on the old code and passes on the new | Yes |
+| O2 | `test_scans_are_reused_and_reviews_follow_the_rules` built its workbook twice; openpyxl stamps the save second into the file, so "same bytes, same scan" failed when the clock ticked between builds. Builds once now. No other test builds a generated workbook twice and compares bytes | With every build forced into a new clock second: old test 0 of 5 runs passed, new test 5 of 5 | Yes (test only) |
