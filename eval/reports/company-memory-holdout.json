@@ -1,0 +1,3565 @@
+{
+ "name": "company-memory-holdout",
+ "split": "holdout",
+ "documents": 29,
+ "crashes": [
+  "DECK prior year: ValueError: invalid literal for int() with base 10: 'col1'"
+ ],
+ "without": {
+  "accuracy": {
+   "n": 2873,
+   "d": 3890,
+   "rate": 0.738560411311054,
+   "low": 0.7245209306680643,
+   "high": 0.7521291724075204
+  },
+  "silent_error_rate": {
+   "n": 47,
+   "d": 2053,
+   "rate": 0.02289332683877253,
+   "low": 0.017259593523315547,
+   "high": 0.03030926156012889
+  },
+  "silent_omission_rate": {
+   "n": 150,
+   "d": 3890,
+   "rate": 0.038560411311053984,
+   "low": 0.03295073116715934,
+   "high": 0.04508058885366534
+  },
+  "catch_rate": {
+   "n": 366,
+   "d": 413,
+   "rate": 0.8861985472154964,
+   "low": 0.851945626886544,
+   "high": 0.9133330785017859
+  },
+  "unnecessary_review_rate": {
+   "n": 867,
+   "d": 2873,
+   "rate": 0.30177514792899407,
+   "low": 0.285263727117363,
+   "high": 0.3188159691717897
+  }
+ },
+ "with": {
+  "accuracy": {
+   "n": 3154,
+   "d": 3859,
+   "rate": 0.8173101839854885,
+   "low": 0.8048047558400501,
+   "high": 0.8291844815130943
+  },
+  "silent_error_rate": {
+   "n": 10,
+   "d": 2334,
+   "rate": 0.004284490145672665,
+   "low": 0.002328909768994384,
+   "high": 0.00786921486015072
+  },
+  "silent_omission_rate": {
+   "n": 92,
+   "d": 3859,
+   "rate": 0.023840373153666754,
+   "low": 0.01947983958688189,
+   "high": 0.029147989211482518
+  },
+  "catch_rate": {
+   "n": 350,
+   "d": 360,
+   "rate": 0.9722222222222222,
+   "low": 0.9496294017253403,
+   "high": 0.9848431819484343
+  },
+  "unnecessary_review_rate": {
+   "n": 830,
+   "d": 3154,
+   "rate": 0.2631578947368421,
+   "low": 0.24808455140983862,
+   "high": 0.2788074877602071
+  }
+ },
+ "review_items_median": {
+  "without": 24,
+  "with": 26
+ },
+ "review_items_mean": {
+  "without": 23.2,
+  "with": 31.0
+ },
+ "values_newly_caught": 24,
+ "values_newly_silent": 0,
+ "prior_items": {
+  "restatement": 51,
+  "misread": 307,
+  "unknown (no key value)": 33,
+  "misread and restatement": 7
+ },
+ "verdicts": {
+  "misread | misread": 120,
+  "misread | restatement": 10,
+  "misread | unclear": 177,
+  "misread and restatement | unclear": 7,
+  "restatement | misread": 9,
+  "restatement | restatement": 6,
+  "restatement | unclear": 36,
+  "unknown (no key value) | misread": 2,
+  "unknown (no key value) | restatement": 3,
+  "unknown (no key value) | unclear": 28
+ },
+ "memory_rows": 1251,
+ "memory_rows_right": 1245,
+ "prior_year_spread": {
+  "accuracy": {
+   "n": 2868,
+   "d": 3907,
+   "rate": 0.7340670591246481,
+   "low": 0.7199876153152751,
+   "high": 0.7476866571482275
+  },
+  "silent_error_rate": {
+   "n": 57,
+   "d": 2162,
+   "rate": 0.026364477335800184,
+   "low": 0.020404860331908532,
+   "high": 0.03400428944155597
+  },
+  "silent_omission_rate": {
+   "n": 146,
+   "d": 3907,
+   "rate": 0.03736882518556437,
+   "low": 0.031861552666680594,
+   "high": 0.043784978248813396
+  },
+  "catch_rate": {
+   "n": 336,
+   "d": 393,
+   "rate": 0.8549618320610687,
+   "low": 0.816708957504773,
+   "high": 0.8863423355048308
+  },
+  "unnecessary_review_rate": {
+   "n": 763,
+   "d": 2868,
+   "rate": 0.2660390516039052,
+   "low": 0.2501873619942719,
+   "high": 0.28251667015011933
+  }
+ },
+ "documents_detail": [
+  {
+   "doc": "CROX",
+   "prior_items": [
+    {
+     "line": "sga",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2024-12-31/12M is 1,364,265,000 here, but the company's approved spread says 1,388,347,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is 68,430,000 here, but the company's approved spread says 54,701,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "buybacks",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Share repurchases for 2024-12-31/12M is -560,690,000 here, but the company's approved spread says -552,451,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2023-12-31/12M is 1,163,940,000 here, but the company's approved spread says 1,173,227,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is 366,525,000 here, but the company's approved spread says 78,391,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "buybacks",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Share repurchases for 2023-12-31/12M is -192,105,000 here, but the company's approved spread says -175,019,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "st_investments",
+     "period": "2024-12-31/I",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Short-term investments for 2024-12-31/I is 3,193,000 here, but the company's approved spread says 0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "common_stock_apic",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Common stock and paid-in capital for 2024-12-31/I is 860,014,000 here, but the company's approved spread says 859,904,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 43,
+    "wrong_review": 4,
+    "correct_auto": 95,
+    "unjudged": 8
+   },
+   "buckets_with": {
+    "correct_review": 49,
+    "correct_auto": 92,
+    "unjudged": 8,
+    "missing_silent": 1
+   },
+   "memory_rows": 48,
+   "memory_rows_right": 48
+  },
+  {
+   "doc": "CSCO",
+   "prior_items": [
+    {
+     "line": "receivables",
+     "period": "2025-07-26/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accounts receivable, net for 2025-07-26/I is 9,762,000,000 here, but the company's approved spread says 6,701,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_liabilities",
+     "period": "2025-07-26/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other non-current liabilities for 2025-07-26/I is 35,796,000,000 here, but the company's approved spread says 17,523,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2025-07-26/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2025-07-26/I is 3,611,000,000 here, but the company's approved spread says 5,468,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2025-07-26/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2025-07-26/12M is 744,000,000 here, but the company's approved spread says 1,772,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2025-07-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2025-07-26/12M is -1,292,000,000 here, but the company's approved spread says -1,506,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2025-07-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2025-07-26/12M is 2,920,000,000 here, but the company's approved spread says 2,997,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "debt_repaid",
+     "period": "2025-07-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt repaid for 2025-07-26/12M is -22,073,000,000 here, but the company's approved spread says 0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-07-27/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2024-07-27/12M is 789,000,000 here, but the company's approved spread says 1,487,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-07-27/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Changes in working capital for 2024-07-27/12M is -4,298,000,000 here, but the company's approved spread says -4,374,000,000 (analyst (key), ). Likely a reclassification by the company: Purchases and sales of investments, net moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-07-27/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Purchases and sales of investments, net for 2024-07-27/12M is 6,191,000,000 here, but the company's approved spread says 6,273,000,000 (analyst (key), ). Likely a reclassification by the company: Changes in working capital moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "debt_repaid",
+     "period": "2024-07-27/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt repaid for 2024-07-27/12M is -12,966,000,000 here, but the company's approved spread says -3,140,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 91,
+    "unjudged": 11,
+    "correct_review": 37,
+    "wrong_review": 9,
+    "missing_flagged": 12,
+    "missing_silent": 3
+   },
+   "buckets_with": {
+    "correct_review": 44,
+    "correct_auto": 99,
+    "unjudged": 11,
+    "wrong_review": 4,
+    "missing_flagged": 4,
+    "missing_silent": 1
+   },
+   "memory_rows": 58,
+   "memory_rows_right": 56
+  },
+  {
+   "doc": "CVX",
+   "prior_items": [
+    {
+     "line": "other_current_assets",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other current assets for 2024-12-31/I is 4,849,000,000 here, but the company's approved spread says 4,368,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-12-31/12M is 41,000,000 here, but the company's approved spread says 45,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-31/12M is -15,239,000,000 here, but the company's approved spread says -12,897,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is -14,718,000,000 here, but the company's approved spread says -6,798,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 19,
+    "missing_flagged": 27,
+    "unjudged": 3,
+    "wrong_review": 5,
+    "correct_auto": 64,
+    "missing_silent": 12
+   },
+   "buckets_with": {
+    "correct_review": 35,
+    "missing_flagged": 2,
+    "unjudged": 3,
+    "correct_auto": 83,
+    "missing_silent": 7
+   },
+   "memory_rows": 47,
+   "memory_rows_right": 47
+  },
+  {
+   "doc": "DE",
+   "prior_items": [
+    {
+     "line": "cf_net_income",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income (cash flow statement) for 2024-10-27/12M is 7,088 here, but the company's approved spread says 7,088,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Depreciation and amortization for 2024-10-27/12M is 2,118 here, but the company's approved spread says 2,118,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_sbc",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Share-based compensation for 2024-10-27/12M is 208 here, but the company's approved spread says 208,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_deferred_tax",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Deferred income taxes for 2024-10-27/12M is -294 here, but the company's approved spread says -294,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Changes in working capital for 2024-10-27/12M is -324 here, but the company's approved spread says -97,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cfo",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash from operating activities for 2024-10-27/12M is 9,231 here, but the company's approved spread says 9,231,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Purchases and sales of investments, net for 2024-10-27/12M is -223 here, but the company's approved spread says -223,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Capital expenditures for 2024-10-27/12M is -1,640 here, but the company's approved spread says -1,640,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cfi",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash from investing activities for 2024-10-27/12M is -6,464 here, but the company's approved spread says -6,464,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other financing activities for 2024-10-27/12M is -13,345 here, but the company's approved spread says -113,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "buybacks",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Share repurchases for 2024-10-27/12M is -4,007 here, but the company's approved spread says -4,007,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "dividends_paid",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Dividends paid for 2024-10-27/12M is -1,605 here, but the company's approved spread says -1,605,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "fx_effect",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Effect of exchange rates on cash for 2024-10-27/12M is -37 here, but the company's approved spread says -37,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_change_cash",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net change in cash for 2024-10-27/12M is 13 here, but the company's approved spread says 13,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cash_end",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash, end of period for 2024-10-27/12M is 7,633 here, but the company's approved spread says 7,633,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "revenue",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Revenue for 2024-10-27/12M is 51,716 here, but the company's approved spread says 51,716,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other income (expense), net for 2024-10-27/12M is 1,174 here, but the company's approved spread says -24,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "rnd",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Research and development for 2024-10-27/12M is 2,290 here, but the company's approved spread says 2,290,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Selling, general and administrative for 2024-10-27/12M is 4,840 here, but the company's approved spread says 4,840,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Interest expense for 2024-10-27/12M is 3,348 here, but the company's approved spread says 3,348,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2024-10-27/12M is 8,369 here, but the company's approved spread says 1,257,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "total_costs",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total costs and expenses (including cost of revenue) for 2024-10-27/12M is 42,510 here, but the company's approved spread says 42,510,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income before income taxes for 2024-10-27/12M is 9,206 here, but the company's approved spread says 9,206,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income tax expense (benefit) for 2024-10-27/12M is 2,094 here, but the company's approved spread says 2,094,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income for 2024-10-27/12M is 7,088 here, but the company's approved spread says 7,088,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "nci_net_income",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income attributable to noncontrolling interests for 2024-10-27/12M is -12 here, but the company's approved spread says -12,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income_parent",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income attributable to the company for 2024-10-27/12M is 7,100 here, but the company's approved spread says 7,100,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2024-10-27/12M is 276.0 here, but the company's approved spread says 276,000,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2024-10-27/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, diluted for 2024-10-27/12M is 277.1 here, but the company's approved spread says 277,100,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2024-10-27/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Gross profit for 2024-10-27/12M is 20,941 here, but the company's approved spread says 13,984 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_opex",
+     "period": "2024-10-27/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Total operating expenses for 2024-10-27/12M is 15,499 here, but the company's approved spread says 24,681 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_net_income",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income (cash flow statement) for 2023-10-29/12M is 10,155 here, but the company's approved spread says 10,155,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Depreciation and amortization for 2023-10-29/12M is 2,004 here, but the company's approved spread says 2,004,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_sbc",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Share-based compensation for 2023-10-29/12M is 130 here, but the company's approved spread says 130,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_deferred_tax",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Deferred income taxes for 2023-10-29/12M is -790 here, but the company's approved spread says -790,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Changes in working capital for 2023-10-29/12M is -3,085 here, but the company's approved spread says -2,915,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cfo",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash from operating activities for 2023-10-29/12M is 8,589 here, but the company's approved spread says 8,589,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Purchases and sales of investments, net for 2023-10-29/12M is -305 here, but the company's approved spread says -305,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "acquisitions",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Acquisitions, net of cash acquired for 2023-10-29/12M is -82 here, but the company's approved spread says -82,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Capital expenditures for 2023-10-29/12M is -1,498 here, but the company's approved spread says -1,498,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cfi",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash from investing activities for 2023-10-29/12M is -8,749 here, but the company's approved spread says -8,749,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other financing activities for 2023-10-29/12M is -7,986 here, but the company's approved spread says -73,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "buybacks",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Share repurchases for 2023-10-29/12M is -7,216 here, but the company's approved spread says -7,216,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "dividends_paid",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Dividends paid for 2023-10-29/12M is -1,427 here, but the company's approved spread says -1,427,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "fx_effect",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Effect of exchange rates on cash for 2023-10-29/12M is 31 here, but the company's approved spread says 31,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_change_cash",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net change in cash for 2023-10-29/12M is 2,679 here, but the company's approved spread says 2,679,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cash_end",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash, end of period for 2023-10-29/12M is 7,620 here, but the company's approved spread says 7,620,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "revenue",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Revenue for 2023-10-29/12M is 61,251 here, but the company's approved spread says 61,251,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other income (expense), net for 2023-10-29/12M is 1,010 here, but the company's approved spread says 7,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "rnd",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Research and development for 2023-10-29/12M is 2,177 here, but the company's approved spread says 2,177,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Selling, general and administrative for 2023-10-29/12M is 4,595 here, but the company's approved spread says 4,595,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Interest expense for 2023-10-29/12M is 2,453 here, but the company's approved spread says 2,453,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2023-10-29/12M is 11,440 here, but the company's approved spread says 1,292,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Cost of revenue, Gross profit (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "total_costs",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total costs and expenses (including cost of revenue) for 2023-10-29/12M is 48,232 here, but the company's approved spread says 48,232,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income before income taxes for 2023-10-29/12M is 13,019 here, but the company's approved spread says 13,019,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income tax expense (benefit) for 2023-10-29/12M is 2,871 here, but the company's approved spread says 2,871,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income for 2023-10-29/12M is 10,155 here, but the company's approved spread says 10,155,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "nci_net_income",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income attributable to noncontrolling interests for 2023-10-29/12M is -11 here, but the company's approved spread says -11,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income_parent",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income attributable to the company for 2023-10-29/12M is 10,166 here, but the company's approved spread says 10,166,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2023-10-29/12M is 292.2 here, but the company's approved spread says 292,200,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2023-10-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, diluted for 2023-10-29/12M is 293.6 here, but the company's approved spread says 293,600,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2023-10-29/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Gross profit for 2023-10-29/12M is 23,536 here, but the company's approved spread says 17,850 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_opex",
+     "period": "2023-10-29/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Total operating expenses for 2023-10-29/12M is 18,212 here, but the company's approved spread says 31,238 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cash",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cash and cash equivalents for 2024-10-27/I is 7,324 here, but the company's approved spread says 7,324,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "inventory",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Inventories for 2024-10-27/I is 7,093 here, but the company's approved spread says 7,093,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "goodwill",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Goodwill for 2024-10-27/I is 3,959 here, but the company's approved spread says 3,959,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "intangibles",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Intangible assets, net for 2024-10-27/I is 999 here, but the company's approved spread says 999,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "deferred_tax_assets",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Deferred tax assets for 2024-10-27/I is 2,086 here, but the company's approved spread says 2,086,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "total_assets",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total assets for 2024-10-27/I is 107,320 here, but the company's approved spread says 107,320,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "st_debt",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Short-term debt and current portion of long-term debt for 2024-10-27/I is 13,533 here, but the company's approved spread says 13,533,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "deferred_tax_liabilities",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Deferred tax liabilities for 2024-10-27/I is 478 here, but the company's approved spread says 478,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "total_liabilities",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total liabilities for 2024-10-27/I is 84,395 here, but the company's approved spread says 84,395,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "temporary_equity",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Redeemable / temporary equity for 2024-10-27/I is 82 here, but the company's approved spread says 82,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "common_stock_apic",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Common stock and paid-in capital for 2024-10-27/I is 5,489 here, but the company's approved spread says 5,489,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "treasury_stock",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Treasury stock for 2024-10-27/I is -35,349 here, but the company's approved spread says -35,349,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "retained_earnings",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Retained earnings (accumulated deficit) for 2024-10-27/I is 56,402 here, but the company's approved spread says 56,402,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "aoci",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Accumulated other comprehensive income (loss) for 2024-10-27/I is -3,706 here, but the company's approved spread says -3,706,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "total_equity_parent",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total shareholders' equity (company) for 2024-10-27/I is 22,843 here, but the company's approved spread says 22,836,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "nci_equity",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Noncontrolling interests for 2024-10-27/I is 7 here, but the company's approved spread says 7,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "total_liabilities_equity",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total liabilities and equity for 2024-10-27/I is 107,320 here, but the company's approved spread says 107,320,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "total_equity",
+     "period": "2024-10-27/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total equity for 2024-10-27/I is 22,850 here, but the company's approved spread says 22,843,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "wrong_review": 117,
+    "missing_flagged": 2,
+    "missing_silent": 6,
+    "correct_review": 6
+   },
+   "buckets_with": {
+    "wrong_review": 125,
+    "correct_review": 6
+   },
+   "memory_rows": 8,
+   "memory_rows_right": 8
+  },
+  {
+   "doc": "FDX",
+   "prior_items": [
+    {
+     "line": "cf_other_noncash",
+     "period": "2025-05-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other non-cash items for 2025-05-31/12M is 3,241,000,000 here, but the company's approved spread says 3,226,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2025-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2025-05-31/12M is -4,715,000,000 here, but the company's approved spread says -1,702,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2025-05-31/12M",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2025-05-31/12M is 78,445,000,000 here, but the company's approved spread says 13,022,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2025-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2025-05-31/12M is 224,000,000 here, but the company's approved spread says -63,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-05-31/12M is -3,431,000,000 here, but the company's approved spread says -313,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2024-05-31/12M is 77,847,000,000 here, but the company's approved spread says 12,811,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2024-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2024-05-31/12M is 277,000,000 here, but the company's approved spread says -70,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "missing_flagged": 35,
+    "correct_auto": 63,
+    "unjudged": 5,
+    "correct_review": 12,
+    "wrong_review": 3,
+    "wrong_auto": 1
+   },
+   "buckets_with": {
+    "missing_flagged": 32,
+    "correct_auto": 66,
+    "unjudged": 5,
+    "correct_review": 12,
+    "wrong_review": 4
+   },
+   "memory_rows": 21,
+   "memory_rows_right": 21
+  },
+  {
+   "doc": "GOOGL",
+   "prior_items": [
+    {
+     "line": "cash",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash and cash equivalents for 2024-12-31/I is 95,657,000,000 here, but the company's approved spread says 23,466,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2024-12-31/I is 76,099,000,000 here, but the company's approved spread says 66,297,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "common_stock_apic",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Common stock and paid-in capital for 2024-12-31/I is 0 here, but the company's approved spread says 84,800,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is -3,845,000,000 here, but the company's approved spread says -4,850,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2023-12-31/12M is 6,734,000,000 here, but the company's approved spread says 8,814,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is -9,829,000,000 here, but the company's approved spread says -71,333,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is -8,406,000,000 here, but the company's approved spread says -7,047,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-12-31/12M is 12,597,000,000 here, but the company's approved spread says 16,749,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-31/12M is -11,036,000,000 here, but the company's approved spread says -80,621,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 84,
+    "correct_review": 30,
+    "missing_flagged": 8,
+    "wrong_review": 4,
+    "wrong_auto": 2,
+    "unjudged": 6
+   },
+   "buckets_with": {
+    "wrong_review": 3,
+    "correct_review": 12,
+    "correct_auto": 109,
+    "unjudged": 8,
+    "wrong_auto": 1,
+    "missing_silent": 1
+   },
+   "memory_rows": 50,
+   "memory_rows_right": 50
+  },
+  {
+   "doc": "GPC",
+   "prior_items": [
+    {
+     "line": "other_current_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other current liabilities for 2024-12-31/I is 2,059,991,000 here, but the company's approved spread says 1,925,636,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2024-12-31/12M is 243,521,000 here, but the company's approved spread says 213,520,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is -87,322,000 here, but the company's approved spread says -491,488,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-31/12M is -28,149,000 here, but the company's approved spread says -11,261,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2023-12-31/12M is 25,947,000 here, but the company's approved spread says 0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is -289,157,000 here, but the company's approved spread says -37,159,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other investing activities for 2023-12-31/12M is 33,282,000 here, but the company's approved spread says 113,764,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is -35,187,000 here, but the company's approved spread says -11,042,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 18,
+    "missing_flagged": 11,
+    "wrong_review": 7,
+    "correct_auto": 96,
+    "unjudged": 7,
+    "missing_silent": 2
+   },
+   "buckets_with": {
+    "correct_auto": 112,
+    "unjudged": 12,
+    "correct_review": 16,
+    "missing_silent": 1
+   },
+   "memory_rows": 51,
+   "memory_rows_right": 51
+  },
+  {
+   "doc": "HD",
+   "prior_items": [
+    {
+     "line": "revenue",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Revenue for 2025-02-02/12M is 164,683,000,000 here, but the company's approved spread says 159,514,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cogs",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cost of revenue for 2025-02-02/12M is 109,818,000,000 here, but the company's approved spread says 106,206,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Gross profit for 2025-02-02/12M is 54,865,000,000 here, but the company's approved spread says 53,308,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2025-02-02/12M is 30,702,000,000 here, but the company's approved spread says 28,748,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "dna_opex",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization (operating) for 2025-02-02/12M is 3,273,000,000 here, but the company's approved spread says 3,034,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_opex",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Total operating expenses for 2025-02-02/12M is 33,975,000,000 here, but the company's approved spread says 31,782,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "operating_income",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Operating income for 2025-02-02/12M is 20,890,000,000 here, but the company's approved spread says 21,526,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "interest_income",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Interest income for 2025-02-02/12M is -124,000,000 here, but the company's approved spread says -201,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Interest expense for 2025-02-02/12M is 2,412,000,000 here, but the company's approved spread says 2,321,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Income before income taxes for 2025-02-02/12M is 18,602,000,000 here, but the company's approved spread says 19,406,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Income tax expense (benefit) for 2025-02-02/12M is 4,446,000,000 here, but the company's approved spread says 4,600,000,000 (analyst (key), ). Likely a reclassification by the company: Other financing activities moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "net_income",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Net income for 2025-02-02/12M is 14,156,000,000 here, but the company's approved spread says 14,806,000,000 (analyst (key), ). Likely a reclassification by the company: Share repurchases moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2025-02-02/12M is 993,000,000 here, but the company's approved spread says 990,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Weighted average shares, diluted (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Weighted average shares, diluted for 2025-02-02/12M is 995,000,000 here, but the company's approved spread says 993,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_net_income",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Net income (cash flow statement) for 2025-02-02/12M is 14,156,000,000 here, but the company's approved spread says 14,806,000,000 (analyst (key), ). Likely a reclassification by the company: Share repurchases moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2025-02-02/12M is 4,121,000,000 here, but the company's approved spread says 3,761,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_sbc",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Share-based compensation for 2025-02-02/12M is 522,000,000 here, but the company's approved spread says 442,000,000 (analyst (key), ). Likely a reclassification by the company: Stock issued moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2025-02-02/12M is -1,394,000,000 here, but the company's approved spread says 1,529,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cfo",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash from operating activities for 2025-02-02/12M is 16,325,000,000 here, but the company's approved spread says 19,810,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Capital expenditures for 2025-02-02/12M is -3,679,000,000 here, but the company's approved spread says -3,485,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "acquisitions",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Acquisitions, net of cash acquired for 2025-02-02/12M is -5,410,000,000 here, but the company's approved spread says -17,644,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cfi",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash from investing activities for 2025-02-02/12M is -8,980,000,000 here, but the company's approved spread says -21,031,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_commercial_paper_net",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Short-term borrowings, net for 2025-02-02/12M is 4,148,000,000 here, but the company's approved spread says 316,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "buybacks",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Share repurchases for 2025-02-02/12M is 0 here, but the company's approved spread says -649,000,000 (analyst (key), ). Likely a misread: it equals the approved value of EPS, basic, EPS, diluted (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "stock_issued",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Stock issued for 2025-02-02/12M is 314,000,000 here, but the company's approved spread says 395,000,000 (analyst (key), ). Likely a reclassification by the company: Share-based compensation moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "dividends_paid",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Dividends paid for 2025-02-02/12M is -9,152,000,000 here, but the company's approved spread says -8,929,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Other financing activities for 2025-02-02/12M is -145,000,000 here, but the company's approved spread says -301,000,000 (analyst (key), ). Likely a reclassification by the company: Income tax expense (benefit) moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "net_change_cash",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Net change in cash for 2025-02-02/12M is -369,000,000 here, but the company's approved spread says -1,915,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "fx_effect",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Effect of exchange rates on cash for 2025-02-02/12M is 99,000,000 here, but the company's approved spread says -186,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cash_end",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash, end of period for 2025-02-02/12M is 1,389,000,000 here, but the company's approved spread says 1,659,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "net_income_parent",
+     "period": "2025-02-02/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Net income attributable to the company for 2025-02-02/12M is 14,156,000,000 here, but the company's approved spread says 14,806,000,000 (analyst (key), ). Likely a reclassification by the company: Share repurchases moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2025-02-02/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2025-02-02/I is 7,941,000,000 here, but the company's approved spread says 3,147,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "common_stock_apic",
+     "period": "2025-02-02/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Common stock and paid-in capital for 2025-02-02/I is 14,207,000,000 here, but the company's approved spread says 14,117,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 23,
+    "correct_review": 25,
+    "missing_flagged": 8,
+    "wrong_review": 44,
+    "unjudged": 4,
+    "missing_silent": 37,
+    "wrong_auto": 17
+   },
+   "buckets_with": {
+    "correct_auto": 53,
+    "correct_review": 1,
+    "unjudged": 4,
+    "missing_silent": 34,
+    "wrong_review": 64,
+    "wrong_auto": 2
+   },
+   "memory_rows": 35,
+   "memory_rows_right": 35
+  },
+  {
+   "doc": "HON",
+   "prior_items": [
+    {
+     "line": "revenue",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Revenue for 2024-12-31/12M is 34,717,000,000 here, but the company's approved spread says 38,498,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cogs",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Cost of revenue for 2024-12-31/12M is 21,360,000,000 here, but the company's approved spread says 23,836,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "rnd",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Research and development for 2024-12-31/12M is 1,454,000,000 here, but the company's approved spread says 1,536,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2024-12-31/12M is 5,235,000,000 here, but the company's approved spread says 5,466,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2024-12-31/12M is -843,000,000 here, but the company's approved spread says -830,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Interest expense for 2024-12-31/12M is 1,048,000,000 here, but the company's approved spread says 1,058,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Income before income taxes for 2024-12-31/12M is 6,244,000,000 here, but the company's approved spread says 7,213,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Income tax expense (benefit) for 2024-12-31/12M is 1,249,000,000 here, but the company's approved spread says 1,473,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_net_income",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Net income (cash flow statement) for 2024-12-31/12M is 5,740,000,000 here, but the company's approved spread says 5,705,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Net income (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2024-12-31/12M",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2024-12-31/12M is 1,152,000,000 here, but the company's approved spread says 671,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_noncash",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "misread",
+     "message": "Other non-cash items for 2024-12-31/12M is 29,000,000 here, but the company's approved spread says -1,140,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Net income attributable to noncontrolling interests (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_sbc",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Share-based compensation for 2024-12-31/12M is 189,000,000 here, but the company's approved spread says 194,000,000 (analyst (key), ). Likely a misread: it equals the approved value for 2022-12-31/12M (a column read for the wrong period). The approved spread is not changed."
+    },
+    {
+     "line": "cf_deferred_tax",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "restatement",
+     "message": "Deferred income taxes for 2024-12-31/12M is -229,000,000 here, but the company's approved spread says -233,000,000 (analyst (key), ). Likely a reclassification by the company: Share-based compensation moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is -284,000,000 here, but the company's approved spread says 237,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "restatement",
+     "message": "Capital expenditures for 2024-12-31/12M is -871,000,000 here, but the company's approved spread says -1,164,000,000 (analyst (key), ). Likely a reclassification by the company: Other investing activities moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "restatement",
+     "message": "Other investing activities for 2024-12-31/12M is -199,000,000 here, but the company's approved spread says 94,000,000 (analyst (key), ). Likely a reclassification by the company: Capital expenditures moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Gross profit for 2024-12-31/12M is 13,357,000,000 here, but the company's approved spread says 21,271,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_opex",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Total operating expenses for 2024-12-31/12M is 6,908,000,000 here, but the company's approved spread says 7,221,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "revenue",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Revenue for 2023-12-31/12M is 33,009,000,000 here, but the company's approved spread says 36,662,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cogs",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Cost of revenue for 2023-12-31/12M is 20,637,000,000 here, but the company's approved spread says 22,995,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "rnd",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Research and development for 2023-12-31/12M is 1,375,000,000 here, but the company's approved spread says 1,456,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2023-12-31/12M is 4,887,000,000 here, but the company's approved spread says 5,127,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Other income (expense), net for 2023-12-31/12M is -830,000,000 here, but the company's approved spread says -840,000,000 (analyst (key), ). Likely a misread: it equals the approved value for 2024-12-31/12M (a column read for the wrong period). The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "restatement",
+     "message": "Interest expense for 2023-12-31/12M is 749,000,000 here, but the company's approved spread says 765,000,000 (analyst (key), ). Likely a reclassification by the company: Net income (cash flow statement) moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Income before income taxes for 2023-12-31/12M is 6,191,000,000 here, but the company's approved spread says 7,159,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Income tax expense (benefit) for 2023-12-31/12M is 1,262,000,000 here, but the company's approved spread says 1,487,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_net_income",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Net income (cash flow statement) for 2023-12-31/12M is 5,672,000,000 here, but the company's approved spread says 5,658,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Net income (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-12-31/12M",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2023-12-31/12M is 1,004,000,000 here, but the company's approved spread says 659,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_noncash",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other non-cash items for 2023-12-31/12M is -539,000,000 here, but the company's approved spread says -2,210,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_sbc",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Share-based compensation for 2023-12-31/12M is 197,000,000 here, but the company's approved spread says 202,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Stock issued (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_deferred_tax",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Deferred income taxes for 2023-12-31/12M is 189,000,000 here, but the company's approved spread says 153,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is 48,000,000 here, but the company's approved spread says 361,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "restatement",
+     "message": "Capital expenditures for 2023-12-31/12M is -741,000,000 here, but the company's approved spread says -1,039,000,000 (analyst (key), ). Likely a reclassification by the company: Other investing activities moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "restatement",
+     "message": "Other investing activities for 2023-12-31/12M is -245,000,000 here, but the company's approved spread says 53,000,000 (analyst (key), ). Likely a reclassification by the company: Capital expenditures moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Gross profit for 2023-12-31/12M is 12,372,000,000 here, but the company's approved spread says 19,685,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_opex",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Total operating expenses for 2023-12-31/12M is 6,262,000,000 here, but the company's approved spread says 6,583,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cash",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Cash and cash equivalents for 2024-12-31/I is 9,906,000,000 here, but the company's approved spread says 10,567,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "receivables",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Accounts receivable, net for 2024-12-31/I is 7,247,000,000 here, but the company's approved spread says 7,819,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "inventory",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Inventories for 2024-12-31/I is 5,884,000,000 here, but the company's approved spread says 6,442,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_current_assets",
+     "period": "2024-12-31/I",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Other current assets for 2024-12-31/I is 4,485,000,000 here, but the company's approved spread says 1,329,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "lt_investments",
+     "period": "2024-12-31/I",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Long-term investments for 2024-12-31/I is 1,230,000,000 here, but the company's approved spread says 1,394,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "ppe_net",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Property, plant and equipment, net for 2024-12-31/I is 4,457,000,000 here, but the company's approved spread says 6,194,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "goodwill",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Goodwill for 2024-12-31/I is 21,019,000,000 here, but the company's approved spread says 21,825,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "intangibles",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Intangible assets, net for 2024-12-31/I is 6,621,000,000 here, but the company's approved spread says 6,656,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "deferred_tax_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread and restatement",
+     "verdict": "unclear",
+     "message": "Deferred tax liabilities for 2024-12-31/I is 1,816,000,000 here, but the company's approved spread says 1,787,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_assets",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other non-current assets for 2024-12-31/I is 10,556,000,000 here, but the company's approved spread says 10,810,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "payables",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Accounts payable for 2024-12-31/I is 6,109,000,000 here, but the company's approved spread says 6,880,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "st_debt",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Short-term debt and current portion of long-term debt for 2024-12-31/I is 5,598,000,000 here, but the company's approved spread says 5,620,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2024-12-31/I is 8,055,000,000 here, but the company's approved spread says 8,348,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_current_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other current liabilities for 2024-12-31/I is 1,494,000,000 here, but the company's approved spread says 4,681,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "lt_debt",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Long-term debt for 2024-12-31/I is 25,440,000,000 here, but the company's approved spread says 25,479,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other non-current liabilities for 2024-12-31/I is 5,581,000,000 here, but the company's approved spread says 6,076,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 69,
+    "correct_review": 18,
+    "unjudged": 10,
+    "wrong_review": 2,
+    "wrong_auto": 7,
+    "missing_flagged": 14,
+    "missing_silent": 9
+   },
+   "buckets_with": {
+    "correct_auto": 49,
+    "correct_review": 57,
+    "unjudged": 10,
+    "missing_flagged": 11,
+    "wrong_review": 2
+   },
+   "memory_rows": 45,
+   "memory_rows_right": 44
+  },
+  {
+   "doc": "IBM",
+   "prior_items": [],
+   "buckets_without": {},
+   "buckets_with": {},
+   "memory_rows": 0,
+   "memory_rows_right": 0
+  },
+  {
+   "doc": "INTC",
+   "prior_items": [
+    {
+     "line": "other_opex",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2023-12-30/12M is 62,000,000 here, but the company's approved spread says -62,000,000 (analyst (key), ). Likely a misread: the sign is flipped. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Capital expenditures for 2023-12-30/12M is -20,946,000,000 here, but the company's approved spread says -25,750,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2023-12-30/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other investing activities for 2023-12-30/12M is 1,574,000,000 here, but the company's approved spread says 1,587,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2023-12-30/12M is 135,000,000 here, but the company's approved spread says -337,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-30/12M is 4,569,000,000 here, but the company's approved spread says -943,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_equity_parent",
+     "period": "2024-12-28/I",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Total shareholders' equity (company) for 2024-12-28/I is 105,032,000,000 here, but the company's approved spread says 99,270,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Total equity (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "total_equity",
+     "period": "2024-12-28/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Total equity for 2024-12-28/I is 110,794,000,000 here, but the company's approved spread says 105,032,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Capital expenditures for 2024-12-28/12M is -16,997,000,000 here, but the company's approved spread says -23,944,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2024-12-28/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other investing activities for 2024-12-28/12M is 1,118,000,000 here, but the company's approved spread says 1,200,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-12-28/12M is 4,570,000,000 here, but the company's approved spread says 3,523,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-28/12M is 13,228,000,000 here, but the company's approved spread says -473,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 34,
+    "correct_auto": 82,
+    "missing_flagged": 18,
+    "wrong_auto": 6,
+    "wrong_review": 1,
+    "unjudged": 9
+   },
+   "buckets_with": {
+    "correct_review": 37,
+    "correct_auto": 98,
+    "wrong_auto": 2,
+    "wrong_review": 3,
+    "missing_silent": 1,
+    "unjudged": 9
+   },
+   "memory_rows": 57,
+   "memory_rows_right": 57
+  },
+  {
+   "doc": "JNJ",
+   "prior_items": [
+    {
+     "line": "deferred_tax_liabilities",
+     "period": "2024-12-29/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Deferred tax liabilities for 2024-12-29/I is 12,909,000,000 here, but the company's approved spread says 2,448,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2024-12-29/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2024-12-29/I is 34,027,000,000 here, but the company's approved spread says 16,447,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "revenue",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Revenue for 2024-12-29/12M is 88,821 here, but the company's approved spread says 88,821,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cogs",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cost of revenue for 2024-12-29/12M is 27,471 here, but the company's approved spread says 27,471,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Gross profit for 2024-12-29/12M is 61,350 here, but the company's approved spread says 61,350,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Selling, general and administrative for 2024-12-29/12M is 22,869 here, but the company's approved spread says 22,869,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "rnd",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Research and development for 2024-12-29/12M is 17,232 here, but the company's approved spread says 17,232,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "interest_income",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Interest income for 2024-12-29/12M is -1,332 here, but the company's approved spread says -1,332,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Interest expense for 2024-12-29/12M is 755 here, but the company's approved spread says 755,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other income (expense), net for 2024-12-29/12M is 4,694 here, but the company's approved spread says 4,694,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2024-12-29/12M is 234 here, but the company's approved spread says 234,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income before income taxes for 2024-12-29/12M is 16,687 here, but the company's approved spread says 16,687,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income tax expense (benefit) for 2024-12-29/12M is 2,621 here, but the company's approved spread says 2,621,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income for 2024-12-29/12M is 14,066 here, but the company's approved spread says 14,066,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "eps_basic",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "EPS, basic for 2024-12-29/12M is 11.68 here, but the company's approved spread says 5.84 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "eps_diluted",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "EPS, diluted for 2024-12-29/12M is 11.58 here, but the company's approved spread says 5.79 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2024-12-29/12M is 2,407.3 here, but the company's approved spread says 2,407,300,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, diluted for 2024-12-29/12M is 2,429.4 here, but the company's approved spread says 2,429,400,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income_parent",
+     "period": "2024-12-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income attributable to the company for 2024-12-29/12M is 14,066 here, but the company's approved spread says 14,066,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "revenue",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Revenue for 2023-12-31/12M is 85,159 here, but the company's approved spread says 85,159,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cogs",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Cost of revenue for 2023-12-31/12M is 26,553 here, but the company's approved spread says 26,553,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "gross_profit",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Gross profit for 2023-12-31/12M is 58,606 here, but the company's approved spread says 58,606,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Selling, general and administrative for 2023-12-31/12M is 21,512 here, but the company's approved spread says 21,512,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "rnd",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Research and development for 2023-12-31/12M is 15,085 here, but the company's approved spread says 15,085,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "interest_income",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Interest income for 2023-12-31/12M is -1,261 here, but the company's approved spread says -1,261,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Interest expense for 2023-12-31/12M is 772 here, but the company's approved spread says 772,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other income (expense), net for 2023-12-31/12M is 6,634 here, but the company's approved spread says 6,634,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2023-12-31/12M is 489 here, but the company's approved spread says 489,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income before income taxes for 2023-12-31/12M is 15,062 here, but the company's approved spread says 15,062,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income tax expense (benefit) for 2023-12-31/12M is 1,736 here, but the company's approved spread says 1,736,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "discontinued_ops",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Discontinued operations, net for 2023-12-31/12M is 21,827 here, but the company's approved spread says 21,827,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income for 2023-12-31/12M is 35,153 here, but the company's approved spread says 35,153,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "eps_basic",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "EPS, basic for 2023-12-31/12M is 19.14 here, but the company's approved spread says 13.88 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "eps_diluted",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "EPS, diluted for 2023-12-31/12M is 18.92 here, but the company's approved spread says 13.72 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2023-12-31/12M is 2,533.5 here, but the company's approved spread says 2,533,500,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Weighted average shares, diluted for 2023-12-31/12M is 2,560.4 here, but the company's approved spread says 2,560,400,000.0 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "net_income_parent",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Net income attributable to the company for 2023-12-31/12M is 35,153 here, but the company's approved spread says 35,153,000,000 (analyst (key), ). Likely a misread: the new value is 10^-6 times the approved one (a unit read wrong). The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 16,
+    "wrong_review": 40,
+    "missing_flagged": 20,
+    "correct_review": 65,
+    "unjudged": 2,
+    "missing_silent": 10
+   },
+   "buckets_with": {
+    "correct_auto": 20,
+    "correct_review": 73,
+    "missing_flagged": 4,
+    "unjudged": 2,
+    "wrong_review": 54
+   },
+   "memory_rows": 33,
+   "memory_rows_right": 32
+  },
+  {
+   "doc": "LMT",
+   "prior_items": [
+    {
+     "line": "other_opex",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2024-12-31/12M is 64,030,000,000 here, but the company's approved spread says 83,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income tax expense (benefit) for 2024-12-31/12M is 884,000,000 here, but the company's approved spread says -884,000,000 (analyst (key), ). Likely a misread: the sign is flipped. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2023-12-31/12M is 59,064,000,000 here, but the company's approved spread says 28,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Income tax expense (benefit) for 2023-12-31/12M is 1,178,000,000 here, but the company's approved spread says -1,178,000,000 (analyst (key), ). Likely a misread: the sign is flipped. The approved spread is not changed."
+    },
+    {
+     "line": "other_current_assets",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other current assets for 2024-12-31/I is 13,541,000,000 here, but the company's approved spread says 584,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_assets",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other non-current assets for 2024-12-31/I is 6,537,000,000 here, but the company's approved spread says 8,403,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2024-12-31/I is 7,916,000,000 here, but the company's approved spread says 3,125,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 72,
+    "correct_review": 44,
+    "unjudged": 4,
+    "missing_flagged": 3,
+    "wrong_review": 6,
+    "wrong_auto": 3,
+    "missing_silent": 3
+   },
+   "buckets_with": {
+    "correct_auto": 76,
+    "unjudged": 4,
+    "correct_review": 42,
+    "missing_flagged": 6,
+    "wrong_review": 5,
+    "wrong_auto": 1,
+    "missing_silent": 1
+   },
+   "memory_rows": 52,
+   "memory_rows_right": 52
+  },
+  {
+   "doc": "LOW",
+   "prior_items": [
+    {
+     "line": "cf_working_capital",
+     "period": "2025-01-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2025-01-31/12M is 118,000,000 here, but the company's approved spread says -515,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-02-02/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-02-02/12M is -2,228,000,000 here, but the company's approved spread says -408,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_current_assets",
+     "period": "2025-01-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other current assets for 2025-01-31/I is 722,000,000 here, but the company's approved spread says 816,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_assets",
+     "period": "2025-01-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other non-current assets for 2025-01-31/I is 248,000,000 here, but the company's approved spread says 836,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 53,
+    "correct_review": 36,
+    "missing_flagged": 55,
+    "wrong_review": 9,
+    "unjudged": 5
+   },
+   "buckets_with": {
+    "correct_auto": 87,
+    "correct_review": 23,
+    "wrong_review": 1,
+    "missing_flagged": 40,
+    "missing_silent": 2,
+    "unjudged": 5
+   },
+   "memory_rows": 41,
+   "memory_rows_right": 40
+  },
+  {
+   "doc": "META",
+   "prior_items": [
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is 1,048,000,000 here, but the company's approved spread says 675,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "restatement",
+     "message": "Purchases and sales of investments, net for 2024-12-31/12M is -9,764,000,000 here, but the company's approved spread says -9,753,000,000 (analyst (key), ). Likely a reclassification by the company: Other investing activities moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "restatement",
+     "message": "Other investing activities for 2024-12-31/12M is 140,000,000 here, but the company's approved spread says 129,000,000 (analyst (key), ). Likely a reclassification by the company: Purchases and sales of investments, net moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is 3,836,000,000 here, but the company's approved spread says 3,785,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 38,
+    "correct_auto": 88,
+    "wrong_review": 5,
+    "missing_flagged": 6,
+    "unjudged": 5
+   },
+   "buckets_with": {
+    "correct_review": 28,
+    "correct_auto": 106,
+    "missing_flagged": 3,
+    "unjudged": 5
+   },
+   "memory_rows": 48,
+   "memory_rows_right": 48
+  },
+  {
+   "doc": "MRK",
+   "prior_items": [
+    {
+     "line": "cf_dna",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2024-12-31/12M is 4,499,000,000 here, but the company's approved spread says 2,104,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-12-31/12M is -142,000,000 here, but the company's approved spread says -519,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other investing activities for 2024-12-31/12M is -3,474,000,000 here, but the company's approved spread says -4,220,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2023-12-31/12M is 3,872,000,000 here, but the company's approved spread says 1,828,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2023-12-31/12M is 703,000,000 here, but the company's approved spread says -955,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "st_debt",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Short-term debt and current portion of long-term debt for 2024-12-31/I is 0 here, but the company's approved spread says 2,649,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_assets",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other non-current assets for 2024-12-31/I is 546 here, but the company's approved spread says 16,044,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "total_assets",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Total assets for 2024-12-31/I is 1,009 here, but the company's approved spread says 117,106,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other non-current liabilities for 2024-12-31/I is 0 here, but the company's approved spread says 6,465,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "missing_flagged": 51,
+    "wrong_review": 8,
+    "correct_auto": 67,
+    "correct_review": 12,
+    "missing_silent": 9,
+    "unjudged": 6
+   },
+   "buckets_with": {
+    "missing_flagged": 48,
+    "wrong_review": 8,
+    "correct_auto": 77,
+    "correct_review": 12,
+    "unjudged": 7,
+    "wrong_auto": 1
+   },
+   "memory_rows": 33,
+   "memory_rows_right": 33
+  },
+  {
+   "doc": "MSFT",
+   "prior_items": [
+    {
+     "line": "cash",
+     "period": "2025-06-30/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash and cash equivalents for 2025-06-30/I is 94,565,000,000 here, but the company's approved spread says 30,242,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 71,
+    "correct_review": 24,
+    "missing_flagged": 52,
+    "wrong_review": 4
+   },
+   "buckets_with": {
+    "wrong_review": 2,
+    "correct_review": 10,
+    "correct_auto": 93,
+    "missing_flagged": 46
+   },
+   "memory_rows": 43,
+   "memory_rows_right": 43
+  },
+  {
+   "doc": "NFLX",
+   "prior_items": [
+    {
+     "line": "shares_basic",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2024-12-31/12M is 4,295,191,000 here, but the company's approved spread says 429,519,000 (analyst (key), ). Likely a misread: the new value is 10^1 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Weighted average shares, diluted for 2024-12-31/12M is 4,392,608,000 here, but the company's approved spread says 439,261,000 (analyst (key), ). Likely a misread: the new value is 10^1 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2024-12-31/12M is 15,630,431,000 here, but the company's approved spread says 328,914,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is -33,075,000 here, but the company's approved spread says 413,276,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Weighted average shares, basic for 2023-12-31/12M is 4,415,712,000 here, but the company's approved spread says 441,571,000 (analyst (key), ). Likely a misread: the new value is 10^1 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2023-12-31/12M",
+     "truth": "restatement",
+     "verdict": "misread",
+     "message": "Weighted average shares, diluted for 2023-12-31/12M is 4,494,966,000 here, but the company's approved spread says 449,498,000 (analyst (key), ). Likely a misread: the new value is 10^1 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2023-12-31/12M is 14,554,384,000 here, but the company's approved spread says 356,947,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is -116,148,000 here, but the company's approved spread says 194,772,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 31,
+    "correct_auto": 101,
+    "unjudged": 6
+   },
+   "buckets_with": {
+    "correct_review": 35,
+    "correct_auto": 96,
+    "unjudged": 6,
+    "missing_silent": 1
+   },
+   "memory_rows": 49,
+   "memory_rows_right": 49
+  },
+  {
+   "doc": "NKE",
+   "prior_items": [
+    {
+     "line": "other_nonoperating",
+     "period": "2025-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2025-05-31/12M is -76,000,000 here, but the company's approved spread says -183,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2024-05-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2024-05-31/12M is -228,000,000 here, but the company's approved spread says -389,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "st_debt",
+     "period": "2025-05-31/I",
+     "truth": "restatement",
+     "verdict": "restatement",
+     "message": "Short-term debt and current portion of long-term debt for 2025-05-31/I is 0 here, but the company's approved spread says 5,000,000 (analyst (key), ). Likely a reclassification by the company: Accrued liabilities moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2025-05-31/I",
+     "truth": "restatement",
+     "verdict": "restatement",
+     "message": "Accrued liabilities for 2025-05-31/I is 6,585,000,000 here, but the company's approved spread says 6,580,000,000 (analyst (key), ). Likely a reclassification by the company: Short-term debt and current portion of long-term debt moved by the same amount the other way, so the total is unchanged. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 64,
+    "correct_review": 18,
+    "missing_flagged": 51,
+    "wrong_auto": 3
+   },
+   "buckets_with": {
+    "correct_auto": 66,
+    "correct_review": 18,
+    "wrong_auto": 1,
+    "wrong_review": 2,
+    "missing_flagged": 49
+   },
+   "memory_rows": 37,
+   "memory_rows_right": 37
+  },
+  {
+   "doc": "NVDA",
+   "prior_items": [
+    {
+     "line": "other_noncurrent_assets",
+     "period": "2025-01-26/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other non-current assets for 2025-01-26/I is 3,038,000,000 here, but the company's approved spread says 6,425,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2025-01-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2025-01-26/12M is -9,383,000,000 here, but the company's approved spread says -13,661,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2025-01-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2025-01-26/12M is -16,200,000,000 here, but the company's approved spread says -14,885,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2025-01-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2025-01-26/12M is -6,440,000,000 here, but the company's approved spread says -6,930,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "debt_repaid",
+     "period": "2025-01-26/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt repaid for 2025-01-26/12M is -1,379,000,000 here, but the company's approved spread says -1,250,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-01-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-01-28/12M is -3,722,000,000 here, but the company's approved spread says -5,747,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-01-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-01-28/12M is -9,290,000,000 here, but the company's approved spread says -8,429,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-01-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-01-28/12M is -2,381,000,000 here, but the company's approved spread says -2,784,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "debt_repaid",
+     "period": "2024-01-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt repaid for 2024-01-28/12M is -1,324,000,000 here, but the company's approved spread says -1,250,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 120,
+    "correct_review": 20,
+    "unjudged": 9,
+    "missing_flagged": 3,
+    "wrong_review": 3
+   },
+   "buckets_with": {
+    "correct_auto": 124,
+    "correct_review": 18,
+    "unjudged": 12,
+    "missing_silent": 1
+   },
+   "memory_rows": 52,
+   "memory_rows_right": 52
+  },
+  {
+   "doc": "ODFL",
+   "prior_items": [
+    {
+     "line": "other_opex",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2024-12-31/12M is 3,290,924,000 here, but the company's approved spread says 24,373,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is 84,158,000 here, but the company's approved spread says -823,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Purchases and sales of investments, net for 2024-12-31/12M is 0 here, but the company's approved spread says -30,000,000 (analyst (key), ). Likely a misread: it equals the approved value of EPS, basic, EPS, diluted (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-31/12M is -16,628,000 here, but the company's approved spread says -22,300,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2023-12-31/12M is 3,182,718,000 here, but the company's approved spread says 4,831,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is -55,347,000 here, but the company's approved spread says -37,506,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is -6,278,000 here, but the company's approved spread says -13,126,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "receivables",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accounts receivable, net for 2024-12-31/I is 522,689,000 here, but the company's approved spread says 501,554,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "common_stock_apic",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Common stock and paid-in capital for 2024-12-31/I is 249,379,000 here, but the company's approved spread says 228,081,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 83,
+    "unjudged": 7,
+    "wrong_review": 7,
+    "wrong_auto": 1,
+    "correct_review": 20,
+    "missing_flagged": 10
+   },
+   "buckets_with": {
+    "correct_auto": 99,
+    "unjudged": 14,
+    "correct_review": 14,
+    "missing_silent": 1
+   },
+   "memory_rows": 43,
+   "memory_rows_right": 43
+  },
+  {
+   "doc": "QCOM",
+   "prior_items": [
+    {
+     "line": "other_noncurrent_liabilities",
+     "period": "2024-09-29/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other non-current liabilities for 2024-09-29/I is 5,403,000,000 here, but the company's approved spread says 88,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-09-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2024-09-29/12M is 179,000,000 here, but the company's approved spread says -179,000,000 (analyst (key), ). Likely a misread: the sign is flipped. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-09-29/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Changes in working capital for 2024-09-29/12M is 1,132,000,000 here, but the company's approved spread says 541,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Weighted average shares, diluted (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-09-29/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-09-29/12M is -2,558,000,000 here, but the company's approved spread says -2,392,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-09-29/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-09-29/12M is -930,000,000 here, but the company's approved spread says -949,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-09-24/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2023-09-24/12M is 862,000,000 here, but the company's approved spread says -862,000,000 (analyst (key), ). Likely a misread: the sign is flipped. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-09-24/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-09-24/12M is 749,000,000 here, but the company's approved spread says 3,028,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-09-24/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2023-09-24/12M is 683,000,000 here, but the company's approved spread says 898,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2023-09-24/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other investing activities for 2023-09-24/12M is 146,000,000 here, but the company's approved spread says 1,529,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-09-24/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-09-24/12M is -598,000,000 here, but the company's approved spread says -540,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 53,
+    "correct_auto": 69,
+    "wrong_review": 11,
+    "missing_flagged": 9,
+    "unjudged": 6
+   },
+   "buckets_with": {
+    "correct_review": 54,
+    "correct_auto": 72,
+    "missing_flagged": 2,
+    "wrong_review": 11,
+    "wrong_auto": 1,
+    "unjudged": 8
+   },
+   "memory_rows": 51,
+   "memory_rows_right": 50
+  },
+  {
+   "doc": "ROKU",
+   "prior_items": [
+    {
+     "line": "cf_dna",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2024-12-31/12M is 339,425,000 here, but the company's approved spread says 62,714,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is -408,757,000 here, but the company's approved spread says -151,876,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other financing activities for 2024-12-31/12M is -89,203,000 here, but the company's approved spread says -98,583,000 (analyst (key), ). Likely a misread: it equals the approved value of Cash from financing activities (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2023-12-31/12M is 335,878,000 here, but the company's approved spread says 70,447,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is -7,266,000 here, but the company's approved spread says 287,675,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is 18,757,000 here, but the company's approved spread says 0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 81,
+    "correct_review": 45,
+    "missing_flagged": 5,
+    "missing_silent": 6,
+    "unjudged": 10
+   },
+   "buckets_with": {
+    "correct_auto": 91,
+    "correct_review": 36,
+    "missing_silent": 6,
+    "unjudged": 10,
+    "missing_flagged": 4
+   },
+   "memory_rows": 39,
+   "memory_rows_right": 39
+  },
+  {
+   "doc": "SBUX",
+   "prior_items": [
+    {
+     "line": "sga",
+     "period": "2024-09-29/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2024-09-29/12M is 17,809,800,000.0 here, but the company's approved spread says 2,523,300,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-09-29/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-09-29/12M is 151,000,000.0 here, but the company's approved spread says -627,500,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2023-10-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2023-10-01/12M is 17,161,600,000.0 here, but the company's approved spread says 2,441,300,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-10-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2023-10-01/12M is 8,900,000.0 here, but the company's approved spread says -610,500,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_noncurrent_liabilities",
+     "period": "2024-09-29/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other non-current liabilities for 2024-09-29/I is 6,619,800,000.0 here, but the company's approved spread says 5,963,600,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 91,
+    "correct_review": 50,
+    "missing_flagged": 15,
+    "wrong_review": 7,
+    "unjudged": 6,
+    "missing_silent": 6
+   },
+   "buckets_with": {
+    "correct_auto": 124,
+    "correct_review": 42,
+    "unjudged": 8,
+    "missing_silent": 1
+   },
+   "memory_rows": 74,
+   "memory_rows_right": 74
+  },
+  {
+   "doc": "TGT",
+   "prior_items": [
+    {
+     "line": "revenue",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Revenue for 2025-02-01/12M is 104,780,000,000 here, but the company's approved spread says 106,566,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cogs",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cost of revenue for 2025-02-01/12M is 75,511,000,000 here, but the company's approved spread says 76,502,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "sga",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Selling, general and administrative for 2025-02-01/12M is 21,535,000,000 here, but the company's approved spread says 21,969,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "dna_opex",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization (operating) for 2025-02-01/12M is 2,617,000,000 here, but the company's approved spread says 2,529,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "operating_income",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Operating income for 2025-02-01/12M is 5,117,000,000 here, but the company's approved spread says 5,566,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "interest_expense",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Interest expense for 2025-02-01/12M is 445,000,000 here, but the company's approved spread says 411,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2025-02-01/12M is -95,000,000 here, but the company's approved spread says -106,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "pretax_income",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Income before income taxes for 2025-02-01/12M is 4,767,000,000 here, but the company's approved spread says 5,261,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "income_tax",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Income tax expense (benefit) for 2025-02-01/12M is 1,062,000,000 here, but the company's approved spread says 1,170,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "net_income",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Net income for 2025-02-01/12M is 3,705,000,000 here, but the company's approved spread says 4,091,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "shares_basic",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Weighted average shares, basic for 2025-02-01/12M is 454,100,000.0 here, but the company's approved spread says 460,400,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "shares_diluted",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Weighted average shares, diluted for 2025-02-01/12M is 455,600,000.0 here, but the company's approved spread says 461,800,000.0 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_net_income",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Net income (cash flow statement) for 2025-02-01/12M is 3,705,000,000 here, but the company's approved spread says 4,091,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2025-02-01/12M is 3,134,000,000 here, but the company's approved spread says 2,981,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_sbc",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Share-based compensation for 2025-02-01/12M is 281,000,000 here, but the company's approved spread says 304,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_deferred_tax",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Deferred income taxes for 2025-02-01/12M is -55,000,000 here, but the company's approved spread says -180,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2025-02-01/12M is -559,000,000 here, but the company's approved spread says -154,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cfo",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash from operating activities for 2025-02-01/12M is 6,562,000,000 here, but the company's approved spread says 7,367,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Capital expenditures for 2025-02-01/12M is -3,727,000,000 here, but the company's approved spread says -2,891,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cfi",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash from investing activities for 2025-02-01/12M is -3,649,000,000 here, but the company's approved spread says -2,860,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "debt_issued",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt issued for 2025-02-01/12M is 1,984,000,000 here, but the company's approved spread says 741,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "debt_repaid",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt repaid for 2025-02-01/12M is -1,643,000,000 here, but the company's approved spread says -1,139,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "dividends_paid",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Dividends paid for 2025-02-01/12M is -2,053,000,000 here, but the company's approved spread says -2,046,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "buybacks",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Share repurchases for 2025-02-01/12M is -408,000,000 here, but the company's approved spread says -1,007,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2025-02-01/12M is -67,000,000 here, but the company's approved spread says -99,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "net_change_cash",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Net change in cash for 2025-02-01/12M is 726,000,000 here, but the company's approved spread says 957,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cash_end",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Cash, end of period for 2025-02-01/12M is 5,488,000,000 here, but the company's approved spread says 4,762,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "net_income_parent",
+     "period": "2025-02-01/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Net income attributable to the company for 2025-02-01/12M is 3,705,000,000 here, but the company's approved spread says 4,091,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 25,
+    "correct_review": 11,
+    "missing_flagged": 15,
+    "missing_silent": 35,
+    "wrong_review": 51
+   },
+   "buckets_with": {
+    "correct_auto": 45,
+    "correct_review": 1,
+    "missing_silent": 31,
+    "wrong_review": 60
+   },
+   "memory_rows": 27,
+   "memory_rows_right": 27
+  },
+  {
+   "doc": "TSLA",
+   "prior_items": [
+    {
+     "line": "other_noncurrent_assets",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other non-current assets for 2024-12-31/I is 4,609,000,000 here, but the company's approved spread says 4,215,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-31/12M is 81,000,000 here, but the company's approved spread says 671,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "capex",
+     "period": "2024-12-31/12M",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Capital expenditures for 2024-12-31/12M is -11,342,000,000 here, but the company's approved spread says -11,339,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-31/12M is 609,000,000 here, but the company's approved spread says -499,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-31/12M is -2,248,000,000 here, but the company's approved spread says -296,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is 9,000,000 here, but the company's approved spread says -637,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 29,
+    "correct_auto": 97,
+    "wrong_review": 4,
+    "missing_silent": 3,
+    "wrong_auto": 3,
+    "unjudged": 6,
+    "missing_flagged": 3
+   },
+   "buckets_with": {
+    "correct_review": 25,
+    "correct_auto": 114,
+    "unjudged": 6
+   },
+   "memory_rows": 51,
+   "memory_rows_right": 51
+  },
+  {
+   "doc": "TXN",
+   "prior_items": [
+    {
+     "line": "other_current_assets",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other current assets for 2024-12-31/I is 3,809,000,000 here, but the company's approved spread says 1,200,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2024-12-31/12M is 1,580,000,000 here, but the company's approved spread says 1,508,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2024-12-31/12M is 1,471,000,000 here, but the company's approved spread says -9,716,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-31/12M is 464,000,000 here, but the company's approved spread says -53,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2023-12-31/12M is 1,238,000,000 here, but the company's approved spread says 1,175,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_investments_net",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Purchases and sales of investments, net for 2023-12-31/12M is 682,000,000 here, but the company's approved spread says -12,705,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-31/12M is 206,000,000 here, but the company's approved spread says -57,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 30,
+    "wrong_review": 6,
+    "correct_auto": 89,
+    "wrong_auto": 2,
+    "missing_flagged": 10,
+    "unjudged": 7,
+    "missing_silent": 3
+   },
+   "buckets_with": {
+    "correct_review": 26,
+    "unjudged": 11,
+    "correct_auto": 108,
+    "missing_flagged": 2
+   },
+   "memory_rows": 57,
+   "memory_rows_right": 57
+  },
+  {
+   "doc": "UPS",
+   "prior_items": [
+    {
+     "line": "cf_other_noncash",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other non-cash items for 2024-12-31/12M is 480,000,000 here, but the company's approved spread says 1,288,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2024-12-31/12M",
+     "truth": "misread",
+     "verdict": "misread",
+     "message": "Other operating expenses for 2024-12-31/12M is 78,993,000,000 here, but the company's approved spread says 7,888,000,000 (analyst (key), ). Likely a misread: the new value is 10^1 times the approved one (a unit read wrong). The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2024-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2024-12-31/12M is -160,000,000 here, but the company's approved spread says 7,728,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_noncash",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other non-cash items for 2023-12-31/12M is 259,000,000 here, but the company's approved spread says -1,511,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_opex",
+     "period": "2023-12-31/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other operating expenses for 2023-12-31/12M is 78,451,000,000 here, but the company's approved spread says 8,097,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2023-12-31/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "misread",
+     "message": "Other income (expense), net for 2023-12-31/12M is 219,000,000 here, but the company's approved spread says 8,316,000,000 (analyst (key), ). Likely a misread: it equals the approved value of Share-based compensation (a row placed on the wrong line). The approved spread is not changed."
+    },
+    {
+     "line": "other_current_assets",
+     "period": "2024-12-31/I",
+     "truth": "restatement",
+     "verdict": "unclear",
+     "message": "Other current assets for 2024-12-31/I is 2,327,000,000 here, but the company's approved spread says 2,121,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2024-12-31/I is 5,045,000,000 here, but the company's approved spread says 3,655,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_current_liabilities",
+     "period": "2024-12-31/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other current liabilities for 2024-12-31/I is 2,523,000,000 here, but the company's approved spread says 1,437,000,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_auto": 42,
+    "correct_review": 87,
+    "missing_flagged": 8,
+    "unjudged": 2,
+    "wrong_review": 8,
+    "missing_silent": 6
+   },
+   "buckets_with": {
+    "correct_auto": 51,
+    "correct_review": 94,
+    "unjudged": 7,
+    "missing_silent": 1
+   },
+   "memory_rows": 54,
+   "memory_rows_right": 54
+  },
+  {
+   "doc": "YETI",
+   "prior_items": [
+    {
+     "line": "other_nonoperating",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2024-12-28/12M is -13,188,000 here, but the company's approved spread says -12,528,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2024-12-28/12M is 48,781,000 here, but the company's approved spread says 48,132,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2024-12-28/12M is -17,937,000 here, but the company's approved spread says -18,606,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_investing",
+     "period": "2024-12-28/12M",
+     "truth": "unknown (no key value)",
+     "verdict": "unclear",
+     "message": "Other investing activities for 2024-12-28/12M is -53,452,000 here, but the company's approved spread says -89,616,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2024-12-28/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2024-12-28/12M is -5,292,000 here, but the company's approved spread says -1,463,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "other_nonoperating",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other income (expense), net for 2023-12-30/12M is 1,430,000 here, but the company's approved spread says 488,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_dna",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Depreciation and amortization for 2023-12-30/12M is 47,038,000 here, but the company's approved spread says 46,434,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "debt_repaid",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Debt repaid for 2023-12-30/12M is -7,404,000 here, but the company's approved spread says -7,734,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_working_capital",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Changes in working capital for 2023-12-30/12M is 14,669,000 here, but the company's approved spread says -3,487,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "cf_other_financing",
+     "period": "2023-12-30/12M",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Other financing activities for 2023-12-30/12M is -7,435,000 here, but the company's approved spread says -2,481,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    },
+    {
+     "line": "accrued_liabilities",
+     "period": "2024-12-28/I",
+     "truth": "misread",
+     "verdict": "unclear",
+     "message": "Accrued liabilities for 2024-12-28/I is 194,909,000 here, but the company's approved spread says 66,699,000 (analyst (key), ). Restatement or misread: check the document for a restatement note. The approved spread is not changed."
+    }
+   ],
+   "buckets_without": {
+    "correct_review": 12,
+    "correct_auto": 110,
+    "unjudged": 12,
+    "wrong_auto": 2,
+    "wrong_review": 1,
+    "missing_flagged": 3
+   },
+   "buckets_with": {
+    "correct_auto": 114,
+    "unjudged": 12,
+    "correct_review": 10,
+    "wrong_auto": 1,
+    "wrong_review": 2,
+    "missing_silent": 1
+   },
+   "memory_rows": 47,
+   "memory_rows_right": 47
+  }
+ ],
+ "provenance": {
+  "created": "2026-10-25T07:17:36+00:00",
+  "commit": "342cddd4cbe0f18431c1d34841e206244aea97d2",
+  "dirty": true,
+  "datasets": [
+   {
+    "name": "sec-holdout",
+    "version": "8e7f8dff07628aa1",
+    "key_version": "a46739fb00bec15f",
+    "files": 90,
+    "matches_manifest": true
+   },
+   {
+    "name": "sec-holdout-prior",
+    "version": null,
+    "note": "prior-year 10-Ks, eval/sec/manifest-prior.json"
+   }
+  ],
+  "config": {
+   "profile": "us-commercial 2026.10.24-1+0ad0af213be8"
+  }
+ }
+}

@@ -135,6 +135,8 @@ New assets: the source exports and last accepted snapshots (`var/finops-files/dq
 | T35 | Formula injection through the findings export | Text that starts like a formula is written as plain text | Tested |
 | T36 | A real problem dismissed as deliberate, or a dismissal reused on a changed formula | A named person and a written reason; errors cannot be dismissed; the review key includes the formula in relative form and the labels, so any change reopens it | Tested |
 | T37 | False confidence: a clean scan read as "the model is right" | The README says what is not checked (values without a saved calculation, logic that is consistent but wrong, VBA) | Documented |
+| T38 | Company memory poisoned: a document uploaded under another company's id, or a wrong mapping approved, then reused automatically every year | Memory is written only by an approval (a named reviewer, blockers resolved); rows behind a corrected line are not remembered; reuse is calibrated, so a memory that starts failing loses automation when recalibrated; approvals are append-only and withdrawn by a new row, so the history shows who approved what. Not covered: the company id and the approver's name are unverified until sign-in exists | Tested in part |
+| T39 | An approved spread rewritten after the fact (to hide a restatement or an error) | `approved_values` and `company_mappings` refuse UPDATE and DELETE (triggers); a new approval adds rows | Tested |
 
 ## Not in scope for the prototype
 Multi-tenant isolation, encryption at rest, key management, and model-risk-management sign-off

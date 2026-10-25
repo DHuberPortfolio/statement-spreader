@@ -24,13 +24,16 @@ USER_AGENT = "StatementSpreader/0.1 research prototype (devinhuber.com)"
 PAUSE = 0.2
 
 
-def main() -> None:
-    CAL.mkdir(parents=True, exist_ok=True)
-    manifest = json.loads(MANIFEST.read_text())
+def main(prior: bool = False) -> None:
+    """prior=True: the prior-year filings (eval/sec/manifest-prior.json, cached in eval/sec/cal-prior)."""
+    cal_dir = CAL.parent / "cal-prior" if prior else CAL
+    manifest_path = MANIFEST.parent / "manifest-prior.json" if prior else MANIFEST
+    cal_dir.mkdir(parents=True, exist_ok=True)
+    manifest = json.loads(manifest_path.read_text())
     client = httpx.Client(headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate"}, timeout=60)
     got, missing = 0, []
     for t, m in sorted(manifest.items()):
-        out = CAL / f"{t}_cal.xml"
+        out = cal_dir / f"{t}_cal.xml"
         if out.exists() and m.get("cal", {}).get("sha256") == hashlib.sha256(out.read_bytes()).hexdigest():
             got += 1
             continue
@@ -58,9 +61,11 @@ def main() -> None:
         out.write_bytes(r.content)
         m["cal"] = {"file": out.name, "url": f"{folder}/{cal}", "sha256": hashlib.sha256(r.content).hexdigest()}
         got += 1
-    MANIFEST.write_text(json.dumps(manifest, indent=1, sort_keys=True))
+    manifest_path.write_text(json.dumps(manifest, indent=1, sort_keys=True))
     print(f"{got} calculation linkbases cached; missing: {missing or 'none'}")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    main(prior="--prior" in sys.argv[1:])

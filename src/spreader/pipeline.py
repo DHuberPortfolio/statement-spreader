@@ -12,9 +12,12 @@ from __future__ import annotations
 
 import re
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
+from typing import Any, TypeVar
 
 from .checks import add_derived, run_checks, run_ratios
+from .company import CompanyContext, compare_with_approved
 from .contracts import DocumentIR, SourceFormat, Spread, StatementResult, StatementType
 from .detect import classify
 from .layout import lay_out
@@ -23,6 +26,8 @@ from .profile import Profile
 from .review import attach_flags, build_review
 from .spread import assemble_statement, merge_periods
 from .structure import build_statement, harmonize_periods
+
+_T = TypeVar("_T")
 
 LAYOUT_TOLERANCE = {SourceFormat.HTML: 0.0, SourceFormat.XLSX: 0.0, SourceFormat.PDF: 2.0}
 _NOT_PRIMARY = re.compile(r"pro\s*forma|unaudited|segment|quarterly|selected financial|summary|condensed consolidating|"
@@ -40,7 +45,7 @@ class StageTimer:
     def __exit__(self, *exc: object) -> None:
         return None
 
-    def run(self, name: str, fn, *args, **kwargs):  # type: ignore[no-untyped-def]
+    def run(self, name: str, fn: Callable[..., _T], *args: Any, **kwargs: Any) -> _T:
         t0 = time.perf_counter()
         try:
             return fn(*args, **kwargs)
@@ -74,7 +79,8 @@ def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dic
 
 
 def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = None,
-                    model: ModelMapper | None = None) -> tuple[Spread, dict[str, float]]:
+                    model: ModelMapper | None = None, company: CompanyContext | None = None,
+                    ) -> tuple[Spread, dict[str, float]]:
     timer = StageTimer()
     picked = pick_statements(doc, profile, timer)
     statements: dict[str, StatementResult] = {}
@@ -90,7 +96,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
                 "primary statement.")
     harmonize_periods(list(built.values()), doc.preface)
     for stype, st in built.items():
-        mappings = timer.run("map", map_table, st, profile, memory, model)
+        mappings = timer.run("map", map_table, st, profile, memory, model, company.mappings if company else None)
         statements[stype.value] = StatementResult(table=st, mappings=mappings)
         values.extend(timer.run("assemble", assemble_statement, st, mappings, profile))
 
@@ -104,11 +110,22 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     checks = timer.run("check", run_checks, values, periods, profile, period_keys, scales, skip)
     ratios = timer.run("ratios", run_ratios, values, periods, profile)
     review = timer.run("review", build_review, statements, values, checks, profile, ratios)
-    attach_flags(values, review)
+    prior: list = []
+    if company and company.approved:
+        partial = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version="", statements=statements,
+                         periods=periods, values=values)
+        # Only the statements' own headings and labels: the cover page's boilerplate ("new or revised financial
+        # accounting standards") made every filing look restated.
+        text = " ".join([*(p.label for r in statements.values() for p in r.table.periods),
+                         *(row.label for r in statements.values() for row in r.table.rows)])
+        prior = timer.run("company", compare_with_approved, partial, company, profile, text)
+    attach_flags(values, review + prior)
 
     order = {ln: i for i, ln in enumerate(profile.lines)}
     values.sort(key=lambda v: (order.get(v.line, 999), v.period))
     spread = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version=f"{profile.version}+{profile.content_hash}",
                     statements=statements, periods=periods, values=values, checks=checks, ratios=ratios,
-                    review=review, warnings=list(doc.warnings))
+                    review=review + prior, warnings=list(doc.warnings), prior_items=prior,
+                    company_id=company.company_id if company else None,
+                    company_version=company.version if company else None)
     return spread, timer.timings

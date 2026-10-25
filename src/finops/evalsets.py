@@ -122,20 +122,23 @@ def _generated(name: str, source: str, files: dict[str, bytes], keys: dict[str, 
     return ds
 
 
-def sec(split: str) -> DataSet:
-    """SEC filings are not in the repository; their hashes are recorded in eval/sec/manifest.json when downloaded."""
-    manifest = json.loads((EVAL / "sec" / "manifest.json").read_text(encoding="utf-8"))
-    ds = DataSet(f"sec-{split}", "files: SEC 10-K filings listed in eval/sec/manifest.json (downloaded by scripts/fetch_sec.py)")
+def sec(split: str, prior: bool = False) -> DataSet:
+    """SEC filings are not in the repository; their hashes are recorded in eval/sec/manifest.json when downloaded.
+    prior=True: the 10-K filed a year before each one (manifest-prior.json; scripts/eval_company_memory.py)."""
+    suffix = "-prior" if prior else ""
+    manifest = json.loads((EVAL / "sec" / f"manifest{suffix}.json").read_text(encoding="utf-8"))
+    ds = DataSet(f"sec-{split}{suffix}", f"files: SEC 10-K filings listed in eval/sec/manifest{suffix}.json "
+                                         f"(downloaded by scripts/fetch_sec.py{' --prior' if prior else ''})")
     for t, m in sorted(manifest.items()):
         if m["split"] != split:
             continue
-        raw = EVAL / "sec" / "raw" / m["file"]
-        ds.entries.append(Entry(f"eval/sec/raw/{m['file']}", m["sha256"], "input"))
+        raw = EVAL / "sec" / f"raw{suffix}" / m["file"]
+        ds.entries.append(Entry(f"eval/sec/raw{suffix}/{m['file']}", m["sha256"], "input"))
         if not raw.exists():
             ds.absent.append(m["file"])
         if m.get("cal"):  # the calculation links shape the key (IMPROVEMENT_LOG #16)
-            ds.entries.append(Entry(f"eval/sec/cal/{m['cal']['file']}", m["cal"]["sha256"], "key"))
-        key = EVAL / "sec" / "keys" / f"{t}.json"
+            ds.entries.append(Entry(f"eval/sec/cal{suffix}/{m['cal']['file']}", m["cal"]["sha256"], "key"))
+        key = EVAL / "sec" / f"keys{suffix}" / f"{t}.json"
         if key.exists():
             ds.entries.append(Entry(_rel(key), sha256_bytes(key.read_bytes()), "key"))
     return ds
@@ -200,6 +203,9 @@ def registry() -> dict[str, Callable[[], DataSet]]:
     """Every set, by name, built lazily (generating a set takes a few seconds)."""
     sets: dict[str, Callable[[], DataSet]] = {"sec-dev": lambda: sec("dev"), "sec-holdout": lambda: sec("holdout"),
                                                "statements-synthetic": statements_synthetic}
+    if (EVAL / "sec" / "manifest-prior.json").exists():
+        sets["sec-dev-prior"] = lambda: sec("dev", prior=True)
+        sets["sec-holdout-prior"] = lambda: sec("holdout", prior=True)
     for split in RECON_SEEDS:
         sets[f"recon-{split}"] = lambda s=split: recon(s)  # type: ignore[misc]
     sets["recon-calibration"] = recon_calibration

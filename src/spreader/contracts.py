@@ -231,6 +231,7 @@ class ReviewKind(str, Enum):
     CONFLICT = "conflict"  # two rows give different values for one line
     SUSPICIOUS = "suspicious"  # passes the checks but looks wrong (scale, sign)
     UNREADABLE = "unreadable"
+    PRIOR_PERIOD = "prior_period"  # differs from the company's approved spread for the same period (spreader.company)
 
 
 class Severity(str, Enum):
@@ -282,6 +283,10 @@ class Spread(BaseModel):
     ratios: list[RatioResult] = Field(default_factory=list)
     review: list[ReviewItem] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
+    company_id: str | None = None
+    company_version: str | None = None  # what the run remembered about the company (spreader.company)
+    prior_items: list[ReviewItem] = Field(default_factory=list)  # differences from approved spreads, kept apart:
+    # the review is rebuilt after every correction, and these come from the company's history, not from the document
 
     def value(self, line: str, period: str) -> SpreadValue | None:
         for v in self.values:

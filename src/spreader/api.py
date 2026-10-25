@@ -19,7 +19,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, File, Header, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
@@ -139,11 +139,14 @@ def documents() -> list[dict[str, Any]]:
 
 
 @app.post("/api/documents")
-async def upload(file: UploadFile = File(...), x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def upload(file: UploadFile = File(...), company_id: str | None = Form(default=None),
+                 x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+    """company_id: the organisation's identifier for the company (an SEC filing defaults to its CIK); a company's
+    documents share its approved spreads and confirmed mappings (spreader.company)."""
     data = await file.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
         raise HTTPException(413, f"File is larger than {MAX_BYTES // 1_000_000} MB")
-    doc, view = await run_in_threadpool(service().upload, file.filename or "document", data, _actor(x_actor))
+    doc, view = await run_in_threadpool(service().upload, file.filename or "document", data, _actor(x_actor), company_id)
     return await run_in_threadpool(_run_payload, view)
 
 

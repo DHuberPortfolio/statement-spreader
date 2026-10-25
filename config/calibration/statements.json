@@ -4,9 +4,9 @@
  ],
  "engine": "statements",
  "fitted": {
-  "commit": "63b9bb0c64d43fcc3a6396510d3617563d68cbf0",
+  "commit": "342cddd4cbe0f18431c1d34841e206244aea97d2",
   "config": {},
-  "created": "2026-10-25T06:18:33+00:00",
+  "created": "2026-10-25T07:04:28+00:00",
   "datasets": [
    {
     "files": 99,
@@ -18,10 +18,12 @@
   ],
   "dirty": true,
   "documents": 33,
-  "extra_outcome_files": [],
+  "extra_outcome_files": [
+   "var/overnight/memory-outcomes-dev.jsonl"
+  ],
   "fitted_by": "scripts/calibrate.py",
   "model": "not used (the model tier is calibrated only when --model is given)",
-  "outcomes": 1875,
+  "outcomes": 3341,
   "profile": "us-commercial 2026.10.24-1+0ad0af213be8"
  },
  "methods": {
@@ -184,6 +186,16 @@
     "sec-dev answer keys": 5
    },
    "total": 5
+  },
+  "memory.company": {
+   "high": 0.9996257997402421,
+   "low": 0.9950392036179426,
+   "rate": 0.9986357435197817,
+   "right": 1464,
+   "sources": {
+    "company-memory dev answer keys": 1466
+   },
+   "total": 1466
   }
  },
  "never_auto": [

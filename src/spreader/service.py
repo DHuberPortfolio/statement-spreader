@@ -21,6 +21,13 @@ from typing import Any
 
 from . import __version__
 from .checks import add_derived, run_checks, run_ratios
+from .company import (
+    ApprovedValue,
+    CompanyContext,
+    approved_from_spread,
+    confirmed_mappings,
+    detect_company_id,
+)
 from .contracts import (
     ProvenanceStep,
     ReviewKind,
@@ -64,23 +71,50 @@ class Service:
                 for r in self.store.memory_rows(self.profile.id)}
 
     # ---- upload and run ----
-    def upload(self, filename: str, data: bytes, actor: str) -> tuple[dict[str, Any], RunView]:
+    def upload(self, filename: str, data: bytes, actor: str, company_id: str | None = None) -> tuple[dict[str, Any], RunView]:
+        """company_id: any identifier the organisation uses for the borrower or client; for an SEC filing it defaults to
+        the CIK on its cover page. Documents of one company share its approved spreads and confirmed mappings."""
         try:
             fmt = sniff_format(filename, data)
         except IngestError as exc:
             raise ActionError(str(exc)) from exc
+        company = (company_id or "").strip()[:100] or detect_company_id(data)
         doc_id = doc_id_for(data)
         new = self.store.save_document(doc_id, _safe_name(filename), fmt.value, data)
         with self.store.tx() as c:
-            self.store.log(c, "upload" if new else "upload_duplicate", {"filename": _safe_name(filename), "size": len(data)},
-                           actor, document_id=doc_id)
+            if company:
+                c.execute("UPDATE documents SET company_id=? WHERE id=?", (company, doc_id))
+            self.store.log(c, "upload" if new else "upload_duplicate", {"filename": _safe_name(filename), "size": len(data),
+                                                                        "company_id": company}, actor, document_id=doc_id)
         run = self.run(doc_id, actor)
         doc = dict(self.store.document(doc_id))  # type: ignore[arg-type]
         return doc, run
 
+    def company_context(self, doc_id: str) -> CompanyContext | None:
+        """What the company's earlier approvals left behind, without the document's own approvals (a document is never
+        compared with itself) and without withdrawn ones."""
+        doc = self.store.document(doc_id)
+        company = doc["company_id"] if doc is not None else None
+        if not company:
+            return None
+        withdrawn = "SELECT run_id FROM approval_withdrawals"
+        ctx = CompanyContext(company_id=company)
+        for r in self.store.query("SELECT * FROM company_mappings WHERE company_id=? AND profile_id=? AND run_id NOT IN "
+                                  f"(SELECT id FROM runs WHERE document_id=?) AND run_id NOT IN ({withdrawn}) ORDER BY rowid",
+                                  (company, self.profile.id, doc_id)):
+            ctx.mappings[(r["statement"], r["label"], r["section"])] = r["canonical"]
+        for r in self.store.query(f"SELECT * FROM approved_values WHERE company_id=? AND profile_id=? AND document_id != ? "
+                                  f"AND run_id NOT IN ({withdrawn}) ORDER BY rowid", (company, self.profile.id, doc_id)):
+            ctx.approved[(r["period"], r["line"])] = ApprovedValue(r["period"], r["line"], Decimal(r["value"]),
+                                                                   Decimal(r["tolerance"]), r["run_id"], r["document_id"],
+                                                                   r["approved_by"], r["approved_at"])
+        return ctx
+
     def idempotency_key(self, doc_id: str) -> str:
+        ctx = self.company_context(doc_id)
         parts = [doc_id, self.profile.id, f"{self.profile.version}+{self.profile.content_hash}",
-                 str(self.store.memory_version(self.profile.id)), self.model_id, ENGINE_VERSION]
+                 str(self.store.memory_version(self.profile.id)), self.model_id, ENGINE_VERSION,
+                 ctx.version if ctx else "no-company"]
         return hashlib.sha256("|".join(parts).encode()).hexdigest()[:32]
 
     def run(self, doc_id: str, actor: str, parent: int | None = None) -> RunView:
@@ -108,7 +142,7 @@ class Service:
         try:
             data = self.store.document_bytes(doc_id, doc["format"])
             ir = read_document(doc["filename"], data)
-            spread, timings = spread_document(ir, self.profile, self.memory(), self.model)
+            spread, timings = spread_document(ir, self.profile, self.memory(), self.model, self.company_context(doc_id))
         except IngestError as exc:
             return self._fail(run_id, f"Could not read the document: {exc}", actor)
         except Exception as exc:  # noqa: BLE001 - recorded as a failed run, never a half-written one
@@ -172,7 +206,8 @@ class Service:
         values.extend(derived)
         checks = run_checks(values, periods, self.profile, period_keys, scales, skip)
         ratios = run_ratios(values, periods, self.profile)
-        review = build_review(spread.statements, values, checks, self.profile, ratios)
+        review = build_review(spread.statements, values, checks, self.profile, ratios) + [
+            i.model_copy() for i in spread.prior_items]
         human = {(v.line, v.period) for v in values if v.status is ValueStatus.HUMAN}
         for it in review:
             if it.id in resolved:
@@ -241,6 +276,9 @@ class Service:
                 raise ActionError(f"{len(blockers)} blocking review item(s) are still open: " + "; ".join(
                     b.message[:80] for b in blockers[:3]))
             state["approved"] = {"by": actor, "at": now()}
+            company = (self.store.document(run["document_id"]) or {})["company_id"]
+            if company:
+                payload["company_id"] = company
         elif kind == "reopen":
             if not state.get("approved"):
                 raise ActionError("This spread is not approved")
@@ -253,7 +291,27 @@ class Service:
                 raise ActionError("This spread was changed by someone else a moment ago. Reload it and try again.")
             c.execute("UPDATE runs SET state=? WHERE id=?", (json.dumps(state), run_id))
             self.store.log(c, kind, payload, actor, run_id, run["document_id"])
+            if kind == "approve" and payload.get("company_id"):
+                self._remember(c, run_id, run["document_id"], payload["company_id"], spread, state, actor)
+            elif kind == "reopen":
+                c.execute("INSERT INTO approval_withdrawals(run_id, withdrawn_by, withdrawn_at) VALUES (?,?,?)",
+                          (run_id, actor, now()))
         return self.get(run_id)
+
+    def _remember(self, c: Any, run_id: int, doc_id: str, company: str, spread: Spread, state: dict[str, Any],
+                  actor: str) -> None:
+        """An approval leaves the company's approved values and confirmed mappings behind (append-only). Lines whose
+        value the reviewer corrected do not confirm the rows behind them (spreader.company.confirmed_mappings)."""
+        at = now()
+        corrected = {k.split("@", 1)[0] for k in state.get("overrides", {})}
+        for a in approved_from_spread(spread, run_id, doc_id, actor, at):
+            c.execute("INSERT INTO approved_values(company_id, profile_id, run_id, document_id, period, line, value, tolerance,"
+                      " approved_by, approved_at) VALUES (?,?,?,?,?,?,?,?,?,?)",
+                      (company, self.profile.id, run_id, doc_id, a.period, a.line, str(a.value), str(a.tolerance), actor, at))
+        for (stmt, label, section), line in confirmed_mappings(spread, corrected).items():
+            c.execute("INSERT INTO company_mappings(company_id, profile_id, statement, label, section, canonical, run_id,"
+                      " confirmed_by, confirmed_at) VALUES (?,?,?,?,?,?,?,?,?)",
+                      (company, self.profile.id, stmt, label, section, line, run_id, actor, at))
 
     def _remap(self, run: dict[str, Any], spread: Spread, action: dict[str, Any], actor: str) -> RunView:
         stmt = str(action.get("statement", ""))

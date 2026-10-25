@@ -152,6 +152,67 @@ reconciliation through its reports and the gate. Revert if silent errors rise an
 - The reconciliation bar of 0.98 was picked after seeing that every current rule clears it. DECISIONS D35 says so.
 - The profile's `confidence:` on catch-all rules is now ignored (kept so overlays load).
 
+## Task 4: remember each company across years
+
+### Plan (written before starting)
+
+- **Identity.** A document gets a `company_id`: given by the uploader (any identifier an organisation uses), or, for an
+  SEC filing, the CIK read from the filing's cover-page tag (`dei:EntityCentralIndexKey`). That is identification
+  metadata, not a value, so D1 (values only from what a person can see) still holds; recorded in DECISIONS.
+- **What is remembered, per company.** (a) Approved values: when a spread is approved, every value is written to an
+  append-only table (company, period, line, value, run, approver); a later approval adds rows, nothing is ever updated
+  or deleted (database triggers refuse it). (b) Confirmed mappings: the label-to-line mapping of every placed row in
+  an approved spread, scoped to that company.
+- **Reuse.** The mapping cascade tries the company's confirmed mappings first (rule `memory.company`), before the
+  global reviewer memory and the rules. It is a calibrated method like any other (D35), measured on the evaluation
+  below; until measured it is reviewed.
+- **Comparison.** When a new document has a column for a period the company already has approved values for, every
+  line that differs beyond the rounding tolerance raises a review item. It says which it most likely is, with the
+  evidence: *likely a misread* when the ratio is a power of ten or the sign is flipped; *likely a restatement* when the
+  document mentions a restatement, recast or reclassification; otherwise *restatement or misread: check the document*.
+  The approved spread is never changed.
+- **Evaluation.** Fetch the prior-year 10-K for each company (`scripts/fetch_sec.py --prior`, the SEC's fair-access
+  rules), build its key, spread it and "approve" it against its own key (the key's values replace the engine's, and the
+  key's line replaces a wrong mapping, as an analyst would before approving). Then spread the current year without and
+  with memory and compare silent errors, wrong values caught, review workload, and the comparison items, which the keys
+  can label: a restatement is where the prior key and the current key disagree on the comparative period; a misread is
+  where the spread disagrees with the current key. Dev first; the holdout once.
+- **Revert if** silent errors rise on dev or the comparison items are mostly noise.
+
+### Result: done
+
+| SEC 10-Ks, current year | Without memory | With memory |
+|---|---|---|
+| Dev (33 companies): silent errors | 59 of 2,487 (2.4%, 1.8-3.0%) | 20 of 2,913 (0.7%, 0.4-1.1%) |
+| Dev: wrong values caught | 163 of 222 (73.4%) | 90 of 110 (81.8%) |
+| Dev: values right / silent omissions | 81.5% / 2.2% | 92.3% / 1.2% |
+| Dev: median review items per filing | 24 | 24 |
+| Holdout (29 companies, once): silent errors | 47 of 2,053 (2.3%, 1.7-3.0%) | 10 of 2,334 (0.4%, 0.2-0.8%) |
+| Holdout: wrong values caught | 366 of 413 (88.6%) | 350 of 360 (97.2%) |
+| Holdout: values right / silent omissions | 73.9% / 3.9% | 81.7% / 2.4% |
+| Holdout: median (mean) review items | 24 (23.2) | 26 (31.0) |
+
+Reports: `company-memory-dev`, `company-memory-holdout` (and the two earlier dev runs, kept under names that say what
+they were). No value went from caught to silent on either split.
+
+- **Built**: `spreader/company.py`; store schema 3 (`approved_values`, `company_mappings`, `approval_withdrawals`,
+  append-only by trigger; `documents.company_id`); `Service.upload(..., company_id)` (API form field; SEC filings
+  default to their CIK); approval remembers, reopening withdraws; the run's idempotency key includes what was
+  remembered. DECISIONS D36, THREAT_MODEL T38-T39, IMPROVEMENT_LOG #20, #21, O7.
+- **Root causes found on the way.** (1) The cover page's standard sentence about "new or revised financial accounting
+  standards" made every filing look restated (140 of 164 misreads were labelled restatements); the restatement words
+  are now read only from the statements. (2) Remembering the rows behind a line the analyst corrected let three wrong
+  values go silent the next year; a corrected line now confirms nothing behind it. (3) Deckers' prior-year 10-K
+  crashed the engine (undated columns, #21); fixed with a hand-built test, after the holdout run, and the holdout was
+  not re-run.
+- **How good is the "which is it" label?** Measured with the keys. When it says *misread* it is usually right (19 of
+  20 dev, 120 of 129 holdout). When it says *restatement* it is not reliable (3 of 5, 6 of 16). Most items say it
+  cannot tell. On dev, 177 of 198 items the keys could judge were real misreads and none was a false alarm, so the
+  items are worth a reviewer's time even when they cannot say which.
+- **Limits.** The stand-in approval is perfect (the key), so remembered mappings are as good as an analyst's best day.
+  The headline gain comes mostly from mappings: last year's corrections carry forward. No UI field for the company id
+  yet (API only).
+
 ## Assumptions made without anyone to ask
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the

@@ -297,3 +297,28 @@ auto-accepted whatever rules the profile listed, and the other engines had no co
   than presented as an independent choice.
 - **What would change it**: reviewer decisions in volume (calibrate on the organisation's own outcomes, not the SEC
   dev split), or a bar a credit or audit function sets for itself.
+
+**D36. Remember each company: its approved spreads are evidence, never something to overwrite.** Most filers come back
+every year, and last year's approved spread is the best evidence about this year's comparative column
+(`spreader.company`, IMPROVEMENT_LOG #20).
+- **Identity.** A document belongs to a company through an identifier the uploader gives (any id an organisation uses),
+  or, for an SEC filing, the CIK on its cover page (`dei:EntityCentralIndexKey`). That reads one tag for
+  identification only; every number still comes from what a person can see (D1).
+- **What is kept.** On approval, every value (append-only table `approved_values`) and the mapping of every placed row
+  (`company_mappings`, append-only too). Reopening a spread adds a withdrawal; nothing is updated or deleted, and
+  database triggers refuse it. A document is never compared with its own approvals.
+- **A corrected line confirms nothing behind it.** If the reviewer corrected a line's value before approving, the rows
+  feeding that line are not remembered: the correction says they were placed wrong. The first evaluation remembered
+  them and three values went silent the next year; with the rule, none did.
+- **Reuse is calibrated, not trusted.** The company's mappings come first in the cascade (`memory.company`) with their
+  measured accuracy (1,464 of 1,466 rows right on dev, at least 99.5%), under the same policy as every rule (D35).
+- **A difference is a question.** Any line that differs from an approved value for the same period beyond rounding gets
+  a warning that says what it most likely is: a misread (a power of ten, a flipped sign, another period's or another
+  line's approved value), a reclassification (lines that move by equal and opposite amounts) or a restatement (columns
+  headed "as restated", "recast", "revised"), or, most often, that it cannot tell. Measured with the keys, "misread" is
+  usually right (19 of 20 on dev, 120 of 129 on the holdout); "restatement" is not reliable (3 of 5 on dev, 6 of 16 on
+  the holdout); most items say they cannot tell. The cover page is not read for the restatement words: its standard
+  "new or revised financial accounting standards" sentence made every filing look restated.
+- **What would change it**: reviewer decisions on these items (a calibrated classifier instead of rules), the notes to
+  the financial statements (where restatements are explained), and a sign-in so the identity of the approver is
+  verified (THREAT_MODEL T38).

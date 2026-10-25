@@ -48,6 +48,7 @@ class MemoryKey:
 
 
 Memory = dict[MemoryKey, str]  # -> canonical line id ("" means "exclude this row")
+CompanyMemory = dict[tuple[str, str, str], str]  # (statement, label, section) -> line, from approved spreads
 ModelMapper = Callable[[StatementTable, StatementRow, list[LineDef]], RowMapping | None]
 
 
@@ -61,11 +62,20 @@ def _section_parts(row: StatementRow) -> list[str]:
     return [s for s in reversed(row.section.split(" > ")) if s] if row.section else []
 
 
-def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: Memory | None = None) -> RowMapping:
+def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: Memory | None = None,
+            company: CompanyMemory | None = None) -> RowMapping:
     sdef = profile.statements[table.statement]
     lines = [ln for ln in sdef.lines if _unit_ok(ln, row)]
     lab = row.label_clean
     sections = _section_parts(row)
+
+    if company:  # this company's confirmed mappings first (spreader.company); calibrated like any rule
+        for sec in [sections[0] if sections else "", ""]:
+            target = company.get((table.statement.value, lab, sec))
+            if target and target in profile.lines and any(ln.id == target for ln in lines):
+                return RowMapping(row_index=row.index, canonical=target, method=MapMethod.MEMORY,
+                                  confidence=calibrated("memory.company"), rule="memory.company",
+                                  reason="The company's approved spread placed this label here before.")
 
     if memory:
         for sec in [sections[0] if sections else "", ""]:
@@ -157,13 +167,13 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
 
 
 def map_table(table: StatementTable, profile: Profile, memory: Memory | None = None,
-              model: ModelMapper | None = None) -> list[RowMapping]:
+              model: ModelMapper | None = None, company: CompanyMemory | None = None) -> list[RowMapping]:
     by_index = {r.index: r for r in table.rows}
     out: dict[int, RowMapping] = {}
     for row in table.rows:
         if row.role is RowRole.HEADER:
             continue
-        out[row.index] = map_row(row, table, profile, memory)
+        out[row.index] = map_row(row, table, profile, memory, company)
 
     # A printed subtotal of rows already placed on different lines ("Total cash, cash equivalents
     # and short-term investments") is not a template line: placing it anywhere counts its rows

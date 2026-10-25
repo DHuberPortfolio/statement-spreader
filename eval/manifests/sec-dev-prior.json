@@ -1,0 +1,504 @@
+{
+ "name": "sec-dev-prior",
+ "source": "files: SEC 10-K filings listed in eval/sec/manifest-prior.json (downloaded by scripts/fetch_sec.py --prior)",
+ "version": "bcf1e066df7150eb",
+ "key_version": "51a3709d46d4215c",
+ "files": 99,
+ "entries": [
+  {
+   "path": "eval/sec/raw-prior/AAPL-0000320193-24-000123.htm",
+   "sha256": "ed02351c7b2d2367c74639d2ca50b6a87d99348a5390016cd38a4313411cb04b",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/AAPL_cal.xml",
+   "sha256": "2e9a0fa7a379a4a691bff7531b3d6c35c307cba9874aa21c62902c399cc15d00",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/AAPL.json",
+   "sha256": "72fbe53d0c7115ffa7e4c63a7e8412967c4aea9816572661fc85407123268303",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/ADBE-0000796343-25-000004.htm",
+   "sha256": "13a01474e5762b25b1595d3f0a55b975dd4aaa0d55e46d6827838fcd30b2dc39",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/ADBE_cal.xml",
+   "sha256": "2cc7500131ef7de9a5c6f1f92cf9eeae52ff3748f059c1e62ab59ca97dbe967e",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/ADBE.json",
+   "sha256": "2f785debde5736695cf14756d6c3c42ba293f75cbb4e5e624c2fa86bfc6db690",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/AMD-0000002488-25-000012.htm",
+   "sha256": "62d294b151d05bc082108136f5ffe918d69418085ec20507d443c7e2bde3717c",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/AMD_cal.xml",
+   "sha256": "41a8cd4a4b775b30d262701670b6e216e7022d5bd942c05454cdd12899bf64b1",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/AMD.json",
+   "sha256": "24d957cd9b8ff1cb32f3c5b2d15f7dddcd6f7fe41202a944796f2a12bc614471",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/AMZN-0001018724-25-000004.htm",
+   "sha256": "5f3722b668e75e35d9bae2ee0d1f92b7710c443de689af2a15cfca82ca04916f",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/AMZN_cal.xml",
+   "sha256": "a6c5d826a852cff4964834aa86b0c4b56283ba3f2fbac2e9d0e8bd20d8a11715",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/AMZN.json",
+   "sha256": "9ed50fe140b2eed4d0faf13904a90bbacada15a3b8fadd60b2d9545838c664c7",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/BA-0000012927-25-000015.htm",
+   "sha256": "e571079b444bbc4d9580acfa1cf2c4c13483d7cc4a0c30ffbd0b232944486141",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/BA_cal.xml",
+   "sha256": "3f794fddc420acb202335e1373446b1c5a1a1cca5f1890806968e24f08d7b539",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/BA.json",
+   "sha256": "929a09ce7bde2e285fa66fb59a38aaa5fb40870e519a660761d1101377a04955",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/BOOT-0001558370-25-007889.htm",
+   "sha256": "d9819ca1885a5be549daed90cca831e3bb30200a1ff0941246b1e8344a4fe5ce",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/BOOT_cal.xml",
+   "sha256": "2cb25509737ddbada77254657dfc332d8f6e172dd847666e9c3dde8619bda3ed",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/BOOT.json",
+   "sha256": "3ce7939112430551d1f993d113795f2a47bc310176e496018c0f15f8c0806c9f",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/CAT-0000018230-25-000008.htm",
+   "sha256": "71c02e217137c5ff05651fbf8632008915ecb654cc7cf12239aa54a3c29680de",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/CAT_cal.xml",
+   "sha256": "e0871e11b7a62a746b1d85eb0022c3b0f440c5128c9e75d24482660fe81f8db6",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/CAT.json",
+   "sha256": "ed8cfdf32604317008405dc6c57a23fe1bdff9d704e48193c9a290f168e98a82",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/CHRW-0001043277-25-000012.htm",
+   "sha256": "84deca85635961188e30247f1dbc5f2e7d4dce1f4fcfc27893aa59df426343d1",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/CHRW_cal.xml",
+   "sha256": "2d89a7558a74a7a3371fad7adcfd95c2bc021e8c58143c485629679c349b8ba3",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/CHRW.json",
+   "sha256": "129f018a9481540422892032c3a4e79a96106fc80b06cea1a171a9292482c1e4",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/CMG-0001058090-25-000014.htm",
+   "sha256": "5576d63e6adb76c4f8f5ef1c8f399da66554ec8eda028283e15ce03d03e8279b",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/CMG_cal.xml",
+   "sha256": "7cd741c0aef1291313a559742fc5fb0c5592ecef49286b52283447f14a294d69",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/CMG.json",
+   "sha256": "9ce57f29d349028ba880df1962ec31e17269efa14a90bf9b56eb54ab0aa4ebed",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/COST-0000909832-25-000101.htm",
+   "sha256": "057291bcade703fa85ef7ec944e81076bc0a77afefa9456a5b3e1cb950d1ae5d",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/COST_cal.xml",
+   "sha256": "9738afdac2576eb016c7a24ff204c68b393bf6da3f2ce8708784f3f1c195ec37",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/COST.json",
+   "sha256": "7931e9d15fd429685c1c811be93548e87b0500382acdc3b9adabadd3dd32ed52",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/DIS-0001744489-24-000276.htm",
+   "sha256": "325f03556967b06c177858754a73c633b6f17a5b4fbb0209c878e347c0e7d39b",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/DIS_cal.xml",
+   "sha256": "1e893e37ba5c9a271bcd1c5069493b8ef10f0ac51eb28a3006e7e5ae1889b268",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/DIS.json",
+   "sha256": "16fdb82dd71929f44a0532b1bd054cd6129aa88e6659870d23c2fda0a48387b2",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/DPZ-0000950170-25-025223.htm",
+   "sha256": "9aa6bfd13aca8007b944ec87a26df94cc14182fa02a9b73aa14223fad4874689",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/DPZ_cal.xml",
+   "sha256": "def64f0634d0cb359320d91b66c89ec737cbbeaa7dbcf2e95f59fcf04fb53160",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/DPZ.json",
+   "sha256": "d458d015be480e6a8a84e53914a379aa9b6e6a84ab907475b05cf177ea267cfc",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/DUOL-0001562088-25-000042.htm",
+   "sha256": "c3210ed18206006ff81e2f6a556b5bd5bb3f7d889a32625d549580bd52a0b4ae",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/DUOL_cal.xml",
+   "sha256": "94f1bc759b58c592c719f0e5b4128f34fd01fdaf6b39553856fc12afaeec7100",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/DUOL.json",
+   "sha256": "9e010ecb261042d229d6a539a8df9040a82473e917ae23feb2b864c8f9f3df98",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/ETSY-0001370637-25-000017.htm",
+   "sha256": "30a568281554012ca9961def5b3a5671470b078a0da373c94a989581d1331762",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/ETSY_cal.xml",
+   "sha256": "049db846627ebe12f44a9650f6d1d16968ab8103410a65d9e5834da3e82d58f1",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/ETSY.json",
+   "sha256": "afa5aae6706c15c783fe0e88a51b5c624478811074a780cba32339a9ac4c8279",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/EXPD-0000950170-25-024750.htm",
+   "sha256": "18b7dac1eae69060c471b0b77431c59872329b32642a7cc635601322fe07245f",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/EXPD_cal.xml",
+   "sha256": "bbaafb969ec1c99989c7e747f4c3a1e675585ca91db025acf7c69eb19998cbf5",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/EXPD.json",
+   "sha256": "be62b061a3bd950e75e7dd3f376204a3a9ff991b4f469d5b2e84e97444848a9f",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/F-0000037996-25-000013.htm",
+   "sha256": "71ae14d5bed187f710a8237aa039ce8de138288772c389cfe6859a3cec0bc7ff",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/F_cal.xml",
+   "sha256": "c04e0907e11b236f2316c26e9cf343e06a968aa8951899688bf6d8db80e3bd33",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/F.json",
+   "sha256": "ffb73cbc5875e20853c94d0979741c45fd1797cb79fc18e6e4b09a210ad76979",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/FAST-0000815556-25-000065.htm",
+   "sha256": "b5a34fa3ce856fc23ebbfd2a1f0014a41a8db7ef1cf936db3a16d6e2eca18bed",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/FAST_cal.xml",
+   "sha256": "e0e5b2f93f02e5373d11987d7e7fb691214cc6681147f7ad3425b420e7976506",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/FAST.json",
+   "sha256": "0a5ed29044bb7f8112d85ced7729e66d02a89fcc625f9a9ad5aed53bc8c01880",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/HAS-0000046080-25-000027.htm",
+   "sha256": "8958e21f41dc487a474ebcded9f1b2aa6362a4fa66aebabd4fc4e26cc0ded58c",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/HAS_cal.xml",
+   "sha256": "197d25238f6bda0132ba2bffccdccacc08b4adab7f4ff4bacd267236fd7ede04",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/HAS.json",
+   "sha256": "2dd50556fc313050c9a552932d5197d02198ec4bfff17ef7bccb59bfb933b41c",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/KO-0000021344-25-000011.htm",
+   "sha256": "135bda93b699ebd1746e24574cdaf01a9f42d63c0addf15ab48286ada5ec0ac5",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/KO_cal.xml",
+   "sha256": "e3debad7096cf7b967de7df62066c5368abc339117725869df4ce0c16c83fad6",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/KO.json",
+   "sha256": "834b2b48c5228caa3993332eebe440e51075be347794da9f56996fe7fe0ada91",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/LULU-0001397187-25-000013.htm",
+   "sha256": "d952bbf6bdde05ad929c2d7840910d208680b06d5b4c5c6bc80387e47e71624a",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/LULU_cal.xml",
+   "sha256": "95d5a54fc2e5ac17b6894b87781a07688014eef4f194ac97c3695155b08a1ddc",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/LULU.json",
+   "sha256": "f5a9e18f69a3a565c6b9c170c7a23eb32deb8dff8223f9b2edb9afedb22a3452",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/MAT-0001628280-25-007887.htm",
+   "sha256": "bffb7ac444d1c75990252184d801cf388f1c403fc411e9a86ba83f629c8fdba1",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/MAT_cal.xml",
+   "sha256": "0444d3918020a9b0beaa639dd5f6cd3dd395f4f2e2f4bd18f2ca056d703265fb",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/MAT.json",
+   "sha256": "a6dd299a55dfd5a2b187053b761704c9367f50ad56629411aef56dc490d4dc0c",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/MCD-0000063908-25-000012.htm",
+   "sha256": "845441661123dfffa718e36ceee12d3cda2ac2feb3bfd55fb26197a34ab27c32",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/MCD_cal.xml",
+   "sha256": "427b8b81dd71521b20bcf2424fa1cfadea9ac02f0dd14428edce4a7d203f88e0",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/MCD.json",
+   "sha256": "2ee69cdf228c98028f7457f254498199810cf4aece1637080d159aba00b187f7",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/MMM-0000066740-25-000006.htm",
+   "sha256": "98cbedb1897b1ca69fa358613193f7b5903e5f9a1834c7af00f312066168837e",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/MMM_cal.xml",
+   "sha256": "bf924bc9eefb3daf44093379ceb6ff09b3033f2c11684d49c25721a0395fedf8",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/MMM.json",
+   "sha256": "64f60e28fff8e5146723af4556c09af4922113a2cee66f9b4b64820725cbfce4",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/ORCL-0000950170-25-087926.htm",
+   "sha256": "4d9836469e159f56cdd57ffec978e10a169f4b2c4954162fa5143167a650a777",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/ORCL_cal.xml",
+   "sha256": "b13d2aeada9848313e86fa8cd63d589c979821e3ac4bd602fe48d5696641725f",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/ORCL.json",
+   "sha256": "c025e909b32d7912a27dd342cfd040a94531c591b4a53838b11f256c33f57f17",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/PEP-0000077476-25-000007.htm",
+   "sha256": "45698a5d996f2e83b6392c8a073cc8a202452c5a0ecaab30ba59b0c776d473e4",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/PEP_cal.xml",
+   "sha256": "23aa22edec93e4dcbb51d601ec1f297f7f0f56f11387ff91cae5a502d253f2f8",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/PEP.json",
+   "sha256": "68503993d76f6c607a81861e2f9dbcb17ce6207326f77d68554489fff8722c13",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/PFE-0000078003-25-000054.htm",
+   "sha256": "30a7915d0d881a9600e18b3611d5ed59079d820d982cb43505a2246a29917403",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/PFE_cal.xml",
+   "sha256": "975a7b775d3c0887fcc88e9c14cc29b83b214388a69a207581c83ce11dcb6241",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/PFE.json",
+   "sha256": "dd2e357aa8acc66445a75c34dade685ff5974263e29a5968b79c4d7c29833a9e",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/PG-0000080424-25-000076.htm",
+   "sha256": "7480c8d3808281eaf376d3fb5a2b497018c13f60d4b5214daa84d0824eef254f",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/PG_cal.xml",
+   "sha256": "deb3b23ae8c204eee26d01128857d63d7fe733c4a4174de0fca648afab9ba2b3",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/PG.json",
+   "sha256": "49482d13340042f005a3d091644151a23614343ac99870da363781880afaee6a",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/POOL-0000945841-25-000032.htm",
+   "sha256": "43402470588f5364464cf6ceaaab054330853c90b357dd2e0640dcdf213b61eb",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/POOL_cal.xml",
+   "sha256": "9d28293115abfa0e9c23eed39d78a2918140018cd1c525c7192ea7cdfe85413a",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/POOL.json",
+   "sha256": "02d61d2b563ab8830c930e0b50141d8a8e071c157fe9a2af87c84e993d66e11e",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/SHAK-0001620533-25-000016.htm",
+   "sha256": "ecdf500f726792a60ee0d52ec98e08439a4d3ccefd8a5f9c1d099dcda2a01502",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/SHAK_cal.xml",
+   "sha256": "01085e31b7f353baa6965afba2a67815b59fbe991bdd393934bc55efca1b510d",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/SHAK.json",
+   "sha256": "22fa75f497bb37694d638a580b04ea5be4b7c1355a0a342eb6e6b8ac74301f45",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/SNA-0000091440-25-000010.htm",
+   "sha256": "100ed0dd18e2d32888d31950fd504e7fef7f03a8831f1c5850900ed76079d636",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/SNA_cal.xml",
+   "sha256": "a9928ac75fecfde4f919ccef51a751ad2069207c2c334cf58846ca8847832345",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/SNA.json",
+   "sha256": "01d53673f6d3c8db8af0de0f76b5677265a901ca2c6c83b9f5300aa81cdea440",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/ULTA-0001558370-25-003810.htm",
+   "sha256": "43e72c49ca347e2a5151f505c8f979afe5f355144e079d64c604430864a05272",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/ULTA_cal.xml",
+   "sha256": "9947533da7a2884e5bd2a021af0bab1743bb43dd7c823fe00e3e3fe3abe8d357",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/ULTA.json",
+   "sha256": "64a38867e78061da5616bb92a19658f6cb94d00811eff42ba20824740e31039a",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/UNP-0000100885-25-000042.htm",
+   "sha256": "c09d020df6dbc51517baf786f816088675f87e08b5979e9480634be1d69ebf59",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/UNP_cal.xml",
+   "sha256": "f993ed5dc9460f188558dede7f71c389c0dd2e06cb91c0657d6b81581a2f13e1",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/UNP.json",
+   "sha256": "dcb9098f65a1eaaabbdda4ef8cd9a0645905be7657e98742819efdfad9188b00",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/raw-prior/WMT-0000104169-25-000021.htm",
+   "sha256": "ff1d6cc27de979282be7a827e5f96af7bfa71b378506f86e12c837ce569f07cb",
+   "role": "input"
+  },
+  {
+   "path": "eval/sec/cal-prior/WMT_cal.xml",
+   "sha256": "3b902da818f48ab31e2533fb330831ac67e28daf0eab86625d4c3f02cdbc7bae",
+   "role": "key"
+  },
+  {
+   "path": "eval/sec/keys-prior/WMT.json",
+   "sha256": "10c046cc808afe539bb9f4243ca2df28eb2598279b9ea075aeffadf4f79a299e",
+   "role": "key"
+  }
+ ]
+}

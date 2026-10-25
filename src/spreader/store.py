@@ -19,7 +19,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 SCHEMA = [
     """CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)""",
@@ -70,6 +70,46 @@ SCHEMA = [
         source_run INTEGER,
         PRIMARY KEY (profile_id, statement, label, section)
     )""",
+    # What each company's approved spreads leave behind (spreader.company). Approved values are append-only: a later
+    # approval adds rows and a reopened spread is withdrawn by a new row, so the history of what was approved, by
+    # whom and when, can never be rewritten.
+    """CREATE TABLE IF NOT EXISTS approved_values (
+        company_id TEXT NOT NULL,
+        profile_id TEXT NOT NULL,
+        run_id INTEGER NOT NULL REFERENCES runs(id),
+        document_id TEXT NOT NULL,
+        period TEXT NOT NULL,
+        line TEXT NOT NULL,
+        value TEXT NOT NULL,               -- Decimal as text
+        tolerance TEXT NOT NULL,
+        approved_by TEXT NOT NULL,
+        approved_at TEXT NOT NULL
+    )""",
+    """CREATE INDEX IF NOT EXISTS approved_values_company ON approved_values(company_id, profile_id)""",
+    """CREATE TABLE IF NOT EXISTS approval_withdrawals (
+        run_id INTEGER NOT NULL REFERENCES runs(id),
+        withdrawn_by TEXT NOT NULL,
+        withdrawn_at TEXT NOT NULL
+    )""",
+    """CREATE TABLE IF NOT EXISTS company_mappings (
+        company_id TEXT NOT NULL,
+        profile_id TEXT NOT NULL,
+        statement TEXT NOT NULL,
+        label TEXT NOT NULL,
+        section TEXT NOT NULL,
+        canonical TEXT NOT NULL,
+        run_id INTEGER NOT NULL REFERENCES runs(id),
+        confirmed_by TEXT NOT NULL,
+        confirmed_at TEXT NOT NULL
+    )""",
+    """CREATE TRIGGER IF NOT EXISTS approved_values_no_update BEFORE UPDATE ON approved_values
+       BEGIN SELECT RAISE(ABORT, 'approved values are append-only'); END""",
+    """CREATE TRIGGER IF NOT EXISTS approved_values_no_delete BEFORE DELETE ON approved_values
+       BEGIN SELECT RAISE(ABORT, 'approved values are append-only'); END""",
+    """CREATE TRIGGER IF NOT EXISTS company_mappings_no_update BEFORE UPDATE ON company_mappings
+       BEGIN SELECT RAISE(ABORT, 'company mappings are append-only'); END""",
+    """CREATE TRIGGER IF NOT EXISTS company_mappings_no_delete BEFORE DELETE ON company_mappings
+       BEGIN SELECT RAISE(ABORT, 'company mappings are append-only'); END""",
     """CREATE TABLE IF NOT EXISTS work_sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         document_id TEXT NOT NULL,
@@ -117,6 +157,8 @@ class Store:
         with self.tx() as c:
             for stmt in SCHEMA:
                 c.execute(stmt)
+            if "company_id" not in {r["name"] for r in c.execute("PRAGMA table_info(documents)")}:
+                c.execute("ALTER TABLE documents ADD COLUMN company_id TEXT")  # schema 3: who the document is about
             row = c.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()
             current = int(row["value"]) if row else 0
             if current > SCHEMA_VERSION:

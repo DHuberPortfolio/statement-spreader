@@ -138,6 +138,14 @@ What the Python tests cover:
   their data; statement confidences are measured bounds, no calibration means every rule-placed row is reviewed, an
   over-confident model is reviewed; an uncalibrated reconciliation rule proposes; every engine's findings carry
   blocking, reason, evidence, required action and the producing rule.
+- `test_company.py` (13 tests): company memory (D36). The comparison: equal values raise nothing; a power of ten and a
+  flipped sign are misreads; equal and opposite moves are a reclassification; "as restated" columns point to a
+  restatement; otherwise it says it cannot tell; it never changes the approved values. Rows behind a corrected line are
+  not remembered (the regression that let three values go silent); the company's mapping comes first and is calibrated;
+  the CIK is read from the cover tag. The service: approval writes append-only rows (UPDATE and DELETE refused), the
+  next year's filing gets exactly the one item, a correction resolves it, reopening withdraws the approval, other
+  companies are never compared; the upload route takes a company id.
+- `test_undated_columns.py` (1 test): columns without headings beside a dated balance sheet no longer crash a filing.
 
 ## Evaluation against answer keys
 
@@ -230,6 +238,21 @@ per filing:
 The files land in `config/calibration/` and record their data. Recalibrating changes what is accepted without a person,
 so treat it like any engine change: dev and synthetic before and after, the release gate, and a log entry. Never fit
 on the holdout split.
+
+## Company memory across years (DECISIONS D36)
+
+```bash
+.venv/Scripts/python scripts/fetch_sec.py --prior          # the 10-K filed a year before each one (eval/sec/raw-prior)
+.venv/Scripts/python scripts/fetch_sec_calc.py --prior     # and its calculation links (eval/sec/cal-prior)
+.venv/Scripts/python scripts/eval_company_memory.py --split dev --save company-memory-dev --outcomes memory-dev.jsonl
+.venv/Scripts/python scripts/calibrate.py statements --outcomes memory-dev.jsonl    # calibrates memory.company
+.venv/Scripts/python scripts/eval_company_memory.py --split holdout --save company-memory-holdout   # once per change
+```
+
+The prior year is "approved" against its own key (the key's value replaces the engine's, the key's line replaces a
+wrong mapping) as a stand-in for an analyst; the current year is spread without and with what that left behind. The
+keys label each comparison item: a restatement where the prior and current keys disagree on the period, a misread
+where the spread disagrees with the current key. The prior-year keys are committed in `eval/sec/keys-prior`.
 
 ## The local model tier (optional)
 
