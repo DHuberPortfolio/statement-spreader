@@ -23,6 +23,18 @@ web tests. Linux matters because lxml's Linux wheels use a newer libxml2 than th
 `test_html_reader_fixes.py`). Tests that need the downloaded SEC filings skip themselves there. Each Python job then
 checks the evaluation manifests and runs the release gate (next section).
 
+## Operational check
+
+```
+.venv/Scripts/python scripts/smoke_check.py
+```
+
+Every engine's real workflow end to end, in a throwaway data folder: statements (upload with a company, approve,
+export, the next document compared with the approved one, a company set after upload), reconciliation (sample run,
+accept, reject, resolve, export), invoices, the data-quality gate (release a held record), the spreadsheet scanner,
+ROI and evaluation data, the reviewer-outcomes feed, the web routes, and the `spreader` commands. Prints PASS or FAIL
+per step; the exit code is the number of failures. CI runs it on every push.
+
 ## Versioned evaluation sets and the release gate
 
 Every evaluation set has a name, a **dataset version** and a **key version** (`src/finops/evalsets.py`): a hash of

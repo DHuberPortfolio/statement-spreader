@@ -46,6 +46,8 @@ jobs:
         run: test -f gate.md && cat gate.md >> "$GITHUB_STEP_SUMMARY" || true
       - name: The spreader command
         run: spreader --help
+      - name: Operational check (every engine end to end through the API and the command line)
+        run: python scripts/smoke_check.py
 
   web:
     runs-on: ubuntu-latest
