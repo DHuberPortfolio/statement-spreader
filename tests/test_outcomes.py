@@ -120,5 +120,7 @@ def test_a_failed_write_never_stops_a_decision(svc: Service, tmp_path: Path, mon
     assert view.run["state"]["approved"]["by"] == "dana"
 
 
-def test_bs_fixture_is_the_one_company_tests_use() -> None:
+def test_tests_never_write_to_the_real_outcomes_folder() -> None:
+    """Approvals in other tests must not become 'reviewer' evidence (conftest gives each test its own folder)."""
+    assert outcomes.directory().resolve() != (ROOT / "var" / "outcomes").resolve()
     assert BS[0][0] == "Cash and cash equivalents"

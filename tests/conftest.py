@@ -10,6 +10,13 @@ def profile() -> Profile:
     return load_profile()
 
 
+@pytest.fixture(autouse=True)
+def _private_outcomes(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Every test writes reviewer outcomes to its own folder: a test's approvals in the real var/outcomes would be
+    learned from as if a reviewer had made them (found 2026-10-25: 123 outcomes from test runs)."""
+    monkeypatch.setenv("FINOPS_OUTCOMES_DIR", str(tmp_path_factory.mktemp("outcomes")))
+
+
 def statement_html(title: str, unit: str, header: list[str], rows: list[tuple], hidden: list[tuple] | None = None,
                    before: str = "") -> str:
     """A small statement table in the style of an SEC filing ("$" and ")" in their own cells)."""
