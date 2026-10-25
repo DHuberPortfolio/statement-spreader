@@ -1,0 +1,165 @@
+{
+ "note": "Hand checks of the industry and IFRS overlays on real filings (scripts/fetch_coverage.py). Each value the spread produced was searched for in the filing's visible text and compared with the printed statement; 'right' means the printed figure matches, 'missing' that the spread has no value for the line. The first company of each group is the one the overlay's wording was written from; the others were not used for the wording. A smoke test on a handful of documents, not a measurement.",
+ "checked_by": "Claude (overnight), 2026-10-25",
+ "documents": [
+  {
+   "ticker": "FITB",
+   "profile": "us-bank",
+   "role": "wording written from",
+   "right": [
+    "total_assets 214,376",
+    "loans_net 120,398",
+    "deposits 171,819",
+    "total_equity 21,724",
+    "net_interest_income 5,982",
+    "provision_credit_losses 662",
+    "noninterest_income 3,035",
+    "noninterest_expense 5,144",
+    "net_income 2,522",
+    "bank_interest_income 9,903"
+   ],
+   "missing": [],
+   "failed_checks": [],
+   "notes": "Every check passes, the bank checks included. 'Marketing expense' lands on SG&A (a base alias)."
+  },
+  {
+   "ticker": "HBAN",
+   "profile": "us-bank",
+   "role": "hand-checked only",
+   "right": [
+    "total_assets 225,106",
+    "loans_net 147,105",
+    "deposits 176,610",
+    "total_equity 24,379",
+    "net_interest_income 5,991",
+    "provision_credit_losses 463",
+    "noninterest_income 2,175",
+    "noninterest_expense 5,015",
+    "bank_interest_income 10,310"
+   ],
+   "missing": [
+    "net_income (printed as 'Income after income taxes' 2,229)"
+   ],
+   "failed_checks": [
+    "cross_cash"
+   ],
+   "notes": "Gaps in wording not seen in the source: 'Income after income taxes', 'Net income applicable to common shares' (lands on net income to the company), 'Dividends on preferred shares', 'Average common shares-basic', per-share rows under a 'Per common share' heading. Not added tonight, so this check stays independent."
+  },
+  {
+   "ticker": "KEY",
+   "profile": "us-bank",
+   "role": "hand-checked only",
+   "right": [
+    "total_assets 184,381",
+    "loans_net 105,114",
+    "deposits 148,713",
+    "total_equity 20,381",
+    "net_interest_income 4,636",
+    "provision_credit_losses 471",
+    "noninterest_income 2,842",
+    "noninterest_expense 4,703",
+    "net_income 1,829",
+    "bank_interest_income 8,386"
+   ],
+   "missing": [],
+   "failed_checks": [
+    "cf_rollforward",
+    "cf_sum",
+    "is_attributable"
+   ],
+   "notes": "Cash-flow checks fail (not investigated tonight); every value checked is right."
+  },
+  {
+   "ticker": "TRV",
+   "profile": "us-insurer",
+   "role": "wording written from",
+   "right": [],
+   "missing": [],
+   "failed_checks": [
+    "cross_cash"
+   ],
+   "notes": "Source document: all key lines placed (premiums 43,914, losses 27,221, investments 101,182, reserves 65,737); the insurer pre-tax check passes. Values not separately hand-checked."
+  },
+  {
+   "ticker": "ALL",
+   "profile": "us-insurer",
+   "role": "hand-checked only",
+   "right": [
+    "revenue 67,685",
+    "total_assets 119,758",
+    "net_investment_income 3,449",
+    "net_income 10,266",
+    "insurer_investments 83,237"
+   ],
+   "missing": [
+    "premiums_earned",
+    "losses_lae",
+    "pretax_income",
+    "loss_reserves",
+    "total_equity_parent"
+   ],
+   "failed_checks": [],
+   "notes": "Allstate words them 'Property and casualty insurance premiums', '... claims and claims expense', 'Reserve for property and casualty insurance claims and claims expense'. The values found are right; half the key lines are missing."
+  },
+  {
+   "ticker": "PGR",
+   "profile": "us-insurer",
+   "role": "hand-checked only",
+   "right": [],
+   "missing": [
+    "the consolidated statements"
+   ],
+   "failed_checks": [],
+   "notes": "The 10-K incorporates the consolidated statements from Exhibit 13; the only balance sheet and cash flow in the document are the parent company's (Schedule II), and they were spread as if consolidated (total assets 45,502 against roughly 100 billion consolidated), unflagged. Fixed in the engine: a parent-only statement is now a blocker (IMPROVEMENT_LOG #23)."
+  },
+  {
+   "ticker": "UL",
+   "profile": "ifrs-commercial",
+   "role": "wording written from",
+   "right": [],
+   "missing": [],
+   "failed_checks": [
+    "cf_rollforward",
+    "cf_sum",
+    "cross_cash",
+    "cross_net_income",
+    "is_pretax"
+   ],
+   "notes": "With the overlay the income statement is found (it was not without it). Amounts are in EUR million, which the unit detection does not recognise: every value is at an assumed unit and flagged (a blocker), never guessed."
+  },
+  {
+   "ticker": "BP",
+   "profile": "ifrs-commercial",
+   "role": "hand-checked only",
+   "right": [
+    "pretax_income 7,746",
+    "net_income 1,295",
+    "total_assets 278,526",
+    "total_equity 74,000",
+    "cash 36,556",
+    "cfo 24,493",
+    "cash_end 36,624"
+   ],
+   "missing": [
+    "revenue ('Sales and other operating revenues')",
+    "operating_income"
+   ],
+   "failed_checks": [
+    "cf_sum",
+    "cross_cash"
+   ],
+   "notes": "'$ million' is not recognised as a unit statement, so values are at an assumed unit and flagged."
+  },
+  {
+   "ticker": "NVS",
+   "profile": "ifrs-commercial",
+   "role": "hand-checked only",
+   "right": [],
+   "missing": [
+    "almost every line"
+   ],
+   "failed_checks": [],
+   "notes": "The right tables are found ('Net sales from continuing operations', 'Property, plant and equipment'...) but almost nothing is placed on a line; not investigated tonight."
+  }
+ ]
+}

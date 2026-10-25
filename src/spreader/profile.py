@@ -164,15 +164,27 @@ def matches(pattern: str, label: str) -> bool:
 def _overlay(base: dict, over: dict) -> dict:
     """Apply an organisation's overlay to a base profile.
 
-    The overlay can: rename and re-version the profile; add aliases or section rules to existing
-    lines (`add_aliases: {line_id: [...]}`, `add_sections: {line_id: [...]}`); append checks,
-    derived lines and ratios; and replace a ratio or check with the same id. It cannot delete
-    template lines, so every organisation's spread stays comparable with the base template.
+    The overlay can: rename and re-version the profile; add lines an industry needs (`add_lines:
+    {statement: [line, ...]}`: a bank's loans and deposits, an insurer's premiums); add aliases or
+    section rules to existing lines (`add_aliases: {line_id: [...]}`, `add_sections: {line_id: [...]}`);
+    append checks, derived lines and ratios; and replace a ratio or check with the same id. It cannot
+    delete template lines, so every organisation's spread stays comparable with the base template.
     """
-    out = dict(base)
+    import copy
+
+    out = copy.deepcopy(base)
     for k in ("id", "version", "title"):
         if k in over:
             out[k] = over[k]
+    existing = {ln["id"] for st in out["statements"].values() for ln in st["lines"]}
+    for stype, new_lines in (over.get("add_lines") or {}).items():
+        if stype not in out["statements"]:
+            raise ValueError(f"overlay: add_lines names unknown statement '{stype}'")
+        for ln in new_lines:
+            if ln.get("id") in existing:
+                raise ValueError(f"overlay: add_lines would redefine the template line '{ln.get('id')}'")
+            existing.add(ln["id"])
+        out["statements"][stype] = {**out["statements"][stype], "lines": list(out["statements"][stype]["lines"]) + list(new_lines)}
     lines = {ln["id"]: ln for st in out["statements"].values() for ln in st["lines"]}
     for line_id, aliases in (over.get("add_aliases") or {}).items():
         if line_id not in lines:

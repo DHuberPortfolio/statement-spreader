@@ -32,6 +32,9 @@ from .structure import build_statement, harmonize_periods
 _T = TypeVar("_T")
 
 LAYOUT_TOLERANCE = {SourceFormat.HTML: 0.0, SourceFormat.XLSX: 0.0, SourceFormat.PDF: 2.0}
+# The registrant's own, unconsolidated statements (SEC Schedule I/II): never the borrower's financial statements.
+_PARENT_ONLY = re.compile(r"condensed financial information of (the )?registrant|parent company only|registrant only|"
+                          r"\(parent company\)", re.I)
 _NOT_PRIMARY = re.compile(r"pro\s*forma|unaudited|segment|quarterly|selected financial|summary|condensed consolidating|"
                           r"supplementary|non-gaap|illustrative", re.I)
 
@@ -90,7 +93,13 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     values = []
     built = {stype: timer.run("structure", build_statement, table, layout, stype, doc.doc_id, det.score)
              for stype, (table, layout, det) in picked.items()}
-    for stype, (table, _layout, _det) in picked.items():
+    for stype, (table, layout, _det) in picked.items():
+        if _PARENT_ONLY.search(layout.title_text + " " + table.context[-200:]):
+            # Found on a 10-K whose consolidated statements are in an exhibit: the only balance sheet in the document was
+            # the parent company's own, and it was spread as if it were the group's (IMPROVEMENT_LOG #23).
+            built[stype].warnings.append(
+                f"PARENT_ONLY: the only {stype.value.replace('_', ' ')} found is the registrant's own (parent company, "
+                "unconsolidated) statement, not the consolidated one; the consolidated statements may be in an exhibit.")
         rival_ids = table.__dict__.get("_rivals")
         if rival_ids:
             built[stype].warnings.append(

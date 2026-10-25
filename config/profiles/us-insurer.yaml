@@ -1,0 +1,62 @@
+# US property-casualty and life insurers (US GAAP): the base template plus the lines an insurer's statements are built
+# from. Revenue is premiums plus investment income; the big costs are claims (losses and loss adjustment expenses) and
+# acquisition costs; the balance sheet is investments on one side and reserves on the other, unclassified.
+# Wording written from one insurer's 10-K (Travelers) and hand-checked on two others (eval/coverage/checks.json).
+# Load with SPREADER_PROFILE=config/profiles/us-insurer.yaml.
+
+extends: us-commercial.yaml
+id: us-insurer
+version: "2026.10.25-insurer-1"
+title: US insurer spread (US GAAP)
+
+add_lines:
+  income_statement:
+    - {id: premiums_earned, label: Premiums earned, kind: income, critical: true,
+       aliases: [premiums, premiums earned, net premiums earned, earned premiums, net earned premiums, "net premiums earned*",
+                 "premiums earned*", total premiums earned]}
+    - {id: net_investment_income, label: Net investment income, kind: income,
+       aliases: [net investment income, "net investment income*", investment income net]}
+    - {id: realized_investment_gains, label: Net realized investment gains (losses), kind: either,
+       aliases: ["net realized investment gains*", "net realized investment losses*", "net realized gains*", "net realized losses*",
+                 "realized investment gains*", "net investment gains*", "net investment losses*", "net gains losses on investments*"]}
+    - {id: losses_lae, label: Losses and loss adjustment expenses, kind: cost, critical: true,
+       aliases: [claims and claim adjustment expenses, losses and loss adjustment expenses, losses and loss expenses,
+                 "losses and loss adjustment expenses*", "claims and claim adjustment expenses*", "losses and lae*",
+                 "policyholder benefits and claims*", "benefits losses and loss adjustment expenses*", "losses and benefits*",
+                 net losses and loss adjustment expenses, "incurred losses*"]}
+    - {id: acquisition_costs, label: Policy acquisition costs, kind: cost,
+       aliases: [amortization of deferred acquisition costs, "amortization of deferred policy acquisition costs*",
+                 policy acquisition costs, "policy acquisition costs*", "amortization of deferred acquisition costs*"]}
+    - {id: total_insurance_expenses, label: Total claims and expenses, kind: cost,
+       aliases: [total claims and expenses, total losses and expenses, total benefits losses and expenses, total expenses,
+                 total benefits and expenses, total costs and expenses]}
+  balance_sheet:
+    - {id: insurer_investments, label: Total investments, kind: asset, critical: true,
+       aliases: [total investments, "total investments*"]}
+    - {id: premiums_receivable, label: Premiums receivable, kind: asset,
+       aliases: ["premiums receivable*", "premiums and other receivables*", "premiums and agents balances*"]}
+    - {id: reinsurance_recoverables, label: Reinsurance recoverables, kind: asset,
+       aliases: ["reinsurance recoverables*", "reinsurance recoverable*"]}
+    - {id: deferred_acquisition_costs, label: Deferred acquisition costs, kind: asset,
+       aliases: ["deferred acquisition costs*", "deferred policy acquisition costs*"]}
+    - {id: loss_reserves, label: Loss and loss adjustment expense reserves, kind: liability, critical: true,
+       aliases: ["claims and claim adjustment expense reserves*", "loss and loss adjustment expense reserves*",
+                 "unpaid losses and loss adjustment expenses*", "loss and loss adjustment expenses*", "reserve for losses*",
+                 "liability for unpaid losses*", "reserves for losses and loss adjustment expenses*"]}
+    - {id: unearned_premiums, label: Unearned premiums, kind: liability,
+       aliases: ["unearned premium reserves*", "unearned premiums*", "reserve for unearned premiums*"]}
+    - {id: future_policy_benefits, label: Future policy benefits, kind: liability,
+       aliases: ["future policy benefits*", "contractholder funds*", "policyholder account balances*"]}
+
+add_aliases:
+  lt_debt: [debt, "debt*", senior notes, "senior notes*"]
+  cash: ["cash including restricted cash*"]
+
+checks:
+  - {id: insurer_pretax, statement: income_statement, title: "Total revenues minus total claims and expenses equals pre-tax income",
+     lhs: pretax_income, rhs: "revenue - total_insurance_expenses", severity: warning}
+
+ratios:
+  - {id: insurer_loss_ratio, label: "Loss ratio (losses / premiums earned)", expr: "losses_lae / premiums_earned", format: percent}
+  - {id: insurer_expense_ratio, label: "Acquisition cost ratio", expr: "acquisition_costs / premiums_earned", format: percent}
+  - {id: insurer_reserves_to_equity, label: "Loss reserves / equity", expr: "loss_reserves / total_equity", format: times}

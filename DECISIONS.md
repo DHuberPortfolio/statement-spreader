@@ -346,3 +346,23 @@ filings tag the printed numbers, and a printed number whose tag agrees is safer 
   reading.
 - **What would change it**: independent outcomes (reviewer decisions on flagged values) to calibrate agreement as
   evidence; then agreement could become a basis for automation on SEC filings, measured like any other method.
+
+**D38. Banks, insurers and IFRS are overlays that add lines, never remove them.** A large client base includes banks,
+insurers and IFRS reporters on day one. Each is a configuration overlay on the commercial template
+(`config/profiles/us-bank.yaml`, `us-insurer.yaml`, `ifrs-commercial.yaml`), with one engine change: an overlay may add
+lines (`add_lines`) but not redefine or delete a template line, so a bank's spread still has every commercial line
+(empty where a bank prints nothing) and stays comparable. Industry identities are checks in the overlay (net interest
+income; loans net of the allowance; revenue minus claims and expenses). New lines are mapped by the same calibrated
+rules (D35); a catch-all on a new line has no measured accuracy yet, so its rows are reviewed.
+- **Measured honestly as a smoke test**, not a rate: three filings per overlay, the wording written from the first and
+  hand-checked on the other two (`eval/coverage/checks.json`). Banks: every value checked on the two unseen banks was
+  right (19 of 19), one bank's net income missing. Insurers: the unseen insurers expose the limit of wording written
+  from one company (Allstate: half the key lines missing; Progressive: no consolidated statements in the document).
+  IFRS: BP's 7 checked values right, revenue missing; Novartis placed almost nothing.
+- **A general flaw found on the way and fixed:** a parent-company-only statement (SEC Schedule I/II) was spread as if it
+  were consolidated when it was the only one in the document. It is now a blocker (IMPROVEMENT_LOG #23).
+- **Not done: currencies.** Unit statements in euros or "$ million" are not recognised; the unit is assumed and
+  flagged as a blocker, never guessed. Recognising them is engine work (the unit patterns are code, not configuration).
+- **What would change it**: a few dozen filings per industry with answer keys (the SEC tags exist for banks and
+  insurers too), so these overlays can be measured like the commercial template; and wording grown from reviewer
+  memory across many borrowers rather than one source filing.

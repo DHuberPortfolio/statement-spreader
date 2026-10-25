@@ -275,6 +275,44 @@ they were). No value went from caught to silent on either split.
   common stock and APIC (8), commercial paper (5); mostly AMD and Walmart (7 each), Amazon and Oracle (6 each). The
   company-memory mode (task 4) brings them to 20.
 
+## Task 7: banks, insurers, IFRS
+
+### Plan (written before starting)
+
+- **One small engine change:** an overlay may add lines (`add_lines`), never remove them, so every spread stays
+  comparable with the base template. Banks and insurers need lines the commercial template lacks (net interest
+  income, provision for credit losses, loans, deposits; premiums earned, losses and loss adjustment expenses, loss
+  reserves). Commercial lines a bank never prints (cost of revenue, inventory) simply stay empty: a missing line raises
+  nothing, and checks whose inputs are missing are skipped.
+- **Three overlays** in `config/profiles/`: `us-bank.yaml`, `us-insurer.yaml`, `ifrs-commercial.yaml` (IFRS wording
+  for the commercial template: "profit for the year", "finance costs", "trade and other receivables", "share
+  premium"...), each with checks of its own where the industry has an identity (net interest income; loans net of the
+  allowance).
+- **Tests** on hand-built statements, and **a hand check on real filings**: two banks, two insurers, two IFRS
+  filers (20-F), downloaded outside the evaluation sets (`eval/coverage/`, filings git-ignored), spread with the
+  overlay, and key values compared by me with the printed statements, recorded in `eval/coverage/checks.json`.
+  A few documents per overlay is a smoke test, not a measurement, and is reported as such.
+
+### Result: done as a smoke test; partial coverage
+
+| Overlay | Written from | Hand-checked (unseen) | What the check found |
+|---|---|---|---|
+| `us-bank.yaml` | Fifth Third: every check passes | Huntington, KeyCorp | 19 of 19 checked values right; Huntington's net income missing ("Income after income taxes"); KeyCorp's cash-flow checks fail |
+| `us-insurer.yaml` | Travelers: key lines placed, insurer check passes | Allstate, Progressive | Allstate: the 5 values found are right, but 5 key lines are missing (its own wording); Progressive: no consolidated statements in the 10-K (see below) |
+| `ifrs-commercial.yaml` | Unilever: the income statement is now found (it was not) | BP, Novartis | BP: 7 of 7 checked values right, revenue missing; Novartis: right tables, almost nothing placed |
+
+- **Engine changes:** overlays can add lines (never redefine or delete one); a parent-company-only statement is a
+  blocker (IMPROVEMENT_LOG #23). Progressive's 10-K holds its consolidated statements in an exhibit, so the only
+  balance sheet in the document was the parent company's, spread as if consolidated, unflagged: a general flaw, now a
+  blocker. Dev and the synthetic corpus are unchanged by both.
+- **What this shows and does not show:** wording written from one company covers that company and some of its peers.
+  Banks generalised well; insurers did not (each insurer words its main lines its own way). This is the case for
+  measuring these overlays like the commercial template: the SEC tags exist for banks and insurers too, so answer keys
+  can be built for a few dozen of each.
+- **Not done:** OCR (out of scope); currencies. Euro and "$ million" unit statements are not recognised, so
+  Unilever's and BP's values carry an assumed unit and a blocker. That is safe, but it is review work on every IFRS
+  filer. It is the next ingestion step after OCR.
+
 ## Assumptions made without anyone to ask
 
 1. The work order's "flaky test" diagnosis was right, but it was not what failed CI; I fixed both and treated the

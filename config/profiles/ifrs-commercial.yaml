@@ -1,0 +1,51 @@
+# IFRS wording for the commercial template: the same lines, the words IFRS reporters use for them ("profit for the
+# year", "finance costs", "trade and other receivables", "share premium"), and the IFRS habit of printing
+# non-current items first. No lines are added: an IFRS spread lands on the same template as a US GAAP one.
+# Wording written from one 20-F (Unilever) and hand-checked on two others (eval/coverage/checks.json).
+# Not handled here (engine work, listed in the overnight report): unit statements in other currencies ("EUR million",
+# "GBP m"); they are assumed and flagged as a blocker, never guessed.
+# Load with SPREADER_PROFILE=config/profiles/ifrs-commercial.yaml.
+
+extends: us-commercial.yaml
+id: ifrs-commercial
+version: "2026.10.25-ifrs-1"
+title: Commercial borrower spread (IFRS wording)
+
+add_detect:
+  income_statement:
+    must_any: ["net profit*", "profit for the year*", "profit for the period*", "profit loss for the year*",
+               "profit attributable to*", "net profit attributable*"]
+    also_any: ["turnover*", "operating profit*", "profit before tax*", "profit before taxation*", "finance costs*",
+               "finance income*"]
+
+add_aliases:
+  revenue: [turnover, "revenue from contracts with customers*"]
+  operating_income: ["operating profit*", "profit from operations*", "results from operating activities*", "operating income loss*"]
+  interest_expense: ["finance costs*", "finance expense*", "financial expenses*", "net finance costs*"]
+  interest_income: ["finance income*", "financial income*"]
+  pretax_income: ["profit before tax*", "profit before taxation*", "profit before income tax*", "profit loss before tax*",
+                  "income before taxes*"]
+  income_tax: [taxation, "taxation*", "income tax expense*", "tax expense*", "income taxes*"]
+  net_income: [net profit, "net profit*", "profit for the year*", "profit for the period*", "profit loss for the year*"]
+  net_income_parent: ["attributable to owners of the parent*", "attributable to equity holders of the parent*",
+                      "attributable to shareholders of*", "net profit attributable to shareholders*",
+                      "profit attributable to owners*", "shareholders equity attributable*"]
+  receivables: ["trade and other receivables*", "trade and other current receivables*", "trade receivables*"]
+  payables: ["trade and other payables*", "trade payables and other current liabilities*", "trade payables*"]
+  total_equity_parent: [shareholders equity, "equity attributable to owners of the parent*",
+                        "equity attributable to equity holders*", "equity attributable to shareholders*",
+                        "total equity attributable to*"]
+  common_stock_apic: ["share capital*", "share premium*", "called up share capital*"]
+  cf_net_income: ["net profit*", "profit for the year*", "profit for the period*"]
+  cfo: ["net cash flow from operating activities*", "net cash from operating activities*", "net cash generated from operating*",
+        "total cash flows from operating activities*", "cash flows from operating activities*"]
+  cfi: ["net cash flow used in investing activities*", "net cash used in investing activities*", "total cash outflow used in investing*",
+        "net cash flows from investing*"]
+  cff: ["net cash flow used in financing activities*", "net cash used in financing activities*", "total cash flow used in financing*",
+        "net cash flows from financing*"]
+
+add_sections:
+  st_debt: [{section: ["current liabilities*"], labels: ["financial liabilities*", "borrowings*", "short term borrowings*",
+                                                        "interest bearing loans*", "loans and borrowings*"]}]
+  lt_debt: [{section: ["non current liabilities*", "noncurrent liabilities*"],
+             labels: ["financial liabilities*", "borrowings*", "long term borrowings*", "interest bearing loans*", "loans and borrowings*"]}]

@@ -32,3 +32,6 @@ eval/sec/pdf/*.pdf
 # Prior-year SEC filings for the company-memory evaluation (scripts/fetch_sec.py --prior); re-downloadable
 eval/sec/raw-prior/
 eval/sec/cal-prior/
+
+# Filings for the industry and IFRS overlays (scripts/fetch_coverage.py); re-downloadable
+eval/coverage/raw/

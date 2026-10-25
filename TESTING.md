@@ -146,6 +146,11 @@ What the Python tests cover:
   next year's filing gets exactly the one item, a correction resolves it, reopening withdraws the approval, other
   companies are never compared; the upload route takes a company id.
 - `test_undated_columns.py` (1 test): columns without headings beside a dated balance sheet no longer crash a filing.
+- `test_industry_profiles.py` (5 tests): the bank overlay places interest, provision, loans, the allowance and
+  deposits (components inside a printed total not added twice) and its checks pass; the insurer overlay places
+  premiums, losses and acquisition costs; the IFRS overlay finds an income statement the US wording cannot; an
+  overlay can add lines but not redefine one, and loading it leaves the base untouched; a parent-company-only
+  statement is a blocker.
 - `test_check_flags.py` (4 tests): a failed check does not flag an input confirmed against another statement; it
   still flags one confirmed only inside its own statement, one whose confirming check has a doubtful other side,
   and one confirmed in another period.
@@ -232,6 +237,16 @@ per filing:
 ```bash
 .venv/Scripts/python scripts/compare_keys.py <old keys dir> eval/sec/keys --reports <old report> <new report>
 ```
+
+## Bank, insurer and IFRS overlays (DECISIONS D38)
+
+```bash
+.venv/Scripts/python scripts/fetch_coverage.py      # 3 banks, 3 insurers, 3 IFRS filers (eval/coverage/raw, git-ignored)
+SPREADER_PROFILE=config/profiles/us-bank.yaml .venv/Scripts/spreader spread eval/coverage/raw/<file>.htm --out spread.xlsx
+```
+
+The first filing of each group is the one the overlay's wording was written from; the others are only
+hand-checked (`eval/coverage/checks.json`). A smoke test, not a measurement.
 
 ## The opt-in XBRL second reader (DECISIONS D37)
 
