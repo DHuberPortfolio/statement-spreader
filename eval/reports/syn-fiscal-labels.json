@@ -1,0 +1,5368 @@
+{
+ "name": "syn-fiscal-labels",
+ "documents": 120,
+ "crashed": 0,
+ "seconds": 15.0,
+ "profile": "us-commercial 2026.10.24-1+0ad0af213be8",
+ "buckets": {
+  "correct_auto": 13207,
+  "correct_review": 878,
+  "missing_flagged": 174,
+  "missing_silent": 252,
+  "wrong_auto": 6
+ },
+ "error_kinds": {
+  "value": 6
+ },
+ "rates": {
+  "accuracy": {
+   "n": 14085,
+   "d": 14517,
+   "rate": 0.9702417854928704,
+   "low": 0.9673508000675096,
+   "high": 0.9728839587773223
+  },
+  "silent_error_rate": {
+   "n": 6,
+   "d": 13213,
+   "rate": 0.00045409823658518124,
+   "low": 0.00020813054513335849,
+   "high": 0.0009904614089383313
+  },
+  "silent_omission_rate": {
+   "n": 252,
+   "d": 14517,
+   "rate": 0.01735895846249225,
+   "low": 0.015358493230166158,
+   "high": 0.019614796472270928
+  },
+  "review_rate": {
+   "n": 878,
+   "d": 14091,
+   "rate": 0.062309275424029524,
+   "low": 0.05843624264659884,
+   "high": 0.06642089657800938
+  },
+  "catch_rate": {
+   "n": 0,
+   "d": 6,
+   "rate": 0.0,
+   "low": 0.0,
+   "high": 0.3903430336530645
+  },
+  "unnecessary_review_rate": {
+   "n": 878,
+   "d": 14085,
+   "rate": 0.06233581824636138,
+   "low": 0.05846118529032305,
+   "high": 0.06644912671148127
+  },
+  "coverage": {
+   "n": 14091,
+   "d": 14517,
+   "rate": 0.9706550940276917,
+   "low": 0.9677826508175074,
+   "high": 0.9732785064090821
+  }
+ },
+ "cells": {
+  "found": {
+   "ok": 5100,
+   "total": 5238
+  },
+  "value": {
+   "ok": 5100,
+   "total": 5100
+  },
+  "period": {
+   "ok": 5100,
+   "total": 5100
+  },
+  "mapping": {
+   "ok": 5041,
+   "total": 5041
+  }
+ },
+ "documents_detail": [
+  {
+   "doc": "syn:s7-001-clean.html",
+   "ms": 77,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 129,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-001-clean.xlsx",
+   "ms": 298,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 129,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-001-clean.pdf",
+   "ms": 440,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 129,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-002-clean.html",
+   "ms": 35,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-002-clean.xlsx",
+   "ms": 39,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-002-clean.pdf",
+   "ms": 315,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-003-clean.html",
+   "ms": 36,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-003-clean.xlsx",
+   "ms": 36,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-003-clean.pdf",
+   "ms": 253,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-004-clean.html",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 96,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-004-clean.xlsx",
+   "ms": 62,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 96,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-004-clean.pdf",
+   "ms": 255,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 96,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-005-clean.html",
+   "ms": 35,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-005-clean.xlsx",
+   "ms": 33,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-005-clean.pdf",
+   "ms": 224,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-006-clean.html",
+   "ms": 31,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 92,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-006-clean.xlsx",
+   "ms": 65,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 92,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-006-clean.pdf",
+   "ms": 248,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 92,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-007-clean.html",
+   "ms": 32,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 120,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-007-clean.xlsx",
+   "ms": 37,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 120,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-007-clean.pdf",
+   "ms": 244,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 122,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-008-clean.html",
+   "ms": 59,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 144,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 44,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-008-clean.xlsx",
+   "ms": 41,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 144,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 44,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-008-clean.pdf",
+   "ms": 261,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 144,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 44,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-009-clean.html",
+   "ms": 29,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 94,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-009-clean.xlsx",
+   "ms": 33,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 94,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-009-clean.pdf",
+   "ms": 207,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 94,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-010-clean.html",
+   "ms": 60,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 133,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 36,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-010-clean.xlsx",
+   "ms": 39,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 133,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 36,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-010-clean.pdf",
+   "ms": 265,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 133,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 36,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-011-clean.html",
+   "ms": 41,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 157,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-011-clean.xlsx",
+   "ms": 47,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 157,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-011-clean.pdf",
+   "ms": 322,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 157,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-012-clean.html",
+   "ms": 38,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-012-clean.xlsx",
+   "ms": 38,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-012-clean.pdf",
+   "ms": 256,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-013-clean.html",
+   "ms": 32,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 125,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-013-clean.xlsx",
+   "ms": 43,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 125,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-013-clean.pdf",
+   "ms": 289,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 125,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-014-clean.html",
+   "ms": 44,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 130,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-014-clean.xlsx",
+   "ms": 47,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 130,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-014-clean.pdf",
+   "ms": 332,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 130,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-015-clean.html",
+   "ms": 32,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 141,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-015-clean.xlsx",
+   "ms": 73,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 141,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-015-clean.pdf",
+   "ms": 238,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 141,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-016-clean.html",
+   "ms": 37,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 142,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 44,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-016-clean.xlsx",
+   "ms": 42,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 142,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 44,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-016-clean.pdf",
+   "ms": 300,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 142,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 44,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-017-clean.html",
+   "ms": 69,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 98,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-017-clean.xlsx",
+   "ms": 37,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 98,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-017-clean.pdf",
+   "ms": 267,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 98,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-018-clean.html",
+   "ms": 42,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 119,
+    "correct_review": 8
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 6,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-018-clean.xlsx",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 119,
+    "correct_review": 8
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 6,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-018-clean.pdf",
+   "ms": 310,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 119,
+    "correct_review": 8
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 6,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-019-clean.html",
+   "ms": 30,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 94,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-019-clean.xlsx",
+   "ms": 38,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 94,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-019-clean.pdf",
+   "ms": 226,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 94,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-020-clean.html",
+   "ms": 48,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 123,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-020-clean.xlsx",
+   "ms": 51,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 123,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-020-clean.pdf",
+   "ms": 329,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 123,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-021-clean.html",
+   "ms": 30,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-021-clean.xlsx",
+   "ms": 36,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-021-clean.pdf",
+   "ms": 282,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-022-clean.html",
+   "ms": 33,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-022-clean.xlsx",
+   "ms": 35,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-022-clean.pdf",
+   "ms": 264,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-023-clean.html",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-023-clean.xlsx",
+   "ms": 38,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-023-clean.pdf",
+   "ms": 257,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 27,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-024-clean.html",
+   "ms": 34,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-024-clean.xlsx",
+   "ms": 43,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-024-clean.pdf",
+   "ms": 311,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-025-clean.html",
+   "ms": 45,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-025-clean.xlsx",
+   "ms": 41,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-025-clean.pdf",
+   "ms": 289,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-026-clean.html",
+   "ms": 71,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 96,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-026-clean.xlsx",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 96,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-026-clean.pdf",
+   "ms": 266,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 96,
+    "correct_review": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-027-clean.html",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-027-clean.xlsx",
+   "ms": 42,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-027-clean.pdf",
+   "ms": 327,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-028-clean.html",
+   "ms": 45,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 126,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-028-clean.xlsx",
+   "ms": 46,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 126,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-028-clean.pdf",
+   "ms": 329,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 128,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-029-clean.html",
+   "ms": 45,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 156,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-029-clean.xlsx",
+   "ms": 77,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 156,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-029-clean.pdf",
+   "ms": 281,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 156,
+    "correct_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 47,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-030-clean.html",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 130,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-030-clean.xlsx",
+   "ms": 45,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 130,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-030-clean.pdf",
+   "ms": 295,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 130,
+    "correct_review": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 2,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-031-no-unit-statement.html",
+   "ms": 83,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 137
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 5,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-031-no-unit-statement.xlsx",
+   "ms": 43,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 137
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 5,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-031-no-unit-statement.pdf",
+   "ms": 313,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 137
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 5,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-032-footing-error.html",
+   "ms": 47,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 140,
+    "correct_review": 16
+   },
+   "checks_failed": 2,
+   "checks_run": 47,
+   "review_items": 6,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-032-footing-error.xlsx",
+   "ms": 45,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_flagged": 51,
+    "correct_auto": 89,
+    "correct_review": 16
+   },
+   "checks_failed": 2,
+   "checks_run": 29,
+   "review_items": 26,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-032-footing-error.pdf",
+   "ms": 355,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 143,
+    "correct_review": 13
+   },
+   "checks_failed": 2,
+   "checks_run": 47,
+   "review_items": 5,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-033-hidden-row.html",
+   "ms": 33,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-033-hidden-row.xlsx",
+   "ms": 44,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-033-hidden-row.pdf",
+   "ms": 250,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-034-prompt-injection.html",
+   "ms": 33,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-034-prompt-injection.xlsx",
+   "ms": 78,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-034-prompt-injection.pdf",
+   "ms": 252,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-035-pct-change-column.html",
+   "ms": 29,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-035-pct-change-column.xlsx",
+   "ms": 35,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-035-pct-change-column.pdf",
+   "ms": 208,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 90,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-036-note-column.html",
+   "ms": 43,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-036-note-column.xlsx",
+   "ms": 84,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-036-note-column.pdf",
+   "ms": 277,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 100,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 31,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-037-shares-thousands-money-millions.html",
+   "ms": 33,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-037-shares-thousands-money-millions.xlsx",
+   "ms": 50,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-037-shares-thousands-money-millions.pdf",
+   "ms": 271,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 124,
+    "correct_review": 5
+   },
+   "checks_failed": 0,
+   "checks_run": 40,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-038-par-value-label.html",
+   "ms": 78,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 113,
+    "correct_review": 7
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-038-par-value-label.xlsx",
+   "ms": 37,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 113,
+    "correct_review": 7
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-038-par-value-label.pdf",
+   "ms": 234,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 110,
+    "correct_review": 7,
+    "missing_silent": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 34,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "ms": 32,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_silent": 83,
+    "wrong_auto": 2,
+    "missing_flagged": 41,
+    "correct_auto": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 0,
+   "review_items": 47,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "ms": 36,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_silent": 83,
+    "wrong_auto": 2,
+    "missing_flagged": 41,
+    "correct_auto": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 0,
+   "review_items": 47,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "ms": 259,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_silent": 83,
+    "wrong_auto": 2,
+    "missing_flagged": 41,
+    "correct_auto": 4
+   },
+   "checks_failed": 0,
+   "checks_run": 0,
+   "review_items": 47,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-040-investments-current-noncurrent.html",
+   "ms": 40,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-040-investments-current-noncurrent.xlsx",
+   "ms": 78,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "syn:s7-040-investments-current-noncurrent.pdf",
+   "ms": 257,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 106,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 1,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  }
+ ],
+ "errors": [
+  {
+   "doc": "syn:s7-038-par-value-label.pdf",
+   "line": "cff",
+   "period": "2024-12-31/12M",
+   "truth": "-30000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-038-par-value-label.pdf",
+   "line": "cff",
+   "period": "2023-12-31/12M",
+   "truth": "-12000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-038-par-value-label.pdf",
+   "line": "cff",
+   "period": "2022-12-31/12M",
+   "truth": "18000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "revenue",
+   "period": "2021-12-31/12M",
+   "truth": "1560288000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "revenue",
+   "period": "2022-12-31/12M",
+   "truth": "1774876000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "2125905000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "cogs",
+   "period": "2021-12-31/12M",
+   "truth": "719147000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "cogs",
+   "period": "2022-12-31/12M",
+   "truth": "850361000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "cogs",
+   "period": "2023-12-31/12M",
+   "truth": "1063007000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "rnd",
+   "period": "2021-12-31/12M",
+   "truth": "167527000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "rnd",
+   "period": "2022-12-31/12M",
+   "truth": "174439000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "rnd",
+   "period": "2023-12-31/12M",
+   "truth": "226188000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "sga",
+   "period": "2021-12-31/12M",
+   "truth": "532037000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "sga",
+   "period": "2022-12-31/12M",
+   "truth": "528670000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "sga",
+   "period": "2023-12-31/12M",
+   "truth": "577105000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_opex",
+   "period": "2021-12-31/12M",
+   "truth": "699564000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_opex",
+   "period": "2022-12-31/12M",
+   "truth": "703109000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_opex",
+   "period": "2023-12-31/12M",
+   "truth": "803293000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "operating_income",
+   "period": "2021-12-31/12M",
+   "truth": "141577000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "operating_income",
+   "period": "2022-12-31/12M",
+   "truth": "221406000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "operating_income",
+   "period": "2023-12-31/12M",
+   "truth": "259605000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "interest_expense",
+   "period": "2021-12-31/12M",
+   "truth": "14224000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "interest_expense",
+   "period": "2022-12-31/12M",
+   "truth": "18032000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "interest_expense",
+   "period": "2023-12-31/12M",
+   "truth": "16137000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "interest_income",
+   "period": "2021-12-31/12M",
+   "truth": "3267000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "interest_income",
+   "period": "2022-12-31/12M",
+   "truth": "5572000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "interest_income",
+   "period": "2023-12-31/12M",
+   "truth": "7590000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "pretax_income",
+   "period": "2021-12-31/12M",
+   "truth": "130620000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "pretax_income",
+   "period": "2022-12-31/12M",
+   "truth": "208946000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "pretax_income",
+   "period": "2023-12-31/12M",
+   "truth": "251058000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "income_tax",
+   "period": "2021-12-31/12M",
+   "truth": "28508000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "income_tax",
+   "period": "2022-12-31/12M",
+   "truth": "45603000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "income_tax",
+   "period": "2023-12-31/12M",
+   "truth": "54794000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "net_income",
+   "period": "2021-12-31/12M",
+   "truth": "102112000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "net_income",
+   "period": "2022-12-31/12M",
+   "truth": "163343000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "truth": "196264000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "eps_basic",
+   "period": "2021-12-31/12M",
+   "truth": "1.10",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "eps_basic",
+   "period": "2022-12-31/12M",
+   "truth": "1.75",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "2.15",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "eps_diluted",
+   "period": "2021-12-31/12M",
+   "truth": "1.07",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "eps_diluted",
+   "period": "2022-12-31/12M",
+   "truth": "1.74",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "2.13",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "shares_basic",
+   "period": "2021-12-31/12M",
+   "truth": "93187000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "shares_basic",
+   "period": "2022-12-31/12M",
+   "truth": "93576000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "truth": "91122000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "shares_diluted",
+   "period": "2021-12-31/12M",
+   "truth": "95621000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "shares_diluted",
+   "period": "2022-12-31/12M",
+   "truth": "94115000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "shares_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "92265000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "cash",
+   "period": "2022-12-31/I",
+   "truth": "306323000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "cash",
+   "period": "2023-12-31/I",
+   "truth": "356540000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "receivables",
+   "period": "2022-12-31/I",
+   "truth": "175262000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "receivables",
+   "period": "2023-12-31/I",
+   "truth": "240087000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "inventory",
+   "period": "2022-12-31/I",
+   "truth": "141103000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "inventory",
+   "period": "2023-12-31/I",
+   "truth": "185956000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "other_current_assets",
+   "period": "2022-12-31/I",
+   "truth": "41155000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "other_current_assets",
+   "period": "2023-12-31/I",
+   "truth": "36261000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_current_assets",
+   "period": "2022-12-31/I",
+   "truth": "663843000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_current_assets",
+   "period": "2023-12-31/I",
+   "truth": "818844000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "ppe_net",
+   "period": "2022-12-31/I",
+   "truth": "370003000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "ppe_net",
+   "period": "2023-12-31/I",
+   "truth": "461889000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "lt_investments",
+   "period": "2022-12-31/I",
+   "truth": "105039000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "lt_investments",
+   "period": "2023-12-31/I",
+   "truth": "112525000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "other_noncurrent_assets",
+   "period": "2022-12-31/I",
+   "truth": "64609000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "other_noncurrent_assets",
+   "period": "2023-12-31/I",
+   "truth": "64609000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_assets",
+   "period": "2022-12-31/I",
+   "truth": "1203494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_assets",
+   "period": "2023-12-31/I",
+   "truth": "1457867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "payables",
+   "period": "2022-12-31/I",
+   "truth": "60756000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "payables",
+   "period": "2023-12-31/I",
+   "truth": "80180000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "accrued_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "101701000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "accrued_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "151039000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "st_debt",
+   "period": "2022-12-31/I",
+   "truth": "30473000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "st_debt",
+   "period": "2023-12-31/I",
+   "truth": "27275000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_current_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "192930000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_current_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "258494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "lt_debt",
+   "period": "2022-12-31/I",
+   "truth": "219097000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "lt_debt",
+   "period": "2023-12-31/I",
+   "truth": "191822000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "other_noncurrent_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "32600000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "other_noncurrent_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "32600000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "444627000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "482916000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "common_stock_apic",
+   "period": "2022-12-31/I",
+   "truth": "276132000",
+   "predicted": "911000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "common_stock_apic",
+   "period": "2023-12-31/I",
+   "truth": "295952000",
+   "predicted": "911000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "retained_earnings",
+   "period": "2022-12-31/I",
+   "truth": "482735000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "retained_earnings",
+   "period": "2023-12-31/I",
+   "truth": "678999000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_equity_parent",
+   "period": "2022-12-31/I",
+   "truth": "758867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_equity_parent",
+   "period": "2023-12-31/I",
+   "truth": "974951000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_liabilities_equity",
+   "period": "2022-12-31/I",
+   "truth": "1203494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.html",
+   "line": "total_liabilities_equity",
+   "period": "2023-12-31/I",
+   "truth": "1457867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "revenue",
+   "period": "2021-12-31/12M",
+   "truth": "1560288000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "revenue",
+   "period": "2022-12-31/12M",
+   "truth": "1774876000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "2125905000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "cogs",
+   "period": "2021-12-31/12M",
+   "truth": "719147000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "cogs",
+   "period": "2022-12-31/12M",
+   "truth": "850361000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "cogs",
+   "period": "2023-12-31/12M",
+   "truth": "1063007000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "rnd",
+   "period": "2021-12-31/12M",
+   "truth": "167527000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "rnd",
+   "period": "2022-12-31/12M",
+   "truth": "174439000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "rnd",
+   "period": "2023-12-31/12M",
+   "truth": "226188000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "sga",
+   "period": "2021-12-31/12M",
+   "truth": "532037000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "sga",
+   "period": "2022-12-31/12M",
+   "truth": "528670000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "sga",
+   "period": "2023-12-31/12M",
+   "truth": "577105000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_opex",
+   "period": "2021-12-31/12M",
+   "truth": "699564000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_opex",
+   "period": "2022-12-31/12M",
+   "truth": "703109000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_opex",
+   "period": "2023-12-31/12M",
+   "truth": "803293000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "operating_income",
+   "period": "2021-12-31/12M",
+   "truth": "141577000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "operating_income",
+   "period": "2022-12-31/12M",
+   "truth": "221406000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "operating_income",
+   "period": "2023-12-31/12M",
+   "truth": "259605000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "interest_expense",
+   "period": "2021-12-31/12M",
+   "truth": "14224000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "interest_expense",
+   "period": "2022-12-31/12M",
+   "truth": "18032000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "interest_expense",
+   "period": "2023-12-31/12M",
+   "truth": "16137000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "interest_income",
+   "period": "2021-12-31/12M",
+   "truth": "3267000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "interest_income",
+   "period": "2022-12-31/12M",
+   "truth": "5572000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "interest_income",
+   "period": "2023-12-31/12M",
+   "truth": "7590000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "pretax_income",
+   "period": "2021-12-31/12M",
+   "truth": "130620000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "pretax_income",
+   "period": "2022-12-31/12M",
+   "truth": "208946000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "pretax_income",
+   "period": "2023-12-31/12M",
+   "truth": "251058000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "income_tax",
+   "period": "2021-12-31/12M",
+   "truth": "28508000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "income_tax",
+   "period": "2022-12-31/12M",
+   "truth": "45603000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "income_tax",
+   "period": "2023-12-31/12M",
+   "truth": "54794000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "net_income",
+   "period": "2021-12-31/12M",
+   "truth": "102112000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "net_income",
+   "period": "2022-12-31/12M",
+   "truth": "163343000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "truth": "196264000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "eps_basic",
+   "period": "2021-12-31/12M",
+   "truth": "1.10",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "eps_basic",
+   "period": "2022-12-31/12M",
+   "truth": "1.75",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "2.15",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "eps_diluted",
+   "period": "2021-12-31/12M",
+   "truth": "1.07",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "eps_diluted",
+   "period": "2022-12-31/12M",
+   "truth": "1.74",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "2.13",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "shares_basic",
+   "period": "2021-12-31/12M",
+   "truth": "93187000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "shares_basic",
+   "period": "2022-12-31/12M",
+   "truth": "93576000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "truth": "91122000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "shares_diluted",
+   "period": "2021-12-31/12M",
+   "truth": "95621000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "shares_diluted",
+   "period": "2022-12-31/12M",
+   "truth": "94115000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "shares_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "92265000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "cash",
+   "period": "2022-12-31/I",
+   "truth": "306323000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "cash",
+   "period": "2023-12-31/I",
+   "truth": "356540000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "receivables",
+   "period": "2022-12-31/I",
+   "truth": "175262000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "receivables",
+   "period": "2023-12-31/I",
+   "truth": "240087000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "inventory",
+   "period": "2022-12-31/I",
+   "truth": "141103000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "inventory",
+   "period": "2023-12-31/I",
+   "truth": "185956000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "other_current_assets",
+   "period": "2022-12-31/I",
+   "truth": "41155000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "other_current_assets",
+   "period": "2023-12-31/I",
+   "truth": "36261000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_current_assets",
+   "period": "2022-12-31/I",
+   "truth": "663843000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_current_assets",
+   "period": "2023-12-31/I",
+   "truth": "818844000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "ppe_net",
+   "period": "2022-12-31/I",
+   "truth": "370003000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "ppe_net",
+   "period": "2023-12-31/I",
+   "truth": "461889000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "lt_investments",
+   "period": "2022-12-31/I",
+   "truth": "105039000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "lt_investments",
+   "period": "2023-12-31/I",
+   "truth": "112525000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "other_noncurrent_assets",
+   "period": "2022-12-31/I",
+   "truth": "64609000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "other_noncurrent_assets",
+   "period": "2023-12-31/I",
+   "truth": "64609000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_assets",
+   "period": "2022-12-31/I",
+   "truth": "1203494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_assets",
+   "period": "2023-12-31/I",
+   "truth": "1457867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "payables",
+   "period": "2022-12-31/I",
+   "truth": "60756000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "payables",
+   "period": "2023-12-31/I",
+   "truth": "80180000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "accrued_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "101701000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "accrued_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "151039000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "st_debt",
+   "period": "2022-12-31/I",
+   "truth": "30473000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "st_debt",
+   "period": "2023-12-31/I",
+   "truth": "27275000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_current_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "192930000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_current_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "258494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "lt_debt",
+   "period": "2022-12-31/I",
+   "truth": "219097000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "lt_debt",
+   "period": "2023-12-31/I",
+   "truth": "191822000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "other_noncurrent_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "32600000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "other_noncurrent_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "32600000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "444627000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "482916000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "common_stock_apic",
+   "period": "2022-12-31/I",
+   "truth": "276132000",
+   "predicted": "911000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "common_stock_apic",
+   "period": "2023-12-31/I",
+   "truth": "295952000",
+   "predicted": "911000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "retained_earnings",
+   "period": "2022-12-31/I",
+   "truth": "482735000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "retained_earnings",
+   "period": "2023-12-31/I",
+   "truth": "678999000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_equity_parent",
+   "period": "2022-12-31/I",
+   "truth": "758867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_equity_parent",
+   "period": "2023-12-31/I",
+   "truth": "974951000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_liabilities_equity",
+   "period": "2022-12-31/I",
+   "truth": "1203494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.xlsx",
+   "line": "total_liabilities_equity",
+   "period": "2023-12-31/I",
+   "truth": "1457867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "revenue",
+   "period": "2021-12-31/12M",
+   "truth": "1560288000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "revenue",
+   "period": "2022-12-31/12M",
+   "truth": "1774876000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "2125905000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "cogs",
+   "period": "2021-12-31/12M",
+   "truth": "719147000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "cogs",
+   "period": "2022-12-31/12M",
+   "truth": "850361000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "cogs",
+   "period": "2023-12-31/12M",
+   "truth": "1063007000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "rnd",
+   "period": "2021-12-31/12M",
+   "truth": "167527000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "rnd",
+   "period": "2022-12-31/12M",
+   "truth": "174439000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "rnd",
+   "period": "2023-12-31/12M",
+   "truth": "226188000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "sga",
+   "period": "2021-12-31/12M",
+   "truth": "532037000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "sga",
+   "period": "2022-12-31/12M",
+   "truth": "528670000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "sga",
+   "period": "2023-12-31/12M",
+   "truth": "577105000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_opex",
+   "period": "2021-12-31/12M",
+   "truth": "699564000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_opex",
+   "period": "2022-12-31/12M",
+   "truth": "703109000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_opex",
+   "period": "2023-12-31/12M",
+   "truth": "803293000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "operating_income",
+   "period": "2021-12-31/12M",
+   "truth": "141577000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "operating_income",
+   "period": "2022-12-31/12M",
+   "truth": "221406000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "operating_income",
+   "period": "2023-12-31/12M",
+   "truth": "259605000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "interest_expense",
+   "period": "2021-12-31/12M",
+   "truth": "14224000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "interest_expense",
+   "period": "2022-12-31/12M",
+   "truth": "18032000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "interest_expense",
+   "period": "2023-12-31/12M",
+   "truth": "16137000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "interest_income",
+   "period": "2021-12-31/12M",
+   "truth": "3267000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "interest_income",
+   "period": "2022-12-31/12M",
+   "truth": "5572000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "interest_income",
+   "period": "2023-12-31/12M",
+   "truth": "7590000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "pretax_income",
+   "period": "2021-12-31/12M",
+   "truth": "130620000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "pretax_income",
+   "period": "2022-12-31/12M",
+   "truth": "208946000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "pretax_income",
+   "period": "2023-12-31/12M",
+   "truth": "251058000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "income_tax",
+   "period": "2021-12-31/12M",
+   "truth": "28508000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "income_tax",
+   "period": "2022-12-31/12M",
+   "truth": "45603000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "income_tax",
+   "period": "2023-12-31/12M",
+   "truth": "54794000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "net_income",
+   "period": "2021-12-31/12M",
+   "truth": "102112000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "net_income",
+   "period": "2022-12-31/12M",
+   "truth": "163343000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "truth": "196264000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "eps_basic",
+   "period": "2021-12-31/12M",
+   "truth": "1.10",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "eps_basic",
+   "period": "2022-12-31/12M",
+   "truth": "1.75",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "2.15",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "eps_diluted",
+   "period": "2021-12-31/12M",
+   "truth": "1.07",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "eps_diluted",
+   "period": "2022-12-31/12M",
+   "truth": "1.74",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "2.13",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "shares_basic",
+   "period": "2021-12-31/12M",
+   "truth": "93187000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "shares_basic",
+   "period": "2022-12-31/12M",
+   "truth": "93576000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "truth": "91122000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "shares_diluted",
+   "period": "2021-12-31/12M",
+   "truth": "95621000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "shares_diluted",
+   "period": "2022-12-31/12M",
+   "truth": "94115000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "shares_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "92265000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "cash",
+   "period": "2022-12-31/I",
+   "truth": "306323000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "cash",
+   "period": "2023-12-31/I",
+   "truth": "356540000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "receivables",
+   "period": "2022-12-31/I",
+   "truth": "175262000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "receivables",
+   "period": "2023-12-31/I",
+   "truth": "240087000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "inventory",
+   "period": "2022-12-31/I",
+   "truth": "141103000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "inventory",
+   "period": "2023-12-31/I",
+   "truth": "185956000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "other_current_assets",
+   "period": "2022-12-31/I",
+   "truth": "41155000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "other_current_assets",
+   "period": "2023-12-31/I",
+   "truth": "36261000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_current_assets",
+   "period": "2022-12-31/I",
+   "truth": "663843000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_current_assets",
+   "period": "2023-12-31/I",
+   "truth": "818844000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "ppe_net",
+   "period": "2022-12-31/I",
+   "truth": "370003000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "ppe_net",
+   "period": "2023-12-31/I",
+   "truth": "461889000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "lt_investments",
+   "period": "2022-12-31/I",
+   "truth": "105039000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "lt_investments",
+   "period": "2023-12-31/I",
+   "truth": "112525000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "other_noncurrent_assets",
+   "period": "2022-12-31/I",
+   "truth": "64609000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "other_noncurrent_assets",
+   "period": "2023-12-31/I",
+   "truth": "64609000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_assets",
+   "period": "2022-12-31/I",
+   "truth": "1203494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_assets",
+   "period": "2023-12-31/I",
+   "truth": "1457867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "payables",
+   "period": "2022-12-31/I",
+   "truth": "60756000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "payables",
+   "period": "2023-12-31/I",
+   "truth": "80180000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "accrued_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "101701000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "accrued_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "151039000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "st_debt",
+   "period": "2022-12-31/I",
+   "truth": "30473000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "st_debt",
+   "period": "2023-12-31/I",
+   "truth": "27275000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_current_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "192930000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_current_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "258494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "lt_debt",
+   "period": "2022-12-31/I",
+   "truth": "219097000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "lt_debt",
+   "period": "2023-12-31/I",
+   "truth": "191822000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "other_noncurrent_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "32600000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "other_noncurrent_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "32600000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_liabilities",
+   "period": "2022-12-31/I",
+   "truth": "444627000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_liabilities",
+   "period": "2023-12-31/I",
+   "truth": "482916000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "common_stock_apic",
+   "period": "2022-12-31/I",
+   "truth": "276132000",
+   "predicted": "911000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "common_stock_apic",
+   "period": "2023-12-31/I",
+   "truth": "295952000",
+   "predicted": "911000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "retained_earnings",
+   "period": "2022-12-31/I",
+   "truth": "482735000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "retained_earnings",
+   "period": "2023-12-31/I",
+   "truth": "678999000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_equity_parent",
+   "period": "2022-12-31/I",
+   "truth": "758867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_equity_parent",
+   "period": "2023-12-31/I",
+   "truth": "974951000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_liabilities_equity",
+   "period": "2022-12-31/I",
+   "truth": "1203494000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "syn:s7-039-european-format.pdf",
+   "line": "total_liabilities_equity",
+   "period": "2023-12-31/I",
+   "truth": "1457867000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  }
+ ],
+ "provenance": {
+  "created": "2026-10-25T22:30:09+00:00",
+  "commit": "03059c4da7a853113c848041ff0460460a6b9571",
+  "dirty": true,
+  "datasets": [
+   {
+    "name": "statements-synthetic",
+    "version": "57da8ee0d67ceda3",
+    "key_version": "b527cfda3607dfb6",
+    "files": 161,
+    "matches_manifest": true
+   }
+  ],
+  "config": {
+   "profile": "us-commercial 2026.10.24-1+0ad0af213be8"
+  }
+ },
+ "review_items_per_document": {
+  "median": 2,
+  "mean": 3.4,
+  "median_blockers": 0
+ },
+ "mapping_by_method": {
+  "alias": [
+   4684,
+   4684
+  ],
+  "structure": [
+   341,
+   341
+  ],
+  "fuzzy": [
+   16,
+   16
+  ]
+ }
+}

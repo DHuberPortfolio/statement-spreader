@@ -19,7 +19,7 @@ from spreader.company import (
 from spreader.contracts import ReviewKind
 from spreader.ingest import read_document
 from spreader.pipeline import spread_document
-from spreader.service import Service
+from spreader.service import ActionError, Service
 from spreader.store import Store
 
 BS = [("Cash and cash equivalents", "100", "80"), ("Accounts receivable, net", "50", "40"),
@@ -162,6 +162,29 @@ def test_documents_of_other_companies_are_never_compared(svc: Service) -> None:
     rows = [("Cash and cash equivalents", "120", "85"), *BS[1:]]
     _, b = svc.upload("b.htm", _bs(["December 31, 2026", "December 31, 2025"], rows), "dana", company_id="globex")
     assert not any(i.kind is ReviewKind.PRIOR_PERIOD for i in b.spread.review)
+
+
+def test_a_company_set_after_upload_brings_last_year_s_approval_in(svc: Service) -> None:
+    _, last_year = svc.upload("2025.htm", _bs(["December 31, 2025", "December 31, 2024"]), "dana", company_id="acme")
+    svc.act(last_year.run["id"], {"type": "approve"}, "dana")
+    rows = [(label, str(int(v2025) + 10), "85" if label.startswith("Cash") else v2025) for label, v2025, _ in BS]
+    _, this_year = svc.upload("2026.htm", _bs(["December 31, 2026", "December 31, 2025"], rows), "dana")
+    assert not any(i.kind is ReviewKind.PRIOR_PERIOD for i in this_year.spread.review)  # no company yet: nothing to compare
+
+    again = svc.set_company(this_year.run["document_id"], "acme", "dana")
+    assert again.run["id"] != this_year.run["id"]
+    assert [i.lines for i in again.spread.review if i.kind is ReviewKind.PRIOR_PERIOD] == [["cash"]]
+    assert [c["company_id"] for c in svc.companies()] == ["acme"]
+    assert svc.companies()[0]["documents"] == 2 and svc.companies()[0]["approved_spreads"] == 1
+
+
+def test_an_approved_document_keeps_its_company(svc: Service) -> None:
+    _, run = svc.upload("2025.htm", _bs(["December 31, 2025", "December 31, 2024"]), "dana", company_id="acme")
+    svc.act(run.run["id"], {"type": "approve"}, "dana")
+    with pytest.raises(ActionError, match="reopen it"):
+        svc.set_company(run.run["document_id"], "globex", "dana")
+    with pytest.raises(ActionError, match="needs a name"):
+        svc.set_company(run.run["document_id"], "  ", "dana")
 
 
 def test_the_upload_route_takes_a_company_id(tmp_path: Any, profile: Any, monkeypatch: pytest.MonkeyPatch) -> None:

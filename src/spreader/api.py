@@ -150,6 +150,26 @@ async def upload(file: UploadFile = File(...), company_id: str | None = Form(def
     return await run_in_threadpool(_run_payload, view)
 
 
+@app.get("/api/companies")
+def companies() -> list[dict[str, Any]]:
+    return service().companies()
+
+
+@app.post("/api/documents/{doc_id}/company")
+async def set_company(doc_id: str, request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+    """Says which company an uploaded document is about; the document is re-run with that company's approvals."""
+    if not re.fullmatch(r"[0-9a-f]{64}", doc_id):
+        raise HTTPException(404, "Unknown document")
+    try:
+        body = await request.json()
+    except json.JSONDecodeError as exc:
+        raise HTTPException(400, "Body must be JSON") from exc
+    if not isinstance(body, dict):
+        raise HTTPException(400, "Body must be a JSON object")
+    view = await run_in_threadpool(service().set_company, doc_id, str(body.get("company_id", "")), _actor(x_actor))
+    return await run_in_threadpool(_run_payload, view)
+
+
 @app.post("/api/documents/{doc_id}/runs")
 def rerun(doc_id: str, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
     if not re.fullmatch(r"[0-9a-f]{64}", doc_id):

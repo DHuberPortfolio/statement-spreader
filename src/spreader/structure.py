@@ -187,6 +187,7 @@ def harmonize_periods(tables: list[StatementTable], preface: str = "") -> None:
     column's own date was an assumption, that resolves it; if it looked printed (often a filing or
     audit date read from nearby text), the change itself is flagged for a reviewer.
     """
+    _align_year_labels(tables, fiscal_year_end(preface))
     _redate_to_balance_sheet(tables)
     exact: dict[str, str] = {}
     for t in tables:
@@ -245,6 +246,67 @@ def harmonize_periods(tables: list[StatementTable], preface: str = "") -> None:
             for r in t.rows:
                 r.values = {rename.get(k, k): v for k, v in r.values.items()}
     _follow_fiscal_pattern(tables)
+
+
+def _align_year_labels(tables: list[StatementTable], fye: str | None) -> None:
+    """Date year-only columns ("Fiscal 2025", "2024") by lining the newest one up with the newest year-end the filing
+    prints, then counting back a year per column (IMPROVEMENT_LOG #24).
+
+    A fiscal year may be called by the year it starts in (Home Depot's "Fiscal 2025" ended February 1, 2026) or the
+    year it ends in (Walmart's "Fiscal 2026" ended January 31, 2026). The newest column belongs to the newest year-end
+    (the cover page's, else the balance sheet's newest printed date), which says which convention a filing uses. A
+    column whose counted-back date is within 10 days of a printed date takes that date (52/53-week years move by a
+    few days); one with no printed date near it keeps a flagged assumption. A newest year-end that fits neither
+    convention changes nothing.
+    """
+    from datetime import date as _date
+
+    def year_only(p: Period) -> bool:
+        # A full-year column, or a balance-sheet date given only as a year ("Fiscal Year End 2025", Snap-on).
+        return (p.months in (12, None) and any("Only the year" in a for a in p.assumed)
+                and bool(re.fullmatch(r"\d{4}-12-31", p.end)))
+
+    columns = [p for t in tables for p in t.periods if year_only(p)]
+    printed = sorted({p.end for t in tables for p in t.periods
+                      if not p.assumed and re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.end)
+                      and (p.months is None or p.months == 12)})
+    balance = [p.end for t in tables if t.statement is StatementType.BALANCE for p in t.periods
+               if p.months is None and not p.assumed]
+    newest = fye or (max(balance) if balance else None)
+    if not columns or not newest:
+        return
+    newest_column = max(int(p.end[:4]) for p in columns)
+    end = _date.fromisoformat(newest)
+    offset = end.year - newest_column
+    if not (offset == 0 or (offset == 1 and end.month <= 3)):
+        return
+    anchors = [_date.fromisoformat(d) for d in {*printed, newest}]
+
+    def back(years: int) -> _date:
+        try:
+            return end.replace(year=end.year - years)
+        except ValueError:  # February 29
+            return end.replace(year=end.year - years, day=28)
+
+    for t in tables:
+        changes: dict[str, tuple[str, str, bool]] = {}
+        for p in t.periods:
+            if not year_only(p):
+                continue
+            expected = back(newest_column - int(p.end[:4]))
+            near = sorted((abs((a - expected).days), a) for a in anchors if abs((a - expected).days) <= 10)
+            if near:
+                when = near[0][1].isoformat()
+                changes[p.key] = (when, f"The column prints {p.label!r}; the filing's year-end {newest} belongs to its "
+                                        f"newest column, so this column ends on the printed date {when}.", False)
+            elif offset == 1:
+                when = expected.isoformat()
+                changes[p.key] = (when, f"The column prints {p.label!r}; this filing names each fiscal year by the year "
+                                        f"it starts in (its newest column ends {newest}), so this one is assumed to end "
+                                        f"{when}. 52/53-week years can differ by a few days.", True)
+            # offset 0 with no printed date near: the year is right; the day is left to the steps below.
+        if changes:
+            _relabel(t, changes)
 
 
 def _relabel(t: StatementTable, changes: dict[str, tuple[str, str, bool]]) -> None:

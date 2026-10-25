@@ -92,6 +92,37 @@ class Service:
         doc = dict(self.store.document(doc_id))  # type: ignore[arg-type]
         return doc, run
 
+    def set_company(self, doc_id: str, company_id: str, actor: str) -> RunView:
+        """Says which company a document is about after upload, then re-runs it so last year's approvals apply. Refused
+        once one of the document's runs is approved: that approval was remembered under the earlier company."""
+        doc = self.store.document(doc_id)
+        if doc is None:
+            raise ActionError("Unknown document")
+        company = company_id.strip()[:100]
+        if not company:
+            raise ActionError("A company needs a name or identifier")
+        approved = [r for r in self.store.query("SELECT state FROM runs WHERE document_id=?", (doc_id,))
+                    if json.loads(r["state"] or "{}").get("approved")]
+        if approved and company != doc["company_id"]:
+            raise ActionError("This document has an approved spread; reopen it before changing its company")
+        with self.store.tx() as c:
+            c.execute("UPDATE documents SET company_id=? WHERE id=?", (company, doc_id))
+            self.store.log(c, "set_company", {"company_id": company, "previous": doc["company_id"]}, actor,
+                           document_id=doc_id)
+        return self.run(doc_id, actor)
+
+    def companies(self) -> list[dict[str, Any]]:
+        """Every company with a document, for the upload screen's suggestions: how many documents and approved spreads
+        each has (an approved spread is what the next year is compared with)."""
+        withdrawn = "SELECT run_id FROM approval_withdrawals"
+        rows = self.store.query(
+            "SELECT d.company_id AS company_id, COUNT(DISTINCT d.id) AS documents, MAX(d.uploaded_at) AS last_upload, "
+            f"(SELECT COUNT(DISTINCT a.run_id) FROM approved_values a WHERE a.company_id = d.company_id AND a.profile_id=? "
+            f"AND a.run_id NOT IN ({withdrawn})) AS approved_spreads "
+            "FROM documents d WHERE d.company_id IS NOT NULL AND d.company_id != '' GROUP BY d.company_id "
+            "ORDER BY last_upload DESC", (self.profile.id,))
+        return [dict(r) for r in rows]
+
     def company_context(self, doc_id: str) -> CompanyContext | None:
         """What the company's earlier approvals left behind, without the document's own approvals (a document is never
         compared with itself) and without withdrawn ones."""

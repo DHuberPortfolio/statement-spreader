@@ -1,14 +1,14 @@
 {
- "name": "stmt-dev-confirmed",
+ "name": "stmt-dev-fiscal-labels",
  "documents": 33,
  "crashed": 0,
- "seconds": 148.8,
+ "seconds": 112.6,
  "profile": "us-commercial 2026.10.24-1+0ad0af213be8",
  "buckets": {
-  "correct_auto": 2457,
-  "correct_review": 1151,
+  "correct_auto": 2459,
+  "correct_review": 1153,
   "unjudged": 184,
-  "wrong_review": 163,
+  "wrong_review": 159,
   "missing_flagged": 501,
   "wrong_auto": 59,
   "missing_silent": 97
@@ -16,23 +16,22 @@
  "error_kinds": {
   "value": 193,
   "sign": 12,
-  "scale": 13,
-  "period": 4
+  "scale": 13
  },
  "rates": {
   "accuracy": {
-   "n": 3608,
+   "n": 3612,
    "d": 4428,
-   "rate": 0.8148148148148148,
-   "low": 0.8031020829206139,
-   "high": 0.8259817724229523
+   "rate": 0.8157181571815718,
+   "low": 0.804026223235146,
+   "high": 0.8268627507751163
   },
   "silent_error_rate": {
    "n": 59,
-   "d": 2516,
-   "rate": 0.02344992050874404,
-   "low": 0.018223303612250583,
-   "high": 0.030129576981513726
+   "d": 2518,
+   "rate": 0.023431294678316124,
+   "low": 0.018208795437579386,
+   "high": 0.03010573787807375
   },
   "silent_omission_rate": {
    "n": 97,
@@ -42,25 +41,25 @@
    "high": 0.02664994624252756
   },
   "review_rate": {
-   "n": 1314,
+   "n": 1312,
    "d": 3830,
-   "rate": 0.34308093994778066,
-   "low": 0.3282096298014398,
-   "high": 0.3582667233165398
+   "rate": 0.34255874673629244,
+   "low": 0.3276934279034515,
+   "high": 0.3577395852914598
   },
   "catch_rate": {
-   "n": 163,
-   "d": 222,
-   "rate": 0.7342342342342343,
-   "low": 0.6724992060587721,
-   "high": 0.788000542437519
+   "n": 159,
+   "d": 218,
+   "rate": 0.7293577981651376,
+   "low": 0.6667853884579521,
+   "high": 0.7839866939648216
   },
   "unnecessary_review_rate": {
-   "n": 1151,
-   "d": 3608,
-   "rate": 0.31901330376940135,
-   "low": 0.30400382000729287,
-   "high": 0.3344077869690485
+   "n": 1153,
+   "d": 3612,
+   "rate": 0.31921373200442965,
+   "low": 0.3042097022977857,
+   "high": 0.334601909361309
   },
   "coverage": {
    "n": 3830,
@@ -91,7 +90,7 @@
  "documents_detail": [
   {
    "doc": "sec:AAPL",
-   "ms": 1282,
+   "ms": 1316,
    "error": null,
    "statements": [
     "income_statement",
@@ -112,7 +111,7 @@
   },
   {
    "doc": "sec:ADBE",
-   "ms": 2785,
+   "ms": 2183,
    "error": null,
    "statements": [
     "cash_flow",
@@ -135,7 +134,7 @@
   },
   {
    "doc": "sec:AMD",
-   "ms": 3179,
+   "ms": 1914,
    "error": null,
    "statements": [
     "cash_flow",
@@ -158,7 +157,7 @@
   },
   {
    "doc": "sec:AMZN",
-   "ms": 2566,
+   "ms": 1651,
    "error": null,
    "statements": [
     "cash_flow",
@@ -181,7 +180,7 @@
   },
   {
    "doc": "sec:BA",
-   "ms": 4696,
+   "ms": 2946,
    "error": null,
    "statements": [
     "income_statement",
@@ -206,7 +205,7 @@
   },
   {
    "doc": "sec:BOOT",
-   "ms": 1318,
+   "ms": 893,
    "error": null,
    "statements": [
     "income_statement",
@@ -230,7 +229,7 @@
   },
   {
    "doc": "sec:CAT",
-   "ms": 13831,
+   "ms": 8529,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -253,7 +252,7 @@
   },
   {
    "doc": "sec:CHRW",
-   "ms": 2841,
+   "ms": 1824,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -276,7 +275,7 @@
   },
   {
    "doc": "sec:CMG",
-   "ms": 2083,
+   "ms": 1408,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -300,7 +299,7 @@
   },
   {
    "doc": "sec:COST",
-   "ms": 1779,
+   "ms": 1142,
    "error": null,
    "statements": [
     "income_statement",
@@ -324,7 +323,7 @@
   },
   {
    "doc": "sec:DIS",
-   "ms": 8508,
+   "ms": 5201,
    "error": null,
    "statements": [
     "income_statement",
@@ -348,7 +347,7 @@
   },
   {
    "doc": "sec:DPZ",
-   "ms": 2609,
+   "ms": 1790,
    "error": null,
    "statements": [
     "income_statement",
@@ -373,7 +372,7 @@
   },
   {
    "doc": "sec:DUOL",
-   "ms": 3459,
+   "ms": 2129,
    "error": null,
    "statements": [
     "income_statement",
@@ -396,7 +395,7 @@
   },
   {
    "doc": "sec:ETSY",
-   "ms": 4860,
+   "ms": 3005,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -419,7 +418,7 @@
   },
   {
    "doc": "sec:EXPD",
-   "ms": 1660,
+   "ms": 1073,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -442,7 +441,7 @@
   },
   {
    "doc": "sec:F",
-   "ms": 16908,
+   "ms": 10609,
    "error": null,
    "statements": [
     "income_statement",
@@ -467,7 +466,7 @@
   },
   {
    "doc": "sec:FAST",
-   "ms": 2519,
+   "ms": 1599,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -489,7 +488,7 @@
   },
   {
    "doc": "sec:HAS",
-   "ms": 4176,
+   "ms": 2654,
    "error": null,
    "statements": [
     "income_statement",
@@ -514,7 +513,7 @@
   },
   {
    "doc": "sec:KO",
-   "ms": 6585,
+   "ms": 4147,
    "error": null,
    "statements": [
     "income_statement",
@@ -538,7 +537,7 @@
   },
   {
    "doc": "sec:LULU",
-   "ms": 3482,
+   "ms": 2284,
    "error": null,
    "statements": [
     "income_statement",
@@ -546,21 +545,20 @@
    ],
    "buckets": {
     "missing_flagged": 57,
-    "wrong_review": 4,
-    "correct_auto": 27,
-    "correct_review": 4,
+    "correct_review": 6,
+    "correct_auto": 29,
     "unjudged": 6
    },
-   "checks_failed": 2,
+   "checks_failed": 0,
    "checks_run": 16,
-   "review_items": 16,
+   "review_items": 14,
    "blockers": 2,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:MAT",
-   "ms": 4431,
+   "ms": 2783,
    "error": null,
    "statements": [
     "income_statement",
@@ -583,7 +581,7 @@
   },
   {
    "doc": "sec:MCD",
-   "ms": 3266,
+   "ms": 2095,
    "error": null,
    "statements": [
     "income_statement",
@@ -608,7 +606,7 @@
   },
   {
    "doc": "sec:MMM",
-   "ms": 4964,
+   "ms": 4585,
    "error": null,
    "statements": [
     "income_statement",
@@ -631,7 +629,7 @@
   },
   {
    "doc": "sec:ORCL",
-   "ms": 4418,
+   "ms": 4279,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -656,7 +654,7 @@
   },
   {
    "doc": "sec:PEP",
-   "ms": 5721,
+   "ms": 5600,
    "error": null,
    "statements": [
     "income_statement",
@@ -680,7 +678,7 @@
   },
   {
    "doc": "sec:PFE",
-   "ms": 7979,
+   "ms": 8142,
    "error": null,
    "statements": [
     "income_statement",
@@ -704,7 +702,7 @@
   },
   {
    "doc": "sec:PG",
-   "ms": 3474,
+   "ms": 3708,
    "error": null,
    "statements": [
     "income_statement",
@@ -727,7 +725,7 @@
   },
   {
    "doc": "sec:POOL",
-   "ms": 2336,
+   "ms": 2282,
    "error": null,
    "statements": [
     "income_statement",
@@ -752,7 +750,7 @@
   },
   {
    "doc": "sec:SHAK",
-   "ms": 5354,
+   "ms": 5538,
    "error": null,
    "statements": [
     "income_statement",
@@ -776,7 +774,7 @@
   },
   {
    "doc": "sec:SNA",
-   "ms": 7522,
+   "ms": 7265,
    "error": null,
    "statements": [
     "income_statement",
@@ -801,7 +799,7 @@
   },
   {
    "doc": "sec:ULTA",
-   "ms": 1750,
+   "ms": 1772,
    "error": null,
    "statements": [
     "income_statement",
@@ -824,7 +822,7 @@
   },
   {
    "doc": "sec:UNP",
-   "ms": 2958,
+   "ms": 2883,
    "error": null,
    "statements": [
     "income_statement",
@@ -849,7 +847,7 @@
   },
   {
    "doc": "sec:WMT",
-   "ms": 3405,
+   "ms": 3319,
    "error": null,
    "statements": [
     "cash_flow",
@@ -3299,58 +3297,6 @@
    ]
   },
   {
-   "doc": "sec:LULU",
-   "line": "pretax_income",
-   "period": "2025-02-02/12M",
-   "truth": "2576077000",
-   "predicted": "2238967000",
-   "bucket": "wrong_review",
-   "kind": "period",
-   "status": "assumed",
-   "flags": [
-    "period:income_statement:2025-02-02/12M"
-   ]
-  },
-  {
-   "doc": "sec:LULU",
-   "line": "pretax_income",
-   "period": "2024-01-28/12M",
-   "truth": "2175735000",
-   "predicted": "2576077000",
-   "bucket": "wrong_review",
-   "kind": "period",
-   "status": "assumed",
-   "flags": [
-    "period:income_statement:2024-01-28/12M"
-   ]
-  },
-  {
-   "doc": "sec:LULU",
-   "line": "income_tax",
-   "period": "2025-02-02/12M",
-   "truth": "761461000",
-   "predicted": "659784000",
-   "bucket": "wrong_review",
-   "kind": "period",
-   "status": "assumed",
-   "flags": [
-    "period:income_statement:2025-02-02/12M"
-   ]
-  },
-  {
-   "doc": "sec:LULU",
-   "line": "income_tax",
-   "period": "2024-01-28/12M",
-   "truth": "625545000",
-   "predicted": "761461000",
-   "bucket": "wrong_review",
-   "kind": "period",
-   "status": "assumed",
-   "flags": [
-    "period:income_statement:2024-01-28/12M"
-   ]
-  },
-  {
    "doc": "sec:MAT",
    "line": "other_noncurrent_liabilities",
    "period": "2025-12-31/I",
@@ -4904,8 +4850,8 @@
   }
  ],
  "provenance": {
-  "created": "2026-10-25T08:11:51+00:00",
-  "commit": "a42ce9d554abcf5b075ca3a0b94ac73082b7c5c5",
+  "created": "2026-10-25T22:26:05+00:00",
+  "commit": "03059c4da7a853113c848041ff0460460a6b9571",
   "dirty": true,
   "datasets": [
    {
