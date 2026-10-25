@@ -20,6 +20,8 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
+from finops.core.outcomes import record as record_outcomes
+
 from . import __version__
 from .checks import add_derived, run_checks, run_ratios
 from .company import (
@@ -39,6 +41,7 @@ from .contracts import (
     ValueStatus,
 )
 from .ingest import IngestError, doc_id_for, read_document, sniff_format
+from .learning import approval_outcomes, remap_outcome
 from .mapping import MemoryKey
 from .pipeline import spread_document
 from .profile import Profile, load_profile
@@ -331,6 +334,10 @@ class Service:
             elif kind == "reopen":
                 c.execute("INSERT INTO approval_withdrawals(run_id, withdrawn_by, withdrawn_at) VALUES (?,?,?)",
                           (run_id, actor, now()))
+        if kind == "approve":  # what the approval says about each rule, for calibration (D40)
+            record_outcomes(approval_outcomes(spread, state, {"run": run_id, "document": run["document_id"],
+                                                              "company": payload.get("company_id")},
+                                              actor, state["approved"]["at"], self.profile.line_statement))
         return self.get(run_id)
 
     def _remember(self, c: Any, run_id: int, doc_id: str, company: str, spread: Spread, state: dict[str, Any],
@@ -367,13 +374,19 @@ class Service:
             if self.profile.line_statement[target].value != stmt:
                 raise ActionError("That line belongs to a different statement")
         section = row.section.split(" > ")[-1] if row.section else ""
+        mapping = next((m for m in res.mappings if m.row_index == row_index), None)
         with self.store.tx() as c:
             c.execute("INSERT OR REPLACE INTO mapping_memory(profile_id, statement, label, section, canonical, created_at,"
                       " created_by, source_run) VALUES (?,?,?,?,?,?,?,?)",
                       (self.profile.id, stmt, row.label_clean, section, target, now(), actor, run["id"]))
             self.store.log(c, action.get("type", "remap_row"),
-                           {"statement": stmt, "row": row_index, "label": row.label, "section": section, "line": target},
+                           {"statement": stmt, "row": row_index, "label": row.label, "section": section, "line": target,
+                            "previous_line": mapping.canonical if mapping else None,
+                            "previous_rule": (mapping.rule or mapping.method.value) if mapping else None},
                            actor, run["id"], run["document_id"])
+        wrong = remap_outcome(stmt, row, mapping, target, actor, now(), {"run": run["id"], "document": run["document_id"]})
+        if wrong is not None:
+            record_outcomes([wrong])
         new = self.run(run["document_id"], actor, parent=run["id"])
         # Carry the reviewer's earlier corrections and resolutions over to the new run.
         if new.run["status"] == "succeeded" and run["state"] and new.run["id"] != run["id"]:

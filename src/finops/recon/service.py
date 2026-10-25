@@ -29,7 +29,7 @@ from finops.core.fingerprint import content_hash, sha256_bytes
 
 from .config import ReconProfile
 from .engine import ENGINE_VERSION, Decisions, reconcile, summary
-from .model import MatchStatus, ReconResult
+from .model import MatchGroup, MatchStatus, ReconResult
 from .normalize import ReconInputError
 
 SCHEMA = [
@@ -280,9 +280,11 @@ class ReconService:
         if g.difference != 0 and len(note.strip()) < 5:
             raise ActionError(f"This match differs by {g.difference}; write a note saying how the difference is handled.")
         members = g.left + g.right
-        return self._decide(run_id, "accept", {"group_id": g.id, "left": g.left, "right": g.right, "note": note.strip(),
-                                               "hashes": {m: res.records[m].content_hash for m in members},
-                                               "difference": str(g.difference)}, actor)
+        out = self._decide(run_id, "accept", {"group_id": g.id, "left": g.left, "right": g.right, "note": note.strip(),
+                                              "hashes": {m: res.records[m].content_hash for m in members},
+                                              "difference": str(g.difference)}, actor)
+        _record(g, True, "accepted", run_id, actor)
+        return out
 
     def reject(self, run_id: int, group_id: str, actor: str, note: str = "") -> dict[str, Any]:
         self._person(actor)
@@ -293,8 +295,10 @@ class ReconService:
         if g.status is not MatchStatus.PROPOSED and len(note.strip()) < 5:
             raise ActionError("Undoing a match that was already accepted needs a note saying why.")
         members = g.left + g.right
-        return self._decide(run_id, "reject", {"group_id": g.id, "members": members, "was": g.status.value, "note": note.strip(),
-                                               "hashes": {m: res.records[m].content_hash for m in members}}, actor)
+        out = self._decide(run_id, "reject", {"group_id": g.id, "members": members, "was": g.status.value, "note": note.strip(),
+                                              "hashes": {m: res.records[m].content_hash for m in members}}, actor)
+        _record(g, False, "rejected" if g.status is MatchStatus.PROPOSED else "undone", run_id, actor)
+        return out
 
     def manual_match(self, run_id: int, left_ids: list[str], right_ids: list[str], actor: str, note: str) -> dict[str, Any]:
         self._person(actor)
@@ -334,3 +338,13 @@ class ReconService:
 
     def events(self, wid: int) -> list[dict[str, Any]]:
         return self.db.events("recon", f"workspace:{wid}")
+
+
+def _record(g: MatchGroup, right: bool, how: str, run_id: int, actor: str) -> None:
+    """A reviewer's verdict on a match, for calibration (D40). Kept, not yet fitted on: nothing confirms the automatic
+    matches nobody undid (there is no sign-off of a whole reconciliation yet), so these outcomes are one-sided."""
+    from finops.core.outcomes import Outcome, record
+
+    record([Outcome(engine="recon", method=g.rule, right=right, how=how,
+                    subject=f"{' + '.join(g.left)} <-> {' + '.join(g.right)}", decided_by=actor, decided_at=now(),
+                    refs={"run": run_id, "group": g.id, "status": g.status.value, "difference": str(g.difference)})])

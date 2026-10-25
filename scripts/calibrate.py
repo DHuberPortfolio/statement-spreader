@@ -96,6 +96,9 @@ def main() -> int:
     ap.add_argument("engine", choices=["statements", "recon"])
     ap.add_argument("--model", default=None)
     ap.add_argument("--outcomes", action="append", default=[], help="extra labelled outcomes (JSONL)")
+    ap.add_argument("--outcomes-dir", default=None,
+                    help="also fit on reviewer decisions recorded in this folder (finops.core.outcomes; 'default' is "
+                         "FINOPS_OUTCOMES_DIR or var/outcomes). Reconciliation outcomes are not fitted on (one-sided, D40)")
     ap.add_argument("--out", default=None, help="directory (default config/calibration)")
     args = ap.parse_args()
     if args.engine == "statements":
@@ -107,13 +110,24 @@ def main() -> int:
         kw = {"unit": "a match a rule produced (right: a true pairing that needs no person)"}
     for extra in args.outcomes:
         outcomes += policy.read_outcomes(Path(extra))
+    reviewer = 0
+    if args.outcomes_dir and args.engine == "statements":
+        from finops.core import outcomes as decisions
+
+        folder = None if args.outcomes_dir == "default" else Path(args.outcomes_dir)
+        recorded = decisions.as_calibration_outcomes(decisions.read("statements", folder))
+        reviewer = len(recorded)
+        outcomes += recorded
+        meta["reviewer_outcomes"] = {"folder": str(folder or decisions.directory()), "count": reviewer}
     prov = provenance(meta.pop("datasets"), {})
     fitted = {**prov, **meta, "outcomes": len(outcomes), "extra_outcome_files": args.outcomes,
               "fitted_by": "scripts/calibrate.py"}
     cal = policy.fit(args.engine, outcomes=outcomes, fitted=fitted, **kw)
     path = policy.save(cal, Path(args.out) if args.out else None)
     for m, s in cal.methods.items():
-        print(f"{m:40s} {s.right:5d} of {s.total:<5d} {s.rate:7.1%}  at least {s.low:6.1%}")
+        print(f"{m:40s} {s.right:5d} of {s.total:<5d} {s.rate:7.1%}  at least {s.low:6.1%}  {s.sources}")
+    if args.outcomes_dir:
+        print(f"Reviewer outcomes used: {reviewer}")
     print(f"Written: {path}")
     return 0
 

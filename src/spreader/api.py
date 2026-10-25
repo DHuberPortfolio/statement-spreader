@@ -150,6 +150,14 @@ async def upload(file: UploadFile = File(...), company_id: str | None = Form(def
     return await run_in_threadpool(_run_payload, view)
 
 
+@app.get("/api/outcomes")
+def outcomes_summary() -> dict[str, Any]:
+    """What reviewers' decisions have recorded for calibration so far (finops.core.outcomes, D40)."""
+    from finops.core.outcomes import summary
+
+    return summary()
+
+
 @app.get("/api/companies")
 def companies() -> list[dict[str, Any]]:
     return service().companies()
