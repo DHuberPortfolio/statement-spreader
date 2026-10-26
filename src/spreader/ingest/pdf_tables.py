@@ -668,7 +668,8 @@ def _read_scan(filename: str, data: bytes, doc_id: str, n_pages: int) -> Documen
         if len(unit_statements) < 50:
             unit_statements.extend(document_unit_statements(" ".join(w["text"] for w in words)))
     warnings = [f"OCR: this PDF has no text layer, so its {n_pages} page(s) were read by optical character "
-                f"recognition; every value read with less than {ocr.MIN_CONFIDENCE:.0%} confidence is flagged for review."]
+                + ("recognition; every value read from it is flagged for review." if ocr.REVIEW_ALL else
+                   f"recognition; every value read with less than {ocr.MIN_CONFIDENCE:.0%} confidence is flagged for review.")]
     tables = _join_continued(parts, warnings)
     if not tables:
         raise IngestError("The PDF has no text layer and OCR found no pages with figures.")

@@ -458,5 +458,9 @@ it. With it (`spreader/ingest/ocr.py`):
   1,292). On both halves none of the silent errors OCR added is a misread digit; they are table structure (a row
   counted twice, debt rows confused, a small common-stock line lost), plus label-matched rows the scorer cannot place
   on a scan (it finds a PDF's company-specific rows by printed label). The scorer was not changed.
-- **Not decided here:** whether a scan's values should carry a stricter acceptance bar than a text PDF's. At 5.2%
-  against 2.4% they arguably should; it needs an outcome-based calibration (D35/D40) on real scans first.
+- **Decided 2026-10-26 (Devin): every value read from a scan goes to a person** until OCR has been measured on real
+  scans (`ocr.REVIEW_ALL`, on by default; `SPREADER_OCR_REVIEW_ALL=0` restores the 90% confidence flag only). On the
+  check half this took the silently wrong values from 66 to 0 (clean scans) and 54 to 0 (tilted), with the share
+  right unchanged (77.4%, 79.8%); the cost is that an analyst checks nearly every value of a scanned statement (only
+  values the pipeline calculated, 34 and 38, are still accepted alone). Turning it off needs an outcome-based
+  calibration (D35/D40) on real scans.

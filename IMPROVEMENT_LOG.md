@@ -231,6 +231,7 @@ Tune half (15 packages, 2,047 to 2,103 key values per variant): text layer 77.8%
 | O-3 | Deskew on the image: the boxes come back square on a tilted page, so the box-slope estimate read 0. Projection-profile angle within 2 degrees, page rotated before reading; blank pages left alone (an almost blank page measured 1.9 degrees) | Measured tilt within 0.1 degree of the applied one on every tune-half page with text, 0 on every clean page; about 0.2 s a page | Yes |
 | O-4 | "S" before an amount at any distance on its line (the "$" sits at the left of a wide column: "Total assets S" hid 3M's balance sheet); a long glued label may keep one unknown stretch (Pfizer's "netincomeattributabletopfizerinc" hid its income statement), never with one-letter words around it | O-3 and O-4 measured together, tune half: clean 72.3% right (1,502 of 2,077), silent 5.2% (43 of 827); tilted 72.7% (1,509 of 2,075), silent 5.4% (46 of 851). Settings frozen here | Yes |
 | O-5 | Check half (18 packages), measured once | Text layer 84.3% right (2,016 of 2,391; 82.8-85.7%), silent 2.4% (38 of 1,589; 1.7-3.3%), review 25.4% of values. Clean scans 77.4% (1,872 of 2,418; 75.7-79.0%), silent 5.2% (66 of 1,281; 4.1-6.5%), review 36.6%. Tilted 79.8% (1,925 of 2,412; 78.2-81.4%), silent 4.2% (54 of 1,292; 3.2-5.4%), review 37.4%. No crash or refusal. Median 181 s per 9-page package with 4 packages read at once on 12 cores (about 19 s a page; one package alone, 10 pages: 82 s). Silent errors OCR added on clean scans: 40, of which 0 misread digits, 12 label-placed rows the scorer leaves unjudged on the text layer, 28 structure (Coca-Cola stock compensation and dividends counted twice, C.H. Robinson and Pool debt rows confused, Pool and Ulta common-stock lines lost) | Measurement |
+| O-6 | Every value read from a scan goes to a person, whatever its confidence (Devin, 2026-10-26; D42; `SPREADER_OCR_REVIEW_ALL`) | Check half, same scans: clean silent errors 66 -> 0 (0 of 34 accepted alone; 0.0-10.2%), silent omissions 22 -> 0; tilted 54 -> 0 (0 of 38; 0.0-9.2%), silent omissions 23 -> 0. Values right unchanged (77.4%, 79.8%). Cost: values sent to review 1,987 of 2,021 read (clean) and 2,027 of 2,065 (tilted). `eval-ocr-check-*-review-all` | Yes |
 
 ### OCR next steps (ranked by expected value per hour)
 
@@ -239,7 +240,8 @@ Tune half (15 packages, 2,047 to 2,103 key values per variant): text layer 77.8%
 2. The 28 structural silent errors: one row counted twice (Coca-Cola) and debt issued/repaid confused (C.H. Robinson,
    Pool) are in the table structure the OCR words produce, not the digits. Compare the scan's rows with the text
    layer's on those pages.
-3. A stricter acceptance bar for scanned values (D42, not decided): calibrate on reviewer outcomes from scans (D40).
+3. Every scanned value now goes to a person (O-6). Letting high-confidence values through again needs a calibration
+   on reviewer outcomes from real scans (D40).
 4. Speed: about 19 s a page under parallel load. Skipping pages without figures before full recognition (detection
    only) would roughly halve a package.
 5. Scoring: the PDF scorer places company-specific rows by printed label, which OCR spells differently; a

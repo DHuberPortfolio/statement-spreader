@@ -124,7 +124,9 @@ sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`
 IFRS is an overlay smoke-tested on a few filings, not measured: see `eval/coverage/checks.json`.
 
 What these numbers do **not** show:
-- SEC filings are cleaner than a borrower's scanned PDF. Scanned PDFs (no text layer) are refused unless the optional OCR extra is installed (DECISIONS D42); on 18 held-back statement packages printed from the dev 10-Ks and scanned at 200 dpi, it got 77.4% of values right with 5.2% of accepted values silently wrong (66 of 1,281), against 84.3% and 2.4% for the same pages with a text layer, at about 3 minutes per 9-page package. No real scan has been measured.
+- SEC filings are cleaner than a borrower's scanned PDF. Scanned PDFs (no text layer) are refused unless the optional OCR extra is installed (DECISIONS D42); on 18 held-back statement packages printed from the dev 10-Ks and scanned at 200 dpi, it got 77.4% of values right with 5.2% of accepted values silently wrong (66 of 1,281), against 84.3% and 2.4% for the same pages with a text layer, at about 3 minutes per 9-page package. No real scan has been measured, so every value read from a scan now goes to a
+  person (D42): on the same packages that took the silently wrong values from 66 to 0, with the share right unchanged,
+  at the cost of an analyst checking nearly every value.
 - The synthetic corpus was written by the same author as the pipeline.
 - US filers only; the commercial figures are for non-financial companies, and banks and insurers are measured
   separately above. Statements in other currencies are read and flagged, never converted.

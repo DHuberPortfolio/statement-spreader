@@ -77,8 +77,20 @@ def test_a_low_confidence_digit_is_flagged_not_trusted(fake_ocr: dict, profile: 
     scan = spread_document(read_document("scan.pdf", _image_only(SAMPLE.read_bytes())), profile)[0]
     v = scan.value(target.line, target.period)
     items = [i for i in scan.review if i.kind is ReviewKind.UNREADABLE and i.id.startswith("ocr:")]
-    assert items and "62% confidence" in items[0].message
+    assert any("62% confidence (below" in i.message for i in items)
     assert v is not None and v.flags, "a number the recogniser was unsure of must not be accepted without a person"
+
+
+def test_every_value_read_from_a_scan_goes_to_a_person_even_when_the_recogniser_is_sure(
+        fake_ocr: dict, profile: Any) -> None:
+    # Until OCR is measured on real scans, no value read from one is accepted alone, whatever its confidence (D42).
+    scan = spread_document(read_document("scan.pdf", _image_only(SAMPLE.read_bytes())), profile)[0]
+    read = [v for v in scan.values if v.status.value == "extracted" and v.refs and v.value is not None]
+    assert read, "the sample scan should give values"
+    flagged = {(p, line) for i in scan.review if i.id.startswith("ocr:") for p in i.periods for line in i.lines}
+    unchecked = [v for v in read if (v.period, v.line) not in flagged]
+    assert not unchecked, f"{len(unchecked)} values read at 99% confidence went through without a person"
+    assert all(v.flags for v in read)
 
 
 def test_too_many_scanned_pages_are_refused(fake_ocr: dict, monkeypatch: pytest.MonkeyPatch) -> None:

@@ -9,7 +9,8 @@ text layer, and the evidence box drawn on the page image lands on the printed nu
 
 - **Confidence.** Each word carries the recogniser's score (`ocr_confidence`). The reader puts the lowest score of a
   cell on its SourceRef, and review flags every value read below `MIN_CONFIDENCE` (spreader.review): a number the
-  model was unsure of goes to a person, never straight into an accepted spread.
+  model was unsure of goes to a person, never straight into an accepted spread. While `REVIEW_ALL` is on (the
+  default), every value read from a scan is flagged, sure or not.
 - **Deskew.** A scan is rarely square, and over a statement's width a 0.5 degree tilt moves a row by more than its own
   height, so labels and their numbers land on different lines. The recogniser's boxes come back square (they do not
   show the tilt), so the tilt is measured on the image: the angle, within 2 degrees, at which the rows of ink line up
@@ -31,6 +32,9 @@ from typing import Any
 
 DPI = 200  # a common office-scanner resolution; also what the recogniser reads digits reliably at (D42)
 MIN_CONFIDENCE = float(os.environ.get("SPREADER_OCR_MIN_CONFIDENCE", "0.90"))
+# Every value read from a scan goes to a person, whatever its confidence, until OCR has been measured on real scans
+# (D42): on printed-and-scanned 10-Ks the accepted values were silently wrong twice as often as with a text layer.
+REVIEW_ALL = os.environ.get("SPREADER_OCR_REVIEW_ALL", "1") != "0"
 MAX_PAGES = int(os.environ.get("SPREADER_OCR_MAX_PAGES", "60"))
 PROFILE_DIR = Path(__file__).resolve().parents[3] / "config" / "profiles"
 
