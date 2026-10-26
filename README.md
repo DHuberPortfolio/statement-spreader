@@ -69,17 +69,34 @@ private-company packages in HTML, Excel and PDF, with exact keys.
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Wrong values caught | Review items per filing (median) | Source |
 |---|---|---|---|---|---|---|---|
-| SEC dev, HTML (tuned on) | 33 | 81.5% (3,608 of 4,428; 80.3-82.6%) | 2.3% (59 of 2,516; 1.8-3.0%) | 2.2% (97 of 4,428; 1.8-2.7%) | 73.4% (163 of 222; 67.2-78.8%) | 24 | `eval/reports/stmt-dev-confirmed` |
-| **SEC holdout, HTML (never tuned on)** | 30 | 74.1% (2,948 of 3,978; 72.7-75.4%) | 2.3% (49 of 2,108; 1.8-3.1%) | 3.8% (150 of 3,978; 3.2-4.4%) | 88.4% (372 of 421; 84.9-91.1%) | 24 | `eval/reports/stmt-holdout-confirmed` |
-| SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,623; 2.4-3.7%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-overnight.json` |
-| Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-overnight` |
+| SEC dev, HTML (tuned on) | 33 | 81.6% (3,612 of 4,428; 80.4-82.7%) | 2.3% (59 of 2,521; 1.8-3.0%) | 2.2% (97 of 4,428; 1.8-2.7%) | 72.9% (159 of 218; 66.7-78.4%) | 24 | `eval/reports/stmt-dev-units` |
+| **SEC holdout, HTML (never tuned on)** | 30 | 81.6% (3,241 of 3,972; 80.4-82.8%) | 1.5% (32 of 2,154; 1.1-2.1%) | 2.1% (83 of 3,972; 1.7-2.6%) | 81.8% (144 of 176; 75.5-86.8%) | 24 | `eval/reports/stmt-holdout-units` |
+| SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,626; 2.4-3.6%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-recheck-2026-10-25.json` |
+| Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-units` |
 
 The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out without a person
 looking, how much is wrong. The holdout was measured at most once per kept change and never used to design one;
-IMPROVEMENT_LOG records each measurement, and the times it was used to confirm a decision.
+IMPROVEMENT_LOG records each measurement, and the times it was used to confirm a decision. The holdout gains since
+2026-10-24 (74.1% right, 49 silent errors) come from two engine fixes, each measured once there: fiscal years named by
+their first calendar year (IMPROVEMENT_LOG #24) and units decided from evidence (#26).
 
-**With last year's approved spread** (opt-in company memory, DECISIONS D36): the prior-year 10-K is approved against its
-own key as a stand-in for an analyst, then the current one is spread with what that approval left behind.
+**Units** (DECISIONS D39): a unit read wrong by a factor of 1,000 makes a whole statement wrong, so where a statement's
+unit came from is a measured rule like any mapping rule. A unit printed at the table (188 of 188 right on the dev
+filings and their prior years) or taken
+from the filing's other statements (68 of 68) is accepted; one stated once for the whole document (8 of 8, too few to
+clear the bar) and a statement with no unit at all go to an analyst. The bar is 80% confidence (the Wilson lower bound
+of the measured rate). The currency is recorded and never converted; anything but US dollars is flagged.
+
+**Learning from reviewers** (DECISIONS D40): every decision an analyst makes that judges a rule (approving a spread,
+moving a value to another line, accepting or rejecting a match) is written to an outcomes folder (`var/outcomes`, or
+`FINOPS_OUTCOMES_DIR`), one JSON line each, with who decided and when. `scripts/calibrate.py --outcomes-dir` re-measures
+each rule's accuracy with those decisions included, so a rule earns or loses the right to act alone from the
+organisation's own documents; the Accuracy page shows what has been recorded.
+
+**With last year's approved spread** (company memory, on by default since 2026-10-25; DECISIONS D36): the prior-year 10-K
+is approved against its own key as a stand-in for an analyst, then the current one is spread with what that approval
+left behind. A document's company is set at upload or later, on the Statements page. These figures were measured on
+2026-10-24, before the two fixes above.
 
 | Set | Silent error rate | Wrong values caught | Values right | Review items per filing (median) | Source |
 |---|---|---|---|---|---|
@@ -94,14 +111,23 @@ forward. A difference from an approved value is a warning that says whether it i
 tags. The two readers agree on 96.8% (dev) and 91.7% (holdout) of tagged printed numbers; in a hand-checked random
 sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`).
 
-**Banks, insurers and IFRS** are configuration overlays (DECISIONS D38), smoke-tested on a few filings each, not
-measured: see `eval/coverage/checks.json`.
+**Banks and insurers** are configuration overlays (DECISIONS D38) with their own answer keys from the filings' tags
+(D41), split the same way; the wording was grown from the dev half only. They are well behind the commercial template:
+
+| Set | Documents | Values right | **Silent error rate** | Silent omissions | Source |
+|---|---|---|---|---|---|
+| Banks, dev (tuned on) | 11 (1 crashed) | 81.9% (840 of 1,026; 79.4-84.1%) | 4.2% (31 of 737; 3.0-5.9%) | 6.2% (64 of 1,026; 4.9-7.9%) | `eval/reports/stmt-bank-dev-merged` |
+| **Banks, holdout** | 10 | 68.7% (831 of 1,209; 66.1-71.3%) | 5.9% (46 of 782; 4.4-7.8%) | 11.3% (137 of 1,209; 9.7-13.2%) | `eval/reports/stmt-bank-holdout-merged` |
+| Insurers, dev (tuned on) | 10 | 63.2% (708 of 1,121; 60.3-65.9%) | 3.1% (20 of 636; 2.0-4.8%) | 7.8% (87 of 1,121; 6.3-9.5%) | `eval/reports/stmt-insurer-dev-merged` |
+| **Insurers, holdout** | 14 | 59.1% (867 of 1,468; 56.5-61.5%) | 7.8% (58 of 744; 6.1-9.9%) | 7.9% (116 of 1,468; 6.6-9.4%) | `eval/reports/stmt-insurer-holdout-merged` |
+
+IFRS is an overlay smoke-tested on a few filings, not measured: see `eval/coverage/checks.json`.
 
 What these numbers do **not** show:
 - SEC filings are cleaner than a borrower's scanned PDF. Scanned PDFs (no text layer) are refused unless the optional OCR extra is installed (DECISIONS D42); on 18 held-back statement packages printed from the dev 10-Ks and scanned at 200 dpi, it got 77.4% of values right with 5.2% of accepted values silently wrong (66 of 1,281), against 84.3% and 2.4% for the same pages with a text layer, at about 3 minutes per 9-page package. No real scan has been measured.
 - The synthetic corpus was written by the same author as the pipeline.
-- Non-financial US companies only, for every measured figure; unit statements in other currencies are not recognised
-  (assumed and flagged).
+- US filers only; the commercial figures are for non-financial companies, and banks and insurers are measured
+  separately above. Statements in other currencies are read and flagged, never converted.
 - ROI: no time savings have been measured yet. The ROI page reports "not measured" until at least three documents are
   spread by hand and three reviewed in assisted mode by a real analyst.
 
@@ -312,6 +338,7 @@ Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the 
 ## Limits and what production would need
 
 Sign-in and roles (the reviewer name is an unverified header), a retention and deletion policy,
-encryption at rest, OCR for scanned statements, multi-user concurrency on a server database, and,
+encryption at rest, OCR measured on real borrower scans (faxes, phone photos), multi-user concurrency on a server
+database, and,
 in banking, model-risk-management review. See [THREAT_MODEL.md](THREAT_MODEL.md) and
 [DECISIONS.md](DECISIONS.md).
