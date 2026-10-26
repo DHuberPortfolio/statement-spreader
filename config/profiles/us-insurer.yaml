@@ -1,40 +1,56 @@
 # US property-casualty and life insurers (US GAAP): the base template plus the lines an insurer's statements are built
 # from. Revenue is premiums plus investment income; the big costs are claims (losses and loss adjustment expenses) and
 # acquisition costs; the balance sheet is investments on one side and reserves on the other, unclassified.
-# Wording written from one insurer's 10-K (Travelers) and hand-checked on two others (eval/coverage/checks.json).
+# Wording written from one insurer's 10-K (Travelers) and hand-checked on two others (eval/coverage/checks.json), then
+# grown from the dev half of the insurer answer-key set (eval/industry/insurer, IMPROVEMENT_LOG B2-B3; holdout never
+# tuned on).
 # Load with SPREADER_PROFILE=config/profiles/us-insurer.yaml.
 
 extends: us-commercial.yaml
 id: us-insurer
-version: "2026.10.25-insurer-1"
+version: "2026.10.25-insurer-2"
 title: US insurer spread (US GAAP)
 
 add_lines:
   income_statement:
     - {id: premiums_earned, label: Premiums earned, kind: income, critical: true,
        aliases: [premiums, premiums earned, net premiums earned, earned premiums, net earned premiums, "net premiums earned*",
-                 "premiums earned*", total premiums earned]}
+                 "premiums earned*", total premiums earned, net premiums, total premium, total premiums,
+                 "premiums and other considerations*", "net premiums*"]}
     - {id: net_investment_income, label: Net investment income, kind: income,
-       aliases: [net investment income, "net investment income*", investment income net]}
+       aliases: [net investment income, "net investment income*", investment income net, "investment income net of*"]}
     - {id: realized_investment_gains, label: Net realized investment gains (losses), kind: either,
        aliases: ["net realized investment gains*", "net realized investment losses*", "net realized gains*", "net realized losses*",
-                 "realized investment gains*", "net investment gains*", "net investment losses*", "net gains losses on investments*"]}
+                 "realized investment gains*", "net investment gains*", "net investment losses*", "net gains losses on investments*",
+                 "investment gains*", "investment losses*", "net realized capital*", "investment related gains*",
+                 "investment related losses*", "realized gains*", "realized losses*", "total net realized*",
+                 "net realized and unrealized*"]}
     - {id: losses_lae, label: Losses and loss adjustment expenses, kind: cost, critical: true,
        aliases: [claims and claim adjustment expenses, losses and loss adjustment expenses, losses and loss expenses,
                  "losses and loss adjustment expenses*", "claims and claim adjustment expenses*", "losses and lae*",
                  "policyholder benefits and claims*", "benefits losses and loss adjustment expenses*", "losses and benefits*",
-                 net losses and loss adjustment expenses, "incurred losses*"]}
+                 net losses and loss adjustment expenses, "incurred losses*", "insurance losses*",
+                 "claims and other policy benefits*", "benefits claims and settlement expenses*",
+                 "insurance claims and policyholders benefits*", "total policyholder benefits*"]}
     - {id: acquisition_costs, label: Policy acquisition costs, kind: cost,
        aliases: [amortization of deferred acquisition costs, "amortization of deferred policy acquisition costs*",
                  policy acquisition costs, "policy acquisition costs*", "amortization of deferred acquisition costs*"]}
     - {id: total_insurance_expenses, label: Total claims and expenses, kind: cost,
        aliases: [total claims and expenses, total losses and expenses, total benefits losses and expenses, total expenses,
-                 total benefits and expenses, total costs and expenses]}
+                 total benefits and expenses, total costs and expenses],
+       # "Total expenses" is also a commercial alias (total costs): an exact tie leaves the row unmapped, so under an
+       # expenses heading the insurer's total takes it (IMPROVEMENT_LOG B2).
+       sections: [{section: ["expenses", "benefits and expenses", "benefits losses and expenses", "losses and expenses",
+                             "benefits claims and expenses", "expenses*"],
+                   labels: [total, total expenses, total benefits and expenses, total costs and expenses,
+                            total losses and expenses, total benefits losses and expenses]}]}
   balance_sheet:
     - {id: insurer_investments, label: Total investments, kind: asset, critical: true,
        aliases: [total investments, "total investments*"]}
     - {id: premiums_receivable, label: Premiums receivable, kind: asset,
-       aliases: ["premiums receivable*", "premiums and other receivables*", "premiums and agents balances*"]}
+       aliases: ["premiums receivable*", "premiums and other receivables*", "premiums and agents balances*",
+                 "premiums due and other receivables*", "premiums and accounts receivable*",
+                 "premiums reinsurance and other receivables*"]}
     - {id: reinsurance_recoverables, label: Reinsurance recoverables, kind: asset,
        aliases: ["reinsurance recoverables*", "reinsurance recoverable*"]}
     - {id: deferred_acquisition_costs, label: Deferred acquisition costs, kind: asset,
@@ -51,6 +67,10 @@ add_lines:
 add_aliases:
   lt_debt: [debt, "debt*", senior notes, "senior notes*"]
   cash: ["cash including restricted cash*"]
+
+add_sections:
+  eps_basic: [{section: ["per common share*", "per share*"], labels: [net income basic, basic, "net income basic*"]}]
+  eps_diluted: [{section: ["per common share*", "per share*"], labels: [net income diluted, diluted, "net income diluted*"]}]
 
 checks:
   - {id: insurer_pretax, statement: income_statement, title: "Total revenues minus total claims and expenses equals pre-tax income",

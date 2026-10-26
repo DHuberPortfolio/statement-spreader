@@ -3,20 +3,24 @@
 # A bank's income statement starts from interest, not revenue and cost of sales; its balance sheet is unclassified
 # (no current/non-current split) and dominated by securities, loans and deposits. The base lines stay (a bank simply
 # never prints cost of revenue or inventory, which leaves them empty), so a bank spread is comparable with any other.
-# Wording written from one bank's 10-K (Fifth Third) and hand-checked on two others (eval/coverage/checks.json).
+# Wording written from one bank's 10-K (Fifth Third) and hand-checked on two others (eval/coverage/checks.json), then
+# grown from the dev half of the bank answer-key set (eval/industry/bank, IMPROVEMENT_LOG B2-B3; holdout never tuned on).
 # Load with SPREADER_PROFILE=config/profiles/us-bank.yaml.
 
 extends: us-commercial.yaml
 id: us-bank
-version: "2026.10.25-bank-1"
+version: "2026.10.25-bank-2"
 title: US commercial bank spread (US GAAP)
 
 add_lines:
   income_statement:
     - {id: bank_interest_income, label: Total interest income, kind: income, critical: true,
-       aliases: [total interest income, total interest and dividend income, "total interest income*", interest income total]}
+       aliases: [total interest income, total interest and dividend income, "total interest income*", interest income total],
+       # "Interest income" alone is a commercial alias; under a net interest income heading it is the bank's (B3).
+       sections: [{section: ["net interest income*"], labels: [interest income, interest and dividend income]}]}
     - {id: bank_interest_expense, label: Total interest expense, kind: cost,
-       aliases: [total interest expense, "total interest expense*", interest expense total]}
+       aliases: [total interest expense, "total interest expense*", interest expense total],
+       sections: [{section: ["net interest income*"], labels: [interest expense]}]}
     - {id: net_interest_income, label: Net interest income, kind: result, critical: true,
        aliases: [net interest income, "net interest income fte", net interest revenue]}
     - {id: provision_credit_losses, label: Provision for credit losses, kind: cost, critical: true,
@@ -39,7 +43,9 @@ add_lines:
     - {id: bank_securities, label: Investment securities, kind: asset,
        aliases: ["available for sale*securities*", "available for sale debt*", "held to maturity securities*",
                  "trading debt securities*", "trading securities*", equity securities, "investment securities*",
-                 "securities available for sale*", "securities held to maturity*", "total investment securities*"]}
+                 "securities available for sale*", "securities held to maturity*", "total investment securities*",
+                 "held to maturity*", "debt securities*", "total debt securities*", "trading account assets*",
+                 "trading account securities*", "equity securities*"]}
     - {id: loans_held_for_sale, label: Loans held for sale, kind: asset,
        aliases: ["loans held for sale*", "loans and leases held for sale*"]}
     - {id: loans_gross, label: Loans and leases, kind: asset, critical: true,
@@ -51,11 +57,20 @@ add_lines:
     - {id: loans_net, label: Loans and leases, net, kind: asset, critical: true,
        aliases: [portfolio loans and leases net, loans and leases net, net loans and leases, net loans, loans net,
                  total loans net, "loans and leases net of allowance*", "net loans and leases*"]}
+    # Deposit detail rows ("Interest-bearing", "Savings") count only under a Deposits heading: worded alone, an
+    # "interest-bearing deposits" row on the asset side is money the bank keeps at other banks (IMPROVEMENT_LOG B2).
     - {id: deposits, label: Deposits, kind: liability, critical: true,
-       aliases: [total deposits, deposits, "noninterest bearing deposits*", "interest bearing deposits*", "noninterestbearing*",
-                 "interestbearing*", "noninterest bearing*", "interest bearing*"]}
+       aliases: [total deposits, deposits, "total deposits*"],
+       sections: [{section: ["deposits*"],
+                   labels: ["noninterest bearing*", "non interest bearing*", "interest bearing*", "noninterestbearing*",
+                            "interestbearing*", "demand*", "savings*", "money market*", "time*", "checking*",
+                            "certificates of deposit*", "brokered*", "foreign*", "domestic*"]}]}
+    # The commercial common-stock line also has "preferred stock*"; these longer patterns win that tie.
     - {id: preferred_equity, label: Preferred stock, kind: equity,
-       aliases: [preferred stock, "preferred stock*"]}
+       aliases: [preferred stock, "preferred stock*", "preferred stock*par value*", "preferred stock*authorized*",
+                 "preferred stock*liquidation*", "preferred stock*series*", "preferred stock*issued*",
+                 "non cumulative perpetual*", "noncumulative perpetual*", "perpetual preferred*"],
+       sections: [{section: ["preferred stock*"], labels: ["non cumulative*", "noncumulative*", "series*", "perpetual*"]}]}
   cash_flow:
     - {id: cf_deposits_net, label: Net change in deposits, kind: flow,
        aliases: [net change in deposits, "net increase in deposits*", "net increase decrease in deposits*", "net decrease in deposits*",
@@ -68,7 +83,14 @@ add_aliases:
   common_stock_apic: [capital surplus, "capital surplus*"]
   ppe_net: ["bank premises and equipment*", "premises and equipment*"]
   st_investments: [other short term investments, "other short term investments*", "interest bearing deposits with banks*",
-                   "federal funds sold*"]
+                   "federal funds sold*", "interest bearing deposits*", "interest earning deposits*", resell agreements,
+                   "securities purchased under agreements to resell*", "money market and other interest earning*",
+                   "money market investments*"]
+  intangibles: ["other identifiable intangible*", "core deposit intangible*"]
+
+add_sections:
+  eps_basic: [{section: ["per common share information*", "per common share*"], labels: [earnings, basic earnings, basic]}]
+  eps_diluted: [{section: ["per common share information*", "per common share*"], labels: [diluted earnings, diluted]}]
 
 checks:
   - {id: bank_nii, statement: income_statement, title: "Interest income minus interest expense equals net interest income",

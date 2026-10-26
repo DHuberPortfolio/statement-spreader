@@ -51,6 +51,24 @@ def sec_docs(split: str) -> list[tuple[str, Path, Path]]:
     return out
 
 
+INDUSTRY = ROOT / "eval" / "industry"
+INDUSTRY_PROFILES = {"bank": ROOT / "config" / "profiles" / "us-bank.yaml",
+                     "insurer": ROOT / "config" / "profiles" / "us-insurer.yaml"}
+
+
+def industry_docs(industry: str, split: str) -> list[tuple[str, Path, Path]]:
+    """Banks' or insurers' 10-Ks (scripts/fetch_industry.py), graded with the industry's profile (D41)."""
+    manifest = json.loads((INDUSTRY / industry / "manifest.json").read_text())
+    out = []
+    for t, m in sorted(manifest.items()):
+        if split != "all" and m["split"] != split:
+            continue
+        raw = INDUSTRY / industry / "raw" / m["file"]
+        if raw.exists():
+            out.append((t, raw, INDUSTRY / industry / "keys" / f"{t}.json"))
+    return out
+
+
 def synthetic_docs(formats: list[str]) -> list[tuple[str, Path, Path]]:
     out = []
     for case in sorted(p for p in SYN.iterdir() if p.is_dir()):
@@ -91,6 +109,9 @@ def main() -> None:
     ap.add_argument("--no-calc", action="store_true", help="rebuild SEC keys without the calculation links (the old key)")
     ap.add_argument("--scale", type=int, default=300, help="recon/invoice: synthetic set size")
     ap.add_argument("--xbrl-check", action="store_true", help="opt-in second reader (D37); NOT independent of the SEC keys")
+    ap.add_argument("--industry", choices=sorted(INDUSTRY_PROFILES), default=None,
+                    help="banks' or insurers' 10-Ks with that industry's profile (eval/industry, D41) instead of the "
+                         "commercial SEC set")
     args = ap.parse_args()
     if args.engine != "statements":
         name = args.save or f"{args.engine}-latest"
@@ -112,14 +133,18 @@ def main() -> None:
         print("\n".join(lines[:60] if args.engine != "dq" else lines))
         return
 
-    profile = load_profile()
+    profile = load_profile(INDUSTRY_PROFILES[args.industry] if args.industry else None)
     model = None
     if args.model:
         from spreader.llm.local import LocalModelMapper
 
         model = LocalModelMapper(args.model, model_name="qwen3-4b-instruct-2507-q4km")
     docs: list[tuple[str, Path, Path]] = []
-    if args.split != "none":
+    if args.industry:
+        if args.split == "none" or args.synthetic:
+            sys.exit("--industry needs a split (dev, holdout, all) and no --synthetic")
+        docs += [(f"{args.industry}:{t}", raw, k) for t, raw, k in industry_docs(args.industry, args.split)]
+    elif args.split != "none":
         docs += [("sec:" + t, raw, k) for t, raw, k in sec_docs(args.split)]
     if args.synthetic:
         docs += [("syn:" + n, f, k) for n, f, k in synthetic_docs(args.formats.split(","))]
@@ -136,10 +161,10 @@ def main() -> None:
         data = path.read_bytes()
         t0 = time.perf_counter()
         try:
-            if key_path.exists() and not (args.rebuild_keys and doc_id.startswith("sec:")):
+            if key_path.exists() and not (args.rebuild_keys and not doc_id.startswith("syn:")):
                 key = AnswerKey.load(key_path)
             else:
-                cal = SEC / "cal" / f"{doc_id.split(':', 1)[1]}_cal.xml"
+                cal = (INDUSTRY / args.industry if args.industry else SEC) / "cal" / f"{doc_id.split(':', 1)[1]}_cal.xml"
                 key, _ = build_key(path.name, data, profile, cal.read_bytes() if cal.exists() and not args.no_calc else None)
                 key_path.parent.mkdir(parents=True, exist_ok=True)
                 key.save(key_path)
@@ -165,7 +190,8 @@ def main() -> None:
 
     summ = summarize(scores)
     r = rates(scores)
-    name = args.save or f"latest-{args.split}{'-syn' if args.synthetic else ''}"
+    name = args.save or (f"stmt-{args.industry}-{args.split}" if args.industry
+                         else f"latest-{args.split}{'-syn' if args.synthetic else ''}")
     REPORTS.mkdir(parents=True, exist_ok=True)
     wrong = [(s.document, v) for s in scores for v in s.values if v.bucket in {"wrong_auto", "wrong_review", "missing_silent"}]
     report = {
@@ -180,7 +206,9 @@ def main() -> None:
                     "status": v.status, "flags": v.flags} for d, v in wrong],
     }
     # Provenance after the run: --rebuild-keys rewrites the keys it records.
-    sets: list[Any] = {"dev": ["sec-dev"], "holdout": ["sec-holdout"], "all": ["sec-dev", "sec-holdout"], "none": []}[args.split]
+    prefix = args.industry or "sec"
+    sets: list[Any] = {"dev": [f"{prefix}-dev"], "holdout": [f"{prefix}-holdout"], "all": [f"{prefix}-dev", f"{prefix}-holdout"],
+                       "none": []}[args.split]
     sets += ["statements-synthetic"] if args.synthetic else []
     if args.only:  # a subset is not the registered set: say so instead of quoting the whole set's version
         sets = [{"name": n, "version": None, "note": f"subset: {args.only}"} for n in sets]
@@ -191,7 +219,7 @@ def main() -> None:
     report["provenance"] = prov
     (REPORTS / f"{name}.json").write_text(json.dumps(report, indent=1, default=str))
     latest = f"latest-{args.split}{'-syn' if args.synthetic else ''}"
-    if name != latest and not args.only and not args.model and not args.xbrl_check:
+    if name != latest and not args.only and not args.model and not args.xbrl_check and not args.industry:
         # The app's ROI page reads latest-*: a full run of the default pipeline refreshes it whatever it is saved as.
         (REPORTS / f"{latest}.json").write_text(json.dumps(report, indent=1, default=str))
     lines = [f"# Evaluation: {name}", "", f"{len(scores)} documents ({report['crashed']} crashed), profile {report['profile']}, "
