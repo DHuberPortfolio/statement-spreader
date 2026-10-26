@@ -1,0 +1,4392 @@
+{
+ "name": "stmt-insurer-dev-merged",
+ "documents": 10,
+ "crashed": 0,
+ "seconds": 271.6,
+ "profile": "us-insurer 2026.10.25-insurer-2+413e86b955cb",
+ "buckets": {
+  "correct_auto": 616,
+  "correct_review": 92,
+  "missing_silent": 87,
+  "wrong_auto": 20,
+  "wrong_review": 209,
+  "missing_flagged": 97,
+  "unjudged": 44
+ },
+ "error_kinds": {
+  "value": 82,
+  "scale": 147
+ },
+ "rates": {
+  "accuracy": {
+   "n": 708,
+   "d": 1121,
+   "rate": 0.631578947368421,
+   "low": 0.602935904881391,
+   "high": 0.6593232434289132
+  },
+  "silent_error_rate": {
+   "n": 20,
+   "d": 636,
+   "rate": 0.031446540880503145,
+   "low": 0.020447366397624005,
+   "high": 0.048072092168371085
+  },
+  "silent_omission_rate": {
+   "n": 87,
+   "d": 1121,
+   "rate": 0.07760927743086529,
+   "low": 0.06334947330264076,
+   "high": 0.09475420991817893
+  },
+  "review_rate": {
+   "n": 301,
+   "d": 937,
+   "rate": 0.32123799359658484,
+   "low": 0.2921209577485811,
+   "high": 0.35181485461345735
+  },
+  "catch_rate": {
+   "n": 209,
+   "d": 229,
+   "rate": 0.9126637554585153,
+   "low": 0.8689574902352812,
+   "high": 0.9427531319215843
+  },
+  "unnecessary_review_rate": {
+   "n": 92,
+   "d": 708,
+   "rate": 0.12994350282485875,
+   "low": 0.10715893884092936,
+   "high": 0.15672223921890865
+  },
+  "coverage": {
+   "n": 937,
+   "d": 1121,
+   "rate": 0.8358608385370205,
+   "low": 0.8130371341234984,
+   "high": 0.8563904546143292
+  }
+ },
+ "cells": {
+  "found": {
+   "ok": 2298,
+   "total": 2749
+  },
+  "value": {
+   "ok": 1923,
+   "total": 2298
+  },
+  "period": {
+   "ok": 2253,
+   "total": 2298
+  },
+  "mapping": {
+   "ok": 977,
+   "total": 1189
+  }
+ },
+ "documents_detail": [
+  {
+   "doc": "insurer:ACGL",
+   "ms": 31431,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 80,
+    "correct_review": 15,
+    "missing_silent": 5,
+    "wrong_auto": 5,
+    "wrong_review": 8,
+    "missing_flagged": 14,
+    "unjudged": 4
+   },
+   "checks_failed": 11,
+   "checks_run": 29,
+   "review_items": 32,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "ms": 56802,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 74,
+    "correct_review": 19,
+    "unjudged": 12,
+    "missing_silent": 4,
+    "missing_flagged": 15,
+    "wrong_review": 5,
+    "wrong_auto": 4
+   },
+   "checks_failed": 8,
+   "checks_run": 26,
+   "review_items": 17,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "ms": 32158,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 91,
+    "missing_silent": 7,
+    "missing_flagged": 12,
+    "unjudged": 3,
+    "wrong_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 20,
+   "review_items": 14,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "ms": 5356,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 6,
+    "correct_auto": 44,
+    "missing_silent": 2,
+    "missing_flagged": 6,
+    "wrong_auto": 4,
+    "wrong_review": 5,
+    "unjudged": 9
+   },
+   "checks_failed": 3,
+   "checks_run": 12,
+   "review_items": 25,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:GL",
+   "ms": 20255,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_silent": 5,
+    "correct_auto": 95,
+    "missing_flagged": 13,
+    "wrong_review": 6,
+    "correct_review": 9
+   },
+   "checks_failed": 6,
+   "checks_run": 23,
+   "review_items": 28,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:L",
+   "ms": 22053,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_silent": 35,
+    "missing_flagged": 9,
+    "wrong_review": 61,
+    "correct_review": 6
+   },
+   "checks_failed": 9,
+   "checks_run": 15,
+   "review_items": 23,
+   "blockers": 9,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:MET",
+   "ms": 58387,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 61,
+    "correct_review": 5,
+    "missing_silent": 6,
+    "wrong_auto": 3,
+    "wrong_review": 12,
+    "missing_flagged": 6
+   },
+   "checks_failed": 5,
+   "checks_run": 26,
+   "review_items": 18,
+   "blockers": 1,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "ms": 15538,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 83,
+    "missing_flagged": 5,
+    "correct_review": 13,
+    "wrong_auto": 2,
+    "wrong_review": 5,
+    "unjudged": 6,
+    "missing_silent": 12
+   },
+   "checks_failed": 2,
+   "checks_run": 26,
+   "review_items": 41,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:RGA",
+   "ms": 23778,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 88,
+    "missing_silent": 3,
+    "correct_review": 16,
+    "missing_flagged": 2,
+    "unjudged": 10,
+    "wrong_auto": 2
+   },
+   "checks_failed": 9,
+   "checks_run": 23,
+   "review_items": 24,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "insurer:THG",
+   "ms": 5729,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "wrong_review": 104,
+    "missing_silent": 8,
+    "missing_flagged": 15,
+    "correct_review": 3
+   },
+   "checks_failed": 3,
+   "checks_run": 20,
+   "review_items": 27,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  }
+ ],
+ "errors": [
+  {
+   "doc": "insurer:ACGL",
+   "line": "intangibles",
+   "period": "2025-12-31/I",
+   "truth": "1222000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "intangibles",
+   "period": "2024-12-31/I",
+   "truth": "1351000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "2736000000",
+   "predicted": "-3674000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "2511000000",
+   "predicted": "-1976000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "treasury_stock",
+   "period": "2025-12-31/I",
+   "truth": "-6410000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "treasury_stock",
+   "period": "2024-12-31/I",
+   "truth": "-4487000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "other_nonoperating",
+   "period": "2025-12-31/12M",
+   "truth": "504000000",
+   "predicted": "558000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "other_nonoperating",
+   "period": "2024-12-31/12M",
+   "truth": "580000000",
+   "predicted": "622000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "other_nonoperating",
+   "period": "2023-12-31/12M",
+   "truth": "278000000",
+   "predicted": "305000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "1880000000",
+   "predicted": "5239000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:20",
+    "confidence:income_statement:22",
+    "confidence:income_statement:25"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "1514000000",
+   "predicted": "4248000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:20",
+    "confidence:income_statement:22",
+    "confidence:income_statement:25"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "1328000000",
+   "predicted": "3775000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:20",
+    "confidence:income_statement:22",
+    "confidence:income_statement:25"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "truth": "4399000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_attributable:2025-12-31/12M",
+    "check:is_eps:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "truth": "4312000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_attributable:2024-12-31/12M",
+    "check:is_eps:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "truth": "4443000000",
+   "predicted": "1000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_attributable:2023-12-31/12M",
+    "check:is_eps:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-92000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-4000000",
+   "predicted": "-1305000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:44",
+    "confidence:cash_flow:45",
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:52",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:63",
+    "confidence:cash_flow:64"
+   ]
+  },
+  {
+   "doc": "insurer:ACGL",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-2000000",
+   "predicted": "-1420000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:44",
+    "confidence:cash_flow:45",
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:52",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:63",
+    "confidence:cash_flow:64"
+   ]
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "41139000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "42521000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "nci_equity",
+   "period": "2025-12-31/I",
+   "truth": "23000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "nci_equity",
+   "period": "2024-12-31/I",
+   "truth": "29000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "truth": "3096000000",
+   "predicted": "6202910000.00",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:is_attributable:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "truth": "-1404000000",
+   "predicted": "-2834360000.00",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:is_attributable:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "truth": "3643000000",
+   "predicted": "7267000000.00",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-12-31/12M",
+    "check:is_attributable:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "shares_basic",
+   "period": "2025-12-31/12M",
+   "truth": "565078072",
+   "predicted": "565078072000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "shares_basic",
+   "period": "2024-12-31/12M",
+   "truth": "651448307",
+   "predicted": "651448307000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "truth": "719506291",
+   "predicted": "719506291000000",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "shares_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "570349988",
+   "predicted": "570349988000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "shares_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "657283160",
+   "predicted": "657283160000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "insurer:AIG",
+   "line": "shares_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "725233068",
+   "predicted": "725233068000000",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "ppe_net",
+   "period": "2025-12-31/I",
+   "truth": "219000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "ppe_net",
+   "period": "2024-12-31/I",
+   "truth": "214000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "deferred_tax_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "1833000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "deferred_tax_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "1476000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "11000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "120000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "60000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-153000000",
+   "predicted": "-983000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-154000000",
+   "predicted": "-887000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "insurer:CINF",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-129000000",
+   "predicted": "-810000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "deferred_tax_assets",
+   "period": "2025-12-31/I",
+   "truth": "14300000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "deferred_tax_assets",
+   "period": "2024-12-31/I",
+   "truth": "38300000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "net_investment_income",
+   "period": "2025-12-31/12M",
+   "truth": "116700000.0",
+   "predicted": "2100000.0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "realized_investment_gains",
+   "period": "2025-12-31/12M",
+   "truth": "-20400000.0",
+   "predicted": "1100000.0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "truth": "858700000.0",
+   "predicted": "3200000.0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "total_insurance_expenses",
+   "period": "2025-12-31/12M",
+   "truth": "846700000.0",
+   "predicted": "10500000.0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "pretax_income",
+   "period": "2025-12-31/12M",
+   "truth": "12000000.0",
+   "predicted": "-7300000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_net:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "income_tax",
+   "period": "2025-12-31/12M",
+   "truth": "1200000.0",
+   "predicted": "-1300000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_net:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "0",
+   "predicted": "-149200000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:56",
+    "confidence:cash_flow:57",
+    "confidence:cash_flow:59",
+    "confidence:cash_flow:63"
+   ]
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-100000.0",
+   "predicted": "-44500000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:56",
+    "confidence:cash_flow:57",
+    "confidence:cash_flow:59",
+    "confidence:cash_flow:63"
+   ]
+  },
+  {
+   "doc": "insurer:EIG",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-200000.0",
+   "predicted": "-77300000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:56",
+    "confidence:cash_flow:57",
+    "confidence:cash_flow:59",
+    "confidence:cash_flow:63"
+   ]
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "lt_investments",
+   "period": "2025-12-31/I",
+   "truth": "1396064000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "lt_investments",
+   "period": "2024-12-31/I",
+   "truth": "1235759000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "truth": "5994318000",
+   "predicted": "10884538000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:4",
+    "confidence:income_statement:5",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "revenue",
+   "period": "2024-12-31/12M",
+   "truth": "5778069000",
+   "predicted": "10444341000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:4",
+    "confidence:income_statement:5",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "5447533000",
+   "predicted": "9903550000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:4",
+    "confidence:income_statement:5",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-176735000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-494365000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-802458000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-6399000",
+   "predicted": "-735688000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:43",
+    "confidence:cash_flow:48",
+    "confidence:cash_flow:49",
+    "confidence:cash_flow:50"
+   ]
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-7253000",
+   "predicted": "-1310973000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:43",
+    "confidence:cash_flow:48",
+    "confidence:cash_flow:49",
+    "confidence:cash_flow:50"
+   ]
+  },
+  {
+   "doc": "insurer:GL",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-757000",
+   "predicted": "-608800000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:43",
+    "confidence:cash_flow:48",
+    "confidence:cash_flow:49",
+    "confidence:cash_flow:50"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "loss_reserves",
+   "period": "2025-12-31/I",
+   "truth": "26599000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "loss_reserves",
+   "period": "2024-12-31/I",
+   "truth": "24976000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "future_policy_benefits",
+   "period": "2025-12-31/I",
+   "truth": "13448000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "future_policy_benefits",
+   "period": "2024-12-31/I",
+   "truth": "13158000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "unearned_premiums",
+   "period": "2025-12-31/I",
+   "truth": "7635000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "unearned_premiums",
+   "period": "2024-12-31/I",
+   "truth": "7346000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "truth": "1052000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "truth": "5000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "truth": "8437000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "truth": "8939000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "deferred_tax_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "839000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "deferred_tax_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "550000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "66707000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "64006000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "2376000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "2492000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "retained_earnings",
+   "period": "2025-12-31/I",
+   "truth": "17377000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "retained_earnings",
+   "period": "2024-12-31/I",
+   "truth": "16459000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "aoci",
+   "period": "2025-12-31/I",
+   "truth": "-1067000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "aoci",
+   "period": "2024-12-31/I",
+   "truth": "-1867000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "treasury_stock",
+   "period": "2025-12-31/I",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "treasury_stock",
+   "period": "2024-12-31/I",
+   "truth": "-18000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "18686000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "17066000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "nci_equity",
+   "period": "2025-12-31/I",
+   "truth": "955000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "nci_equity",
+   "period": "2024-12-31/I",
+   "truth": "871000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "truth": "19641000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "truth": "17937000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_liabilities_equity",
+   "period": "2025-12-31/I",
+   "truth": "86348000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_liabilities_equity",
+   "period": "2024-12-31/I",
+   "truth": "81943000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_investment_income",
+   "period": "2025-12-31/12M",
+   "truth": "2779000000",
+   "predicted": "2779",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_investment_income",
+   "period": "2024-12-31/12M",
+   "truth": "2780000000",
+   "predicted": "2780",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_investment_income",
+   "period": "2023-12-31/12M",
+   "truth": "2395000000",
+   "predicted": "2395",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "realized_investment_gains",
+   "period": "2025-12-31/12M",
+   "truth": "-81000000",
+   "predicted": "-81",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "realized_investment_gains",
+   "period": "2024-12-31/12M",
+   "truth": "-81000000",
+   "predicted": "-81",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "realized_investment_gains",
+   "period": "2023-12-31/12M",
+   "truth": "-53000000",
+   "predicted": "-53",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "truth": "18454000000",
+   "predicted": "15756",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:5",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "revenue",
+   "period": "2024-12-31/12M",
+   "truth": "17510000000",
+   "predicted": "14811",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:5",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "15901000000",
+   "predicted": "13559",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:5",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "losses_lae",
+   "period": "2025-12-31/12M",
+   "truth": "8294000000",
+   "predicted": "8294",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "losses_lae",
+   "period": "2024-12-31/12M",
+   "truth": "7738000000",
+   "predicted": "7738",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "losses_lae",
+   "period": "2023-12-31/12M",
+   "truth": "7068000000",
+   "predicted": "7068",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "acquisition_costs",
+   "period": "2025-12-31/12M",
+   "truth": "1898000000",
+   "predicted": "1898",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "acquisition_costs",
+   "period": "2024-12-31/12M",
+   "truth": "1798000000",
+   "predicted": "1798",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "acquisition_costs",
+   "period": "2023-12-31/12M",
+   "truth": "1644000000",
+   "predicted": "1644",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_insurance_expenses",
+   "period": "2025-12-31/12M",
+   "truth": "16171000000",
+   "predicted": "16171",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_insurance_expenses",
+   "period": "2024-12-31/12M",
+   "truth": "15636000000",
+   "predicted": "15636",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "total_insurance_expenses",
+   "period": "2023-12-31/12M",
+   "truth": "13905000000",
+   "predicted": "13905",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "pretax_income",
+   "period": "2025-12-31/12M",
+   "truth": "2283000000",
+   "predicted": "2283",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_net:2025-12-31/12M",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "pretax_income",
+   "period": "2024-12-31/12M",
+   "truth": "1874000000",
+   "predicted": "1874",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_net:2024-12-31/12M",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "pretax_income",
+   "period": "2023-12-31/12M",
+   "truth": "1996000000",
+   "predicted": "1996",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_net:2023-12-31/12M",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "income_tax",
+   "period": "2025-12-31/12M",
+   "truth": "-511000000",
+   "predicted": "-511",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_net:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "income_tax",
+   "period": "2024-12-31/12M",
+   "truth": "-380000000",
+   "predicted": "-380",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_net:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "income_tax",
+   "period": "2023-12-31/12M",
+   "truth": "-451000000",
+   "predicted": "-451",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_net:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_income",
+   "period": "2025-12-31/12M",
+   "truth": "1772000000",
+   "predicted": "1772",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_income",
+   "period": "2024-12-31/12M",
+   "truth": "1494000000",
+   "predicted": "1494",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "truth": "1545000000",
+   "predicted": "1545",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "nci_net_income",
+   "period": "2025-12-31/12M",
+   "truth": "-105000000",
+   "predicted": "-105",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_attributable:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "nci_net_income",
+   "period": "2024-12-31/12M",
+   "truth": "-80000000",
+   "predicted": "-80",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_attributable:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "nci_net_income",
+   "period": "2023-12-31/12M",
+   "truth": "-111000000",
+   "predicted": "-111",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_attributable:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "truth": "1667000000",
+   "predicted": "1667",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_attributable:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "truth": "1414000000",
+   "predicted": "1414",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_attributable:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "truth": "1434000000",
+   "predicted": "1434",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:is_attributable:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "shares_basic",
+   "period": "2025-12-31/12M",
+   "truth": "208960000.00",
+   "predicted": "208.96",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "shares_basic",
+   "period": "2024-12-31/12M",
+   "truth": "220260000.00",
+   "predicted": "220.26",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "truth": "227480000.00",
+   "predicted": "227.48",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "shares_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "209100000.00",
+   "predicted": "209.10",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "shares_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "220530000.00",
+   "predicted": "220.53",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "shares_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "227810000.00",
+   "predicted": "227.81",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_net_income",
+   "period": "2025-12-31/12M",
+   "truth": "1772000000",
+   "predicted": "1772",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_net_income",
+   "period": "2024-12-31/12M",
+   "truth": "1494000000",
+   "predicted": "1494",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_net_income",
+   "period": "2023-12-31/12M",
+   "truth": "1545000000",
+   "predicted": "1545",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_dna",
+   "period": "2025-12-31/12M",
+   "truth": "610000000",
+   "predicted": "402",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_dna",
+   "period": "2024-12-31/12M",
+   "truth": "583000000",
+   "predicted": "383",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_dna",
+   "period": "2023-12-31/12M",
+   "truth": "538000000",
+   "predicted": "347",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_deferred_tax",
+   "period": "2025-12-31/12M",
+   "truth": "112000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_deferred_tax",
+   "period": "2024-12-31/12M",
+   "truth": "-45000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_deferred_tax",
+   "period": "2023-12-31/12M",
+   "truth": "127000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-459000000",
+   "predicted": "781",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-521000000",
+   "predicted": "1080",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-451000000",
+   "predicted": "1708",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cfo",
+   "period": "2025-12-31/12M",
+   "truth": "3279000000",
+   "predicted": "3279",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cfo",
+   "period": "2024-12-31/12M",
+   "truth": "3025000000",
+   "predicted": "3025",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cfo",
+   "period": "2023-12-31/12M",
+   "truth": "3907000000",
+   "predicted": "3907",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-815000000",
+   "predicted": "-2167",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-1164000000",
+   "predicted": "-1352",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-1253000000",
+   "predicted": "-1480",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "capex",
+   "period": "2025-12-31/12M",
+   "truth": "-579000000",
+   "predicted": "-579",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "capex",
+   "period": "2024-12-31/12M",
+   "truth": "-632000000",
+   "predicted": "-632",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "capex",
+   "period": "2023-12-31/12M",
+   "truth": "-686000000",
+   "predicted": "-686",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "acquisitions",
+   "period": "2025-12-31/12M",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "acquisitions",
+   "period": "2024-12-31/12M",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:L",
+   "line": "acquisitions",
+   "period": "2023-12-31/12M",
+   "truth": "-401000000",
+   "predicted": "-401",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cfi",
+   "period": "2025-12-31/12M",
+   "truth": "-2828000000",
+   "predicted": "-2828",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cfi",
+   "period": "2024-12-31/12M",
+   "truth": "-1975000000",
+   "predicted": "-1975",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:L",
+   "line": "cfi",
+   "period": "2023-12-31/12M",
+   "truth": "-2745000000",
+   "predicted": "-2745",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "deferred_tax_assets",
+   "period": "2025-12-31/I",
+   "truth": "2585000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "deferred_tax_assets",
+   "period": "2024-12-31/I",
+   "truth": "2994000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "deferred_tax_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "536000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "deferred_tax_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "132000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "28398000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "27445000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "losses_lae",
+   "period": "2025-12-31/12M",
+   "truth": "49718000000",
+   "predicted": "50271000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "losses_lae",
+   "period": "2024-12-31/12M",
+   "truth": "44728000000",
+   "predicted": "45323000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "losses_lae",
+   "period": "2023-12-31/12M",
+   "truth": "44590000000",
+   "predicted": "45212000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cf_net_income",
+   "period": "2025-12-31/12M",
+   "truth": "3403000000",
+   "predicted": "3379000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow",
+    "check:cross_net_income:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cf_net_income",
+   "period": "2024-12-31/12M",
+   "truth": "4444000000",
+   "predicted": "4426000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow",
+    "check:cross_net_income:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cf_net_income",
+   "period": "2023-12-31/12M",
+   "truth": "1602000000",
+   "predicted": "1578000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow",
+    "check:cross_net_income:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cfo",
+   "period": "2025-12-31/12M",
+   "truth": "17092000000",
+   "predicted": "2840000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cfo",
+   "period": "2024-12-31/12M",
+   "truth": "14598000000",
+   "predicted": "4735000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cfo",
+   "period": "2023-12-31/12M",
+   "truth": "13721000000",
+   "predicted": "4183000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-92543000000",
+   "predicted": "-236000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-76610000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-77460000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cfi",
+   "period": "2025-12-31/12M",
+   "truth": "-15607000000",
+   "predicted": "1428000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cfi",
+   "period": "2024-12-31/12M",
+   "truth": "-11493000000",
+   "predicted": "-791000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:MET",
+   "line": "cfi",
+   "period": "2023-12-31/12M",
+   "truth": "-10246000000",
+   "predicted": "1342000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "parent_only:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "11883900000.0",
+   "predicted": "11917000000.0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "11086400000.0",
+   "predicted": "11131300000.0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "truth": "11917000000.0",
+   "predicted": "11950100000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "calculated",
+   "flags": [
+    "check:bs_liab_plus_equity:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "truth": "11131300000.0",
+   "predicted": "11176200000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "calculated",
+   "flags": [
+    "check:bs_liab_plus_equity:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "5.32",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "6.77",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "2.58",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "5.25",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "6.68",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "2.55",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "73100000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "54800000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "178200000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-15663400000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-14969400000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-11417000000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-8900000.0",
+   "predicted": "867600000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:46",
+    "confidence:cash_flow:47",
+    "confidence:cash_flow:48",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:54",
+    "confidence:cash_flow:55"
+   ]
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-500000.0",
+   "predicted": "771400000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:46",
+    "confidence:cash_flow:47",
+    "confidence:cash_flow:48",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:54",
+    "confidence:cash_flow:55"
+   ]
+  },
+  {
+   "doc": "insurer:PFG",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-2500000.0",
+   "predicted": "-1927100000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:46",
+    "confidence:cash_flow:47",
+    "confidence:cash_flow:48",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:54",
+    "confidence:cash_flow:55"
+   ]
+  },
+  {
+   "doc": "insurer:RGA",
+   "line": "reinsurance_recoverables",
+   "period": "2025-12-31/I",
+   "truth": "7175000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:RGA",
+   "line": "reinsurance_recoverables",
+   "period": "2024-12-31/I",
+   "truth": "5531000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:RGA",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "10816000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:RGA",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "161000000",
+   "predicted": "8821000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:RGA",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-113000000",
+   "predicted": "3228000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "insurer_investments",
+   "period": "2025-12-31/I",
+   "truth": "10382700000.0",
+   "predicted": "10382.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "insurer_investments",
+   "period": "2024-12-31/I",
+   "truth": "9409800000.0",
+   "predicted": "9409.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cash",
+   "period": "2025-12-31/I",
+   "truth": "1122700000.0",
+   "predicted": "1122.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cash",
+   "period": "2024-12-31/I",
+   "truth": "435500000.0",
+   "predicted": "435.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "premiums_receivable",
+   "period": "2025-12-31/I",
+   "truth": "1861300000.0",
+   "predicted": "1861.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "premiums_receivable",
+   "period": "2024-12-31/I",
+   "truth": "1800800000.0",
+   "predicted": "1800.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "reinsurance_recoverables",
+   "period": "2025-12-31/I",
+   "truth": "2011100000.0",
+   "predicted": "2011.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "reinsurance_recoverables",
+   "period": "2024-12-31/I",
+   "truth": "1994500000.0",
+   "predicted": "1994.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "deferred_acquisition_costs",
+   "period": "2025-12-31/I",
+   "truth": "703000000.0",
+   "predicted": "703.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "deferred_acquisition_costs",
+   "period": "2024-12-31/I",
+   "truth": "662800000.0",
+   "predicted": "662.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "deferred_tax_assets",
+   "period": "2025-12-31/I",
+   "truth": "83300000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "deferred_tax_assets",
+   "period": "2024-12-31/I",
+   "truth": "174200000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "goodwill",
+   "period": "2025-12-31/I",
+   "truth": "178800000.0",
+   "predicted": "178.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "goodwill",
+   "period": "2024-12-31/I",
+   "truth": "178800000.0",
+   "predicted": "178.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "truth": "16945900000.0",
+   "predicted": "16945.9",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_assets",
+   "period": "2024-12-31/I",
+   "truth": "15274500000.0",
+   "predicted": "15274.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "loss_reserves",
+   "period": "2025-12-31/I",
+   "truth": "7755200000.0",
+   "predicted": "7755.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "loss_reserves",
+   "period": "2024-12-31/I",
+   "truth": "7461200000.0",
+   "predicted": "7461.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "unearned_premiums",
+   "period": "2025-12-31/I",
+   "truth": "3440400000.0",
+   "predicted": "3440.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "unearned_premiums",
+   "period": "2024-12-31/I",
+   "truth": "3283300000.0",
+   "predicted": "3283.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "truth": "375000000.0",
+   "predicted": "375.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "truth": "61800000.0",
+   "predicted": "61.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "truth": "843300000.0",
+   "predicted": "843.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "truth": "722300000.0",
+   "predicted": "722.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "13374400000.0",
+   "predicted": "13374.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "12432700000.0",
+   "predicted": "12432.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "2014100000.0",
+   "predicted": "2014.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "1974200000.0",
+   "predicted": "1974.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "aoci",
+   "period": "2025-12-31/I",
+   "truth": "-171400000.0",
+   "predicted": "-171.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "aoci",
+   "period": "2024-12-31/I",
+   "truth": "-456300000.0",
+   "predicted": "-456.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "retained_earnings",
+   "period": "2025-12-31/I",
+   "truth": "3741600000.0",
+   "predicted": "3741.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "retained_earnings",
+   "period": "2024-12-31/I",
+   "truth": "3209600000.0",
+   "predicted": "3209.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "treasury_stock",
+   "period": "2025-12-31/I",
+   "truth": "-2012800000.0",
+   "predicted": "-2012.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "treasury_stock",
+   "period": "2024-12-31/I",
+   "truth": "-1885700000.0",
+   "predicted": "-1885.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "3571500000.0",
+   "predicted": "3571.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "2841800000.0",
+   "predicted": "2841.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_liabilities_equity",
+   "period": "2025-12-31/I",
+   "truth": "16945900000.0",
+   "predicted": "16945.9",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_liabilities_equity",
+   "period": "2024-12-31/I",
+   "truth": "15274500000.0",
+   "predicted": "15274.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "premiums_earned",
+   "period": "2025-12-31/12M",
+   "truth": "6161100000.0",
+   "predicted": "6161.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "premiums_earned",
+   "period": "2024-12-31/12M",
+   "truth": "5912600000.0",
+   "predicted": "5912.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "premiums_earned",
+   "period": "2023-12-31/12M",
+   "truth": "5663100000.0",
+   "predicted": "5663.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_investment_income",
+   "period": "2025-12-31/12M",
+   "truth": "454400000.0",
+   "predicted": "454.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_investment_income",
+   "period": "2024-12-31/12M",
+   "truth": "372600000.0",
+   "predicted": "372.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_investment_income",
+   "period": "2023-12-31/12M",
+   "truth": "332100000.0",
+   "predicted": "332.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "realized_investment_gains",
+   "period": "2025-12-31/12M",
+   "truth": "-61700000.0",
+   "predicted": "-46.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "realized_investment_gains",
+   "period": "2024-12-31/12M",
+   "truth": "-84200000.0",
+   "predicted": "-75.8",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "realized_investment_gains",
+   "period": "2023-12-31/12M",
+   "truth": "-8900000.0",
+   "predicted": "-32.5",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "truth": "6594400000.0",
+   "predicted": "6610.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:7",
+    "confidence:income_statement:11",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "revenue",
+   "period": "2024-12-31/12M",
+   "truth": "6237400000.0",
+   "predicted": "6245.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:7",
+    "confidence:income_statement:11",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "5993500000.0",
+   "predicted": "5969.9",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:7",
+    "confidence:income_statement:11",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "losses_lae",
+   "period": "2025-12-31/12M",
+   "truth": "3729300000.0",
+   "predicted": "3729.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "losses_lae",
+   "period": "2024-12-31/12M",
+   "truth": "3757400000.0",
+   "predicted": "3757.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "losses_lae",
+   "period": "2023-12-31/12M",
+   "truth": "4134600000.0",
+   "predicted": "4134.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "acquisition_costs",
+   "period": "2025-12-31/12M",
+   "truth": "1285200000.0",
+   "predicted": "1285.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "acquisition_costs",
+   "period": "2024-12-31/12M",
+   "truth": "1221700000.0",
+   "predicted": "1221.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "acquisition_costs",
+   "period": "2023-12-31/12M",
+   "truth": "1176000000.0",
+   "predicted": "1176.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "interest_expense",
+   "period": "2025-12-31/12M",
+   "truth": "43200000.0",
+   "predicted": "43.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "interest_expense",
+   "period": "2024-12-31/12M",
+   "truth": "34100000.0",
+   "predicted": "34.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "interest_expense",
+   "period": "2023-12-31/12M",
+   "truth": "34100000.0",
+   "predicted": "34.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "692900000.0",
+   "predicted": "692.9",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "686400000.0",
+   "predicted": "686.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "607700000.0",
+   "predicted": "607.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_insurance_expenses",
+   "period": "2025-12-31/12M",
+   "truth": "5750600000.0",
+   "predicted": "5750.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_insurance_expenses",
+   "period": "2024-12-31/12M",
+   "truth": "5699600000.0",
+   "predicted": "5699.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_insurance_expenses",
+   "period": "2023-12-31/12M",
+   "truth": "5952400000.0",
+   "predicted": "5952.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "pretax_income",
+   "period": "2025-12-31/12M",
+   "truth": "843800000.0",
+   "predicted": "843.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "pretax_income",
+   "period": "2024-12-31/12M",
+   "truth": "537800000.0",
+   "predicted": "537.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "pretax_income",
+   "period": "2023-12-31/12M",
+   "truth": "41100000.0",
+   "predicted": "41.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "check:insurer_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "truth": "662500000.0",
+   "predicted": "662.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "calculated",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "truth": "426000000.0",
+   "predicted": "426.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "calculated",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "truth": "35300000.0",
+   "predicted": "35.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "calculated",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_net_income",
+   "period": "2025-12-31/12M",
+   "truth": "662500000.0",
+   "predicted": "662.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_net_income",
+   "period": "2024-12-31/12M",
+   "truth": "426000000.0",
+   "predicted": "426.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_net_income",
+   "period": "2023-12-31/12M",
+   "truth": "35300000.0",
+   "predicted": "35.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_dna",
+   "period": "2025-12-31/12M",
+   "truth": "-4600000.0",
+   "predicted": "2.1",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow",
+    "confidence:cash_flow:6"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_dna",
+   "period": "2024-12-31/12M",
+   "truth": "1500000.0",
+   "predicted": "8.3",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow",
+    "confidence:cash_flow:6"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_dna",
+   "period": "2023-12-31/12M",
+   "truth": "6300000.0",
+   "predicted": "14.2",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow",
+    "confidence:cash_flow:6"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_sbc",
+   "period": "2025-12-31/12M",
+   "truth": "35600000.0",
+   "predicted": "35.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_sbc",
+   "period": "2024-12-31/12M",
+   "truth": "31000000.0",
+   "predicted": "31.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_sbc",
+   "period": "2023-12-31/12M",
+   "truth": "31100000.0",
+   "predicted": "31.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "80100000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "54100000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "49300000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cfo",
+   "period": "2025-12-31/12M",
+   "truth": "1178100000.0",
+   "predicted": "1178.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cfo",
+   "period": "2024-12-31/12M",
+   "truth": "806400000.0",
+   "predicted": "806.4",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cfo",
+   "period": "2023-12-31/12M",
+   "truth": "361700000.0",
+   "predicted": "361.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-3307900000.0",
+   "predicted": "-658.5",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-3240700000.0",
+   "predicted": "-530.7",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-1059800000.0",
+   "predicted": "-216.6",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "capex",
+   "period": "2025-12-31/12M",
+   "truth": "-7700000.0",
+   "predicted": "-7.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "capex",
+   "period": "2024-12-31/12M",
+   "truth": "-10200000.0",
+   "predicted": "-10.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "capex",
+   "period": "2023-12-31/12M",
+   "truth": "-11900000.0",
+   "predicted": "-11.9",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cfi",
+   "period": "2025-12-31/12M",
+   "truth": "-666200000.0",
+   "predicted": "-666.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cfi",
+   "period": "2024-12-31/12M",
+   "truth": "-540900000.0",
+   "predicted": "-540.9",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cfi",
+   "period": "2023-12-31/12M",
+   "truth": "-228500000.0",
+   "predicted": "-228.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "stock_issued",
+   "period": "2025-12-31/12M",
+   "truth": "15400000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "stock_issued",
+   "period": "2024-12-31/12M",
+   "truth": "16700000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "stock_issued",
+   "period": "2023-12-31/12M",
+   "truth": "6500000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "dividends_paid",
+   "period": "2025-12-31/12M",
+   "truth": "-130600000.0",
+   "predicted": "-130.6",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "dividends_paid",
+   "period": "2024-12-31/12M",
+   "truth": "-124100000.0",
+   "predicted": "-124.1",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "dividends_paid",
+   "period": "2023-12-31/12M",
+   "truth": "-117200000.0",
+   "predicted": "-117.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "debt_repaid",
+   "period": "2025-12-31/12M",
+   "truth": "-61800000.0",
+   "predicted": "-61.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "buybacks",
+   "period": "2025-12-31/12M",
+   "truth": "-129200000.0",
+   "predicted": "-129.2",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "buybacks",
+   "period": "2024-12-31/12M",
+   "truth": "-26700000.0",
+   "predicted": "-26.7",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-13600000.0",
+   "predicted": "1.8",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow",
+    "confidence:cash_flow:25"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-11400000.0",
+   "predicted": "5.3",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow",
+    "confidence:cash_flow:25"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-11400000.0",
+   "predicted": "-4.9",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:cash_flow",
+    "confidence:cash_flow:25"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "truth": "35300000.0",
+   "predicted": "35.3",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_income",
+   "period": "2024-12-31/12M",
+   "truth": "426000000.0",
+   "predicted": "426.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "net_income",
+   "period": "2025-12-31/12M",
+   "truth": "662500000.0",
+   "predicted": "662.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "truth": "2841800000.0",
+   "predicted": "2841.8",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "calculated",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "insurer:THG",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "truth": "3571500000.0",
+   "predicted": "3571.5",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "calculated",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  }
+ ],
+ "provenance": {
+  "created": "2026-10-26T03:52:43+00:00",
+  "commit": "82c0f5da08a8d5165583337050649cedeb9d6bf4",
+  "dirty": false,
+  "datasets": [
+   {
+    "name": "insurer-dev",
+    "version": "081b20ffb7a0eac6",
+    "key_version": "7c374f4774e24f5f",
+    "files": 30,
+    "matches_manifest": true
+   }
+  ],
+  "config": {
+   "profile": "us-insurer 2026.10.25-insurer-2+413e86b955cb"
+  }
+ },
+ "review_items_per_document": {
+  "median": 25,
+  "mean": 24.9,
+  "median_blockers": 3
+ },
+ "mapping_by_method": {
+  "alias": [
+   935,
+   982
+  ],
+  "none": [
+   0,
+   110
+  ],
+  "structure": [
+   39,
+   94
+  ],
+  "fuzzy": [
+   3,
+   3
+  ]
+ }
+}
