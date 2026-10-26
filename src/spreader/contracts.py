@@ -39,6 +39,7 @@ class SourceRef(BaseModel):
     cell: str | None = None  # Excel A1 reference
     xpath: str | None = None  # HTML element path
     text: str  # the text exactly as found
+    ocr_confidence: float | None = None  # set only when the text was read by OCR from a scan (lowest word score, 0..1)
 
 
 class Token(BaseModel):

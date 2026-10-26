@@ -25,6 +25,7 @@ from .contracts import (
     StatementResult,
     StatementType,
 )
+from .ingest.ocr import MIN_CONFIDENCE as OCR_MIN_CONFIDENCE
 from .mapping import CONFIDENCE_REVIEW, CONFIDENCE_REVIEW_CRITICAL
 from .profile import Profile
 from .units import REPORTING_CURRENCY, unit_reason
@@ -98,6 +99,16 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                                         severity=Severity.WARNING, statement=stype, rows=[row.index], periods=[k],
                                         lines=[mapping_of[row.index].canonical] if mapping_of.get(row.index) and mapping_of[row.index].canonical else [],
                                         message=f"Row '{row.label}': {v.note}."))
+            # A number read by OCR from a scan with low recognition confidence goes to a person (D42).
+            for pk, pv in row.values.items():
+                conf = pv.ref.ocr_confidence if pv.ref is not None else None
+                if pv.displayed is not None and conf is not None and conf < OCR_MIN_CONFIDENCE:
+                    items.append(ReviewItem(
+                        id=f"ocr:{skey}:{row.index}:{pk}", kind=ReviewKind.UNREADABLE, severity=Severity.WARNING,
+                        statement=stype, rows=[row.index], periods=[pk],
+                        lines=[mapping_of[row.index].canonical] if mapping_of.get(row.index) and mapping_of[row.index].canonical else [],
+                        message=f"Row '{row.label}': '{pv.raw}' was read from a scan with {conf:.0%} confidence (below "
+                                f"{OCR_MIN_CONFIDENCE:.0%}). Check it against the page image."))
             looks_total = row.label_clean.startswith("total") and row.unit.value == "money"
             # A "total" with no detail rows of its own above it (the only revenue line, labelled
             # "Total revenue") has nothing to foot against.
