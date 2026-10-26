@@ -10,8 +10,10 @@ text layer, and the evidence box drawn on the page image lands on the printed nu
 - **Confidence.** Each word carries the recogniser's score (`ocr_confidence`). The reader puts the lowest score of a
   cell on its SourceRef, and review flags every value read below `MIN_CONFIDENCE` (spreader.review): a number the
   model was unsure of goes to a person, never straight into an accepted spread.
-- **Deskew.** A scan is rarely square. The text boxes' own slope is measured (median of the long boxes) and every box
-  is rotated back about the page centre, so a 0.5 degree tilt does not split one printed row into two lines.
+- **Deskew.** A scan is rarely square, and over a statement's width a 0.5 degree tilt moves a row by more than its own
+  height, so labels and their numbers land on different lines. The recogniser's boxes come back square (they do not
+  show the tilt), so the tilt is measured on the image: the angle, within 2 degrees, at which the rows of ink line up
+  best (the sharpest horizontal projection), and the page is rotated straight before it is read.
 - **Glued words.** The recogniser often drops the spaces in bold or tightly set text ("Researchanddevelopment",
   "CONSOLIDATEDSTATEMENTSOFOPERATIONS"). A run of letters that is not a known word is split into known words when
   it can be split completely; the vocabulary is the words of the template profiles (config/profiles) and the
@@ -21,10 +23,8 @@ text layer, and the evidence box drawn on the page image lands on the printed nu
 
 from __future__ import annotations
 
-import math
 import os
 import re
-import statistics
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -72,9 +72,9 @@ def vocabulary() -> frozenset[str]:
     return frozenset(words)
 
 
-def _segment(letters: str) -> list[str] | None:
-    """Known words covering `letters` completely (fewest words), or None."""
-    low = letters.lower()
+def _cover(low: str, min_len: int = 1) -> list[int] | None:
+    """Cut points that cover `low` completely with known words of at least `min_len` letters (fewest words; [] for
+    ""), or None."""
     vocab = vocabulary()
     n = len(low)
     best: list[list[int] | None] = [None] * (n + 1)
@@ -82,11 +82,35 @@ def _segment(letters: str) -> list[str] | None:
     for i in range(n):
         if best[i] is None:
             continue
-        for j in range(i + 1, min(n, i + 24) + 1):
+        for j in range(i + min_len, min(n, i + 24) + 1):
             if low[i:j] in vocab and (best[j] is None or len(best[i]) + 1 < len(best[j])):  # type: ignore[arg-type]
                 best[j] = [*best[i], j]  # type: ignore[misc]
-    cuts = best[n]
-    if not cuts or len(cuts) < 2 or len(cuts) > n // 2:
+    return best[n]
+
+
+def _segment(letters: str) -> list[str] | None:
+    """Known words covering `letters` completely (fewest words), or None. A long run may keep one unknown stretch,
+    a name ("netincomeattributabletopfizerinc" -> net income attributable to pfizer inc), when it is at most a third
+    of the run and the rest is at least two known words."""
+    low = letters.lower()
+    n = len(low)
+    cuts = _cover(low)
+    if cuts and 2 <= len(cuts) <= n // 2:
+        pass
+    elif n >= 12:
+        cuts = None
+        for size in range(3, n // 3 + 1):  # the shortest unknown stretch wins
+            for i in range(0, n - size + 1):
+                # around a name, no one-letter words ("a" would take the first letter of "acme")
+                before, after = _cover(low[:i], 2), _cover(low[i + size:], 2)
+                if before is not None and after is not None and len(before) + len(after) >= 2:
+                    cuts = [*before, i + size, *[i + size + c for c in after]] if i else [size, *[size + c for c in after]]
+                    break
+            if cuts:
+                break
+        if not cuts:
+            return None
+    else:
         return None
     out, start = [], 0
     for c in cuts:
@@ -127,11 +151,32 @@ def split_glued(token: str) -> list[str]:
     return out or [token]
 
 
-def _angle(box: list[list[float]]) -> float | None:
-    (x0, y0), (x1, y1) = box[0], box[1]
-    if x1 - x0 < 60:  # short boxes give a noisy slope
-        return None
-    return math.degrees(math.atan2(y1 - y0, x1 - x0))
+def skew_angle(image: Any, limit: float = 2.0, step: float = 0.1) -> float:
+    """The rotation (degrees, PIL's counter-clockwise sense) that makes a page's text rows horizontal: the angle whose
+    horizontal ink profile is sharpest. Measured on a 1000-pixel-wide copy; 0.0 for a blank page."""
+    import numpy as np
+    from PIL import Image
+
+    small = image.convert("L")
+    if small.width > 1000:
+        small = small.resize((1000, round(small.height * 1000 / small.width)))
+    mask = np.asarray(small) < 128
+    if mask.mean() < 0.002:  # a (nearly) blank page: every angle scores alike, so leave it as it is
+        return 0.0
+    ink = Image.fromarray((mask * 255).astype(np.uint8))
+
+    def sharpness(angle: float) -> float:
+        rows = np.asarray(ink.rotate(angle, resample=Image.NEAREST, fillcolor=0), dtype=np.float64).sum(axis=1)
+        return float(np.square(np.diff(rows)).sum())
+
+    level = sharpness(0.0)
+    best, best_score = 0.0, level
+    n = round(limit / step)
+    for i in range(-n, n + 1):
+        if i and (score := sharpness(i * step)) > best_score:
+            best, best_score = i * step, score
+    # Rotating resamples the page; only do it when the rows are clearly straighter, not for a marginal gain.
+    return round(best, 2) if best_score > 1.1 * level else 0.0
 
 
 def _split_box(text: str, chars: list[list[list[float]]] | None, box: list[list[float]]
@@ -185,6 +230,9 @@ def page_words(data: bytes, page_index: int) -> tuple[list[dict], float, float]:
         page.close()
     finally:
         doc.close()
+    tilt = skew_angle(image)
+    if abs(tilt) >= 0.1:  # rotated about the centre, so the page's coordinates are kept (the evidence box still fits)
+        image = image.rotate(tilt, resample=3, expand=False, fillcolor=255)  # 3: bicubic
     result = None
     for attempt in (1, 2):  # the runtime can fail to allocate under memory pressure; one retry, then say so
         try:
@@ -198,23 +246,11 @@ def page_words(data: bytes, page_index: int) -> tuple[list[dict], float, float]:
             gc.collect()
     k = 72 / DPI
     boxes = [r for r in (result or []) if str(r[1]).strip()]
-    angles = [a for a in (_angle(r[0]) for r in boxes) if a is not None and abs(a) < 5]
-    tilt = statistics.median(angles) if len(angles) >= 5 else 0.0
-    cx, cy = image.width / 2, image.height / 2
-    cos, sin = math.cos(math.radians(-tilt)), math.sin(math.radians(-tilt))
-
-    def straighten(pts: list[list[float]]) -> list[list[float]]:
-        if not tilt:
-            return [[float(x), float(y)] for x, y in pts]
-        return [[cx + (x - cx) * cos - (y - cy) * sin, cy + (x - cx) * sin + (y - cy) * cos] for x, y in pts]
-
     words: list[dict] = []
     for r in boxes:
         box, text, score = r[0], str(r[1]), float(r[2])
         chars = r[3] if len(r) > 3 and r[3] else None  # one 4-point box per character, spaces included
-        if chars:
-            chars = [straighten(c) for c in chars]
-        for w, x0, x1, top, bottom in _split_box(text, chars, straighten(box)):
+        for w, x0, x1, top, bottom in _split_box(text, chars, box):
             pieces = split_glued(w)
             total = sum(len(p) for p in pieces) + len(pieces) - 1
             x = x0
@@ -227,14 +263,15 @@ def page_words(data: bytes, page_index: int) -> tuple[list[dict], float, float]:
 
 
 def _dollar_signs(words: list[dict]) -> list[dict]:
-    """A lone "S" just before an amount on the same line is the dollar sign read as a letter ("S 5,695"). Only the
-    currency sign is changed; numbers are never."""
+    """A lone "S" whose next word on the same line is an amount is the dollar sign read as a letter ("S 5,695"; in a
+    statement the "$" sits at the left of a wide column, so the amount can be far to its right). Only the currency
+    sign is changed; numbers are never."""
     for w in words:
         if w["text"] not in {"S", "s", "S(", "s("}:
             continue
         height = w["bottom"] - w["top"]
         mid = (w["top"] + w["bottom"]) / 2
-        nxt = [o for o in words if o is not w and o["x0"] >= w["x1"] - 1 and o["x0"] - w["x1"] < 4 * height
+        nxt = [o for o in words if o is not w and o["x0"] >= w["x1"] - 1
                and abs((o["top"] + o["bottom"]) / 2 - mid) < height / 2]
         if nxt and re.match(r"[(\d]", min(nxt, key=lambda o: o["x0"])["text"]):
             w["text"] = "$" + w["text"][1:]

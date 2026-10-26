@@ -94,6 +94,9 @@ def test_glued_words_are_split_only_into_known_words() -> None:
     assert ocr.split_glued("5,539$") == ["5,539", "$"]
     assert ocr.split_glued("Goodwill") == ["Goodwill"]  # a known word is left alone
     assert ocr.split_glued("Xyzzyplughq") == ["Xyzzyplughq"]  # cannot be covered by known words: left as read
+    # one unknown stretch (a company name) inside a long glued label is allowed; an unknown long word is not split
+    assert ocr.split_glued("netincomeattributabletoacmeinc") == ["net", "income", "attributable", "to", "acme", "inc"]
+    assert ocr.split_glued("Teleconferencing") == ["Teleconferencing"]
     assert ocr.split_glued("(1,234)") == ["(1,234)"]  # numbers are never changed
 
 
@@ -119,6 +122,20 @@ def test_the_recogniser_reads_a_scanned_statement(profile: Any) -> None:
     assert len(wrong_unflagged) <= 1
 
 
+@pytest.mark.skipif(not ocr.available(), reason="the optional OCR extra is not installed")
+def test_the_tilt_of_a_scan_is_measured_and_a_blank_page_is_left_alone() -> None:
+    from PIL import Image, ImageDraw
+
+    page = Image.new("L", (1700, 2200), 255)
+    draw = ImageDraw.Draw(page)
+    for y in range(200, 2000, 60):  # rows of "text": dark bars with gaps, like a printed statement
+        for x in range(150, 1550, 120):
+            draw.rectangle([x, y, x + 90, y + 22], fill=0)
+    assert abs(ocr.skew_angle(page.rotate(0.6, fillcolor=255)) + 0.6) <= 0.1
+    assert ocr.skew_angle(page) == 0.0
+    assert ocr.skew_angle(Image.new("L", (1700, 2200), 255)) == 0.0
+
+
 def test_dates_glued_by_the_recogniser_are_split() -> None:
     assert ocr.split_glued("September27,") == ["September", "27,"]
     assert ocr.split_glued("December31,2022") == ["December", "31,", "2022"]
@@ -128,8 +145,11 @@ def test_an_s_read_for_a_dollar_sign_before_an_amount_is_a_dollar_sign() -> None
     words = [{"text": "S", "x0": 10, "x1": 14, "top": 0, "bottom": 10},
              {"text": "5,695", "x0": 20, "x1": 40, "top": 0, "bottom": 10},
              {"text": "S", "x0": 100, "x1": 104, "top": 0, "bottom": 10},
-             {"text": "Corp", "x0": 110, "x1": 130, "top": 0, "bottom": 10}]
-    assert [w["text"] for w in ocr._dollar_signs(words)] == ["$", "5,695", "S", "Corp"]
+             {"text": "Corp", "x0": 110, "x1": 130, "top": 0, "bottom": 10},
+             # "Total assets S ... 39,868": the "$" at the left of a wide column, far from its number
+             {"text": "S", "x0": 10, "x1": 14, "top": 50, "bottom": 60},
+             {"text": "39,868", "x0": 300, "x1": 330, "top": 50, "bottom": 60}]
+    assert [w["text"] for w in ocr._dollar_signs(words)] == ["$", "5,695", "S", "Corp", "$", "39,868"]
 
 
 def test_a_recogniser_failure_is_a_clear_refusal_not_an_empty_spread(monkeypatch: pytest.MonkeyPatch) -> None:
