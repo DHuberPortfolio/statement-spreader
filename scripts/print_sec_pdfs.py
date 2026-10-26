@@ -4,6 +4,8 @@
     .venv/Scripts/python scripts/print_sec_pdfs.py --eval          # grade the printed SEC PDFs and the synthetic PDFs
     .venv/Scripts/python scripts/print_sec_pdfs.py --eval --set sec --save baseline --only AAPL,KO
     .venv/Scripts/python scripts/print_sec_pdfs.py --eval --reader saved/pdf_tables.py   # A/B: grade an older reader
+    .venv/Scripts/python scripts/print_sec_pdfs.py --eval --set scan-clean --half tune --save ocr-tune-clean
+                                                   # scanned statement packages (scripts/make_scans.py, D42)
 
 Printing uses headless Edge, the way a person would "Print to PDF" a filing from a browser: the
 statements come out as positioned words on pages (no table structure, no XBRL tags). The answer
@@ -129,9 +131,19 @@ def _grade(args: tuple[str, str, str]) -> dict:
     }
 
 
-def documents(which: str, only: list[str] | None) -> list[tuple[str, str, str]]:
-    """(document id, PDF path, answer-key path) for the printed SEC filings and/or the synthetic PDFs."""
+SCANS = SEC / "scans"
+
+
+def documents(which: str, only: list[str] | None, half: str | None = None) -> list[tuple[str, str, str]]:
+    """(document id, PDF path, answer-key path) for the printed SEC filings and/or the synthetic PDFs, or one variant
+    of the scanned statement packages (scan-text, scan-clean, scan-skewed), optionally one half of them."""
     out: list[tuple[str, str, str]] = []
+    if which.startswith("scan-"):
+        manifest = json.loads((SCANS / "manifest.json").read_text(encoding="utf-8"))["packages"]
+        for p in sorted((SCANS / which.removeprefix("scan-")).glob("*.pdf")):
+            key = SEC / "keys" / f"{p.stem}.json"
+            if key.exists() and (half is None or manifest.get(p.stem, {}).get("half") == half):
+                out.append((f"sec:{p.stem}", str(p), str(key)))
     if which in {"sec", "all"}:
         for p in sorted(PDF_DIR.glob("*.pdf")):
             key = SEC / "keys" / f"{p.stem}.json"
@@ -168,12 +180,15 @@ def summarize(results: list[dict]) -> tuple[dict[str, int], dict]:
     return buckets, rates
 
 
-def evaluate(which: str, only: list[str] | None, jobs: int, save: str | None, reader: str | None = None) -> None:
-    todo = documents(which, only)
+def evaluate(which: str, only: list[str] | None, jobs: int, save: str | None, reader: str | None = None,
+             half: str | None = None) -> None:
+    todo = documents(which, only, half)
     if not todo:
         sys.exit("no PDFs with answer keys")
     if reader:
         print(f"reader: {reader}")
+    if which.startswith("scan-"):  # share the cores between the workers' OCR models (inherited by the workers)
+        os.environ.setdefault("SPREADER_OCR_THREADS", str(max(1, (os.cpu_count() or 2) // max(1, jobs))))
     t_all = time.perf_counter()
     with ProcessPoolExecutor(max_workers=max(1, jobs), initializer=_use_reader, initargs=(reader,)) as ex:
         results = list(ex.map(_grade, todo))
@@ -217,8 +232,9 @@ def evaluate(which: str, only: list[str] | None, jobs: int, save: str | None, re
         summary[name] = {"buckets": buckets, "kinds": kinds, "rates": {k: v.as_dict() for k, v in rates.items()}}
     print(f"\n{len(results)} PDFs in {seconds:.0f} s with {jobs} workers")
     if save:
-        out = PDF_DIR / f"eval-{save}.json"
-        out.write_text(json.dumps({"name": save, "reader": reader, "seconds": round(seconds, 1), "summary": summary,
+        out = (SCANS if which.startswith("scan-") else PDF_DIR) / f"eval-{save}.json"
+        out.write_text(json.dumps({"name": save, "set": which, "half": half, "reader": reader,
+                                   "seconds": round(seconds, 1), "summary": summary,
                                    "documents": results}, indent=1, default=str), encoding="utf-8")
         print(f"saved {out.relative_to(ROOT)}")
 
@@ -226,15 +242,16 @@ def evaluate(which: str, only: list[str] | None, jobs: int, save: str | None, re
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--eval", action="store_true", help="grade the PDFs instead of printing")
-    ap.add_argument("--set", default="all", choices=["sec", "synthetic", "all"],
-                    help="sec: eval/sec/pdf/*.pdf; synthetic: eval/synthetic/*/statement.pdf")
+    ap.add_argument("--set", default="all", choices=["sec", "synthetic", "all", "scan-text", "scan-clean", "scan-skewed"],
+                    help="sec: eval/sec/pdf/*.pdf; synthetic: eval/synthetic/*/statement.pdf; scan-*: eval/sec/scans/*")
+    ap.add_argument("--half", default=None, choices=["tune", "check"], help="scan sets: one half by ticker hash")
     ap.add_argument("--only", default=None, help="comma-separated document ids (AAPL, s7-005-clean, ...)")
     ap.add_argument("--jobs", type=int, default=max(1, min(8, (os.cpu_count() or 2) - 1)))
     ap.add_argument("--save", default=None, help="write eval/sec/pdf/eval-<name>.json")
     ap.add_argument("--reader", default=None, help="grade with this copy of pdf_tables.py instead (A/B runs)")
     args = ap.parse_args()
     if args.eval:
-        evaluate(args.set, args.only.split(",") if args.only else None, args.jobs, args.save, args.reader)
+        evaluate(args.set, args.only.split(",") if args.only else None, args.jobs, args.save, args.reader, args.half)
     else:
         print_all()
 

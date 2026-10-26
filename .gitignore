@@ -35,3 +35,6 @@ eval/sec/cal-prior/
 
 # Filings for the industry and IFRS overlays (scripts/fetch_coverage.py); re-downloadable
 eval/coverage/raw/
+
+# OCR measurement: scanned statement packages (scripts/make_scans.py); the manifest is committed
+eval/sec/scans/*/*.pdf

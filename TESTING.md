@@ -291,6 +291,22 @@ The folder is `var/outcomes/` unless `FINOPS_OUTCOMES_DIR` names another. `tests
 approval, a remap and a reconciliation verdict are recorded, that a failed write never stops a decision, and that the
 rebuild matches what was written live.
 
+## Scanned PDFs read by OCR (DECISIONS D42)
+
+```
+.venv/Scripts/python -m pip install -e .[ocr]                  # the optional recogniser (rapidocr-onnxruntime, local)
+.venv/Scripts/python scripts/make_scans.py                     # statement packages from eval/sec/pdf: text, clean, skewed
+.venv/Scripts/python scripts/print_sec_pdfs.py --eval --set scan-clean --half tune --jobs 4 --save ocr-tune-clean
+.venv/Scripts/python scripts/print_sec_pdfs.py --eval --set scan-text --half check --jobs 4 --save ocr-check-text
+```
+
+Each package is the pages the text-layer reader used for the statements, plus two pages on each side; `text/` keeps
+the text layer (the baseline), `clean/` is a 200 dpi grey scan with noise and JPEG, `skewed/` the same rotated 0.3 to
+0.8 degrees. Tickers are split by hash into a `tune` half (OCR settings changed while looking at it) and a `check` half
+(measured once). Reports go to `eval/sec/scans/eval-*.json`; the manifest records the pages, skew and hashes.
+`tests/test_ocr.py` runs in every job without the model (it feeds the reader the words an OCR pass returns) and runs
+the real recogniser where the extra is installed (one CI job).
+
 ## Company memory across years (DECISIONS D36)
 
 ```bash
