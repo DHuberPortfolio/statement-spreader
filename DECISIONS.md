@@ -366,3 +366,23 @@ rules (D35); a catch-all on a new line has no measured accuracy yet, so its rows
 - **What would change it**: a few dozen filings per industry with answer keys (the SEC tags exist for banks and
   insurers too), so these overlays can be measured like the commercial template; and wording grown from reviewer
   memory across many borrowers rather than one source filing.
+
+**D41. Bank and insurer answer keys come from the tags through an industry crosswalk overlay, independent of the
+profiles' wording.** D38's "what would change it", done: 21 banks' and 24 insurers' latest 10-Ks (none of the six
+smoke-test filers), downloaded by `scripts/fetch_industry.py` with their calculation links and split by ticker hash.
+The answer key reads the concepts the filer tagged, not the printed labels, so it is as independent of the overlays as
+the commercial keys are of the template. The commercial crosswalk is not enough: it reads a bank's
+`InterestExpense` as non-operating interest expense and the revenue concept (which banks tag on one component,
+service charges) as revenue. So `ixbrl_truth.INDUSTRY_CROSSWALK` adds, per profile id, concepts for the industry
+lines and sets to "unjudged" the base meanings that are wrong for the industry; with any other profile nothing
+changes (six commercial keys rebuilt byte for byte).
+- **Tuned on dev only; holdout measured once.** Dev filings shaped the crosswalk and the overlay wording; the holdouts
+  were measured once at the end (B5). Results, with 95% Wilson intervals: banks dev silent error rate 7.5% -> 4.8%
+  (31 of 645), holdout 6.2% (46 of 740; 4.7-8.2%); insurers dev 2.4% -> 2.6% (15 of 577), holdout 7.8% (58 of 744;
+  6.1-9.9%). Holdout is worse than dev for both: wording grown from ten filings does not yet generalise, and the
+  holdout figure is the one to quote.
+- **What the keys cannot see.** Three dev banks give nothing to grade (statements in an exhibit, or no table the reader
+  accepts); a combined income and comprehensive income statement is never a candidate (B4, engine-wide).
+- **What would change it**: the B4 detection change measured on the commercial sets; more filings per industry so a
+  tuning round can use a fresh dev half; and the holdout's largest silent groups (an insurer's common stock and APIC,
+  investing cash flows) worked on with a new holdout, since this one has now been seen.
