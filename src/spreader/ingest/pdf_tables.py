@@ -24,7 +24,10 @@ Every token keeps its page and bounding box, so the interface can draw a box aro
 printed number. Pages without figures are skipped after a fast text pass (pdfium) so a 250-page
 annual report is read in seconds, not minutes.
 
-Scanned PDFs have no text layer; they are refused with that reason rather than read as empty.
+Scanned PDFs have no text layer. With the optional `ocr` extra installed, their pages are read by optical character
+recognition (spreader.ingest.ocr, D42) into the same words with boxes, and everything above applies unchanged; every
+OCR'd token carries its recognition confidence. Without the extra, a scan is refused with that reason rather than
+read as empty.
 """
 
 from __future__ import annotations
@@ -524,8 +527,10 @@ def _header_spans(line: _Line, columns: list[tuple[float, float, int]], vx: floa
 def _token(cell: _Cell, doc_id: str, t_index: int, r_index: int, page: int,
            span: tuple[float, float] | None = None) -> Token:
     text = cell.text
+    scores = [w["ocr_confidence"] for w in cell.words if w.get("ocr_confidence") is not None]
     ref = SourceRef(doc_id=doc_id, format=SourceFormat.PDF, table=t_index, row=r_index, page=page,
-                    bbox=(round(cell.x0, 2), round(cell.top, 2), round(cell.x1, 2), round(cell.bottom, 2)), text=text)
+                    bbox=(round(cell.x0, 2), round(cell.top, 2), round(cell.x1, 2), round(cell.bottom, 2)), text=text,
+                    ocr_confidence=round(min(scores), 4) if scores else None)
     if span:
         x0, x1 = span
     else:
@@ -575,9 +580,12 @@ def _page_lines(page: pdfplumber.page.Page) -> list[_Line]:
     """A page's lines of cells: running headers, footers and stray markers removed, wrapped
     labels joined."""
     words = page.extract_words(keep_blank_chars=False, use_text_flow=False, extra_attrs=["fontname", "size"])
+    return _lines_from_words(words, float(page.height))
+
+
+def _lines_from_words(words: list[dict], height: float) -> list[_Line]:
     if not words:
         return []
-    height = float(page.height)
     font = statistics.median((w.get("size") or (w["bottom"] - w["top"])) for w in words)
     raw = _lines(words)
     last = len(raw) - 1
@@ -588,7 +596,10 @@ def _page_lines(page: pdfplumber.page.Page) -> list[_Line]:
 
 
 def _page_parts(page: pdfplumber.page.Page, pno: int, doc_id: str, first_index: int) -> list[_Part]:
-    lines = _page_lines(page)
+    return _parts_from_lines(_page_lines(page), pno, doc_id, first_index)
+
+
+def _parts_from_lines(lines: list[_Line], pno: int, doc_id: str, first_index: int) -> list[_Part]:
     parts: list[_Part] = []
     for seg in _segments(lines):
         part = _part(seg, doc_id, first_index + len(parts), pno)
@@ -615,7 +626,7 @@ def read_pdf(filename: str, data: bytes) -> DocumentIR:
             raise IngestError(f"The PDF has {n_pages} pages; the limit is {MAX_PAGES}")
         scan = _figure_pages(data)
         if scan is not None and scan[1] == 0:
-            raise IngestError("The PDF has no text layer (it is probably a scan). OCR is not supported yet.")
+            return _read_scan(filename, data, doc_id, n_pages)
         pages = scan[0] if scan is not None else list(range(n_pages))
         text_pages = 0
         for i in pages:
@@ -626,10 +637,41 @@ def read_pdf(filename: str, data: bytes) -> DocumentIR:
             if len(unit_statements) < 50:
                 unit_statements.extend(document_unit_statements(page.extract_text() or ""))
         if scan is None and text_pages == 0:
-            raise IngestError("The PDF has no text layer (it is probably a scan). OCR is not supported yet.")
+            return _read_scan(filename, data, doc_id, n_pages)
     tables = _join_continued(parts, warnings)
     if not tables:
         raise IngestError("No pages with figures were found in this PDF")
+    return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.PDF, tables=tables, warnings=warnings,
+                      unit_statements=unit_statements[:50])
+
+
+def _read_scan(filename: str, data: bytes, doc_id: str, n_pages: int) -> DocumentIR:
+    """A PDF with no text layer: read by OCR when the extra is installed, refused with the reason otherwise."""
+    from . import ocr
+
+    if not ocr.available():
+        raise IngestError("The PDF has no text layer (it is probably a scan). Reading scans needs the optional OCR "
+                          "component (install with: pip install -e .[ocr]).")
+    if n_pages > ocr.MAX_PAGES:
+        raise IngestError(f"The PDF is a scan of {n_pages} pages; OCR reads at most {ocr.MAX_PAGES} "
+                          "(SPREADER_OCR_MAX_PAGES). Split out the statement pages and upload those.")
+    parts: list[_Part] = []
+    unit_statements: list[str] = []
+    for i in range(n_pages):
+        try:
+            words, _, height = ocr.page_words(data, i)
+        except ocr.OCRError as exc:
+            raise IngestError(f"{exc}. Try again, or upload a text PDF.") from exc
+        if sum(1 for w in words if is_amount_like(w["text"])) < MIN_PAGE_NUMBERS:
+            continue
+        parts.extend(_parts_from_lines(_lines_from_words(words, height), i + 1, doc_id, len(parts)))
+        if len(unit_statements) < 50:
+            unit_statements.extend(document_unit_statements(" ".join(w["text"] for w in words)))
+    warnings = [f"OCR: this PDF has no text layer, so its {n_pages} page(s) were read by optical character "
+                f"recognition; every value read with less than {ocr.MIN_CONFIDENCE:.0%} confidence is flagged for review."]
+    tables = _join_continued(parts, warnings)
+    if not tables:
+        raise IngestError("The PDF has no text layer and OCR found no pages with figures.")
     return DocumentIR(doc_id=doc_id, filename=filename, format=SourceFormat.PDF, tables=tables, warnings=warnings,
                       unit_statements=unit_statements[:50])
 

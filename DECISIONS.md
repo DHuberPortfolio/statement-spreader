@@ -429,3 +429,34 @@ changes (six commercial keys rebuilt byte for byte).
 - **What would change it**: the B4 detection change measured on the commercial sets; more filings per industry so a
   tuning round can use a fresh dev half; and the holdout's largest silent groups (an insurer's common stock and APIC,
   investing cash flows) worked on with a new holdout, since this one has now been seen.
+
+**D42. Scanned PDFs are read by local OCR when an optional extra is installed, through the same reader as a text PDF,
+and every number the recogniser was unsure of goes to review.** `pip install -e .[ocr]` adds rapidocr-onnxruntime
+1.4.4 (PP-OCRv4 models in ONNX, run on the CPU; about 210 MB with onnxruntime, opencv-python, numpy and shapely; no
+system program, no network, no paid service). Without it a PDF with no text layer is refused, now with how to install
+it. With it (`spreader/ingest/ocr.py`):
+- **Same reader.** Each page is rendered at 200 dpi (a common office-scanner setting) and recognised into words with
+  boxes in PDF points, with the keys the text-layer reader uses, so lines, cells, wrapped labels, statements, units,
+  periods, review and the evidence box on the page image are the same code. A document warning says it was read by
+  OCR. Scans of more than 60 pages are refused (`SPREADER_OCR_MAX_PAGES`): reading costs seconds per page.
+- **Fail closed on digits.** Every token carries the recogniser's confidence (`SourceRef.ocr_confidence`, lowest word
+  in the cell); review raises an "unreadable" item on any value read below 90% (`SPREADER_OCR_MIN_CONFIDENCE`), so it
+  is never accepted alone. Numbers are never edited: a cell that does not read as a clean amount stays text and the
+  value is missing and flagged, not guessed. A recogniser failure on a page is a refusal, not an empty spread.
+- **Text repairs, letters only.** The recogniser drops spaces in tight text ("Researchanddevelopment"): a run of
+  letters is split only when known words cover it (vocabulary: the template profiles plus statement and date words),
+  with at most one unknown stretch (a company name) in a long run. A month glued to its day, a comma or bracket glued
+  to the next word, and a lone "S" whose next word on the line is an amount (the "$") are repaired.
+- **Deskew.** The recogniser's boxes come back square on a tilted scan, so the tilt is measured on the image (the
+  angle within 2 degrees with the sharpest horizontal ink profile; blank pages and marginal gains left alone) and the
+  page rotated straight before reading.
+- **Measured on scans made from the dev filings** (`scripts/make_scans.py`): each printed 10-K cut to its statement
+  pages plus two on each side (33 packages; 7 filings had no statement pages found by the text reader), as a 200 dpi
+  grey scan with noise and JPEG, and the same tilted 0.3 to 0.8 degrees. Tickers split by hash: settings were changed
+  only while looking at the tune half (15); the check half (18) was measured once at the end. Check half, silent error
+  rate (wrong values accepted alone): text layer 2.4% (38 of 1,589), clean scans 5.2% (66 of 1,281), tilted 4.2% (54 of
+  1,292). On both halves none of the silent errors OCR added is a misread digit; they are table structure (a row
+  counted twice, debt rows confused, a small common-stock line lost), plus label-matched rows the scorer cannot place
+  on a scan (it finds a PDF's company-specific rows by printed label). The scorer was not changed.
+- **Not decided here:** whether a scan's values should carry a stricter acceptance bar than a text PDF's. At 5.2%
+  against 2.4% they arguably should; it needs an outcome-based calibration (D35/D40) on real scans first.

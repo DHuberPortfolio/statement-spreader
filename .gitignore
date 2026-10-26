@@ -39,3 +39,6 @@ eval/coverage/raw/
 # Bank and insurer filings and calculation links for their answer keys (scripts/fetch_industry.py); re-downloadable
 eval/industry/*/raw/
 eval/industry/*/cal/
+
+# OCR measurement: scanned statement packages (scripts/make_scans.py); the manifest is committed
+eval/sec/scans/*/*.pdf

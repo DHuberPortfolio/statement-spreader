@@ -19,6 +19,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "hypothesis>=6.100", "ruff>=0.5", "mypy>=1.10", "types-PyYAML"]
+# Reading scanned PDFs (DECISIONS D42): a local ONNX recogniser, no system program, no network; about 210 MB installed
+# with its dependencies (onnxruntime, opencv-python, numpy, shapely). Without it, a scan is refused with that reason.
+ocr = ["rapidocr-onnxruntime==1.4.4"]
 
 [project.scripts]
 spreader = "spreader.cli:main"
