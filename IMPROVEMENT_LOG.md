@@ -203,3 +203,30 @@ Work order: OVERNIGHT_REPORT.md. Branch `overnight-2026-10-25`.
 | O8 | Opt-in XBRL second reader (D37, `spreader.second_reader`): each printed number the spread uses is compared with the tag on its cell (magnitude and period); a disagreement is a warning on that value. The first comparison counted opening and closing cash as period disagreements in every filing (they are printed in a year column and tagged as balances at a date); fixed in the comparison, visible on dev (Walmart) | Not graded against the answer keys (circular). `xbrl-check`: readers agree on 96.8% of 6,233 tagged printed numbers (dev) and 91.7% of 5,381 (holdout); disagreements are scale (27, 240) and period (171, 208), never another value. Hand-checked random sample of 30 (seed 20261025, 8 filings): the tag was right 29 times, the printed reader once. Only 24 of 646 disagreements were on values not already sent to review | Yes, off by default |
 | O9 | Failed-check flags narrowed by cross-statement confirmation; see #22. The 59 remaining dev silent errors: 47 wrong values, 7 signs, 5 scales; most on other non-operating income (9), common stock and APIC (8) and commercial paper (5); most in AMD and Walmart (7 each), Amazon and Oracle (6 each) | See #22 | Yes |
 | O10 | Bank, insurer and IFRS overlays (D38): `add_lines` in overlays; `us-bank.yaml`, `us-insurer.yaml`, `ifrs-commercial.yaml`; `scripts/fetch_coverage.py` (9 filings outside the evaluation sets); hand checks in `eval/coverage/checks.json`; the parent-only blocker (#23) | Banks, unseen: 19 of 19 checked values right, one net income missing. Insurers, unseen: 5 found values right, 5 key lines missing (Allstate); Progressive has no consolidated statements in its 10-K. IFRS, unseen: 7 of 7 checked values right (BP), revenue missing; Novartis placed almost nothing. A smoke test, not a rate | Yes |
+
+## OCR log (DECISIONS D42)
+
+Branch from c433f20. Scans and halves: `eval/sec/scans/manifest.json`; reports `eval/sec/scans/eval-ocr-*.json`.
+Tune half (15 packages, 2,047 to 2,103 key values per variant): text layer 77.8% right, silent 3.8% (39 of 1,037).
+
+| # | Change | Measured | Kept? |
+|---|---|---|---|
+| O-1 | OCR path: a PDF with no text layer is rendered at 200 dpi, recognised (rapidocr-onnxruntime 1.4.4, per-character boxes split a label from the numbers printed after it in one box), and fed to the text-layer reader; confidence on every token, review flag below 90%; glued words split into known words | Tune half, first run: clean scans 52.5% right, silent 5.9% (42 of 714); tilted 28.5% right, silent 9.4%, and 2 of 15 crashed inside the ONNX runtime with 6 parallel workers | Yes |
+| O-2 | A recogniser failure is retried once, then refused with a clear message; evaluation runs 4 workers with the cores shared between them (`SPREADER_OCR_THREADS`). Months glued to days, company and table words in the vocabulary, "S" read for "$" next to an amount | Tune half: clean 67.9% right (1,414 of 2,082), silent 5.5% (42 of 763); tilted 38.5%, silent 10.5% (54 of 512), no crashes. Of the silent errors OCR added on clean scans, none was a misread digit: all were structure, or rows the scorer places by label (same value, unjudged on the text layer) | Yes |
+| O-3 | Deskew on the image: the boxes come back square on a tilted page, so the box-slope estimate read 0. Projection-profile angle within 2 degrees, page rotated before reading; blank pages left alone (an almost blank page measured 1.9 degrees) | Measured tilt within 0.1 degree of the applied one on every tune-half page with text, 0 on every clean page; about 0.2 s a page | Yes |
+| O-4 | "S" before an amount at any distance on its line (the "$" sits at the left of a wide column: "Total assets S" hid 3M's balance sheet); a long glued label may keep one unknown stretch (Pfizer's "netincomeattributabletopfizerinc" hid its income statement), never with one-letter words around it | O-3 and O-4 measured together, tune half: clean 72.3% right (1,502 of 2,077), silent 5.2% (43 of 827); tilted 72.7% (1,509 of 2,075), silent 5.4% (46 of 851). Settings frozen here | Yes |
+| O-5 | Check half (18 packages), measured once | Text layer 84.3% right (2,016 of 2,391; 82.8-85.7%), silent 2.4% (38 of 1,589; 1.7-3.3%), review 25.4% of values. Clean scans 77.4% (1,872 of 2,418; 75.7-79.0%), silent 5.2% (66 of 1,281; 4.1-6.5%), review 36.6%. Tilted 79.8% (1,925 of 2,412; 78.2-81.4%), silent 4.2% (54 of 1,292; 3.2-5.4%), review 37.4%. No crash or refusal. Median 181 s per 9-page package with 4 packages read at once on 12 cores (about 19 s a page; one package alone, 10 pages: 82 s). Silent errors OCR added on clean scans: 40, of which 0 misread digits, 12 label-placed rows the scorer leaves unjudged on the text layer, 28 structure (Coca-Cola stock compensation and dividends counted twice, C.H. Robinson and Pool debt rows confused, Pool and Ulta common-stock lines lost) | Measurement |
+
+### OCR next steps (ranked by expected value per hour)
+
+1. Real scans: the packages here are clean prints made into images; a borrower's scan (fax, phone photo, stamps,
+   handwriting) will be worse. Ten real scanned statements with answer keys are the next measurement.
+2. The 28 structural silent errors: one row counted twice (Coca-Cola) and debt issued/repaid confused (C.H. Robinson,
+   Pool) are in the table structure the OCR words produce, not the digits. Compare the scan's rows with the text
+   layer's on those pages.
+3. A stricter acceptance bar for scanned values (D42, not decided): calibrate on reviewer outcomes from scans (D40).
+4. Speed: about 19 s a page under parallel load. Skipping pages without figures before full recognition (detection
+   only) would roughly halve a package.
+5. Scoring: the PDF scorer places company-specific rows by printed label, which OCR spells differently; a
+   label-insensitive way (position in the statement) would remove 12 of the 40 added silent errors on the check half,
+   if they are indeed not errors. Change it only with a test on the text-layer set showing no figure moves.

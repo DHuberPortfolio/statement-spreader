@@ -98,7 +98,7 @@ sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`
 measured: see `eval/coverage/checks.json`.
 
 What these numbers do **not** show:
-- SEC filings are cleaner than a borrower's scanned PDF; scanned PDFs (no text layer) are refused.
+- SEC filings are cleaner than a borrower's scanned PDF. Scanned PDFs (no text layer) are refused unless the optional OCR extra is installed (DECISIONS D42); on 18 held-back statement packages printed from the dev 10-Ks and scanned at 200 dpi, it got 77.4% of values right with 5.2% of accepted values silently wrong (66 of 1,281), against 84.3% and 2.4% for the same pages with a text layer, at about 3 minutes per 9-page package. No real scan has been measured.
 - The synthetic corpus was written by the same author as the pipeline.
 - Non-financial US companies only, for every measured figure; unit statements in other currencies are not recognised
   (assumed and flagged).
