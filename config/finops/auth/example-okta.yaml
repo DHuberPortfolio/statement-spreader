@@ -1,0 +1,20 @@
+# Example: Okta with group claims. A second provider and organisation: only this file differs, no code.
+extends: roles-base.yaml
+mode: oidc
+organization: example-insurer
+oidc:
+  issuer: https://example-insurer.okta.com/oauth2/default
+  client_id: 0oaEXAMPLECLIENTID
+  audience: ["api://finops"]
+  client_secret_env: FINOPS_OIDC_CLIENT_SECRET
+  redirect_uri: https://finops.example-insurer.com/api/auth/callback
+  roles_claim: groups
+  actor_claim: email
+role_map:
+  finance-ap-clerks: [preparer]
+  finance-controllers: [reviewer, approver]
+  internal-audit: [auditor]
+  finops-admins: [admin]
+separation_of_duties:
+  approver_not_uploader: true
+  approver_not_corrector: false   # this organisation lets a controller correct and approve; uploader still excluded

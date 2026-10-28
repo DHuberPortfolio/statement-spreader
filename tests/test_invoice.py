@@ -217,8 +217,7 @@ def test_bank_change_needs_a_different_person_and_a_real_note(svc: InvoiceServic
 
 
 def test_api_routes_end_to_end(tmp_path: Path, truth) -> None:  # type: ignore[no-untyped-def]
-    from fastapi.testclient import TestClient
-
+    from conftest import client_as
     from finops import api as fapi
     from finops.recon.service import ReconService
     from spreader.api import app
@@ -226,8 +225,8 @@ def test_api_routes_end_to_end(tmp_path: Path, truth) -> None:  # type: ignore[n
     database = Database(tmp_path / "f.sqlite3")
     fapi.configure(database, ReconService(database, tmp_path / "files", ROOT / "config" / "finops" / "recon"),
                    InvoiceService(database, tmp_path / "inv", POLICY, DEV / "master", tmp_path / "key"))
-    c = TestClient(app)
-    h = {"X-Actor": "dana"}
+    c = client_as(app, "dana")
+    h: dict[str, str] = {}
     wid = c.post("/api/finops/recon/workspaces", json={"name": "March", "profile": "bank-vs-gl.yaml"}, headers=h).json()["id"]
     run = c.post(f"/api/finops/recon/workspaces/{wid}/sample", json={}, headers=h).json()
     assert run["run"]["status"] == "succeeded" and run["result"]["groups"]

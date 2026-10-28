@@ -14,7 +14,7 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, Header, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request
 
 from . import roi
 from .store import now
@@ -79,7 +79,7 @@ async def _body(request: Request) -> dict[str, Any]:
 
 
 @router.post("/api/sessions")
-async def start_session(request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def start_session(request: Request) -> dict[str, Any]:
     svc, actor_of = _svc()
     b = await _body(request)
     mode = b.get("mode")
@@ -97,9 +97,9 @@ async def start_session(request: Request, x_actor: str | None = Header(default=N
             raise HTTPException(400, "That run does not belong to this document")
     with svc.store.tx() as c:
         cur = c.execute("INSERT INTO work_sessions(document_id, run_id, mode, actor, started_at) VALUES (?,?,?,?,?)",
-                        (doc["id"], run_id, mode, actor_of(x_actor), now()))
+                        (doc["id"], run_id, mode, actor_of(), now()))
         sid = cur.lastrowid
-        svc.store.log(c, "session_start", {"session": sid, "mode": mode}, actor_of(x_actor), run_id, doc["id"])
+        svc.store.log(c, "session_start", {"session": sid, "mode": mode}, actor_of(), run_id, doc["id"])
     return {"id": sid}
 
 
@@ -129,7 +129,7 @@ async def heartbeat(sid: int, request: Request) -> dict[str, Any]:
 
 
 @router.post("/api/sessions/{sid}/end")
-async def end_session(sid: int, request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def end_session(sid: int, request: Request) -> dict[str, Any]:
     svc, actor_of = _svc()
     b = await _body(request)
     rows = svc.store.query("SELECT * FROM work_sessions WHERE id=?", (sid,))
@@ -162,7 +162,7 @@ async def end_session(sid: int, request: Request, x_actor: str | None = Header(d
                   " WHERE id=?", (now(), int(b.get("corrections", 0) or 0), len(entered) or int(b.get("values_entered", 0) or 0),
                                   errors, checked, str(b.get("note", ""))[:500], sid))
         svc.store.log(c, "session_end", {"session": sid, "active_seconds": s["active_seconds"], "errors_found": errors,
-                                         "values_checked": checked}, actor_of(x_actor), s["run_id"], s["document_id"])
+                                         "values_checked": checked}, actor_of(), s["run_id"], s["document_id"])
     return dict(svc.store.query("SELECT * FROM work_sessions WHERE id=?", (sid,))[0])
 
 
@@ -184,7 +184,7 @@ def _assumptions(svc: Any) -> dict[str, tuple[float, str]]:
 
 
 @router.put("/api/roi/assumptions")
-async def set_assumptions(request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def set_assumptions(request: Request) -> dict[str, Any]:
     svc, actor_of = _svc()
     b = await _body(request)
     changed = {}
@@ -199,9 +199,9 @@ async def set_assumptions(request: Request, x_actor: str | None = Header(default
             if not math.isfinite(f) or f < 0 or (k.endswith("_share") and f > 1) or f > 1e9:
                 raise HTTPException(400, f"'{k}' is out of range")
             c.execute("INSERT OR REPLACE INTO assumptions(key, value, source, note, updated_at, updated_by) VALUES (?,?,?,?,?,?)",
-                      (k, str(f), "entered", None, now(), actor_of(x_actor)))
+                      (k, str(f), "entered", None, now(), actor_of()))
             changed[k] = f
-        svc.store.log(c, "assumptions", changed, actor_of(x_actor))
+        svc.store.log(c, "assumptions", changed, actor_of())
     return report()
 
 

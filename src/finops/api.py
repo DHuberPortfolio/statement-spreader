@@ -1,7 +1,7 @@
 """HTTP routes for the reconciliation and invoice engines, mounted into the existing app.
 
 Same boundaries as the statement engine's API (spreader/api.py): local, no sign-in, the
-reviewer's name from X-Actor (recorded, not verified), cross-site writes refused by the app's
+signed-in user's identity from auth_api (DECISIONS D43), cross-site writes refused by the app's
 middleware. Errors a reviewer can act on come back as 400 {"error": "..."}.
 
 Sample data: the "sample" routes load the synthetic sets (eval/), so the workflows can be tried
@@ -17,12 +17,13 @@ import os
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, File, Header, HTTPException, Request, UploadFile
+from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from fastapi.responses import Response
 from pydantic import BaseModel
 from starlette.datastructures import UploadFile as StarletteUpload
 
 from finops.core.audit import Database
+from finops.core.identity import require
 from spreader.export import _safe_text as safe  # text that starts with = + - @ is written as plain text
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -100,10 +101,10 @@ def configure(database: Database, recon_service: Any = None, invoice_service: An
     _db, _recon, _invoice, _dq, _sheets = database, recon_service, invoice_service, dq_service, sheets_service
 
 
-def _actor(x_actor: str | None) -> str:
-    from spreader.api import _actor as clean
+def _actor() -> str:
+    from finops.core.identity import current
 
-    return clean(x_actor)
+    return current().actor
 
 
 async def _read(f: UploadFile) -> tuple[str, bytes]:
@@ -173,26 +174,25 @@ def recon_workspaces() -> list[dict[str, Any]]:
 
 
 @router.post("/recon/workspaces")
-def recon_create(body: NewWorkspace, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return {"id": recon().create_workspace(body.name, body.profile, _actor(x_actor))}
+def recon_create(body: NewWorkspace) -> dict[str, Any]:
+    return {"id": recon().create_workspace(body.name, body.profile, _actor())}
 
 
 @router.post("/recon/workspaces/{wid}/run")
-async def recon_run(wid: int, left: UploadFile | None = File(default=None), right: UploadFile | None = File(default=None),
-                    x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def recon_run(wid: int, left: UploadFile | None = File(default=None), right: UploadFile | None = File(default=None)) -> dict[str, Any]:
     lf = await _read(left) if left else None
     rf = await _read(right) if right else None
     from starlette.concurrency import run_in_threadpool
 
-    return await run_in_threadpool(recon().run, wid, _actor(x_actor), lf, rf)
+    return await run_in_threadpool(recon().run, wid, _actor(), lf, rf)
 
 
 @router.post("/recon/workspaces/{wid}/sample")
-def recon_sample(wid: int, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+def recon_sample(wid: int) -> dict[str, Any]:
     from finops.recon.synthetic import generate
 
     bank, ledger, _ = generate(7, 60)
-    return recon().run(wid, _actor(x_actor), ("sample-bank.csv", bank), ("sample-ledger.csv", ledger))
+    return recon().run(wid, _actor(), ("sample-bank.csv", bank), ("sample-ledger.csv", ledger))
 
 
 @router.get("/recon/runs/{run_id}")
@@ -201,23 +201,23 @@ def recon_get(run_id: int) -> dict[str, Any]:
 
 
 @router.post("/recon/runs/{run_id}/accept")
-def recon_accept(run_id: int, body: GroupAction, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return recon().accept(run_id, body.group_id, _actor(x_actor), body.note)
+def recon_accept(run_id: int, body: GroupAction) -> dict[str, Any]:
+    return recon().accept(run_id, body.group_id, _actor(), body.note)
 
 
 @router.post("/recon/runs/{run_id}/reject")
-def recon_reject(run_id: int, body: GroupAction, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return recon().reject(run_id, body.group_id, _actor(x_actor), body.note)
+def recon_reject(run_id: int, body: GroupAction) -> dict[str, Any]:
+    return recon().reject(run_id, body.group_id, _actor(), body.note)
 
 
 @router.post("/recon/runs/{run_id}/manual")
-def recon_manual(run_id: int, body: ManualMatch, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return recon().manual_match(run_id, body.left, body.right, _actor(x_actor), body.note)
+def recon_manual(run_id: int, body: ManualMatch) -> dict[str, Any]:
+    return recon().manual_match(run_id, body.left, body.right, _actor(), body.note)
 
 
 @router.post("/recon/runs/{run_id}/resolve")
-def recon_resolve(run_id: int, body: Resolve, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return recon().resolve(run_id, body.exception_id, body.action, _actor(x_actor), body.note)
+def recon_resolve(run_id: int, body: Resolve) -> dict[str, Any]:
+    return recon().resolve(run_id, body.exception_id, body.action, _actor(), body.note)
 
 
 @router.get("/recon/workspaces/{wid}/events")
@@ -255,21 +255,21 @@ def invoice_list() -> list[dict[str, Any]]:
 
 
 @router.post("/invoices")
-async def invoice_upload(file: UploadFile = File(...), x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def invoice_upload(file: UploadFile = File(...)) -> dict[str, Any]:
     name, data = await _read(file)
     from starlette.concurrency import run_in_threadpool
 
-    return await run_in_threadpool(invoices().upload, name, data, _actor(x_actor))
+    return await run_in_threadpool(invoices().upload, name, data, _actor())
 
 
 @router.post("/invoices/sample")
-def invoice_sample(x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+def invoice_sample() -> dict[str, Any]:
     """Load the synthetic dev inbox, in order (only meaningful with the default sample master data)."""
     d = ROOT / "eval" / "invoice" / "dev"
     truth = json.loads((d / "truth.json").read_text(encoding="utf-8"))
     n = 0
     for doc in truth["inbox"]:
-        invoices().upload(Path(doc["file"]).name, (d / doc["file"]).read_bytes(), _actor(x_actor))
+        invoices().upload(Path(doc["file"]).name, (d / doc["file"]).read_bytes(), _actor())
         n += 1
     return {"submitted": n}
 
@@ -292,18 +292,20 @@ def invoice_get(doc_id: str) -> dict[str, Any]:
 
 
 @router.post("/invoices/{doc_id}/reprocess")
-def invoice_reprocess(doc_id: str, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return invoices().process(doc_id, _actor(x_actor))
+def invoice_reprocess(doc_id: str) -> dict[str, Any]:
+    return invoices().process(doc_id, _actor())
 
 
 @router.post("/invoices/{doc_id}/correct")
-def invoice_correct(doc_id: str, body: Correction, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return invoices().correct(doc_id, body.field, body.value, body.note, _actor(x_actor))
+def invoice_correct(doc_id: str, body: Correction) -> dict[str, Any]:
+    return invoices().correct(doc_id, body.field, body.value, body.note, _actor())
 
 
 @router.post("/invoices/{doc_id}/resolve")
-def invoice_resolve(doc_id: str, body: Resolve, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return invoices().resolve(doc_id, body.exception_id, body.action, body.note, _actor(x_actor))
+def invoice_resolve(doc_id: str, body: Resolve) -> dict[str, Any]:
+    if body.action == "verified_independently":  # accepting changed bank details is an approval (D43)
+        require("approve")
+    return invoices().resolve(doc_id, body.exception_id, body.action, body.note, _actor())
 
 
 @router.get("/invoices/{doc_id}/events")
@@ -331,7 +333,7 @@ def dq_runs() -> list[dict[str, Any]]:
 
 
 @router.post("/dq/runs")
-async def dq_run(request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def dq_run(request: Request) -> dict[str, Any]:
     """Multipart form: `dataset` (a configuration file name), one file per source as `source_<id>`, optional
     `reference_<dataset>` files and an optional `previous` (the last accepted export)."""
     form = await request.form()
@@ -351,18 +353,18 @@ async def dq_run(request: Request, x_actor: str | None = Header(default=None)) -
             previous = (name, data)
     from starlette.concurrency import run_in_threadpool
 
-    run_id = await run_in_threadpool(dq().run, dataset, inputs, _actor(x_actor), refs, previous)
+    run_id = await run_in_threadpool(dq().run, dataset, inputs, _actor(), refs, previous)
     return {"run": run_id}
 
 
 @router.post("/dq/sample")
-def dq_sample(x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+def dq_sample() -> dict[str, Any]:
     """The synthetic vendor and purchase-order exports (finops.dq.synthetic, seed 21): vendors from two systems
     against last month's accepted file, then purchase orders against the vendors this run accepted."""
     from finops.dq.synthetic import generate
 
     s = generate(21)
-    actor = _actor(x_actor)
+    actor = _actor()
     v = dq().run("vendors.yaml", [("portal", "sample-portal.csv", s.portal_csv), ("erp", "sample-erp.xlsx", s.erp_xlsx)], actor,
                  previous=("sample-last-accepted-vendors.csv", s.previous_csv))
     _, accepted = dq().export(v, "accepted")
@@ -376,8 +378,9 @@ def dq_get(run_id: int) -> dict[str, Any]:
 
 
 @router.post("/dq/runs/{run_id}/decide")
-def dq_decide(run_id: int, body: GateDecision, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return {"run": dq().decide(run_id, body.record_id, body.action, _actor(x_actor), body.note, body.field, body.value)}
+def dq_decide(run_id: int, body: GateDecision) -> dict[str, Any]:
+    require({"release": "approve", "reject": "review", "correct": "edit"}.get(body.action, "edit"))
+    return {"run": dq().decide(run_id, body.record_id, body.action, _actor(), body.note, body.field, body.value)}
 
 
 @router.get("/dq/runs/{run_id}/export/{kind}.csv")
@@ -404,7 +407,7 @@ def sheets_scans() -> list[dict[str, Any]]:
 
 
 @router.post("/sheets/scans")
-async def sheets_scan(request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def sheets_scan(request: Request) -> dict[str, Any]:
     """Multipart form: `workbook`, an optional `previous` version and an optional `model` name."""
     form = await request.form()
     wb = form.get("workbook")
@@ -415,18 +418,18 @@ async def sheets_scan(request: Request, x_actor: str | None = Header(default=Non
     previous = await _read(prev_f) if isinstance(prev_f, StarletteUpload) else None  # type: ignore[arg-type]
     from starlette.concurrency import run_in_threadpool
 
-    scan_id = await run_in_threadpool(sheets().scan, name, data, _actor(x_actor), previous, str(form.get("model") or "") or None)
+    scan_id = await run_in_threadpool(sheets().scan, name, data, _actor(), previous, str(form.get("model") or "") or None)
     return {"scan": scan_id}
 
 
 @router.post("/sheets/sample")
-def sheets_sample(x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+def sheets_sample() -> dict[str, Any]:
     """A synthetic budget with planted problems (finops.sheets.synthetic, seed 41), then an edited version of a
     clean budget compared with its original."""
     from finops.sheets.synthetic import generate
 
     books, pairs = generate(41)
-    actor = _actor(x_actor)
+    actor = _actor()
     one = sheets().scan(books[0].name, books[0].data, actor)
     p = pairs[0]
     two = sheets().scan(p.after.name, p.after.data, actor, (p.before.name, p.before.data))
@@ -439,8 +442,8 @@ def sheets_get(scan_id: int) -> dict[str, Any]:
 
 
 @router.post("/sheets/scans/{scan_id}/review")
-def sheets_review(scan_id: int, body: Review, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
-    return sheets().review(scan_id, body.finding_id, body.action, _actor(x_actor), body.note)
+def sheets_review(scan_id: int, body: Review) -> dict[str, Any]:
+    return sheets().review(scan_id, body.finding_id, body.action, _actor(), body.note)
 
 
 @router.get("/sheets/scans/{scan_id}/export.csv")
@@ -474,7 +477,7 @@ def roi() -> dict[str, Any]:
 
 
 @router.put("/roi/assumptions")
-def roi_assumptions(body: dict[str, float], x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+def roi_assumptions(body: dict[str, float]) -> dict[str, Any]:
     from finops.core.audit import now
     from finops.roi import DEFAULTS
 
@@ -490,6 +493,6 @@ def roi_assumptions(body: dict[str, float], x_actor: str | None = Header(default
         for k, v in body.items():
             c.execute("INSERT INTO finops_assumptions (key, value, actor, at) VALUES (?,?,?,?) "
                       "ON CONFLICT(key) DO UPDATE SET value = excluded.value, actor = excluded.actor, at = excluded.at",
-                      (k, float(v), _actor(x_actor), now()))
-        db().append_event(c, "roi", "assumptions", _actor(x_actor), "assumptions_changed", dict(body))
+                      (k, float(v), _actor(), now()))
+        db().append_event(c, "roi", "assumptions", _actor(), "assumptions_changed", dict(body))
     return roi()

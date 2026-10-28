@@ -7,10 +7,9 @@ import time
 from decimal import Decimal
 
 import pytest
-from conftest import statement_html
-from fastapi.testclient import TestClient
 from openpyxl import Workbook
 
+from conftest import client_as, statement_html
 from spreader import api, roi
 from spreader.ingest import read_document
 from spreader.numbers import clean_label, parse_amount
@@ -107,7 +106,7 @@ def test_other_digit_scripts_are_refused() -> None:
 @pytest.fixture()
 def client(tmp_path, profile):  # type: ignore[no-untyped-def]
     api.set_service(Service(Store(tmp_path / "db.sqlite3"), profile=profile))
-    return TestClient(api.app)
+    return client_as(api.app, "dana")
 
 
 def test_cross_site_writes_and_foreign_hosts_are_refused(client) -> None:  # type: ignore[no-untyped-def]
@@ -123,7 +122,8 @@ def test_cross_site_writes_and_foreign_hosts_are_refused(client) -> None:  # typ
 
 
 def test_assumptions_must_be_finite(client) -> None:  # type: ignore[no-untyped-def]
-    assert client.put("/api/roi/assumptions", json={"cash_realization_share": "nan"}).status_code == 400
+    assert client.put("/api/roi/assumptions", json={"cash_realization_share": "0.5"}).status_code == 403  # not an admin
+    assert client_as(api.app, "adm").put("/api/roi/assumptions", json={"cash_realization_share": "nan"}).status_code == 400
 
 
 def test_roi_ignores_empty_sessions() -> None:

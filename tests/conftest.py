@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+from pathlib import Path
+from typing import Any
+
 import pytest
 
 from spreader.profile import Profile, load_profile
+
+AUTH_TEST_CONFIG = Path(__file__).parent / "fixtures" / "auth-test.yaml"
 
 
 @pytest.fixture(scope="session")
@@ -15,6 +20,31 @@ def _private_outcomes(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pyt
     """Every test writes reviewer outcomes to its own folder: a test's approvals in the real var/outcomes would be
     learned from as if a reviewer had made them (found 2026-10-25: 123 outcomes from test runs)."""
     monkeypatch.setenv("FINOPS_OUTCOMES_DIR", str(tmp_path_factory.mktemp("outcomes")))
+
+
+@pytest.fixture(autouse=True)
+def _test_sign_in(tmp_path_factory: pytest.TempPathFactory) -> Any:
+    """Every test gets its own sign-in setup (development users from fixtures/auth-test.yaml, sessions in a temporary
+    database), so no test can reach the API without signing in and none touches var/."""
+    from finops.core.audit import Database
+    from finops.core.identity import load_auth_config
+    from spreader import auth_api
+
+    a = auth_api.Auth(load_auth_config(AUTH_TEST_CONFIG), Database(tmp_path_factory.mktemp("auth") / "auth.sqlite3"))
+    auth_api.configure(a)
+    yield a
+    auth_api.configure(None)
+
+
+def client_as(app: Any, username: str | None) -> Any:
+    """A test client signed in as one of the development users in fixtures/auth-test.yaml (None: not signed in)."""
+    from fastapi.testclient import TestClient
+
+    c = TestClient(app)
+    if username is not None:
+        r = c.post("/api/auth/dev-login", json={"username": username})
+        assert r.status_code == 200, r.text
+    return c
 
 
 def statement_html(title: str, unit: str, header: list[str], rows: list[tuple], hidden: list[tuple] | None = None,

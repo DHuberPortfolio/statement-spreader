@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import { AuthGate } from "./components/SignIn";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/app.css";
@@ -10,6 +11,8 @@ const root = document.getElementById("root");
 if (!root) throw new Error("No #root element");
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <AuthGate>
+      <App />
+    </AuthGate>
   </StrictMode>,
 );

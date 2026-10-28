@@ -2527,3 +2527,17 @@ input[type="file"]::file-selector-button {
 input[type="file"]::file-selector-button:hover {
   background: var(--sheet-2);
 }
+
+/* Sign-in (DECISIONS D43) */
+.signin { max-width: 34rem; margin: 10vh auto; padding: 0 16px; }
+.signin h1 { margin-bottom: 1rem; }
+.signin-users { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.signin-wait { margin: 20vh auto; text-align: center; color: var(--muted, #667); }
+.dev-warning, .dev-auth { background: #fff4d6; color: #5a4100; border: 1px solid #e8c46a; border-radius: 6px; }
+.dev-warning { padding: .75rem 1rem; }
+.dev-auth { padding: .1rem .5rem; font-size: .8rem; font-weight: 600; }
+.signin-error { color: #b42318; }
+.user-badge { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+@media (prefers-color-scheme: dark) {
+  .dev-warning, .dev-auth { background: #3a2d05; color: #ffe4a3; border-color: #7a5d12; }
+}

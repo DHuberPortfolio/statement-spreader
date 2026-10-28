@@ -1,0 +1,20 @@
+# Example: Microsoft Entra ID (Azure AD) with app roles. Replace the ids with your tenant's.
+# The client secret is read from the environment variable named in client_secret_env, never from this file.
+extends: roles-base.yaml
+mode: oidc
+organization: example-bank
+oidc:
+  issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+  client_id: 11111111-1111-1111-1111-111111111111
+  audience: ["api://11111111-1111-1111-1111-111111111111"]
+  client_secret_env: FINOPS_OIDC_CLIENT_SECRET
+  redirect_uri: https://finops.example-bank.internal/api/auth/callback
+  roles_claim: roles            # Entra app roles
+  actor_claim: preferred_username
+  required_claims: {tid: 00000000-0000-0000-0000-000000000000}   # tokens from other tenants are refused
+role_map:
+  FinOps.Preparer: [preparer]
+  FinOps.Reviewer: [reviewer]
+  FinOps.Approver: [approver]
+  FinOps.Auditor: [auditor]
+  FinOps.Admin: [admin]

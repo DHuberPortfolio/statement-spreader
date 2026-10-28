@@ -4,7 +4,8 @@ A local, $0 platform that does the keying and ticking finance teams do by hand, 
 unsure of to a person. Built as the foundation for a real deployment at a company whose clients include a large share
 of the biggest US companies: trustworthy before fast, every number traceable to where it was printed, every change
 measured, and adaptable to a company's own data through configuration. **A tested prototype, not a production
-system**: no sign-in, one machine, measured on public filings and synthetic data only.
+system**: one machine, sign-in tested only against a local test identity provider, measured on public filings and
+synthetic data only. Progress toward production: [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md).
 
 ## Who uses it, what it replaces, what stays human
 
@@ -308,7 +309,14 @@ SPREADER_DATA=var/demo .venv/Scripts/spreader serve                  # the same,
 .venv/Scripts/spreader spread path/to/10-K.htm --out spread.xlsx      # one document, no app (export marked unapproved)
 ```
 
-Open http://127.0.0.1:8765: **Statements**, **Reconciliation** (/recon: create one, then upload two files or
+Open http://127.0.0.1:8765 and sign in. Without configuration the app uses **development sign-in**
+(`config/finops/auth/development.yaml`): pick a test user (preparer, reviewer, approver, auditor, admin, viewer). It is
+labelled on every page, refused on any non-local host or with `FINOPS_ENV=production`, and an approval needs a
+different user from the one who uploaded or corrected. For an organisation's single sign-on, point
+`FINOPS_AUTH_CONFIG` at a copy of `config/finops/auth/example-entra-id.yaml` or `example-okta.yaml` with its own ids,
+and set the client secret in `FINOPS_OIDC_CLIENT_SECRET` (DECISIONS D43).
+
+Then: **Statements**, **Reconciliation** (/recon: create one, then upload two files or
 "Try sample data") and **Invoices** (/invoices: upload a PDF or JSON, or "Load the sample inbox"); the samples are
 the synthetic sets in `eval/`. Invoice matching reads its vendor master, POs and receipts from
 `FINOPS_MASTER_DIR` (default: the synthetic `eval/invoice/dev/master`) under the policy in `FINOPS_AP_POLICY`
@@ -339,7 +347,8 @@ Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the 
 
 ## Limits and what production would need
 
-Sign-in and roles (the reviewer name is an unverified header), a retention and deletion policy,
+Single sign-on verified against the organisation's live identity provider (implemented and tested with a local test
+provider only, D43), an external anchor for the audit chain (D44), a retention and deletion policy,
 encryption at rest, OCR measured on real borrower scans (faxes, phone photos), multi-user concurrency on a server
 database, and,
 in banking, model-risk-management review. See [THREAT_MODEL.md](THREAT_MODEL.md) and

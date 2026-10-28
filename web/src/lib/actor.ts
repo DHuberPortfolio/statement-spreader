@@ -1,31 +1,13 @@
-// The reviewer's name, kept in localStorage and sent as X-Actor on every request.
-// Storage can be unavailable (private windows, blocked site data), so every access is guarded.
-
-const KEY = "spreader.actor";
-const listeners = new Set<(name: string) => void>();
+// The signed-in user's name as the audit log records it (lib/auth.ts holds the session).
+// "local-user" means nobody is signed in: actions that need a person stay disabled.
+import { authState, onAuthChange } from "./auth";
 
 export function getActor(): string {
-  try {
-    return localStorage.getItem(KEY)?.trim() || "local-user";
-  } catch {
-    return "local-user";
-  }
-}
-
-export function setActor(name: string): void {
-  const clean = name.replace(/[^\w .@-]/g, "").trim().slice(0, 60);
-  try {
-    if (clean) localStorage.setItem(KEY, clean);
-    else localStorage.removeItem(KEY);
-  } catch {
-    /* storage unavailable: the name lasts for this page only */
-  }
-  listeners.forEach((fn) => fn(clean || "local-user"));
+  return authState().me?.actor ?? "local-user";
 }
 
 export function onActorChange(fn: (name: string) => void): () => void {
-  listeners.add(fn);
-  return () => listeners.delete(fn);
+  return onAuthChange((s) => fn(s.me?.actor ?? "local-user"));
 }
 
 export function readStored<T>(key: string, fallback: T): T {

@@ -1,0 +1,16 @@
+# Sign-in for the test suite: development mode with the base roles. dana and erin hold every working role so the
+# older engine tests can act as one person; separation of duties stays on as in production.
+extends: ../../config/finops/auth/roles-base.yaml
+mode: development
+organization: test-org
+session: {secure_cookie: false}
+dev_users:
+  - {username: dana, name: Dana, roles: [preparer, reviewer, approver, auditor]}
+  - {username: erin, name: Erin, roles: [preparer, reviewer, approver, auditor]}
+  - {username: pat, name: Pat, roles: [preparer]}
+  - {username: rae, name: Rae, roles: [reviewer]}
+  - {username: ari, name: Ari, roles: [approver]}
+  - {username: aud, name: Aud, roles: [auditor]}
+  - {username: adm, name: Adm, roles: [admin]}
+  - {username: vic, name: Vic, roles: [viewer]}
+  - {username: nobody, name: Nobody, roles: []}

@@ -264,6 +264,26 @@ class Service:
         return spread.model_copy(update={"values": values, "checks": checks, "ratios": ratios, "review": review})
 
     # ---- reviewer actions ----
+    def approval_conflict(self, run_id: int, actor: str, not_uploader: bool, not_corrector: bool) -> str | None:
+        """Why `actor` may not approve this run under separation of duties, or None (DECISIONS D43).
+
+        The uploader is whoever uploaded the document (first upload or a duplicate); a corrector is anyone who corrected
+        a value, remapped or excluded a row on any run of the document. Both are read from the audit log."""
+        from finops.core.exceptions import same_person
+
+        run = self.get(run_id).run
+        rows = self.store.query("SELECT actor, kind FROM events WHERE document_id=? AND kind IN "
+                                "('upload','upload_duplicate','correct_value','remap_row','exclude_row')", (run["document_id"],))
+        uploaders = {r["actor"] for r in rows if r["kind"].startswith("upload")}
+        correctors = {r["actor"] for r in rows if not r["kind"].startswith("upload")}
+        for o in run["state"].get("overrides", {}).values():
+            correctors.add(o.get("actor", ""))
+        if not_uploader and any(same_person(actor, u) for u in uploaders):
+            return "You uploaded this document; separation of duties needs someone else to approve its spread"
+        if not_corrector and any(same_person(actor, x) for x in correctors):
+            return "You corrected or remapped values in this spread; separation of duties needs someone else to approve it"
+        return None
+
     def act(self, run_id: int, action: dict[str, Any], actor: str) -> RunView:
         view = self.get(run_id)
         run, spread = view.run, view.spread

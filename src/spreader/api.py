@@ -3,10 +3,8 @@
 Run locally:  .venv/Scripts/python -m uvicorn spreader.api:app --port 8765
 
 Boundaries, stated plainly:
-- There is no sign-in. The reviewer's name comes from the X-Actor header and is recorded in the
-  audit log, but nothing verifies it. This is a single-user local prototype; a deployment must
-  put it behind the organisation's SSO and map roles (preparer, reviewer) before approval means
-  anything.
+- Every /api route needs a signed-in user with the route's permission (auth_api.py, DECISIONS D43). The
+  actor in the audit log is the identity the server established, never a name the client sends.
 - Documents never come back as raw HTML (that would run a filing's markup in the browser). The
   evidence view gets the parsed table as text cells, or a rendered PNG of a PDF page.
 """
@@ -19,7 +17,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, File, Form, Header, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
@@ -81,9 +79,17 @@ def set_service(svc: Service) -> None:
     _service = svc
 
 
-def _actor(x_actor: str | None) -> str:
-    name = (x_actor or "local-user").strip()[:60]
-    return re.sub(r"[^\w .@-]", "", name) or "local-user"
+def _actor() -> str:
+    """The signed-in principal's name for the audit log (auth_api established it; nothing the client sends
+    can change it)."""
+    from finops.core.identity import current
+
+    return current().actor
+
+
+# Statement actions: what each one needs, on top of signing in (auth_api refines the route by action here).
+ACTION_PERMISSION = {"correct_value": "edit", "remap_row": "edit", "exclude_row": "edit", "resolve_item": "review",
+                     "approve": "approve", "reopen": "approve"}
 
 
 @app.exception_handler(ActionError)
@@ -139,14 +145,13 @@ def documents() -> list[dict[str, Any]]:
 
 
 @app.post("/api/documents")
-async def upload(file: UploadFile = File(...), company_id: str | None = Form(default=None),
-                 x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def upload(file: UploadFile = File(...), company_id: str | None = Form(default=None)) -> dict[str, Any]:
     """company_id: the organisation's identifier for the company (an SEC filing defaults to its CIK); a company's
     documents share its approved spreads and confirmed mappings (spreader.company)."""
     data = await file.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
         raise HTTPException(413, f"File is larger than {MAX_BYTES // 1_000_000} MB")
-    doc, view = await run_in_threadpool(service().upload, file.filename or "document", data, _actor(x_actor), company_id)
+    doc, view = await run_in_threadpool(service().upload, file.filename or "document", data, _actor(), company_id)
     return await run_in_threadpool(_run_payload, view)
 
 
@@ -164,7 +169,7 @@ def companies() -> list[dict[str, Any]]:
 
 
 @app.post("/api/documents/{doc_id}/company")
-async def set_company(doc_id: str, request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def set_company(doc_id: str, request: Request) -> dict[str, Any]:
     """Says which company an uploaded document is about; the document is re-run with that company's approvals."""
     if not re.fullmatch(r"[0-9a-f]{64}", doc_id):
         raise HTTPException(404, "Unknown document")
@@ -174,15 +179,15 @@ async def set_company(doc_id: str, request: Request, x_actor: str | None = Heade
         raise HTTPException(400, "Body must be JSON") from exc
     if not isinstance(body, dict):
         raise HTTPException(400, "Body must be a JSON object")
-    view = await run_in_threadpool(service().set_company, doc_id, str(body.get("company_id", "")), _actor(x_actor))
+    view = await run_in_threadpool(service().set_company, doc_id, str(body.get("company_id", "")), _actor())
     return await run_in_threadpool(_run_payload, view)
 
 
 @app.post("/api/documents/{doc_id}/runs")
-def rerun(doc_id: str, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+def rerun(doc_id: str) -> dict[str, Any]:
     if not re.fullmatch(r"[0-9a-f]{64}", doc_id):
         raise HTTPException(404, "Unknown document")
-    return _run_payload(service().run(doc_id, _actor(x_actor)))
+    return _run_payload(service().run(doc_id, _actor()))
 
 
 @app.get("/api/runs/{run_id}")
@@ -194,14 +199,25 @@ def get_run(run_id: int) -> dict[str, Any]:
 
 
 @app.post("/api/runs/{run_id}/actions")
-async def act(run_id: int, request: Request, x_actor: str | None = Header(default=None)) -> dict[str, Any]:
+async def act(run_id: int, request: Request) -> dict[str, Any]:
     try:
         body = await request.json()
     except json.JSONDecodeError as exc:
         raise HTTPException(400, "Body must be JSON") from exc
     if not isinstance(body, dict):
         raise HTTPException(400, "Body must be a JSON object")
-    view = await run_in_threadpool(service().act, run_id, body, _actor(x_actor))
+    from finops.core.identity import require
+
+    require(ACTION_PERMISSION.get(str(body.get("type", "")), "edit"))
+    if body.get("type") == "approve":
+        from .auth_api import auth
+
+        sod = auth().cfg.separation_of_duties
+        why = await run_in_threadpool(service().approval_conflict, run_id, _actor(), sod.approver_not_uploader,
+                                      sod.approver_not_corrector)
+        if why:
+            raise HTTPException(403, why)
+    view = await run_in_threadpool(service().act, run_id, body, _actor())
     return await run_in_threadpool(_run_payload, view)
 
 
@@ -272,7 +288,7 @@ def _export_meta(view: Any) -> dict[str, Any]:
 
 
 @app.get("/api/runs/{run_id}/export.{fmt}")
-def export(run_id: int, fmt: str, x_actor: str | None = Header(default=None)) -> Response:
+def export(run_id: int, fmt: str) -> Response:
     svc = service()
     view = svc.get(run_id)
     if view.spread is None:
@@ -287,7 +303,7 @@ def export(run_id: int, fmt: str, x_actor: str | None = Header(default=None)) ->
     else:
         raise HTTPException(404, "Formats: xlsx, csv, json")
     with svc.store.tx() as c:
-        svc.store.log(c, "export", {"format": fmt, "approved": bool(meta["approved"])}, _actor(x_actor), run_id,
+        svc.store.log(c, "export", {"format": fmt, "approved": bool(meta["approved"])}, _actor(), run_id,
                       view.run["document_id"])
     name = f"spread-run{run_id}.{fmt}"
     return Response(body, media_type=media, headers={"Content-Disposition": f'attachment; filename="{name}"'})
@@ -318,6 +334,34 @@ from finops.recon.service import ActionError as ReconActionError  # noqa: E402
 from finops.sheets.service import ActionError as SheetsActionError  # noqa: E402
 
 app.include_router(finops_router)
+
+from finops.core.identity import AuthError, Forbidden  # noqa: E402
+
+from . import auth_api  # noqa: E402
+
+app.include_router(auth_api.router)
+app.add_middleware(auth_api.AuthMiddleware)  # outermost: identity is settled before anything else runs
+
+
+@app.exception_handler(AuthError)
+async def _auth_error(_: Request, exc: AuthError) -> JSONResponse:
+    return JSONResponse(status_code=401, content={"error": str(exc), "sign_in": True})
+
+
+@app.exception_handler(Forbidden)
+async def _forbidden(_: Request, exc: Forbidden) -> JSONResponse:
+    return JSONResponse(status_code=403, content={"error": str(exc)})
+
+
+@app.get("/api/audit/verify")
+def audit_verify() -> dict[str, Any]:
+    """Recompute both audit chains and report the first entry that does not fit (needs the audit permission)."""
+    from finops.api import db
+
+    ok, first_bad = db().verify_chain()
+    s_ok, s_bad = service().store.verify_chain()
+    return {"platform": {"intact": ok, "first_bad_event": first_bad},
+            "statements": {"intact": s_ok, "first_bad_event": s_bad}}
 
 
 @app.exception_handler(ReconActionError)

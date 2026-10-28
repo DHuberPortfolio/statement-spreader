@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { getActor, onActorChange, setActor } from "../lib/actor";
+import { authState, onAuthChange, signOut } from "../lib/auth";
 import { formatDuration } from "../lib/format";
 import { Link, navigate, useLocation } from "../lib/router";
 import { endActiveSession } from "../lib/session";
@@ -7,35 +7,24 @@ import { flash, useFlash, useSession } from "../lib/store";
 import { useTimer } from "../lib/timer";
 import { InlineMessage } from "./States";
 
-function ActorField() {
-  const [name, setName] = useState(getActor());
-  const [draft, setDraft] = useState(name === "local-user" ? "" : name);
-  useEffect(() => onActorChange(setName), []);
+function UserBadge() {
+  const [me, setMe] = useState(authState().me);
+  useEffect(() => onAuthChange((st) => setMe(st.me)), []);
+  if (!me) return null;
   return (
-    <form
-      className="actor-field"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setActor(draft);
-        (document.activeElement as HTMLElement | null)?.blur();
-      }}
-    >
-      <label htmlFor="actor-input">Reviewer</label>
-      <input
-        id="actor-input"
-        type="text"
-        value={draft}
-        placeholder="your name"
-        maxLength={60}
-        autoComplete="name"
-        onChange={(e) => setDraft(e.target.value)}
-        onBlur={() => setActor(draft)}
-        aria-describedby="actor-hint"
-      />
-      <span id="actor-hint" className="sr-only">
-        Recorded in the audit log with every action. Currently {name}.
+    <div className="user-badge">
+      {!me.verified && (
+        <span className="dev-auth" title="Development sign-in: identities are not verified. Not for real data or approvals.">
+          Development sign-in
+        </span>
+      )}
+      <span className="user-name">
+        <strong>{me.name}</strong> <span className="muted small">{me.roles.join(", ") || "no role"}</span>
       </span>
-    </form>
+      <button type="button" className="btn btn-small btn-quiet" onClick={() => void signOut()}>
+        Sign out
+      </button>
+    </div>
   );
 }
 
@@ -217,7 +206,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
       <div className="workarea">
         <header className="topbar">
           <span className="topbar-note">Local prototype · public and synthetic data only</span>
-          <ActorField />
+          <UserBadge />
         </header>
         <SessionBanner />
         <FlashArea />

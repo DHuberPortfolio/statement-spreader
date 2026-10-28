@@ -411,15 +411,14 @@ def test_model_names() -> None:
 
 
 def test_http_routes(tmp_path: Path) -> None:
-    from fastapi.testclient import TestClient
-
+    from conftest import client_as
     from finops import api as fapi
     from spreader.api import app
 
     database = Database(tmp_path / "f.sqlite3")
     fapi.configure(database, sheets_service=SheetsService(database, tmp_path / "files", CONFIG))
-    c = TestClient(app)
-    h = {"X-Actor": "dana"}
+    c = client_as(app, "dana")
+    h: dict[str, str] = {}
     sample = c.post("/api/finops/sheets/sample", json={}, headers=h).json()["scans"]
     one = c.get(f"/api/finops/sheets/scans/{sample[0]}").json()
     assert one["status"] == "succeeded" and one["counts"]["error"] + one["counts"]["risk"] > 0

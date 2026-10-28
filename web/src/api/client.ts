@@ -1,8 +1,8 @@
-// A small fetch wrapper. Every request carries the reviewer's name in X-Actor (the backend
-// records it in the audit log). Errors come back as {"error": "..."} (reviewer actions) or
+// A small fetch wrapper. Identity is the session cookie the server issued at sign-in (lib/auth.ts); a 401 sends the
+// app back to the sign-in screen. Errors come back as {"error": "..."} (reviewer actions) or
 // {"detail": "..."} (FastAPI's HTTPException); both are turned into an ApiError with that message.
 
-import { getActor } from "../lib/actor";
+import { sessionEnded } from "../lib/auth";
 import type {
   AuditEvent,
   CompanyRow,
@@ -57,14 +57,14 @@ async function messageFrom(res: Response): Promise<string> {
 
 export async function request(path: string, init: RequestInit = {}): Promise<Response> {
   const headers = new Headers(init.headers);
-  headers.set("X-Actor", getActor());
   let res: Response;
   try {
-    res = await fetch(path, { ...init, headers });
+    res = await fetch(path, { ...init, headers, credentials: "same-origin" });
   } catch {
     throw new ApiError("Cannot reach the spreading service. Is the backend running on port 8765?", 0, true);
   }
   if (!res.ok) {
+    if (res.status === 401) sessionEnded();
     const text = await res.clone().text().catch(() => "");
     // A gateway error, or the Vite dev proxy's empty 500 when nothing listens on the backend port.
     const offline = (res.status >= 502 && res.status <= 504) || (res.status === 500 && text.trim() === "");
@@ -118,7 +118,7 @@ export function uploadDocument(file: File, onProgress: (fraction: number) => voi
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/documents");
-    xhr.setRequestHeader("X-Actor", getActor());
+    xhr.withCredentials = true;
     xhr.upload.onprogress = (e) => {
       if (e.lengthComputable) onProgress(e.loaded / e.total);
     };
@@ -130,6 +130,7 @@ export function uploadDocument(file: File, onProgress: (fraction: number) => voi
       } catch {
         /* not JSON */
       }
+      if (xhr.status === 401) sessionEnded();
       if (xhr.status >= 200 && xhr.status < 300 && body) {
         resolve(body as RunPayload);
         return;
@@ -157,7 +158,7 @@ export function uploadDocument(file: File, onProgress: (fraction: number) => voi
   });
 }
 
-/** Download an export with the X-Actor header (so the audit log names the reviewer). */
+/** Download an export through the signed-in session (so the audit log names the user). */
 export async function downloadExport(runId: number, fmt: "xlsx" | "csv" | "json"): Promise<void> {
   const res = await request(`/api/runs/${runId}/export.${fmt}`);
   const blob = await res.blob();

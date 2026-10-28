@@ -29,8 +29,19 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from spreader import api  # noqa: E402
 
-H = {"X-Actor": "Smoke Reviewer"}
-client = TestClient(api.app)
+H: dict[str, str] = {}  # identity comes from signing in, never from a header (DECISIONS D43)
+
+
+def signed_in(username: str) -> TestClient:
+    c = TestClient(api.app)
+    r = c.post("/api/auth/dev-login", json={"username": username})
+    if r.status_code != 200:
+        raise SystemExit(f"could not sign in as {username}: HTTP {r.status_code} {r.text[:200]}")
+    return c
+
+
+# Development users from config/finops/auth/development.yaml, one per role the workflows need.
+prep, client, appr = signed_in("pat"), signed_in("rae"), signed_in("ari")
 results: list[tuple[str, bool, str, float]] = []
 
 
@@ -61,6 +72,18 @@ state: dict[str, Any] = {}
 SYN = ROOT / "eval" / "synthetic"
 
 
+@step("sign-in: nobody unsigned, no name from a header, roles enforced")
+def _auth() -> str:
+    anon = TestClient(api.app)
+    check(anon.get("/api/documents", headers={"X-Actor": "ari"}).status_code == 401, "an unsigned request was served")
+    me = ok(prep.get("/api/auth/me", headers={"X-Actor": "ari"}), "me")
+    check(me["actor"] == "dev:pat" and not me["verified"], f"identity came from the header: {me}")
+    check(prep.put("/api/roi/assumptions", json={}).status_code == 403, "a preparer could change settings")
+    r = anon.get("/api/health")
+    check(r.headers.get("x-auth-mode") == "development-unverified", "development mode not announced")
+    return "401 unsigned, header ignored, 403 outside the role, development mode announced"
+
+
 @step("health and profile")
 def _health() -> str:
     h = ok(client.get("/api/health"), "health")
@@ -72,7 +95,7 @@ def _health() -> str:
 @step("statements: upload with a company, read, approve, export")
 def _statements() -> str:
     f = SYN / "s7-001-clean" / "statement.html"
-    run = ok(client.post("/api/documents", files={"file": (f.name, f.read_bytes())}, data={"company_id": "Smoke Co"},
+    run = ok(prep.post("/api/documents", files={"file": (f.name, f.read_bytes())}, data={"company_id": "Smoke Co"},
                          headers=H), "upload")
     check(run["run"]["status"] == "succeeded", f"run {run['run']['status']}")
     rid = run["run"]["id"]
@@ -80,8 +103,10 @@ def _statements() -> str:
     check(not blockers, f"{len(blockers)} blockers on a clean synthetic statement")
     for stmt in run["spread"]["statements"]:
         ok(client.get(f"/api/runs/{rid}/source/{stmt}"), f"source {stmt}")
-    after = ok(client.post(f"/api/runs/{rid}/actions", json={"type": "approve"}, headers=H), "approve")
-    check(after["run"]["state"]["approved"]["by"] == "Smoke Reviewer", "approval not recorded")
+    refused = prep.post(f"/api/runs/{rid}/actions", json={"type": "approve"})
+    check(refused.status_code == 403, f"a preparer could approve: HTTP {refused.status_code}")
+    after = ok(appr.post(f"/api/runs/{rid}/actions", json={"type": "approve"}, headers=H), "approve")
+    check(after["run"]["state"]["approved"]["by"] == "dev:ari", "approval not recorded under the signed-in approver")
     for fmt in ("xlsx", "csv", "json"):
         r = client.get(f"/api/runs/{rid}/export.{fmt}")
         check(r.status_code == 200 and len(r.content) > 100, f"export {fmt} HTTP {r.status_code}")
@@ -93,14 +118,14 @@ def _statements() -> str:
 @step("statements: the next document of the company is compared with the approved one")
 def _company() -> str:
     f = SYN / "s7-002-clean" / "statement.html"
-    run = ok(client.post("/api/documents", files={"file": (f.name, f.read_bytes())}, headers=H), "upload")
-    moved = ok(client.post(f"/api/documents/{run['run']['document_id']}/company", json={"company_id": "Smoke Co"},
+    run = ok(prep.post("/api/documents", files={"file": (f.name, f.read_bytes())}, headers=H), "upload")
+    moved = ok(prep.post(f"/api/documents/{run['run']['document_id']}/company", json={"company_id": "Smoke Co"},
                            headers=H), "set company")
     check(moved["run"]["id"] != run["run"]["id"], "setting the company did not re-run the document")
     companies = ok(client.get("/api/companies"), "companies")
     smoke = next(c for c in companies if c["company_id"] == "Smoke Co")
     check(smoke["documents"] == 2 and smoke["approved_spreads"] == 1, f"companies: {smoke}")
-    refused = client.post(f"/api/documents/{state['doc']}/company", json={"company_id": "Other"}, headers=H)
+    refused = prep.post(f"/api/documents/{state['doc']}/company", json={"company_id": "Other"}, headers=H)
     check(refused.status_code == 400, "an approved document's company could be changed")
     return "company set after upload re-ran it; approved document kept its company"
 
@@ -115,9 +140,9 @@ def _docs() -> str:
 @step("reconciliation: sample run, accept, reject, resolve, export")
 def _recon() -> str:
     profiles = ok(client.get("/api/finops/recon/profiles"), "profiles")
-    wid = ok(client.post("/api/finops/recon/workspaces", json={"name": "Smoke", "profile": profiles[0]["file"]},
+    wid = ok(prep.post("/api/finops/recon/workspaces", json={"name": "Smoke", "profile": profiles[0]["file"]},
                          headers=H), "workspace")["id"]
-    run = ok(client.post(f"/api/finops/recon/workspaces/{wid}/sample", json={}, headers=H), "sample run")
+    run = ok(prep.post(f"/api/finops/recon/workspaces/{wid}/sample", json={}, headers=H), "sample run")
     rid = run["run"]["id"]
     groups = run["result"]["groups"]
     proposed = [g for g in groups if g["status"] == "proposed"]
@@ -144,7 +169,7 @@ def _recon() -> str:
 
 @step("invoices: sample inbox, detail, resolve, export")
 def _invoices() -> str:
-    ok(client.post("/api/finops/invoices/sample", json={}, headers=H), "sample")
+    ok(prep.post("/api/finops/invoices/sample", json={}, headers=H), "sample")
     rows = ok(client.get("/api/finops/invoices"), "list")
     check(rows, "no invoices")
     eligible = sum(1 for i in rows if i["eligibility"] == "eligible_for_approval")
@@ -162,7 +187,7 @@ def _invoices() -> str:
 
 @step("data-quality gate: sample, release a held record, export")
 def _dq() -> str:
-    ok(client.post("/api/finops/dq/sample", json={}, headers=H), "sample")
+    ok(prep.post("/api/finops/dq/sample", json={}, headers=H), "sample")
     runs = ok(client.get("/api/finops/dq/runs"), "runs")
     run = ok(client.get(f"/api/finops/dq/runs/{runs[0]['id']}"), "run")
     records = run["result"]["records"]
@@ -170,7 +195,7 @@ def _dq() -> str:
     check(held is not None or not runs[0]["counts"]["review"], "held records counted but none found")
     note = "no held record"
     if held:
-        ok(client.post(f"/api/finops/dq/runs/{runs[0]['id']}/decide",
+        ok(appr.post(f"/api/finops/dq/runs/{runs[0]['id']}/decide",
                        json={"record_id": held["id"], "action": "release", "note": "smoke: checked the source"},
                        headers=H), "release")
         note = f"released {held['id']}"
@@ -182,7 +207,7 @@ def _dq() -> str:
 
 @step("spreadsheet scanner: sample, confirm a finding, export")
 def _sheets() -> str:
-    ok(client.post("/api/finops/sheets/sample", json={}, headers=H), "sample")
+    ok(prep.post("/api/finops/sheets/sample", json={}, headers=H), "sample")
     scans = ok(client.get("/api/finops/sheets/scans"), "scans")
     scan = ok(client.get(f"/api/finops/sheets/scans/{scans[0]['id']}"), "scan")
     findings = scan["result"]["findings"]

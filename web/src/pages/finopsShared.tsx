@@ -102,7 +102,7 @@ export function ExceptionCard({
             Note{e.severity === "blocker" ? " (required)" : ""}{" "}
             <input value={note} onChange={(ev) => setNote(ev.target.value)} placeholder="What you checked and found" />
           </label>
-          <button className="btn btn-small" type="submit" disabled={busy || needsName()} title={needsName() ? "Enter your name at the top first" : ""}>
+          <button className="btn btn-small" type="submit" disabled={busy || needsName()} title={needsName() ? "Sign in first" : ""}>
             {busy ? "Saving…" : "Resolve"}
           </button>
           {err && <InlineMessage kind="error">{err}</InlineMessage>}
@@ -130,7 +130,7 @@ export function NameReminder() {
   if (!needsName()) return null;
   return (
     <InlineMessage kind="info">
-      Enter your name in the Reviewer box at the top: every decision is recorded with it, and unnamed decisions are refused.
+      Sign in to act: every decision is recorded under the signed-in user.
     </InlineMessage>
   );
 }

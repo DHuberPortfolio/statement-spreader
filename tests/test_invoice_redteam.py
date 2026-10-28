@@ -99,8 +99,7 @@ def test_instructions_inside_an_invoice_change_nothing(env) -> None:  # type: ig
 
 
 def test_csv_exports_neutralise_formulas(tmp_path: Path) -> None:
-    from fastapi.testclient import TestClient
-
+    from conftest import client_as
     from finops import api as fapi
     from finops.core.audit import Database
     from finops.recon.service import ReconService
@@ -115,6 +114,6 @@ def test_csv_exports_neutralise_formulas(tmp_path: Path) -> None:
     gl = (head_g + "J1,2026-03-05,+cmd|' /C calc'!A0,,P,10.00,,USD\n").encode()
     wid = svc.create_workspace("t", "bank-vs-gl.yaml", "dana")
     run_id = svc.run(wid, "dana", ("b.csv", bank), ("g.csv", gl))["run"]["id"]
-    text = TestClient(app).get(f"/api/finops/recon/runs/{run_id}/export.csv").text
+    text = client_as(app, "dana").get(f"/api/finops/recon/runs/{run_id}/export.csv").text
     assert "'=HYPERLINK" in text and "'+cmd" in text
     assert ',=HYPERLINK' not in text and ",+cmd" not in text

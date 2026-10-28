@@ -8,7 +8,7 @@ from typing import Any
 
 import pytest
 
-from conftest import statement_html
+from conftest import client_as, statement_html
 from spreader.company import (
     ApprovedValue,
     CompanyContext,
@@ -188,13 +188,12 @@ def test_an_approved_document_keeps_its_company(svc: Service) -> None:
 
 
 def test_the_upload_route_takes_a_company_id(tmp_path: Any, profile: Any, monkeypatch: pytest.MonkeyPatch) -> None:
-    from fastapi.testclient import TestClient
 
     from spreader import api
 
     svc = Service(Store(tmp_path / "db.sqlite3"), profile=profile)
     monkeypatch.setattr(api, "service", lambda: svc)
-    r = TestClient(api.app).post("/api/documents", files={"file": ("a.htm", _bs(["December 31, 2025", "December 31, 2024"]))},
-                                 data={"company_id": "acme"}, headers={"X-Actor": "dana"})
+    r = client_as(api.app, "dana").post("/api/documents", files={"file": ("a.htm", _bs(["December 31, 2025", "December 31, 2024"]))},
+                                 data={"company_id": "acme"})
     assert r.status_code == 200
     assert svc.store.query("SELECT company_id FROM documents")[0]["company_id"] == "acme"

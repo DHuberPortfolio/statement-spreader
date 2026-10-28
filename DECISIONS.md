@@ -464,3 +464,54 @@ it. With it (`spreader/ingest/ocr.py`):
   right unchanged (77.4%, 79.8%); the cost is that an analyst checks nearly every value of a scanned statement (only
   values the pipeline calculated, 34 and 38, are still accepted alone). Turning it off needs an outcome-based
   calibration (D35/D40) on real scans.
+
+## Production readiness (2026-10-28, night)
+
+**D43. Identity is established by the server: OpenID Connect for organisations, a labelled development mode for one
+machine, role-based permissions, separation of duties checked where the action happens.**
+- **Problem.** The reviewer's name was the X-Actor header, typed into the app. Anyone could act as anyone, so every
+  "second person" control (bank-detail verification, record release) and every audit entry rested on a typed name.
+- **Choice.** Every /api route needs a signed-in principal and the route's permission (`spreader/auth_api.py`,
+  `ROUTE_PERMISSIONS`); a route missing from the table is refused, so new routes start closed. Routes whose permission
+  depends on the action check again in the handler (a statement action by type, an invoice resolution that verifies
+  bank details, a data-quality release). The header is ignored; the actor is the server's principal.
+- **Why OIDC.** It is the standard every enterprise identity provider speaks (Entra ID, Okta, Auth0, Keycloak, Google).
+  The provider is configuration (`config/finops/auth/*.yaml`: issuer, client id, which claim holds roles, how the
+  organisation's groups map to app roles, required tenant claims); two example organisations are included. Browser
+  sign-in is the authorization-code flow with PKCE, a single-use state and a nonce, and a server-side session
+  (HttpOnly, SameSite=Lax cookie; only its hash is stored; idle and absolute expiry; sign-out revokes). API clients
+  send bearer tokens. Token checks use PyJWT (signature against the provider's published keys, issuer, audience,
+  expiry, not-before, nonce, tenant; asymmetric algorithms only). The flow's few HTTP steps are ours; all
+  cryptography and token parsing is PyJWT's and `cryptography`'s.
+- **Considered.** Authlib (a full OAuth client): more than the flow needs and its Starlette integration wants signed
+  cookie sessions as well. A reverse proxy doing sign-in (oauth2-proxy) and passing a header: simpler code, but the
+  app would again trust a header, and only the proxy's configuration would stand between a request and an approval.
+  A home-made username and password: a new credential store to protect, and the reason SSO exists.
+- **Roles and permissions.** Permissions are a fixed list in code (`view, upload, edit, review, approve, export,
+  audit, admin`); roles grant them in configuration (`roles-base.yaml`): viewer, preparer, reviewer, approver,
+  auditor, admin. No base role both approves and administers, or approves and uploads. A user whose provider groups
+  map to no role can do nothing.
+- **Separation of duties** (`separation_of_duties` in the configuration, on by default): a statement spread is approved
+  by someone other than whoever uploaded the document and anyone who corrected or remapped its values (read from the
+  audit log). The existing second-person rules (bank details, released records) now compare verified identities.
+- **Development mode** keeps the prototype usable on one machine: named test users with single roles. It refuses
+  FINOPS_ENV=production and non-local host names, labels every response and the app, prefixes audit entries `dev:`,
+  and its sessions are worthless once a provider is configured.
+- **Scope and limits.** One organisation per deployment: every signed-in user with `view` sees all of that
+  organisation's records (no per-record ownership yet). Roles are read at sign-in; a role removed at the provider takes
+  effect at the next sign-in (sessions last at most 8 hours by default). Tested end to end with an in-process test
+  provider (47 tests in `tests/test_identity.py`); **no live provider has been configured or tested**, so this is
+  "implemented, awaiting validation", not production-ready SSO. The approval separation check runs just before the
+  approval's transaction, not inside it; the only race is one user correcting and approving in two simultaneous
+  requests, and a correction after approval is refused anyway.
+
+**D44. The statement engine's audit log is append-only and hash-chained, like the platform's.**
+- **Problem found.** The README called the statement audit log append-only, but the `events` table had no guard and
+  no chain: any code path or tool could rewrite it. The platform engines' log (finops.core.audit) already had both.
+- **Choice.** Schema 4: `events` gains `prev_hash` and `hash` (SHA-256 over the previous hash and the event's fields),
+  and triggers refuse UPDATE and DELETE. Migration chains existing events as they are (`meta.chain_legacy_events`
+  records how many): later edits to them are detected, earlier ones cannot be. `/api/audit/verify` (auditor) checks
+  both logs.
+- **Limit, stated plainly.** A hash chain detects a partial edit. Whoever controls the database file can rebuild the
+  whole chain; detecting that needs the latest hash (`Store.chain_head()`) copied somewhere they cannot write
+  (THREAT_MODEL T41). Not done yet.

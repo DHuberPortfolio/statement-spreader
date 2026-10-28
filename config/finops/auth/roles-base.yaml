@@ -1,0 +1,13 @@
+# The application's roles and what each may do (permissions are fixed in src/finops/core/identity.py).
+# An organisation's sign-in file `extends:` this and adds how its identity provider's groups map onto these roles.
+# Approving is kept apart from administering: an administrator cannot approve, an approver cannot change settings.
+roles:
+  viewer: [view]
+  preparer: [view, upload, edit, export]
+  reviewer: [view, edit, review, export]
+  approver: [view, review, approve, export]
+  auditor: [view, audit, export]
+  admin: [view, admin, audit]
+separation_of_duties:
+  approver_not_uploader: true
+  approver_not_corrector: true

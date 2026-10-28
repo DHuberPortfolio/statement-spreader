@@ -459,15 +459,14 @@ def test_synthetic_sets_are_scored_and_stable(tmp_path: Path, monkeypatch: pytes
 
 
 def test_http_routes(tmp_path: Path) -> None:
-    from fastapi.testclient import TestClient
-
+    from conftest import client_as
     from finops import api as fapi
     from spreader.api import app
 
     database = Database(tmp_path / "f.sqlite3")
     fapi.configure(database, dq_service=DQService(database, tmp_path / "files", ROOT / "config" / "finops" / "dq"))
-    c = TestClient(app)
-    h = {"X-Actor": "dana"}
+    c = client_as(app, "dana")
+    h: dict[str, str] = {}
     assert {d["id"] for d in c.get("/api/finops/dq/datasets").json()} == {"vendors", "purchase_orders"}
     runs = c.post("/api/finops/dq/sample", json={}, headers=h).json()
     v = c.get(f"/api/finops/dq/runs/{runs['vendors']}").json()

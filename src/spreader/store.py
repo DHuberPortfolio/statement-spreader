@@ -10,6 +10,7 @@ same file twice stores it once.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 import threading
@@ -19,7 +20,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 SCHEMA = [
     """CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)""",
@@ -140,6 +141,20 @@ def now() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds")
 
 
+EVENT_GUARDS = [
+    """CREATE TRIGGER IF NOT EXISTS events_no_update BEFORE UPDATE ON events
+       BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
+    """CREATE TRIGGER IF NOT EXISTS events_no_delete BEFORE DELETE ON events
+       BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
+]
+
+
+def _event_hash(prev: str, r: Any) -> str:
+    body = json.dumps([prev, r["run_id"], r["document_id"], r["at"], r["actor"], r["kind"], r["payload"]],
+                      ensure_ascii=True, separators=(",", ":"))
+    return hashlib.sha256(body.encode()).hexdigest()
+
+
 class Store:
     def __init__(self, path: str | Path) -> None:
         self.path = Path(path)
@@ -159,6 +174,20 @@ class Store:
                 c.execute(stmt)
             if "company_id" not in {r["name"] for r in c.execute("PRAGMA table_info(documents)")}:
                 c.execute("ALTER TABLE documents ADD COLUMN company_id TEXT")  # schema 3: who the document is about
+            if "hash" not in {r["name"] for r in c.execute("PRAGMA table_info(events)")}:
+                # schema 4: the audit log becomes a hash chain that refuses edits (DECISIONS D44). Events written before
+                # this migration are chained as they are now: later edits to them are detected, earlier ones cannot be.
+                c.execute("ALTER TABLE events ADD COLUMN prev_hash TEXT NOT NULL DEFAULT ''")
+                c.execute("ALTER TABLE events ADD COLUMN hash TEXT NOT NULL DEFAULT ''")
+                prev = "genesis"
+                legacy = c.execute("SELECT * FROM events ORDER BY id").fetchall()
+                for r in legacy:
+                    h = _event_hash(prev, r)
+                    c.execute("UPDATE events SET prev_hash=?, hash=? WHERE id=?", (prev, h, r["id"]))
+                    prev = h
+                c.execute("INSERT OR REPLACE INTO meta(key, value) VALUES ('chain_legacy_events', ?)", (str(len(legacy)),))
+            for stmt in EVENT_GUARDS:
+                c.execute(stmt)
             row = c.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()
             current = int(row["value"]) if row else 0
             if current > SCHEMA_VERSION:
@@ -207,8 +236,30 @@ class Store:
     # ---- events ----
     def log(self, c: sqlite3.Connection, kind: str, payload: dict[str, Any], actor: str,
             run_id: int | None = None, document_id: str | None = None) -> None:
-        c.execute("INSERT INTO events(run_id, document_id, at, actor, kind, payload) VALUES (?,?,?,?,?,?)",
-                  (run_id, document_id, now(), actor, kind, json.dumps(payload, default=str)))
+        """Append an event inside the caller's transaction, chained to the one before it."""
+        last = c.execute("SELECT hash FROM events ORDER BY id DESC LIMIT 1").fetchone()
+        prev = last["hash"] if last else "genesis"
+        row = {"run_id": run_id, "document_id": document_id, "at": now(), "actor": actor, "kind": kind,
+               "payload": json.dumps(payload, default=str)}
+        c.execute("INSERT INTO events(run_id, document_id, at, actor, kind, payload, prev_hash, hash) VALUES (?,?,?,?,?,?,?,?)",
+                  (row["run_id"], row["document_id"], row["at"], actor, kind, row["payload"], prev, _event_hash(prev, row)))
+
+    def verify_chain(self) -> tuple[bool, int | None]:
+        """(True, None) if every event still fits the chain; else (False, id of the first that does not).
+
+        Detects an edit, insertion or deletion made with other tools. It cannot stop someone who controls the file
+        from rebuilding the whole chain: that needs a copy of the latest hash kept elsewhere (THREAT_MODEL T41)."""
+        prev = "genesis"
+        for r in self.query("SELECT * FROM events ORDER BY id"):
+            if r["prev_hash"] != prev or r["hash"] != _event_hash(prev, r):
+                return False, int(r["id"])
+            prev = r["hash"]
+        return True, None
+
+    def chain_head(self) -> dict[str, Any]:
+        """The latest event id and hash: copy it somewhere the database's owner cannot write, to detect a rebuild."""
+        rows = self.query("SELECT id, hash FROM events ORDER BY id DESC LIMIT 1")
+        return {"id": int(rows[0]["id"]), "hash": rows[0]["hash"]} if rows else {"id": 0, "hash": "genesis"}
 
     # ---- memory ----
     def memory_rows(self, profile_id: str) -> list[sqlite3.Row]:

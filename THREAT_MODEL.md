@@ -23,7 +23,7 @@ document that changes the system's behaviour, and confidential data leaking.
 | T7 | Malicious files: huge files, zip bombs, XML entity expansion | 40 MB upload limit; Excel uncompressed-size limit (200 MB); HTML parsed with lxml's HTML parser (no network, no DTD); iXBRL key parsing with `resolve_entities=False, no_network=True`; PDF page limit | Partly tested |
 | T8 | Formula/config code execution | Formulas parsed to a restricted syntax tree, no eval; YAML loaded with `safe_load` | Tested |
 | T9 | Duplicate or partial runs (retries, double clicks) | Idempotency key per (document, profile, memory, model, engine); a run is written running -> succeeded/failed in transactions; failed runs keep no spread | Tested |
-| T10 | Unauthorised approval or tampering with history | Approval refused with open blockers; append-only events; corrections need reasons. **Not solved: there is no sign-in; the reviewer name is an unverified header.** | Open: needs SSO and roles in a deployment |
+| T10 | Unauthorised approval or tampering with history | Sign-in required on every API route; permissions by role; approval needs the approve permission and someone other than the uploader and correctors (D43); approval refused with open blockers; events append-only and hash-chained (D44); corrections need reasons | Tested locally (tests/test_identity.py, tests/test_audit_chain.py); a live identity provider is not yet verified |
 | T11 | Confidential data in logs | Logs record stage timings and counts, not values; failed-run errors show the exception type, not its message | By design |
 | T12 | Data retention | Documents are kept until deleted by hand from `var/`. **No retention policy or delete endpoint yet.** | Open |
 | T13 | Misleading ROI (capacity counted as cash, omitted review time, demo sessions shown as evidence) | Labels on every number; cash only via an entered share (default 0%); review time counts against the tool; sessions noted "demo" trigger a warning; fewer than 3 sessions is "not measured" | Tested |
@@ -82,7 +82,7 @@ master, PO and receipt exports.
 | T23 | An automated actor closes exceptions | Named reviewer required; "system", "model", "ai", "assistant", "local-user" refused; blockers need notes | Tested |
 | T24 | CSV formula injection from descriptions or file names | Exports prefix risky text with an apostrophe (shared with the statement engine) | Tested |
 | T25 | Credit notes or negative invoices reaching "eligible" | CREDIT_NOTE warning blocks touchless processing | Tested |
-| T26 | Reviewer identity is an unverified header (inherits T10) | Segregation of duties is only as strong as the names; needs SSO and roles | **Open** |
+| T26 | Reviewer identity was an unverified header (inherits T10) | The header is ignored; the actor is the identity the server established (session or provider token); bank-detail verification and record release need the approve permission on top of the existing second-person rules (D43) | Tested locally; live provider pending |
 
 ### Independent red-team review of the platform (2026-10-24, afternoon)
 
@@ -138,6 +138,19 @@ New assets: the source exports and last accepted snapshots (`var/finops-files/dq
 | T38 | Company memory poisoned: a document uploaded under another company's id, or a wrong mapping approved, then reused automatically every year | Memory is written only by an approval (a named reviewer, blockers resolved); rows behind a corrected line are not remembered; reuse is calibrated, so a memory that starts failing loses automation when recalibrated; approvals are append-only and withdrawn by a new row, so the history shows who approved what. Not covered: the company id and the approver's name are unverified until sign-in exists | Tested in part |
 | T39 | An approved spread rewritten after the fact (to hide a restatement or an error) | `approved_values` and `company_mappings` refuse UPDATE and DELETE (triggers); a new approval adds rows | Tested |
 
+## Identity, sessions and audit integrity (2026-10-28)
+
+New assets: sessions and pending sign-ins (`auth_sessions`, `auth_pending` in `var/finops.sqlite3`; only hashes of
+cookie values and sign-in states are stored), the sign-in configuration (`config/finops/auth/*.yaml`), the identity
+provider's client secret (an environment variable named in the configuration, never in a file).
+
+| # | Threat | Safeguard | Status |
+|---|---|---|---|
+| T40 | Identity spoofing or privilege escalation: a name in a header, body or cookie; a forged, expired, re-signed (`alg: none`, HS256 with the public key), wrong-audience or other-tenant token; a session cookie guessed or replayed after sign-out | Identity only from a server-issued session or a provider token checked with PyJWT against the provider's published keys (issuer, audience, expiry, not-before, nonce, required tenant claims, asymmetric algorithms only); sessions expire (idle and absolute) and end at sign-out; sign-in state and PKCE verifier single-use; every /api route has a permission and unknown routes are closed; roles only from the organisation's role map; provider unreachable means refused (D43) | Tested through the API with a local test provider (tests/test_identity.py, 47 tests); **not yet verified against a live provider** |
+| T41 | History rewritten by someone with access to the database file | Statement and platform audit logs refuse UPDATE/DELETE (triggers) and are hash-chained; `/api/audit/verify` (auditor) finds the first entry that does not fit. **A full rebuild of the chain by whoever controls the file is not detected**: that needs the chain head (`Store.chain_head`) copied to storage the database owner cannot write (D44) | Partial edits tested (tests/test_audit_chain.py); external anchoring open |
+| T42 | Development sign-in used for real | Refused with FINOPS_ENV=production or any non-local host name; every response carries `X-Auth-Mode: development-unverified`; the app shows a banner; audit entries are prefixed `dev:`; development sessions are worthless once a provider is configured; bearer tokens are refused in development | Tested |
+| T43 | Cross-site use of a signed-in browser (CSRF) | Session cookie HttpOnly and SameSite=Lax (Secure outside local development); writes refused unless same-origin JSON or a file upload (existing middleware) | Tested (existing cross-site tests, now with sessions) |
+
 ## Not in scope for the prototype
-Multi-tenant isolation, encryption at rest, key management, and model-risk-management sign-off
+Multi-tenant isolation in one deployment (one organisation per deployment for now), encryption at rest, key management, and model-risk-management sign-off
 (SR 11-7 in US banking) are required before any production use with real borrower data.

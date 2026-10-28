@@ -1,0 +1,16 @@
+# Development sign-in: named test users, picked on the sign-in screen. Identities are NOT verified.
+# Refused with FINOPS_ENV=production or any non-local host name; every audit entry is prefixed "dev:".
+extends: roles-base.yaml
+mode: development
+organization: local-dev
+session:
+  absolute_minutes: 480
+  idle_minutes: 120
+  secure_cookie: false   # local http only
+dev_users:
+  - {username: pat, name: "Pat Preparer (dev)", roles: [preparer]}
+  - {username: rae, name: "Rae Reviewer (dev)", roles: [reviewer]}
+  - {username: ari, name: "Ari Approver (dev)", roles: [approver]}
+  - {username: aud, name: "Audrey Auditor (dev)", roles: [auditor]}
+  - {username: adm, name: "Adam Admin (dev)", roles: [admin]}
+  - {username: vic, name: "Vic Viewer (dev)", roles: [viewer]}
