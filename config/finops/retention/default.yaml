@@ -1,0 +1,11 @@
+# Retention policy (DECISIONS D46). keep_days counts from a unit's last activity. Left empty, nothing is deleted
+# automatically: there is no universal period, and deleting financial records too early is worse than keeping them.
+# An organisation sets its own periods in an overlay (see example-seven-years.yaml) and points
+# FINOPS_RETENTION_POLICY at it. Legal holds always win.
+statement: {keep_days: null}
+invoice: {keep_days: null}
+recon: {keep_days: null}
+dq: {keep_days: null}
+sheets: {keep_days: null}
+temporary_files_hours: 24
+ended_sessions_days: 30

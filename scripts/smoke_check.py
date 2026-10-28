@@ -237,6 +237,17 @@ def _outcomes() -> str:
     return ", ".join(f"{k} {v['outcomes']}" for k, v in sorted(engines.items()))
 
 
+@step("audit chains intact; retention plan and erasure record")
+def _admin() -> str:
+    aud, adm = signed_in("aud"), signed_in("adm")
+    v = ok(aud.get("/api/audit/verify"), "verify")
+    check(v["platform"]["intact"] and v["statements"]["intact"], f"audit chain broken: {v}")
+    plan = ok(adm.get("/api/admin/retention"), "retention plan")
+    check(plan["due"] == [] and not plan["applied"], "the default policy must never schedule deletion")
+    check(client.get("/api/admin/retention").status_code == 403, "a reviewer could see the retention plan")
+    return "both chains verify; default policy deletes nothing; admin only"
+
+
 @step("web pages are served")
 def _web() -> str:
     if not (ROOT / "web" / "dist" / "index.html").exists():

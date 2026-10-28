@@ -340,12 +340,25 @@ from finops.core.identity import AuthError, Forbidden  # noqa: E402
 from . import auth_api  # noqa: E402
 
 app.include_router(auth_api.router)
+
+from . import admin_api  # noqa: E402
+
+app.include_router(admin_api.router)
 app.add_middleware(auth_api.AuthMiddleware)  # outermost: identity is settled before anything else runs
 
 
 @app.exception_handler(AuthError)
 async def _auth_error(_: Request, exc: AuthError) -> JSONResponse:
     return JSONResponse(status_code=401, content={"error": str(exc), "sign_in": True})
+
+
+from finops.core.vault import VaultError  # noqa: E402
+
+
+@app.exception_handler(VaultError)
+async def _vault_error(_: Request, exc: VaultError) -> JSONResponse:
+    """A stored file that does not decrypt is never served or processed as if it were the original."""
+    return JSONResponse(status_code=500, content={"error": f"A stored file could not be read: {exc}"})
 
 
 @app.exception_handler(Forbidden)

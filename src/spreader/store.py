@@ -20,6 +20,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from finops.core.vault import vault
+
 SCHEMA_VERSION = 4
 
 SCHEMA = [
@@ -105,11 +107,7 @@ SCHEMA = [
     )""",
     """CREATE TRIGGER IF NOT EXISTS approved_values_no_update BEFORE UPDATE ON approved_values
        BEGIN SELECT RAISE(ABORT, 'approved values are append-only'); END""",
-    """CREATE TRIGGER IF NOT EXISTS approved_values_no_delete BEFORE DELETE ON approved_values
-       BEGIN SELECT RAISE(ABORT, 'approved values are append-only'); END""",
     """CREATE TRIGGER IF NOT EXISTS company_mappings_no_update BEFORE UPDATE ON company_mappings
-       BEGIN SELECT RAISE(ABORT, 'company mappings are append-only'); END""",
-    """CREATE TRIGGER IF NOT EXISTS company_mappings_no_delete BEFORE DELETE ON company_mappings
        BEGIN SELECT RAISE(ABORT, 'company mappings are append-only'); END""",
     """CREATE TABLE IF NOT EXISTS work_sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -126,6 +124,15 @@ SCHEMA = [
         values_checked INTEGER,
         note TEXT
     )""",
+    # Documents whose content was erased (retention or a deletion request, D46): the minimal record that it happened.
+    """CREATE TABLE IF NOT EXISTS erasures (
+        document_id TEXT PRIMARY KEY,
+        reason TEXT NOT NULL,
+        requested_by TEXT NOT NULL,
+        requested_at TEXT NOT NULL,
+        completed_at TEXT,
+        counts TEXT
+    )""",
     """CREATE TABLE IF NOT EXISTS assumptions (
         key TEXT PRIMARY KEY,
         value TEXT NOT NULL,
@@ -141,16 +148,51 @@ def now() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds")
 
 
-EVENT_GUARDS = [
-    """CREATE TRIGGER IF NOT EXISTS events_no_update BEFORE UPDATE ON events
+ERASED = '{"erased": true}'  # what an erased event's payload becomes (DECISIONS D46)
+
+# Rebuilt at every start (DROP, then CREATE), so an older database gets the current rules. History is append-only;
+# the one exception is erasure (D46): once a document is listed in `erasures`, its events' payloads may be replaced by
+# ERASED (nothing else about the event may change) and its approved values and confirmed mappings may be deleted.
+_DOC_OF_EVENT = "COALESCE(OLD.document_id, (SELECT document_id FROM runs WHERE id = OLD.run_id))"
+GUARDS = [
+    "DROP TRIGGER IF EXISTS events_no_update",
+    f"""CREATE TRIGGER events_no_update BEFORE UPDATE ON events
+       WHEN NOT EXISTS (SELECT 1 FROM erasures e WHERE e.document_id = {_DOC_OF_EVENT})
+         OR NEW.payload IS NOT '{ERASED}' OR NEW.id IS NOT OLD.id OR NEW.run_id IS NOT OLD.run_id
+         OR NEW.document_id IS NOT OLD.document_id OR NEW.at IS NOT OLD.at OR NEW.actor IS NOT OLD.actor
+         OR NEW.kind IS NOT OLD.kind OR NEW.prev_hash IS NOT OLD.prev_hash OR NEW.hash IS NOT OLD.hash
+         OR NEW.payload_sha IS NOT OLD.payload_sha
        BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
-    """CREATE TRIGGER IF NOT EXISTS events_no_delete BEFORE DELETE ON events
+    "DROP TRIGGER IF EXISTS events_no_delete",
+    """CREATE TRIGGER events_no_delete BEFORE DELETE ON events
        BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
+    "DROP TRIGGER IF EXISTS approved_values_no_delete",
+    """CREATE TRIGGER approved_values_no_delete BEFORE DELETE ON approved_values
+       WHEN NOT EXISTS (SELECT 1 FROM erasures e WHERE e.document_id = OLD.document_id)
+       BEGIN SELECT RAISE(ABORT, 'approved values are append-only'); END""",
+    "DROP TRIGGER IF EXISTS company_mappings_no_delete",
+    """CREATE TRIGGER company_mappings_no_delete BEFORE DELETE ON company_mappings
+       WHEN NOT EXISTS (SELECT 1 FROM erasures e WHERE e.document_id = (SELECT document_id FROM runs WHERE id = OLD.run_id))
+       BEGIN SELECT RAISE(ABORT, 'company mappings are append-only'); END""",
+    "DROP TRIGGER IF EXISTS erasures_no_delete",
+    """CREATE TRIGGER erasures_no_delete BEFORE DELETE ON erasures
+       BEGIN SELECT RAISE(ABORT, 'erasure records are kept'); END""",
+    "DROP TRIGGER IF EXISTS erasures_no_rewrite",
+    """CREATE TRIGGER erasures_no_rewrite BEFORE UPDATE ON erasures
+       WHEN NEW.document_id IS NOT OLD.document_id OR NEW.reason IS NOT OLD.reason
+         OR NEW.requested_by IS NOT OLD.requested_by OR NEW.requested_at IS NOT OLD.requested_at
+       BEGIN SELECT RAISE(ABORT, 'erasure records are kept'); END""",
 ]
 
 
-def _event_hash(prev: str, r: Any) -> str:
-    body = json.dumps([prev, r["run_id"], r["document_id"], r["at"], r["actor"], r["kind"], r["payload"]],
+def _sha(text: str) -> str:
+    return hashlib.sha256(text.encode()).hexdigest()
+
+
+def _event_hash(prev: str, r: Any, payload_sha: str) -> str:
+    """The chain covers a digest of the payload, not the payload itself, so an erased payload (D46) leaves the chain
+    intact while every other field stays covered."""
+    body = json.dumps([prev, r["run_id"], r["document_id"], r["at"], r["actor"], r["kind"], payload_sha],
                       ensure_ascii=True, separators=(",", ":"))
     return hashlib.sha256(body.encode()).hexdigest()
 
@@ -179,14 +221,17 @@ class Store:
                 # this migration are chained as they are now: later edits to them are detected, earlier ones cannot be.
                 c.execute("ALTER TABLE events ADD COLUMN prev_hash TEXT NOT NULL DEFAULT ''")
                 c.execute("ALTER TABLE events ADD COLUMN hash TEXT NOT NULL DEFAULT ''")
+                c.execute("ALTER TABLE events ADD COLUMN payload_sha TEXT NOT NULL DEFAULT ''")
+                c.execute("DROP TRIGGER IF EXISTS events_no_update")
                 prev = "genesis"
                 legacy = c.execute("SELECT * FROM events ORDER BY id").fetchall()
                 for r in legacy:
-                    h = _event_hash(prev, r)
-                    c.execute("UPDATE events SET prev_hash=?, hash=? WHERE id=?", (prev, h, r["id"]))
+                    ps = _sha(r["payload"])
+                    h = _event_hash(prev, r, ps)
+                    c.execute("UPDATE events SET prev_hash=?, hash=?, payload_sha=? WHERE id=?", (prev, h, ps, r["id"]))
                     prev = h
                 c.execute("INSERT OR REPLACE INTO meta(key, value) VALUES ('chain_legacy_events', ?)", (str(len(legacy)),))
-            for stmt in EVENT_GUARDS:
+            for stmt in GUARDS:
                 c.execute(stmt)
             row = c.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()
             current = int(row["value"]) if row else 0
@@ -217,9 +262,7 @@ class Store:
         ext = {"html": "htm", "pdf": "pdf", "xlsx": "xlsx"}[fmt]
         blob = self.blob_dir / f"{doc_id}.{ext}"
         if not blob.exists():
-            tmp = blob.with_suffix(blob.suffix + ".tmp")
-            tmp.write_bytes(data)
-            tmp.replace(blob)  # atomic on the same volume
+            vault().write(blob, data)  # encrypted when a data key is configured (D45); atomic on the same volume
         with self.tx() as c:
             cur = c.execute("INSERT OR IGNORE INTO documents(id, filename, format, size, uploaded_at) VALUES (?,?,?,?,?)",
                             (doc_id, filename, fmt, len(data), now()))
@@ -227,7 +270,7 @@ class Store:
 
     def document_bytes(self, doc_id: str, fmt: str) -> bytes:
         ext = {"html": "htm", "pdf": "pdf", "xlsx": "xlsx"}[fmt]
-        return (self.blob_dir / f"{doc_id}.{ext}").read_bytes()
+        return vault().read(self.blob_dir / f"{doc_id}.{ext}")
 
     def document(self, doc_id: str) -> sqlite3.Row | None:
         rows = self.query("SELECT * FROM documents WHERE id=?", (doc_id,))
@@ -241,8 +284,11 @@ class Store:
         prev = last["hash"] if last else "genesis"
         row = {"run_id": run_id, "document_id": document_id, "at": now(), "actor": actor, "kind": kind,
                "payload": json.dumps(payload, default=str)}
-        c.execute("INSERT INTO events(run_id, document_id, at, actor, kind, payload, prev_hash, hash) VALUES (?,?,?,?,?,?,?,?)",
-                  (row["run_id"], row["document_id"], row["at"], actor, kind, row["payload"], prev, _event_hash(prev, row)))
+        ps = _sha(row["payload"])
+        c.execute("INSERT INTO events(run_id, document_id, at, actor, kind, payload, prev_hash, hash, payload_sha)"
+                  " VALUES (?,?,?,?,?,?,?,?,?)",
+                  (row["run_id"], row["document_id"], row["at"], actor, kind, row["payload"], prev,
+                   _event_hash(prev, row, ps), ps))
 
     def verify_chain(self) -> tuple[bool, int | None]:
         """(True, None) if every event still fits the chain; else (False, id of the first that does not).
@@ -250,8 +296,13 @@ class Store:
         Detects an edit, insertion or deletion made with other tools. It cannot stop someone who controls the file
         from rebuilding the whole chain: that needs a copy of the latest hash kept elsewhere (THREAT_MODEL T41)."""
         prev = "genesis"
+        erased = {r["document_id"] for r in self.query("SELECT document_id FROM erasures")}
+        run_doc = {r["id"]: r["document_id"] for r in self.query("SELECT id, document_id FROM runs")}
         for r in self.query("SELECT * FROM events ORDER BY id"):
-            if r["prev_hash"] != prev or r["hash"] != _event_hash(prev, r):
+            if r["prev_hash"] != prev or r["hash"] != _event_hash(prev, r, r["payload_sha"]):
+                return False, int(r["id"])
+            doc = r["document_id"] or run_doc.get(r["run_id"])
+            if _sha(r["payload"]) != r["payload_sha"] and not (r["payload"] == ERASED and doc in erased):
                 return False, int(r["id"])
             prev = r["hash"]
         return True, None

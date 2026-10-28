@@ -348,8 +348,9 @@ Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the 
 ## Limits and what production would need
 
 Single sign-on verified against the organisation's live identity provider (implemented and tested with a local test
-provider only, D43), an external anchor for the audit chain (D44), a retention and deletion policy,
-encryption at rest, OCR measured on real borrower scans (faxes, phone photos), multi-user concurrency on a server
+provider only, D43), an external anchor for the audit chain (D44), the organisation's own retention periods
+(the default deletes nothing; erasure, legal holds and file encryption are in place: D45, D46, DATA_LIFECYCLE.md),
+the databases on an encrypted volume (the app encrypts uploaded files, not its databases), OCR measured on real borrower scans (faxes, phone photos), multi-user concurrency on a server
 database, and,
 in banking, model-risk-management review. See [THREAT_MODEL.md](THREAT_MODEL.md) and
 [DECISIONS.md](DECISIONS.md).

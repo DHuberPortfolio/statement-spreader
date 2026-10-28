@@ -135,9 +135,10 @@ def test_every_protected_route_refuses_a_caller_who_is_not_signed_in(statements:
 
 def test_every_api_route_in_the_source_has_a_permission_and_unknown_routes_are_closed() -> None:
     decl = re.compile(r'@(app|router)\.(get|post|put|patch|delete)\("([^"]+)"')
-    prefixes = {"src/finops/api.py": "/api/finops", "src/spreader/auth_api.py": "/api/auth"}
+    prefixes = {"src/finops/api.py": "/api/finops", "src/spreader/auth_api.py": "/api/auth", "src/spreader/admin_api.py": "/api/admin"}
     missing = []
-    for f in ["src/spreader/api.py", "src/spreader/roi_api.py", "src/finops/api.py", "src/spreader/auth_api.py"]:
+    for f in ["src/spreader/api.py", "src/spreader/roi_api.py", "src/finops/api.py", "src/spreader/auth_api.py",
+              "src/spreader/admin_api.py"]:
         for _, method, path in decl.findall((ROOT / f).read_text(encoding="utf-8")):
             full = prefixes.get(f, "") + path
             if not full.startswith("/api/") or (method.upper(), full) in auth_api.PUBLIC:

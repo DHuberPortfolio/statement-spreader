@@ -80,6 +80,11 @@ ROUTE_PERMISSIONS: list[tuple[str, str, str]] = [
     ("GET", rf"/api/finops/sheets/models/{_ID}/events", "view"),
     # audit
     ("GET", r"/api/audit/verify", "audit"),
+    # retention, erasure, legal holds (admin_api.py)
+    ("GET", r"/api/admin/retention", "admin"), ("POST", r"/api/admin/retention/run", "admin"),
+    ("GET", r"/api/admin/erasures", "admin"), ("POST", r"/api/admin/erasures", "admin"),
+    ("GET", r"/api/admin/holds", "admin"), ("POST", r"/api/admin/holds", "admin"),
+    ("POST", rf"/api/admin/holds/{_ID}/release", "admin"),
     ("GET", r"/api/auth/me", "view"),
 ]
 _COMPILED = [(m, re.compile(p), perm) for m, p, perm in ROUTE_PERMISSIONS]

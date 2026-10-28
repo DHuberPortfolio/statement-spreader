@@ -25,7 +25,7 @@ document that changes the system's behaviour, and confidential data leaking.
 | T9 | Duplicate or partial runs (retries, double clicks) | Idempotency key per (document, profile, memory, model, engine); a run is written running -> succeeded/failed in transactions; failed runs keep no spread | Tested |
 | T10 | Unauthorised approval or tampering with history | Sign-in required on every API route; permissions by role; approval needs the approve permission and someone other than the uploader and correctors (D43); approval refused with open blockers; events append-only and hash-chained (D44); corrections need reasons | Tested locally (tests/test_identity.py, tests/test_audit_chain.py); a live identity provider is not yet verified |
 | T11 | Confidential data in logs | Logs record stage timings and counts, not values; failed-run errors show the exception type, not its message | By design |
-| T12 | Data retention | Documents are kept until deleted by hand from `var/`. **No retention policy or delete endpoint yet.** | Open |
+| T12 | Data retention | Configurable retention per engine (default: nothing deleted automatically), erasure of a unit's files, derived records, notes and audit payloads, legal holds that block erasure (D46); inventory in DATA_LIFECYCLE.md | Tested (tests/test_data_protection.py); organisation periods to be set by each organisation |
 | T13 | Misleading ROI (capacity counted as cash, omitted review time, demo sessions shown as evidence) | Labels on every number; cash only via an entered share (default 0%); review time counts against the tool; sessions noted "demo" trigger a warning; fewer than 3 sessions is "not measured" | Tested |
 | T14 | Network exposure of the local servers | uvicorn and llama-server bind to 127.0.0.1 in the documented commands | By configuration |
 
@@ -138,7 +138,7 @@ New assets: the source exports and last accepted snapshots (`var/finops-files/dq
 | T38 | Company memory poisoned: a document uploaded under another company's id, or a wrong mapping approved, then reused automatically every year | Memory is written only by an approval (a named reviewer, blockers resolved); rows behind a corrected line are not remembered; reuse is calibrated, so a memory that starts failing loses automation when recalibrated; approvals are append-only and withdrawn by a new row, so the history shows who approved what. Not covered: the company id and the approver's name are unverified until sign-in exists | Tested in part |
 | T39 | An approved spread rewritten after the fact (to hide a restatement or an error) | `approved_values` and `company_mappings` refuse UPDATE and DELETE (triggers); a new approval adds rows | Tested |
 
-## Identity, sessions and audit integrity (2026-10-28)
+## Identity, sessions, audit integrity and data protection (2026-10-28)
 
 New assets: sessions and pending sign-ins (`auth_sessions`, `auth_pending` in `var/finops.sqlite3`; only hashes of
 cookie values and sign-in states are stored), the sign-in configuration (`config/finops/auth/*.yaml`), the identity
@@ -150,7 +150,10 @@ provider's client secret (an environment variable named in the configuration, ne
 | T41 | History rewritten by someone with access to the database file | Statement and platform audit logs refuse UPDATE/DELETE (triggers) and are hash-chained; `/api/audit/verify` (auditor) finds the first entry that does not fit. **A full rebuild of the chain by whoever controls the file is not detected**: that needs the chain head (`Store.chain_head`) copied to storage the database owner cannot write (D44) | Partial edits tested (tests/test_audit_chain.py); external anchoring open |
 | T42 | Development sign-in used for real | Refused with FINOPS_ENV=production or any non-local host name; every response carries `X-Auth-Mode: development-unverified`; the app shows a banner; audit entries are prefixed `dev:`; development sessions are worthless once a provider is configured; bearer tokens are refused in development | Tested |
 | T43 | Cross-site use of a signed-in browser (CSRF) | Session cookie HttpOnly and SameSite=Lax (Secure outside local development); writes refused unless same-origin JSON or a file upload (existing middleware) | Tested (existing cross-site tests, now with sessions) |
+| T44 | Stored uploads read from a copied data folder, a backup or a stolen disk | Uploaded files encrypted with AES-256-GCM, file name bound in; key outside the data folder (refused inside); production refuses to start without a key (D45) | Tested; **databases are not encrypted by the app** (volume encryption assumed) |
+| T45 | Deletion that misses derived copies, or that breaks the evidence trail | Erasure covers files, spreads, results, decisions, notes, company memory, outcomes and audit payloads; chains stay verifiable; minimal record kept (D46) | Tested per engine; model cache and pre-2026-10-28 platform payloads not covered (DATA_LIFECYCLE.md) |
+| T46 | Erasure used to rewrite history, or to delete what a legal hold protects | Triggers allow only an erased unit's payload to become the erasure marker; erasure records and holds cannot be deleted; held units are refused; erasure needs `admin` and a reason, and is itself audited | Tested |
 
 ## Not in scope for the prototype
-Multi-tenant isolation in one deployment (one organisation per deployment for now), encryption at rest, key management, and model-risk-management sign-off
+Multi-tenant isolation in one deployment (one organisation per deployment for now), database encryption (volume encryption assumed), a key management service, and model-risk-management sign-off
 (SR 11-7 in US banking) are required before any production use with real borrower data.

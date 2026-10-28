@@ -1,0 +1,8 @@
+# Example: keep business records about seven years after their last activity, workbook scans one year.
+# Check your own record-keeping obligations (regulators, tax, contracts) before choosing periods.
+extends: default.yaml
+statement: {keep_days: 2557}
+invoice: {keep_days: 2557}
+recon: {keep_days: 2557}
+dq: {keep_days: 730}
+sheets: {keep_days: 365}

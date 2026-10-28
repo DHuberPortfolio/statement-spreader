@@ -12,6 +12,7 @@ approved; spreads that go anywhere are reviewed and approved in the app.
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -145,6 +146,91 @@ def _scan(args: argparse.Namespace) -> int:
     return 1 if args.strict and c["error"] else 0
 
 
+def _data_dir(args: argparse.Namespace) -> Path:
+    return Path(args.data or os.environ.get("SPREADER_DATA") or Path(__file__).resolve().parents[2] / "var")
+
+
+def _vault_cmd(args: argparse.Namespace) -> int:
+    """Data keys and encrypting stored files (DECISIONS D45)."""
+    from finops.core.vault import Vault, VaultError, load_keys, new_key
+
+    data = _data_dir(args)
+    if args.action == "new-key":
+        out = Path(args.out)
+        if out.exists():
+            print(f"{out} exists; not overwritten (a lost key means unreadable files)")
+            return 1
+        if out.resolve().is_relative_to(data.resolve()):
+            print("Keep the key outside the data folder it protects")
+            return 1
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(new_key() + "\n", encoding="ascii")
+        print(f"Wrote a new 256-bit data key to {out}. Back it up separately from the data; set FINOPS_DATA_KEY_FILE to it.")
+        return 0
+    key_file = args.key or os.environ.get("FINOPS_DATA_KEY_FILE")
+    try:
+        v = Vault(load_keys(key_file, data)) if key_file else Vault([])
+    except VaultError as exc:
+        print(f"Key problem: {exc}")
+        return 1
+    folders = [data / "documents", data / "finops-files"]
+    if args.action == "status":
+        plain = enc = 0
+        for f in folders:
+            for path in f.rglob("*") if f.exists() else []:
+                if path.is_file() and not path.name.endswith(".tmp"):
+                    if v.is_encrypted(path):
+                        enc += 1
+                    else:
+                        plain += 1
+        print(f"{data}: {enc} encrypted, {plain} plain stored files; key configured: {'yes' if v.encrypting else 'no'}")
+        return 1 if plain and v.encrypting else 0
+    if not v.encrypting:
+        print("No data key: set FINOPS_DATA_KEY_FILE or pass --key")
+        return 1
+    try:
+        totals: dict[str, int] = {}
+        for f in folders:
+            if f.exists():
+                for k, n in v.migrate(f).items():
+                    totals[k] = totals.get(k, 0) + n
+    except VaultError as exc:
+        print(f"Stopped: {exc}. Files already done stay encrypted; run again after fixing the key.")
+        return 1
+    print(f"{data}: " + ", ".join(f"{n} {k}" for k, n in totals.items()))
+    return 0
+
+
+def _retention_cmd(args: argparse.Namespace) -> int:
+    """Retention, erasure and legal holds from the command line (DECISIONS D46). Prints JSON; exit 1 on any failure."""
+    import json
+
+    from finops.core import retention as rt
+
+    p = rt.platform_from_env(_data_dir(args))
+    actor = rt.operator()
+    policy = rt.load_policy(args.policy or os.environ.get("FINOPS_RETENTION_POLICY")
+                            or Path(__file__).resolve().parents[2] / "config" / "finops" / "retention" / "default.yaml")
+    try:
+        if args.action in {"plan", "run"}:
+            out = rt.run(p, policy, actor, apply=args.action == "run")
+            print(json.dumps(out, indent=2, default=str))
+            return 1 if out["failed"] or (args.action == "run" and out["incomplete"]) else 0
+        if args.action == "erase":
+            print(json.dumps(rt.erase(p, args.engine, args.unit, args.reason or "", actor), indent=2))
+        elif args.action == "hold":
+            print(json.dumps({"hold": rt.place_hold(p.db, args.engine, args.unit, args.reason or "", actor)}))
+        elif args.action == "release":
+            rt.release_hold(p.db, int(args.hold_id), actor, args.reason or "")
+            print(json.dumps({"released": int(args.hold_id)}))
+        else:
+            print(json.dumps(rt.holds(p.db, active_only=False), indent=2))
+    except rt.RetentionError as exc:
+        print(f"Refused: {exc}")
+        return 1
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="spreader", description="Financial statement spreading with review.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -173,6 +259,21 @@ def main(argv: list[str] | None = None) -> int:
     k.add_argument("--all", action="store_true", help="also print the low-confidence anomalies")
     k.add_argument("--strict", action="store_true", help="exit with 1 when a definite error is found")
     k.set_defaults(run=_scan)
+    v = sub.add_parser("vault", help="data keys and encryption of stored files")
+    v.add_argument("action", choices=["new-key", "status", "migrate"])
+    v.add_argument("--out", default="finops-data.key", help="new-key: where to write the key (outside the data folder)")
+    v.add_argument("--key", help="key file (default FINOPS_DATA_KEY_FILE)")
+    v.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
+    v.set_defaults(run=_vault_cmd)
+    r = sub.add_parser("retention", help="retention policy, erasure and legal holds")
+    r.add_argument("action", choices=["plan", "run", "erase", "hold", "release", "holds"])
+    r.add_argument("--engine", choices=["statement", "invoice", "recon", "dq", "sheets"])
+    r.add_argument("--unit", help="statement document id, or doc:<12 hex>, workspace:<id>, dataset:<id>, model:<name>")
+    r.add_argument("--reason", help="why (erase, hold) or who authorised it (release)")
+    r.add_argument("--hold-id", help="release: the hold's id")
+    r.add_argument("--policy", help="retention policy YAML (default FINOPS_RETENTION_POLICY, else config default)")
+    r.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
+    r.set_defaults(run=_retention_cmd)
     args = ap.parse_args(argv)
     return int(args.run(args))
 

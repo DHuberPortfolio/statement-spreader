@@ -28,6 +28,7 @@ from finops.core.audit import Database, now
 from finops.core.config import ConfigError, load_config
 from finops.core.exceptions import is_person
 from finops.core.fingerprint import content_hash, sha256_bytes
+from finops.core.vault import vault
 
 from .config import ScanSpec
 from .diff import Change, compare
@@ -125,8 +126,7 @@ class SheetsService:
         sha = sha256_bytes(data)
         path = self.files_dir / sha
         if not path.exists():
-            self.files_dir.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
+            vault().write(path, data)
         with self.db.tx() as c:
             c.execute("INSERT OR IGNORE INTO files (sha256, name, size, stored_at) VALUES (?,?,?,?)",
                       (sha, Path(name).name[:200], len(data), now()))

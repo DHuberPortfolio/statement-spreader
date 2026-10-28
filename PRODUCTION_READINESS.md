@@ -31,8 +31,8 @@ Defects found by reading the code before changing it:
 |---|---|---|---|---|---|
 | 0 | Baseline and regression protection | P0 | Validated against defined criteria | Table above; `var/readiness/` holds the raw outputs (not committed) | - |
 | 1 | Identity, authorization, separation of duties | P1 | Implemented, awaiting validation | D43; `tests/test_identity.py` (47 tests); smoke check step "sign-in" | **Live identity provider** (an Entra ID or Okta test tenant and a client registration) - Devin; per-record ownership inside one organisation (not needed until multi-team use) |
-| 2a | Audit integrity | P1 | In progress | D44; `tests/test_audit_chain.py` | External anchoring of the chain head (T41) |
-| 2b | Data protection: inventory, encryption at rest, retention and deletion, backups | P1 | Planned | - | Key management service for a deployment |
+| 2a | Audit integrity | P1 | Implemented, awaiting validation | D44, D46; `tests/test_audit_chain.py`, erasure tamper tests in `tests/test_data_protection.py`; `/api/audit/verify` | External anchoring of the chain head (T41): a full rebuild by whoever controls the file is not detected |
+| 2b | Data protection: inventory, encryption at rest, retention and deletion, backups | P1 | Implemented, awaiting validation | DATA_LIFECYCLE.md; D45, D46; `tests/test_data_protection.py` (16 tests); smoke step "audit chains intact; retention plan" | Databases not encrypted by the app (volume encryption assumed); the organisation's retention periods; a key management service; backup re-application of erasures is manual |
 | 3 | OCR and ingestion reliability | P2 | In progress (before this tracker) | D42: OCR measured on simulated scans; every scanned value goes to a person | **Real borrower scans** (anonymised, with permission) |
 | 4 | Multi-user persistence and concurrency | P3 | Not assessed | Existing: transactions, idempotency keys, edits re-checked inside the write transaction (red-team fixes) | Server database only if a shared deployment is chosen |
 | 5 | Model risk management and AI governance | P4 | Not assessed | Existing: no model in the default path; optional local model capped below auto-accept (D8, D27, D35) | Qualified MRM review (SR 11-7) for a bank |
@@ -61,6 +61,24 @@ tenant's ids and `FINOPS_OIDC_CLIENT_SECRET`, sign in with one user per role, an
 Rollback: revert the commit. The schema 4 migration (two columns and two triggers on `events`) is one-way: older code
 refuses to open a schema 4 database ("newer than this code"), so rolling back the code means restoring the database
 copy taken before upgrading. That copy was taken for `var/demo` (`var/readiness/backup-before-schema4/`).
+
+### Workstream 2 acceptance criteria and evidence
+
+| Criterion | Evidence | Gap |
+|---|---|---|
+| Sensitive persistent data is protected by the configured encryption | `test_every_engines_stored_files_are_encrypted_and_still_work` (all five engines' uploads) | Databases: volume encryption, not the app |
+| Key material not exposed or stored with the data | `test_keys_are_kept_away_from_the_data_and_never_printed`; key refused inside the data folder | `bank-fingerprint.key` still in the data folder (DATA_LIFECYCLE gap 2) |
+| Retention configurable and deterministic | `test_the_policy_decides_what_is_due_and_never_deletes_by_default` | Periods are the organisation's decision |
+| Deletion covers derived artifacts and temporary storage | `test_erasing_a_statement_removes...`, `test_erasing_a_platform_unit...` (4 engines), temp files in the policy test | Model cache, mapping memory |
+| Legal holds respected | `test_a_legal_hold_blocks_erasure_until_released` | - |
+| Audit verification detects modification | `test_an_edit_made_around_the_guards_is_detected` (5 attacks), `test_erasure_cannot_be_used_to_rewrite_other_history` | Full rebuild (T41) |
+| Failed deletion observable and retryable | `test_an_interrupted_erasure_is_visible_and_finishes_when_run_again`; `spreader retention run` exits 1 on failure or unfinished erasures | - |
+| Backups, restores, migrations keep the guarantees | Migration: `test_a_schema_3_database_is_migrated...`, `test_migration_encrypts_old_files_and_rotates_keys`; platform chain upgraded on a copy of the demo data and still verifies | Backup/restore drill not automated; erasures after a restore re-applied by hand |
+| Documented defaults and fail-safe behaviour | Default policy deletes nothing; production without a data key refuses to start | - |
+
+Rollback: revert the commit and restore the database copy taken before upgrading. Older code would open the
+upgraded platform database but report its chain broken at the first event written by this version (that event
+chains a payload digest), and it cannot read encrypted files.
 
 ## Session log
 

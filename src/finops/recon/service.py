@@ -26,6 +26,7 @@ from finops.core.audit import Database, now
 from finops.core.config import ConfigError, load_config
 from finops.core.exceptions import ExceptionStatus, Resolution, ResolutionError, check_resolution
 from finops.core.fingerprint import content_hash, sha256_bytes
+from finops.core.vault import vault
 
 from .config import ReconProfile
 from .engine import ENGINE_VERSION, Decisions, reconcile, summary
@@ -115,8 +116,7 @@ class ReconService:
         sha = sha256_bytes(data)
         path = self.files_dir / sha
         if not path.exists():
-            self.files_dir.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
+            vault().write(path, data)
         with self.db.tx() as c:
             c.execute("INSERT OR IGNORE INTO files (sha256, name, size, stored_at) VALUES (?,?,?,?)",
                       (sha, Path(name).name[:200], len(data), now()))
@@ -126,7 +126,7 @@ class ReconService:
         row = self.db.query("SELECT name FROM files WHERE sha256 = ?", (sha,))
         if not row:
             raise ActionError(f"file {sha[:12]} is not stored")
-        data = (self.files_dir / sha).read_bytes()
+        data = vault().read(self.files_dir / sha)
         if sha256_bytes(data) != sha:
             raise ActionError(f"stored file {sha[:12]} no longer matches its fingerprint")
         return row[0]["name"], data

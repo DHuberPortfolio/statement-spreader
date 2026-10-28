@@ -515,3 +515,41 @@ machine, role-based permissions, separation of duties checked where the action h
 - **Limit, stated plainly.** A hash chain detects a partial edit. Whoever controls the database file can rebuild the
   whole chain; detecting that needs the latest hash (`Store.chain_head()`) copied somewhere they cannot write
   (THREAT_MODEL T41). Not done yet.
+
+**D45. Uploaded files are encrypted at rest by the app; the databases rely on volume encryption for now.**
+- **Problem.** Every upload (statements, bank exports, invoices, master data, workbooks) sat in the data folder as a
+  plain file: a copied folder or a stolen disk exposed them all.
+- **Choice.** One small module (`finops/core/vault.py`) that every engine's file reads and writes go through:
+  AES-256-GCM from the `cryptography` library, a random nonce per write, the file name bound in as associated data
+  (a file swapped under another name does not decrypt), atomic writes. Keys come from `FINOPS_DATA_KEY_FILE`, a file
+  outside the data folder (a key inside it is refused), one base64 key per line: the first encrypts, all decrypt, so
+  `spreader vault migrate` rotates keys and encrypts files stored before. With `FINOPS_ENV=production` and no key, the
+  app refuses to start. Keys are never printed (not in `repr`, logs or responses).
+- **Not chosen now.** SQLCipher for the databases: it needs a native SQLite build on every platform and a different
+  driver; the databases' content (spreads, notes, results) is covered by volume encryption in a deployment, which is
+  also what protects backups of the folder. Field-level encryption of database columns: it would touch every query.
+  Both are recorded as gaps in DATA_LIFECYCLE.md rather than claimed.
+- **Cost.** Encryption adds microseconds per file; no new dependency (`cryptography` was already installed through
+  pdfminer and is now also required by PyJWT).
+
+**D46. Retention is configured per organisation, erasure removes a unit's content and keeps a minimal record, and
+legal holds win.**
+- **Problem.** Documents were kept until someone deleted files by hand (THREAT_MODEL T12); deleting the upload would
+  have left the spread, the notes, company memory and the audit payloads behind, and nothing could stop a deletion
+  that a legal hold forbids.
+- **Choice** (`finops/core/retention.py`, `spreader retention ...`, `/api/admin/...` for administrators). The unit of
+  deletion is what a person works on: a statement document, an invoice, a reconciliation workspace, a data-quality
+  dataset, a workbook model. Erasure removes its files (unless a live unit uses the same bytes), extracted values,
+  spreads, results, review notes, decisions, company memory and reviewer outcomes, and replaces its audit payloads with
+  `{"erased": true}`. Kind, actor, time and hashes stay: the record that the work and the erasure happened.
+- **Audit chains stay verifiable.** Both logs now chain a digest of each payload rather than the payload, so an erased
+  payload leaves the chain intact while every other field stays covered. The append-only triggers allow exactly one
+  change: an erased unit's payload becoming the erasure marker. Anything else (another field, another unit's payload,
+  deleting an erasure record or a legal hold) is refused, and done around the triggers it is detected by verification.
+- **Policy.** No universal period: the default deletes nothing automatically; an organisation sets days per engine
+  (an example overlay uses about seven years). Every step is idempotent; an erasure is recorded as started before
+  anything is removed and completed after, so an interrupted one is listed and finishes when run again.
+- **Limits.** Platform audit events written before this change chain their payload directly and cannot be erased
+  (reported, not hidden). The model cache and reviewer mapping memory are not erased with a document. Re-applying
+  erasures after restoring an older backup is manual. Erasure needs one administrator; a second-person rule for
+  erasure is a configuration to add when an organisation asks for it.

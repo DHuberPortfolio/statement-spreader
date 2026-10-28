@@ -7,6 +7,10 @@ event that does not fit, which detects edits made with other tools.
 
 This is evidence, not a security boundary: whoever controls the file can rebuild it. A
 deployment that needs a stronger guarantee ships events to write-once storage.
+
+Erasure (DECISIONS D46): events written since 2026-10-28 chain a digest of their payload (`payload_sha`), so once a
+unit is listed in `erasures` (engine + scope) its payloads can be replaced by ERASED without breaking the chain; who
+did what, and when, stays. Older events chain the payload itself and cannot be erased this way.
 """
 
 from __future__ import annotations
@@ -35,11 +39,59 @@ AUDIT_SCHEMA = [
         hash TEXT NOT NULL
     )""",
     """CREATE INDEX IF NOT EXISTS audit_scope ON audit_events(engine, scope)""",
-    """CREATE TRIGGER IF NOT EXISTS audit_no_update BEFORE UPDATE ON audit_events
-       BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
-    """CREATE TRIGGER IF NOT EXISTS audit_no_delete BEFORE DELETE ON audit_events
-       BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
+    """CREATE TABLE IF NOT EXISTS erasures (
+        engine TEXT NOT NULL,
+        unit TEXT NOT NULL,           -- the audit scope of what was erased, e.g. 'doc:0a1b2c3d4e5f'
+        reason TEXT NOT NULL,
+        requested_by TEXT NOT NULL,
+        requested_at TEXT NOT NULL,
+        completed_at TEXT,
+        counts TEXT,
+        PRIMARY KEY (engine, unit)
+    )""",
+    """CREATE TABLE IF NOT EXISTS legal_holds (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        engine TEXT NOT NULL,
+        unit TEXT NOT NULL,
+        reason TEXT NOT NULL,
+        placed_by TEXT NOT NULL,
+        placed_at TEXT NOT NULL,
+        released_by TEXT,
+        released_at TEXT
+    )""",
 ]
+ERASED = '{"erased": true}'
+# Rebuilt at every start so an older database gets the current rules (see the module docstring).
+AUDIT_GUARDS = [
+    "DROP TRIGGER IF EXISTS audit_no_update",
+    f"""CREATE TRIGGER audit_no_update BEFORE UPDATE ON audit_events
+       WHEN OLD.payload_sha = '' OR NEW.payload IS NOT '{ERASED}'
+         OR NOT EXISTS (SELECT 1 FROM erasures e WHERE e.engine = OLD.engine AND e.unit = OLD.scope)
+         OR NEW.id IS NOT OLD.id OR NEW.at IS NOT OLD.at OR NEW.engine IS NOT OLD.engine OR NEW.scope IS NOT OLD.scope
+         OR NEW.actor IS NOT OLD.actor OR NEW.kind IS NOT OLD.kind OR NEW.prev_hash IS NOT OLD.prev_hash
+         OR NEW.hash IS NOT OLD.hash OR NEW.payload_sha IS NOT OLD.payload_sha
+       BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
+    "DROP TRIGGER IF EXISTS audit_no_delete",
+    """CREATE TRIGGER audit_no_delete BEFORE DELETE ON audit_events
+       BEGIN SELECT RAISE(ABORT, 'audit events are append-only'); END""",
+    "DROP TRIGGER IF EXISTS erasures_no_delete",
+    """CREATE TRIGGER erasures_no_delete BEFORE DELETE ON erasures
+       BEGIN SELECT RAISE(ABORT, 'erasure records are kept'); END""",
+    "DROP TRIGGER IF EXISTS erasures_no_rewrite",
+    """CREATE TRIGGER erasures_no_rewrite BEFORE UPDATE ON erasures
+       WHEN NEW.engine IS NOT OLD.engine OR NEW.unit IS NOT OLD.unit OR NEW.reason IS NOT OLD.reason
+         OR NEW.requested_by IS NOT OLD.requested_by OR NEW.requested_at IS NOT OLD.requested_at
+       BEGIN SELECT RAISE(ABORT, 'erasure records are kept'); END""",
+    "DROP TRIGGER IF EXISTS legal_holds_no_delete",
+    """CREATE TRIGGER legal_holds_no_delete BEFORE DELETE ON legal_holds
+       BEGIN SELECT RAISE(ABORT, 'legal holds are released, never deleted'); END""",
+]
+
+
+def _payload_sha(body: str) -> str:
+    import hashlib
+
+    return hashlib.sha256(body.encode()).hexdigest()
 
 
 def now() -> str:
@@ -60,7 +112,12 @@ class Database:
         if str(path) != ":memory:":
             self.conn.execute("PRAGMA journal_mode = WAL")
         with self.tx():
-            for stmt in AUDIT_SCHEMA + (schema or []):
+            for stmt in AUDIT_SCHEMA:
+                self.conn.execute(stmt)
+            if "payload_sha" not in {r["name"] for r in self.conn.execute("PRAGMA table_info(audit_events)")}:
+                self.conn.execute("DROP TRIGGER IF EXISTS audit_no_update")
+                self.conn.execute("ALTER TABLE audit_events ADD COLUMN payload_sha TEXT NOT NULL DEFAULT ''")
+            for stmt in AUDIT_GUARDS + (schema or []):
                 self.conn.execute(stmt)
 
     @contextmanager
@@ -89,10 +146,11 @@ class Database:
         prev = last["hash"] if last else "genesis"
         at = now()
         body = canonical_json(payload)
-        h = content_hash([prev, at, engine, scope, actor, kind, body], 32)
+        ps = _payload_sha(body)
+        h = content_hash([prev, at, engine, scope, actor, kind, "sha256:" + ps], 32)
         cur = conn.execute(
-            "INSERT INTO audit_events (at, engine, scope, actor, kind, payload, prev_hash, hash) VALUES (?,?,?,?,?,?,?,?)",
-            (at, engine, scope, actor, kind, body, prev, h))
+            "INSERT INTO audit_events (at, engine, scope, actor, kind, payload, prev_hash, hash, payload_sha)"
+            " VALUES (?,?,?,?,?,?,?,?,?)", (at, engine, scope, actor, kind, body, prev, h, ps))
         return int(cur.lastrowid or 0)
 
     def events(self, engine: str, scope: str | None = None) -> list[dict[str, Any]]:
@@ -103,9 +161,15 @@ class Database:
     def verify_chain(self) -> tuple[bool, int | None]:
         """(True, None) when every event's hash fits; else (False, id of the first that does not)."""
         prev = "genesis"
+        erased = {(r["engine"], r["unit"]) for r in self.query("SELECT engine, unit FROM erasures")}
         for r in self.query("SELECT * FROM audit_events ORDER BY id"):
-            h = content_hash([prev, r["at"], r["engine"], r["scope"], r["actor"], r["kind"], r["payload"]], 32)
+            ps = r["payload_sha"]
+            covered = ("sha256:" + ps) if ps else r["payload"]  # events before 2026-10-28 chain the payload itself
+            h = content_hash([prev, r["at"], r["engine"], r["scope"], r["actor"], r["kind"], covered], 32)
             if r["prev_hash"] != prev or r["hash"] != h:
+                return False, int(r["id"])
+            if ps and _payload_sha(r["payload"]) != ps and not (
+                    r["payload"] == ERASED and (r["engine"], r["scope"]) in erased):
                 return False, int(r["id"])
             prev = r["hash"]
         return True, None

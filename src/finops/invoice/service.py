@@ -33,6 +33,7 @@ from finops.core.exceptions import (
     same_person,
 )
 from finops.core.fingerprint import content_hash, sha256_bytes
+from finops.core.vault import vault
 
 from .config import APPolicy
 from .engine import CORRECTABLE, ENGINE_VERSION, history_entry, process
@@ -110,8 +111,7 @@ class InvoiceService:
                 self.db.append_event(c, "invoice", f"doc:{doc_id[:12]}", actor, "same_file_uploaded_again",
                                      {"name": Path(name).name, "first_uploaded_by": existing[0]["uploaded_by"]})
             return {**self.get(doc_id), "already_uploaded": True}
-        self.files_dir.mkdir(parents=True, exist_ok=True)
-        (self.files_dir / doc_id).write_bytes(data)
+        vault().write(self.files_dir / doc_id, data)
         with self.db.tx() as c:
             c.execute("INSERT INTO inv_documents (doc_id, name, size, uploaded_by, uploaded_at) VALUES (?,?,?,?,?)",
                       (doc_id, Path(name).name[:200], len(data), actor, now()))
@@ -151,7 +151,7 @@ class InvoiceService:
         done = self.db.query("SELECT id FROM inv_outcomes WHERE doc_id = ? AND run_key = ?", (doc_id, key))
         if done:
             return {**self.get(doc_id), "reused": True}
-        data = (self.files_dir / doc_id).read_bytes()
+        data = vault().read(self.files_dir / doc_id)
         try:
             outcome = process(doc[0]["name"], data, policy, master, history, self.fp, corrections, resolutions)
         except (ValueError, ArithmeticError, RecursionError, TypeError) as exc:
