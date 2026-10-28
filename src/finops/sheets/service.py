@@ -217,7 +217,7 @@ class SheetsService:
                                  {"scan": scan_id, "finding": finding_id, "key": f.key, "note": note.strip()})
         return self.get(scan_id)
 
-    def export(self, scan_id: int) -> tuple[str, bytes]:
+    def export(self, scan_id: int, actor: str) -> tuple[str, bytes]:
         out = self.get(scan_id)
         res = out["result"]
         if not res:
@@ -237,7 +237,7 @@ class SheetsService:
                             ch["column_label"], ch["after"] or "", ch["before"] or "", ch["detail"], "", "", "", "", "", ""]])
         body = buf.getvalue().encode("utf-8")
         with self.db.tx() as c:
-            self.db.append_event(c, "sheets", f"model:{out['model']}", "export", "exported",
+            self.db.append_event(c, "sheets", f"model:{out['model']}", actor, "exported",
                                  {"scan": scan_id, "sha256": sha256_bytes(body)})
         return f"{Path(out['name']).stem}-findings-scan{scan_id}.csv", body
 

@@ -264,7 +264,7 @@ class DQService:
             raise ActionError("Re-running this run did not reproduce its result; nothing was exported")
         return res
 
-    def export(self, run_id: int, kind: str) -> tuple[str, bytes]:
+    def export(self, run_id: int, kind: str, actor: str) -> tuple[str, bytes]:
         res = self.result(run_id)
         row = self._row(run_id)
         if kind == "accepted":
@@ -276,7 +276,7 @@ class DQService:
         else:
             raise ActionError("export is 'accepted' or 'quarantine'")
         with self.db.tx() as c:
-            self.db.append_event(c, "dq", f"dataset:{row['dataset_id']}", "export", "exported",
+            self.db.append_event(c, "dq", f"dataset:{row['dataset_id']}", actor, "exported",
                                  {"run": run_id, "kind": kind, "rows": body.count(b"\n") - 1, "sha256": sha256_bytes(body)})
         return name, body
 

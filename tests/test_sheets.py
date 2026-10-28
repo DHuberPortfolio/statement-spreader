@@ -401,7 +401,7 @@ def test_failed_scan_is_recorded_and_export_is_safe(tmp_path: Path) -> None:
     wb = forecast_sheet()
     wb["Plan"]["B12"] = "=cmd|' /C calc'!A0"
     sid = svc.scan("m.xlsx", xlsx(wb), "dana")
-    _, body = svc.export(sid)
+    _, body = svc.export(sid, "dev:dana")
     assert b",=cmd" not in body and b"'=cmd" in body  # formula-like text is written as plain text
 
 

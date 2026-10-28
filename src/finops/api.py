@@ -14,6 +14,7 @@ import csv
 import io
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -99,6 +100,12 @@ def configure(database: Database, recon_service: Any = None, invoice_service: An
     """Tests point the routes at temporary services."""
     global _db, _recon, _invoice, _dq, _sheets
     _db, _recon, _invoice, _dq, _sheets = database, recon_service, invoice_service, dq_service, sheets_service
+
+
+def attachment(name: str) -> str:
+    """A download header that a file name cannot break: letters, digits, dot, dash and underscore only."""
+    safe_name = re.sub(r"[^A-Za-z0-9._-]+", "_", name).strip("._") or "export"
+    return f'attachment; filename="{safe_name[:120]}"'
 
 
 def _actor() -> str:
@@ -243,8 +250,12 @@ def recon_export(run_id: int) -> Response:
         w.writerow([safe(t.id), t.source, safe(t.file), t.row, t.date.isoformat(), str(t.amount), t.currency, safe(t.reference),
                     safe(t.description), g.id if g else "", g.status.value if g else "unmatched", g.rule if g else "",
                     safe(g.decided_by) if g else "", "; ".join(exc.get(t.id, []))])
-    return Response(buf.getvalue(), media_type="text/csv",
-                    headers={"Content-Disposition": f'attachment; filename="reconciliation-run{run_id}.csv"'})
+    body = buf.getvalue()
+    wid = db().query("SELECT workspace_id FROM recon_runs WHERE id = ?", (run_id,))
+    with db().tx() as c:  # data leaving the platform is recorded under the person who took it
+        db().append_event(c, "recon", f"workspace:{wid[0]['workspace_id'] if wid else '?'}", _actor(), "exported",
+                          {"run": run_id, "rows": len(res.records)})
+    return Response(body, media_type="text/csv", headers={"Content-Disposition": attachment(f"reconciliation-run{run_id}.csv")})
 
 
 # -- invoices --------------------------------------------------------------------------------------
@@ -283,7 +294,9 @@ def invoice_export() -> Response:
         w.writerow([i["doc_id"][:12], safe(i["name"] or ""), safe(i["vendor"] or ""), i["vendor_id"],
                     safe(str(i["invoice_number"] or "")), safe(str(i["currency"] or "")), i["total"], i["eligibility"],
                     i["touchless"], "; ".join(i["open"])])
-    return Response(buf.getvalue(), media_type="text/csv", headers={"Content-Disposition": 'attachment; filename="invoices.csv"'})
+    with db().tx() as c:
+        db().append_event(c, "invoice", "inbox", _actor(), "exported", {"kind": "inbox"})
+    return Response(buf.getvalue(), media_type="text/csv", headers={"Content-Disposition": attachment("invoices.csv")})
 
 
 @router.get("/invoices/{doc_id}")
@@ -367,7 +380,7 @@ def dq_sample() -> dict[str, Any]:
     actor = _actor()
     v = dq().run("vendors.yaml", [("portal", "sample-portal.csv", s.portal_csv), ("erp", "sample-erp.xlsx", s.erp_xlsx)], actor,
                  previous=("sample-last-accepted-vendors.csv", s.previous_csv))
-    _, accepted = dq().export(v, "accepted")
+    _, accepted = dq().export(v, "accepted", actor)
     p = dq().run("purchase_orders.yaml", [("erp", "sample-po.csv", s.po_csv)], actor, references={"vendors": ("vendors-accepted.csv", accepted)})
     return {"vendors": v, "purchase_orders": p}
 
@@ -385,8 +398,8 @@ def dq_decide(run_id: int, body: GateDecision) -> dict[str, Any]:
 
 @router.get("/dq/runs/{run_id}/export/{kind}.csv")
 def dq_export(run_id: int, kind: str) -> Response:
-    name, body = dq().export(run_id, kind)
-    return Response(body, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{name}"'})
+    name, body = dq().export(run_id, kind, _actor())
+    return Response(body, media_type="text/csv", headers={"Content-Disposition": attachment(name)})
 
 
 @router.get("/dq/datasets/{dataset_id}/events")
@@ -448,8 +461,8 @@ def sheets_review(scan_id: int, body: Review) -> dict[str, Any]:
 
 @router.get("/sheets/scans/{scan_id}/export.csv")
 def sheets_export(scan_id: int) -> Response:
-    name, body = sheets().export(scan_id)
-    return Response(body, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{name}"'})
+    name, body = sheets().export(scan_id, _actor())
+    return Response(body, media_type="text/csv", headers={"Content-Disposition": attachment(name)})
 
 
 @router.get("/sheets/models/{model}/events")

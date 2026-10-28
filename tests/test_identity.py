@@ -501,3 +501,29 @@ def test_no_secret_is_kept_in_a_sign_in_file() -> None:
     for f in (ROOT / "config" / "finops" / "auth").glob("*.yaml"):
         text = f.read_text(encoding="utf-8").lower()
         assert "client_secret:" not in text and "private_key" not in text, f.name
+
+
+def test_download_names_cannot_break_the_header_and_exports_name_the_user(tmp_path: Path) -> None:
+    from finops import api as fapi
+    from finops.sheets.service import SheetsService
+    from finops.sheets.synthetic import generate
+
+    database = Database(tmp_path / "f.sqlite3")
+    fapi.configure(database, sheets_service=SheetsService(database, tmp_path / "files",
+                                                          ROOT / "config" / "finops" / "sheets" / "default.yaml"))
+    try:
+        books, _ = generate(41)
+        pat = client_as(api.app, "pat")
+        evil = 'budget"\r\nSet-Cookie: x=1; été.xlsx'
+        r = pat.post("/api/finops/sheets/scans", files={"workbook": (evil, books[0].data, "application/octet-stream")})
+        assert r.status_code == 200, r.text
+        scan = r.json()["id"] if "id" in r.json() else r.json()["scan"]
+        out = pat.get(f"/api/finops/sheets/scans/{scan}/export.csv")
+        assert out.status_code == 200
+        cd = out.headers["content-disposition"]
+        assert "set-cookie" not in {k.lower() for k in out.headers}
+        assert re.fullmatch(r'attachment; filename="[A-Za-z0-9._-]+"', cd), cd
+        ev = [e for e in database.events("sheets") if e["kind"] == "exported"]
+        assert ev and ev[-1]["actor"] == "dev:pat"
+    finally:
+        fapi.configure(None)  # type: ignore[arg-type]

@@ -345,7 +345,7 @@ def test_release_correct_and_the_two_person_rule(svc: DQService) -> None:
     assert recs3["V100"]["decision"] == "accepted" and recs3["V100"]["decided_by"] == "Alice Reviewer"
     assert recs3["V101"]["decision"] == "accepted"  # corrected and now valid
     assert any("corrected by Bob Clerk" in c["step"] for c in recs3["V101"]["changes"])
-    name, body = svc.export(run3, "accepted")
+    name, body = svc.export(run3, "accepted", "dev:dana")
     assert body.count(b"\n") == 3 and b"12-3456789" in body
     # the decisions table refuses edits, so the history cannot be rewritten
     with pytest.raises(sqlite3.DatabaseError):

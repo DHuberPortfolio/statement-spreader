@@ -80,6 +80,17 @@ Rollback: revert the commit and restore the database copy taken before upgrading
 upgraded platform database but report its chain broken at the first event written by this version (that event
 chains a payload digest), and it cannot read encrypted files.
 
+## Cross-platform QA and adversarial testing (running)
+
+| Area | Evidence | Found and fixed |
+|---|---|---|
+| Dependency vulnerabilities | `pip-audit --local`, `npm audit` (2026-10-28) | PyJWT 2.10.1 -> 2.15.1 (advisories), Vite 7.3.6 -> 7.3.7 (dev only), setuptools in the venv; both audits then clean (T48) |
+| Download headers and export traceability | `test_download_names_cannot_break_the_header_and_exports_name_the_user` | Unescaped user file name in a header; two exports logged no person, two logged none at all (T47) |
+| Authorization bypass | `tests/test_identity.py` | Header-based identity (D43) |
+| Concurrency and replay | `tests/test_concurrency.py`, `scripts/load_check.py` | Spurious conflicts, stale-screen approval (D47) |
+| Model output | `tests/test_model_governance.py` | Crash on non-object replies, non-blocking model placements (D48) |
+| Erasure abuse and tampering | `tests/test_data_protection.py`, `tests/test_audit_chain.py` | Statement audit log had no guard or chain (D44) |
+
 ## Session log
 
 ### 2026-10-28 (overnight, autonomous)
