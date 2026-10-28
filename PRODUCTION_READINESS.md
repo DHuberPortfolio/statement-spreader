@@ -93,5 +93,52 @@ chains a payload digest), and it cannot read encrypted files.
 
 ## Session log
 
-### 2026-10-28 (overnight, autonomous)
-See the end of this file once the session closes.
+### 2026-10-28, 02:05 to 03:30 EDT (autonomous; branch `production-readiness-2026-10-28` from main 6a870ac, not pushed)
+
+**1-3. What changed, why, where** (one commit each, in order):
+
+| Commit | What | Why | Main files |
+|---|---|---|---|
+| 942d844 | Sign-in (OIDC + labelled development mode), roles and permissions on every route, separation of duties; statement audit log append-only and hash-chained | Anyone could act as anyone (typed header); the statement audit log had no guard | `finops/core/identity.py`, `spreader/auth_api.py`, `config/finops/auth/`, `store.py`, web sign-in |
+| 220b064 | Uploaded files encrypted at rest; retention policy, erasure, legal holds; audit chains survive erasure | Plain files on disk; no deletion beyond the upload; no legal holds | `finops/core/vault.py`, `finops/core/retention.py`, `spreader/admin_api.py`, DATA_LIFECYCLE.md |
+| 5433389 | Non-overlapping edits merge; same-cell edits refused; stale-screen approval refused; consistent backups; audit anchors | 34 of 100 concurrent corrections were refused needlessly; approval from an out-of-date screen was possible | `service.py`, `finops/core/backup.py`, `scripts/load_check.py` |
+| fe40874 | Model placements block approval; malformed model output is no answer; model inventory and risk register | A model's choice could be approved without confirmation; a non-object reply crashed the run | `review.py`, `llm/local.py`, MODEL_RISK.md |
+| df2f38a | Pilot protocol, re-timing guard, pilot report | Fair, repeatable ROI measurement | PILOT_PROTOCOL.md, `roi_api.py`, `scripts/pilot_report.py` |
+| 6b3af94 | Dependency upgrades (PyJWT, Vite, setuptools); safe download names; every export audited | Audit findings; unescaped names; exports without a named person | `pyproject.toml`, `web/package.json`, `finops/api.py` |
+| 679fbcd | Not-applicable checks and ratios for banks and insurers; organisation files | Misleading ratios on bank and insurer filings; adapting meant setting variables by hand | `profile.py`, `config/profiles/us-bank.yaml`, `us-insurer.yaml`, `config/organisations/` |
+
+**4. Tests and results** (all from commands run tonight): Python suite 1,110 tests before, 1,233 after, 0 failures
+at every commit; web tests 31 of 31; release gate PASSED; manifests pass; smoke check 12 of 12 before, 14 of 14
+after (two steps added); `pip-audit` and `npm audit` clean after the upgrades; load check 100 of 100 concurrent
+corrections applied in each of 3 runs; bank and insurer dev evaluations identical before and after D50.
+
+**5. Defects found**: header identity (D43); unguarded statement audit log (D44); spurious concurrency refusals and
+stale approvals (D47); crash on non-object model replies and non-blocking model placements (D48); PyJWT advisories
+(the version pinned at the start of the night, T48); unescaped download names and unattributed exports (T47);
+misleading bank and insurer ratios (D50). All fixed with regression tests. An insurer baseline run appeared
+finished while still running; it was confirmed uncontaminated (the profile is read once at start) before use.
+
+**6. Security and financial implications**: approval now needs a different person from the uploader and correctors
+(configurable); model placements now block approval when the model is on; deletion exists and is irreversible by
+design (admin only, held units refused, all audited); the demo database was migrated to schema 5 (a pre-migration
+copy is in `var/readiness/backup-before-schema4/`).
+
+**7. Remaining work**: see the workstream table; the largest open items are a live identity provider, real scans,
+analyst sessions, database encryption or an encrypted volume, external anchoring on a schedule, PostgreSQL for
+several servers, IFRS keys and checks, and an independent model-risk review.
+
+**8. Next step**: Devin reviews the branch (`git log main..production-readiness-2026-10-28`) and the decisions
+listed below; then push the branch so CI runs on Linux.
+
+**9. Reproduce**: `.venv/Scripts/python -m pytest -q`; `.venv/Scripts/python scripts/release_gate.py --out gate.md`;
+`.venv/Scripts/python scripts/smoke_check.py`; `cd web && npm test`; `.venv/Scripts/python scripts/load_check.py`;
+`.venv/Scripts/python scripts/check_not_applicable.py 6b3af94`; `.venv/Scripts/python -m pip_audit --local`.
+
+**10. Decisions that need a person**:
+1. Push the branch and merge after CI (nothing is pushed).
+2. D43 separation of duties is on by default: an uploader or corrector cannot approve. Keep, or relax per
+   organisation (the Okta example relaxes the corrector rule).
+3. D48 makes model placements blocking (tightens a control; only matters with the model on).
+4. A test identity-provider tenant (Entra ID or Okta developer account) to validate sign-in live.
+5. Retention periods are each organisation's decision; the default deletes nothing.
+6. Analysts and documents for the pilot (PILOT_PROTOCOL.md).

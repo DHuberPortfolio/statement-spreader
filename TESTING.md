@@ -35,6 +35,25 @@ accept, reject, resolve, export), invoices, the data-quality gate (release a hel
 ROI and evaluation data, the reviewer-outcomes feed, the web routes, and the `spreader` commands. Prints PASS or FAIL
 per step; the exit code is the number of failures. CI runs it on every push.
 
+## Production-readiness checks (2026-10-28; PRODUCTION_READINESS.md)
+
+Every API test signs in: `tests/conftest.py` gives each test its own development sign-in (users in
+`tests/fixtures/auth-test.yaml`) and `client_as(app, user)` returns a signed-in client.
+
+| What | Tests | Commands |
+|---|---|---|
+| Sign-in, roles, separation of duties, tokens (D43) | `tests/test_identity.py` | - |
+| Audit chains and anchors (D44, D47) | `tests/test_audit_chain.py`, `tests/test_concurrency.py` | `spreader backup anchor <file>`, `spreader backup check-anchor <file>` |
+| Encryption, retention, erasure, legal holds (D45, D46) | `tests/test_data_protection.py` | `spreader vault status|migrate|new-key`, `spreader retention plan|run|erase|hold|release|holds` |
+| Concurrency, interruptions, backups (D47) | `tests/test_concurrency.py` | `spreader backup backup <folder>`, `spreader backup verify-backup <folder>`, `scripts/load_check.py` |
+| Model failure modes (D48) | `tests/test_model_governance.py` | - |
+| Analyst pilot (D49) | `tests/test_pilot.py` | `scripts/pilot_report.py` |
+| Profiles and organisations (D50) | `tests/test_profile_applicability.py`, `tests/test_organisation.py` | `scripts/check_not_applicable.py <git ref>`, `spreader serve --org <file>` |
+| Dependencies | - | `.venv/Scripts/python -m pip_audit --local`, `cd web && npm audit` |
+
+The smoke check also signs in as each role, checks that a header cannot name the actor, that both audit chains
+verify and that the default retention policy schedules no deletion.
+
 ## Versioned evaluation sets and the release gate
 
 Every evaluation set has a name, a **dataset version** and a **key version** (`src/finops/evalsets.py`): a hash of
