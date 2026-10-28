@@ -91,14 +91,16 @@ class LocalModelMapper:
                 })
                 r.raise_for_status()
                 answer = json.loads(r.json()["choices"][0]["message"]["content"])
-            except (httpx.HTTPError, KeyError, ValueError, IndexError):
+                if not isinstance(answer, dict) or not isinstance(answer.get("line"), str):
+                    raise ValueError("not the requested shape")  # a list, a number, a missing line: no answer (D48)
+            except (httpx.HTTPError, KeyError, ValueError, IndexError, TypeError):
                 self.errors += 1
                 return None
             self.calls += 1
             with self._lock:
                 self._db.execute("INSERT OR REPLACE INTO cache(key, answer) VALUES (?, ?)", (key, json.dumps(answer)))
                 self._db.commit()
-        line = answer.get("line")
+        line = answer.get("line") if isinstance(answer, dict) else None  # a cache written by older code may hold anything
         if line not in {ln.id for ln in lines}:
             return None  # "none", or anything outside the closed list
         # The model's own stated confidence is not used (finops.core.policy): what is shown is the tier's measured

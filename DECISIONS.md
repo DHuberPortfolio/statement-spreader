@@ -582,3 +582,16 @@ screen; backups are consistent snapshots with an audit anchor.**
   anchor"; how often to anchor, and where, is the organisation's choice.
 - **Tenancy.** One organisation per deployment (D43); isolation between organisations is separate deployments and
   data folders, not rows in one database.
+
+**D48. A model's placement blocks approval until a person confirms it; malformed model output is no answer.**
+- **Found.** A row the local model placed raised a review *warning*, so a spread could be approved without anyone
+  confirming the model's choice; D8 said every suggestion is reviewed, the code only noted it. And a model reply
+  that was valid JSON but not an object (a list, a number) crashed the whole run instead of counting as no answer,
+  and was cached.
+- **Choice.** Model placements are now *blocking* review items: resolving one is the confirmation. Replies that are
+  not an object with a string line are counted as errors, never cached, and the row is left unplaced and reported.
+  The model is off by default, so the default results and the release gate are unchanged.
+- **Inventory and risk register** for every model (mapping, invoice wording drafter, OCR) in MODEL_RISK.md, with the
+  existing measurements (IMPROVEMENT_LOG #9, #14; D27; D42) and the failure tests in `tests/test_model_governance.py`.
+- **Needs Devin's review**: this tightens a financial control (more blocking items when the model is on). Revert by
+  restoring the warning severity in `review.py`; the test will then fail, by design.

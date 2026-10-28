@@ -14,6 +14,7 @@ from finops.core.policy import Finding
 from .contracts import (
     CheckResult,
     CheckStatus,
+    MapMethod,
     RatioResult,
     ReviewItem,
     ReviewKind,
@@ -156,9 +157,11 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
             # decision, or a total of rows that each passed; never a model's own confidence.
             decision = policy.load("statements").decide(m.rule or m.method.value, threshold, m.confidence)
             if not decision.auto:
+                # A model's placement must be confirmed before approval, never just noted (DECISIONS D48).
                 items.append(ReviewItem(
                     id=f"confidence:{skey}:{row.index}", kind=ReviewKind.LOW_CONFIDENCE,
-                    severity=Severity.WARNING, statement=stype, rows=[row.index], lines=[m.canonical],
+                    severity=Severity.BLOCKER if m.method is MapMethod.MODEL else Severity.WARNING,
+                    statement=stype, rows=[row.index], lines=[m.canonical],
                     periods=list(row.values),
                     message=(f"'{row.label}' was placed on {profile.lines[m.canonical].label} ({m.method.value}): "
                              f"{m.reason} {decision.reason}")))
