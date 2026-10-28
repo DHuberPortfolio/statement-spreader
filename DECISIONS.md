@@ -595,3 +595,14 @@ screen; backups are consistent snapshots with an audit anchor.**
   existing measurements (IMPROVEMENT_LOG #9, #14; D27; D42) and the failure tests in `tests/test_model_governance.py`.
 - **Needs Devin's review**: this tightens a financial control (more blocking items when the model is on). Revert by
   restoring the warning severity in `review.py`; the test will then fail, by design.
+
+**D49. The analyst pilot is a protocol plus guards, and its report refuses to conclude early.**
+- **Gap.** The app could time by-hand and assisted sessions, but nothing stopped one analyst timing the same document
+  both ways (the second pass is faster for reasons that have nothing to do with the tool), and nothing recorded how
+  hard a document was or how experienced the analyst.
+- **Choice.** PILOT_PROTOCOL.md: two comparable document sets, at least two analysts in a crossover, difficulty rated
+  before the study, active time only, an independent quality check against answer keys or a second analyst, and a
+  rubric. The app now refuses a second timing of one document by the same person, and records difficulty and
+  experience (schema 5). `scripts/pilot_report.py` reports observed medians with ranges and the quality figures side
+  by side, says PENDING until both arms have three finished sessions, and computes no money.
+- **Status.** No analyst session has been run; nothing here is evidence of time saved.

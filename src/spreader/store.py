@@ -22,7 +22,7 @@ from typing import Any
 
 from finops.core.vault import vault
 
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
 
 SCHEMA = [
     """CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)""",
@@ -216,6 +216,10 @@ class Store:
                 c.execute(stmt)
             if "company_id" not in {r["name"] for r in c.execute("PRAGMA table_info(documents)")}:
                 c.execute("ALTER TABLE documents ADD COLUMN company_id TEXT")  # schema 3: who the document is about
+            ws = {r["name"] for r in c.execute("PRAGMA table_info(work_sessions)")}
+            for col in ("difficulty", "analyst_experience"):  # schema 5: pilot context (PILOT_PROTOCOL.md)
+                if col not in ws:
+                    c.execute(f"ALTER TABLE work_sessions ADD COLUMN {col} TEXT")
             if "hash" not in {r["name"] for r in c.execute("PRAGMA table_info(events)")}:
                 # schema 4: the audit log becomes a hash chain that refuses edits (DECISIONS D44). Events written before
                 # this migration are chained as they are now: later edits to them are detected, earlier ones cannot be.

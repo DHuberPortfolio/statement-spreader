@@ -78,6 +78,10 @@ async def _body(request: Request) -> dict[str, Any]:
     return body
 
 
+DIFFICULTY = {"low", "medium", "high"}  # rubric in PILOT_PROTOCOL.md
+EXPERIENCE = {"under 1 year", "1-3 years", "3-5 years", "over 5 years"}
+
+
 @router.post("/api/sessions")
 async def start_session(request: Request) -> dict[str, Any]:
     svc, actor_of = _svc()
@@ -95,9 +99,21 @@ async def start_session(request: Request) -> dict[str, Any]:
         owner = svc.store.query("SELECT document_id FROM runs WHERE id=?", (run_id,))
         if not owner or owner[0]["document_id"] != doc["id"]:
             raise HTTPException(400, "That run does not belong to this document")
+    difficulty, experience = b.get("difficulty"), b.get("analyst_experience")
+    if difficulty is not None and difficulty not in DIFFICULTY:
+        raise HTTPException(400, f"difficulty must be one of {sorted(DIFFICULTY)}")
+    if experience is not None and experience not in EXPERIENCE:
+        raise HTTPException(400, f"analyst_experience must be one of {sorted(EXPERIENCE)}")
     with svc.store.tx() as c:
-        cur = c.execute("INSERT INTO work_sessions(document_id, run_id, mode, actor, started_at) VALUES (?,?,?,?,?)",
-                        (doc["id"], run_id, mode, actor_of(), now()))
+        # A person who has already worked a document knows it: timing them on it again (either way) would make the
+        # second session look faster than the tool or the method deserves (PILOT_PROTOCOL.md, D49).
+        seen = c.execute("SELECT mode FROM work_sessions WHERE document_id=? AND actor=? AND ended_at IS NOT NULL "
+                         "AND active_seconds > 0", (doc["id"], actor_of())).fetchone()
+        if seen:
+            raise HTTPException(409, f"You already timed this document ({seen['mode']}); a second timing by the same person "
+                                     "is not comparable. Ask another analyst, or use a comparable document.")
+        cur = c.execute("INSERT INTO work_sessions(document_id, run_id, mode, actor, started_at, difficulty, analyst_experience)"
+                        " VALUES (?,?,?,?,?,?,?)", (doc["id"], run_id, mode, actor_of(), now(), difficulty, experience))
         sid = cur.lastrowid
         svc.store.log(c, "session_start", {"session": sid, "mode": mode}, actor_of(), run_id, doc["id"])
     return {"id": sid}

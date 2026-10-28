@@ -342,6 +342,8 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
   const usable = docs.filter((d) => d.run_id && d.run_status === "succeeded");
   const [docId, setDocId] = useState("");
   const [mode, setMode] = useState<"assisted" | "baseline">("assisted");
+  const [difficulty, setDifficulty] = useState("");
+  const [experience, setExperience] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => {
@@ -359,7 +361,13 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
     setBusy(true);
     setErr(null);
     try {
-      const res = await api.startSession({ mode, document_id: doc.id, run_id: doc.run_id });
+      const res = await api.startSession({
+        mode,
+        document_id: doc.id,
+        run_id: doc.run_id,
+        ...(difficulty ? { difficulty } : {}),
+        ...(experience ? { analyst_experience: experience } : {}),
+      });
       setSession({
         id: res.id,
         mode,
@@ -431,6 +439,21 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
                 </span>
               </label>
             </fieldset>
+            <label htmlFor="timing-difficulty">Difficulty</label>
+            <select id="timing-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+              <option value="">not rated</option>
+              <option value="low">low: clean, one unit, two periods</option>
+              <option value="medium">medium: three periods, a unit change or over 60 lines</option>
+              <option value="high">high: restated columns, unusual labels or a scan</option>
+            </select>
+            <label htmlFor="timing-experience">Your experience</label>
+            <select id="timing-experience" value={experience} onChange={(e) => setExperience(e.target.value)}>
+              <option value="">not given</option>
+              <option value="under 1 year">under 1 year</option>
+              <option value="1-3 years">1-3 years</option>
+              <option value="3-5 years">3-5 years</option>
+              <option value="over 5 years">over 5 years</option>
+            </select>
           </div>
           <div className="form-row">
             <button type="submit" className="btn btn-primary" disabled={busy}>

@@ -105,7 +105,13 @@ export const api = {
   roi: () => getJson<RoiReport>("/api/roi"),
   setAssumptions: (values: Record<string, number>) => sendJson<RoiReport>("/api/roi/assumptions", "PUT", values),
   sessions: () => getJson<WorkSession[]>("/api/sessions"),
-  startSession: (body: { mode: "baseline" | "assisted"; document_id: string; run_id?: number | null }) =>
+  startSession: (body: {
+    mode: "baseline" | "assisted";
+    document_id: string;
+    run_id?: number | null;
+    difficulty?: string;
+    analyst_experience?: string;
+  }) =>
     sendJson<{ id: number }>("/api/sessions", "POST", body),
   heartbeat: (sid: number, activeSeconds: number) =>
     sendJson<{ active_seconds: number }>(`/api/sessions/${sid}/heartbeat`, "POST", { active_seconds: activeSeconds }),
