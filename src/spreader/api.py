@@ -136,6 +136,7 @@ def profile() -> dict[str, Any]:
         "checks": [c.model_dump() for c in p.checks],
         "ratios": [r.model_dump() for r in p.ratios],
         "derived": [d.model_dump() for d in p.derived],
+        "not_applicable": p.not_applicable,
     }
 
 

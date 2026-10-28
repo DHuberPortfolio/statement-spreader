@@ -112,3 +112,30 @@ ratios:
   - {id: bank_efficiency, label: "Efficiency ratio (noninterest expense / revenue)",
      expr: "noninterest_expense / (net_interest_income + noninterest_income)", format: percent}
   - {id: bank_loans_to_deposits, label: Loans to deposits, expr: "loans_net / deposits", format: percent}
+
+# Base checks and ratios that do not hold for a bank (D50): shown on the profile with the reason, never run.
+not_applicable:
+  checks:
+    bs_current_assets: "Bank balance sheets are unclassified: there is no current-assets subtotal to check"
+    bs_current_liabilities: "Bank balance sheets are unclassified: there is no current-liabilities subtotal to check"
+    bs_assets_parts: "Rests on the current / non-current split, which banks do not present"
+    bs_liabilities_parts: "Rests on the current / non-current split, which banks do not present"
+    is_gross_profit: "Banks report no revenue less cost of sales: income starts from interest"
+    is_operating: "Banks report no operating income built from gross profit"
+    is_operating_total_costs: "Banks report no operating income; pre-tax income is checked by bank_pretax"
+    is_pretax: "The corporate bridge from operating income does not exist for banks; bank_pretax replaces it"
+  ratios:
+    gross_margin: "No gross profit for a bank"
+    operating_margin: "No operating income for a bank"
+    ebitda: "Depreciation-adjusted operating profit is not a bank measure; interest is the business itself"
+    ebitda_margin: "As EBITDA: not a bank measure"
+    current_ratio: "Unclassified balance sheet: liquidity is judged on liquidity-coverage data these statements lack"
+    quick_ratio: "Unclassified balance sheet: no current liabilities to divide by"
+    total_debt: "For a bank, borrowings exclude deposits, the main funding; a debt total would mislead"
+    debt_to_equity: "Bank leverage is measured by regulatory capital ratios, which these statements do not give"
+    debt_to_ebitda: "Neither debt nor EBITDA means for a bank what it means for a company"
+    interest_coverage: "Interest expense is a bank's cost of funding, not a debt service burden"
+    dso: "Banks have loans, not trade receivables"
+    dio: "Banks hold no inventory"
+    dpo: "Banks have no cost of sales or trade payables cycle"
+    free_cash_flow: "A bank's operating cash flow includes lending and deposit flows; free cash flow is not meaningful"

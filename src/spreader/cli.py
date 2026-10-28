@@ -48,6 +48,16 @@ def _spread(args: argparse.Namespace) -> int:
 def _serve(args: argparse.Namespace) -> int:
     import uvicorn
 
+    if args.org:
+        from finops.core.organisation import OrganisationError, apply
+
+        try:
+            settings = apply(args.org)
+        except OrganisationError as exc:
+            print(f"Not started: {exc}")
+            return 1
+        print(f"Organisation {settings['FINOPS_ORGANISATION']}: configuration checked")
+
     uvicorn.run("spreader.api:app", host=args.host, port=args.port)
     return 0
 
@@ -271,6 +281,7 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("serve", help="run the review app")
     s.add_argument("--host", default="127.0.0.1")
     s.add_argument("--port", type=int, default=8765)
+    s.add_argument("--org", help="organisation file (config/organisations/*.env): sign-in, profile, retention, payables")
     s.set_defaults(run=_serve)
     p = sub.add_parser("spread", help="spread one document (HTML, PDF or Excel) to a file")
     p.add_argument("file")

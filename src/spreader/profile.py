@@ -114,6 +114,9 @@ class Profile(BaseModel):
     derived: list[DerivedDef] = Field(default_factory=list)
     checks: list[CheckDef] = Field(default_factory=list)
     ratios: list[RatioDef] = Field(default_factory=list)
+    # Checks and ratios of the base template that do not hold for this kind of company, with the reason (D50):
+    # "check:is_gross_profit" -> "Banks do not report cost of sales". Shown, never silently dropped.
+    not_applicable: dict[str, str] = Field(default_factory=dict)
     content_hash: str = ""
 
     @model_validator(mode="after")
@@ -169,6 +172,8 @@ def _overlay(base: dict, over: dict) -> dict:
     section rules to existing lines (`add_aliases: {line_id: [...]}`, `add_sections: {line_id: [...]}`);
     append checks, derived lines and ratios; and replace a ratio or check with the same id. It cannot
     delete template lines, so every organisation's spread stays comparable with the base template.
+    A check or ratio that does not hold for the kind of company is declared `not_applicable: {checks: {id: reason},
+    ratios: {id: reason}}`: it stops running and the profile says why (D50). An unknown id is an error.
     """
     import copy
 
@@ -206,6 +211,27 @@ def _overlay(base: dict, over: dict) -> dict:
         for d in over.get(key, []) or []:
             merged[d.get("id") or d.get("line")] = d
         out[key] = list(merged.values())
+    na = over.get("not_applicable") or {}
+    unknown_kinds = set(na) - {"checks", "ratios"}
+    if unknown_kinds:
+        raise ValueError(f"overlay: not_applicable takes checks and ratios, not {sorted(unknown_kinds)}")
+    declared = dict(out.get("not_applicable", {}))
+    for key in ("checks", "ratios"):
+        reasons = na.get(key) or {}
+        have = {d.get("id") for d in out.get(key, [])}
+        missing = set(reasons) - have
+        if missing:
+            raise ValueError(f"overlay: not_applicable names {key} that do not exist: {sorted(missing)}")
+        for cid, why in reasons.items():
+            if not str(why).strip():
+                raise ValueError(f"overlay: not_applicable {key} '{cid}' needs a reason")
+            declared[f"{key[:-1]}:{cid}"] = str(why).strip()
+        out[key] = [d for d in out.get(key, []) if d.get("id") not in reasons]
+    gone = set(na.get("checks") or {})
+    for d in out.get("derived", []):  # a derived line no longer needs to skip a check that does not run
+        if d.get("skip_check") in gone:
+            d.pop("skip_check")
+    out["not_applicable"] = declared
     return out
 
 

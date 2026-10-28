@@ -606,3 +606,24 @@ screen; backups are consistent snapshots with an audit anchor.**
   experience (schema 5). `scripts/pilot_report.py` reports observed medians with ranges and the quality figures side
   by side, says PENDING until both arms have three finished sessions, and computes no money.
 - **Status.** No analyst session has been run; nothing here is evidence of time saved.
+
+**D50. Industry profiles declare which corporate checks and ratios do not apply; an organisation is one checked file.**
+- **Found.** The bank and insurer overlays inherited every corporate check and ratio. The checks were harmless (all
+  of them skipped for missing inputs on every dev filing), but some ratios were computed and shown: on the bank dev
+  filings the previous profile reported debt-to-equity for 16 filing-periods, free cash flow for 15 and a debt total
+  for 8, none of which means for a bank what it means for a company; on the insurer dev filings, days sales
+  outstanding for 2 (`scripts/check_not_applicable.py`).
+- **Choice.** A profile overlay may declare `not_applicable: {checks: {id: reason}, ratios: {id: reason}}`. Those stop
+  running, the profile lists them with the reason (`/api/profile`), an unknown id or an empty reason is refused, and
+  everything not declared stays exactly the base definition (tested). Lines are never removed, so spreads stay
+  comparable. Bank: 8 checks, 14 ratios; insurer: 8 checks, 11 ratios, each with its reason in the YAML.
+- **Measured.** Bank and insurer dev splits before and after: identical values right (840 of 1,026; 708 of 1,121),
+  silent errors (31 of 737; 20 of 636), omissions and review load. The holdout halves were not re-measured: nothing
+  that is scored changed.
+- **Organisations.** `config/organisations/*.env` names an organisation's sign-in, statement profile, retention
+  policy and payables policy; `spreader serve --org <file>` validates every named file with the engine's own loader
+  before starting, refuses secrets in the file, unknown settings and a sign-in file for another organisation. Two
+  examples differ in every setting (a bank on Entra ID with strict three-way matching and seven-year retention; an
+  insurer on Okta with the defaults) plus the local demo.
+- **Not done.** IFRS stays a smoke-tested overlay; no IFRS answer keys were built tonight (the template's IFRS
+  presentation by nature, not function, needs its own checks before any accuracy claim).

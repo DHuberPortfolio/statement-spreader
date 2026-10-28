@@ -80,3 +80,27 @@ ratios:
   - {id: insurer_loss_ratio, label: "Loss ratio (losses / premiums earned)", expr: "losses_lae / premiums_earned", format: percent}
   - {id: insurer_expense_ratio, label: "Acquisition cost ratio", expr: "acquisition_costs / premiums_earned", format: percent}
   - {id: insurer_reserves_to_equity, label: "Loss reserves / equity", expr: "loss_reserves / total_equity", format: times}
+
+# Base checks and ratios that do not hold for an insurer (D50): shown on the profile with the reason, never run.
+not_applicable:
+  checks:
+    bs_current_assets: "Insurer balance sheets are unclassified: there is no current-assets subtotal to check"
+    bs_current_liabilities: "Insurer balance sheets are unclassified: there is no current-liabilities subtotal to check"
+    bs_assets_parts: "Rests on the current / non-current split, which insurers do not present"
+    bs_liabilities_parts: "Rests on the current / non-current split, which insurers do not present"
+    is_gross_profit: "Insurers report premiums and claims, not revenue less cost of sales"
+    is_operating: "Insurers report no operating income built from gross profit"
+    is_operating_total_costs: "Insurers report no operating income; pre-tax income is checked by insurer_pretax"
+    is_pretax: "The corporate bridge from operating income does not exist for insurers; insurer_pretax replaces it"
+  ratios:
+    gross_margin: "No gross profit for an insurer"
+    operating_margin: "No operating income for an insurer"
+    ebitda: "Not an insurance measure: claims and reserves, not depreciation, drive results"
+    ebitda_margin: "As EBITDA: not an insurance measure"
+    current_ratio: "Unclassified balance sheet: no current subtotals"
+    quick_ratio: "Unclassified balance sheet: no current liabilities to divide by"
+    debt_to_ebitda: "EBITDA is not an insurance measure"
+    interest_coverage: "Rests on operating income, which insurers do not report"
+    dso: "Premiums receivable are not trade receivables against sales"
+    dio: "Insurers hold no inventory"
+    dpo: "Insurers have no cost of sales or trade payables cycle"
