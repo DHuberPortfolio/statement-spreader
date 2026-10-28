@@ -16,6 +16,8 @@ import hashlib
 import json
 import logging
 import os
+import random
+import time
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from typing import Any
@@ -51,6 +53,34 @@ from .store import Store, now
 
 log = logging.getLogger("spreader")
 ENGINE_VERSION = __version__
+
+
+class StaleError(Exception):
+    """The person acted on a version of the spread that is no longer current (HTTP 409)."""
+
+
+class _StateMoved(Exception):
+    """Internal: another person's unrelated change landed first; the action is applied again to the new state."""
+
+
+def state_version(state: dict[str, Any]) -> str:
+    """A short fingerprint of a run's review state, shown to the person as `version`."""
+    import hashlib
+
+    return hashlib.sha256(json.dumps(state, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def _target(kind: Any, action: dict[str, Any]) -> tuple[str | None, str]:
+    """Which part of the review state an action changes; approving and reopening change all of it (None)."""
+    if kind == "correct_value":
+        return "overrides", f"{action.get('line', '')}@{action.get('period', '')}"
+    if kind == "resolve_item":
+        return "resolved", str(action.get("item", ""))
+    return None, ""
+
+
+class SeparationError(Exception):
+    """Separation of duties forbids this person doing this (HTTP 403)."""
 
 
 class ActionError(ValueError):
@@ -208,6 +238,7 @@ class Service:
 
     def _view(self, run: dict[str, Any]) -> RunView:
         run["state"] = json.loads(run.get("state") or "{}")
+        run["version"] = state_version(run["state"])
         run["timings"] = json.loads(run["timings"]) if run.get("timings") else {}
         spread = None
         if run.get("spread"):
@@ -284,7 +315,27 @@ class Service:
             return "You corrected or remapped values in this spread; separation of duties needs someone else to approve it"
         return None
 
-    def act(self, run_id: int, action: dict[str, Any], actor: str) -> RunView:
+    def act(self, run_id: int, action: dict[str, Any], actor: str,
+            separation: tuple[bool, bool] | None = None) -> RunView:
+        """Apply one reviewer action (DECISIONS D47).
+
+        Two people working on one spread: an action whose target nobody else touched in the meantime is applied to
+        the latest state (so two corrections to different cells both land); an action on a value, item or approval
+        someone else changed a moment ago is refused, never silently overwritten. Approving and reopening also refuse
+        when the spread changed since the person loaded it (`expected_version`, the `version` they were shown), so
+        nobody approves numbers they have not seen. `separation` = (approver not uploader, approver not corrector) is
+        checked inside the write transaction (D43)."""
+        action = dict(action)
+        expected = action.pop("expected_version", None)
+        for attempt in range(20):
+            try:
+                return self._act_once(run_id, action, actor, separation, expected)
+            except _StateMoved:  # someone else's unrelated change landed first: apply this one to the new state
+                time.sleep(random.uniform(0.005, 0.05) * (1 + attempt))  # spread out writers that keep colliding
+        raise ActionError("This spread is being changed by several people at once. Reload it and try again.")
+
+    def _act_once(self, run_id: int, action: dict[str, Any], actor: str, separation: tuple[bool, bool] | None,
+                  expected: str | None) -> RunView:
         view = self.get(run_id)
         run, spread = view.run, view.spread
         if run["status"] != "succeeded" or spread is None:
@@ -294,6 +345,8 @@ class Service:
         if state.get("approved") and action.get("type") not in {"reopen"}:
             raise ActionError("This spread is approved. Reopen it before changing anything.")
         kind = action.get("type")
+        if kind in {"approve", "reopen"} and expected is not None and expected != state_version(before):
+            raise StaleError("This spread changed since you opened it. Reload it, check the changes, then try again.")
         payload: dict[str, Any] = {k: v for k, v in action.items() if k != "type"}
         if kind == "correct_value":
             line, period = str(action.get("line", "")), str(action.get("period", ""))
@@ -344,9 +397,17 @@ class Service:
         else:
             raise ActionError(f"Unknown action '{kind}'")
         with self.store.tx() as c:
-            current = c.execute("SELECT state FROM runs WHERE id=?", (run_id,)).fetchone()["state"]
-            if json.loads(current or "{}") != before:
-                raise ActionError("This spread was changed by someone else a moment ago. Reload it and try again.")
+            current = json.loads(c.execute("SELECT state FROM runs WHERE id=?", (run_id,)).fetchone()["state"] or "{}")
+            if current != before:
+                section, key = _target(kind, action)
+                if section is None or current.get(section, {}).get(key) != before.get(section, {}).get(key) or \
+                        current.get("approved") != before.get("approved"):
+                    raise ActionError("Someone else changed this a moment ago. Reload the spread and try again.")
+                raise _StateMoved()
+            if kind == "approve" and separation is not None:
+                why = self.approval_conflict(run_id, actor, *separation)
+                if why:
+                    raise SeparationError(why)
             c.execute("UPDATE runs SET state=? WHERE id=?", (json.dumps(state), run_id))
             self.store.log(c, kind, payload, actor, run_id, run["document_id"])
             if kind == "approve" and payload.get("company_id"):

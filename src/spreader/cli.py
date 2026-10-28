@@ -231,6 +231,40 @@ def _retention_cmd(args: argparse.Namespace) -> int:
     return 0
 
 
+def _backup_cmd(args: argparse.Namespace) -> int:
+    """Consistent backups, backup checks and audit anchors (DECISIONS D47). Exit 1 when a check finds a problem."""
+    import json
+
+    from finops.core import backup as bk
+
+    try:
+        if args.action == "backup":
+            m = bk.backup(_data_dir(args), Path(args.path))
+            print(f"Backed up {len(m['databases'])} databases and {len(m['files'])} files to {args.path}"
+                  f" (key not included; anchor {m['anchor']['statement']['id']}/{m['anchor']['platform']['id']})")
+            return 0
+        if args.action == "verify-backup":
+            problems = bk.verify_backup(Path(args.path))
+        elif args.action == "anchor":
+            a = bk.anchor(_data_dir(args))
+            out = Path(args.path)
+            if out.exists():
+                print(f"{out} exists; not overwritten")
+                return 1
+            out.write_text(json.dumps(a, indent=2), encoding="utf-8")
+            print(f"Anchor written to {out}: keep a copy where the data folder's owner cannot change it")
+            return 0
+        else:
+            problems = bk.check_anchor(_data_dir(args), json.loads(Path(args.path).read_text(encoding="utf-8")))
+    except bk.BackupError as exc:
+        print(f"Refused: {exc}")
+        return 1
+    for line in problems:
+        print("PROBLEM", line)
+    print("OK" if not problems else f"{len(problems)} problem(s)")
+    return 1 if problems else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="spreader", description="Financial statement spreading with review.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -274,6 +308,11 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--policy", help="retention policy YAML (default FINOPS_RETENTION_POLICY, else config default)")
     r.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
     r.set_defaults(run=_retention_cmd)
+    b = sub.add_parser("backup", help="consistent backup, backup check, audit anchors")
+    b.add_argument("action", choices=["backup", "verify-backup", "anchor", "check-anchor"])
+    b.add_argument("path", help="backup folder (backup, verify-backup) or anchor file (anchor, check-anchor)")
+    b.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
+    b.set_defaults(run=_backup_cmd)
     args = ap.parse_args(argv)
     return int(args.run(args))
 

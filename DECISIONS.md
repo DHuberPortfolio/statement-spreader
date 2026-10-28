@@ -553,3 +553,32 @@ legal holds win.**
   (reported, not hidden). The model cache and reviewer mapping memory are not erased with a document. Re-applying
   erasures after restoring an older backup is manual. Erasure needs one administrator; a second-person rule for
   erasure is a configuration to add when an organisation asks for it.
+
+**D47. Several people at once: SQLite stays, actions merge when they do not collide, approvals refuse a stale
+screen; backups are consistent snapshots with an audit anchor.**
+- **Found.** The statement engine refused any action if the spread's review state changed while the action was being
+  computed: no lost updates, but in a local load check (4 reviewers correcting one spread while 8 people read it)
+  34 of 100 corrections were refused although they touched different cells. And nothing stopped someone approving a
+  spread that had changed since they opened it.
+- **Choice.** An action whose target nobody else touched is applied to the latest state (retried with a short
+  jittered wait); an action on a value, item or approval someone else changed is refused, never overwritten. Every run
+  shows a `version` (a fingerprint of its review state); approving or reopening with an `expected_version` that is
+  no longer current is a 409 ("changed since you opened it"); the web app sends it. Separation of duties is checked
+  inside the approval's transaction. Same load check afterwards, three runs: 100 of 100 corrections applied each
+  time; worst run's 95th percentile 779 ms for a correction, 371 ms for a read, slowest correction 2.6 s
+  (`scripts/load_check.py`, in-process, this machine).
+- **Why not a server database now.** One SQLite file in WAL mode with immediate write transactions gives
+  serialisable writes, foreign keys, unique constraints and an online backup API, with nothing to run. It fits one
+  application server and a team-sized number of reviewers. Several application servers sharing data need a server
+  database (PostgreSQL): the stores use plain SQL behind two small classes, but that move, its migrations and its
+  tests are not done and nothing here claims them.
+- **Backups.** `spreader backup backup <folder>` takes both databases through SQLite's online backup API (a consistent
+  snapshot while the app runs) and copies stored files as stored (encrypted; the key is never copied), with a
+  manifest of hashes and both chains' heads; `verify-backup` checks it without changing it. Restore is copying the
+  folder back and verifying.
+- **Anchors** (`spreader backup anchor <file>`, `check-anchor`): the latest event id and hash of both chains, kept
+  where the database's owner cannot write. A chain rebuilt from an earlier point verifies on its own but cannot keep
+  an anchored hash; the test rebuilds one and the anchor catches it. This narrows T41 to "changes after the last
+  anchor"; how often to anchor, and where, is the organisation's choice.
+- **Tenancy.** One organisation per deployment (D43); isolation between organisations is separate deployments and
+  data folders, not rows in one database.

@@ -27,7 +27,7 @@ from . import __version__
 from .contracts import RowRole
 from .export import to_csv, to_json, to_xlsx
 from .ingest import MAX_BYTES
-from .service import ActionError, Service
+from .service import ActionError, SeparationError, Service, StaleError
 from .store import Store, now
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -209,15 +209,16 @@ async def act(run_id: int, request: Request) -> dict[str, Any]:
     from finops.core.identity import require
 
     require(ACTION_PERMISSION.get(str(body.get("type", "")), "edit"))
-    if body.get("type") == "approve":
-        from .auth_api import auth
+    from .auth_api import auth
 
-        sod = auth().cfg.separation_of_duties
-        why = await run_in_threadpool(service().approval_conflict, run_id, _actor(), sod.approver_not_uploader,
-                                      sod.approver_not_corrector)
-        if why:
-            raise HTTPException(403, why)
-    view = await run_in_threadpool(service().act, run_id, body, _actor())
+    sod = auth().cfg.separation_of_duties
+    try:
+        view = await run_in_threadpool(service().act, run_id, body, _actor(),
+                                       (sod.approver_not_uploader, sod.approver_not_corrector))
+    except SeparationError as exc:
+        raise HTTPException(403, str(exc)) from exc
+    except StaleError as exc:
+        raise HTTPException(409, str(exc)) from exc
     return await run_in_threadpool(_run_payload, view)
 
 

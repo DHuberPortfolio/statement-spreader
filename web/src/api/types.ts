@@ -176,6 +176,8 @@ export interface Run {
   finished_at: string | null;
   timings: Record<string, number>;
   state: RunState;
+  /** Fingerprint of the review state; sent back with approve and reopen so a stale screen is refused. */
+  version: string;
   parent_run: number | null;
 }
 

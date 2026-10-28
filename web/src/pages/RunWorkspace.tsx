@@ -77,13 +77,13 @@ function RunHeader({
 
   const approve = () =>
     doAction("approve", async () => {
-      onPayload(await api.act(run.id, { type: "approve" }));
+      onPayload(await api.act(run.id, { type: "approve", expected_version: run.version }));
       setMessage({ kind: "success", text: "Approved. The spread is locked; reopen it to make changes." });
     });
 
   const reopen = () =>
     doAction("reopen", async () => {
-      onPayload(await api.act(run.id, { type: "reopen" }));
+      onPayload(await api.act(run.id, { type: "reopen", expected_version: run.version }));
       setMessage({ kind: "info", text: "Reopened. Approval was withdrawn." });
     });
 
