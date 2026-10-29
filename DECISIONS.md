@@ -80,7 +80,9 @@ baseline and is kept as a strategy only for comparison. Candidate pairs are grou
 components; a component with one record per side is a match; equal-sized components match only through
 unique, mutual, clearly-better pairs; anything else is proposed as the best overall assignment (exact,
 by dynamic programming over at most 12 records) and flagged ambiguous. Measured: on the round-amount
-stress set greedy auto-accepted 7 wrong matches (3.0% of 234) and 18 of 51 pairings that needed a person;
+stress set greedy auto-accepted 7 wrong matches (3.0% of 234; re-measured 2026-10-29 on the current code: 3 of 233,
+1.3%, likely 0.4-3.7%, `eval/reports/recon-recheck-2026-10-29`, the README's figure) and 18 of 51 pairings that needed a person
+(re-measured: 18 of 57, 31.6%);
 the component strategy auto-accepted none of either, at a cost of auto recall (93.4% vs 98.1%). No
 optimisation solver: the exact assignment is only ever needed on tiny components, so a dependency would
 add nothing.
@@ -424,6 +426,10 @@ changes (six commercial keys rebuilt byte for byte).
   (31 of 645), holdout 6.2% (46 of 740; 4.7-8.2%); insurers dev 2.4% -> 2.6% (15 of 577), holdout 7.8% (58 of 744;
   6.1-9.9%). Holdout is worse than dev for both: wording grown from ten filings does not yet generalise, and the
   holdout figure is the one to quote.
+- **Re-measured 2026-10-26 on the merged code** (commit 957686e, `eval/reports/stmt-<industry>-<split>-merged`), the
+  figures the README quotes: banks dev 4.2% (31 of 737; 3.0-5.9%), holdout 5.9% (46 of 782; 4.4-7.8%); insurers dev
+  3.1% (20 of 636; 2.0-4.8%), holdout 7.8% (58 of 744; 6.1-9.9%). The same wrong values, out of more values accepted
+  alone. The figures above are the first measurement, kept as it was made.
 - **What the keys cannot see.** Three dev banks give nothing to grade (statements in an exhibit, or no table the reader
   accepts); a combined income and comprehensive income statement is never a candidate (B4, engine-wide).
 - **What would change it**: the B4 detection change measured on the commercial sets; more filings per industry so a
@@ -500,7 +506,7 @@ machine, role-based permissions, separation of duties checked where the action h
 - **Scope and limits.** One organisation per deployment: every signed-in user with `view` sees all of that
   organisation's records (no per-record ownership yet). Roles are read at sign-in; a role removed at the provider takes
   effect at the next sign-in (sessions last at most 8 hours by default). Tested end to end with an in-process test
-  provider (47 tests in `tests/test_identity.py`); **no live provider has been configured or tested**, so this is
+  provider (47 tests in `tests/test_identity.py` then; 49 since D51); **no live provider has been configured or tested**, so this is
   "implemented, awaiting validation", not production-ready SSO. The approval separation check runs just before the
   approval's transaction, not inside it; the only race is one user correcting and approving in two simultaneous
   requests, and a correction after approval is refused anyway.
