@@ -64,12 +64,14 @@ _service: Service | None = None
 def service() -> Service:
     global _service
     if _service is None:
-        from .llm import configured_model
+        from .llm import configured_model, shadow_model
         from .profile import load_profile
 
         model, model_id = configured_model()
+        shadow, shadow_id = shadow_model()  # SPREADER_MODEL_ROLE=shadow: a hidden second opinion (D52)
         profile = load_profile(os.environ["SPREADER_PROFILE"]) if os.environ.get("SPREADER_PROFILE") else None
-        _service = Service(Store(DATA_DIR / "spreader.sqlite3"), profile=profile, model=model, model_id=model_id)
+        _service = Service(Store(DATA_DIR / "spreader.sqlite3"), profile=profile, model=model, model_id=model_id,
+                           shadow=shadow, shadow_id=shadow_id)
     return _service
 
 

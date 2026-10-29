@@ -18,6 +18,7 @@ import logging
 import os
 import random
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from typing import Any
@@ -49,10 +50,13 @@ from .pipeline import spread_document
 from .profile import Profile, load_profile
 from .review import attach_flags, build_review, unresolved_blockers
 from .second_reader import tagged_cells
+from .shadow import second_opinions
+from .shadow import summary as shadow_summary
 from .store import Store, now
 
 log = logging.getLogger("spreader")
 ENGINE_VERSION = __version__
+SHADOW_ACTOR = "system:shadow-model"  # who the audit log names for the second opinion (D52)
 
 
 class StaleError(Exception):
@@ -94,11 +98,17 @@ class RunView:
 
 
 class Service:
-    def __init__(self, store: Store, profile: Profile | None = None, model: Any = None, model_id: str = "none") -> None:
+    def __init__(self, store: Store, profile: Profile | None = None, model: Any = None, model_id: str = "none",
+                 shadow: Any = None, shadow_id: str = "none", shadow_sync: bool = False) -> None:
+        """shadow: a model giving the hidden second opinion after each run (D52), on one background thread so the
+        analyst never waits for it; shadow_sync runs it before `run` returns (tests, the backfill command)."""
         self.store = store
         self.profile = profile or load_profile()
         self.model = model
         self.model_id = model_id
+        self.shadow_model = shadow
+        self.shadow_id = shadow_id
+        self._shadow_pool = None if shadow is None or shadow_sync else ThreadPoolExecutor(1, thread_name_prefix="shadow")
 
     # ---- memory ----
     def memory(self) -> dict[MemoryKey, str]:
@@ -221,7 +231,52 @@ class Service:
                       (now(), json.dumps(timings), spread.model_dump_json(), run_id))
             self.store.log(c, "run", {"status": "succeeded", "values": len(spread.values),
                                       "review_items": len(spread.review), "parent": parent}, actor, run_id, doc_id)
+        if self.shadow_model is not None:
+            if self._shadow_pool is None:
+                self.record_shadow(run_id)
+            else:
+                self._shadow_pool.submit(self.record_shadow, run_id)
         return self.get(run_id)
+
+    def record_shadow(self, run_id: int) -> dict[str, Any] | None:
+        """Ask the shadow model for its opinion on every row of a succeeded run and store it apart from the run (D52).
+        Once per run and model. Never raises: a failure is logged and the run is untouched."""
+        if self.shadow_model is None:
+            return None
+        try:
+            done = self.store.query("SELECT outcome, COUNT(*) AS n FROM shadow_opinions WHERE run_id=? AND model_id=? "
+                                    "GROUP BY outcome", (run_id, self.shadow_id))
+            if done:
+                counts = {"rows": 0, "agree": 0, "disagree": 0, "no_answer": 0}
+                for r in done:
+                    counts[r["outcome"]] = r["n"]
+                    counts["rows"] += r["n"]
+                return counts
+            rows = self.store.query("SELECT document_id, spread FROM runs WHERE id=? AND status='succeeded'", (run_id,))
+            if not rows or not rows[0]["spread"]:
+                return None
+            opinions = second_opinions(Spread.model_validate_json(rows[0]["spread"]), self.profile, self.shadow_model)
+            counts = shadow_summary(opinions)
+            with self.store.tx() as c:
+                at = now()
+                c.executemany(
+                    "INSERT OR IGNORE INTO shadow_opinions(run_id, model_id, statement, row_index, label, section, "
+                    "platform_line, platform_excluded, platform_rule, model_line, outcome, created_at) "
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                    [(run_id, self.shadow_id, o.statement, o.row_index, o.label, o.section, o.platform_line,
+                      int(o.platform_excluded), o.platform_rule, o.model_line, o.outcome, at) for o in opinions])
+                self.store.log(c, "shadow_opinion", {"model": self.shadow_id, **counts}, SHADOW_ACTOR, run_id,
+                               rows[0]["document_id"])
+            return counts
+        except Exception as exc:  # noqa: BLE001 - the second opinion must never disturb the analyst's work
+            log.exception("shadow opinion for run %s failed", run_id)
+            try:
+                with self.store.tx() as c:
+                    self.store.log(c, "shadow_opinion", {"model": self.shadow_id, "failed": type(exc).__name__},
+                                   SHADOW_ACTOR, run_id)
+            except Exception:  # noqa: BLE001
+                log.exception("could not record the failed shadow opinion for run %s", run_id)
+            return None
 
     def _fail(self, run_id: int, message: str, actor: str) -> RunView:
         with self.store.tx() as c:
@@ -481,7 +536,9 @@ class Service:
         return new
 
     def events(self, run_id: int) -> list[dict[str, Any]]:
-        rows = self.store.query("SELECT * FROM events WHERE run_id=? ORDER BY id", (run_id,))
+        # The second opinion's entries stay in the audit log but not in the run's history: even its counts would tell
+        # the analyst where the model disagreed (D52).
+        rows = self.store.query("SELECT * FROM events WHERE run_id=? AND kind != 'shadow_opinion' ORDER BY id", (run_id,))
         return [{**dict(r), "payload": json.loads(r["payload"])} for r in rows]
 
     def documents(self) -> list[dict[str, Any]]:

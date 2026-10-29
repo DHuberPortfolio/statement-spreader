@@ -66,7 +66,10 @@ class LocalModelMapper:
             "Reply as {\"line\": \"<id or none>\", \"confidence\": <0 to 1>}."
         )
 
-    def __call__(self, table: StatementTable, row: StatementRow, lines: list[LineDef]) -> RowMapping | None:
+    def ask(self, table: StatementTable, row: StatementRow, lines: list[LineDef]) -> str | None:
+        """The model's answer for one row: a line id from `lines`, "none", or None when there is no usable answer
+        (server failure, malformed reply, an id outside the list). The second opinion (spreader.shadow) records
+        "none" and no answer differently; the cascade treats both as no suggestion."""
         if not lines or not row.label:
             return None
         prompt = self._prompt(table, row, lines)
@@ -101,8 +104,14 @@ class LocalModelMapper:
                 self._db.execute("INSERT OR REPLACE INTO cache(key, answer) VALUES (?, ?)", (key, json.dumps(answer)))
                 self._db.commit()
         line = answer.get("line") if isinstance(answer, dict) else None  # a cache written by older code may hold anything
-        if line not in {ln.id for ln in lines}:
-            return None  # "none", or anything outside the closed list
+        if line != "none" and line not in {ln.id for ln in lines}:
+            return None  # anything outside the closed list
+        return line
+
+    def __call__(self, table: StatementTable, row: StatementRow, lines: list[LineDef]) -> RowMapping | None:
+        line = self.ask(table, row, lines)
+        if line is None or line == "none":
+            return None
         # The model's own stated confidence is not used (finops.core.policy): what is shown is the tier's measured
         # accuracy, and the policy sends every model suggestion to a person whatever that is (D8).
         conf = calibrated("model")

@@ -22,7 +22,7 @@ from typing import Any
 
 from finops.core.vault import vault
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 
 SCHEMA = [
     """CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)""",
@@ -132,6 +132,24 @@ SCHEMA = [
         requested_at TEXT NOT NULL,
         completed_at TEXT,
         counts TEXT
+    )""",
+    # The model's hidden second opinion on each row of a run (schema 6, DECISIONS D52). Kept apart from the run: it
+    # never changes a spread and is never shown to analysts. Erased with the document (D46).
+    """CREATE TABLE IF NOT EXISTS shadow_opinions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        run_id INTEGER NOT NULL REFERENCES runs(id),
+        model_id TEXT NOT NULL,
+        statement TEXT NOT NULL,
+        row_index INTEGER NOT NULL,
+        label TEXT NOT NULL,
+        section TEXT NOT NULL,
+        platform_line TEXT,
+        platform_excluded INTEGER NOT NULL,
+        platform_rule TEXT NOT NULL,
+        model_line TEXT,                   -- a line id, 'none', or NULL (no usable answer)
+        outcome TEXT NOT NULL,             -- agree | disagree | no_answer
+        created_at TEXT NOT NULL,
+        UNIQUE (run_id, model_id, statement, row_index)
     )""",
     """CREATE TABLE IF NOT EXISTS assumptions (
         key TEXT PRIMARY KEY,

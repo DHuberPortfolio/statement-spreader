@@ -47,6 +47,7 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | Encryption, retention, erasure, legal holds (D45, D46) | `tests/test_data_protection.py` | `spreader vault status|migrate|new-key`, `spreader retention plan|run|erase|hold|release|holds` |
 | Concurrency, interruptions, backups (D47) | `tests/test_concurrency.py` | `spreader backup backup <folder>`, `spreader backup verify-backup <folder>`, `scripts/load_check.py` |
 | Model failure modes (D48) | `tests/test_model_governance.py` | - |
+| The model's hidden second opinion (D52) | `tests/test_shadow.py` | - |
 | Analyst pilot (D49) | `tests/test_pilot.py` | `scripts/pilot_report.py` |
 | Profiles and organisations (D50) | `tests/test_profile_applicability.py`, `tests/test_organisation.py` | `scripts/check_not_applicable.py <git ref>`, `spreader serve --org <file>` |
 | Dependencies | - | `.venv/Scripts/python -m pip_audit --local`, `cd web && npm audit` |
@@ -361,6 +362,10 @@ llama-server -m Qwen3-4B-Instruct-2507-Q4_K_M.gguf -ngl 99 -c 8192 --host 127.0.
 ```
 
 Responses are cached in `var/llm-cache.sqlite3`, so a rerun is repeatable and needs no GPU.
+
+The model's hidden second opinion (learning period, D52) is tested without a server in `tests/test_shadow.py`: the
+spread is identical with and without it, every labelled row gets an opinion, model failures leave the run untouched,
+analysts never see it, erasure removes it, and the backfill command (`spreader shadow`) asks once per run.
 
 ## Manual checks of the interface
 

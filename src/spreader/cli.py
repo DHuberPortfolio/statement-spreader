@@ -275,6 +275,41 @@ def _backup_cmd(args: argparse.Namespace) -> int:
     return 1 if problems else 0
 
 
+def _shadow_cmd(args: argparse.Namespace) -> int:
+    """Record the model's hidden second opinion for runs that have none (D52): the latest run of every document, or
+    one run. Needs SPREADER_MODEL_URL and SPREADER_MODEL_ROLE=shadow."""
+    from .llm import shadow_model
+    from .profile import load_profile
+    from .service import Service
+    from .store import Store
+
+    try:
+        model, model_id = shadow_model()
+    except ValueError as exc:
+        print(f"Refused: {exc}")
+        return 1
+    if model is None:
+        print("Refused: set SPREADER_MODEL_URL and SPREADER_MODEL_ROLE=shadow first")
+        return 1
+    profile = load_profile(os.environ["SPREADER_PROFILE"]) if os.environ.get("SPREADER_PROFILE") else None
+    svc = Service(Store(_data_dir(args) / "spreader.sqlite3"), profile=profile, shadow=model, shadow_id=model_id,
+                  shadow_sync=True)
+    runs = [args.run_id] if args.run_id else [r["id"] for r in svc.store.query(
+        "SELECT MAX(id) AS id FROM runs WHERE status='succeeded' GROUP BY document_id ORDER BY id")]
+    totals = {"runs": 0, "rows": 0, "agree": 0, "disagree": 0, "no_answer": 0}
+    for run_id in runs:
+        counts = svc.record_shadow(run_id)
+        if counts is None:
+            print(f"run {run_id}: no opinion recorded (not a succeeded run, or the model failed: see the log)")
+            continue
+        totals["runs"] += 1
+        for k in ("rows", "agree", "disagree", "no_answer"):
+            totals[k] += counts[k]
+    print(f"{model_id}: {totals['runs']} runs, {totals['rows']} rows; agree {totals['agree']}, disagree "
+          f"{totals['disagree']}, no answer {totals['no_answer']}")
+    return 0 if totals["runs"] == len(runs) else 1
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="spreader", description="Financial statement spreading with review.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -324,6 +359,10 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("path", help="backup folder (backup, verify-backup) or anchor file (anchor, check-anchor)")
     b.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
     b.set_defaults(run=_backup_cmd)
+    h = sub.add_parser("shadow", help="record the model's hidden second opinion for runs without one (learning period)")
+    h.add_argument("--run", dest="run_id", type=int, help="one run id (default: the latest run of every document)")
+    h.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
+    h.set_defaults(run=_shadow_cmd)
     args = ap.parse_args(argv)
     return int(args.run(args))
 

@@ -39,6 +39,13 @@ qualified people, and nothing here substitutes for them.
 | M8 | Confidential labels sent outside | Low | High | Local server only in documented commands; no external provider integrated | Code review: the only model calls go to `SPREADER_MODEL_URL` (mapping) and the URL given to the drafter | Someone points the URL at an external API: needs approval and a data-processing agreement first |
 | M9 | OCR misreads become accepted values | Medium | High | Every scanned value goes to a person (D42) | `tests/test_ocr.py` | Unmeasured on real scans |
 | M10 | The model's or OCR's output becomes an approval, payment or authorisation | - | Critical | No model has any permission; approvals and releases need a signed-in person with the approve permission (D43) | `tests/test_identity.py` | - |
+| M11 | In a learning period (`SPREADER_MODEL_ROLE=shadow`, D52) the second opinion changes what the analyst gets, or the analyst sees it and is anchored by it, so the comparison measures nothing | Low | Medium | The model takes no part in spreading (run model id `none`, same idempotency key and spread); opinions live in their own table, never in a run payload, document list or run history; failures leave the run untouched | `tests/test_shadow.py` (11 tests) | Anyone with database access can read the opinions |
+
+The mapping model has a second role, **shadow** (D52): during a learning period it gives a hidden second opinion on
+every row after each run, stored in `shadow_opinions` for later comparison with what the analyst approved. In that
+role it changes nothing an analyst sees. Note: the "confirmations go to mapping memory" control above holds for a
+remap or exclusion; confirming a model placement by resolving its review item does not yet write memory (found
+2026-10-29, to be fixed with the adjudication step).
 
 ## Change management
 

@@ -652,4 +652,31 @@ screen; backups are consistent snapshots with an audit anchor.**
   adapter in front of the same roles.
 - **Planned (Devin).** During a learning period before the model is relied on, run it alongside the analysts and
   record every case it would have flagged that the analyst let through. A reviewer later decides who was right and
-  why, and those decisions teach the model the nuanced cases. Not built yet.
+  why, and those decisions teach the model the nuanced cases. Step 1 is D52.
+
+## The model's learning period (2026-10-29)
+
+**D52. In a learning period the model takes no part in spreading and gives a hidden second opinion on every row.**
+- **Why (Devin).** Before the model is relied on, it should be compared with the analysts on real work: every row
+  where it would have placed a line differently from what the analyst approved goes to a reviewer, who decides who
+  was right and why. This is step 1 of 5: recording the opinions. Steps 2 to 5 (the disagreement list at approval,
+  the review page, turning decisions into golden sets, memory and training examples, and the go-live report) follow.
+- **Choice.** `SPREADER_MODEL_ROLE` is `live` (the default, the D48 cascade step) or `shadow`. In `shadow` the model
+  is not in the cascade: runs record model `none`, keep the same idempotency key and produce the same spread as with
+  no model. After a run succeeds, one background thread asks the model, independently of the rules, where each
+  labelled row belongs (`spreader/shadow.py`, `LocalModelMapper.ask`: a line id, `none`, or no answer) and stores the
+  answer next to the platform's placement and rule in `shadow_opinions` (schema 6), with an outcome (agree, disagree,
+  no answer). One opinion per run and model. `spreader shadow` records opinions for runs spread earlier.
+- **Kept from the analyst.** Opinions are never in a run payload, the document list or the run's history (the audit
+  log keeps a count-only entry under `system:shadow-model`). An analyst who saw where the model disagreed would be
+  anchored by it, and the comparison would measure nothing.
+- **Never in the way.** The analyst does not wait for it, and a model failure or crash leaves the run untouched (the
+  failure is logged). It sees what the cascade model sees: labels and section headers, never numbers. Erasing a
+  document erases its opinions (D46).
+- **Scope.** The model judges placement only, not values: wrong numbers stay the checks' job. The comparison here is
+  with the platform's own placement; the comparison with what the analyst approved is step 2.
+- **Found.** The cascade docstring and MODEL_RISK.md say a confirmed model placement goes to mapping memory. Only a
+  remap or exclusion does; resolving the model's review item does not. To be fixed with step 4.
+- **Tests.** `tests/test_shadow.py` (11): the spread is identical with and without it, every labelled row gets an
+  opinion next to the platform's, failures and crashes leave the run untouched, one opinion per run, analysts never
+  see it through the API, erasure removes it, "none" is told apart from no answer, the backfill asks once.

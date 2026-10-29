@@ -323,7 +323,9 @@ the synthetic sets in `eval/`. Invoice matching reads its vendor master, POs and
 `FINOPS_MASTER_DIR` (default: the synthetic `eval/invoice/dev/master`) under the policy in `FINOPS_AP_POLICY`
 (default `config/finops/invoice/default-ap.yaml`). To use an organisation's statement overlay:
 `SPREADER_PROFILE=config/profiles/example-lender-overlay.yaml`. To turn on the local model tier, run
-llama.cpp's `llama-server` on 127.0.0.1 and set `SPREADER_MODEL_URL=http://127.0.0.1:8088`.
+llama.cpp's `llama-server` on 127.0.0.1 and set `SPREADER_MODEL_URL=http://127.0.0.1:8088`. For a learning period
+in which the model only gives a hidden second opinion and takes no part in spreading, also set
+`SPREADER_MODEL_ROLE=shadow`; `spreader shadow` records opinions for documents spread earlier (DECISIONS D52).
 
 Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier
 (measured on an RTX 3060 Ti: about 0.35 s per row, 4.8 GB of GPU memory).
