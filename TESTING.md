@@ -48,6 +48,7 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | Concurrency, interruptions, backups (D47) | `tests/test_concurrency.py` | `spreader backup backup <folder>`, `spreader backup verify-backup <folder>`, `scripts/load_check.py` |
 | Model failure modes (D48) | `tests/test_model_governance.py` | - |
 | The model's hidden second opinion (D52) | `tests/test_shadow.py` | - |
+| Disagreements with the approved spread, deadline, sample (D53) | `tests/test_disagreements.py` | - |
 | Analyst pilot (D49) | `tests/test_pilot.py` | `scripts/pilot_report.py` |
 | Profiles and organisations (D50) | `tests/test_profile_applicability.py`, `tests/test_organisation.py` | `scripts/check_not_applicable.py <git ref>`, `spreader serve --org <file>` |
 | Dependencies | - | `.venv/Scripts/python -m pip_audit --local`, `cd web && npm audit` |

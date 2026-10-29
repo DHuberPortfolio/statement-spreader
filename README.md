@@ -325,7 +325,10 @@ the synthetic sets in `eval/`. Invoice matching reads its vendor master, POs and
 `SPREADER_PROFILE=config/profiles/example-lender-overlay.yaml`. To turn on the local model tier, run
 llama.cpp's `llama-server` on 127.0.0.1 and set `SPREADER_MODEL_URL=http://127.0.0.1:8088`. For a learning period
 in which the model only gives a hidden second opinion and takes no part in spreading, also set
-`SPREADER_MODEL_ROLE=shadow`; `spreader shadow` records opinions for documents spread earlier (DECISIONS D52).
+`SPREADER_MODEL_ROLE=shadow`; `spreader shadow` records opinions for documents spread earlier (DECISIONS D52). When
+an analyst approves, every row where the model would have placed the line differently waits for a senior's ruling;
+after 14 days without one the analyst's answer stands (`SPREADER_SHADOW_REVIEW_DAYS`; `SPREADER_SHADOW_SHARE` limits
+the model to a share of documents). `spreader disagreements` lists them (D53).
 
 Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier (an 8 GB RTX 3060 Ti is
 enough for the 4-billion-parameter model used here).

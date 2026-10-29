@@ -310,6 +310,31 @@ def _shadow_cmd(args: argparse.Namespace) -> int:
     return 0 if totals["runs"] == len(runs) else 1
 
 
+def _disagreements_cmd(args: argparse.Namespace) -> int:
+    """Where the model's hidden opinion differed from what the analyst approved (D53): counts by status, then the open
+    ones. For seniors and the learning-period report; settles the overdue ones first (the analyst's answer stands)."""
+    from .service import Service
+    from .shadow import review_days
+    from .store import Store
+
+    try:
+        days = review_days()
+    except ValueError as exc:
+        print(f"Refused: {exc}")
+        return 1
+    svc = Service(Store(_data_dir(args) / "spreader.sqlite3"))
+    rows = svc.disagreements()
+    counts: dict[str, int] = {}
+    for r in rows:
+        counts[r["status"]] = counts.get(r["status"], 0) + 1
+    print(f"{len(rows)} disagreements: " + (", ".join(f"{k} {v}" for k, v in sorted(counts.items())) or "none")
+          + f" (an unruled one stands with the analyst after {days} days)")
+    for r in (x for x in rows if x["status"] == "open"):
+        print(f"  #{r['id']} run {r['run_id']} {r['statement']} '{r['label']}': analyst {r['analyst_line']}, "
+              f"model {r['model_line']} (approved by {r['approved_by']}, due {r['due_at'][:10]})")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="spreader", description="Financial statement spreading with review.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -363,6 +388,9 @@ def main(argv: list[str] | None = None) -> int:
     h.add_argument("--run", dest="run_id", type=int, help="one run id (default: the latest run of every document)")
     h.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
     h.set_defaults(run=_shadow_cmd)
+    d = sub.add_parser("disagreements", help="rows where the model's hidden opinion differed from the approved spread")
+    d.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
+    d.set_defaults(run=_disagreements_cmd)
     args = ap.parse_args(argv)
     return int(args.run(args))
 

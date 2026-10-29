@@ -680,3 +680,37 @@ screen; backups are consistent snapshots with an audit anchor.**
 - **Tests.** `tests/test_shadow.py` (11): the spread is identical with and without it, every labelled row gets an
   opinion next to the platform's, failures and crashes leave the run untouched, one opinion per run, analysts never
   see it through the API, erasure removes it, "none" is told apart from no answer, the backfill asks once.
+
+**D53. At approval, every row where the model would have placed the line differently becomes a disagreement for a
+senior to rule on; without a ruling in 14 days, the analyst's answer stands.**
+- **Decided by Devin.**
+  1. A senior, with more years of experience, rules on each disagreement and has the final word.
+  2. When the senior sides with the model, the model learns the senior's answer. If no senior rules in time, the
+     analyst's answer stands; a wrong one is corrected over time by other analysts.
+  3. The model checks every document by default; a share is a company setting, depending on what the company will
+     spend to teach the model.
+  4. The model goes live when seniors side with it at least as often as with the analysts, with enough rulings and a
+     margin (z = 1.96) so it is not luck. A company may go live earlier with stricter confidence settings, so more
+     goes to analysts and only routine work is automated; for the best accuracy it waits until the model does better
+     than associate-level analysts. The pass mark is the company's call.
+- **Choice (step 2 of 5).** When a run is approved, each of its opinions marked `disagree` becomes a row in
+  `disagreements` (schema 7): the label, the analyst's line (the approved placement, `none` when the row was left off),
+  the rule behind it, the model's line, who approved and when, and a deadline. The comparison is with the approved
+  run's own placement, which already includes the analyst's remaps and exclusions. If the opinion arrives after the
+  approval (it runs in the background), the comparison happens then. Reopening withdraws the run's open disagreements
+  (a ruling already made stays); approving again opens them with the new approver and deadline. Rows where the model
+  agreed or gave no answer are not disagreements.
+- **Settings.** `SPREADER_SHADOW_REVIEW_DAYS` (default 14) and `SPREADER_SHADOW_SHARE` (default 1, every document;
+  the sample is decided by the document's id, so all runs of a document are in or out together). Nonsense values are
+  refused.
+- **Deadline.** Listing the disagreements first settles the overdue ones: status `analyst_stands`, verdict `analyst`,
+  recorded under `system:review-deadline` with a count-only audit entry. `spreader disagreements` lists them.
+- **Kept from analysts.** No API route serves them; their audit entries are hidden from the run's history, like the
+  opinions (D52).
+- **Next (step 3).** The senior's page and ruling: a permission of its own; verdict analyst, model or neither with
+  the correct line, a reason and a note; when the senior sides with the model, the approved spread is marked
+  "corrected after review" and the analyst is told (Devin, Oct 29; a setting, on by default). The ruling columns
+  already exist in `disagreements`.
+- **Tests.** `tests/test_disagreements.py` (17; a nonsense setting stops the start rather than failing each upload): every differing row and only those, a late opinion still compared,
+  reopen and re-approve, the deadline (not a second early), settings refused when nonsensical, the defaults, the
+  sample's share and stability, hidden from analysts, erased with the document, the command.

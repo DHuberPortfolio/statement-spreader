@@ -20,6 +20,7 @@ import random
 import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
@@ -50,13 +51,15 @@ from .pipeline import spread_document
 from .profile import Profile, load_profile
 from .review import attach_flags, build_review, unresolved_blockers
 from .second_reader import tagged_cells
-from .shadow import second_opinions
+from .shadow import in_sample, review_days, second_opinions
 from .shadow import summary as shadow_summary
 from .store import Store, now
 
 log = logging.getLogger("spreader")
 ENGINE_VERSION = __version__
 SHADOW_ACTOR = "system:shadow-model"  # who the audit log names for the second opinion (D52)
+DEADLINE_ACTOR = "system:review-deadline"  # who settles a disagreement no senior ruled on in time (D53)
+HIDDEN_FROM_RUN_HISTORY = ("shadow_opinion", "disagreements")
 
 
 class StaleError(Exception):
@@ -108,6 +111,9 @@ class Service:
         self.model_id = model_id
         self.shadow_model = shadow
         self.shadow_id = shadow_id
+        if shadow is not None:  # a nonsense setting stops the start, not every upload (D53)
+            in_sample("0" * 8)
+            review_days()
         self._shadow_pool = None if shadow is None or shadow_sync else ThreadPoolExecutor(1, thread_name_prefix="shadow")
 
     # ---- memory ----
@@ -231,7 +237,7 @@ class Service:
                       (now(), json.dumps(timings), spread.model_dump_json(), run_id))
             self.store.log(c, "run", {"status": "succeeded", "values": len(spread.values),
                                       "review_items": len(spread.review), "parent": parent}, actor, run_id, doc_id)
-        if self.shadow_model is not None:
+        if self.shadow_model is not None and in_sample(doc_id):
             if self._shadow_pool is None:
                 self.record_shadow(run_id)
             else:
@@ -267,6 +273,7 @@ class Service:
                       int(o.platform_excluded), o.platform_rule, o.model_line, o.outcome, at) for o in opinions])
                 self.store.log(c, "shadow_opinion", {"model": self.shadow_id, **counts}, SHADOW_ACTOR, run_id,
                                rows[0]["document_id"])
+            self.collect_disagreements(run_id)  # the analyst may have approved before the opinion was ready
             return counts
         except Exception as exc:  # noqa: BLE001 - the second opinion must never disturb the analyst's work
             log.exception("shadow opinion for run %s failed", run_id)
@@ -277,6 +284,55 @@ class Service:
             except Exception:  # noqa: BLE001
                 log.exception("could not record the failed shadow opinion for run %s", run_id)
             return None
+
+    def collect_disagreements(self, run_id: int) -> int:
+        """Every row of an approved run where the model's opinion differs from the approved placement becomes a
+        disagreement waiting for a senior's ruling (D53). Runs at approval and when a late opinion arrives; a
+        re-approval after a reopen opens the run's withdrawn disagreements again. Returns how many are open now.
+        Never raises: the analyst's approval already stands."""
+        try:
+            rows = self.store.query("SELECT document_id, state FROM runs WHERE id=?", (run_id,))
+            approved = json.loads(rows[0]["state"] or "{}").get("approved") if rows else None
+            if not approved:
+                return 0
+            due = (datetime.fromisoformat(approved["at"]) + timedelta(days=review_days())).isoformat(timespec="seconds")
+            with self.store.tx() as c:
+                before = c.execute("SELECT COUNT(*) FROM disagreements WHERE run_id=? AND status='open'",
+                                   (run_id,)).fetchone()[0]
+                c.execute(
+                    "INSERT INTO disagreements(opinion_id, run_id, document_id, model_id, statement, row_index, label, "
+                    "section, analyst_line, analyst_rule, model_line, approved_by, approved_at, due_at, status, created_at) "
+                    "SELECT id, run_id, ?, model_id, statement, row_index, label, section, "
+                    "CASE WHEN platform_line IS NULL OR platform_excluded THEN 'none' ELSE platform_line END, "
+                    "platform_rule, model_line, ?, ?, ?, 'open', ? FROM shadow_opinions "
+                    "WHERE run_id=? AND outcome='disagree' "
+                    "ON CONFLICT(opinion_id) DO UPDATE SET status='open', approved_by=excluded.approved_by, "
+                    "approved_at=excluded.approved_at, due_at=excluded.due_at WHERE disagreements.status='withdrawn'",
+                    (rows[0]["document_id"], approved["by"], approved["at"], due, now(), run_id))
+                after = c.execute("SELECT COUNT(*) FROM disagreements WHERE run_id=? AND status='open'",
+                                  (run_id,)).fetchone()[0]
+                if after != before:
+                    self.store.log(c, "disagreements", {"open": after}, SHADOW_ACTOR, run_id, rows[0]["document_id"])
+            return after
+        except Exception:  # noqa: BLE001
+            log.exception("collecting disagreements for run %s failed", run_id)
+            return 0
+
+    def settle_overdue(self, at: str | None = None) -> int:
+        """Disagreements past their deadline without a senior's ruling: the analyst's answer stands (D53)."""
+        at = at or now()
+        with self.store.tx() as c:
+            n = c.execute("UPDATE disagreements SET status='analyst_stands', verdict='analyst', ruled_by=?, ruled_at=? "
+                          "WHERE status='open' AND due_at <= ?", (DEADLINE_ACTOR, at, at)).rowcount
+            if n:
+                self.store.log(c, "disagreements_settled", {"analyst_stands": n}, DEADLINE_ACTOR)
+        return n
+
+    def disagreements(self, status: str | None = None) -> list[dict[str, Any]]:
+        """For seniors and the learning-period report, never for analysts (D53). Settles overdue ones first."""
+        self.settle_overdue()
+        where, args = ("WHERE status=?", (status,)) if status else ("", ())
+        return [dict(r) for r in self.store.query(f"SELECT * FROM disagreements {where} ORDER BY id", args)]
 
     def _fail(self, run_id: int, message: str, actor: str) -> RunView:
         with self.store.tx() as c:
@@ -470,10 +526,13 @@ class Service:
             elif kind == "reopen":
                 c.execute("INSERT INTO approval_withdrawals(run_id, withdrawn_by, withdrawn_at) VALUES (?,?,?)",
                           (run_id, actor, now()))
+                # the approval they compared with is withdrawn; a ruling already made stays (D53)
+                c.execute("UPDATE disagreements SET status='withdrawn' WHERE run_id=? AND status='open'", (run_id,))
         if kind == "approve":  # what the approval says about each rule, for calibration (D40)
             record_outcomes(approval_outcomes(spread, state, {"run": run_id, "document": run["document_id"],
                                                               "company": payload.get("company_id")},
                                               actor, state["approved"]["at"], self.profile.line_statement))
+            self.collect_disagreements(run_id)
         return self.get(run_id)
 
     def _remember(self, c: Any, run_id: int, doc_id: str, company: str, spread: Spread, state: dict[str, Any],
@@ -538,7 +597,9 @@ class Service:
     def events(self, run_id: int) -> list[dict[str, Any]]:
         # The second opinion's entries stay in the audit log but not in the run's history: even its counts would tell
         # the analyst where the model disagreed (D52).
-        rows = self.store.query("SELECT * FROM events WHERE run_id=? AND kind != 'shadow_opinion' ORDER BY id", (run_id,))
+        marks = ",".join("?" * len(HIDDEN_FROM_RUN_HISTORY))
+        rows = self.store.query(f"SELECT * FROM events WHERE run_id=? AND kind NOT IN ({marks}) ORDER BY id",
+                                (run_id, *HIDDEN_FROM_RUN_HISTORY))
         return [{**dict(r), "payload": json.loads(r["payload"])} for r in rows]
 
     def documents(self) -> list[dict[str, Any]]:

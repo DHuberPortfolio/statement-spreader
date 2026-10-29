@@ -247,6 +247,7 @@ def _erase_statement(p: Platform, doc_id: str, reason: str, actor: str) -> dict[
             (S_ERASED, doc_id, *runs, S_ERASED)).rowcount
         n["approved_values"] = c.execute("DELETE FROM approved_values WHERE document_id = ?", (doc_id,)).rowcount
         n["company_mappings"] = c.execute(f"DELETE FROM company_mappings WHERE run_id IN ({marks})", tuple(runs)).rowcount
+        n["disagreements"] = c.execute(f"DELETE FROM disagreements WHERE run_id IN ({marks})", tuple(runs)).rowcount
         n["shadow_opinions"] = c.execute(f"DELETE FROM shadow_opinions WHERE run_id IN ({marks})", tuple(runs)).rowcount
         n["runs"] = c.execute("UPDATE runs SET spread = NULL, state = '{}', error = NULL, timings = NULL "
                               "WHERE document_id = ?", (doc_id,)).rowcount

@@ -22,7 +22,7 @@ from typing import Any
 
 from finops.core.vault import vault
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 
 SCHEMA = [
     """CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)""",
@@ -150,6 +150,33 @@ SCHEMA = [
         outcome TEXT NOT NULL,             -- agree | disagree | no_answer
         created_at TEXT NOT NULL,
         UNIQUE (run_id, model_id, statement, row_index)
+    )""",
+    # Rows where the model's opinion differs from what the analyst approved, waiting for a senior's ruling (schema 7,
+    # DECISIONS D53). Never shown to analysts; erased with the document (D46).
+    """CREATE TABLE IF NOT EXISTS disagreements (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        opinion_id INTEGER NOT NULL UNIQUE REFERENCES shadow_opinions(id),
+        run_id INTEGER NOT NULL REFERENCES runs(id),
+        document_id TEXT NOT NULL,
+        model_id TEXT NOT NULL,
+        statement TEXT NOT NULL,
+        row_index INTEGER NOT NULL,
+        label TEXT NOT NULL,
+        section TEXT NOT NULL,
+        analyst_line TEXT NOT NULL,        -- the approved placement; 'none' when the row was left off the spread
+        analyst_rule TEXT NOT NULL,        -- the rule behind it (memory = a reviewer's remap)
+        model_line TEXT NOT NULL,          -- a line id or 'none'
+        approved_by TEXT NOT NULL,
+        approved_at TEXT NOT NULL,
+        due_at TEXT NOT NULL,              -- after this, without a ruling, the analyst's answer stands
+        status TEXT NOT NULL,              -- open | analyst_stands | ruled | withdrawn (the approval was reopened)
+        ruled_by TEXT,                     -- filled by the senior's ruling (step 3) or the deadline
+        ruled_at TEXT,
+        verdict TEXT,                      -- analyst | model | neither
+        correct_line TEXT,
+        reason TEXT,
+        note TEXT,
+        created_at TEXT NOT NULL
     )""",
     """CREATE TABLE IF NOT EXISTS assumptions (
         key TEXT PRIMARY KEY,

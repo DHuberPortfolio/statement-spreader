@@ -4,13 +4,18 @@ With SPREADER_MODEL_ROLE=shadow the model takes no part in spreading. After a ru
 independently where every labelled row belongs, as if no rule had placed it, and its answer is stored next to the
 platform's placement in `shadow_opinions`. Nothing here changes a run, a spread, a review item or the run's
 idempotency key, and analysts are never shown the opinions: seeing them would anchor the decisions they are meant
-to be compared with. Later steps compare them with what the analyst approved and send disagreements to a reviewer.
+to be compared with.
+
+When the analyst approves, every row where the model's opinion differs from the approved placement becomes a
+disagreement (D53) waiting for a senior's ruling; after SPREADER_SHADOW_REVIEW_DAYS without one, the analyst's
+answer stands. The ruling itself is the next step.
 
 The model sees what it sees in the cascade (llm/local.py): labels and section headers, never numbers.
 """
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from typing import Any, Protocol
 
@@ -57,6 +62,35 @@ def second_opinions(spread: Spread, profile: Profile, model: Asker) -> list[Opin
             out.append(Opinion(table.statement.value, row.index, row.label, row.section or "", m.canonical,
                                bool(m.excluded), m.rule or "", answer))
     return out
+
+
+def share() -> float:
+    """SPREADER_SHADOW_SHARE: the share of documents the model gives an opinion on (D53). 1 (every document) by
+    default; a company that will not spend the GPU time on all of them sets a share, e.g. 0.2."""
+    raw = os.environ.get("SPREADER_SHADOW_SHARE", "1")
+    try:
+        value = float(raw)
+    except ValueError:
+        value = -1.0
+    if not 0 < value <= 1:
+        raise ValueError(f"SPREADER_SHADOW_SHARE must be a number above 0 and at most 1, not {raw!r}")
+    return value
+
+
+def in_sample(doc_id: str) -> bool:
+    """Whether a document is in the sample. Decided by its id, so every run of one document is in or out together and
+    the sample is random with respect to anything about the document's content or who spread it."""
+    s = share()
+    return s >= 1 or int(doc_id[:8], 16) / 0x1_0000_0000 < s
+
+
+def review_days() -> int:
+    """SPREADER_SHADOW_REVIEW_DAYS: how long a disagreement waits for a senior's ruling before the analyst's answer
+    stands (D53). 14 by default."""
+    raw = os.environ.get("SPREADER_SHADOW_REVIEW_DAYS", "14")
+    if not raw.isdigit() or not 1 <= int(raw) <= 365:
+        raise ValueError(f"SPREADER_SHADOW_REVIEW_DAYS must be a whole number of days from 1 to 365, not {raw!r}")
+    return int(raw)
 
 
 def summary(opinions: list[Opinion]) -> dict[str, Any]:
