@@ -711,6 +711,38 @@ senior to rule on; without a ruling in 14 days, the analyst's answer stands.**
   the correct line, a reason and a note; when the senior sides with the model, the approved spread is marked
   "corrected after review" and the analyst is told (Devin, Oct 29; a setting, on by default). The ruling columns
   already exist in `disagreements`.
-- **Tests.** `tests/test_disagreements.py` (17; a nonsense setting stops the start rather than failing each upload): every differing row and only those, a late opinion still compared,
+- **Tests.** `tests/test_disagreements.py` (17; a nonsense setting stops the start rather than failing each upload):
+  every differing row and only those, a late opinion still compared,
   reopen and re-approve, the deadline (not a second early), settings refused when nonsensical, the defaults, the
   sample's share and stability, hidden from analysts, erased with the document, the command.
+
+**D54. A senior rules on each disagreement without knowing which answer is the model's; a wrong approved line shows
+"corrected after review" to its analyst.**
+- **Who (Devin).** A senior, with more years of experience, has the final word. A new permission, `adjudicate`, and a
+  role, `senior` (`view, adjudicate, export`); a senior who also spreads holds both roles. Development sign-in has
+  `sam` (senior).
+- **The ruling.** On the page *Model disagreements* (`/disagreements`, shown only with `adjudicate`; API
+  `GET /api/disagreements`, `POST /api/disagreements/<id>/rule`), the senior picks answer A, answer B, or neither and
+  the correct line, a reason from a closed list (so reasons can be counted) and a note. A ruling is final. A ruling
+  after the deadline replaces the analyst-stands default. Nobody rules on a spread they approved themselves.
+- **Blind by default.** The two answers are shown as A and B, in an order fixed per disagreement and unrelated to whose
+  each is, and the approver's name is hidden, until the senior has ruled. A senior who knows which answer is the
+  model's can lean towards or against it; the go-live measure (D53, Devin's point 4) would then measure the senior's
+  view of the model rather than the model. `SPREADER_BLIND_RULING=0` shows them. Not decided by Devin: chosen here and
+  raised with him. Limit: the page does not link to the run while ruling blind, but a senior who also has `view` can
+  still open the run and see the approved placement. Blind ruling keeps the source out of view; it cannot stop a
+  senior who goes looking.
+- **Corrected after review (Devin).** When the senior rules the approved line wrong (verdict model or neither), the
+  run page shows the analyst which line, the approved and the correct line, the note and who ruled, and the document
+  list marks the document. It shows while the run is approved and clears when the analyst reopens the spread to fix
+  it. No email or message is sent: the analyst sees it in the app. `SPREADER_FLAG_CORRECTED=0` turns it off. No
+  model id reaches the analyst.
+- **Audit.** Each ruling is an audit entry under the senior (`ruling`: the disagreement, verdict, reason, whether it
+  was late), hidden from the run's history like the opinions.
+- **Not yet (step 4).** The model does not learn from rulings yet: that is the next step (memory, golden sets,
+  training examples). The ruling's verdict, correct line, reason and note are what it will learn from.
+- **Tests.** `tests/test_rulings.py` (14): only seniors, blind until ruled, A is not always the analyst's, choice to
+  verdict, neither and its line, a reason and a note required, final, nothing to rule on after a reopen, no ruling on
+  one's own approval, a late ruling, corrected after review until reopened, both switches, the audit chain. Checked in
+  the browser: a senior ruled on the page, the analyst then saw the notice on the run and the mark in the list, and
+  the analyst's menu has no senior page.

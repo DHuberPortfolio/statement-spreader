@@ -10,6 +10,8 @@ separation_of_duties:
   approver_not_corrector: true
 dev_users:
   - {username: ana, name: Ana, roles: [analyst]}
+  - {username: sam, name: Sam, roles: [senior]}
+  - {username: sid, name: Sid, roles: [analyst, senior]}
   - {username: dana, name: Dana, roles: [preparer, reviewer, approver, auditor]}
   - {username: erin, name: Erin, roles: [preparer, reviewer, approver, auditor]}
   - {username: pat, name: Pat, roles: [preparer]}

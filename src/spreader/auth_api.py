@@ -38,6 +38,8 @@ ROUTE_PERMISSIONS: list[tuple[str, str, str]] = [
     ("GET", rf"/api/runs/{_ID}", "view"),
     ("POST", rf"/api/runs/{_ID}/actions", "view"),  # refined in the handler by action type
     ("GET", rf"/api/runs/{_ID}/events", "view"),
+    # the model's learning period: seniors only (D54)
+    ("GET", r"/api/disagreements", "adjudicate"), ("POST", rf"/api/disagreements/{_ID}/rule", "adjudicate"),
     ("GET", rf"/api/runs/{_ID}/source/{_ID}", "view"),
     ("GET", rf"/api/runs/{_ID}/export\.{_ID}", "export"),
     # analyst timing (ROI)

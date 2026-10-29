@@ -2541,3 +2541,42 @@ input[type="file"]::file-selector-button:hover {
 @media (prefers-color-scheme: dark) {
   .dev-warning, .dev-auth { background: #3a2d05; color: #ffe4a3; border-color: #7a5d12; }
 }
+
+/* ---- the model's learning period: a senior rules on disagreements (D54) ---- */
+.disagreement {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  max-width: 760px;
+}
+.disagreement h3 {
+  margin: 0 0 2px;
+  font-size: 1rem;
+}
+.disagreement header p {
+  margin: 2px 0;
+}
+.rule-choices {
+  border: 0;
+  margin: 8px 0 6px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rule-choices legend {
+  font-weight: 600;
+  margin-bottom: 4px;
+  padding: 0;
+}
+.rule-choice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.rule-choice select {
+  max-width: 100%;
+}

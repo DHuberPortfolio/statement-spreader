@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { authState, onAuthChange, signOut } from "../lib/auth";
+import { authState, can, onAuthChange, signOut } from "../lib/auth";
 import { formatDuration } from "../lib/format";
 import { Link, navigate, useLocation } from "../lib/router";
 import { endActiveSession } from "../lib/session";
@@ -89,7 +89,15 @@ function FlashArea() {
   );
 }
 
-type NavItem = { to: string; label: string; hint: string; icon: IconName; active: (path: string) => boolean };
+type NavItem = {
+  to: string;
+  label: string;
+  hint: string;
+  icon: IconName;
+  active: (path: string) => boolean;
+  /** shown only to someone with this permission */
+  needs?: string;
+};
 
 const NAV: { group: string; items: NavItem[] }[] = [
   {
@@ -118,6 +126,8 @@ const NAV: { group: string; items: NavItem[] }[] = [
       { to: "/roi", label: "Time saved", hint: "Measured hours and cost", icon: "clock",
         active: (p) => p.startsWith("/roi") || p.startsWith("/sessions") },
       { to: "/evaluation", label: "Accuracy", hint: "How right it is, and learning", icon: "target", active: (p) => p.startsWith("/evaluation") },
+      { to: "/disagreements", label: "Model disagreements", hint: "Rule on the model's learning", icon: "match",
+        active: (p) => p.startsWith("/disagreements"), needs: "adjudicate" },
     ],
   },
 ];
@@ -183,7 +193,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
             <div className="nav-group" key={g.group || "home"}>
               {g.group && <p className="nav-group-title">{g.group}</p>}
               <ul>
-                {g.items.map((n) => {
+                {g.items.filter((n) => !n.needs || can(n.needs)).map((n) => {
                   const active = n.active(loc.path);
                   return (
                     <li key={n.to}>

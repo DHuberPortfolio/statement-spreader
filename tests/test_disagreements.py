@@ -181,8 +181,15 @@ def test_analysts_never_see_disagreements(tmp_path: Path, profile: Any) -> None:
     svc.act(run, {"type": "approve"}, "dev:ana")
     assert _rows(svc)
     assert not {e["kind"] for e in svc.events(run)} & {"shadow_opinion", "disagreements"}
-    assert not [p for _, p, _ in auth_api.ROUTE_PERMISSIONS if "disagree" in p or "shadow" in p], \
-        "no API route serves them yet: the senior's page (step 3) gets its own permission"
+    routes = [(p, perm) for _, p, perm in auth_api.ROUTE_PERMISSIONS if "disagree" in p or "shadow" in p]
+    assert routes and all(perm == "adjudicate" for _, perm in routes), "only seniors reach them (D54)"
+    assert "adjudicate" not in profile_roles("analyst")
+
+
+def profile_roles(role: str) -> set[str]:
+    from finops.core.identity import load_auth_config
+
+    return set(load_auth_config(ROOT / "config" / "finops" / "auth" / "development.yaml").roles[role])
 
 
 def test_erasing_a_document_erases_its_disagreements(tmp_path: Path, profile: Any) -> None:

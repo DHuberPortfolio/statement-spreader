@@ -51,7 +51,7 @@ from .pipeline import spread_document
 from .profile import Profile, load_profile
 from .review import attach_flags, build_review, unresolved_blockers
 from .second_reader import tagged_cells
-from .shadow import in_sample, review_days, second_opinions
+from .shadow import REASONS, blind_ruling, flag_corrected, in_sample, review_days, second_opinions
 from .shadow import summary as shadow_summary
 from .store import Store, now
 
@@ -59,7 +59,7 @@ log = logging.getLogger("spreader")
 ENGINE_VERSION = __version__
 SHADOW_ACTOR = "system:shadow-model"  # who the audit log names for the second opinion (D52)
 DEADLINE_ACTOR = "system:review-deadline"  # who settles a disagreement no senior ruled on in time (D53)
-HIDDEN_FROM_RUN_HISTORY = ("shadow_opinion", "disagreements")
+HIDDEN_FROM_RUN_HISTORY = ("shadow_opinion", "disagreements", "ruling")
 
 
 class StaleError(Exception):
@@ -114,6 +114,8 @@ class Service:
         if shadow is not None:  # a nonsense setting stops the start, not every upload (D53)
             in_sample("0" * 8)
             review_days()
+        flag_corrected()  # read by the document list even without a model (D54)
+        blind_ruling()
         self._shadow_pool = None if shadow is None or shadow_sync else ThreadPoolExecutor(1, thread_name_prefix="shadow")
 
     # ---- memory ----
@@ -333,6 +335,65 @@ class Service:
         self.settle_overdue()
         where, args = ("WHERE status=?", (status,)) if status else ("", ())
         return [dict(r) for r in self.store.query(f"SELECT * FROM disagreements {where} ORDER BY id", args)]
+
+    def rule(self, disagreement_id: int, verdict: str, actor: str, reason: str, note: str,
+             correct_line: str | None = None) -> dict[str, Any]:
+        """A senior's ruling on one disagreement (D54): the analyst was right, the model was, or neither (then the
+        correct line). A ruling made after the deadline replaces the analyst-stands default; a ruling is final, and
+        nobody rules on a spread they approved themselves."""
+        from finops.core.exceptions import same_person
+
+        rows = self.store.query("SELECT * FROM disagreements WHERE id=?", (disagreement_id,))
+        if not rows:
+            raise ActionError("Unknown disagreement")
+        d = dict(rows[0])
+        if d["status"] == "withdrawn":
+            raise ActionError("The approval this was compared with was reopened; there is nothing to rule on")
+        if d["status"] == "ruled":
+            raise ActionError(f"Already ruled by {d['ruled_by']}; a ruling is final")
+        if same_person(actor, d["approved_by"]):
+            raise SeparationError("You approved this spread; a senior other than its approver rules on it")
+        if verdict not in {"analyst", "model", "neither"}:
+            raise ActionError("The verdict is analyst, model or neither")
+        if reason not in REASONS:
+            raise ActionError(f"Unknown reason; one of: {', '.join(REASONS)}")
+        note = note.strip()
+        if len(note) < 3:
+            raise ActionError("A ruling needs a note saying why")
+        if verdict == "neither":
+            allowed = {ln.id for ln in self.profile.statements[StatementType(d["statement"])].lines} | {"none"}
+            if correct_line not in allowed:
+                raise ActionError("Neither answer was right: choose the correct line (or 'none')")
+            if correct_line in {d["analyst_line"], d["model_line"]}:
+                raise ActionError("That is one of the two answers; rule for it instead of 'neither'")
+            line = correct_line
+        else:
+            line = d["analyst_line"] if verdict == "analyst" else d["model_line"]
+        at = now()
+        with self.store.tx() as c:
+            n = c.execute("UPDATE disagreements SET status='ruled', verdict=?, correct_line=?, reason=?, note=?, "
+                          "ruled_by=?, ruled_at=? WHERE id=? AND status IN ('open', 'analyst_stands')",
+                          (verdict, line, reason, note[:1000], actor, at, disagreement_id)).rowcount
+            if not n:
+                raise ActionError("Someone ruled on this a moment ago. Reload the list.")
+            self.store.log(c, "ruling", {"disagreement": disagreement_id, "verdict": verdict, "reason": reason,
+                                         "late": d["status"] == "analyst_stands"}, actor, d["run_id"], d["document_id"])
+        return dict(self.store.query("SELECT * FROM disagreements WHERE id=?", (disagreement_id,))[0])
+
+    def corrections(self, run_id: int) -> list[dict[str, Any]]:
+        """What seniors corrected in this approved spread, for its analyst (D54): rulings that the approved line was
+        wrong, made while the run is approved and since its last reopening. Reopening the spread to fix it clears them.
+        Off with SPREADER_FLAG_CORRECTED=0."""
+        if not flag_corrected():
+            return []
+        rows = self.store.query("SELECT state FROM runs WHERE id=?", (run_id,))
+        if not rows or not json.loads(rows[0]["state"] or "{}").get("approved"):
+            return []
+        return [dict(r) for r in self.store.query(
+            "SELECT id, statement, label, section, analyst_line AS approved_line, correct_line, reason, note, ruled_by, "
+            "ruled_at FROM disagreements d WHERE run_id=? AND status='ruled' AND verdict != 'analyst' AND ruled_at > "
+            "COALESCE((SELECT MAX(withdrawn_at) FROM approval_withdrawals w WHERE w.run_id = d.run_id), '') ORDER BY id",
+            (run_id,))]
 
     def _fail(self, run_id: int, message: str, actor: str) -> RunView:
         with self.store.tx() as c:
@@ -612,6 +673,7 @@ class Service:
             d = dict(r)
             st = json.loads(d.pop("run_state") or "{}")
             d["approved"] = bool(st.get("approved"))
+            d["corrected_after_review"] = len(self.corrections(int(d["run_id"]))) if d.get("run_id") else 0
             d["summary"] = None
             if d.get("run_id") and d.get("run_status") == "succeeded":
                 view = self.get(int(d["run_id"]))

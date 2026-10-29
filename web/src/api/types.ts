@@ -192,6 +192,7 @@ export interface DocumentRow {
   run_status?: Run["status"] | null;
   run_at?: string | null;
   approved?: boolean;
+  corrected_after_review?: number;
   company_id?: string | null;
   summary?: { blocker: number; warning: number; info: number; values: number; auto_accepted: number } | null;
 }
@@ -231,6 +232,62 @@ export interface RunPayload {
   lines?: Record<string, LineInfo>;
   summary?: RunSummary;
   document: DocumentRow | null;
+  /** Lines a senior ruled wrong in this approved spread (D54); cleared when the spread is reopened. */
+  corrected_after_review?: ReviewCorrection[];
+}
+
+export interface ReviewCorrection {
+  id: number;
+  statement: string;
+  label: string;
+  approved_line: string;
+  approved_label: string;
+  correct_line: string;
+  correct_label: string;
+  reason: string;
+  note: string;
+  ruled_by: string;
+  ruled_at: string;
+}
+
+// ---- the model's learning period: a senior rules on disagreements (D53, D54) ----
+
+export interface DisagreementAnswer {
+  key: "a" | "b";
+  line: string;
+  label: string;
+  /** Only once ruled, or when ruling is not blind. */
+  who?: "analyst" | "model";
+}
+
+export interface Disagreement {
+  id: number;
+  run_id: number;
+  document: string | null;
+  statement: string;
+  label: string;
+  section: string;
+  approved_at: string;
+  due_at: string;
+  status: "open" | "analyst_stands" | "ruled";
+  answers: DisagreementAnswer[];
+  approved_by?: string;
+  verdict: "analyst" | "model" | "neither" | null;
+  correct_line: string | null;
+  correct_label: string | null;
+  reason: string | null;
+  note: string | null;
+  ruled_by: string | null;
+  ruled_at: string | null;
+}
+
+export interface DisagreementList {
+  items: Disagreement[];
+  counts: Record<string, number>;
+  reasons: Record<string, string>;
+  review_days: number;
+  blind: boolean;
+  lines: Record<string, { id: string; label: string }[]>;
 }
 
 export interface ProfileLine {

@@ -328,7 +328,10 @@ in which the model only gives a hidden second opinion and takes no part in sprea
 `SPREADER_MODEL_ROLE=shadow`; `spreader shadow` records opinions for documents spread earlier (DECISIONS D52). When
 an analyst approves, every row where the model would have placed the line differently waits for a senior's ruling;
 after 14 days without one the analyst's answer stands (`SPREADER_SHADOW_REVIEW_DAYS`; `SPREADER_SHADOW_SHARE` limits
-the model to a share of documents). `spreader disagreements` lists them (D53).
+the model to a share of documents). `spreader disagreements` lists them (D53). A senior (role `senior`; development
+user "Sam Senior") rules on them on the *Model disagreements* page, seeing the two answers as A and B without knowing
+which is the model's; a line ruled wrong shows "corrected after review" to its analyst until they reopen the spread
+(`SPREADER_BLIND_RULING`, `SPREADER_FLAG_CORRECTED`; D54).
 
 Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier (an 8 GB RTX 3060 Ti is
 enough for the 4-billion-parameter model used here).

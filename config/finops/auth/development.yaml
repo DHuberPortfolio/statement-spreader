@@ -9,6 +9,7 @@ session:
   secure_cookie: false   # local http only
 dev_users:
   - {username: ana, name: "Ana Analyst (dev)", roles: [analyst]}
+  - {username: sam, name: "Sam Senior (dev)", roles: [senior]}
   - {username: pat, name: "Pat Preparer (dev)", roles: [preparer]}
   - {username: rae, name: "Rae Reviewer (dev)", roles: [reviewer]}
   - {username: ari, name: "Ari Approver (dev)", roles: [approver]}

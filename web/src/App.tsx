@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Layout } from "./components/Layout";
 import { BaselinePage } from "./pages/BaselinePage";
 import { DataQualityListPage, DataQualityRunPage } from "./pages/DataQualityPage";
+import { DisagreementsPage } from "./pages/DisagreementsPage";
 import { DocumentsPage } from "./pages/DocumentsPage";
 import { EvaluationPage } from "./pages/EvaluationPage";
 import { InvoiceDetailPage, InvoiceListPage } from "./pages/InvoicesPage";
@@ -22,6 +23,7 @@ const TITLES: [RegExp, string][] = [
   [/^\/invoices/, "Invoices"],
   [/^\/data-quality/, "Data quality"],
   [/^\/spreadsheets/, "Spreadsheets"],
+  [/^\/disagreements/, "Model disagreements"],
 ];
 
 export function App() {
@@ -38,6 +40,7 @@ export function App() {
   if (baseline) return <BaselinePage sessionId={Number(baseline[0])} />;
   if (path === "/roi" || path === "/roi/") return <RoiPage />;
   if (path === "/evaluation" || path === "/evaluation/") return <EvaluationPage />;
+  if (path === "/disagreements" || path === "/disagreements/") return <DisagreementsPage />;
   const reconRun = match(/^\/recon\/runs\/(\d+)\/?$/, path);
   if (reconRun) return <ReconRunPage key={reconRun[0]} runId={Number(reconRun[0])} />;
   if (path === "/recon" || path === "/recon/") return <ReconListPage />;

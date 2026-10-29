@@ -6,6 +6,8 @@ import { sessionEnded } from "../lib/auth";
 import type {
   AuditEvent,
   CompanyRow,
+  Disagreement,
+  DisagreementList,
   DocumentRow,
   EvalReport,
   OutcomeSummary,
@@ -117,6 +119,9 @@ export const api = {
     sendJson<{ active_seconds: number }>(`/api/sessions/${sid}/heartbeat`, "POST", { active_seconds: activeSeconds }),
   endSession: (sid: number, body: Record<string, unknown>) => sendJson<WorkSession>(`/api/sessions/${sid}/end`, "POST", body),
   evaluation: () => getJson<{ reports: EvalReport[] }>("/api/evaluation"),
+  disagreements: (signal?: AbortSignal) => getJson<DisagreementList>("/api/disagreements", signal),
+  rule: (id: number, body: { choice: "a" | "b" | "neither"; correct_line?: string; reason: string; note: string }) =>
+    sendJson<Disagreement>(`/api/disagreements/${id}/rule`, "POST", body),
 };
 
 /** Upload with progress (fetch has no upload progress, so this uses XMLHttpRequest). */

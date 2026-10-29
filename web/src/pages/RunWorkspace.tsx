@@ -216,6 +216,23 @@ function RunHeader({
           </dl>
         )}
       </div>
+      {(payload.corrected_after_review?.length ?? 0) > 0 && (
+        <InlineMessage kind="error">
+          <strong>Corrected after review.</strong> A senior reviewed this approved spread and ruled{" "}
+          {payload.corrected_after_review!.length === 1 ? "one line" : `${payload.corrected_after_review!.length} lines`} wrong.
+          Reopen the spread to fix {payload.corrected_after_review!.length === 1 ? "it" : "them"}:
+          <ul className="plain-list">
+            {payload.corrected_after_review!.map((c) => (
+              <li key={c.id}>
+                “{c.label}”: approved as {c.approved_label}, belongs {c.correct_line === "none" ? "off the spread" : `on ${c.correct_label}`}.{" "}
+                <span className="muted small">
+                  “{c.note}” · {c.ruled_by}, {formatDateTime(c.ruled_at)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </InlineMessage>
+      )}
       {latestRunId !== null && latestRunId !== run.id && (
         <InlineMessage kind="info">
           This is not the latest run of this document: <Link to={`/runs/${latestRunId}`}>run #{latestRunId}</Link> is newer. Review and

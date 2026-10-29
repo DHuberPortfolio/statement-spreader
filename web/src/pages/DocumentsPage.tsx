@@ -338,7 +338,15 @@ export function DocumentsPage() {
                       <td>
                         <RunStatus doc={d} />
                       </td>
-                      <td>{d.approved ? <span className="stamp stamp-small">Approved</span> : <span className="muted">Not approved</span>}</td>
+                      <td>
+                        {d.approved ? <span className="stamp stamp-small">Approved</span> : <span className="muted">Not approved</span>}
+                        {(d.corrected_after_review ?? 0) > 0 && " "}
+                        {(d.corrected_after_review ?? 0) > 0 && (
+                          <span className="chip chip-bad" title="A senior ruled lines of this approved spread wrong; reopen it to fix them">
+                            Corrected after review
+                          </span>
+                        )}
+                      </td>
                       <td className="num">
                         {s === undefined ? (
                           d.run_status === "succeeded" ? <span className="muted" aria-label="loading">…</span> : <span className="muted">–</span>

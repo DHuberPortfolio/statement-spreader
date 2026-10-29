@@ -11,6 +11,7 @@ Boundaries, stated plainly:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -118,7 +119,82 @@ def _run_payload(view: Any) -> dict[str, Any]:
         }
     doc = svc.store.document(view.run["document_id"])
     out["document"] = dict(doc) if doc else None
+    out["corrected_after_review"] = [{**c, "approved_label": _line_label(c["approved_line"]),
+                                      "correct_label": _line_label(c["correct_line"])}
+                                     for c in svc.corrections(int(view.run["id"]))]
     return out
+
+
+def _line_label(line: str | None) -> str:
+    if not line or line == "none":
+        return "left off the spread"
+    ln = service().profile.lines.get(line)
+    return ln.label if ln else line
+
+
+# ---- the learning period: a senior rules on disagreements (D53, D54) ----
+
+def _a_is_analyst(disagreement_id: int) -> bool:
+    """Which of the two answers is shown as A: fixed per disagreement, unrelated to whose it is."""
+    return hashlib.sha256(f"disagreement:{disagreement_id}".encode()).digest()[0] % 2 == 0
+
+
+def _disagreement_view(d: dict[str, Any], blind: bool) -> dict[str, Any]:
+    first, second = ("analyst", "model") if _a_is_analyst(d["id"]) else ("model", "analyst")
+    line_of = {"analyst": d["analyst_line"], "model": d["model_line"]}
+    rulable = d["status"] in {"open", "analyst_stands"}
+    out = {k: d[k] for k in ("id", "run_id", "statement", "label", "section", "approved_at", "due_at", "status",
+                             "verdict", "reason", "note", "ruled_by", "ruled_at")}
+    doc = service().store.document(d["document_id"])
+    out["document"] = doc["filename"] if doc else None
+    out["answers"] = [{"key": k, "line": line_of[who], "label": _line_label(line_of[who]),
+                       **({} if blind and rulable else {"who": who})} for k, who in (("a", first), ("b", second))]
+    out["correct_line"] = d["correct_line"]
+    out["correct_label"] = _line_label(d["correct_line"]) if d["correct_line"] else None
+    if not (blind and rulable):
+        out["approved_by"] = d["approved_by"]
+    return out
+
+
+@app.get("/api/disagreements")
+def disagreements() -> dict[str, Any]:
+    from .shadow import REASONS, blind_ruling, review_days
+
+    svc = service()
+    blind = blind_ruling()
+    rows = svc.disagreements()
+    counts: dict[str, int] = {}
+    for r in rows:
+        counts[r["status"]] = counts.get(r["status"], 0) + 1
+    return {
+        "items": [_disagreement_view(r, blind) for r in rows if r["status"] != "withdrawn"],
+        "counts": counts, "reasons": REASONS, "review_days": review_days(), "blind": blind,
+        "lines": {k.value: [{"id": ln.id, "label": ln.label} for ln in s.lines] for k, s in svc.profile.statements.items()},
+    }
+
+
+@app.post("/api/disagreements/{disagreement_id}/rule")
+async def rule(disagreement_id: int, request: Request) -> dict[str, Any]:
+    """body: {"choice": "a" | "b" | "neither", "correct_line": <line id or "none">, "reason": <key>, "note": "..."}"""
+    from .shadow import blind_ruling
+
+    try:
+        body = await request.json()
+    except json.JSONDecodeError as exc:
+        raise HTTPException(400, "Body must be JSON") from exc
+    if not isinstance(body, dict):
+        raise HTTPException(400, "Body must be a JSON object")
+    choice = str(body.get("choice", ""))
+    if choice not in {"a", "b", "neither"}:
+        raise HTTPException(400, "choice is a, b or neither")
+    a_is_analyst = _a_is_analyst(disagreement_id)
+    verdict = "neither" if choice == "neither" else ("analyst" if (choice == "a") == a_is_analyst else "model")
+    try:
+        d = await run_in_threadpool(service().rule, disagreement_id, verdict, _actor(), str(body.get("reason", "")),
+                                    str(body.get("note", "")), body.get("correct_line"))
+    except SeparationError as exc:
+        raise HTTPException(403, str(exc)) from exc
+    return _disagreement_view(d, blind_ruling())
 
 
 @app.get("/api/health")

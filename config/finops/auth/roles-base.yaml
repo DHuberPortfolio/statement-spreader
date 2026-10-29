@@ -8,6 +8,9 @@
 roles:
   viewer: [view]
   analyst: [view, upload, edit, review, approve, export]
+  # A senior analyst rules on rows where the model, during its learning period, would have placed a line differently
+  # from what an analyst approved (D54). Give a senior who also spreads both roles: analyst and senior.
+  senior: [view, adjudicate, export]
   preparer: [view, upload, edit, export]
   reviewer: [view, edit, review, export]
   approver: [view, review, approve, export]
