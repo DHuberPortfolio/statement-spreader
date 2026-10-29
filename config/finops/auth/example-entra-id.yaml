@@ -1,4 +1,6 @@
 # Example: Microsoft Entra ID (Azure AD) with app roles. Replace the ids with your tenant's.
+# This example is a larger organisation with two-person sign-off (D51): separate preparer/reviewer/approver roles and
+# both separation rules on.
 # The client secret is read from the environment variable named in client_secret_env, never from this file.
 extends: roles-base.yaml
 mode: oidc
@@ -18,3 +20,6 @@ role_map:
   FinOps.Approver: [approver]
   FinOps.Auditor: [auditor]
   FinOps.Admin: [admin]
+separation_of_duties:
+  approver_not_uploader: true
+  approver_not_corrector: true

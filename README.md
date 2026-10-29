@@ -310,9 +310,10 @@ SPREADER_DATA=var/demo .venv/Scripts/spreader serve                  # the same,
 ```
 
 Open http://127.0.0.1:8765 and sign in. Without configuration the app uses **development sign-in**
-(`config/finops/auth/development.yaml`): pick a test user (preparer, reviewer, approver, auditor, admin, viewer). It is
-labelled on every page, refused on any non-local host or with `FINOPS_ENV=production`, and an approval needs a
-different user from the one who uploaded or corrected. For an organisation's single sign-on, point
+(`config/finops/auth/development.yaml`): pick a test user (analyst, preparer, reviewer, approver, auditor, admin,
+viewer). It is labelled on every page and refused on any non-local host or with `FINOPS_ENV=production`. By default
+an analyst corrects and approves their own spread; two-person sign-off is a setting (DECISIONS D51). For an
+organisation's single sign-on, point
 `FINOPS_AUTH_CONFIG` at a copy of `config/finops/auth/example-entra-id.yaml` or `example-okta.yaml` with its own ids,
 and set the client secret in `FINOPS_OIDC_CLIENT_SECRET` (DECISIONS D43).
 

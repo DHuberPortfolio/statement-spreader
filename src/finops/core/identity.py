@@ -103,9 +103,12 @@ class SessionSettings(BaseModel):
 
 
 class SeparationOfDuties(BaseModel):
-    """Who may not do what, on top of permissions. Each rule is checked where the action happens."""
-    approver_not_uploader: bool = True  # a statement spread is approved by someone other than whoever uploaded it
-    approver_not_corrector: bool = True  # ... and other than anyone who corrected or remapped its values
+    """Who may not do what, on top of permissions. Each rule is checked where the action happens.
+
+    Off by default: one analyst corrects and approves their own spread (D51). An organisation that wants two-person
+    sign-off turns them on in its sign-in file."""
+    approver_not_uploader: bool = False  # on: a statement spread is approved by someone other than whoever uploaded it
+    approver_not_corrector: bool = False  # on: ... and other than anyone who corrected or remapped its values
 
 
 class AuthConfig(BaseModel):

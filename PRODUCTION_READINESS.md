@@ -30,7 +30,7 @@ Defects found by reading the code before changing it:
 | # | Workstream | Priority | Status | Evidence | Open / external |
 |---|---|---|---|---|---|
 | 0 | Baseline and regression protection | P0 | Validated against defined criteria | Table above; `var/readiness/` holds the raw outputs (not committed) | - |
-| 1 | Identity, authorization, separation of duties | P1 | Implemented, awaiting validation | D43; `tests/test_identity.py` (47 tests); smoke check step "sign-in" | **Live identity provider** (an Entra ID or Okta test tenant and a client registration) - Devin; per-record ownership inside one organisation (not needed until multi-team use) |
+| 1 | Identity, authorization, separation of duties | P1 | Implemented, awaiting validation | D43, D51 (one analyst signs off by default; two-person sign-off is a setting); `tests/test_identity.py` (49 tests); smoke check step "sign-in" | A live identity provider once a company is onboarded (none chosen: the design stays provider-neutral, D51); per-record ownership inside one organisation (not needed until multi-team use) |
 | 2a | Audit integrity | P1 | Implemented, awaiting validation | D44, D46, D47 (anchors); `tests/test_audit_chain.py`, erasure tamper tests in `tests/test_data_protection.py`; `/api/audit/verify` | Anchors exist (`spreader backup anchor`); keeping them somewhere the data's owner cannot write, on a schedule, is the organisation's job: changes after the last anchor remain undetectable by a rebuild |
 | 2b | Data protection: inventory, encryption at rest, retention and deletion, backups | P1 | Implemented, awaiting validation | DATA_LIFECYCLE.md; D45, D46; `tests/test_data_protection.py` (16 tests); smoke step "audit chains intact; retention plan" | Databases not encrypted by the app (volume encryption assumed); the organisation's retention periods; a key management service; backup re-application of erasures is manual |
 | 3 | OCR and ingestion reliability | P2 | In progress (before this tracker) | D42: OCR measured on simulated scans; every scanned value goes to a person | **Real borrower scans** (anonymised, with permission) |
@@ -135,10 +135,10 @@ listed below; then push the branch so CI runs on Linux.
 `.venv/Scripts/python scripts/check_not_applicable.py 6b3af94`; `.venv/Scripts/python -m pip_audit --local`.
 
 **10. Decisions that need a person**:
-1. Push the branch and merge after CI (nothing is pushed).
-2. D43 separation of duties is on by default: an uploader or corrector cannot approve. Keep, or relax per
-   organisation (the Okta example relaxes the corrector rule).
-3. D48 makes model placements blocking (tightens a control; only matters with the model on).
-4. A test identity-provider tenant (Entra ID or Okta developer account) to validate sign-in live.
+1. Push the branch and merge after CI. Done Oct 28: merged to main 06dbb2f, CI green.
+2. D43 separation of duties: decided by Devin (D51). One analyst corrects and approves by default; two-person
+   sign-off stays available as a setting.
+3. D48 makes model placements blocking: kept by Devin while the model learns.
+4. A live identity provider: none until a company is onboarded; the design stays provider-neutral (D51).
 5. Retention periods are each organisation's decision; the default deletes nothing.
-6. Analysts and documents for the pilot (PILOT_PROTOCOL.md).
+6. Analysts and documents for the pilot (PILOT_PROTOCOL.md): none yet; this is the foundation for a deployment.

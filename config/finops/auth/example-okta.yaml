@@ -10,11 +10,10 @@ oidc:
   redirect_uri: https://finops.example-insurer.com/api/auth/callback
   roles_claim: groups
   actor_claim: email
+# A mid-size organisation on the default (D51): analysts correct and approve their own work, no separation rules.
 role_map:
+  financial-analysts: [analyst]
   finance-ap-clerks: [preparer]
   finance-controllers: [reviewer, approver]
   internal-audit: [auditor]
   finops-admins: [admin]
-separation_of_duties:
-  approver_not_uploader: true
-  approver_not_corrector: false   # this organisation lets a controller correct and approve; uploader still excluded

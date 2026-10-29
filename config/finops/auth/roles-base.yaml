@@ -1,13 +1,23 @@
 # The application's roles and what each may do (permissions are fixed in src/finops/core/identity.py).
 # An organisation's sign-in file `extends:` this and adds how its identity provider's groups map onto these roles.
 # Approving is kept apart from administering: an administrator cannot approve, an approver cannot change settings.
+#
+# Default (DECISIONS D51): one analyst does the work and signs it off. The platform prepares the spread (reads,
+# standardises, checks); the analyst fixes what it flagged and approves. No second person re-checks.
+# preparer / reviewer / approver are for an organisation that wants a second person (see separation_of_duties below).
 roles:
   viewer: [view]
+  analyst: [view, upload, edit, review, approve, export]
   preparer: [view, upload, edit, export]
   reviewer: [view, edit, review, export]
   approver: [view, review, approve, export]
   auditor: [view, audit, export]
   admin: [view, admin, audit]
+# Two-person sign-off ("maker-checker"), off by default (D51). A larger organisation turns these on in its own
+# sign-in file and gives people preparer/reviewer/approver instead of analyst:
+#   approver_not_uploader: whoever uploaded a document cannot approve its spread
+#   approver_not_corrector: whoever corrected or remapped values in a spread cannot approve it
+# config/finops/auth/example-entra-id.yaml shows an organisation with both on.
 separation_of_duties:
-  approver_not_uploader: true
-  approver_not_corrector: true
+  approver_not_uploader: false
+  approver_not_corrector: false

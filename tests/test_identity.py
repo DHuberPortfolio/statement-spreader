@@ -200,7 +200,8 @@ def test_each_role_is_refused_every_route_it_is_not_granted(user: str, _test_sig
 def test_the_role_table_keeps_approving_apart_from_administering(_test_sign_in: Any) -> None:
     roles = _test_sign_in.cfg.roles
     assert not [r for r, perms in roles.items() if "approve" in perms and "admin" in perms]
-    assert not [r for r, perms in roles.items() if "approve" in perms and "upload" in perms]
+    # only the one-analyst role (D51) both uploads and approves; the two-person roles keep them apart
+    assert [r for r, perms in roles.items() if "approve" in perms and "upload" in perms] == ["analyst"]
 
 
 def test_statement_actions_need_the_permission_of_the_action(statements: Service) -> None:
@@ -409,6 +410,29 @@ def test_a_corrector_cannot_approve_and_the_rule_is_configurable(statements: Ser
         assert erin.post(f"/api/runs/{run}/actions", json={"type": "approve"}).status_code == 200
     finally:
         _test_sign_in.cfg.separation_of_duties.approver_not_corrector = True
+
+
+def test_by_default_one_analyst_uploads_corrects_and_approves_their_own_spread(statements: Service,
+                                                                                _test_sign_in: Any) -> None:
+    """D51: the shipped configuration has no second checker. The analyst's correction and approval both stand and
+    are recorded under their name (the record later used to learn from them)."""
+    shipped = idn.load_auth_config(ROOT / "config" / "finops" / "auth" / "development.yaml")
+    assert not shipped.separation_of_duties.approver_not_uploader
+    assert not shipped.separation_of_duties.approver_not_corrector
+    assert {"upload", "edit", "review", "approve"} <= set(shipped.roles["analyst"])
+    assert "admin" not in shipped.roles["analyst"]
+    _test_sign_in.cfg.separation_of_duties = shipped.separation_of_duties
+    ana = client_as(api.app, "ana")
+    view = ana.post("/api/documents", files={"file": ("a.htm", _sample_html())}).json()
+    run = view["run"]["id"]
+    v = next(x for x in view["spread"]["values"] if x["value"] is not None)
+    r = ana.post(f"/api/runs/{run}/actions", json={"type": "correct_value", "line": v["line"], "period": v["period"],
+                                                   "value": str(v["value"]), "reason": "checked against the page"})
+    assert r.status_code == 200, r.text
+    r = ana.post(f"/api/runs/{run}/actions", json={"type": "approve"})
+    assert r.status_code == 200, r.text
+    assert r.json()["run"]["state"]["approved"]["by"] == "dev:ana"
+    assert {e["actor"] for e in statements.store.query("SELECT actor FROM events")} == {"dev:ana"}
 
 
 # -- 7. the audit log names the verified actor --------------------------------------------------------------------------

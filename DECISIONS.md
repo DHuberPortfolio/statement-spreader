@@ -491,7 +491,7 @@ machine, role-based permissions, separation of duties checked where the action h
   audit, admin`); roles grant them in configuration (`roles-base.yaml`): viewer, preparer, reviewer, approver,
   auditor, admin. No base role both approves and administers, or approves and uploads. A user whose provider groups
   map to no role can do nothing.
-- **Separation of duties** (`separation_of_duties` in the configuration, on by default): a statement spread is approved
+- **Separation of duties** (`separation_of_duties` in the configuration; on by default until D51 turned it off): a statement spread is approved
   by someone other than whoever uploaded the document and anyone who corrected or remapped its values (read from the
   audit log). The existing second-person rules (bank details, released records) now compare verified identities.
 - **Development mode** keeps the prototype usable on one machine: named test users with single roles. It refuses
@@ -627,3 +627,29 @@ screen; backups are consistent snapshots with an audit anchor.**
   insurer on Okta with the defaults) plus the local demo.
 - **Not done.** IFRS stays a smoke-tested overlay; no IFRS answer keys were built tonight (the template's IFRS
   presentation by nature, not function, needs its own checks before any accuracy claim).
+
+## Who signs off (2026-10-28, day)
+
+**D51. One analyst corrects and approves their own spread by default; two-person sign-off is a setting.**
+- **Decided by Devin.** The mid-size companies this is aimed at pay analysts to spread and check documents well; a
+  second analyst re-checking each one is not part of their flow. When an analyst submits, it goes through.
+- **The flow.** The platform prepares the spread: it reads, standardises and checks the document and flags what it
+  is unsure of. The analyst fixes the flagged items and approves. Their corrections and approval are recorded under
+  their name, which is what the outcomes log and future golden sets learn from.
+- **Choice.** A new `analyst` role holds `view, upload, edit, review, approve, export` (`roles-base.yaml`), and both
+  `separation_of_duties` rules are off by default (`identity.py`, `roles-base.yaml`). The development sign-in has an
+  analyst user (`ana`). Administering still never comes with approving.
+- **Kept for later.** A larger organisation that wants maker-checker turns both rules on in its own sign-in file and
+  uses preparer / reviewer / approver instead of analyst; `example-entra-id.yaml` is that setup, `example-okta.yaml`
+  the one-analyst default. The test suite runs the strict setup so the rules stay tested
+  (`tests/fixtures/auth-test.yaml`), and `test_by_default_one_analyst_uploads_corrects_and_approves_their_own_spread`
+  checks the shipped default (it fails on the D43 default).
+- **Unchanged.** D48: a value the model placed still needs a person's confirmation before approval, while the model
+  learns. The payables and data-quality second-person checks (changed bank details, released records) are fraud
+  controls on payments and master data, not on spreading, and stay.
+- **Sign-in stays provider-neutral.** No identity provider is chosen. The code speaks OpenID Connect, which most
+  providers support; Okta and Entra appear only in example files. A provider that only speaks SAML would need an
+  adapter in front of the same roles.
+- **Planned (Devin).** During a learning period before the model is relied on, run it alongside the analysts and
+  record every case it would have flagged that the analyst let through. A reviewer later decides who was right and
+  why, and those decisions teach the model the nuanced cases. Not built yet.
