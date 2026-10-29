@@ -746,3 +746,55 @@ senior to rule on; without a ruling in 14 days, the analyst's answer stands.**
   one's own approval, a late ruling, corrected after review until reopened, both switches, the audit chain. Checked in
   the browser: a senior ruled on the page, the analyst then saw the notice on the run and the mark in the list, and
   the analyst's menu has no senior page.
+
+**D55. A senior's ruling teaches memory, calibration and the model's prompt, becomes a golden case and a training
+example, and the go-live report says when the model is ready.**
+- **Asked by Devin.** "The AI should always learn from the answer the senior executive chose"; if nobody rules,
+  trust the analyst and adjust from there; go live once seniors side with the model at least as often as with the
+  analysts (D53). Built in `spreader/teaching.py`.
+- **Memory.** A ruling writes the correct line (or "left off") for the label under its section to reviewer memory,
+  as a remap does, so the next document places it that way without the model. If the document belongs to a company,
+  the correction also goes into the company's memory, which is consulted before reviewer memory: without it, the
+  company's own wrong approval would keep winning for that company (found while designing this; tested). A later
+  reopen of the approval does not undo it (tested). Memory is not erased with a document (a label, not a value), as
+  for remaps (DATA_LIFECYCLE.md).
+- **Calibration.** Each ruling records whether the rule behind the approved line was right and whether the model was
+  (method `model.shadow`, declared never-auto in `scripts/calibrate.py`, so measuring the model can never let one of
+  its placements skip a person, D48).
+- **The gap from D52 is closed.** Confirming a model placement (resolving its review item) now writes memory, so the
+  label is placed by memory next time. Checked on the previous code: no memory was written.
+- **Examples in the prompt.** Up to three earlier decisions on labels that read alike (rapidfuzz token-set ratio at
+  least 0.8, same statement, never from the same document) are shown to the model, senior rulings before
+  analyst-stands defaults, quoted and cut short, marked as data. The answer stays a choice from the closed list. A
+  live model's runs include the example set's version in their idempotency key, so a new ruling cannot be hidden
+  behind an old run; a shadow model's examples never touch a run.
+- **Measured** (`scripts/measure_ruling_examples.py`, one run each, Qwen3-4B on the RTX 3060 Ti, SEC dev split): the
+  model was asked about the 976 rows of 16 filings that the answer keys can judge, after 91 rulings were simulated
+  from the keys on the model's mistakes in the other 17 filings. Without examples 882 of 976 were right (90.4%; 95%
+  interval 88.4% to 92.1%). With examples matched by token-set similarity: 906 (92.8%; 91.0% to 94.3%), 27 rows
+  fixed and 3 broken; all 3 were a short ruled label matching a longer one that contained its words. With whole-label
+  matching (token-sort, now the default): also 906, 24 fixed and none broken (exact McNemar p = 1.2e-7), examples
+  shown on 129 rows instead of 326 (`eval/reports/ruling-examples-*-2026-10-29.json`). The rulings were simulated
+  from answer keys on public filings, and rows no rule placed cannot be judged by these keys: this measures the
+  mechanism, not a lender's result.
+- **Weaker evidence stays weaker.** A disagreement no senior ruled on in time is a training example marked
+  `analyst_default` with weight 0.5 and a prompt example after the senior rulings, never memory, never a golden case,
+  never in the go-live measure.
+- **Export.** `spreader learning export` writes `golden-placements.jsonl` (senior rulings: the label, the correct
+  line, the verdict, the reason and note), `training.jsonl` (chat-format examples with the plain prompt, without
+  examples, and the correct answer) and `manifest.json` with each file's SHA-256. The files hold document labels and
+  are not erased with the documents. Found by a test: written as text on Windows the files got CRLF line ends and the
+  digests no longer matched; now written as bytes.
+- **Go-live report** (`spreader learning report`, `GET /api/learning/report` for seniors, a panel on the senior's
+  page). Per model: seniors' verdicts between the analyst and the model, the model's share with a Wilson interval
+  (z = 1.96), and the verdict: not enough rulings, not yet, as good (lower bound at least 0.5 minus the margin) or
+  better (lower bound above 0.5). Settings `SPREADER_GOLIVE_MIN_RULINGS` (default 100) and `SPREADER_GOLIVE_MARGIN`
+  (default 0.05) are the company's; both defaults are chosen here, not by Devin. Also: how often the model agreed with
+  the analyst on approved spreads, reasons, rulings per senior, and labels ruled two different ways (the latest is the
+  one remembered). Limits stated in the report: agreement is not correctness (both can be wrong), defaults are left
+  out, and the model judges placement, not values.
+- **Red team** (`tests/test_learning_redteam.py`): two seniors ruling at the same moment leave one ruling, one memory
+  row and one outcome; a reopen keeps the lesson; a new ruling is an example at once (the example cache follows the
+  ruling count); nonsense settings stop the start; the senior's page lists everything open but only the latest 200
+  rulings (it returned the whole history before).
+- **Not done.** Retraining the model itself: `training.jsonl` is ready for it, but no model has been trained.

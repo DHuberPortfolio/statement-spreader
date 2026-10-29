@@ -281,6 +281,29 @@ export interface Disagreement {
   ruled_at: string | null;
 }
 
+export interface Interval {
+  rate: number;
+  low: number;
+  high: number;
+  of: number;
+}
+
+export interface GoLiveReport {
+  model: string | null;
+  verdict: "not_enough" | "not_yet" | "as_good" | "better";
+  ready: boolean;
+  why: string;
+  settings: { min_rulings: number; margin: number; z: number };
+  status: Record<string, number>;
+  wins: { model: number; analyst: number; neither: number };
+  model_share: (Interval & { model: number }) | null;
+  agreement: (Interval & { agree: number; no_answer: number }) | null;
+  reasons: Record<string, number>;
+  seniors: Record<string, number>;
+  conflicts: { statement: string; label: string; section: string; lines: string[] }[];
+  limits: string[];
+}
+
 export interface DisagreementList {
   items: Disagreement[];
   counts: Record<string, number>;

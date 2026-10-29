@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { ApiError, api } from "../api/client";
-import type { Disagreement, DisagreementList } from "../api/types";
+import type { Disagreement, DisagreementList, GoLiveReport } from "../api/types";
 import { Layout } from "../components/Layout";
 import { EmptyState, ErrorState, InlineMessage, Loading } from "../components/States";
 import { can } from "../lib/auth";
@@ -116,6 +116,57 @@ function RuleForm({ item, list, onRuled }: { item: Disagreement; list: Disagreem
   );
 }
 
+const VERDICT_TITLE: Record<GoLiveReport["verdict"], string> = {
+  not_enough: "Not enough rulings yet",
+  not_yet: "Not ready yet",
+  as_good: "Ready: as good as the analysts",
+  better: "Ready: better than the analysts",
+};
+
+const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
+
+/** Whether the model is ready to go live (D55): seniors' rulings between the analyst and the model, with a margin. */
+function GoLive({ reload }: { reload: number }) {
+  const state = useApi((signal) => api.learningReport(signal), [reload]);
+  const r = state.data;
+  if (state.error) return <ErrorState error={state.error} onRetry={state.reload} title="Could not load the go-live report" />;
+  if (!r) return <Loading label="Loading the go-live report" />;
+  const s = r.model_share;
+  return (
+    <section className={`golive golive-${r.verdict}`} aria-labelledby="golive-title">
+      <h2 id="golive-title" className="section-title">
+        Ready to go live? <span className="muted small">{r.model ?? "no model yet"}</span>
+      </h2>
+      <p>
+        <strong>{VERDICT_TITLE[r.verdict]}.</strong> {r.why.charAt(0).toUpperCase() + r.why.slice(1)}.
+      </p>
+      {s && (
+        <p className="small">
+          Seniors sided with the model in <strong className="num">{s.model}</strong> of <span className="num">{s.of}</span>{" "}
+          rulings between it and the analyst ({pct(s.rate)}; 95% interval {pct(s.low)} to {pct(s.high)}). Neither was right{" "}
+          <span className="num">{r.wins.neither}</span> times.
+        </p>
+      )}
+      {r.agreement && (
+        <p className="small">
+          On approved spreads the model agreed with the analyst on <span className="num">{r.agreement.agree}</span> of{" "}
+          <span className="num">{r.agreement.of}</span> lines ({pct(r.agreement.rate)}).
+        </p>
+      )}
+      {r.conflicts.length > 0 && (
+        <InlineMessage kind="info">
+          {r.conflicts.length} label{r.conflicts.length === 1 ? " was" : "s were"} ruled two different ways; the latest
+          ruling is the one remembered: {r.conflicts.slice(0, 3).map((c) => `“${c.label}” (${c.lines.join(" / ")})`).join(", ")}.
+        </InlineMessage>
+      )}
+      <p className="small muted">
+        The bar: at least {r.settings.min_rulings} rulings, and with 95% confidence seniors side with the model at least{" "}
+        {pct(0.5 - r.settings.margin)} of the time. Your organisation sets both. {r.limits[0]}
+      </p>
+    </section>
+  );
+}
+
 function Item({ item, list, onRuled }: { item: Disagreement; list: DisagreementList; onRuled: (d: Disagreement) => void }) {
   const rulable = item.status !== "ruled";
   return (
@@ -166,6 +217,7 @@ export function DisagreementsPage() {
   // without the senior role nothing is asked of the server (it would refuse it anyway)
   const state = useApi((signal) => (allowed ? api.disagreements(signal) : Promise.resolve(null)), [allowed]);
   const [showRuled, setShowRuled] = useState(false);
+  const [ruledCount, setRuledCount] = useState(0); // refreshes the go-live report after each ruling
   if (!allowed)
     return (
       <Layout>
@@ -177,6 +229,7 @@ export function DisagreementsPage() {
   const list = state.data;
   const onRuled = (d: Disagreement) => {
     if (list) state.setData({ ...list, items: list.items.map((i) => (i.id === d.id ? d : i)) });
+    setRuledCount((n) => n + 1);
   };
   const rulable = list?.items.filter((i) => i.status !== "ruled") ?? [];
   const ruled = list?.items.filter((i) => i.status === "ruled") ?? [];
@@ -195,6 +248,7 @@ export function DisagreementsPage() {
       {state.error && <ErrorState error={state.error} onRetry={state.reload} />}
       {list && (
         <>
+          <GoLive reload={ruledCount} />
           <h2 className="section-title">
             To rule on <span className="muted">({rulable.length})</span>
           </h2>

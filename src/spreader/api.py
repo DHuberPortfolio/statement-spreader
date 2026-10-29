@@ -134,6 +134,9 @@ def _line_label(line: str | None) -> str:
 
 # ---- the learning period: a senior rules on disagreements (D53, D54) ----
 
+RECENT_RULINGS = 200  # rulings listed on the senior's page; older ones stay in the report and the export
+
+
 def _a_is_analyst(disagreement_id: int) -> bool:
     """Which of the two answers is shown as A: fixed per disagreement, unrelated to whose it is."""
     return hashlib.sha256(f"disagreement:{disagreement_id}".encode()).digest()[0] % 2 == 0
@@ -166,8 +169,12 @@ def disagreements() -> dict[str, Any]:
     counts: dict[str, int] = {}
     for r in rows:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
+    # Everything still to rule on, and the most recent rulings: the full history is in the go-live report and export.
+    rulable = [r for r in rows if r["status"] in {"open", "analyst_stands"}]
+    ruled = [r for r in rows if r["status"] == "ruled"][-RECENT_RULINGS:]
     return {
-        "items": [_disagreement_view(r, blind) for r in rows if r["status"] != "withdrawn"],
+        "items": [_disagreement_view(r, blind) for r in rulable + ruled],
+        "recent_rulings_shown": len(ruled),
         "counts": counts, "reasons": REASONS, "review_days": review_days(), "blind": blind,
         "lines": {k.value: [{"id": ln.id, "label": ln.label} for ln in s.lines] for k, s in svc.profile.statements.items()},
     }
@@ -195,6 +202,16 @@ async def rule(disagreement_id: int, request: Request) -> dict[str, Any]:
     except SeparationError as exc:
         raise HTTPException(403, str(exc)) from exc
     return _disagreement_view(d, blind_ruling())
+
+
+@app.get("/api/learning/report")
+def learning_report() -> dict[str, Any]:
+    """Whether the model is ready to go live, and the evidence (D55). Settles overdue disagreements first."""
+    from .teaching import golive_report
+
+    svc = service()
+    svc.settle_overdue()
+    return golive_report(svc.store)
 
 
 @app.get("/api/health")

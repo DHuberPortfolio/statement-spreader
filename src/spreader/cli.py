@@ -335,6 +335,49 @@ def _disagreements_cmd(args: argparse.Namespace) -> int:
     return 0
 
 
+def _learning_cmd(args: argparse.Namespace) -> int:
+    """The learning period's results (D55): `report` says whether the model is ready to go live and why; `export`
+    writes the golden placement set and training examples built from seniors' rulings."""
+    import json
+
+    from .llm.local import prompt
+    from .profile import load_profile
+    from .service import Service
+    from .store import Store
+    from .teaching import export, golive_report
+
+    try:
+        svc = Service(Store(_data_dir(args) / "spreader.sqlite3"),
+                      profile=load_profile(os.environ["SPREADER_PROFILE"]) if os.environ.get("SPREADER_PROFILE") else None)
+        svc.settle_overdue()
+        if args.action == "report":
+            r = golive_report(svc.store, args.model)
+            if args.json:
+                print(json.dumps(r, indent=2))
+                return 0
+            s = r["model_share"]
+            print(f"Model {r['model'] or '(none yet)'}: {r['verdict'].replace('_', ' ').upper()}: {r['why']}")
+            if s:
+                print(f"  seniors sided with the model {s['model']} of {s['of']} times ({s['rate']:.1%}; 95% interval "
+                      f"{s['low']:.1%} to {s['high']:.1%}); neither was right {r['wins']['neither']} times")
+            if r["agreement"]:
+                a = r["agreement"]
+                print(f"  on approved spreads the model agreed with the analyst on {a['agree']} of {a['of']} rows "
+                      f"({a['rate']:.1%}); no answer on {a['no_answer']}")
+            print(f"  disagreements by status: {r['status'] or 'none'}; conflicting rulings: {len(r['conflicts'])}")
+            print(f"  bar: at least {r['settings']['min_rulings']} rulings and a margin of {r['settings']['margin']:.0%}"
+                  " (SPREADER_GOLIVE_MIN_RULINGS, SPREADER_GOLIVE_MARGIN)")
+            return 0
+        out = Path(args.out) if args.out else _data_dir(args) / "learning-export"
+        m = export(svc.store, svc.profile, out, prompt)
+        print(f"Wrote {m['golden']} golden placements and {m['training']} training examples to {out}"
+              f" ({m['skipped_erased']} skipped: document erased). They hold document labels: keep them with the data.")
+        return 0
+    except ValueError as exc:
+        print(f"Refused: {exc}")
+        return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="spreader", description="Financial statement spreading with review.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -391,6 +434,13 @@ def main(argv: list[str] | None = None) -> int:
     d = sub.add_parser("disagreements", help="rows where the model's hidden opinion differed from the approved spread")
     d.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
     d.set_defaults(run=_disagreements_cmd)
+    lp = sub.add_parser("learning", help="the model's learning period: go-live report, golden set and training export")
+    lp.add_argument("action", choices=["report", "export"])
+    lp.add_argument("--model", help="report: the model id (default: the most recent)")
+    lp.add_argument("--json", action="store_true", help="report: the full report as JSON")
+    lp.add_argument("--out", help="export: folder (default: <data>/learning-export)")
+    lp.add_argument("--data", help="data folder (default SPREADER_DATA, else var/)")
+    lp.set_defaults(run=_learning_cmd)
     args = ap.parse_args(argv)
     return int(args.run(args))
 

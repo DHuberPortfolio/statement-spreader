@@ -104,7 +104,9 @@ def main() -> int:
     if args.engine == "statements":
         outcomes, meta = statements(args.model)
         kw = {"unit": "a mapped statement row (all its periods right)", "person_methods": ["memory"],
-              "derived_methods": ["structure.total_of_children"], "never_auto": ["model"]}
+              "derived_methods": ["structure.total_of_children"],
+              # the model's ruled opinions (D55) measure it; they never let a model placement skip a person (D48)
+              "never_auto": ["model", "model.shadow"]}
     else:
         outcomes, meta = recon()
         kw = {"unit": "a match a rule produced (right: a true pairing that needs no person)"}

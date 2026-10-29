@@ -10,6 +10,7 @@ import type {
   DisagreementList,
   DocumentRow,
   EvalReport,
+  GoLiveReport,
   OutcomeSummary,
   Profile,
   RoiReport,
@@ -122,6 +123,7 @@ export const api = {
   disagreements: (signal?: AbortSignal) => getJson<DisagreementList>("/api/disagreements", signal),
   rule: (id: number, body: { choice: "a" | "b" | "neither"; correct_line?: string; reason: string; note: string }) =>
     sendJson<Disagreement>(`/api/disagreements/${id}/rule`, "POST", body),
+  learningReport: (signal?: AbortSignal) => getJson<GoLiveReport>("/api/learning/report", signal),
 };
 
 /** Upload with progress (fetch has no upload progress, so this uses XMLHttpRequest). */

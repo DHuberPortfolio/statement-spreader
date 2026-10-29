@@ -49,6 +49,7 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | Model failure modes (D48) | `tests/test_model_governance.py` | - |
 | The model's hidden second opinion (D52) | `tests/test_shadow.py` | - |
 | Disagreements with the approved spread, deadline, sample (D53) | `tests/test_disagreements.py` | - |
+| What rulings teach; go-live report; export (D55) | `tests/test_teaching.py`, `tests/test_learning_redteam.py` | `spreader learning report`; with `llama-server` running, `scripts/measure_ruling_examples.py` |
 | A senior's blind ruling, corrected after review (D54) | `tests/test_rulings.py` | Sign in as Sam Senior, open Model disagreements, rule; then as Ana open the run |
 | Analyst pilot (D49) | `tests/test_pilot.py` | `scripts/pilot_report.py` |
 | Profiles and organisations (D50) | `tests/test_profile_applicability.py`, `tests/test_organisation.py` | `scripts/check_not_applicable.py <git ref>`, `spreader serve --org <file>` |

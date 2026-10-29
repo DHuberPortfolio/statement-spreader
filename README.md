@@ -331,7 +331,9 @@ after 14 days without one the analyst's answer stands (`SPREADER_SHADOW_REVIEW_D
 the model to a share of documents). `spreader disagreements` lists them (D53). A senior (role `senior`; development
 user "Sam Senior") rules on them on the *Model disagreements* page, seeing the two answers as A and B without knowing
 which is the model's; a line ruled wrong shows "corrected after review" to its analyst until they reopen the spread
-(`SPREADER_BLIND_RULING`, `SPREADER_FLAG_CORRECTED`; D54).
+(`SPREADER_BLIND_RULING`, `SPREADER_FLAG_CORRECTED`; D54). A ruling teaches the platform's memory, calibration and
+the model's prompt; `spreader learning report` says whether the model is ready to go live and `spreader learning
+export` writes the golden placement set and training examples (D55).
 
 Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier (an 8 GB RTX 3060 Ti is
 enough for the 4-billion-parameter model used here).

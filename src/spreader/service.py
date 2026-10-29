@@ -36,11 +36,13 @@ from .company import (
     detect_company_id,
 )
 from .contracts import (
+    MapMethod,
     ProvenanceStep,
     ReviewKind,
     Severity,
     Spread,
     SpreadValue,
+    StatementRow,
     StatementType,
     ValueStatus,
 )
@@ -54,6 +56,7 @@ from .second_reader import tagged_cells
 from .shadow import REASONS, blind_ruling, flag_corrected, in_sample, review_days, second_opinions
 from .shadow import summary as shadow_summary
 from .store import Store, now
+from .teaching import RulingExamples, golive_settings, memory_section, row_of, ruling_outcomes
 
 log = logging.getLogger("spreader")
 ENGINE_VERSION = __version__
@@ -116,6 +119,12 @@ class Service:
             review_days()
         flag_corrected()  # read by the document list even without a model (D54)
         blind_ruling()
+        golive_settings()  # the go-live bar (D55): nonsense stops the start, not the report
+        # Earlier rulings on similar labels go into the model's prompt (D55), for whichever role it has.
+        self.examples = RulingExamples(store)
+        for m in (model, shadow):
+            if m is not None and hasattr(m, "examples") and m.examples is None:
+                m.examples = self.examples
         self._shadow_pool = None if shadow is None or shadow_sync else ThreadPoolExecutor(1, thread_name_prefix="shadow")
 
     # ---- memory ----
@@ -198,6 +207,8 @@ class Service:
         ctx = self.company_context(doc_id)
         parts = [doc_id, self.profile.id, f"{self.profile.version}+{self.profile.content_hash}",
                  str(self.store.memory_version(self.profile.id)), self.model_id, ENGINE_VERSION,
+                 # a live model's prompt includes earlier rulings (D55): new rulings can change its answers
+                 self.examples.version() if getattr(self.model, "examples", None) is not None else "",
                  ctx.version if ctx else "no-company", "xbrl-check" if os.environ.get("SPREADER_XBRL_CHECK") == "1" else ""]
         return hashlib.sha256("|".join(parts).encode()).hexdigest()[:32]
 
@@ -370,15 +381,35 @@ class Service:
         else:
             line = d["analyst_line"] if verdict == "analyst" else d["model_line"]
         at = now()
+        # What the platform learns (D55): the senior's line is remembered for this label under its section, like a
+        # remap, and in the company's own memory, which is consulted first, so a wrong approved line stops winning there.
+        raw = self.store.query("SELECT spread FROM runs WHERE id=?", (d["run_id"],))
+        row = row_of(Spread.model_validate_json(raw[0]["spread"]), d["statement"], d["row_index"]) \
+            if raw and raw[0]["spread"] else None
+        company = (self.store.document(d["document_id"]) or {})["company_id"] if row is not None else None
+        target = "" if line == "none" else line
         with self.store.tx() as c:
             n = c.execute("UPDATE disagreements SET status='ruled', verdict=?, correct_line=?, reason=?, note=?, "
                           "ruled_by=?, ruled_at=? WHERE id=? AND status IN ('open', 'analyst_stands')",
                           (verdict, line, reason, note[:1000], actor, at, disagreement_id)).rowcount
             if not n:
                 raise ActionError("Someone ruled on this a moment ago. Reload the list.")
+            if row is not None:
+                c.execute("INSERT OR REPLACE INTO mapping_memory(profile_id, statement, label, section, canonical, "
+                          "created_at, created_by, source_run) VALUES (?,?,?,?,?,?,?,?)",
+                          (self.profile.id, d["statement"], row.label_clean, memory_section(row), target, at, actor,
+                           d["run_id"]))
+                if company:
+                    c.execute("INSERT INTO company_mappings(company_id, profile_id, statement, label, section, canonical, "
+                              "run_id, confirmed_by, confirmed_at) VALUES (?,?,?,?,?,?,?,?,?)",
+                              (company, self.profile.id, d["statement"], row.label_clean, memory_section(row), target,
+                               d["run_id"], actor, at))
             self.store.log(c, "ruling", {"disagreement": disagreement_id, "verdict": verdict, "reason": reason,
-                                         "late": d["status"] == "analyst_stands"}, actor, d["run_id"], d["document_id"])
-        return dict(self.store.query("SELECT * FROM disagreements WHERE id=?", (disagreement_id,))[0])
+                                         "late": d["status"] == "analyst_stands", "remembered": row is not None,
+                                         "company": bool(company)}, actor, d["run_id"], d["document_id"])
+        ruled = dict(self.store.query("SELECT * FROM disagreements WHERE id=?", (disagreement_id,))[0])
+        record_outcomes(ruling_outcomes(ruled, actor, at))
+        return ruled
 
     def corrections(self, run_id: int) -> list[dict[str, Any]]:
         """What seniors corrected in this approved spread, for its analyst (D54): rulings that the approved line was
@@ -520,6 +551,7 @@ class Service:
         if kind in {"approve", "reopen"} and expected is not None and expected != state_version(before):
             raise StaleError("This spread changed since you opened it. Reload it, check the changes, then try again.")
         payload: dict[str, Any] = {k: v for k, v in action.items() if k != "type"}
+        remember: tuple[str, StatementRow, str] | None = None  # a confirmed model placement, written with the action
         if kind == "correct_value":
             line, period = str(action.get("line", "")), str(action.get("period", ""))
             if line not in self.profile.lines:
@@ -551,6 +583,15 @@ class Service:
                 raise ActionError("An assumed unit can only be resolved by confirming it (include the word 'confirm')")
             state.setdefault("resolved", {})[item_id] = {"note": f"{note[:500]} ({actor}, {now()})",
                                                         "fingerprint": _fingerprint(item.message)}
+            # Confirming a line the model placed is a reviewer's decision about that label: remembered, like a remap,
+            # so the label is placed by memory next time, without the model (D48, gap found 2026-10-29, D55).
+            if item.kind is ReviewKind.LOW_CONFIDENCE and item.statement is not None and len(item.rows) == 1:
+                res = spread.statements.get(item.statement.value)
+                m = next((x for x in res.mappings if x.row_index == item.rows[0]), None) if res else None
+                row = row_of(spread, item.statement.value, item.rows[0])
+                if m is not None and row is not None and m.method is MapMethod.MODEL and m.canonical:
+                    remember = (item.statement.value, row, m.canonical)
+                    payload["remembered"] = m.canonical
         elif kind in {"remap_row", "exclude_row"}:
             return self._remap(run, spread, action, actor)
         elif kind == "approve":
@@ -581,6 +622,11 @@ class Service:
                 if why:
                     raise SeparationError(why)
             c.execute("UPDATE runs SET state=? WHERE id=?", (json.dumps(state), run_id))
+            if remember is not None:
+                stmt, row, line = remember
+                c.execute("INSERT OR REPLACE INTO mapping_memory(profile_id, statement, label, section, canonical, "
+                          "created_at, created_by, source_run) VALUES (?,?,?,?,?,?,?,?)",
+                          (self.profile.id, stmt, row.label_clean, memory_section(row), line, now(), actor, run_id))
             self.store.log(c, kind, payload, actor, run_id, run["document_id"])
             if kind == "approve" and payload.get("company_id"):
                 self._remember(c, run_id, run["document_id"], payload["company_id"], spread, state, actor)

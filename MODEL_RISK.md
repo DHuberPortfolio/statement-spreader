@@ -43,9 +43,19 @@ qualified people, and nothing here substitutes for them.
 
 The mapping model has a second role, **shadow** (D52): during a learning period it gives a hidden second opinion on
 every row after each run, stored in `shadow_opinions` for later comparison with what the analyst approved. In that
-role it changes nothing an analyst sees. Note: the "confirmations go to mapping memory" control above holds for a
-remap or exclusion; confirming a model placement by resolving its review item does not yet write memory (found
-2026-10-29, to be fixed with the adjudication step).
+role it changes nothing an analyst sees. Confirming a model placement by resolving its review item writes mapping
+memory (gap found 2026-10-29, fixed in D55).
+
+Seniors' rulings on disagreements (D54) teach the platform and the model (D55): memory, calibration (`model.shadow`,
+never-auto), up to three earlier rulings on similar labels in the model's prompt, a golden placement set and training
+examples, and a go-live report. Added risks:
+
+| # | Risk | Likelihood | Impact | Control | Test | Residual |
+|---|---|---|---|---|---|---|
+| M12 | A wrong or hasty ruling teaches every later document (memory is global for a label) | Medium | Medium | Blind ruling (D54); a ruling is final and audited under the senior; rulings per senior and labels ruled two ways are in the go-live report | `test_conflicting_rulings_on_one_label_are_reported`; `tests/test_learning_redteam.py` | A wrong ruling stays until another analyst remaps the label or a senior rules again |
+| M15 | An example for a label that only looks similar turns a right answer wrong | Low | Medium | Whole-label (token-sort) matching at 0.8; measured on the SEC dev split: 24 rows fixed, none broken (token-set matching broke 3) | `test_a_short_ruled_label_is_not_an_example_for_a_longer_label_that_contains_its_words` | Measured on simulated rulings and public filings only |
+| M13 | Text in an example label steers the model | Low | Medium | Examples are quoted, cut to 120 characters, marked as data; the answer stays a closed-list choice that a person confirms (D48) | `test_a_label_in_an_example_cannot_turn_into_instructions` | A wrong suggestion, caught as for M1 |
+| M14 | The go-live measure is gamed or misread | Medium | High | Defaults never count; minimum rulings and a 95% lower bound; the senior does not know which answer is the model's; the report states its limits | `test_the_go_live_verdict_follows_the_rulings_and_the_bar` | Agreement is not correctness: both can be wrong, which only the golden sets reveal |
 
 ## Change management
 
