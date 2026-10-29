@@ -327,8 +327,31 @@ llama.cpp's `llama-server` on 127.0.0.1 and set `SPREADER_MODEL_URL=http://127.0
 in which the model only gives a hidden second opinion and takes no part in spreading, also set
 `SPREADER_MODEL_ROLE=shadow`; `spreader shadow` records opinions for documents spread earlier (DECISIONS D52).
 
-Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier
-(measured on an RTX 3060 Ti: about 0.35 s per row, 4.8 GB of GPU memory).
+Needs nothing paid: Python 3.11, Node 18+, and optionally an NVIDIA GPU for the model tier (an 8 GB RTX 3060 Ti is
+enough for the 4-billion-parameter model used here).
+
+### What it costs to run
+
+No per-use API fees: the rules run on the processor and the optional model is an open model on a local GPU, so
+documents never leave the machine. Measured on 2026-10-29 over the 33 filings of the SEC dev split, one run, on an
+RTX 3060 Ti with Qwen3-4B-Instruct-2507 (Q4_K_M) and an empty cache (`eval/reports/model-cost-2026-10-29.json`):
+
+| | Rules only | Model in the live role (D48): rows no rule placed | Model in the shadow role (D52): every row |
+|---|---|---|---|
+| Time per document | 0.110 s | 4.85 s | 45.84 s |
+| Documents per hour, one GPU | - | 743 | 79 |
+| GPU-hours per 1,000 documents | - | 1.35 | 12.73 |
+| GPU electricity per 1,000 documents | - | 0.17 kWh, $0.02 | 1.59 kWh, $0.23 |
+| Rented GPU per 1,000 documents | - | $0.36 | $3.44 |
+
+A filing has 84.8 labelled rows on average; the model took 0.542 s per row with no failed answers and the GPU drew
+125.0 W on average while answering (19.3 W idle). Prices are today's published rates, not measurements: electricity at
+$0.1447/kWh (EIA, U.S. commercial average, August 2026) and a rented GPU at $0.27/hour (RunPod RTX A5000, Secure Cloud,
+October 2026; its speed was not measured, the table assumes it matches the 3060 Ti). Only the GPU's own power is
+counted, not the rest of the computer, and no hardware cost. To measure again or price it differently:
+`.venv/Scripts/python scripts/measure_model_cost.py --out <file>` with `llama-server` running, or
+`--from eval/reports/model-cost-2026-10-29.json --price-kwh <$> --gpu-hourly <$>`. The cost that matters to a
+lender, analyst time per document, is what the pilot measures (PILOT_PROTOCOL.md); no session has been run yet.
 
 ## Adapting it to an organisation
 
