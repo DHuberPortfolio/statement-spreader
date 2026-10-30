@@ -1,8 +1,8 @@
 {
  "name": "insurer-holdout",
  "source": "files: SEC 10-K filings listed in eval/industry/insurer/manifest.json (downloaded by scripts/fetch_industry.py)",
- "version": "4563b89687d822df",
- "key_version": "32a17b1b5d7c6f03",
+ "version": "6b26e428fa3f884a",
+ "key_version": "3856f9e0f3e2c2b8",
  "files": 42,
  "entries": [
   {
@@ -47,7 +47,7 @@
   },
   {
    "path": "eval/industry/insurer/keys/AXS.json",
-   "sha256": "b0dfa0aed73cc1f02c40cd35cf86701533a2ecafe44a057c605087100a3c4c73",
+   "sha256": "eb82d98d55972f51ec4efc7fac8ad99e59ae5035e4d105b64b50820c314edb2e",
    "role": "key"
   },
   {
@@ -212,7 +212,7 @@
   },
   {
    "path": "eval/industry/insurer/keys/WRB.json",
-   "sha256": "7dbd59b5ca2741c157d650f359ae21e48afccd5e6cd60b80c5939364bcee4940",
+   "sha256": "6fcf805ad1148bc4fb8fb25bbec897df34b1aec0493142d4c2e701c038b73916",
    "role": "key"
   }
  ]

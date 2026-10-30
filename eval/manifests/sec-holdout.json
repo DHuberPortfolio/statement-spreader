@@ -1,8 +1,8 @@
 {
  "name": "sec-holdout",
  "source": "files: SEC 10-K filings listed in eval/sec/manifest.json (downloaded by scripts/fetch_sec.py)",
- "version": "8e7f8dff07628aa1",
- "key_version": "a46739fb00bec15f",
+ "version": "40a19fa8c6f786c4",
+ "key_version": "3216a7696759b3fd",
  "files": 90,
  "entries": [
   {
@@ -212,7 +212,7 @@
   },
   {
    "path": "eval/sec/keys/LMT.json",
-   "sha256": "dde5097b5d94ab1fc7f417fd951194670a64d6999b5fa3e2e65723454f82f36c",
+   "sha256": "1f8def7c66320b7f3123219c0c76544ff4b994b049c47620cc2cb1a5ee866ce5",
    "role": "key"
   },
   {
@@ -287,7 +287,7 @@
   },
   {
    "path": "eval/sec/keys/NFLX.json",
-   "sha256": "3304b07195efa6abea0483d4374ecaffb66ed185429a5255f4d2b9a5bf044f22",
+   "sha256": "89ed492501f2937603156fc4c6cd8826920c973f51e6432fdd5befe39c2ecd7f",
    "role": "key"
   },
   {
@@ -347,7 +347,7 @@
   },
   {
    "path": "eval/sec/keys/QCOM.json",
-   "sha256": "9381d8275ca139d4f1727535307f158c625b71876ad68b0b19d3f6d41079b2af",
+   "sha256": "2306fc2a2376e891ac22ae591dcff821ba9bebcdc53d0471d05ccf39e8843def",
    "role": "key"
   },
   {
@@ -452,7 +452,7 @@
   },
   {
    "path": "eval/sec/keys/YETI.json",
-   "sha256": "beae924208403c30f966bf913d39c659ab8a4587b028864f32e41b76e3ade385",
+   "sha256": "02fccd024eb1e9077a6963442b3aad8e9502e2cc2fac2752dc53d680a89c6a6d",
    "role": "key"
   }
  ]

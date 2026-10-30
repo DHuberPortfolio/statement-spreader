@@ -5,8 +5,9 @@ Rules, in order:
   but not added again. Otherwise "Products" + "Services" + "Total net sales" would triple-count.
 - Several separate rows feeding one line are added, and the value says it is a sum.
 - Cost lines printed in parentheses (a presentation choice some companies make) are spread as
-  positive costs, but only when the statement prints costs that way consistently; a single
-  negative tax line is a tax benefit, not a presentation choice.
+  positive costs, but only when the statement prints costs that way consistently. A single
+  negative tax line is settled by the statement's arithmetic (pre-tax - tax = net income): an
+  expense printed as a deduction, or a benefit (D57).
 - The printed scale is applied last, and the value records the scale's evidence.
 """
 
@@ -181,7 +182,38 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
                 status = ValueStatus.ASSUMED
             out.append(SpreadValue(line=line, period=period.key, value=value, status=status, confidence=min(confs),
                                    source_rows=[i for i, _ in parts], refs=refs, steps=steps))
+    _settle_tax_sign(out, table)
     return out
+
+
+def _settle_tax_sign(values: list[SpreadValue], table: StatementTable) -> None:
+    """The sign of income tax, from the statement's own arithmetic: pre-tax income - tax expense (+ discontinued
+    operations) = net income. When that holds only with the tax negated, the row printed its expense as a deduction
+    ("Provision for income taxes (9,265)" among positive costs: Amazon, Netflix, Qualcomm, Union Pacific) or its benefit
+    as the positive ("Income tax (expense) benefit 55,595": AXIS): the spread takes the sign that makes the statement
+    add up (D57). When both or neither fit, nothing changes and the checks speak."""
+    by = {(v.line, v.period): v for v in values}
+    mult = Decimal(table.scale.multiplier)
+    for v in values:
+        if v.line != "income_tax" or not v.value:
+            continue
+        pre, net = by.get(("pretax_income", v.period)), by.get(("net_income", v.period))
+        if pre is None or net is None:
+            continue
+        disc = by.get(("discontinued_ops", v.period))
+        d = disc.value if disc is not None else Decimal(0)
+        tol = Decimal(3 + (disc is not None)) * Decimal("0.5") * mult
+        as_is = abs(pre.value - v.value + d - net.value) <= tol
+        negated = abs(pre.value + v.value + d - net.value) <= tol
+        if negated and not as_is:
+            v.value = -v.value
+            v.steps.append(ProvenanceStep(kind="sign", detail=(
+                f"Pre-tax income {_fmt(pre.value)} - tax {_fmt(v.value)}"
+                + (f" + discontinued operations {_fmt(d)}" if disc is not None else "")
+                + f" = net income {_fmt(net.value)} only with this sign: spread as a tax "
+                + ("expense" if v.value > 0 else "benefit"))))
+            if v.status is ValueStatus.EXTRACTED:
+                v.status = ValueStatus.NORMALIZED
 
 
 def _multiplier(table: StatementTable, unit: ValueUnit) -> tuple[int, str, bool]:

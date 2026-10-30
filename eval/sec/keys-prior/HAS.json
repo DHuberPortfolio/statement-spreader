@@ -395,6 +395,27 @@
   },
   {
    "statement": "income_statement",
+   "line": "sga",
+   "period": "2024-12-29/12M",
+   "value": "1532700000.0",
+   "precision": "100000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "sga",
+   "period": "2023-12-31/12M",
+   "value": "1838800000.0",
+   "precision": "100000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "sga",
+   "period": "2022-12-25/12M",
+   "value": "2053400000.0",
+   "precision": "100000"
+  },
+  {
+   "statement": "income_statement",
    "line": "dna_opex",
    "period": "2024-12-29/12M",
    "value": "68300000.0",
@@ -433,27 +454,6 @@
    "line": "other_opex",
    "period": "2022-12-25/12M",
    "value": "0",
-   "precision": "100000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "sga",
-   "period": "2024-12-29/12M",
-   "value": "1213200000.0",
-   "precision": "100000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "sga",
-   "period": "2023-12-31/12M",
-   "value": "1480400000.0",
-   "precision": "100000"
-  },
-  {
-   "statement": "income_statement",
-   "line": "sga",
-   "period": "2022-12-25/12M",
-   "value": "1666100000.0",
    "precision": "100000"
   },
   {
@@ -1904,7 +1904,7 @@
    "row_label": "Advertising",
    "period": "2024-12-29/12M",
    "value": "319500000.0",
-   "line": null,
+   "line": "sga",
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[718]/table[1]/tr[9]/td[2]"
   },
@@ -1913,7 +1913,7 @@
    "row_label": "Advertising",
    "period": "2023-12-31/12M",
    "value": "358400000.0",
-   "line": null,
+   "line": "sga",
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[718]/table[1]/tr[9]/td[5]"
   },
@@ -1922,7 +1922,7 @@
    "row_label": "Advertising",
    "period": "2022-12-25/12M",
    "value": "387300000.0",
-   "line": null,
+   "line": "sga",
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[718]/table[1]/tr[9]/td[8]"
   },
@@ -3608,7 +3608,6 @@
   "has:IncreaseDecreaseInNetDeemedRepatriationTax",
   "has:ProgramProductionCostAmortization",
   "has:ProgramProductionCostsNetofTaxRebatesReceived",
-  "us-gaap:AdvertisingExpense",
   "us-gaap:AllowanceForDoubtfulAccountsReceivableCurrent",
   "us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
   "us-gaap:CommitmentsAndContingencies",

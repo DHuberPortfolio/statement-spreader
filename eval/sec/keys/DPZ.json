@@ -439,21 +439,21 @@
    "statement": "income_statement",
    "line": "sga",
    "period": "2025-12-28/12M",
-   "value": "464120000",
+   "value": "1023614000",
    "precision": "1000"
   },
   {
    "statement": "income_statement",
    "line": "sga",
    "period": "2024-12-29/12M",
-   "value": "459492000",
+   "value": "969345000",
    "precision": "1000"
   },
   {
    "statement": "income_statement",
    "line": "sga",
    "period": "2023-12-31/12M",
-   "value": "434554000",
+   "value": "907749000",
    "precision": "1000"
   },
   {
@@ -2278,7 +2278,7 @@
    "row_label": "U.S. franchise advertising",
    "period": "2025-12-28/12M",
    "value": "559494000",
-   "line": null,
+   "line": "sga",
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[168]/table[1]/tr[18]/td[4]"
   },
@@ -2287,7 +2287,7 @@
    "row_label": "U.S. franchise advertising",
    "period": "2024-12-29/12M",
    "value": "509853000",
-   "line": null,
+   "line": "sga",
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[168]/table[1]/tr[18]/td[8]"
   },
@@ -2296,7 +2296,7 @@
    "row_label": "U.S. franchise advertising",
    "period": "2023-12-31/12M",
    "value": "473195000",
-   "line": null,
+   "line": "sga",
    "role": "detail",
    "xpath": "/html[1]/body[1]/div[168]/table[1]/tr[18]/td[12]"
   },
@@ -3668,7 +3668,6 @@
   "us-gaap:AccruedInsuranceCurrent",
   "us-gaap:AccruedInsuranceNoncurrent",
   "us-gaap:AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-  "us-gaap:AdvertisingExpense",
   "us-gaap:AllowanceForDoubtfulAccountsReceivableCurrent",
   "us-gaap:AmortizationOfFinancingCostsAndDiscounts",
   "us-gaap:CapitalizedComputerSoftwareAccumulatedAmortization",

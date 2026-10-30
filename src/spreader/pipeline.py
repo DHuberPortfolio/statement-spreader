@@ -59,6 +59,23 @@ class StageTimer:
             self.timings[name] = round(self.timings.get(name, 0.0) + (time.perf_counter() - t0) * 1000, 2)
 
 
+# Rows only a holding company's own statements have: they mark a parent-only table even when the "parent company only"
+# heading is pages above it (Hancock Whitney's "Condensed Statements of Cash Flows", found in D57: chosen over the
+# consolidated statement, its figures added up, and three wrong values per year went out without review).
+_PARENT_ROWS = re.compile(r"dividends? received from (?:bank |banking )?subsidiar|"
+                          r"equity in (?:the )?undistributed (?:net )?(?:earnings|income|loss)\w* of (?:bank |banking )?subsidiar|"
+                          r"investments? in (?:and advances to )?(?:bank |banking |consolidated )?subsidiar|"
+                          r"advances (?:to|from) subsidiar|dividends? from (?:bank |banking )?subsidiar", re.I)
+
+
+def is_parent_only(table: Any, layout: Any) -> bool:
+    """The registrant's own (unconsolidated) statement: by its heading or by rows only a parent company prints."""
+    if _PARENT_ONLY.search(layout.title_text + " " + table.context[-200:]):
+        return True
+    labels = " | ".join(" ".join(t.text for t in r.tokens[:1]) for r in table.rows)
+    return bool(_PARENT_ROWS.search(labels))
+
+
 def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dict[StatementType, tuple]:
     """Lay out every table and keep the best-scoring one per statement type."""
     best: dict[StatementType, tuple] = {}
@@ -72,6 +89,8 @@ def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dic
         title = (layout.title_text + " " + table.context[-200:]).lower()
         if _NOT_PRIMARY.search(title):
             det.score -= 6  # a pro forma, unaudited, segment or quarterly table is not the primary statement
+        if is_parent_only(table, layout):
+            det.score -= 20  # the parent company's own statement: any consolidated candidate wins over it (D57)
         rivals.setdefault(det.statement, []).append((table, layout, det))
         cur = best.get(det.statement)
         if cur is None or det.score > cur[2].score:
@@ -95,7 +114,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     built = {stype: timer.run("structure", build_statement, table, layout, stype, doc.doc_id, det.score)
              for stype, (table, layout, det) in picked.items()}
     for stype, (table, layout, _det) in picked.items():
-        if _PARENT_ONLY.search(layout.title_text + " " + table.context[-200:]):
+        if is_parent_only(table, layout):
             # Found on a 10-K whose consolidated statements are in an exhibit: the only balance sheet in the document was
             # the parent company's own, and it was spread as if it were the group's (IMPROVEMENT_LOG #23).
             built[stype].warnings.append(

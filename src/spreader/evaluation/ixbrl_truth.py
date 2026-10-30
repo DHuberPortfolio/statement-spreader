@@ -31,7 +31,7 @@ from decimal import Decimal, InvalidOperation
 from lxml import etree
 
 from ..ingest.paths import element_path
-from ..profile import Profile
+from ..profile import LineDef, Profile
 from .truth import AnswerKey, TruthCell, TruthValue
 
 NS = {"ix": "http://www.xbrl.org/2013/inlineXBRL", "xbrli": "http://www.xbrl.org/2003/instance",
@@ -40,11 +40,17 @@ NS = {"ix": "http://www.xbrl.org/2013/inlineXBRL", "xbrli": "http://www.xbrl.org
 # us-gaap concept (local name) -> template line. Only concepts whose meaning is unambiguous for
 # the template are listed; anything else is "unknown" and not used to grade mapping.
 CROSSWALK: dict[str, str] = {}
+ORDER: dict[str, int] = {}  # the order concepts are listed in: the first is preferred where values are not added (D57)
+
+# Concepts whose positive value is income, listed on a cost line: an expense is their negative, so a cost line negates
+# them (Amazon's "Other operating expense (income), net" is OtherOperatingIncomeExpenseNet, -763 for an expense of 763).
+INCOME_POSITIVE = {"OtherOperatingIncomeExpenseNet", "GainLossOnDispositionOfAssets"}
 
 
 def _cw(line: str, *concepts: str) -> None:
     for c in concepts:
         CROSSWALK[c] = line
+        ORDER.setdefault(c, len(ORDER))
 
 
 _cw("revenue", "Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax",
@@ -56,7 +62,9 @@ _cw("gross_profit", "GrossProfit")
 _cw("rnd", "ResearchAndDevelopmentExpense", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
     "ResearchAndDevelopmentExpenseSoftwareExcludingAcquiredInProcessCost")
 _cw("sga", "SellingGeneralAndAdministrativeExpense", "GeneralAndAdministrativeExpense", "SellingAndMarketingExpense",
-    "SellingExpense", "MarketingAndAdvertisingExpense", "MarketingExpense")
+    "SellingExpense", "MarketingAndAdvertisingExpense", "MarketingExpense",
+    # advertising printed as its own line is a selling cost, as MarketingAndAdvertisingExpense already is (D57)
+    "AdvertisingExpense")
 _cw("dna_opex", "DepreciationAndAmortization", "DepreciationDepletionAndAmortization", "AmortizationOfIntangibleAssets",
     "Depreciation", "DepreciationAmortizationAndAccretionNet")
 _cw("other_opex", "RestructuringCharges", "GoodwillImpairmentLoss", "AssetImpairmentCharges", "OtherOperatingIncomeExpenseNet",
@@ -607,9 +615,15 @@ def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | No
                 fs = drop_parts_of_totals(fs, calc, line if stmt == "balance_sheet" else None,
                                           lambda n: _template_line(n, cw))
             ldef = profile.lines[line]
-            vals = [(f.value if ldef.kind == "cost" else f.printed) for f in fs]
+            vals = [_line_value(f, ldef) for f in fs]
             uniq = list(dict.fromkeys(vals))
-            if len(uniq) > 1:
+            if len(uniq) > 1 and ldef.unit.value in ("per_share", "shares"):
+                # Per-share figures and share counts are never added: two facts on one line are two measures of the
+                # same thing (Disney's 2022 diluted EPS from continuing operations, 1.75, and in total, 1.72, were keyed
+                # as 3.47). The total measure wins over the continuing-operations one, then the crosswalk's order.
+                best = min(fs, key=lambda f: ("ContinuingOperations" in f.concept, ORDER.get(f.concept, 10**6)))
+                value = _line_value(best, ldef)
+            elif len(uniq) > 1:
                 total = sum(uniq[1:], Decimal(0))
                 # One value that is the sum of the others is their total.
                 biggest = max(uniq, key=abs)
@@ -623,6 +637,21 @@ def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | No
     key.periods = sorted(periods)
     key.unknown_lines = sorted(unknown)
     return key, statements
+
+
+def _line_value(f: Fact, ldef: LineDef) -> Decimal:
+    """The value a fact gives its template line, in the template's sign convention.
+
+    Cost lines and the tax deduction take the tagged value, which is positive for an expense however it is printed: a
+    "negated label" prints an expense in parentheses, and the template spreads costs and tax expense positive (a tax
+    benefit negative). Before D57 tax took the printed value, so a filer that prints tax in parentheses (Disney) had
+    its tax expense keyed negative. Concepts whose positive is income are negated on a cost line. Every other line takes
+    the value as printed."""
+    if ldef.kind == "cost":
+        return -f.value if f.concept in INCOME_POSITIVE else f.value
+    if ldef.deduction:
+        return f.value
+    return f.printed
 
 
 def _precision(fs: list[Fact]) -> Decimal:

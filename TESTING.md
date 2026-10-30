@@ -49,6 +49,7 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | Model failure modes (D48) | `tests/test_model_governance.py` | - |
 | The model's hidden second opinion (D52) | `tests/test_shadow.py` | - |
 | Disagreements with the approved spread, deadline, sample (D53) | `tests/test_disagreements.py` | - |
+| Answer-key signs, tax sign from the statement's arithmetic, parent-only statements (D57) | `tests/test_answer_key_signs.py`, `tests/test_tax_sign.py`, `tests/test_parent_only.py` | - |
 | Workbooks laid out like the SEC's Financial_Report.xlsx (D56) | `tests/test_workbook_layouts.py` | The real workbooks in `var/real-samples` (download list in its manifest), scored against `eval/sec/keys-prior` |
 | What rulings teach; go-live report; export (D55) | `tests/test_teaching.py`, `tests/test_learning_redteam.py` | `spreader learning report`; with `llama-server` running, `scripts/measure_ruling_examples.py` |
 | A senior's blind ruling, corrected after review (D54) | `tests/test_rulings.py` | Sign in as Sam Senior, open Model disagreements, rule; then as Ana open the run |

@@ -842,3 +842,44 @@ totals the others on its line, and a money unit that follows a share unit.**
   money unit from the title.
 - **Not done.** The scans Devin approved (Internet Archive) ran through OCR but have no answer keys, so they are not
   scored; the vendor list is downloaded but not yet used.
+
+**D57. Four errors shared by workbooks and HTML, traced to their causes: three in the answer keys, the rest in the
+platform; fixing them exposed two more hidden error sources and a regression from D56, all fixed.**
+- **Asked by Devin**: investigate Disney's tax sign, Amazon's other operating expense sign, Hasbro's selling costs and
+  Disney's 2022 EPS, the errors D56 left. Then: no error the platform cannot track.
+- **The keys** (`evaluation/ixbrl_truth.py`). Tax took the printed sign, so a filer printing its expense in parentheses
+  was keyed with a negative expense; it now takes the tagged value, like cost lines (expense positive, benefit
+  negative). On a cost line a concept whose positive is income (`OtherOperatingIncomeExpenseNet`,
+  `GainLossOnDispositionOfAssets`) is negated: Amazon's 763 expense was keyed -763. Per-share figures and share counts
+  are never added: Disney's 1.75 and 1.72 were keyed 3.47; the total measure wins over continuing operations.
+  `AdvertisingExpense` printed as its own line is a selling cost, as `MarketingAndAdvertisingExpense` already was. Keys
+  rebuilt: 56 of 8,754 commercial values changed (tax 30, other operating 18, SG&A 6, EPS 2), 18 of 2,702 insurer values,
+  no bank values; 34 key files, every other key byte for byte the same; six manifests rewritten.
+- **The platform's tax sign** (`spread._settle_tax_sign`). A lone tax line in parentheses was read as a benefit. With
+  the keys right, this showed on Amazon, Netflix, Qualcomm, Union Pacific, YETI, Etsy, AXIS, Globe Life and W. R. Berkley.
+  Now the statement's arithmetic decides: when pre-tax income - tax (+ discontinued operations) = net income only with
+  the tax negated, it is negated and the provenance says why; when both or neither fit (equity income after tax:
+  Amazon, AXIS), nothing changes and the checks speak.
+- **Wording.** "Selling, distribution and administration" (Hasbro) is SG&A; "Net income before noncontrolling interests"
+  is net income and "Net income to common stockholders" the company's share (W. R. Berkley: without the second, the
+  first made its company share silently wrong three times).
+- **Two hidden error sources.** D56 counted a figure printed twice once. On Hancock Whitney's 10-K that made the parent
+  company's own cash-flow statement, chosen over the consolidated one, add up, and six wrong values a year went out
+  without review where the double count had failed a check before (bank holdout silent errors 46 -> 52, found by
+  measuring every set, which D56's check had not done). Parent-only statements are now known by their rows
+  ("dividends received from subsidiaries", "equity in undistributed earnings of subsidiaries") as well as their
+  heading, lose to any consolidated candidate, and raise the parent-only blocker when chosen alone. The consolidated
+  statement then showed "Increase in cash surrender value of life insurance contracts" placed on the net change in cash
+  by "increase in cash*"; without "net", those labels must now say which cash.
+- **Measured** against the last commit (8a7c63d) on every SEC-based set, new keys after: values right / accepted alone
+  wrong: SEC dev 3,618 -> 3,629, 59 of 2,538 -> 51 of 2,548; SEC holdout 3,241 -> 3,247, 32 of 2,154 -> 29 of 2,167;
+  banks dev 840 -> 846, 31 -> 31; banks holdout 831 -> 856, 52 -> 35; insurers dev 708 -> 720, 20 -> 20; insurers
+  holdout 867 -> 924, 58 -> 50. Release gate passed. Scored with the same spreads, the key fix alone moved the
+  commercial silent errors from 100 to 80 of about 4,710 and the insurers' from 84 to 78 (`eval/reports/key-fix-d57-*`).
+- **Not done, and the next step.** Silent omissions rose on the holdouts (banks 137 -> 177, insurers 116 -> 160 of their
+  values): avoiding parent-only statements leaves some consolidated ones incomplete (Hancock Whitney's cash flow is
+  split across tables). A blank is safer than a wrong number, but a value missing without a flag is still an error
+  nobody is told about: every expected line and period should be flagged when missing. That, and accepting alone only
+  values an independent check confirms, are the route to Devin's target of under 0.2% silent errors.
+- **Tests.** `tests/test_answer_key_signs.py` (5), `tests/test_tax_sign.py` (5), `tests/test_parent_only.py` (3).
+  Checked on the previous code: 10 of the 13 fail; the other three guard behaviour that was already right.

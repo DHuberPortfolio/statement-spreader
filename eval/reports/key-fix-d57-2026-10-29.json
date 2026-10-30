@@ -1,0 +1,106 @@
+{
+  "sec": {
+    "key_values": 8754,
+    "changed_by_line": {
+      "eps_diluted": 1,
+      "eps_basic": 1,
+      "income_tax": 30,
+      "other_opex": 18,
+      "sga": 6
+    },
+    "examples": {
+      "eps_diluted": "AMD 2025-12-27/12M: 5.26 -> 2.65",
+      "eps_basic": "AMD 2025-12-27/12M: 5.30 -> 2.67",
+      "income_tax": "AMZN 2024-12-31/12M: -9265000000 -> 9265000000",
+      "other_opex": "AMZN 2025-12-31/12M: -4639000000 -> 4639000000",
+      "sga": "DPZ 2025-12-28/12M: 464120000 -> 1023614000"
+    },
+    "old": {
+      "correct_auto": 4613,
+      "correct_review": 2231,
+      "unjudged": 360,
+      "wrong_review": 297,
+      "missing_flagged": 968,
+      "wrong_auto": 100,
+      "missing_silent": 185
+    },
+    "new": {
+      "correct_auto": 4635,
+      "correct_review": 2241,
+      "unjudged": 360,
+      "wrong_review": 285,
+      "missing_flagged": 968,
+      "wrong_auto": 80,
+      "missing_silent": 185
+    }
+  },
+  "bank": {
+    "key_values": 2317,
+    "changed_by_line": {},
+    "examples": {},
+    "old": {
+      "wrong_auto": 83,
+      "correct_auto": 1442,
+      "missing_silent": 220,
+      "correct_review": 229,
+      "missing_flagged": 187,
+      "wrong_review": 74,
+      "unjudged": 82
+    },
+    "new": {
+      "wrong_auto": 83,
+      "correct_auto": 1442,
+      "missing_silent": 220,
+      "correct_review": 229,
+      "missing_flagged": 187,
+      "wrong_review": 74,
+      "unjudged": 82
+    }
+  },
+  "insurer": {
+    "key_values": 2702,
+    "changed_by_line": {
+      "other_opex": 6,
+      "income_tax": 12
+    },
+    "examples": {
+      "other_opex": "ACGL 2025-12-31/12M: 1880000000 -> 1772000000",
+      "income_tax": "AXS 2024-12-31/12M: 55595000 -> -55595000"
+    },
+    "old": {
+      "correct_auto": 1299,
+      "correct_review": 276,
+      "missing_silent": 200,
+      "wrong_auto": 84,
+      "wrong_review": 329,
+      "missing_flagged": 401,
+      "unjudged": 113
+    },
+    "new": {
+      "correct_auto": 1305,
+      "correct_review": 273,
+      "missing_silent": 200,
+      "wrong_auto": 78,
+      "wrong_review": 332,
+      "missing_flagged": 401,
+      "unjudged": 113
+    }
+  },
+  "sec-prior": {
+    "key_values": 8800,
+    "changed_by_line": {
+      "income_tax": 30,
+      "other_opex": 18,
+      "eps_basic": 1,
+      "eps_diluted": 1,
+      "sga": 6
+    },
+    "examples": {
+      "income_tax": "AMZN 2022-12-31/12M: 3217000000 -> -3217000000",
+      "other_opex": "AMZN 2022-12-31/12M: -1263000000 -> 1263000000",
+      "eps_basic": "DIS 2022-10-01/12M: 3.48 -> 1.73",
+      "eps_diluted": "DIS 2022-10-01/12M: 3.47 -> 1.72",
+      "sga": "DPZ 2023-12-31/12M: 434554000 -> 907749000"
+    }
+  }
+}

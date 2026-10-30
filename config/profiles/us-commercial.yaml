@@ -71,7 +71,8 @@ statements:
                   "general and administrative*", selling, administrative expenses, marketing general and administrative,
                   distribution and selling, selling and distribution, "marketing*", "*general and administrative*",
                   "*selling and administrative*", "advertising*", "*selling and marketing*", "*sales and marketing*",
-                  "store operating*", "*selling general*", "fulfillment", "technology and infrastructure"]
+                  "store operating*", "*selling general*", "fulfillment", "technology and infrastructure",
+                  "selling distribution and administrat*"]
       - id: dna_opex
         label: Depreciation and amortization (operating)
         kind: cost
@@ -146,7 +147,9 @@ statements:
         kind: result
         critical: true
         aliases: [net income, net loss, net income loss, net loss income, net earnings, net earnings loss, "net income including*",
-                  consolidated net income, "net income loss including*", profit for the year, net profit, profit, profit loss]
+                  consolidated net income, "net income loss including*", profit for the year, net profit, profit, profit loss,
+                  "net income before noncontrolling interest*", "net income loss before noncontrolling interest*",
+                  "net earnings before noncontrolling interest*"]
       - id: nci_net_income
         label: Net income attributable to noncontrolling interests
         kind: either
@@ -156,7 +159,8 @@ statements:
         label: Net income attributable to the company
         kind: result
         aliases: ["net income attributable to*", "net loss attributable to*", "net income loss attributable to*",
-                  "net earnings attributable to*", "net income available to common*", "net income applicable to common*"]
+                  "net earnings attributable to*", "net income available to common*", "net income applicable to common*",
+                  "net income to common*", "net earnings to common*"]
       - id: eps_basic
         label: EPS, basic
         kind: per_share
@@ -566,9 +570,19 @@ statements:
         label: Net change in cash
         kind: flow
         critical: true
-        aliases: ["increase decrease in cash*", "decrease increase in cash*", "net increase decrease in cash*", "net decrease increase in cash*",
-                  "net increase in cash*", "net decrease in cash*", "net change in cash*", "change in cash*", "increase in cash*",
-                  "decrease in cash*"]
+        # Without "net", the label must go on to say which cash: "increase in cash*" also took "Increase in cash
+        # surrender value of life insurance contracts", a bank's operating item, as the net change in cash (D57).
+        aliases: ["net increase decrease in cash*", "net decrease increase in cash*",
+                  "net increase in cash*", "net decrease in cash*", "net change in cash*",
+                  increase decrease in cash, "increase decrease in cash and*", "increase decrease in cash cash*",
+                  "increase decrease in cash equivalents*", "increase decrease in cash due*",
+                  decrease increase in cash, "decrease increase in cash and*", "decrease increase in cash cash*",
+                  "decrease increase in cash equivalents*", "decrease increase in cash due*",
+                  change in cash, "change in cash and*", "change in cash cash*", "change in cash equivalents*", "change in cash due*",
+                  increase in cash, "increase in cash and*", "increase in cash cash*", "increase in cash equivalents*",
+                  "increase in cash due*",
+                  decrease in cash, "decrease in cash and*", "decrease in cash cash*", "decrease in cash equivalents*",
+                  "decrease in cash due*"]
       - id: cash_begin
         label: Cash, beginning of period
         kind: asset
