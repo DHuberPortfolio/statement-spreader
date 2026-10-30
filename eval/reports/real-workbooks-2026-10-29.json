@@ -1,0 +1,297 @@
+{
+  "source": "SEC Financial_Report.xlsx of the prior-year 10-Ks in eval/sec/manifest-prior.json, downloaded 2026-10-29 (var/real-samples/manifest.json has URLs and SHA-256); scored against eval/sec/keys-prior",
+  "runs": {
+    "before": {
+      "AAPL": {
+        "xlsx": {
+          "right": 126,
+          "key_values": 146,
+          "silent_wrong": 2,
+          "auto_accepted": 115,
+          "blockers": 3
+        },
+        "html": {
+          "right": 146,
+          "key_values": 146,
+          "silent_wrong": 0,
+          "auto_accepted": 136,
+          "blockers": 0
+        }
+      },
+      "ADBE": {
+        "xlsx": {
+          "right": 135,
+          "key_values": 153,
+          "silent_wrong": 0,
+          "auto_accepted": 113,
+          "blockers": 7
+        },
+        "html": {
+          "right": 141,
+          "key_values": 153,
+          "silent_wrong": 0,
+          "auto_accepted": 122,
+          "blockers": 4
+        }
+      },
+      "AMZN": {
+        "xlsx": {
+          "right": 120,
+          "key_values": 137,
+          "silent_wrong": 4,
+          "auto_accepted": 86,
+          "blockers": 8
+        },
+        "html": {
+          "right": 129,
+          "key_values": 137,
+          "silent_wrong": 4,
+          "auto_accepted": 101,
+          "blockers": 5
+        }
+      },
+      "BOOT": {
+        "xlsx": {
+          "right": 92,
+          "key_values": 117,
+          "silent_wrong": 1,
+          "auto_accepted": 83,
+          "blockers": 2
+        },
+        "html": {
+          "right": 104,
+          "key_values": 117,
+          "silent_wrong": 1,
+          "auto_accepted": 95,
+          "blockers": 2
+        }
+      },
+      "DIS": {
+        "xlsx": {
+          "right": 107,
+          "key_values": 147,
+          "silent_wrong": 14,
+          "auto_accepted": 88,
+          "blockers": 7
+        },
+        "html": {
+          "right": 100,
+          "key_values": 147,
+          "silent_wrong": 0,
+          "auto_accepted": 22,
+          "blockers": 7
+        }
+      },
+      "F": {
+        "xlsx": {
+          "right": 93,
+          "key_values": 150,
+          "silent_wrong": 4,
+          "auto_accepted": 68,
+          "blockers": 13
+        },
+        "html": {
+          "right": 93,
+          "key_values": 147,
+          "silent_wrong": 2,
+          "auto_accepted": 58,
+          "blockers": 16
+        }
+      },
+      "HAS": {
+        "xlsx": {
+          "right": 127,
+          "key_values": 151,
+          "silent_wrong": 5,
+          "auto_accepted": 112,
+          "blockers": 2
+        },
+        "html": {
+          "right": 133,
+          "key_values": 153,
+          "silent_wrong": 4,
+          "auto_accepted": 87,
+          "blockers": 2
+        }
+      },
+      "JNJ": {
+        "xlsx": {
+          "right": 116,
+          "key_values": 151,
+          "silent_wrong": 0,
+          "auto_accepted": 84,
+          "blockers": 6
+        },
+        "html": {
+          "right": 117,
+          "key_values": 151,
+          "silent_wrong": 0,
+          "auto_accepted": 42,
+          "blockers": 4
+        }
+      },
+      "MAT": {
+        "xlsx": {
+          "right": 111,
+          "key_values": 136,
+          "silent_wrong": 0,
+          "auto_accepted": 82,
+          "blockers": 6
+        },
+        "html": {
+          "right": 108,
+          "key_values": 136,
+          "silent_wrong": 0,
+          "auto_accepted": 82,
+          "blockers": 6
+        }
+      }
+    },
+    "after": {
+      "AAPL": {
+        "xlsx": {
+          "right": 134,
+          "key_values": 146,
+          "silent_wrong": 0,
+          "auto_accepted": 124,
+          "blockers": 0
+        },
+        "html": {
+          "right": 146,
+          "key_values": 146,
+          "silent_wrong": 0,
+          "auto_accepted": 136,
+          "blockers": 0
+        }
+      },
+      "ADBE": {
+        "xlsx": {
+          "right": 141,
+          "key_values": 153,
+          "silent_wrong": 0,
+          "auto_accepted": 122,
+          "blockers": 4
+        },
+        "html": {
+          "right": 141,
+          "key_values": 153,
+          "silent_wrong": 0,
+          "auto_accepted": 122,
+          "blockers": 4
+        }
+      },
+      "AMZN": {
+        "xlsx": {
+          "right": 123,
+          "key_values": 137,
+          "silent_wrong": 4,
+          "auto_accepted": 95,
+          "blockers": 5
+        },
+        "html": {
+          "right": 129,
+          "key_values": 137,
+          "silent_wrong": 4,
+          "auto_accepted": 101,
+          "blockers": 5
+        }
+      },
+      "BOOT": {
+        "xlsx": {
+          "right": 92,
+          "key_values": 117,
+          "silent_wrong": 1,
+          "auto_accepted": 83,
+          "blockers": 2
+        },
+        "html": {
+          "right": 104,
+          "key_values": 117,
+          "silent_wrong": 1,
+          "auto_accepted": 95,
+          "blockers": 2
+        }
+      },
+      "DIS": {
+        "xlsx": {
+          "right": 110,
+          "key_values": 147,
+          "silent_wrong": 11,
+          "auto_accepted": 88,
+          "blockers": 7
+        },
+        "html": {
+          "right": 100,
+          "key_values": 147,
+          "silent_wrong": 0,
+          "auto_accepted": 22,
+          "blockers": 7
+        }
+      },
+      "F": {
+        "xlsx": {
+          "right": 99,
+          "key_values": 150,
+          "silent_wrong": 3,
+          "auto_accepted": 71,
+          "blockers": 10
+        },
+        "html": {
+          "right": 96,
+          "key_values": 147,
+          "silent_wrong": 2,
+          "auto_accepted": 70,
+          "blockers": 10
+        }
+      },
+      "HAS": {
+        "xlsx": {
+          "right": 127,
+          "key_values": 151,
+          "silent_wrong": 5,
+          "auto_accepted": 112,
+          "blockers": 2
+        },
+        "html": {
+          "right": 133,
+          "key_values": 153,
+          "silent_wrong": 4,
+          "auto_accepted": 87,
+          "blockers": 2
+        }
+      },
+      "JNJ": {
+        "xlsx": {
+          "right": 116,
+          "key_values": 151,
+          "silent_wrong": 0,
+          "auto_accepted": 84,
+          "blockers": 6
+        },
+        "html": {
+          "right": 117,
+          "key_values": 151,
+          "silent_wrong": 0,
+          "auto_accepted": 42,
+          "blockers": 4
+        }
+      },
+      "MAT": {
+        "xlsx": {
+          "right": 111,
+          "key_values": 136,
+          "silent_wrong": 0,
+          "auto_accepted": 82,
+          "blockers": 6
+        },
+        "html": {
+          "right": 108,
+          "key_values": 136,
+          "silent_wrong": 0,
+          "auto_accepted": 82,
+          "blockers": 6
+        }
+      }
+    }
+  }
+}

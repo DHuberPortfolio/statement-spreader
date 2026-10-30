@@ -33,6 +33,11 @@ _SHARES = re.compile(r"weighted average|shares used|number of (common )?shares|s
                      re.I)
 _MONEY_WORDS = re.compile(r"par value|paid in|capital|authorized|payments?|proceeds|repurchase|issuance|"
                           r"settlement|compensation|dividend|treasury|stock based|share based", re.I)
+# A unit the label states outright, as SEC renderings (Financial_Report.xlsx, the R pages) and some workbooks write it:
+# "Common stock, shares issued (in shares)", "Basic (in dollars per share)", "Diluted (shares)". It decides before any
+# word in the label does: "Common stock, shares authorized (in shares)" names money words but is a share count (D56).
+_STATED_PER_SHARE = re.compile(r"\((?:in )?(?:dollars|usd|us\$|\$|[a-z]{3}) per share\)|\(per share\)", re.I)
+_STATED_SHARES = re.compile(r"\((?:in )?(?:thousands of |millions of )?shares\)", re.I)
 _PER_SHARE_SECTION = re.compile(r"per (common )?share|\beps\b|earnings loss per|net income loss per", re.I)
 _SHARES_SECTION = re.compile(r"shares used|weighted average|shares outstanding|number of shares|share count", re.I)
 _NOT_PERIOD = re.compile(r"%|\bchange\b|\bvariance\b|\bnotes?\b|\bref\b|previously reported|as originally|\bbudget|"
@@ -131,7 +136,7 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
             continue
         # A total closes the section it totals ("Total current assets" ends "Current assets:").
         section = " > ".join(s for _, s in section_stack)
-        unit = _unit(lab, section, [lo.values[si].text for si in lo.values if periods[si] is not None])
+        unit = _unit(lab, section, [lo.values[si].text for si in lo.values if periods[si] is not None], label)
         if unit in (ValueUnit.MONEY, ValueUnit.SHARES):
             # A money amount printed with exactly three decimals ("719.147") is how European
             # statements write 719,147. US statements print money as whole numbers, so this is
@@ -385,10 +390,14 @@ def _follow_fiscal_pattern(tables: list[StatementTable]) -> None:
             _relabel(t, changes)
 
 
-def _unit(lab: str, section: str, period_texts: list[str]) -> ValueUnit:
+def _unit(lab: str, section: str, period_texts: list[str], label: str = "") -> ValueUnit:
     raw_vals = " ".join(period_texts)
     if "%" in raw_vals:
         return ValueUnit.PERCENT
+    if _STATED_PER_SHARE.search(label):
+        return ValueUnit.PER_SHARE
+    if _STATED_SHARES.search(label):
+        return ValueUnit.SHARES
     if _PER_SHARE.search(lab) and not _MONEY_WORDS.search(lab):
         return ValueUnit.PER_SHARE
     if _MONEY_WORDS.search(lab):

@@ -104,6 +104,10 @@ def detect_currency(texts: list[str]) -> tuple[str | None, str]:
         if len(found) > 1:
             return None, f"several currencies named nearby ({', '.join(sorted(found))})"
     return None, ""
+
+
+# A unit statement that names its currency first ("$ in Millions"): money, whatever comes before it (D56).
+_CURRENCY_LED = re.compile(r"[\s(\[|;:]*(?:\$|€|£|¥|usd\b|eur\b|gbp\b|dollars\b|euros?\b)", re.I)
 _SHARE_SCALE = re.compile(
     r"shares?\b[^.;)]{0,60}?\bin\s+(thousands|millions)"
     r"|(thousands|millions)\s+of\s+shares",
@@ -295,14 +299,18 @@ def detect_scale(texts: list[str]) -> tuple[Scale, Scale | None]:
             continue
         t = clean_text(text)
         if money is None:
-            # A match right after "shares ..." describes share counts, not money.
-            ms = [m for m in _SCALE.finditer(t) if "share" not in t[max(0, m.start() - 45): m.start()].lower()]
+            # A match right after "shares ..." describes share counts, not money, unless the match names its currency
+            # itself: the SEC's "USD ($) shares in Thousands, $ in Millions" states both, and "$ in Millions" is the
+            # money (D56). Apple's "except number of shares, which are reflected in thousands" stays a share unit.
+            ms = [m for m in _SCALE.finditer(t)
+                  if "share" not in t[max(0, m.start() - 45): m.start()].lower() or _CURRENCY_LED.match(m.group(0))]
             if ms:
                 # Inside the table the first statement wins; in the text above it, the nearest (last).
                 m = ms[0] if n < 2 else ms[-1]
                 word = _first_group(m).lower()
                 money = Scale(multiplier=_SCALE_WORDS[word], evidence=m.group(0).strip())
-                sm = _SHARE_SCALE.search(t[max(0, m.start() - 20): m.end() + 200])
+                # the share unit may come first ("shares in Thousands, $ in Millions", the SEC's renderings)
+                sm = _SHARE_SCALE.search(t[max(0, m.start() - 60): m.end() + 200])
                 if sm:
                     shares = Scale(multiplier=_SCALE_WORDS[_first_group(sm).lower()], evidence=sm.group(0).strip())
                 elif _SHARES_UNITS.search(t[m.start(): m.end() + 120]):

@@ -804,3 +804,41 @@ example, and the go-live report says when the model is ready.**
   ruling count); nonsense settings stop the start; the senior's page lists everything open but only the latest 200
   rulings (it returned the whole history before).
 - **Not done.** Retraining the model itself: `training.jsonl` is ready for it, but no model has been trained.
+
+## Real workbooks (2026-10-29)
+
+**D56. Three ways the SEC's real workbooks were read wrong, fixed in general rules: a unit the label states, a row that
+totals the others on its line, and a money unit that follows a share unit.**
+- **Found.** Devin asked for real samples; the SEC publishes a `Financial_Report.xlsx` with each filing. The nine of
+  the prior-year 10-Ks in the evaluation set (downloaded 2026-10-29 to `var/real-samples`, git-ignored, with URLs and
+  SHA-256 in its manifest) were spread and scored against the prior-year answer keys, next to the same filings' HTML:
+  workbooks 1,027 of 1,288 right (79.7%) and 30 of 831 values accepted alone wrong (3.6%); the HTML 1,071 of 1,287 and
+  11 of 745 (1.5%). Of the 30, six were the workbook's own, below; the rest were the same value as the HTML's (nine sent
+  to review there only because its period dates were assumed), shared mapping or sign issues, or the answer key
+  (Disney's 2022 diluted EPS is keyed as 3.47, the continuing and total figures added). Those are not fixed here.
+- **1. A stated unit decides first** (`structure._unit`). The SEC writes "Common stock, shares issued (in shares)"
+  among money rows; "issued" is not a share word, so the row was money and its count was added to common stock
+  (Apple: 15.2 trillion instead of 83 billion). A label stating "(in shares)", "(shares)" or "(in dollars per share)"
+  now sets the unit before any word does.
+- **2. A row that equals the sum of the others on its line is their total** (`spread._total_of_the_others`). The SEC's
+  income sheet is followed by its breakdown ("Service: Revenues", "Product: Revenues") with no indentation, so all three
+  rows were added onto revenue (Disney: twice its revenue). When several rows land on one line and one equals the sum of
+  the others in every period they share (to printed rounding, at least one period non-zero), it is taken alone and the
+  provenance says so; a figure printed twice is the same case.
+- **3. "$ in Millions" after "shares in Thousands"** (`detect.detect_scale`). The SEC's title "USD ($) shares in
+  Thousands, $ in Millions" lost its money unit: any unit within 45 characters after "share" was taken as a share unit.
+  A unit that names its currency ("$ in Millions") is now money whatever precedes it, and the share unit is looked for
+  before it too. A first version split the clause at commas instead and turned Apple's 10-K HTML from 146 of 146 right
+  to 58 ("number of shares, which are reflected in thousands" became the money unit); caught on the real filing,
+  replaced, and Apple's heading is now in the tests.
+- **Measured.** Workbooks: 1,053 of 1,288 right (81.8%), 24 of 861 accepted alone wrong (2.8%; 1.9-4.1%); all 24 are
+  the shared or key issues above. HTML of the same filings: 1,074 right, 11 of 757 (1.5%). SEC dev, last commit
+  against this one: 3,612 -> 3,618 of 4,428 right, silent errors 59 of 2,521 -> 59 of 2,538; holdout unchanged (3,241
+  of 3,972, 32 of 2,154); release gate passed (`eval/reports/stmt-<split>-before-workbook-fixes.json`,
+  `stmt-<split>-workbook-fixes.*`, `real-workbooks-2026-10-29.json`).
+- **Tests.** `tests/test_workbook_layouts.py` (5): the breakdown under a statement, share rows that say so, stated
+  units before label words, the total rule's edges (a period that disagrees, independent rows, zeros, rounding), the
+  SEC title and Apple's heading. Checked on the previous code: revenue 182,722 million, common stock 15,200,062, no
+  money unit from the title.
+- **Not done.** The scans Devin approved (Internet Archive) ran through OCR but have no answer keys, so they are not
+  scored; the vendor list is downloaded but not yet used.

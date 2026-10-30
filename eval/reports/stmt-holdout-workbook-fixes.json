@@ -1,0 +1,4103 @@
+{
+ "name": "ab-new-holdout",
+ "documents": 30,
+ "crashed": 0,
+ "seconds": 175.1,
+ "profile": "us-commercial 2026.10.24-1+0ad0af213be8",
+ "buckets": {
+  "correct_review": 1119,
+  "wrong_review": 144,
+  "correct_auto": 2122,
+  "unjudged": 170,
+  "missing_flagged": 472,
+  "missing_silent": 83,
+  "wrong_auto": 32
+ },
+ "error_kinds": {
+  "value": 168,
+  "sign": 7,
+  "scale": 1
+ },
+ "rates": {
+  "accuracy": {
+   "n": 3241,
+   "d": 3972,
+   "rate": 0.8159617321248741,
+   "low": 0.8036069132880029,
+   "high": 0.827705963965457
+  },
+  "silent_error_rate": {
+   "n": 32,
+   "d": 2154,
+   "rate": 0.014856081708449397,
+   "low": 0.010542784399109262,
+   "high": 0.020896780024896654
+  },
+  "silent_omission_rate": {
+   "n": 83,
+   "d": 3972,
+   "rate": 0.020896273917421954,
+   "low": 0.016888953167248456,
+   "high": 0.025829448893839695
+  },
+  "review_rate": {
+   "n": 1263,
+   "d": 3417,
+   "rate": 0.36962247585601404,
+   "low": 0.35359230163307864,
+   "high": 0.3859454776081467
+  },
+  "catch_rate": {
+   "n": 144,
+   "d": 176,
+   "rate": 0.8181818181818182,
+   "low": 0.7546060198295274,
+   "high": 0.8681642402215398
+  },
+  "unnecessary_review_rate": {
+   "n": 1119,
+   "d": 3241,
+   "rate": 0.3452638074668312,
+   "low": 0.32908655096004574,
+   "high": 0.3618074513850918
+  },
+  "coverage": {
+   "n": 3417,
+   "d": 3972,
+   "rate": 0.8602719033232629,
+   "low": 0.849141090965623,
+   "high": 0.8707065005480832
+  }
+ },
+ "cells": {
+  "found": {
+   "ok": 5985,
+   "total": 6730
+  },
+  "value": {
+   "ok": 5961,
+   "total": 5985
+  },
+  "period": {
+   "ok": 5727,
+   "total": 5985
+  },
+  "mapping": {
+   "ok": 3889,
+   "total": 4501
+  }
+ },
+ "documents_detail": [
+  {
+   "doc": "sec:CROX",
+   "ms": 4324,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 43,
+    "wrong_review": 4,
+    "correct_auto": 95,
+    "unjudged": 8
+   },
+   "checks_failed": 9,
+   "checks_run": 37,
+   "review_items": 24,
+   "blockers": 4,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:CSCO",
+   "ms": 7158,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 91,
+    "unjudged": 11,
+    "correct_review": 37,
+    "wrong_review": 9,
+    "missing_flagged": 12,
+    "missing_silent": 3
+   },
+   "checks_failed": 6,
+   "checks_run": 33,
+   "review_items": 24,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:CVX",
+   "ms": 15672,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 19,
+    "missing_flagged": 27,
+    "unjudged": 3,
+    "wrong_review": 5,
+    "correct_auto": 64,
+    "missing_silent": 12
+   },
+   "checks_failed": 8,
+   "checks_run": 22,
+   "review_items": 42,
+   "blockers": 8,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:DE",
+   "ms": 7051,
+   "error": null,
+   "statements": [
+    "cash_flow",
+    "income_statement",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_review": 103,
+    "wrong_review": 14,
+    "missing_flagged": 5,
+    "missing_silent": 3,
+    "unjudged": 6
+   },
+   "checks_failed": 4,
+   "checks_run": 23,
+   "review_items": 33,
+   "blockers": 5,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:DECK",
+   "ms": 2838,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 29,
+    "wrong_review": 4,
+    "missing_flagged": 5,
+    "correct_auto": 48,
+    "wrong_auto": 2,
+    "unjudged": 8
+   },
+   "checks_failed": 8,
+   "checks_run": 26,
+   "review_items": 22,
+   "blockers": 7,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:FDX",
+   "ms": 7507,
+   "error": null,
+   "statements": [
+    "cash_flow",
+    "balance_sheet",
+    "income_statement"
+   ],
+   "buckets": {
+    "missing_flagged": 35,
+    "correct_auto": 63,
+    "unjudged": 5,
+    "correct_review": 12,
+    "wrong_review": 3,
+    "wrong_auto": 1
+   },
+   "checks_failed": 5,
+   "checks_run": 23,
+   "review_items": 29,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:GOOGL",
+   "ms": 5831,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 84,
+    "correct_review": 30,
+    "missing_flagged": 8,
+    "wrong_review": 4,
+    "wrong_auto": 2,
+    "unjudged": 6
+   },
+   "checks_failed": 6,
+   "checks_run": 37,
+   "review_items": 13,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:GPC",
+   "ms": 4187,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 18,
+    "missing_flagged": 11,
+    "wrong_review": 7,
+    "correct_auto": 96,
+    "unjudged": 7,
+    "missing_silent": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 29,
+   "review_items": 24,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:HD",
+   "ms": 3607,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 59,
+    "correct_review": 74,
+    "missing_flagged": 12,
+    "wrong_review": 5,
+    "unjudged": 4,
+    "missing_silent": 4
+   },
+   "checks_failed": 13,
+   "checks_run": 40,
+   "review_items": 30,
+   "blockers": 10,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:HON",
+   "ms": 10634,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 69,
+    "correct_review": 18,
+    "unjudged": 10,
+    "wrong_review": 2,
+    "wrong_auto": 7,
+    "missing_flagged": 14,
+    "missing_silent": 9
+   },
+   "checks_failed": 2,
+   "checks_run": 14,
+   "review_items": 25,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:IBM",
+   "ms": 552,
+   "error": null,
+   "statements": [],
+   "buckets": {},
+   "checks_failed": 0,
+   "checks_run": 0,
+   "review_items": 3,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:INTC",
+   "ms": 8121,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 34,
+    "correct_auto": 82,
+    "missing_flagged": 18,
+    "wrong_auto": 6,
+    "wrong_review": 1,
+    "unjudged": 9
+   },
+   "checks_failed": 6,
+   "checks_run": 33,
+   "review_items": 34,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "ms": 6211,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 40,
+    "wrong_review": 4,
+    "missing_flagged": 23,
+    "correct_review": 77,
+    "unjudged": 2,
+    "missing_silent": 7
+   },
+   "checks_failed": 4,
+   "checks_run": 15,
+   "review_items": 39,
+   "blockers": 4,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:LMT",
+   "ms": 4621,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 72,
+    "correct_review": 44,
+    "unjudged": 4,
+    "missing_flagged": 3,
+    "wrong_review": 6,
+    "wrong_auto": 3,
+    "missing_silent": 3
+   },
+   "checks_failed": 12,
+   "checks_run": 34,
+   "review_items": 21,
+   "blockers": 9,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:LOW",
+   "ms": 5206,
+   "error": null,
+   "statements": [
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 53,
+    "correct_review": 36,
+    "missing_flagged": 55,
+    "wrong_review": 9,
+    "unjudged": 5
+   },
+   "checks_failed": 6,
+   "checks_run": 22,
+   "review_items": 21,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:META",
+   "ms": 7092,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 38,
+    "correct_auto": 88,
+    "wrong_review": 5,
+    "missing_flagged": 6,
+    "unjudged": 5
+   },
+   "checks_failed": 9,
+   "checks_run": 40,
+   "review_items": 22,
+   "blockers": 4,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:MRK",
+   "ms": 12287,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "missing_flagged": 51,
+    "wrong_review": 8,
+    "correct_auto": 67,
+    "correct_review": 12,
+    "missing_silent": 9,
+    "unjudged": 6
+   },
+   "checks_failed": 0,
+   "checks_run": 17,
+   "review_items": 25,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:MSFT",
+   "ms": 5412,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 71,
+    "correct_review": 24,
+    "missing_flagged": 52,
+    "wrong_review": 4
+   },
+   "checks_failed": 4,
+   "checks_run": 27,
+   "review_items": 7,
+   "blockers": 4,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:NFLX",
+   "ms": 4184,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_review": 28,
+    "correct_auto": 104,
+    "unjudged": 6
+   },
+   "checks_failed": 9,
+   "checks_run": 37,
+   "review_items": 16,
+   "blockers": 7,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:NKE",
+   "ms": 6025,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 64,
+    "correct_review": 18,
+    "missing_flagged": 51,
+    "wrong_auto": 3
+   },
+   "checks_failed": 2,
+   "checks_run": 17,
+   "review_items": 8,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:NVDA",
+   "ms": 4578,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 120,
+    "correct_review": 20,
+    "unjudged": 9,
+    "missing_flagged": 3,
+    "wrong_review": 3
+   },
+   "checks_failed": 2,
+   "checks_run": 40,
+   "review_items": 11,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:ODFL",
+   "ms": 1704,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 83,
+    "unjudged": 7,
+    "wrong_review": 7,
+    "wrong_auto": 1,
+    "correct_review": 20,
+    "missing_flagged": 10
+   },
+   "checks_failed": 5,
+   "checks_run": 34,
+   "review_items": 29,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:QCOM",
+   "ms": 3347,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 53,
+    "correct_auto": 69,
+    "wrong_review": 11,
+    "missing_flagged": 9,
+    "unjudged": 6
+   },
+   "checks_failed": 11,
+   "checks_run": 31,
+   "review_items": 29,
+   "blockers": 7,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:ROKU",
+   "ms": 5215,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "cash_flow",
+    "balance_sheet"
+   ],
+   "buckets": {
+    "correct_auto": 82,
+    "correct_review": 44,
+    "missing_flagged": 5,
+    "missing_silent": 6,
+    "unjudged": 10
+   },
+   "checks_failed": 11,
+   "checks_run": 37,
+   "review_items": 26,
+   "blockers": 10,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "ms": 6363,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 91,
+    "correct_review": 50,
+    "missing_flagged": 15,
+    "wrong_review": 7,
+    "unjudged": 6,
+    "missing_silent": 6
+   },
+   "checks_failed": 9,
+   "checks_run": 30,
+   "review_items": 22,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:TGT",
+   "ms": 4570,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 26,
+    "correct_review": 83,
+    "missing_flagged": 18,
+    "missing_silent": 7,
+    "wrong_review": 3
+   },
+   "checks_failed": 5,
+   "checks_run": 30,
+   "review_items": 21,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:TSLA",
+   "ms": 4911,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 29,
+    "correct_auto": 97,
+    "wrong_review": 4,
+    "missing_silent": 3,
+    "wrong_auto": 3,
+    "unjudged": 6,
+    "missing_flagged": 3
+   },
+   "checks_failed": 8,
+   "checks_run": 43,
+   "review_items": 23,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:TXN",
+   "ms": 3030,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 30,
+    "wrong_review": 6,
+    "correct_auto": 89,
+    "wrong_auto": 2,
+    "missing_flagged": 10,
+    "unjudged": 7,
+    "missing_silent": 3
+   },
+   "checks_failed": 6,
+   "checks_run": 37,
+   "review_items": 19,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:UPS",
+   "ms": 8805,
+   "error": null,
+   "statements": [
+    "cash_flow",
+    "balance_sheet",
+    "income_statement"
+   ],
+   "buckets": {
+    "correct_auto": 42,
+    "correct_review": 87,
+    "missing_flagged": 8,
+    "unjudged": 2,
+    "wrong_review": 8,
+    "missing_silent": 6
+   },
+   "checks_failed": 3,
+   "checks_run": 27,
+   "review_items": 33,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "sec:YETI",
+   "ms": 3985,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 9,
+    "correct_auto": 113,
+    "unjudged": 12,
+    "wrong_auto": 2,
+    "wrong_review": 1,
+    "missing_flagged": 3
+   },
+   "checks_failed": 4,
+   "checks_run": 37,
+   "review_items": 14,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  }
+ ],
+ "errors": [
+  {
+   "doc": "sec:CROX",
+   "line": "receivables",
+   "period": "2025-12-31/I",
+   "truth": "300273000",
+   "predicted": "333055000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:7",
+    "confidence:balance_sheet:9",
+    "confidence:balance_sheet:10",
+    "check:bs_current_assets:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CROX",
+   "line": "receivables",
+   "period": "2024-12-31/I",
+   "truth": "279861000",
+   "predicted": "283907000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:7",
+    "confidence:balance_sheet:9",
+    "confidence:balance_sheet:10",
+    "check:bs_current_assets:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CROX",
+   "line": "other_current_assets",
+   "period": "2025-12-31/I",
+   "truth": "86569000",
+   "predicted": "53787000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_current_assets:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CROX",
+   "line": "other_current_assets",
+   "period": "2024-12-31/I",
+   "truth": "55669000",
+   "predicted": "51623000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_current_assets:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "accrued_liabilities",
+   "period": "2026-07-25/I",
+   "truth": "4247000000",
+   "predicted": "6586000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2026-07-25/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "accrued_liabilities",
+   "period": "2025-07-26/I",
+   "truth": "5468000000",
+   "predicted": "7633000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-07-26/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "deferred_revenue_current",
+   "period": "2026-07-25/I",
+   "truth": "16988000000",
+   "predicted": "29781000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2026-07-25/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "deferred_revenue_current",
+   "period": "2025-07-26/I",
+   "truth": "16416000000",
+   "predicted": "28779000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-07-26/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "other_noncurrent_liabilities",
+   "period": "2026-07-25/I",
+   "truth": "18455000000",
+   "predicted": "3323000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2026-07-25/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-07-26/I",
+   "truth": "17523000000",
+   "predicted": "2995000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-07-26/I"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "cf_other_financing",
+   "period": "2026-07-25/12M",
+   "truth": "-1906000000",
+   "predicted": "20857000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:32",
+    "confidence:cash_flow:34",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:44"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "cf_other_financing",
+   "period": "2025-07-26/12M",
+   "truth": "-1302000000",
+   "predicted": "27568000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:32",
+    "confidence:cash_flow:34",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:44"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "cf_other_financing",
+   "period": "2024-07-27/12M",
+   "truth": "-1029000000",
+   "predicted": "43130000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:32",
+    "confidence:cash_flow:34",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:44"
+   ]
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "cash_end",
+   "period": "2025-07-26/12M",
+   "truth": "8910000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "cash_end",
+   "period": "2024-07-27/12M",
+   "truth": "8842000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CSCO",
+   "line": "cash_end",
+   "period": "2026-07-25/12M",
+   "truth": "7227000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "accrued_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "11607000000",
+   "predicted": "10763000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_current_liabilities:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "accrued_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "10358000000",
+   "predicted": "8486000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_current_liabilities:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "truth": "189031000000",
+   "predicted": "187432000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:5",
+    "confidence:income_statement:6"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "revenue",
+   "period": "2024-12-31/12M",
+   "truth": "202792000000",
+   "predicted": "198010000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:5",
+    "confidence:income_statement:6"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "200949000000",
+   "predicted": "202044000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:5",
+    "confidence:income_statement:6"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "total_costs",
+   "period": "2025-12-31/12M",
+   "truth": "169288000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "total_costs",
+   "period": "2024-12-31/12M",
+   "truth": "175286000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "total_costs",
+   "period": "2023-12-31/12M",
+   "truth": "171365000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "6.65",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "9.76",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "11.41",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "6.63",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "9.72",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "11.36",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "cash_end",
+   "period": "2024-12-31/12M",
+   "truth": "8262000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "cash_end",
+   "period": "2023-12-31/12M",
+   "truth": "9275000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "cash_end",
+   "period": "2025-12-31/12M",
+   "truth": "7285000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:DE",
+   "line": "deferred_tax_assets",
+   "period": "2025-11-02/I",
+   "truth": "2284000000",
+   "predicted": "2718000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "deferred_tax_assets",
+   "period": "2024-10-27/I",
+   "truth": "2086000000",
+   "predicted": "2564000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_equity_parent",
+   "period": "2025-11-02/I",
+   "truth": "25950000000",
+   "predicted": "25956000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_equity_parent",
+   "period": "2024-10-27/I",
+   "truth": "22836000000",
+   "predicted": "22843000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:balance_sheet"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_equity",
+   "period": "2025-11-02/I",
+   "truth": "25956000000",
+   "predicted": "25962000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "calculated",
+   "flags": [
+    "scale:balance_sheet",
+    "check:bs_liab_plus_equity:2025-11-02/I"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_equity",
+   "period": "2024-10-27/I",
+   "truth": "22843000000",
+   "predicted": "22850000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "calculated",
+   "flags": [
+    "scale:balance_sheet",
+    "check:bs_liab_plus_equity:2024-10-27/I"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "revenue",
+   "period": "2025-11-02/12M",
+   "truth": "45684000000",
+   "predicted": "38917000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "revenue",
+   "period": "2024-10-27/12M",
+   "truth": "51716000000",
+   "predicted": "44759000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "revenue",
+   "period": "2023-10-29/12M",
+   "truth": "61251000000",
+   "predicted": "55565000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "other_opex",
+   "period": "2025-11-02/12M",
+   "truth": "1124000000",
+   "predicted": "12379000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:16",
+    "confidence:income_statement:19"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "other_opex",
+   "period": "2024-10-27/12M",
+   "truth": "1257000000",
+   "predicted": "17551000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:16",
+    "confidence:income_statement:19",
+    "confidence:income_statement:20"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "other_opex",
+   "period": "2023-10-29/12M",
+   "truth": "1292000000",
+   "predicted": "24466000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement",
+    "confidence:income_statement:16",
+    "confidence:income_statement:19",
+    "confidence:income_statement:20"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_costs",
+   "period": "2025-11-02/12M",
+   "truth": "39427000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_costs",
+   "period": "2024-10-27/12M",
+   "truth": "42510000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:DE",
+   "line": "total_costs",
+   "period": "2023-10-29/12M",
+   "truth": "48232000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:DE",
+   "line": "other_nonoperating",
+   "period": "2024-10-27/12M",
+   "truth": "-24000000",
+   "predicted": "1198000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "sec:DE",
+   "line": "other_nonoperating",
+   "period": "2023-10-29/12M",
+   "truth": "7000000",
+   "predicted": "1003000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "scale:income_statement"
+   ]
+  },
+  {
+   "doc": "sec:DECK",
+   "line": "other_current_assets",
+   "period": "2026-03-31/I",
+   "truth": "137175000",
+   "predicted": "135350000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_assets:2026-03-31/I"
+   ]
+  },
+  {
+   "doc": "sec:DECK",
+   "line": "other_current_assets",
+   "period": "2025-03-31/I",
+   "truth": "143189000",
+   "predicted": "106576000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_assets:2025-03-31/I"
+   ]
+  },
+  {
+   "doc": "sec:DECK",
+   "line": "accrued_liabilities",
+   "period": "2026-03-31/I",
+   "truth": "156072000",
+   "predicted": "119597000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_current_liabilities:2026-03-31/I"
+   ]
+  },
+  {
+   "doc": "sec:DECK",
+   "line": "accrued_liabilities",
+   "period": "2025-03-31/I",
+   "truth": "148716000",
+   "predicted": "125417000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_current_liabilities:2025-03-31/I"
+   ]
+  },
+  {
+   "doc": "sec:DECK",
+   "line": "other_noncurrent_liabilities",
+   "period": "2026-03-31/I",
+   "truth": "92790000",
+   "predicted": "66477000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:DECK",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-03-31/I",
+   "truth": "64776000",
+   "predicted": "51189000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:FDX",
+   "line": "other_nonoperating",
+   "period": "2026-05-31/12M",
+   "truth": "-22000000",
+   "predicted": "330000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2026-05-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:FDX",
+   "line": "other_nonoperating",
+   "period": "2025-05-31/12M",
+   "truth": "-63000000",
+   "predicted": "224000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2025-05-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:FDX",
+   "line": "other_nonoperating",
+   "period": "2024-05-31/12M",
+   "truth": "-70000000",
+   "predicted": "277000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2024-05-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:FDX",
+   "line": "cf_working_capital",
+   "period": "2024-05-31/12M",
+   "truth": "-313000000",
+   "predicted": "-3431000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:GOOGL",
+   "line": "accrued_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "66297000000",
+   "predicted": "84881000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:GOOGL",
+   "line": "accrued_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "73103000000",
+   "predicted": "93498000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:GOOGL",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "13476000000",
+   "predicted": "4694000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:GOOGL",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "17980000000",
+   "predicted": "8449000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:GOOGL",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "84800000000",
+   "predicted": "0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:GOOGL",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "93126000000",
+   "predicted": "0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "other_current_assets",
+   "period": "2025-12-31/I",
+   "truth": "1644620000",
+   "predicted": "7716616000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:7"
+   ]
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "other_current_assets",
+   "period": "2024-12-31/I",
+   "truth": "1675310000",
+   "predicted": "7189737000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:7"
+   ]
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "4422991000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "4337407000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "253961000",
+   "predicted": "7442024000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:7",
+    "confidence:income_statement:9"
+   ]
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "213520000",
+   "predicted": "6886421000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:7",
+    "confidence:income_statement:9"
+   ]
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "0",
+   "predicted": "6193090000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:7",
+    "confidence:income_statement:9"
+   ]
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-11261000",
+   "predicted": "-178148000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:37"
+   ]
+  },
+  {
+   "doc": "sec:GPC",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-11042000",
+   "predicted": "-296660000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:37"
+   ]
+  },
+  {
+   "doc": "sec:HD",
+   "line": "st_debt",
+   "period": "2026-02-01/I",
+   "truth": "9431000000",
+   "predicted": "4464000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:st_debt:2025-02-02/I:2026-02-01/I"
+   ]
+  },
+  {
+   "doc": "sec:HD",
+   "line": "st_debt",
+   "period": "2025-02-02/I",
+   "truth": "4898000000",
+   "predicted": "316000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:st_debt:2025-02-02/I:2026-02-01/I"
+   ]
+  },
+  {
+   "doc": "sec:HD",
+   "line": "cf_working_capital",
+   "period": "2024-01-28/12M",
+   "truth": "-1490000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HD",
+   "line": "acquisitions",
+   "period": "2024-01-28/12M",
+   "truth": "-1514000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HD",
+   "line": "stock_issued",
+   "period": "2024-01-28/12M",
+   "truth": "323000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HD",
+   "line": "dividends_paid",
+   "period": "2024-01-28/12M",
+   "truth": "-8383000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HD",
+   "line": "cf_other_financing",
+   "period": "2026-02-01/12M",
+   "truth": "-145000000",
+   "predicted": "-8983000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:33",
+    "confidence:cash_flow:34"
+   ]
+  },
+  {
+   "doc": "sec:HD",
+   "line": "cf_other_financing",
+   "period": "2025-02-02/12M",
+   "truth": "-301000000",
+   "predicted": "-8835000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:33",
+    "confidence:cash_flow:34"
+   ]
+  },
+  {
+   "doc": "sec:HD",
+   "line": "cf_other_financing",
+   "period": "2024-01-28/12M",
+   "truth": "-156000000",
+   "predicted": "-8216000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2024-02-01/12M",
+    "confidence:cash_flow:33",
+    "confidence:cash_flow:34"
+   ]
+  },
+  {
+   "doc": "sec:HON",
+   "line": "deferred_tax_assets",
+   "period": "2025-12-31/I",
+   "truth": "199000000",
+   "predicted": "1776000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_assets_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:HON",
+   "line": "deferred_tax_assets",
+   "period": "2024-12-31/I",
+   "truth": "235000000",
+   "predicted": "1816000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_assets_parts:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:HON",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "truth": "7439000000",
+   "predicted": "1546000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "truth": "5598000000",
+   "predicted": "1325000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "10157000000",
+   "predicted": "-32872000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "9695000000",
+   "predicted": "-29683000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "cogs",
+   "period": "2025-12-31/12M",
+   "truth": "23613000000",
+   "predicted": "16153000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "cogs",
+   "period": "2024-12-31/12M",
+   "truth": "21360000000",
+   "predicted": "15017000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "cogs",
+   "period": "2023-12-31/12M",
+   "truth": "20637000000",
+   "predicted": "14836000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "discontinued_ops",
+   "period": "2025-12-31/12M",
+   "truth": "304000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "discontinued_ops",
+   "period": "2024-12-31/12M",
+   "truth": "745000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "discontinued_ops",
+   "period": "2023-12-31/12M",
+   "truth": "743000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "7.40",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "8.76",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "8.53",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "7.36",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "8.71",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:HON",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "8.47",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "accrued_liabilities",
+   "period": "2025-12-27/I",
+   "truth": "4594000000",
+   "predicted": "19194000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "accrued_liabilities",
+   "period": "2024-12-28/I",
+   "truth": "5099000000",
+   "predicted": "19381000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "total_equity_parent",
+   "period": "2025-12-27/I",
+   "truth": "114281000000",
+   "predicted": "126360000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "total_equity_parent",
+   "period": "2024-12-28/I",
+   "truth": "99270000000",
+   "predicted": "105032000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "total_equity",
+   "period": "2025-12-27/I",
+   "truth": "126360000000",
+   "predicted": "138439000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "calculated",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "total_equity",
+   "period": "2024-12-28/I",
+   "truth": "105032000000",
+   "predicted": "110794000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "calculated",
+   "flags": []
+  },
+  {
+   "doc": "sec:INTC",
+   "line": "other_opex",
+   "period": "2023-12-30/12M",
+   "truth": "-62000000",
+   "predicted": "62000000",
+   "bucket": "wrong_review",
+   "kind": "sign",
+   "status": "normalized",
+   "flags": [
+    "suspicious:jump:other_opex:2023-12-30/12M:2024-12-28/12M"
+   ]
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "receivables",
+   "period": "2025-12-28/I",
+   "truth": "17178000000",
+   "predicted": "21331000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:6",
+    "confidence:balance_sheet:9"
+   ]
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "receivables",
+   "period": "2024-12-29/I",
+   "truth": "14842000000",
+   "predicted": "18927000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:6",
+    "confidence:balance_sheet:9"
+   ]
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-28/I",
+   "truth": "17311000000",
+   "predicted": "9868000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-12-28/I"
+   ]
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-29/I",
+   "truth": "25194000000",
+   "predicted": "17549000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-12-29/I"
+   ]
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "discontinued_ops",
+   "period": "2023-12-31/12M",
+   "truth": "21827000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "eps_basic",
+   "period": "2025-12-28/12M",
+   "truth": "11.13",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "eps_basic",
+   "period": "2024-12-29/12M",
+   "truth": "5.84",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "13.88",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "eps_diluted",
+   "period": "2025-12-28/12M",
+   "truth": "11.03",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "eps_diluted",
+   "period": "2024-12-29/12M",
+   "truth": "5.79",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:JNJ",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "13.72",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "112000000",
+   "predicted": "67429000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "confidence:income_statement:11"
+   ]
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "83000000",
+   "predicted": "64113000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "confidence:income_statement:11"
+   ]
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "28000000",
+   "predicted": "59092000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "confidence:income_statement:11"
+   ]
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "other_nonoperating",
+   "period": "2025-12-31/12M",
+   "truth": "183000000",
+   "predicted": "112000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "other_nonoperating",
+   "period": "2024-12-31/12M",
+   "truth": "181000000",
+   "predicted": "83000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "other_nonoperating",
+   "period": "2023-12-31/12M",
+   "truth": "64000000",
+   "predicted": "28000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "income_tax",
+   "period": "2025-12-31/12M",
+   "truth": "-905000000",
+   "predicted": "905000000",
+   "bucket": "wrong_auto",
+   "kind": "sign",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "income_tax",
+   "period": "2024-12-31/12M",
+   "truth": "-884000000",
+   "predicted": "884000000",
+   "bucket": "wrong_auto",
+   "kind": "sign",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "income_tax",
+   "period": "2023-12-31/12M",
+   "truth": "-1178000000",
+   "predicted": "1178000000",
+   "bucket": "wrong_auto",
+   "kind": "sign",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-285000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-563000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:LMT",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "909000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "other_current_assets",
+   "period": "2026-01-30/I",
+   "truth": "1213000000",
+   "predicted": "18513000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:8"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "other_current_assets",
+   "period": "2025-01-31/I",
+   "truth": "722000000",
+   "predicted": "18131000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:8"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "deferred_revenue_current",
+   "period": "2026-01-30/I",
+   "truth": "1477000000",
+   "predicted": "3778000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2026-01-30/I"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "deferred_revenue_current",
+   "period": "2025-01-31/I",
+   "truth": "1358000000",
+   "predicted": "2870000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-01-31/I"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "other_noncurrent_liabilities",
+   "period": "2026-01-30/I",
+   "truth": "2026000000",
+   "predicted": "764000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2026-01-30/I"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-01-31/I",
+   "truth": "2047000000",
+   "predicted": "779000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-01-31/I"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "cf_other_financing",
+   "period": "2026-01-30/12M",
+   "truth": "-68000000",
+   "predicted": "4270000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:38"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "cf_other_financing",
+   "period": "2025-01-31/12M",
+   "truth": "-42000000",
+   "predicted": "-2608000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:38"
+   ]
+  },
+  {
+   "doc": "sec:LOW",
+   "line": "cf_other_financing",
+   "period": "2024-02-02/12M",
+   "truth": "-21000000",
+   "predicted": "431000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:35",
+    "confidence:cash_flow:38"
+   ]
+  },
+  {
+   "doc": "sec:META",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "25258000000",
+   "predicted": "4253000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:META",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "12703000000",
+   "predicted": "2716000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:META",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-18704000000",
+   "predicted": "-44952000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36"
+   ]
+  },
+  {
+   "doc": "sec:META",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-16016000000",
+   "predicted": "-46141000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36"
+   ]
+  },
+  {
+   "doc": "sec:META",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-8181000000",
+   "predicted": "-27955000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "other_noncurrent_assets",
+   "period": "2025-12-31/I",
+   "truth": "18818000000",
+   "predicted": "537000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I",
+    "confidence:balance_sheet:14"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "other_noncurrent_assets",
+   "period": "2024-12-31/I",
+   "truth": "16044000000",
+   "predicted": "546000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I",
+    "confidence:balance_sheet:14"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "truth": "136866000000",
+   "predicted": "1492000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "total_assets",
+   "period": "2024-12-31/I",
+   "truth": "117106000000",
+   "predicted": "1009000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "truth": "2589000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "truth": "2649000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "7688000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "6465000000",
+   "predicted": "0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "7.30",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "6.76",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "0.14",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "7.28",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "6.74",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "0.14",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-7086000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-3849000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MRK",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-1825000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:MSFT",
+   "line": "other_current_liabilities",
+   "period": "2026-06-30/I",
+   "truth": "26738000000",
+   "predicted": "99703000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:35"
+   ]
+  },
+  {
+   "doc": "sec:MSFT",
+   "line": "other_current_liabilities",
+   "period": "2025-06-30/I",
+   "truth": "25020000000",
+   "predicted": "89575000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:35"
+   ]
+  },
+  {
+   "doc": "sec:MSFT",
+   "line": "other_noncurrent_liabilities",
+   "period": "2026-06-30/I",
+   "truth": "96511000000",
+   "predicted": "65117000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2026-06-30/I"
+   ]
+  },
+  {
+   "doc": "sec:MSFT",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-06-30/I",
+   "truth": "73882000000",
+   "predicted": "45186000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-06-30/I"
+   ]
+  },
+  {
+   "doc": "sec:NKE",
+   "line": "other_nonoperating",
+   "period": "2026-05-31/12M",
+   "truth": "-103000000",
+   "predicted": "-53000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:NKE",
+   "line": "other_nonoperating",
+   "period": "2025-05-31/12M",
+   "truth": "-183000000",
+   "predicted": "-76000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:NKE",
+   "line": "other_nonoperating",
+   "period": "2024-05-31/12M",
+   "truth": "-389000000",
+   "predicted": "-228000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:NVDA",
+   "line": "cf_other_financing",
+   "period": "2026-01-25/12M",
+   "truth": "-7957000000",
+   "predicted": "-47399000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:31",
+    "confidence:cash_flow:32",
+    "confidence:cash_flow:33"
+   ]
+  },
+  {
+   "doc": "sec:NVDA",
+   "line": "cf_other_financing",
+   "period": "2025-01-26/12M",
+   "truth": "-6930000000",
+   "predicted": "-40146000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:31",
+    "confidence:cash_flow:32",
+    "confidence:cash_flow:33"
+   ]
+  },
+  {
+   "doc": "sec:NVDA",
+   "line": "cf_other_financing",
+   "period": "2024-01-28/12M",
+   "truth": "-2784000000",
+   "predicted": "-11914000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:31",
+    "confidence:cash_flow:32",
+    "confidence:cash_flow:33"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "receivables",
+   "period": "2024-12-31/I",
+   "truth": "501554000",
+   "predicted": "527691000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:5",
+    "confidence:balance_sheet:6",
+    "confidence:balance_sheet:7"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "other_current_assets",
+   "period": "2024-12-31/I",
+   "truth": "89318000",
+   "predicted": "84316000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "32863000",
+   "predicted": "3770661000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:5",
+    "confidence:income_statement:6",
+    "confidence:income_statement:7",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "confidence:income_statement:10",
+    "confidence:income_statement:12",
+    "confidence:income_statement:13"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "24373000",
+   "predicted": "3926244000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:5",
+    "confidence:income_statement:6",
+    "confidence:income_statement:7",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "confidence:income_statement:10",
+    "confidence:income_statement:12",
+    "confidence:income_statement:13"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "4831000",
+   "predicted": "3901044000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:5",
+    "confidence:income_statement:6",
+    "confidence:income_statement:7",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9",
+    "confidence:income_statement:10",
+    "confidence:income_statement:12",
+    "confidence:income_statement:13"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-6328000",
+   "predicted": "-728113000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:29",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-22300000",
+   "predicted": "-983922000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:29",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-13126000",
+   "predicted": "-459891000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:29",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "deferred_revenue_current",
+   "period": "2025-09-28/I",
+   "truth": "358000000",
+   "predicted": "429000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-09-28/I"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "deferred_revenue_current",
+   "period": "2024-09-29/I",
+   "truth": "297000000",
+   "predicted": "385000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2024-09-29/I"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-09-28/I",
+   "truth": "71000000",
+   "predicted": "4911000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-09-28/I"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-09-29/I",
+   "truth": "88000000",
+   "predicted": "5018000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-09-29/I"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "other_opex",
+   "period": "2025-09-28/12M",
+   "truth": "-39000000",
+   "predicted": "39000000",
+   "bucket": "wrong_review",
+   "kind": "sign",
+   "status": "extracted",
+   "flags": [
+    "confidence:income_statement:11"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "other_opex",
+   "period": "2024-09-29/12M",
+   "truth": "-179000000",
+   "predicted": "179000000",
+   "bucket": "wrong_review",
+   "kind": "sign",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2024-09-29/12M",
+    "confidence:income_statement:11"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "other_opex",
+   "period": "2023-09-24/12M",
+   "truth": "-862000000",
+   "predicted": "862000000",
+   "bucket": "wrong_review",
+   "kind": "sign",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-09-24/12M",
+    "confidence:income_statement:11"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "cf_other_financing",
+   "period": "2025-09-28/12M",
+   "truth": "-1126000000",
+   "predicted": "-9917000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:47",
+    "confidence:cash_flow:49",
+    "confidence:cash_flow:53"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "cf_other_financing",
+   "period": "2024-09-29/12M",
+   "truth": "-949000000",
+   "predicted": "-5051000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:47",
+    "confidence:cash_flow:49",
+    "confidence:cash_flow:53"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "cf_other_financing",
+   "period": "2023-09-24/12M",
+   "truth": "-540000000",
+   "predicted": "-3571000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:47",
+    "confidence:cash_flow:49",
+    "confidence:cash_flow:53"
+   ]
+  },
+  {
+   "doc": "sec:QCOM",
+   "line": "cash_end",
+   "period": "2025-09-28/12M",
+   "truth": "2323000000",
+   "predicted": "7843000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:cross_cash:2025-09-28/12M"
+   ]
+  },
+  {
+   "doc": "sec:ROKU",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "0.60",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:ROKU",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "-0.89",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:ROKU",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "-5.01",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:ROKU",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "0.59",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:ROKU",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "-0.89",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:ROKU",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "-5.01",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "deferred_revenue_current",
+   "period": "2025-09-28/I",
+   "truth": "1840600000.0",
+   "predicted": "7599500000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-09-28/I"
+   ]
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "deferred_revenue_current",
+   "period": "2024-09-29/I",
+   "truth": "1781200000.0",
+   "predicted": "7730300000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2024-09-29/I"
+   ]
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-09-28/I",
+   "truth": "5772600000.0",
+   "predicted": "577800000.0",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-09-28/I"
+   ]
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-09-29/I",
+   "truth": "5963600000.0",
+   "predicted": "656200000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-09-29/I"
+   ]
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_net_income",
+   "period": "2025-09-28/12M",
+   "truth": "1856700000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_net_income",
+   "period": "2024-09-29/12M",
+   "truth": "3762300000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_net_income",
+   "period": "2023-10-01/12M",
+   "truth": "4124700000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_working_capital",
+   "period": "2025-09-28/12M",
+   "truth": "82300000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_working_capital",
+   "period": "2024-09-29/12M",
+   "truth": "246100000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_working_capital",
+   "period": "2023-10-01/12M",
+   "truth": "310400000.0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_other_financing",
+   "period": "2025-09-28/12M",
+   "truth": "-96700000.0",
+   "predicted": "1651800000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:38",
+    "confidence:cash_flow:43"
+   ]
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_other_financing",
+   "period": "2024-09-29/12M",
+   "truth": "-111000000.0",
+   "predicted": "1884300000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:38",
+    "confidence:cash_flow:43"
+   ]
+  },
+  {
+   "doc": "sec:SBUX",
+   "line": "cf_other_financing",
+   "period": "2023-10-01/12M",
+   "truth": "-100400000.0",
+   "predicted": "1397400000.0",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:38",
+    "confidence:cash_flow:43"
+   ]
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "dna_opex",
+   "period": "2024-02-03/12M",
+   "truth": "2415000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "cf_working_capital",
+   "period": "2026-01-31/12M",
+   "truth": "-559000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "cf_working_capital",
+   "period": "2025-02-01/12M",
+   "truth": "-154000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "cf_working_capital",
+   "period": "2024-02-03/12M",
+   "truth": "312000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "debt_issued",
+   "period": "2024-02-03/12M",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "debt_repaid",
+   "period": "2024-02-03/12M",
+   "truth": "-147000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "buybacks",
+   "period": "2024-02-03/12M",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "cf_other_financing",
+   "period": "2026-01-31/12M",
+   "truth": "-67000000",
+   "predicted": "-134000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2026-01-31/12M",
+    "confidence:cash_flow:33",
+    "confidence:cash_flow:34",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37",
+    "suspicious:jump:cf_other_financing:2025-02-01/12M:2026-01-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "cf_other_financing",
+   "period": "2025-02-01/12M",
+   "truth": "-99000000",
+   "predicted": "-1504000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2025-02-01/12M",
+    "confidence:cash_flow:33",
+    "confidence:cash_flow:34",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37",
+    "suspicious:jump:cf_other_financing:2025-02-01/12M:2026-01-31/12M"
+   ]
+  },
+  {
+   "doc": "sec:TGT",
+   "line": "cf_other_financing",
+   "period": "2024-02-03/12M",
+   "truth": "-127000000",
+   "predicted": "-274000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2024-01-31/12M",
+    "confidence:cash_flow:33",
+    "confidence:cash_flow:34",
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37"
+   ]
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "deferred_revenue_current",
+   "period": "2025-12-31/I",
+   "truth": "3424000000",
+   "predicted": "7055000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "deferred_revenue_current",
+   "period": "2024-12-31/I",
+   "truth": "3168000000",
+   "predicted": "6485000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:bs_current_liabilities:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "16491000000",
+   "predicted": "12860000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "13812000000",
+   "predicted": "10495000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "nci_net_income",
+   "period": "2025-12-31/12M",
+   "truth": "61000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "nci_net_income",
+   "period": "2024-12-31/12M",
+   "truth": "62000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "nci_net_income",
+   "period": "2023-12-31/12M",
+   "truth": "-23000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "truth": "3794000000",
+   "predicted": "3855000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "truth": "7091000000",
+   "predicted": "7153000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:TSLA",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "truth": "14997000000",
+   "predicted": "14974000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "other_current_assets",
+   "period": "2025-12-31/I",
+   "truth": "2102000000",
+   "predicted": "6906000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:8",
+    "confidence:balance_sheet:9",
+    "confidence:balance_sheet:10",
+    "check:bs_current_assets:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "other_current_assets",
+   "period": "2024-12-31/I",
+   "truth": "1200000000",
+   "predicted": "5727000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:8",
+    "confidence:balance_sheet:9",
+    "confidence:balance_sheet:10",
+    "check:bs_current_assets:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "accrued_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "896000000",
+   "predicted": "1903000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "accrued_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "998000000",
+   "predicted": "2073000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "1539000000",
+   "predicted": "1415000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "2064000000",
+   "predicted": "1954000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:bs_liabilities_parts:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-214000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-132000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-1465000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-62000000",
+   "predicted": "-1139000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37"
+   ]
+  },
+  {
+   "doc": "sec:TXN",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-57000000",
+   "predicted": "-87000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:37"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "other_current_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "1375000000",
+   "predicted": "3275000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:21",
+    "confidence:balance_sheet:24"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "other_current_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "1437000000",
+   "predicted": "3256000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:21",
+    "confidence:balance_sheet:24"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "operating_lease_liab_noncurrent",
+   "period": "2025-12-31/I",
+   "truth": "3700000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "operating_lease_liab_noncurrent",
+   "period": "2024-12-31/I",
+   "truth": "3635000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "16227000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "16718000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "truth": "16255000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "truth": "16743000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "8163000000",
+   "predicted": "68885000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2025-12-31/12M",
+    "confidence:income_statement:4",
+    "confidence:income_statement:5",
+    "confidence:income_statement:7",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "7888000000",
+   "predicted": "71105000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2024-12-31/12M",
+    "confidence:income_statement:4",
+    "confidence:income_statement:5",
+    "confidence:income_statement:7",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "8097000000",
+   "predicted": "70354000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-12-31/12M",
+    "confidence:income_statement:4",
+    "confidence:income_statement:5",
+    "confidence:income_statement:7",
+    "confidence:income_statement:8",
+    "confidence:income_statement:9"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "14000000",
+   "predicted": "173000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2025-12-31/12M",
+    "confidence:cash_flow:33"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-209000000",
+   "predicted": "23000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2024-12-31/12M",
+    "confidence:cash_flow:33"
+   ]
+  },
+  {
+   "doc": "sec:UPS",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-432000000",
+   "predicted": "-184000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:cash_flow:2023-12-31/12M",
+    "confidence:cash_flow:33"
+   ]
+  },
+  {
+   "doc": "sec:YETI",
+   "line": "other_nonoperating",
+   "period": "2026-01-03/12M",
+   "truth": "6724000",
+   "predicted": "7167000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "sec:YETI",
+   "line": "other_nonoperating",
+   "period": "2024-12-28/12M",
+   "truth": "-12528000",
+   "predicted": "-13188000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_pretax:2024-12-28/12M"
+   ]
+  },
+  {
+   "doc": "sec:YETI",
+   "line": "other_nonoperating",
+   "period": "2023-12-30/12M",
+   "truth": "488000",
+   "predicted": "1430000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  }
+ ],
+ "provenance": {
+  "created": "2026-10-30T00:49:54+00:00",
+  "commit": "b3f00725bdfffa3772bc35979bee7b639f0a932d",
+  "dirty": true,
+  "datasets": [
+   {
+    "name": "sec-holdout",
+    "version": "8e7f8dff07628aa1",
+    "key_version": "a46739fb00bec15f",
+    "files": 90,
+    "matches_manifest": true
+   }
+  ],
+  "config": {
+   "profile": "us-commercial 2026.10.24-1+0ad0af213be8"
+  }
+ },
+ "review_items_per_document": {
+  "median": 24,
+  "mean": 23.0,
+  "median_blockers": 5
+ },
+ "mapping_by_method": {
+  "alias": [
+   3526,
+   3664
+  ],
+  "structure": [
+   345,
+   505
+  ],
+  "none": [
+   0,
+   314
+  ],
+  "fuzzy": [
+   18,
+   18
+  ]
+ }
+}

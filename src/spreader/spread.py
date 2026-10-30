@@ -49,6 +49,37 @@ def costs_shown_negative(table: StatementTable, mappings: list[RowMapping], prof
     return neg >= 3 and neg >= 2 * pos
 
 
+def _total_of_the_others(sources: list[int], by_index: dict, periods: list[Period]) -> int | None:
+    """The one row, among rows placed on the same line, that equals the sum of all the others in every period they
+    share (to printed rounding), with at least one such period non-zero; None when there is no such row.
+
+    Indentation tells a total from its parts on a printed statement. A workbook without it (the SEC's
+    Financial_Report.xlsx appends "Service: Revenues" and "Product: Revenues" under the income statement) would
+    otherwise have its parts added onto the total, doubling it (found on real workbooks, D56). A figure printed twice
+    is the same case with one part."""
+    if len(sources) < 2:
+        return None
+    for t in sources:
+        others = [i for i in sources if i != t]
+        agree = 0
+        for p in periods:
+            tv = by_index[t].values.get(p.key)
+            ov = [by_index[o].values.get(p.key) for o in others]
+            if tv is None or tv.displayed is None or any(v is None or v.displayed is None for v in ov):
+                continue
+            nums = [tv.displayed, *(v.displayed for v in ov)]  # type: ignore[union-attr]
+            places = max(max(-n.as_tuple().exponent, 0) for n in nums)  # type: ignore[operator]
+            tol = Decimal(len(others)) * Decimal("0.5") * Decimal(10) ** -places
+            if abs(tv.displayed - sum(v.displayed for v in ov)) > tol:  # type: ignore[union-attr, misc]
+                agree = -1
+                break
+            if tv.displayed != 0:
+                agree += 1
+        if agree > 0:
+            return t
+    return None
+
+
 def assemble_statement(table: StatementTable, mappings: list[RowMapping], profile: Profile) -> list[SpreadValue]:
     by_index = {r.index: r for r in table.rows}
     mapping_of = {m.row_index: m for m in mappings}
@@ -84,6 +115,14 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
     for line, idxs in feeding.items():
         ldef = profile.lines[line]
         sources = [i for i in idxs if i not in components]
+        total_row = _total_of_the_others(sources, by_index, table.periods)
+        total_note = None
+        if total_row is not None:
+            parts_rows = [i for i in sources if i != total_row]
+            total_note = (f"Row '{by_index[total_row].label}' equals the sum of the other {len(parts_rows)} row(s) "
+                          f"placed on this line ({', '.join(repr(by_index[i].label) for i in parts_rows[:3])}) in every "
+                          "period: it is their total, so they are its parts and are not added again")
+            sources = [total_row]
         for period in table.periods:
             parts = [(i, by_index[i].values.get(period.key)) for i in sources]
             parts = [(i, v) for i, v in parts if v is not None and v.displayed is not None]
@@ -100,6 +139,8 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
                 total += v.displayed
             if len(parts) > 1:
                 steps.append(ProvenanceStep(kind="sum", detail=f"Added {len(parts)} rows: {_fmt(total)}"))
+            if total_note:
+                steps.append(ProvenanceStep(kind="sum", detail=total_note))
             status = ValueStatus.EXTRACTED if len(parts) == 1 else ValueStatus.NORMALIZED
             if ldef.deduction and flip_costs:
                 total = -total
