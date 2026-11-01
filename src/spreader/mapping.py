@@ -15,6 +15,7 @@ Numbers never pass through a model; a model only ever picks a line id from a clo
 
 from __future__ import annotations
 
+import re
 from collections.abc import Callable
 from dataclasses import dataclass
 
@@ -50,6 +51,17 @@ class MemoryKey:
 Memory = dict[MemoryKey, str]  # -> canonical line id ("" means "exclude this row")
 CompanyMemory = dict[tuple[str, str, str], str]  # (statement, label, section) -> line, from approved spreads
 ModelMapper = Callable[[StatementTable, StatementRow, list[LineDef]], RowMapping | None]
+
+
+# The parent's own equity total, named after the company ("Total AIG shareholders' equity", "FHN shareholders'
+# equity"): no alias list can hold every company name, so the shape decides. Anything naming liabilities,
+# noncontrolling interests or preferred stock, or joining two things with "and", is some other total.
+_OWN_EQUITY = re.compile(r"^(total )?[a-z0-9 ]{2,60} (stockholders|shareholders) equity( deficit)?$")
+_NOT_OWN_EQUITY = re.compile(r"\b(liabilities|noncontrolling|non controlling|preferred|and|including|total equity)\b")
+
+
+def _own_equity_total(row: StatementRow, lab: str) -> bool:
+    return row.role is RowRole.TOTAL and bool(_OWN_EQUITY.match(lab)) and not _NOT_OWN_EQUITY.search(lab)
 
 
 def _unit_ok(line: LineDef, row: StatementRow) -> bool:
@@ -142,6 +154,12 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
                               candidates=[(ln.id, 0.9) for _, ln in wild[1:4]],
                               reason=f"'{lab}' matches an alias pattern of {best.label}.", rule="alias.pattern")
 
+    if _own_equity_total(row, lab) and any(ln.id == "total_equity_parent" for ln in lines):
+        return RowMapping(row_index=row.index, canonical="total_equity_parent", method=MapMethod.STRUCTURE,
+                          confidence=calibrated("structure.own_equity_total"),
+                          reason=f"'{lab}' is a total of the company's own shareholders' equity, named after the company.",
+                          rule="structure.own_equity_total")
+
     choices = {(ln.id, a): a for ln in lines for a in ln.aliases if "*" not in a}
     if choices:
         hits = process.extract(lab, choices, scorer=fuzz.token_sort_ratio, limit=3)
@@ -182,7 +200,7 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
         if row.role is not RowRole.TOTAL:
             continue
         m = out[row.index]
-        if m.method not in (MapMethod.STRUCTURE, MapMethod.NONE, MapMethod.FUZZY):
+        if m.method not in (MapMethod.STRUCTURE, MapMethod.NONE, MapMethod.FUZZY) or m.rule == "structure.own_equity_total":
             continue
         targets = {out[c].canonical for c in row.children if c in out and out[c].canonical}
         if len(targets) >= 2:

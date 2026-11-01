@@ -883,3 +883,39 @@ platform; fixing them exposed two more hidden error sources and a regression fro
   values an independent check confirms, are the route to Devin's target of under 0.2% silent errors.
 - **Tests.** `tests/test_answer_key_signs.py` (5), `tests/test_tax_sign.py` (5), `tests/test_parent_only.py` (3).
   Checked on the previous code: 10 of the 13 fail; the other three guard behaviour that was already right.
+
+**D58. Printed subtotals no longer set aside while a template total stays blank: the template's own totals under
+unknown wordings are placed, and one still set aside goes to a person.**
+- **Asked by Devin**: flag every missing value, toward under 0.2% silent errors (D57's next step).
+- **Traced first** (dev sets only, holdout untouched). Of the 259 silent blanks on the three dev sets, 126 were numbers
+  not printed in the chosen table (mostly lines the key adds up from several rows), 46 rows placed on a neighbouring
+  line, 51 rows inside a placed total, 6 rows left unplaced and 30 rows set aside. A blanket "flag every blank line" rule was simulated: a
+  skipped check per missing input would have caught 68 of the 259 for 599 review items, 410 of them pointing at nothing
+  the key has; flagging every blank critical line, 52 for 621 items. Neither was built: a reviewer drowned in false
+  alarms stops reading them.
+- **The set-aside rows.** 42 printed subtotals were left out as "a subtotal of rows placed on other lines"
+  (`structure.cross_line_subtotal`); 13 of them hid 32 blank values. They were the template's own totals under
+  wordings no alias knew: "Earnings/(loss) from operations" and "... before income taxes" (Boeing), "Cash provided by
+  operations" and "Cash and equivalents increase (decrease)" (McDonald's), "Net income before allocation to
+  noncontrolling interests" (Pfizer), "Total liabilities, noncontrolling interests and shareholders' equity" (Hasbro),
+  "Total revenue, net of interest expense" (Bank of America); and parent-equity totals named after the company
+  ("Total AIG shareholders' equity", "FHN shareholders' equity"). The wordings are aliases now; the company-named
+  equity total is recognised by its shape (`mapping._own_equity_total`, rule `structure.own_equity_total`: a total
+  ending in "stockholders'/shareholders' equity" that names no liabilities, noncontrolling interests, preferred stock
+  or "and"). That rule has no measured accuracy yet, so its placements go to review.
+- **The safety net** (`review.py`). A subtotal still set aside while a critical total of its statement (a result, an
+  equity total, a total_* line or a cash-flow total; current assets and liabilities excepted, since unclassified
+  balance sheets print none) is blank in its columns raises a warning naming the blank lines (`set_aside:` items). A wider
+  version (any blank critical line) fired 18 times in 53 dev documents after the alias fixes; mean review items per document rose by 0.4 to
+  0.7 on every set, including the new rule's placements.
+- **Measured** against the last commit (5d00382), values right / accepted alone wrong / blank with no flag:
+  SEC dev 3,629 -> 3,664, 51 of 2,548 -> 49 of 2,541, 102 -> 78; SEC holdout 3,247 -> 3,249, 29 -> 29 of 2,167,
+  83 -> 67; banks dev 846 -> 853, 31 -> 31, 68 -> 61; banks holdout 856 -> 856, 35 -> 35, 177 -> 174; insurers dev
+  720 -> 725, 20 of 666 -> 20 of 664, 89 -> 82; insurers holdout 924 -> 924, 50 -> 50, 160 -> 154. No value newly
+  wrong without review on any set (Hasbro's total equity, silently wrong before, is now caught). Release gate passed,
+  28 of 28 manifests match.
+- **Not done.** The bank and insurer holdouts barely moved: their blanks are mostly rows placed on a neighbouring line
+  and lines the key builds from several rows, which need their own fixes. The silent error rate did not move; under
+  0.2% needs values accepted alone only when an independent check confirms them.
+- **Tests.** `tests/test_set_aside_subtotals.py` (16). Checked on the previous code: 11 fail; the other five guard
+  behaviour that was already right (other equity totals not taken as the parent's; no item when nothing is blank).

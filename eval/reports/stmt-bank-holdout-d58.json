@@ -1,0 +1,3259 @@
+{
+ "name": "stmt-bank-holdout-d58",
+ "documents": 10,
+ "crashed": 0,
+ "seconds": 333.5,
+ "profile": "us-bank 2026.10.25-bank-2+2f82c64be98d",
+ "buckets": {
+  "missing_silent": 174,
+  "correct_auto": 764,
+  "missing_flagged": 99,
+  "wrong_review": 42,
+  "unjudged": 44,
+  "correct_review": 92,
+  "wrong_auto": 35
+ },
+ "error_kinds": {
+  "value": 71,
+  "scale": 6
+ },
+ "rates": {
+  "accuracy": {
+   "n": 856,
+   "d": 1206,
+   "rate": 0.7097844112769486,
+   "low": 0.6835346246775275,
+   "high": 0.7347019444733432
+  },
+  "silent_error_rate": {
+   "n": 35,
+   "d": 799,
+   "rate": 0.04380475594493116,
+   "low": 0.03166322460045273,
+   "high": 0.060312079120729625
+  },
+  "silent_omission_rate": {
+   "n": 174,
+   "d": 1206,
+   "rate": 0.14427860696517414,
+   "low": 0.12557621749856474,
+   "high": 0.16524003481082855
+  },
+  "review_rate": {
+   "n": 134,
+   "d": 933,
+   "rate": 0.14362272240085744,
+   "low": 0.12257878635987307,
+   "high": 0.16758937013531244
+  },
+  "catch_rate": {
+   "n": 42,
+   "d": 77,
+   "rate": 0.5454545454545454,
+   "low": 0.43472886644893927,
+   "high": 0.6518602163994951
+  },
+  "unnecessary_review_rate": {
+   "n": 92,
+   "d": 856,
+   "rate": 0.10747663551401869,
+   "low": 0.088454138309481,
+   "high": 0.13000656421991516
+  },
+  "coverage": {
+   "n": 933,
+   "d": 1206,
+   "rate": 0.7736318407960199,
+   "low": 0.7491657377832507,
+   "high": 0.7963602219787546
+  }
+ },
+ "cells": {
+  "found": {
+   "ok": 2624,
+   "total": 3043
+  },
+  "value": {
+   "ok": 2611,
+   "total": 2624
+  },
+  "period": {
+   "ok": 2588,
+   "total": 2624
+  },
+  "mapping": {
+   "ok": 964,
+   "total": 1218
+  }
+ },
+ "documents_detail": [
+  {
+   "doc": "bank:C",
+   "ms": 59362,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "missing_silent": 44,
+    "correct_auto": 28,
+    "missing_flagged": 15,
+    "wrong_review": 3,
+    "unjudged": 9,
+    "correct_review": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 2,
+   "review_items": 38,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:CFG",
+   "ms": 15969,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 13,
+    "correct_auto": 96,
+    "missing_silent": 7,
+    "wrong_auto": 11,
+    "wrong_review": 6,
+    "missing_flagged": 5,
+    "unjudged": 3
+   },
+   "checks_failed": 8,
+   "checks_run": 37,
+   "review_items": 15,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "ms": 29831,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "wrong_review": 18,
+    "missing_silent": 32,
+    "correct_auto": 42,
+    "missing_flagged": 12,
+    "wrong_auto": 7
+   },
+   "checks_failed": 3,
+   "checks_run": 23,
+   "review_items": 28,
+   "blockers": 6,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "ms": 37492,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 102,
+    "unjudged": 10,
+    "correct_review": 24,
+    "missing_silent": 6,
+    "missing_flagged": 6,
+    "wrong_review": 3
+   },
+   "checks_failed": 0,
+   "checks_run": 37,
+   "review_items": 29,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:HWC",
+   "ms": 19177,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "wrong_auto": 2,
+    "correct_auto": 65,
+    "missing_silent": 42,
+    "unjudged": 2
+   },
+   "checks_failed": 0,
+   "checks_run": 21,
+   "review_items": 18,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:JPM",
+   "ms": 35525,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 4,
+    "wrong_auto": 2,
+    "correct_auto": 83,
+    "missing_silent": 11,
+    "missing_flagged": 26,
+    "unjudged": 3,
+    "wrong_review": 3
+   },
+   "checks_failed": 5,
+   "checks_run": 26,
+   "review_items": 22,
+   "blockers": 3,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:MTB",
+   "ms": 26689,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 14,
+    "correct_auto": 92,
+    "wrong_auto": 2,
+    "missing_silent": 4,
+    "missing_flagged": 19,
+    "unjudged": 6,
+    "wrong_review": 2
+   },
+   "checks_failed": 5,
+   "checks_run": 31,
+   "review_items": 26,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:PB",
+   "ms": 8418,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_review": 4,
+    "correct_auto": 89,
+    "wrong_auto": 3,
+    "missing_silent": 3,
+    "missing_flagged": 6,
+    "unjudged": 3
+   },
+   "checks_failed": 4,
+   "checks_run": 31,
+   "review_items": 28,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:PNC",
+   "ms": 60681,
+   "error": null,
+   "statements": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 93,
+    "missing_silent": 12,
+    "wrong_auto": 2,
+    "correct_review": 6
+   },
+   "checks_failed": 3,
+   "checks_run": 26,
+   "review_items": 12,
+   "blockers": 0,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  },
+  {
+   "doc": "bank:TFC",
+   "ms": 38865,
+   "error": null,
+   "statements": [
+    "balance_sheet",
+    "income_statement",
+    "cash_flow"
+   ],
+   "buckets": {
+    "correct_auto": 74,
+    "wrong_auto": 6,
+    "missing_silent": 13,
+    "unjudged": 8,
+    "correct_review": 25,
+    "missing_flagged": 10,
+    "wrong_review": 7
+   },
+   "checks_failed": 7,
+   "checks_run": 28,
+   "review_items": 28,
+   "blockers": 2,
+   "expected_review_missing": [],
+   "forbidden_present": []
+  }
+ ],
+ "errors": [
+  {
+   "doc": "bank:C",
+   "line": "deposits",
+   "period": "2025-12-31/I",
+   "truth": "1403573000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "deposits",
+   "period": "2024-12-31/I",
+   "truth": "1284458000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "truth": "51878000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "truth": "48505000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "truth": "315827000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "truth": "287300000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "2443380000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "2143579000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "preferred_equity",
+   "period": "2025-12-31/I",
+   "truth": "20050000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "preferred_equity",
+   "period": "2024-12-31/I",
+   "truth": "17850000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "108483000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "109148000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "retained_earnings",
+   "period": "2025-12-31/I",
+   "truth": "215128000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "retained_earnings",
+   "period": "2024-12-31/I",
+   "truth": "206294000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "treasury_stock",
+   "period": "2025-12-31/I",
+   "truth": "-89473000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "treasury_stock",
+   "period": "2024-12-31/I",
+   "truth": "-76842000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "aoci",
+   "period": "2025-12-31/I",
+   "truth": "-41897000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "aoci",
+   "period": "2024-12-31/I",
+   "truth": "-47852000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "212291000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "208598000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "nci_equity",
+   "period": "2025-12-31/I",
+   "truth": "1531000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "nci_equity",
+   "period": "2024-12-31/I",
+   "truth": "768000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "truth": "213822000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "truth": "209366000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_liabilities_equity",
+   "period": "2025-12-31/I",
+   "truth": "2657202000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "total_liabilities_equity",
+   "period": "2024-12-31/I",
+   "truth": "2352945000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "bank_interest_income",
+   "period": "2025-12-31/12M",
+   "truth": "142864000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "bank_interest_income",
+   "period": "2024-12-31/12M",
+   "truth": "143713000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "bank_interest_income",
+   "period": "2023-12-31/12M",
+   "truth": "133258000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "bank_interest_expense",
+   "period": "2025-12-31/12M",
+   "truth": "83072000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "bank_interest_expense",
+   "period": "2024-12-31/12M",
+   "truth": "89618000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "bank_interest_expense",
+   "period": "2023-12-31/12M",
+   "truth": "78358000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "other_nonoperating",
+   "period": "2025-12-31/12M",
+   "truth": "-504000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "other_nonoperating",
+   "period": "2024-12-31/12M",
+   "truth": "1250000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "other_nonoperating",
+   "period": "2023-12-31/12M",
+   "truth": "2734000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "truth": "85225000000",
+   "predicted": "25433000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "confidence:income_statement:16"
+   ]
+  },
+  {
+   "doc": "bank:C",
+   "line": "revenue",
+   "period": "2024-12-31/12M",
+   "truth": "80722000000",
+   "predicted": "26627000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "confidence:income_statement:16"
+   ]
+  },
+  {
+   "doc": "bank:C",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "truth": "78066000000",
+   "predicted": "23166000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "confidence:income_statement:16"
+   ]
+  },
+  {
+   "doc": "bank:C",
+   "line": "noninterest_expense",
+   "period": "2025-12-31/12M",
+   "truth": "55132000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "noninterest_expense",
+   "period": "2024-12-31/12M",
+   "truth": "53567000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "noninterest_expense",
+   "period": "2023-12-31/12M",
+   "truth": "55970000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "7.11",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "6.03",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "4.07",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-13786000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-11718000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:C",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-2774000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "truth": "58000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "truth": "11224000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "truth": "12401000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "preferred_equity",
+   "period": "2025-12-31/I",
+   "truth": "2111000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "preferred_equity",
+   "period": "2024-12-31/I",
+   "truth": "2113000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "22483000000",
+   "predicted": "22476000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "22371000000",
+   "predicted": "22364000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "shares_basic",
+   "period": "2025-12-31/12M",
+   "truth": "433173162",
+   "predicted": "433173162000000",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "check:is_eps:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "shares_basic",
+   "period": "2024-12-31/12M",
+   "truth": "450678038",
+   "predicted": "450678038000000",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "check:is_eps:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "truth": "475089384",
+   "predicted": "475089384000000",
+   "bucket": "wrong_review",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": [
+    "check:is_eps:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "shares_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "436890731",
+   "predicted": "436890731000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "shares_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "453510245",
+   "predicted": "453510245000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "shares_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "476693148",
+   "predicted": "476693148000000",
+   "bucket": "wrong_auto",
+   "kind": "scale",
+   "status": "assumed",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "273000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-1648000000",
+   "predicted": "4768000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-2832000000",
+   "predicted": "3966000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-5145000000",
+   "predicted": "2762000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "debt_issued",
+   "period": "2025-12-31/12M",
+   "truth": "8534000000",
+   "predicted": "3797000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "debt_issued",
+   "period": "2024-12-31/12M",
+   "truth": "13185000000",
+   "predicted": "3619000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "debt_issued",
+   "period": "2023-12-31/12M",
+   "truth": "25983000000",
+   "predicted": "2941000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-8000000",
+   "predicted": "7919000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:38",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "18000000",
+   "predicted": "12245000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:38",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "bank:CFG",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "21000000",
+   "predicted": "25098000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:36",
+    "confidence:cash_flow:38",
+    "confidence:cash_flow:39",
+    "confidence:cash_flow:40"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cash",
+   "period": "2025-12-31/I",
+   "truth": "656125000",
+   "predicted": "386798000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I",
+    "check:cross_cash:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cash",
+   "period": "2024-12-31/I",
+   "truth": "360734000",
+   "predicted": "345056000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I",
+    "check:cross_cash:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "st_investments",
+   "period": "2025-12-31/I",
+   "truth": "3957014000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "st_investments",
+   "period": "2024-12-31/I",
+   "truth": "5315008000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "bank_securities",
+   "period": "2025-12-31/I",
+   "truth": "16082278000",
+   "predicted": "15407072000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "bank_securities",
+   "period": "2024-12-31/I",
+   "truth": "13764224000",
+   "predicted": "11747211000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "loans_held_for_sale",
+   "period": "2025-12-31/I",
+   "truth": "20976000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "loans_held_for_sale",
+   "period": "2024-12-31/I",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "allowance_loan_losses",
+   "period": "2025-12-31/I",
+   "truth": "809773000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "allowance_loan_losses",
+   "period": "2024-12-31/I",
+   "truth": "702052000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "loans_net",
+   "period": "2025-12-31/I",
+   "truth": "56068399000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "loans_net",
+   "period": "2024-12-31/I",
+   "truth": "53024585000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "ppe_net",
+   "period": "2025-12-31/I",
+   "truth": "82310000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "ppe_net",
+   "period": "2024-12-31/I",
+   "truth": "82233000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "operating_lease_rou",
+   "period": "2025-12-31/I",
+   "truth": "125407000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "operating_lease_rou",
+   "period": "2024-12-31/I",
+   "truth": "81967000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "goodwill",
+   "period": "2025-12-31/I",
+   "truth": "465697000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "goodwill",
+   "period": "2024-12-31/I",
+   "truth": "465697000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "truth": "80434997000",
+   "predicted": "77899862000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_assets",
+   "period": "2024-12-31/I",
+   "truth": "75976475000",
+   "predicted": "72821842000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "deposits",
+   "period": "2025-12-31/I",
+   "truth": "67082701000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "deposits",
+   "period": "2024-12-31/I",
+   "truth": "63175023000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "truth": "35645000",
+   "predicted": "35780000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "truth": "35974000",
+   "predicted": "58467000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "other_current_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "1279243000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "other_current_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "1453161000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "71535795000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "68253421000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "2111486000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "2030882000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "retained_earnings",
+   "period": "2025-12-31/I",
+   "truth": "8301522000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "retained_earnings",
+   "period": "2024-12-31/I",
+   "truth": "7311542000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "treasury_stock",
+   "period": "2025-12-31/I",
+   "truth": "-1168196000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "treasury_stock",
+   "period": "2024-12-31/I",
+   "truth": "-1034110000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "aoci",
+   "period": "2025-12-31/I",
+   "truth": "-345610000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "aoci",
+   "period": "2024-12-31/I",
+   "truth": "-585260000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "truth": "8899202000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "truth": "7723054000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_liabilities_equity",
+   "period": "2025-12-31/I",
+   "truth": "80434997000",
+   "predicted": "77899862000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_liabilities_equity",
+   "period": "2024-12-31/I",
+   "truth": "75976475000",
+   "predicted": "72821842000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "dup_period:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "nii_after_provision",
+   "period": "2025-12-31/12M",
+   "truth": "2392629000",
+   "predicted": "4945258000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:18"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "nii_after_provision",
+   "period": "2024-12-31/12M",
+   "truth": "2104716000",
+   "predicted": "4383432000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:18"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "nii_after_provision",
+   "period": "2023-12-31/12M",
+   "truth": "2187254000",
+   "predicted": "4499508000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:income_statement:18"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cf_deferred_tax",
+   "period": "2025-12-31/12M",
+   "truth": "-7775000",
+   "predicted": "62000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:cf_deferred_tax:2024-12-31/12M:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cf_deferred_tax",
+   "period": "2024-12-31/12M",
+   "truth": "-14283000",
+   "predicted": "2788000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:cf_deferred_tax:2024-12-31/12M:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cf_deferred_tax",
+   "period": "2023-12-31/12M",
+   "truth": "-49139000",
+   "predicted": "948000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cfo",
+   "period": "2025-12-31/12M",
+   "truth": "1501700000",
+   "predicted": "734806000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cfo",
+   "period": "2024-12-31/12M",
+   "truth": "1411667000",
+   "predicted": "526057000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cfo",
+   "period": "2023-12-31/12M",
+   "truth": "1424909000",
+   "predicted": "689605000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-2135705000",
+   "predicted": "1945000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-4623567000",
+   "predicted": "0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "-75889000",
+   "predicted": "0",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cfi",
+   "period": "2025-12-31/12M",
+   "truth": "-5476505000",
+   "predicted": "-65000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:cfi:2024-12-31/12M:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cfi",
+   "period": "2024-12-31/12M",
+   "truth": "-6295203000",
+   "predicted": "3064000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:cfi:2023-12-31/12M:2024-12-31/12M",
+    "suspicious:jump:cfi:2024-12-31/12M:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "cfi",
+   "period": "2023-12-31/12M",
+   "truth": "-4247161000",
+   "predicted": "-95095000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "suspicious:jump:cfi:2023-12-31/12M:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "truth": "7723054000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:EWBC",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "truth": "8899202000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "other_nonoperating",
+   "period": "2025-12-31/12M",
+   "truth": "-9000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "other_nonoperating",
+   "period": "2024-12-31/12M",
+   "truth": "-2000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "other_nonoperating",
+   "period": "2023-12-31/12M",
+   "truth": "0",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-112000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-529000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-173000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "0",
+   "predicted": "5686000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:51",
+    "confidence:cash_flow:52",
+    "confidence:cash_flow:56",
+    "confidence:cash_flow:57",
+    "confidence:cash_flow:58"
+   ]
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-14000000",
+   "predicted": "7681000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:51",
+    "confidence:cash_flow:52",
+    "confidence:cash_flow:56",
+    "confidence:cash_flow:57",
+    "confidence:cash_flow:58"
+   ]
+  },
+  {
+   "doc": "bank:FCNCA",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-7000000",
+   "predicted": "10288000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:51",
+    "confidence:cash_flow:52",
+    "confidence:cash_flow:56",
+    "confidence:cash_flow:57",
+    "confidence:cash_flow:58"
+   ]
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "st_investments",
+   "period": "2025-12-31/I",
+   "truth": "132266000",
+   "predicted": "229000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "st_investments",
+   "period": "2024-12-31/I",
+   "truth": "939715000",
+   "predicted": "409000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "deferred_tax_assets",
+   "period": "2025-12-31/I",
+   "truth": "55798000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "deferred_tax_assets",
+   "period": "2024-12-31/I",
+   "truth": "146567000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "net_income_common",
+   "period": "2025-12-31/12M",
+   "truth": "486073000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "net_income_common",
+   "period": "2024-12-31/12M",
+   "truth": "460815000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "net_income_common",
+   "period": "2023-12-31/12M",
+   "truth": "392602000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "5.70",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "5.30",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "4.51",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "5.67",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "5.28",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "4.50",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-555769000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "745340000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-296077000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "acquisitions",
+   "period": "2025-12-31/12M",
+   "truth": "-112071000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "capex",
+   "period": "2025-12-31/12M",
+   "truth": "-18720000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "capex",
+   "period": "2024-12-31/12M",
+   "truth": "-10237000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "capex",
+   "period": "2023-12-31/12M",
+   "truth": "-25025000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cfi",
+   "period": "2025-12-31/12M",
+   "truth": "-314356000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cfi",
+   "period": "2024-12-31/12M",
+   "truth": "274756000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cfi",
+   "period": "2023-12-31/12M",
+   "truth": "-295211000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_deposits_net",
+   "period": "2025-12-31/12M",
+   "truth": "-213077000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_deposits_net",
+   "period": "2024-12-31/12M",
+   "truth": "-197208000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_deposits_net",
+   "period": "2023-12-31/12M",
+   "truth": "619710000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_commercial_paper_net",
+   "period": "2025-12-31/12M",
+   "truth": "378277000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_commercial_paper_net",
+   "period": "2024-12-31/12M",
+   "truth": "-515814000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_commercial_paper_net",
+   "period": "2023-12-31/12M",
+   "truth": "-716442000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "dividends_paid",
+   "period": "2025-12-31/12M",
+   "truth": "-153803000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "dividends_paid",
+   "period": "2024-12-31/12M",
+   "truth": "-130840000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "dividends_paid",
+   "period": "2023-12-31/12M",
+   "truth": "-104697000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-8301000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-9358000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-5681000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "buybacks",
+   "period": "2025-12-31/12M",
+   "truth": "-246874000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "buybacks",
+   "period": "2024-12-31/12M",
+   "truth": "-37690000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "net_change_cash",
+   "period": "2025-12-31/12M",
+   "truth": "-11915000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "net_change_cash",
+   "period": "2024-12-31/12M",
+   "truth": "13708000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "net_change_cash",
+   "period": "2023-12-31/12M",
+   "truth": "-3257000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cash_end",
+   "period": "2024-12-31/12M",
+   "truth": "574910000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cash_end",
+   "period": "2023-12-31/12M",
+   "truth": "561202000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cash_begin",
+   "period": "2023-12-31/12M",
+   "truth": "564459000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:HWC",
+   "line": "cash_end",
+   "period": "2025-12-31/12M",
+   "truth": "562995000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "st_investments",
+   "period": "2025-12-31/I",
+   "truth": "658022000000",
+   "predicted": "336426000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "st_investments",
+   "period": "2024-12-31/I",
+   "truth": "740946000000",
+   "predicted": "295001000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "loans_net",
+   "period": "2025-12-31/I",
+   "truth": "1467664000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "loans_net",
+   "period": "2024-12-31/I",
+   "truth": "1323643000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "deposits",
+   "period": "2025-12-31/I",
+   "truth": "2559320000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "deposits",
+   "period": "2024-12-31/I",
+   "truth": "2406032000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "truth": "57048000000",
+   "predicted": "55681000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_attributable:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "truth": "58471000000",
+   "predicted": "56868000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_attributable:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "truth": "49552000000",
+   "predicted": "47760000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "check:is_attributable:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "32970000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "46679000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "acquisitions",
+   "period": "2023-12-31/12M",
+   "truth": "-9920000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "cf_deposits_net",
+   "period": "2023-12-31/12M",
+   "truth": "-32196000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "cf_commercial_paper_net",
+   "period": "2023-12-31/12M",
+   "truth": "-1934000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "buybacks",
+   "period": "2023-12-31/12M",
+   "truth": "-9824000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:JPM",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-1521000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "bank_securities",
+   "period": "2025-12-31/I",
+   "truth": "35632000000",
+   "predicted": "36649000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "bank_securities",
+   "period": "2024-12-31/I",
+   "truth": "33044000000",
+   "predicted": "34051000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "intangibles",
+   "period": "2025-12-31/I",
+   "truth": "64000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "intangibles",
+   "period": "2024-12-31/I",
+   "truth": "94000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "cf_deferred_tax",
+   "period": "2023-12-31/12M",
+   "truth": "-97000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "397000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-20000000",
+   "predicted": "420000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:44",
+    "confidence:cash_flow:45",
+    "confidence:cash_flow:46"
+   ]
+  },
+  {
+   "doc": "bank:MTB",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "114000000",
+   "predicted": "497000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:44",
+    "confidence:cash_flow:45",
+    "confidence:cash_flow:46",
+    "suspicious:jump:cf_other_financing:2023-12-31/12M:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:PB",
+   "line": "dna_opex",
+   "period": "2025-12-31/12M",
+   "truth": "14442000",
+   "predicted": "19674000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:PB",
+   "line": "dna_opex",
+   "period": "2024-12-31/12M",
+   "truth": "15670000",
+   "predicted": "19054000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:PB",
+   "line": "dna_opex",
+   "period": "2023-12-31/12M",
+   "truth": "12676000",
+   "predicted": "18283000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:PB",
+   "line": "other_opex",
+   "period": "2025-12-31/12M",
+   "truth": "330000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PB",
+   "line": "other_opex",
+   "period": "2024-12-31/12M",
+   "truth": "4444000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PB",
+   "line": "other_opex",
+   "period": "2023-12-31/12M",
+   "truth": "15133000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "truth": "57101000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "truth": "61673000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "other_current_liabilities",
+   "period": "2025-12-31/I",
+   "truth": "14151000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "other_current_liabilities",
+   "period": "2024-12-31/I",
+   "truth": "16439000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "truth": "21639000000",
+   "predicted": "727000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "truth": "21427000000",
+   "predicted": "1708000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "treasury_stock",
+   "period": "2025-12-31/I",
+   "truth": "-20912000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "treasury_stock",
+   "period": "2024-12-31/I",
+   "truth": "-19719000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "2444000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "2492000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "3507000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "cf_investments_net",
+   "period": "2025-12-31/12M",
+   "truth": "-8757000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "cf_investments_net",
+   "period": "2024-12-31/12M",
+   "truth": "-23744000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:PNC",
+   "line": "cf_investments_net",
+   "period": "2023-12-31/12M",
+   "truth": "3111000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "st_investments",
+   "period": "2025-12-31/I",
+   "truth": "34610000000",
+   "predicted": "326716000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "st_investments",
+   "period": "2024-12-31/I",
+   "truth": "36525000000",
+   "predicted": "317048000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "bank_securities",
+   "period": "2025-12-31/I",
+   "truth": "112228000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "bank_securities",
+   "period": "2024-12-31/I",
+   "truth": "118104000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "loans_held_for_sale",
+   "period": "2025-12-31/I",
+   "truth": "1883000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "loans_held_for_sale",
+   "period": "2024-12-31/I",
+   "truth": "1388000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "loans_gross",
+   "period": "2025-12-31/I",
+   "truth": "328595000000",
+   "predicted": "323565000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "loans_gross",
+   "period": "2024-12-31/I",
+   "truth": "306383000000",
+   "predicted": "301526000000",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "extracted",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "allowance_loan_losses",
+   "period": "2025-12-31/I",
+   "truth": "-5030000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "allowance_loan_losses",
+   "period": "2024-12-31/I",
+   "truth": "-4857000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "loans_net",
+   "period": "2025-12-31/I",
+   "truth": "323565000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "loans_net",
+   "period": "2024-12-31/I",
+   "truth": "301526000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "intangibles",
+   "period": "2025-12-31/I",
+   "truth": "1256000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "intangibles",
+   "period": "2024-12-31/I",
+   "truth": "1550000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "truth": "3.87",
+   "predicted": "7.74",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:is_eps:2025-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "truth": "3.36",
+   "predicted": "3.06",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "check:is_eps:2024-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "truth": "-1.09",
+   "predicted": "-2.49",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-12-31/12M",
+    "check:is_eps:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "truth": "3.82",
+   "predicted": "7.64",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "truth": "3.36",
+   "predicted": "3.06",
+   "bucket": "wrong_auto",
+   "kind": "value",
+   "status": "normalized",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "truth": "-1.09",
+   "predicted": "-2.49",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "assumed",
+   "flags": [
+    "period:income_statement:2023-12-31/12M"
+   ]
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "truth": "-717000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "truth": "-5390000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "truth": "-40000000",
+   "predicted": null,
+   "bucket": "missing_silent",
+   "kind": "",
+   "status": "",
+   "flags": []
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "truth": "-71000000",
+   "predicted": "38697000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:54",
+    "confidence:cash_flow:58"
+   ]
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "truth": "-24000000",
+   "predicted": "29663000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:54",
+    "confidence:cash_flow:58"
+   ]
+  },
+  {
+   "doc": "bank:TFC",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "truth": "-12000000",
+   "predicted": "22594000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:cash_flow:50",
+    "confidence:cash_flow:53",
+    "confidence:cash_flow:54",
+    "confidence:cash_flow:58"
+   ]
+  }
+ ],
+ "provenance": {
+  "created": "2026-11-01T01:44:32+00:00",
+  "commit": "5d00382fa480d05dfe14850ea00450340f140b45",
+  "dirty": true,
+  "datasets": [
+   {
+    "name": "bank-holdout",
+    "version": "db44c0a14beaaf5a",
+    "key_version": "4b9f7dcc3226d92d",
+    "files": 30,
+    "matches_manifest": true
+   }
+  ],
+  "config": {
+   "profile": "us-bank 2026.10.25-bank-2+2f82c64be98d"
+  }
+ },
+ "review_items_per_document": {
+  "median": 28,
+  "mean": 24.4,
+  "median_blockers": 0
+ },
+ "mapping_by_method": {
+  "alias": [
+   956,
+   1011
+  ],
+  "structure": [
+   2,
+   56
+  ],
+  "none": [
+   0,
+   142
+  ],
+  "fuzzy": [
+   6,
+   9
+  ]
+ }
+}

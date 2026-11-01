@@ -70,8 +70,8 @@ private-company packages in HTML, Excel and PDF, with exact keys.
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Wrong values caught | Review items per filing (median) | Source |
 |---|---|---|---|---|---|---|---|
-| SEC dev, HTML (tuned on) | 33 | 82.1% (3,629 of 4,422; 80.9-83.2%) | 2.0% (51 of 2,548; 1.5-2.6%) | 2.3% (102 of 4,422; 1.9-2.8%) | 73.8% (144 of 195; 67.3-79.5%) | 24 | `eval/reports/stmt-dev-d57` |
-| **SEC holdout, HTML (never tuned on)** | 30 | 81.7% (3,247 of 3,972; 80.5-82.9%) | 1.3% (29 of 2,167; 0.9-1.9%) | 2.1% (83 of 3,972; 1.7-2.6%) | 82.9% (141 of 170; 76.6-87.9%) | 24 | `eval/reports/stmt-holdout-d57` |
+| SEC dev, HTML (tuned on) | 33 | 82.9% (3,664 of 4,422; 81.7-83.9%) | 1.9% (49 of 2,541; 1.5-2.5%) | 1.8% (78 of 4,422; 1.4-2.2%) | 74.9% (146 of 195; 68.3-80.4%) | 24 | `eval/reports/stmt-dev-d58` |
+| **SEC holdout, HTML (never tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 1.3% (29 of 2,167; 0.9-1.9%) | 1.7% (67 of 3,972; 1.3-2.1%) | 82.9% (141 of 170; 76.6-87.9%) | 24 | `eval/reports/stmt-holdout-d58` |
 | SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,626; 2.4-3.6%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-recheck-2026-10-25.json` |
 | Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-units` |
 
@@ -117,10 +117,10 @@ sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Source |
 |---|---|---|---|---|---|
-| Banks, dev (tuned on) | 11 (1 crashed) | 82.0% (846 of 1,032; 79.5-84.2%) | 4.1% (31 of 755; 2.9-5.8%) | 6.6% (68 of 1,032; 5.2-8.3%) | `eval/reports/stmt-bank-dev-d57` |
-| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 4.4% (35 of 799; 3.2-6.0%) | 14.7% (177 of 1,206; 12.8-16.8%) | `eval/reports/stmt-bank-holdout-d57` |
-| Insurers, dev (tuned on) | 10 | 64.2% (720 of 1,121; 61.4-67.0%) | 3.0% (20 of 666; 2.0-4.6%) | 7.9% (89 of 1,121; 6.5-9.7%) | `eval/reports/stmt-insurer-dev-d57` |
-| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 6.2% (50 of 813; 4.7-8.0%) | 10.9% (160 of 1,465; 9.4-12.6%) | `eval/reports/stmt-insurer-holdout-d57` |
+| Banks, dev (tuned on) | 11 (1 crashed) | 82.7% (853 of 1,032; 80.2-84.8%) | 4.1% (31 of 755; 2.9-5.8%) | 5.9% (61 of 1,032; 4.6-7.5%) | `eval/reports/stmt-bank-dev-d58` |
+| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 4.4% (35 of 799; 3.2-6.0%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d58` |
+| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 3.0% (20 of 664; 2.0-4.6%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d58` |
+| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 6.2% (50 of 813; 4.7-8.0%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d58` |
 
 IFRS is an overlay smoke-tested on a few filings, not measured: see `eval/coverage/checks.json`.
 

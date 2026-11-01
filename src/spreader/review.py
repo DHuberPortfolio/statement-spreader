@@ -129,6 +129,23 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                     rows=[row.index], lines=[m.canonical] if m and m.canonical else [], periods=list(row.values),
                     message=(f"'{row.label}' does not equal the sum of the rows directly above it. Either a number was "
                              "misread or the document's own subtotal does not add up; compare it with the source.")))
+        # A printed subtotal left out so its rows are not counted twice is accounted for, unless a total of the
+        # template is blank in its columns: then it may be that very total under a wording no alias knows ("Earnings/
+        # (loss) from operations"), and a blank must not pass silently (D58).
+        have = {(v.line, v.period) for v in values if v.value is not None}
+        for m in res.mappings:
+            if not m.excluded or m.rule != "structure.cross_line_subtotal":
+                continue
+            row = by_index[m.row_index]
+            cols = [k for k, v in row.values.items() if v.displayed not in (None, Decimal(0))]
+            blank = [ln for ln in stmt_lines if _total_like(profile, ln) and any((ln, k) not in have for k in cols)]
+            if cols and blank:
+                items.append(ReviewItem(
+                    id=f"set_aside:{skey}:{row.index}", kind=ReviewKind.UNMAPPED_ROW, severity=Severity.WARNING,
+                    statement=stype, rows=[row.index], periods=cols,  # no lines: the blank lines have no values to flag
+                    message=(f"'{row.label}' was left out as a subtotal of rows placed on other lines, but "
+                             f"{', '.join(profile.lines[ln].label for ln in blank[:3])} "
+                             f"{'is' if len(blank) == 1 else 'are'} blank. If the subtotal is one of them, place it there.")))
         # Mapping problems on rows whose numbers reach the spread.
         components = {c for r in t.rows if r.role is RowRole.TOTAL and mapping_of.get(r.index) and mapping_of[r.index].canonical
                       for c in r.children if mapping_of.get(c) and mapping_of[c].canonical == mapping_of[r.index].canonical}
@@ -230,6 +247,18 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                                      f"{b.period} ({b.value:,}). Real, or a scale or column mix-up?")))
     items.extend(currency_items(statements))
     return items
+
+
+_FLOW_TOTALS = {"revenue", "cfo", "cfi", "cff", "net_change_cash", "cash_end"}
+# Unclassified balance sheets (banks, insurers, some companies) print no current subtotals: blank there is normal.
+_OFTEN_ABSENT = {"total_current_assets", "total_current_liabilities"}
+
+
+def _total_like(profile: Profile, line: str) -> bool:
+    """A critical line a printed subtotal could be: a result, an equity total, a total_* line or a cash-flow total."""
+    ld = profile.lines[line]
+    return ld.critical and line not in _OFTEN_ABSENT and (
+        ld.kind in {"result", "equity"} or line.startswith("total_") or line in _FLOW_TOTALS)
 
 
 def currency_items(statements: dict[str, StatementResult]) -> list[ReviewItem]:
