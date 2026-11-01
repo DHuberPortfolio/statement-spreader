@@ -1,10 +1,9 @@
 # Finance Operations Platform (statement-spreader)
 
 A local, $0 platform that does the keying and ticking finance teams do by hand, checks it, and sends only what it is
-unsure of to a person. Built as the foundation for a real deployment at a company whose clients include a large share
-of the biggest US companies: trustworthy before fast, every number traceable to where it was printed, every change
-measured, and adaptable to a company's own data through configuration. **A tested prototype, not a production
-system**: one machine, sign-in tested only against a local test identity provider, measured on public filings and
+unsure of to a person. Built as the foundation for a real deployment: trustworthy before fast, every number traceable
+to where it was printed, every change measured, and adaptable to a company's own data through configuration. **A
+tested prototype, not a production system**: one machine, sign-in tested only against a local test identity provider, measured on public filings and
 synthetic data only. Progress toward production: [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md).
 
 ## Who uses it, what it replaces, what stays human

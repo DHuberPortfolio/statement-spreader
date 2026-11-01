@@ -40,8 +40,8 @@ ROI layer that separates what was measured from what is assumed.
 - Next ideas (ranked) in IMPROVEMENT_LOG.md "Next" section
 
 ## Services (none left running; start them when needed)
-- Model server (optional): `C:\Users\devin\tools\llama.cpp\b11853\bin\llama-server.exe -m
-  C:\Users\devin\tools\models\Qwen3-4B-Instruct-2507-Q4_K_M.gguf -ngl 99 -c 8192 --host 127.0.0.1 --port 8088`,
+- Model server (optional): `<llama.cpp b11853>\bin\llama-server.exe -m
+  <models>\Qwen3-4B-Instruct-2507-Q4_K_M.gguf -ngl 99 -c 8192 --host 127.0.0.1 --port 8088`,
   then set `SPREADER_MODEL_URL=http://127.0.0.1:8088` for the app or pass `--model` to `scripts/run_eval.py`.
 - App: `.venv\Scripts\python scripts\load_demo.py var\demo`, then
   `SPREADER_DATA=var/demo .venv/Scripts/python -m uvicorn spreader.api:app --host 127.0.0.1 --port 8765`
@@ -49,7 +49,7 @@ ROI layer that separates what was measured from what is assumed.
 
 ## How to resume
 
-1. `cd C:\Users\devin\Github\statement-spreader`; `git log --oneline`; read IMPROVEMENT_LOG.md.
+1. `cd statement-spreader`; `git log --oneline`; read IMPROVEMENT_LOG.md.
 2. `.venv\Scripts\python -m pytest -o addopts=""` and `.venv\Scripts\python scripts\run_eval.py --split dev`.
 3. Compare with the latest saved report in `eval/reports/` before and after any change.
 
