@@ -70,10 +70,18 @@ private-company packages in HTML, Excel and PDF, with exact keys.
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Wrong values caught | Review items per filing (median) | Source |
 |---|---|---|---|---|---|---|---|
-| SEC dev, HTML (tuned on) | 33 | 82.9% (3,664 of 4,422; 81.7-83.9%) | 1.9% (49 of 2,541; 1.5-2.5%) | 1.8% (78 of 4,422; 1.4-2.2%) | 74.9% (146 of 195; 68.3-80.4%) | 24 | `eval/reports/stmt-dev-d58` |
-| **SEC holdout, HTML (never tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 1.3% (29 of 2,167; 0.9-1.9%) | 1.7% (67 of 3,972; 1.3-2.1%) | 82.9% (141 of 170; 76.6-87.9%) | 24 | `eval/reports/stmt-holdout-d58` |
+| SEC dev, HTML (tuned on) | 33 | 82.9% (3,664 of 4,422; 81.7-83.9%) | 0.0% (0 of 329; 0.0-1.2%) | 1.8% (78 of 4,422; 1.4-2.2%) | 100.0% (195 of 195; 98.1-100.0%) | 31 | `eval/reports/stmt-dev-d59` |
+| **SEC holdout, HTML (never tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 1.1% (3 of 269; 0.4-3.2%) | 1.7% (67 of 3,972; 1.3-2.1%) | 98.2% (167 of 170; 94.9-99.4%) | 32 | `eval/reports/stmt-holdout-d59` |
 | SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,626; 2.4-3.6%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-recheck-2026-10-25.json` |
 | Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-units` |
+
+Since D59 a value goes out without a person only when two different checks that ran and held include it
+(`SPREADER_CONFIRMATIONS`, 2 by default; 0 restores the old rule). The silent error rate fell from 3.0% (114 of 3,779)
+to 0.7% (3 of 441; 0.2-2.0%) across the three holdouts, and from 1.3% to 1.1% (3 of 269) on the SEC holdout alone:
+all three are Tesla's net income to the company, a consistent set two checks could not see. The price: 8-12% of
+right values now go out alone (SEC holdout 266 of 3,249, against 2,138 before), the rest wait for a person. The
+PDF and synthetic rows were measured before D59. Under 0.2% is not shown yet: even with no errors, about 1,900 values
+accepted alone are needed to show it at z = 1.96.
 
 The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out without a person
 looking, how much is wrong. The holdout was measured at most once per kept change and never used to design one;
@@ -117,10 +125,10 @@ sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Source |
 |---|---|---|---|---|---|
-| Banks, dev (tuned on) | 11 (1 crashed) | 82.7% (853 of 1,032; 80.2-84.8%) | 4.1% (31 of 755; 2.9-5.8%) | 5.9% (61 of 1,032; 4.6-7.5%) | `eval/reports/stmt-bank-dev-d58` |
-| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 4.4% (35 of 799; 3.2-6.0%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d58` |
-| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 3.0% (20 of 664; 2.0-4.6%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d58` |
-| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 6.2% (50 of 813; 4.7-8.0%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d58` |
+| Banks, dev (tuned on) | 11 (1 crashed) | 82.7% (853 of 1,032; 80.2-84.8%) | 0.0% (0 of 103; 0.0-3.6%) | 5.9% (61 of 1,032; 4.6-7.5%) | `eval/reports/stmt-bank-dev-d59` |
+| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 0.0% (0 of 91; 0.0-4.1%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d59` |
+| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 0.0% (0 of 57; 0.0-6.3%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d59` |
+| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 0.0% (0 of 81; 0.0-4.5%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d59` |
 
 IFRS is an overlay smoke-tested on a few filings, not measured: see `eval/coverage/checks.json`.
 

@@ -24,7 +24,7 @@ from .detect import classify
 from .layout import lay_out
 from .mapping import Memory, ModelMapper, map_table
 from .profile import Profile
-from .review import attach_flags, build_review
+from .review import attach_flags, build_review, unconfirmed_items
 from .second_reader import TagFact
 from .second_reader import compare as compare_tags
 from .spread import assemble_statement, merge_periods
@@ -160,6 +160,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
         partial = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version="", statements=statements,
                          periods=periods, values=values)
         second = timer.run("second_reader", compare_tags, partial, tags).items
+    review = review + timer.run("confirm", unconfirmed_items, values, checks, review + prior + second, profile)
     attach_flags(values, review + prior + second)
 
     order = {ln: i for i, ln in enumerate(profile.lines)}

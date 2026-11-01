@@ -243,6 +243,7 @@ class ReviewKind(str, Enum):
     PRIOR_PERIOD = "prior_period"  # differs from the company's approved spread for the same period (spreader.company)
     SECOND_READER = "second_reader"  # the cell's inline XBRL tag disagrees with the printed number (opt-in, D37)
     CURRENCY = "currency"  # not the profile's currency, or statements in different currencies (spreader.units, D39)
+    UNCONFIRMED = "unconfirmed"  # nothing doubts the value, but not enough independent checks confirm it (D59)
 
 
 class Severity(str, Enum):

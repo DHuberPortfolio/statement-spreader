@@ -919,3 +919,32 @@ unknown wordings are placed, and one still set aside goes to a person.**
   0.2% needs values accepted alone only when an independent check confirms them.
 - **Tests.** `tests/test_set_aside_subtotals.py` (16). Checked on the previous code: 11 fail; the other five guard
   behaviour that was already right (other equity totals not taken as the parent's; no item when nothing is blank).
+
+**D59. A value goes out without a person only when two checks that ran and held confirm it (strict for now).**
+- **Asked by Devin**: silent errors under 0.2%; "If something is wrong, we need to know about it." Chosen by Devin
+  (Nov 1) between the strict rule and one check: "Strict for now", improving the share accepted alone over time.
+- **Measured first** (dev sets only). Of the values accepted without review under the old rule (nothing doubts them),
+  those that are an input of at least one passing check were still wrong 13 of 1,418 (commercial), 12 of 406 (banks)
+  and 2 of 258 (insurers): two errors that cancel inside one sum (AMD's other non-operating income) or a whole set read
+  consistently wrong (Western Alliance's operating and investing cash flows, Bank of America's loans, EIG's revenue).
+  In at least two passing checks: 0 of 489. Excluding catch-all placements changed nothing; a printed total in one
+  passing check left 2 of 501, 8 of 197 and 2 of 158 wrong.
+- **Built** (`review.unconfirmed_items`). After the other review items, every value that nothing doubts, that a person
+  did not enter, and that fewer than `SPREADER_CONFIRMATIONS` (2 by default; 1; 0 restores the old rule) different
+  passing checks include is listed on one warning per statement and period (`unconfirmed:` items, kind `unconfirmed`).
+  A balance-sheet value counts checks on flows ending that day. Resolving the item accepts its values with the
+  reviewer's name; the service judges confirmation after the other items are settled, so a value whose doubt was
+  resolved still needs confirming.
+- **Measured** against D58 (703c153), accepted alone wrong: SEC dev 49 of 2,541 -> 0 of 329; SEC holdout 29 of 2,167
+  -> 3 of 269 (1.1%; 0.4-3.2%); banks dev 31 of 755 -> 0 of 103; banks holdout 35 of 799 -> 0 of 91; insurers dev 20
+  of 664 -> 0 of 57; insurers holdout 50 of 813 -> 0 of 81. Three holdouts together 114 of 3,779 (3.0%) -> 3 of 441
+  (0.7%; 0.2-2.0%). Values right and blanks unchanged. The price: right values accepted alone 8-12% per set (SEC holdout
+  2,138 -> 266 of 3,249); mean review items per document up 5.8-7.3 (SEC holdout 23.1 -> 29.4).
+- **The three.** Tesla's net income to the company, 2023-2025, off by 23-62 million: a consistent set two checks could
+  not see. Found on the holdout, so not fixed here (fixing it would tune on the holdout).
+- **Not shown.** Under 0.2%: with no errors at all, about 1,900 values accepted alone are needed to show it at
+  z = 1.96; the dev sets have 489. The next confirmations are independent of the statement's own arithmetic: last
+  year's approved spread for the same borrower (company memory; measured once at 0.4% silent, 10 of 2,334, on the SEC
+  holdout) and cross-statement ties.
+- **Tests.** `tests/test_confirmation.py` (6). The rule is new, so on the previous code the file cannot import; the
+  service test is the behavioural one: an unconfirmed value is flagged, and resolving its item clears the flag.

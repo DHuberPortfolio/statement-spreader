@@ -6,6 +6,7 @@ share of auto-accepted values that are wrong, so every reason to doubt a value m
 
 from __future__ import annotations
 
+import os
 from decimal import Decimal
 
 from finops.core import policy
@@ -25,6 +26,7 @@ from .contracts import (
     SpreadValue,
     StatementResult,
     StatementType,
+    ValueStatus,
 )
 from .ingest.ocr import MIN_CONFIDENCE as OCR_MIN_CONFIDENCE
 from .ingest.ocr import REVIEW_ALL as OCR_REVIEW_ALL
@@ -354,6 +356,60 @@ def attach_flags(values: list[SpreadValue], items: list[ReviewItem]) -> None:
                     v.flags.append(it.id)
 
 
+def confirmations_required() -> int:
+    """SPREADER_CONFIRMATIONS: how many different checks that ran and held a value must be an input of before it is
+    accepted without a person (D59). 2 by default (Devin, Nov 1: strict until more independent confirmations exist);
+    1 accepts on one check; 0 restores the old rule (accepted when nothing doubts it)."""
+    raw = os.environ.get("SPREADER_CONFIRMATIONS", "2").strip()
+    if raw not in {"0", "1", "2", "3"}:
+        raise ValueError(f"SPREADER_CONFIRMATIONS must be 0, 1, 2 or 3, not {raw!r}")
+    return int(raw)
+
+
+def unconfirmed_items(values: list[SpreadValue], checks: list[CheckResult], items: list[ReviewItem], profile: Profile,
+                      required: int | None = None) -> list[ReviewItem]:
+    """Values nothing doubts that too few passing checks confirm, one warning per statement and period (D59).
+
+    A single check can hold with a wrong value in it: two errors that cancel (an amount moved between two lines of one
+    sum) or a whole consistent set read from the wrong table. Measured on the dev sets, values in at least one passing
+    check were wrong 0.8-3.0% of the time, in at least two 0 of 489. A value a person entered is confirmed by them."""
+    need = confirmations_required() if required is None else required
+    if need == 0:
+        return []
+    doubted: set[tuple[str, str]] = set()
+    for it in items:
+        if it.resolved or it.severity is Severity.INFO:
+            continue
+        for ln in it.lines:
+            for p in it.periods:
+                doubted.add((ln, p))
+                if p.endswith("M"):
+                    doubted.add((ln, p.split("/")[0] + "/I"))
+    held: dict[tuple[str, str], set[str]] = {}
+    for c in checks:
+        if c.status is not CheckStatus.PASS:
+            continue
+        for ln in c.lines:
+            for p in {c.period, c.period.split("/")[0] + "/I"}:
+                held.setdefault((ln, p), set()).add(c.id)
+    by_group: dict[tuple[str, str], list[str]] = {}
+    for v in values:
+        if v.value is None or v.status is ValueStatus.HUMAN or (v.line, v.period) in doubted:
+            continue
+        if len(held.get((v.line, v.period), ())) >= need:
+            continue
+        by_group.setdefault((profile.line_statement[v.line].value, v.period), []).append(v.line)
+    out = []
+    for (skey, period), lines in sorted(by_group.items()):
+        names = ", ".join(profile.lines[ln].label for ln in lines[:6]) + (f" and {len(lines) - 6} more" if len(lines) > 6 else "")
+        out.append(ReviewItem(
+            id=f"unconfirmed:{skey}:{period}", kind=ReviewKind.UNCONFIRMED, severity=Severity.WARNING,
+            statement=StatementType(skey), lines=lines, periods=[period],
+            message=(f"{len(lines)} value{'s' if len(lines) != 1 else ''} for {period} {'are' if len(lines) != 1 else 'is'} "
+                     f"not confirmed by {need} of the statement's checks: {names}. Compare them with the document.")))
+    return out
+
+
 def is_auto_accepted(v: SpreadValue) -> bool:
     return not v.flags
 
@@ -382,6 +438,8 @@ ACTION = {
     ReviewKind.CONFLICT: "Choose which row's value the line should take.",
     ReviewKind.SUSPICIOUS: "Check the value against the document (scale and sign).",
     ReviewKind.UNREADABLE: "Read the number from the document and enter it with a note.",
+    ReviewKind.UNCONFIRMED: "Compare the listed values with the document; resolve the item when they match, or correct "
+                            "the ones that do not.",
 }
 
 

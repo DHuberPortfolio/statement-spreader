@@ -38,6 +38,7 @@ from .company import (
 from .contracts import (
     MapMethod,
     ProvenanceStep,
+    ReviewItem,
     ReviewKind,
     Severity,
     Spread,
@@ -51,7 +52,7 @@ from .learning import approval_outcomes, remap_outcome
 from .mapping import MemoryKey
 from .pipeline import spread_document
 from .profile import Profile, load_profile
-from .review import attach_flags, build_review, unresolved_blockers
+from .review import attach_flags, build_review, unconfirmed_items, unresolved_blockers
 from .second_reader import tagged_cells
 from .shadow import REASONS, blind_ruling, flag_corrected, in_sample, review_days, second_opinions
 from .shadow import summary as shadow_summary
@@ -481,17 +482,26 @@ class Service:
         review = build_review(spread.statements, values, checks, self.profile, ratios) + [
             i.model_copy() for i in spread.prior_items + spread.second_reader_items]
         human = {(v.line, v.period) for v in values if v.status is ValueStatus.HUMAN}
-        for it in review:
-            if it.id in resolved:
-                r = resolved[it.id]
-                if isinstance(r, dict) and r.get("fingerprint") not in (None, _fingerprint(it.message)):
-                    continue  # the numbers it was resolved on have changed: open again
-                it.resolved = True
-                it.resolution = r["note"] if isinstance(r, dict) else r
-            elif it.kind is not ReviewKind.FAILED_CHECK and it.lines and all(
-                    (ln, p) in human for ln in it.lines for p in it.periods):
-                it.resolved = True
-                it.resolution = "Every value it concerns was corrected by a reviewer."
+
+        def settle(items: list[ReviewItem]) -> None:
+            for it in items:
+                if it.id in resolved:
+                    r = resolved[it.id]
+                    if isinstance(r, dict) and r.get("fingerprint") not in (None, _fingerprint(it.message)):
+                        continue  # the numbers it was resolved on have changed: open again
+                    it.resolved = True
+                    it.resolution = r["note"] if isinstance(r, dict) else r
+                elif it.kind is not ReviewKind.FAILED_CHECK and it.lines and all(
+                        (ln, p) in human for ln in it.lines for p in it.periods):
+                    it.resolved = True
+                    it.resolution = "Every value it concerns was corrected by a reviewer."
+
+        settle(review)
+        # Confirmation is judged after the other items are settled: a value whose doubt a person resolved needs
+        # confirming like any other (D59).
+        confirm = unconfirmed_items(values, checks, review, self.profile)
+        settle(confirm)
+        review += confirm
         attach_flags(values, review)
         order = {ln: i for i, ln in enumerate(self.profile.lines)}
         values.sort(key=lambda v: (order.get(v.line, 999), v.period))
