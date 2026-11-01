@@ -24,10 +24,12 @@ from datetime import datetime, timedelta
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
+from finops.core.outcomes import read as read_outcomes
 from finops.core.outcomes import record as record_outcomes
 
 from . import __version__
 from .checks import add_derived, run_checks, run_ratios
+from .confirm import record_docs_required, record_from_outcomes
 from .company import (
     ApprovedValue,
     CompanyContext,
@@ -239,8 +241,10 @@ class Service:
             data = self.store.document_bytes(doc_id, doc["format"])
             ir = read_document(doc["filename"], data)
             tags = tagged_cells(data) if os.environ.get("SPREADER_XBRL_CHECK") == "1" else None  # opt-in (D37)
+            # Placements reviewers approved in other documents (D61): read from the outcomes folder at each run.
+            record = record_from_outcomes(read_outcomes("statements")) if record_docs_required() else None
             spread, timings = spread_document(ir, self.profile, self.memory(), self.model, self.company_context(doc_id),
-                                              tags)
+                                              tags, record)
         except IngestError as exc:
             return self._fail(run_id, f"Could not read the document: {exc}", actor)
         except Exception as exc:  # noqa: BLE001 - recorded as a failed run, never a half-written one
@@ -499,7 +503,7 @@ class Service:
         settle(review)
         # Confirmation is judged after the other items are settled: a value whose doubt a person resolved needs
         # confirming like any other (D59).
-        confirm = unconfirmed_items(values, checks, review, self.profile, None, spread.echoes)
+        confirm = unconfirmed_items(values, checks, review, self.profile, None, spread.echoes, spread.confirmations)
         settle(confirm)
         review += confirm
         attach_flags(values, review)

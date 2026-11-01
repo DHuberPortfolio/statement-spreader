@@ -292,6 +292,18 @@ class Echo(BaseModel):
     ref: SourceRef  # where the repeated number is printed
 
 
+class Confirmation(BaseModel):
+    """Evidence from outside the document that a spread value is right (D61): it equals the company's approved spread
+    ("prior"), or its row's label has been placed on that line, and approved unchanged, in many other documents
+    ("label")."""
+
+    line: str
+    period: str
+    value: Decimal  # the value it confirms; a value changed since no longer counts as confirmed
+    source: str  # prior | label
+    detail: str
+
+
 class Spread(BaseModel):
     """Everything one run produced for one document."""
 
@@ -311,6 +323,7 @@ class Spread(BaseModel):
     prior_items: list[ReviewItem] = Field(default_factory=list)  # differences from approved spreads, kept apart:
     # the review is rebuilt after every correction, and these come from the company's history, not from the document
     echoes: list[Echo] = Field(default_factory=list)  # values printed again elsewhere in the document (spreader.echo)
+    confirmations: list[Confirmation] = Field(default_factory=list)  # from approved spreads (spreader.confirm)
 
     def value(self, line: str, period: str) -> SpreadValue | None:
         for v in self.values:

@@ -69,8 +69,8 @@ private-company packages in HTML, Excel and PDF, with exact keys.
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Wrong values caught | Review items per filing (median) | Source |
 |---|---|---|---|---|---|---|---|
-| SEC dev, HTML (tuned on) | 33 | 82.9% (3,664 of 4,422; 81.7-83.9%) | 0.0% (0 of 745; 0.0-0.5%) | 1.8% (78 of 4,422; 1.4-2.2%) | 100.0% (195 of 195; 98.1-100.0%) | 31 | `eval/reports/stmt-dev-d60` |
-| **SEC holdout, HTML (never tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 0.8% (5 of 626; 0.3-1.9%) | 1.7% (67 of 3,972; 1.3-2.1%) | 97.1% (165 of 170; 93.3-98.7%) | 32 | `eval/reports/stmt-holdout-d60` |
+| SEC dev, HTML (tuned on) | 33 | 82.9% (3,664 of 4,422; 81.7-83.9%) | 0.0% (0 of 985; 0.0-0.4%) | 1.8% (78 of 4,422; 1.4-2.2%) | 100.0% (195 of 195; 98.1-100.0%) | 31 | `eval/reports/stmt-dev-d61` |
+| **SEC holdout, HTML (never tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 0.6% (5 of 825; 0.3-1.4%) | 1.7% (67 of 3,972; 1.3-2.1%) | 97.1% (165 of 170; 93.3-98.7%) | 32 | `eval/reports/stmt-holdout-d61` |
 | SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,626; 2.4-3.6%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-recheck-2026-10-25.json` |
 | Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-units` |
 
@@ -84,8 +84,17 @@ Since D60 the same number printed again elsewhere in the document, under a simil
 confirmations, as long as the other is a check (never on a catch-all "other" line). Right values going out alone:
 SEC holdout 8.2% -> 19.1% (621 of 3,249), banks 10.6% -> 27.0%, insurers 8.8% -> 20.1%; three holdouts together 438 ->
 1,038. Silent errors across them 0.5% (5 of 1,043; 0.2-1.1%), against 0.7% (3 of 441): the two added are Honeywell's
-short-term debt, one row of the two the line should hold, printed again in its debt note. The table above is D60. The
-PDF and synthetic rows were measured before D59. Under 0.2% is not shown yet: even with no errors, about 1,900 values
+short-term debt, one row of the two the line should hold, printed again in its debt note.
+
+Since D61 two confirmations from approved work count too, on the same terms (beside a check, never on a catch-all
+line): the value equals the company's approved spread for that line and period, or its row's label has been placed on
+that line and approved unchanged in at least 7 other documents and never moved (`SPREADER_LABEL_RECORD_DOCS`). The
+table above is D61 with label records learned from the dev keys (no prior year): SEC holdout 25.2% of right values
+alone (820), banks 32.4%, insurers 23.6%. With last year's 10-K approved first (`eval/reports/company-memory-holdout-d61`):
+SEC holdout 34.3% (1,231 of 3,589 right values) and none wrong; with banks and insurers, 0 of 1,726 wrong (0.0-0.2%,
+upper bound 0.22%). That prior year was "approved" against its own answer key, which flatters it: a real analyst's
+approval can be wrong. The catch-all exclusion for label records was found on the SEC holdout (three values on "other"
+lines), so that holdout is no longer unseen for it. The PDF and synthetic rows were measured before D59. Under 0.2% is not shown yet: even with no errors, about 1,900 values
 accepted alone are needed to show it at z = 1.96.
 
 The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out without a person
@@ -130,10 +139,10 @@ sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Source |
 |---|---|---|---|---|---|
-| Banks, dev (tuned on) | 11 (1 crashed) | 82.7% (853 of 1,032; 80.2-84.8%) | 0.0% (0 of 272; 0.0-1.4%) | 5.9% (61 of 1,032; 4.6-7.5%) | `eval/reports/stmt-bank-dev-d60` |
-| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 0.0% (0 of 231; 0.0-1.6%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d60` |
-| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 0.0% (0 of 152; 0.0-2.5%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d60` |
-| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 0.0% (0 of 186; 0.0-2.0%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d60` |
+| Banks, dev (tuned on) | 11 (1 crashed) | 82.7% (853 of 1,032; 80.2-84.8%) | 0.0% (0 of 294; 0.0-1.3%) | 5.9% (61 of 1,032; 4.6-7.5%) | `eval/reports/stmt-bank-dev-d61` |
+| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 0.0% (0 of 277; 0.0-1.4%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d61` |
+| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 0.0% (0 of 168; 0.0-2.2%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d61` |
+| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 0.0% (0 of 218; 0.0-1.7%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d61` |
 
 IFRS is an overlay smoke-tested on a few filings, not measured: see `eval/coverage/checks.json`.
 

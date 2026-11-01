@@ -980,3 +980,35 @@ unknown wordings are placed, and one still set aside goes to a person.**
 - **Tests.** `tests/test_echo.py` (5): what is an echo and what is not (another label, a catch-all line, the statement's
   own table), echo with a check confirms, echo alone does not, an echo of a changed value confirms nothing. New code, so
   on the previous code the file cannot import.
+
+**D61. Two confirmations from approved work: the company's approved spread, and a label's record across documents.**
+- **Asked by Devin**: build ideas 3 (last year's approved spread) and 4 (the rule's track record) to raise the share
+  accepted alone.
+- **Idea 4 reshaped.** A rule's measured accuracy is too low to vouch for anything (the best, an exact alias, 96-98%), and
+  every value reaching confirmation already clears its rule's bar. What vouches is a specific label's record: "Total
+  assets" placed on total assets and approved unchanged in many documents, and never moved.
+- **Simulated first** (dev only; label records leave-one-document-out). Right / wrong values accepted alone beside D60's
+  rule: SEC (with the prior year approved, as `scripts/eval_company_memory.py` does) 809 / 0; + prior 1,314 / 0;
+  + label record of 2, 3, 5 documents 1,322, 1,234, 1,171 / 0; both 1,537, 1,501, 1,473 / 0. Banks 272 / 0; + label 2,
+  3, 5, 7, 9: 329 / 8, 318 / 3, 315 / 0, 294 / 0, 272 / 0. Insurers 152 / 0; + label 2, 3, 5, 7, 9: 203 / 2, 194 / 1,
+  188 / 1, 168 / 0, 152 / 0 (the one: EIG's revenue, a perfect label on the wrong table). SEC with 7: 1,132 / 0, with
+  the prior year 1,456 / 0. Chosen: 7 documents (`SPREADER_LABEL_RECORD_DOCS`), and a check still required.
+- **Built** (`spreader/confirm.py`). "prior": the value equals the company's approved spread for that line and period
+  within the rounding both carry. "label": every printed row behind the value carries a label approved on that line
+  unchanged in at least 7 other documents and moved in none. Each is kept on the spread (`Spread.confirmations`), shown
+  on the value as a "confirm" step, and counts one in `review.unconfirmed_items` while the value is unchanged. The
+  record is read from the reviewer outcomes folder at each run; approval and remap outcomes now carry the row's label.
+  `scripts/run_eval.py --label-record dev` and `scripts/eval_company_memory.py --label-record dev` learn it from the dev
+  keys; a document never counts toward its own record, so dev runs are leave-one-out.
+- **Found on the holdout, fixed, and said so.** The first SEC holdout run let 3 wrong values through on catch-all lines
+  (Old Dominion's other current assets, YETI's other non-operating income twice), as echoes had on the dev sets (D60).
+  Label records no longer confirm "other_*" lines; the SEC holdout is no longer unseen for that rule.
+- **Measured** against D60 (25949c7), right values accepted alone, all with none newly wrong: SEC dev 745 -> 985
+  (26.9%); banks dev 272 -> 294 (34.5%); insurers dev 152 -> 168 (23.2%); SEC holdout 621 -> 820 (25.2%; still the 5
+  wrong of D60: Tesla, Honeywell); banks holdout 231 -> 277 (32.4%); insurers holdout 186 -> 218 (23.6%). With the prior
+  year approved first: SEC dev 1,422 of 4,090 right values (34.8%), SEC holdout 1,231 of 3,589 (34.3%), none wrong
+  (0.0-0.3%); with banks and insurers, 0 of 1,726 (upper bound 0.22%). The prior year was approved against its own key,
+  which flatters it. Values right, blanks and review items per document unchanged.
+- **Not done.** Under 0.2% is in reach but not shown (0 of 1,726; about 1,900 needed). Next ideas: the model as a second
+  opinion, materiality tiers (Devin's call), a faster review.
+- **Tests.** `tests/test_prior_and_label_confirmations.py` (8). New code, so on the previous code the file cannot import.

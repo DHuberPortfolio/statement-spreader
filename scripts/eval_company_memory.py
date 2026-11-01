@@ -100,6 +100,8 @@ def main() -> int:
     ap.add_argument("--split", default="dev", choices=["dev", "holdout"])
     ap.add_argument("--save", default=None)
     ap.add_argument("--outcomes", default=None, help="write memory.company mapping outcomes (JSONL) here")
+    ap.add_argument("--label-record", choices=["dev", "holdout"], default=None,
+                    help="also count label records (D61) learned from this split's answer keys (run_eval.py)")
     args = ap.parse_args()
     name = args.save or f"company-memory-{args.split}"
     profile = load_profile()
@@ -107,6 +109,11 @@ def main() -> int:
     prior_manifest = json.loads((SEC / "manifest-prior.json").read_text())
     tickers = sorted(t for t, m in cur_manifest.items() if m["split"] == args.split and t in prior_manifest
                      and (SEC / "raw" / m["file"]).exists() and (SEC / "raw-prior" / prior_manifest[t]["file"]).exists())
+    record = None
+    if args.label_record:
+        from run_eval import label_record_from_keys, sec_docs
+
+        record = label_record_from_keys(sec_docs(args.label_record), profile)
     without, with_mem, prior_scores = [], [], []
     items_by: Counter[str] = Counter()
     verdicts: Counter[tuple[str, str]] = Counter()
@@ -131,8 +138,8 @@ def main() -> int:
         key = AnswerKey.load(SEC / "keys" / f"{t}.json")
         ir = read_document(m["file"], (SEC / "raw" / m["file"]).read_bytes())
         try:
-            base, _ = spread_document(ir, profile)
-            mem, _ = spread_document(ir, profile, company=ctx)
+            base, _ = spread_document(ir, profile, record=record)
+            mem, _ = spread_document(ir, profile, company=ctx, record=record)
         except Exception as exc:  # noqa: BLE001
             crashes.append(f"{t} current year: {type(exc).__name__}: {exc}")
             print(f"{t:6s} CURRENT YEAR CRASHED ({type(exc).__name__}: {exc}); not counted")
@@ -188,6 +195,8 @@ def main() -> int:
         "prior_items": dict(items_by), "verdicts": {f"{a} | {b}": n for (a, b), n in sorted(verdicts.items())},
         "memory_rows": sum(d["memory_rows"] for d in per_doc), "memory_rows_right": sum(d["memory_rows_right"] for d in per_doc),
         "prior_year_spread": {k: v.as_dict() for k, v in rates(prior_scores).items()}, "documents_detail": per_doc,
+        "label_record": args.label_record,
+        "buckets": {"without": dict(summarize(without).buckets), "with": dict(summarize(with_mem).buckets)},
     }
     report["provenance"] = provenance([f"sec-{args.split}", f"sec-{args.split}-prior"],
                                       {"profile": f"{profile.id} {profile.version}+{profile.content_hash}"})

@@ -21,6 +21,7 @@ from .company import CompanyContext, compare_with_approved
 from .units import resolve_units
 from .contracts import DocumentIR, ProvenanceStep, SourceFormat, Spread, StatementResult, StatementType
 from .detect import classify
+from .confirm import LabelRecord, find_confirmations
 from .echo import find_echoes
 from .layout import lay_out
 from .mapping import Memory, ModelMapper, map_table
@@ -106,8 +107,10 @@ def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dic
 
 def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = None,
                     model: ModelMapper | None = None, company: CompanyContext | None = None,
-                    tags: dict[str, list[TagFact]] | None = None) -> tuple[Spread, dict[str, float]]:
-    """tags: the opt-in second reader's inline XBRL facts by cell (spreader.second_reader); None leaves it off."""
+                    tags: dict[str, list[TagFact]] | None = None,
+                    record: LabelRecord | None = None) -> tuple[Spread, dict[str, float]]:
+    """tags: the opt-in second reader's inline XBRL facts by cell (spreader.second_reader); None leaves it off.
+    record: placements reviewers approved in other documents (spreader.confirm); None counts no label record."""
     timer = StageTimer()
     picked = pick_statements(doc, profile, timer)
     statements: dict[str, StatementResult] = {}
@@ -167,8 +170,11 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
         where = f"page {e.ref.page}" if e.ref.page else (f"cell {e.ref.cell}" if e.ref.cell else f"table {e.ref.table + 1}")
         by_key[(e.line, e.period)].steps.append(ProvenanceStep(
             kind="confirm", detail=f"The same number is printed again under '{e.label}' ({where})."))
+    confirmations = timer.run("confirmations", find_confirmations, doc.doc_id, statements, values, profile, company, record)
+    for c in confirmations:
+        by_key[(c.line, c.period)].steps.append(ProvenanceStep(kind="confirm", detail=c.detail))
     review = review + timer.run("confirm", unconfirmed_items, values, checks, review + prior + second, profile,
-                                None, echoes)
+                                None, echoes, confirmations)
     attach_flags(values, review + prior + second)
 
     order = {ln: i for i, ln in enumerate(profile.lines)}
@@ -176,7 +182,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     spread = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version=f"{profile.version}+{profile.content_hash}",
                     statements=statements, periods=periods, values=values, checks=checks, ratios=ratios,
                     review=review + prior + second, warnings=list(doc.warnings), prior_items=prior,
-                    second_reader_items=second, echoes=echoes,
+                    second_reader_items=second, echoes=echoes, confirmations=confirmations,
                     company_id=company.company_id if company else None,
                     company_version=company.version if company else None)
     return spread, timer.timings

@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from finops.core.evaluation import provenance, provenance_lines
+from spreader.confirm import LabelRecord
 from spreader.evaluation.ixbrl_truth import build_key
 from spreader.evaluation.score import DocScore, score, summarize
 from spreader.evaluation.stats import Rate
@@ -79,6 +80,31 @@ def synthetic_docs(formats: list[str]) -> list[tuple[str, Path, Path]]:
     return out
 
 
+def label_record_from_keys(docs: list[tuple[str, Path, Path]], profile) -> LabelRecord:  # type: ignore[no-untyped-def]
+    """What reviewers would have taught (D61), with the answer keys standing in for them: each placed row the key
+    judges is approved unchanged when right and moved when wrong, under the document's id."""
+    rec = LabelRecord()
+    for _, path, key_path in docs:
+        try:
+            ir = read_document(path.name, path.read_bytes())
+            spread, _ = spread_document(ir, profile)
+            s = score(spread, AnswerKey.load(key_path))
+        except Exception:  # noqa: BLE001 - a document that cannot be spread teaches nothing
+            continue
+        rows: dict[str, bool] = {}
+        for c in s.cells:
+            if c.found and c.mapping_ok is not None and c.row and c.line_pred:
+                rows[c.row] = rows.get(c.row, True) and bool(c.mapping_ok)
+        for rk, ok in rows.items():
+            st, idx = rk.split(":")
+            res = spread.statements.get(st)
+            m = next((m for m in res.mappings if m.row_index == int(idx)), None) if res else None
+            row = next((r for r in res.table.rows if r.index == int(idx)), None) if res else None
+            if m and row and m.canonical:
+                rec.add((st, row.label_clean, m.canonical), ir.doc_id, ok)
+    return rec
+
+
 def rates(scores: list[DocScore]) -> dict[str, Rate]:
     b = summarize(scores).buckets
     present = b["correct_auto"] + b["correct_review"] + b["wrong_auto"] + b["wrong_review"]
@@ -112,6 +138,9 @@ def main() -> None:
     ap.add_argument("--industry", choices=sorted(INDUSTRY_PROFILES), default=None,
                     help="banks' or insurers' 10-Ks with that industry's profile (eval/industry, D41) instead of the "
                          "commercial SEC set")
+    ap.add_argument("--label-record", choices=["dev", "holdout"], default=None,
+                    help="count label records (D61) learned from this split's answer keys; a document never counts "
+                         "toward its own record, so --split dev --label-record dev is leave-one-out")
     args = ap.parse_args()
     if args.engine != "statements":
         name = args.save or f"{args.engine}-latest"
@@ -154,6 +183,12 @@ def main() -> None:
     if not docs:
         sys.exit("no documents")
 
+    record = None
+    if args.label_record:
+        src = (industry_docs(args.industry, args.label_record) if args.industry else sec_docs(args.label_record))
+        record = label_record_from_keys(src, profile)
+        print(f"label record from the {args.label_record} split: {sum(len(v) for v in record.right.values())} approved "
+              f"placements, {sum(len(v) for v in record.wrong.values())} moved")
     scores: list[DocScore] = []
     per_doc: list[dict] = []
     t_all = time.perf_counter()
@@ -169,7 +204,8 @@ def main() -> None:
                 key_path.parent.mkdir(parents=True, exist_ok=True)
                 key.save(key_path)
             ir = read_document(path.name, data)
-            spread, _ = spread_document(ir, profile, model=model, tags=tagged_cells(data) if args.xbrl_check else None)
+            spread, _ = spread_document(ir, profile, model=model, tags=tagged_cells(data) if args.xbrl_check else None,
+                                        record=record)
             s = score(spread, key)
         except Exception as exc:  # a crash is a result too: record it, keep going
             s = DocScore(document=doc_id, source=doc_id.split(":")[0], error=f"{type(exc).__name__}: {exc}")

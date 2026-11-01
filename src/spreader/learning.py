@@ -40,7 +40,8 @@ def approval_outcomes(spread: Spread, state: dict[str, Any], refs: dict[str, Any
                 continue
             out.append(Outcome(engine="statements", method=m.rule or m.method.value, right=True, how="approved_unchanged",
                                subject=_subject(skey, rows.get(m.row_index), m), decided_by=actor, decided_at=at,
-                               refs={**refs, "statement": skey, "row": m.row_index, "line": m.canonical}))
+                               refs={**refs, "statement": skey, "row": m.row_index, "line": m.canonical,
+                                     "label": rows[m.row_index].label_clean if m.row_index in rows else ""}))
         scaled = [k for k, o in overrides.items()
                   if line_statement.get(k.split("@", 1)[0]) is StatementType(skey) and o.get("previous") is not None
                   and _power_of_ten(Decimal(str(o["value"])), Decimal(str(o["previous"])))]
@@ -60,7 +61,8 @@ def remap_outcome(skey: str, row: StatementRow, mapping: RowMapping | None, new_
     return Outcome(engine="statements", method=mapping.rule or mapping.method.value, right=False,
                    how="excluded" if not new_line else "remapped", subject=_subject(skey, row, mapping),
                    decided_by=actor, decided_at=at,
-                   refs={**refs, "statement": skey, "row": row.index, "line": mapping.canonical, "moved_to": new_line})
+                   refs={**refs, "statement": skey, "row": row.index, "line": mapping.canonical, "moved_to": new_line,
+                         "label": row.label_clean})
 
 
 def _subject(skey: str, row: StatementRow | None, m: RowMapping) -> str:
