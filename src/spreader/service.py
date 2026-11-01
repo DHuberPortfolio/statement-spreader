@@ -499,7 +499,7 @@ class Service:
         settle(review)
         # Confirmation is judged after the other items are settled: a value whose doubt a person resolved needs
         # confirming like any other (D59).
-        confirm = unconfirmed_items(values, checks, review, self.profile)
+        confirm = unconfirmed_items(values, checks, review, self.profile, None, spread.echoes)
         settle(confirm)
         review += confirm
         attach_flags(values, review)

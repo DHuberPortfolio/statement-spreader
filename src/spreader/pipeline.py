@@ -19,8 +19,9 @@ from typing import Any, TypeVar
 from .checks import add_derived, run_checks, run_ratios
 from .company import CompanyContext, compare_with_approved
 from .units import resolve_units
-from .contracts import DocumentIR, SourceFormat, Spread, StatementResult, StatementType
+from .contracts import DocumentIR, ProvenanceStep, SourceFormat, Spread, StatementResult, StatementType
 from .detect import classify
+from .echo import find_echoes
 from .layout import lay_out
 from .mapping import Memory, ModelMapper, map_table
 from .profile import Profile
@@ -160,7 +161,14 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
         partial = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version="", statements=statements,
                          periods=periods, values=values)
         second = timer.run("second_reader", compare_tags, partial, tags).items
-    review = review + timer.run("confirm", unconfirmed_items, values, checks, review + prior + second, profile)
+    echoes = timer.run("echo", find_echoes, doc, statements, values, profile)
+    by_key = {(v.line, v.period): v for v in values}
+    for e in echoes:
+        where = f"page {e.ref.page}" if e.ref.page else (f"cell {e.ref.cell}" if e.ref.cell else f"table {e.ref.table + 1}")
+        by_key[(e.line, e.period)].steps.append(ProvenanceStep(
+            kind="confirm", detail=f"The same number is printed again under '{e.label}' ({where})."))
+    review = review + timer.run("confirm", unconfirmed_items, values, checks, review + prior + second, profile,
+                                None, echoes)
     attach_flags(values, review + prior + second)
 
     order = {ln: i for i, ln in enumerate(profile.lines)}
@@ -168,7 +176,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     spread = Spread(doc_id=doc.doc_id, profile_id=profile.id, profile_version=f"{profile.version}+{profile.content_hash}",
                     statements=statements, periods=periods, values=values, checks=checks, ratios=ratios,
                     review=review + prior + second, warnings=list(doc.warnings), prior_items=prior,
-                    second_reader_items=second,
+                    second_reader_items=second, echoes=echoes,
                     company_id=company.company_id if company else None,
                     company_version=company.version if company else None)
     return spread, timer.timings

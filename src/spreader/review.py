@@ -15,6 +15,7 @@ from finops.core.policy import Finding
 from .contracts import (
     CheckResult,
     CheckStatus,
+    Echo,
     MapMethod,
     RatioResult,
     ReviewItem,
@@ -367,13 +368,18 @@ def confirmations_required() -> int:
 
 
 def unconfirmed_items(values: list[SpreadValue], checks: list[CheckResult], items: list[ReviewItem], profile: Profile,
-                      required: int | None = None) -> list[ReviewItem]:
-    """Values nothing doubts that too few passing checks confirm, one warning per statement and period (D59).
+                      required: int | None = None, echoes: list[Echo] | None = None) -> list[ReviewItem]:
+    """Values nothing doubts that too few confirmations back, one warning per statement and period (D59, D60).
 
     A single check can hold with a wrong value in it: two errors that cancel (an amount moved between two lines of one
     sum) or a whole consistent set read from the wrong table. Measured on the dev sets, values in at least one passing
-    check were wrong 0.8-3.0% of the time, in at least two 0 of 489. A value a person entered is confirmed by them."""
+    check were wrong 0.8-3.0% of the time, in at least two 0 of 489. A value a person entered is confirmed by them.
+
+    The same number printed again elsewhere in the document (spreader.echo) is one confirmation, but at least one must
+    be a check: a repeated number proves the reading, and only a check says the line holds what it should (on the dev
+    sets, echo with a printed total's footing and no check let 4 wrong values through; echo with a check, none)."""
     need = confirmations_required() if required is None else required
+    echoed = {(e.line, e.period, e.value) for e in echoes or []}
     if need == 0:
         return []
     doubted: set[tuple[str, str]] = set()
@@ -396,7 +402,8 @@ def unconfirmed_items(values: list[SpreadValue], checks: list[CheckResult], item
     for v in values:
         if v.value is None or v.status is ValueStatus.HUMAN or (v.line, v.period) in doubted:
             continue
-        if len(held.get((v.line, v.period), ())) >= need:
+        n_checks = len(held.get((v.line, v.period), ()))
+        if n_checks >= need or (n_checks >= 1 and n_checks + ((v.line, v.period, v.value) in echoed) >= need):
             continue
         by_group.setdefault((profile.line_statement[v.line].value, v.period), []).append(v.line)
     out = []
@@ -406,7 +413,8 @@ def unconfirmed_items(values: list[SpreadValue], checks: list[CheckResult], item
             id=f"unconfirmed:{skey}:{period}", kind=ReviewKind.UNCONFIRMED, severity=Severity.WARNING,
             statement=StatementType(skey), lines=lines, periods=[period],
             message=(f"{len(lines)} value{'s' if len(lines) != 1 else ''} for {period} {'are' if len(lines) != 1 else 'is'} "
-                     f"not confirmed by {need} of the statement's checks: {names}. Compare them with the document.")))
+                     f"not confirmed {need} times (a check that held, or the same number printed elsewhere in the "
+                     f"document): {names}. Compare them with the document.")))
     return out
 
 

@@ -282,6 +282,16 @@ class RatioResult(BaseModel):
     note: str = ""
 
 
+class Echo(BaseModel):
+    """A spread value's printed number found again, under a similar label, in another table of the document (D60)."""
+
+    line: str
+    period: str
+    value: Decimal  # the spread value it confirms; a value changed since no longer counts as confirmed
+    label: str  # the other table's row label
+    ref: SourceRef  # where the repeated number is printed
+
+
 class Spread(BaseModel):
     """Everything one run produced for one document."""
 
@@ -300,6 +310,7 @@ class Spread(BaseModel):
     second_reader_items: list[ReviewItem] = Field(default_factory=list)  # opt-in XBRL comparison (spreader.second_reader)
     prior_items: list[ReviewItem] = Field(default_factory=list)  # differences from approved spreads, kept apart:
     # the review is rebuilt after every correction, and these come from the company's history, not from the document
+    echoes: list[Echo] = Field(default_factory=list)  # values printed again elsewhere in the document (spreader.echo)
 
     def value(self, line: str, period: str) -> SpreadValue | None:
         for v in self.values:

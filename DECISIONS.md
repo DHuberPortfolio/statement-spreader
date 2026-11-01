@@ -948,3 +948,35 @@ unknown wordings are placed, and one still set aside goes to a person.**
   holdout) and cross-statement ties.
 - **Tests.** `tests/test_confirmation.py` (6). The rule is new, so on the previous code the file cannot import; the
   service test is the behavioural one: an unconfirmed value is flagged, and resolving its item clears the flag.
+
+**D60. The same number printed twice counts as one confirmation, beside a check; footing does not count.**
+- **Asked by Devin**: raise the share of values accepted alone (8-12% after D59), creatively; chose to start with a
+  printed total's footing and repeated numbers.
+- **Why values were held back** (dev sets): of the right values D59 sent to review, about half were in no check at all
+  (commercial 1,087, banks 330, insurers 388: depreciation, stock pay, capital spending, EPS, shares, retained
+  earnings, SG&A) and half in exactly one (1,076, 291, 199: cash from operations, revenue, total assets).
+- **Simulated first** (dev only), right / wrong values accepted alone. Footing (the value's printed row is a total that
+  foots or sits inside one) beside checks: 1,121 / 10, 305 / 12, 223 / 2. It proves the number was read right, not that
+  the line holds the right rows: the leaks were the consistent-but-wrong sets of D59 (Bank of America's loans, Western
+  Alliance's cash flows, EIG's revenue). A repeated number beside checks: 765 / 8, 272 / 0, 152 / 0; all 8 on "other
+  non-operating income", a catch-all line whose rows differ from the key's. Without catch-all lines: 745 / 0, 272 / 0,
+  152 / 0. Adding footing for values a repeated number confirms but no check does: 986 / 0, 374 / 4, 322 / 0 (Bank of
+  America's cash and Regions' common stock: a line's meaning only a check vouches for). Chosen: a repeated number
+  counts, never on a catch-all line, and at least one confirmation must be a check.
+- **Built.** `spreader/echo.py`: every significant number (three or more significant digits) printed in any table,
+  matched to a value's single source row when a row in another table reads alike (token-sort similarity >= 80);
+  numbers compared as printed, so a note in another unit confirms nothing. Each echo is kept on the spread
+  (`Spread.echoes`, with where it is printed) and shown on the value as a "confirm" step; it counts only while the value
+  is unchanged. `review.unconfirmed_items` counts it.
+- **Measured** against D59 (72e56de). Dev, right values accepted alone: 329 -> 745 (9.0% -> 20.3%), 103 -> 272
+  (12.1% -> 31.9%), 57 -> 152 (7.9% -> 21.0%), none wrong (0 of 1,169; 0.0-0.3%). Holdouts, measured once: SEC 266 ->
+  621 (8.2% -> 19.1%), banks 91 -> 231 (10.6% -> 27.0%), insurers 81 -> 186 (8.8% -> 20.1%); silent errors SEC 3 of 269
+  -> 5 of 626, banks 0 of 231, insurers 0 of 186; three together 3 of 441 (0.7%) -> 5 of 1,043 (0.5%; 0.2-1.1%). The
+  two added are Honeywell's short-term debt: the line took one printed row where the key adds two, and that row is
+  printed again in the debt note; found on the holdout, not fixed here. Values right, blanks and review items per
+  document unchanged (items are per statement and period).
+- **Not done.** Last year's approved spread as a confirmation (next), the rule's track record, the model as a second
+  opinion. Under 0.2% still not shown: about 1,900 values accepted alone with no errors are needed.
+- **Tests.** `tests/test_echo.py` (5): what is an echo and what is not (another label, a catch-all line, the statement's
+  own table), echo with a check confirms, echo alone does not, an echo of a changed value confirms nothing. New code, so
+  on the previous code the file cannot import.
