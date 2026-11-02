@@ -195,7 +195,7 @@ the saved-error checks are tested only by unit tests; no real company's model ha
 
 ## Overnight log (2026-10-25)
 
-Work order: OVERNIGHT_REPORT.md. Branch `overnight-2026-10-25`.
+Work order: [docs/OVERNIGHT_REPORT.md](docs/OVERNIGHT_REPORT.md). Branch `overnight-2026-10-25`.
 
 | # | Change | Measured | Kept? |
 |---|---|---|---|
@@ -254,3 +254,55 @@ Tune half (15 packages, 2,047 to 2,103 key values per variant): text layer 77.8%
 5. Scoring: the PDF scorer places company-specific rows by printed label, which OCR spells differently; a
    label-insensitive way (position in the statement) would remove 12 of the 40 added silent errors on the check half,
    if they are indeed not errors. Change it only with a test on the text-layer set showing no figure moves.
+
+## Earlier README results
+
+Moved from the README on 2026-11-02 so its opening stays short; the text is unchanged.
+
+**The accept-alone rule, step by step (D59-D61).**
+
+Since D59 a value goes out without a person only when two different checks that ran and held include it
+(`SPREADER_CONFIRMATIONS`, 2 by default; 0 restores the old rule). The silent error rate fell from 3.0% (114 of 3,779)
+to 0.7% (3 of 441; 0.2-2.0%) across the three holdouts, and from 1.3% to 1.1% (3 of 269) on the SEC holdout alone:
+all three are Tesla's net income to the company, a consistent set two checks could not see. The price: 8-12% of
+right values now go out alone (SEC holdout 266 of 3,249, against 2,138 before), the rest wait for a person.
+
+Since D60 the same number printed again elsewhere in the document, under a similar label, counts as one of the two
+confirmations, as long as the other is a check (never on a catch-all "other" line). Right values going out alone:
+SEC holdout 8.2% -> 19.1% (621 of 3,249), banks 10.6% -> 27.0%, insurers 8.8% -> 20.1%; three holdouts together 438 ->
+1,038. Silent errors across them 0.5% (5 of 1,043; 0.2-1.1%), against 0.7% (3 of 441): the two added are Honeywell's
+short-term debt, one row of the two the line should hold, printed again in its debt note.
+
+Since D61 two confirmations from approved work count too, on the same terms (beside a check, never on a catch-all
+line): the value equals the company's approved spread for that line and period, or its row's label has been placed on
+that line and approved unchanged in at least 7 other documents and never moved (`SPREADER_LABEL_RECORD_DOCS`). The
+README's table was D61 with label records learned from the dev keys (no prior year): SEC holdout 25.2% of right values
+alone (820), banks 32.4%, insurers 23.6%. With last year's 10-K approved first (`eval/reports/company-memory-holdout-d61`):
+SEC holdout 34.3% (1,231 of 3,589 right values) and none wrong; with banks and insurers, 0 of 1,726 wrong (0.0-0.2%,
+upper bound 0.22%). That prior year was "approved" against its own answer key, which flatters it: a real analyst's
+approval can be wrong. The catch-all exclusion for label records was found on the SEC holdout (three values on "other"
+lines), so that holdout is no longer unseen for it. The PDF and synthetic rows were measured before D59. Under 0.2% is not shown yet: even with no errors, about 1,900 values
+accepted alone are needed to show it at z = 1.96.
+
+The holdout gains since 2026-10-24 (74.1% right, 49 silent errors) come from two engine fixes, each measured once
+there: fiscal years named by their first calendar year (#24) and units decided from evidence (#26).
+
+**Company memory, as first measured (2026-10-24, DECISIONS D36)**, before those two fixes:
+
+| Set | Silent error rate | Wrong values caught | Values right | Review items per filing (median) | Source |
+|---|---|---|---|---|---|
+| SEC dev, 33 companies | 0.7% (20 of 2,913; 0.4-1.1%) | 81.8% (90 of 110; 73.6-87.9%) | 92.3% (4,051 of 4,391; 91.4-93.0%) | 24 | `eval/reports/company-memory-dev` |
+| SEC holdout, 29 companies (measured once) | 0.4% (10 of 2,334; 0.2-0.8%) | 97.2% (350 of 360; 95.0-98.5%) | 81.7% (3,154 of 3,859; 80.5-82.9%) | 26 | `eval/reports/company-memory-holdout` |
+
+**Earlier statement-engine measurements.**
+
+- **Statement engine**: anchoring column dates on the balance sheet and flagging every gap cut silent omissions on the dev
+  split from 3.9% to 2.2% and on the never-tuned holdout from 5.3% to 3.9%, without adding silent errors (holdout 68 -> 66).
+- **Statement answer keys** (a scorer fix, engine unchanged): the key builder now reads each filing's own calculation
+  links, so a total and its part tagged on one line are no longer added together (Walmart's revenue key was about twice
+  its revenue). Same engine output, old keys against new: silent errors 70 -> 60 on dev, 66 -> 55 on the holdout, 87 -> 77
+  on the printed PDFs.
+- **An outside test run on a fresh Linux install** found that lxml's Linux wheels stop reading at the first `</html>`
+  (a second statement in the same file vanished) and that the reader hid Deckers' entire 10-K behind a `font-size:0`
+  page wrapper, so the holdout had scored 29 of 30 filings. Both are fixed and measured (#17-#18: holdout with all 30
+  filings, 74.1% right, 55 silent errors of 2,139).

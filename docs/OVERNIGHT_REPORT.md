@@ -1,5 +1,7 @@
 # Overnight report: 2026-10-25
 
+> Archived working notes, moved here from the repository root on 2026-11-02. Current state: the [README](../README.md), [IMPROVEMENT_LOG.md](../IMPROVEMENT_LOG.md) and [PRODUCTION_READINESS.md](../PRODUCTION_READINESS.md).
+
 Branch `overnight-2026-10-25`, cut from `main` at 8e644a7. Written as the night goes, so it is useful wherever it
 stops.
 

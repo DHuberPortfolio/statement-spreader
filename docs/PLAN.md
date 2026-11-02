@@ -1,8 +1,10 @@
 # Plan and status
 
+> Archived working notes, moved here from the repository root on 2026-11-02. Current state: the [README](../README.md), [IMPROVEMENT_LOG.md](../IMPROVEMENT_LOG.md) and [PRODUCTION_READINESS.md](../PRODUCTION_READINESS.md).
+
 Since 2026-10-24 afternoon this repository is a small finance operations platform: the statement spreader below
 (engine one, unchanged), plus reconciliation (engine two) and invoice intake with three-way matching (engine
-three) on a shared core. Platform architecture: [ARCHITECTURE.md](ARCHITECTURE.md). Platform status is at the end
+three) on a shared core. Platform architecture: [ARCHITECTURE.md](../ARCHITECTURE.md). Platform status is at the end
 of this file.
 
 Statement Spreader: financial statements (HTML, PDF, Excel) in; a standard spread out, where every

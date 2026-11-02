@@ -1,10 +1,27 @@
 # Finance Operations Platform (statement-spreader)
 
-A local, $0 platform that does the keying and ticking finance teams do by hand, checks it, and sends only what it is
-unsure of to a person. Built as the foundation for a real deployment: trustworthy before fast, every number traceable
-to where it was printed, every change measured, and adaptable to a company's own data through configuration. **A
-tested prototype, not a production system**: one machine, sign-in tested only against a local test identity provider, measured on public filings and
-synthetic data only. Progress toward production: [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md).
+- **What it does:** reads a company's financial statements (SEC 10-K, PDF, Excel) and keys them into a standard credit spread.
+- **How it stays safe:** every number links to the cell it was printed in; accounting checks test that the numbers add up; anything in doubt goes to a person.
+- **Also included:** bank-to-ledger reconciliation, invoice matching, a data-quality gate for vendor exports, and a spreadsheet risk scanner.
+- **Cost to run:** nothing per document. It runs on one machine; an optional local AI model only suggests, and a person confirms.
+- **Status:** a tested prototype, not a production system, measured on public SEC filings and synthetic data ([PRODUCTION_READINESS.md](PRODUCTION_READINESS.md)).
+
+## Results at a glance
+
+Statement spreading on SEC 10-K filings the engine was never tuned on (the holdout sets), measured 2026-11-01:
+
+| Set | Values read right | Right values that go out with no review | Wrong values that go out with no review |
+|---|---|---|---|
+| Commercial companies, 30 filings | 81.8% (3,249 of 3,972) | 25.2% (820) | 0.6% (5 of 825) |
+| Same, with last year's spread already approved | 91.1% (3,589 of 3,938) | 34.3% (1,231) | 0.0% (0 of 1,231) |
+| Banks, 10 filings | 71.0% (856 of 1,206) | 32.4% (277) | 0.0% (0 of 277) |
+| Insurers, 14 filings | 63.1% (924 of 1,465) | 23.6% (218) | 0.0% (0 of 218) |
+
+Everything else (wrong values, blanks, values in doubt) goes to an analyst, who approves the spread. The last column
+is the one that matters most: across the last three rows, 0 of 1,726 values that went out alone were wrong (likely
+range 0.0-0.2%). That prior year was approved against its own answer key, so a real
+analyst's approvals would carry some errors forward. Full results, the dev sets and what the numbers do not show:
+[below](#financial-statement-spreading-results); the history of each change: [IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md).
 
 ## Who uses it, what it replaces, what stays human
 
@@ -17,7 +34,7 @@ synthetic data only. Progress toward production: [PRODUCTION_READINESS.md](PRODU
 | Model owners, reviewers | Hunting for broken formulas in workbooks and between versions | Confirming or dismissing each finding with a reason; definite errors cannot be dismissed |
 
 No language model decides anything. A local model may suggest a mapping or draft wording configuration; a person
-confirms both, and its own stated confidence is never used (DECISIONS D8, D27, D35).
+confirms both, and its own stated confidence is never used.
 
 ## How it fits together
 
@@ -52,13 +69,13 @@ flowchart LR
 ```
 
 Each hexagon is a human decision, taken by a named person with a reason. What the platform does alone is narrow: it
-accepts a value or settles a match only on a rule whose accuracy was measured (DECISIONS D35), and the furthest an
-invoice goes without a person is "eligible for approval" (D21). A spread is approved, a held record released and a
+accepts a value or settles a match only on a rule whose accuracy was measured, and the furthest an invoice goes
+without a person is "eligible for approval". A spread is approved, a held record released and a
 changed bank account accepted only by a person, and approval is refused while a blocking item is open. Internals:
 [ARCHITECTURE.md](ARCHITECTURE.md); why each choice: [DECISIONS.md](DECISIONS.md); how every number below was
 produced: [TESTING.md](TESTING.md).
 
-## Financial statement spreading: results (2026-10-25)
+## Financial statement spreading: results
 
 Statements in (an SEC 10-K, a PDF, an Excel workbook), a standard spread out: every line mapped to one template, each
 number traced to the printed cell it came from, checked by accounting identities, auto-accepted only when nothing
@@ -74,34 +91,17 @@ private-company packages in HTML, Excel and PDF, with exact keys.
 | SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,626; 2.4-3.6%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-recheck-2026-10-25.json` |
 | Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-units` |
 
-Since D59 a value goes out without a person only when two different checks that ran and held include it
-(`SPREADER_CONFIRMATIONS`, 2 by default; 0 restores the old rule). The silent error rate fell from 3.0% (114 of 3,779)
-to 0.7% (3 of 441; 0.2-2.0%) across the three holdouts, and from 1.3% to 1.1% (3 of 269) on the SEC holdout alone:
-all three are Tesla's net income to the company, a consistent set two checks could not see. The price: 8-12% of
-right values now go out alone (SEC holdout 266 of 3,249, against 2,138 before), the rest wait for a person.
-
-Since D60 the same number printed again elsewhere in the document, under a similar label, counts as one of the two
-confirmations, as long as the other is a check (never on a catch-all "other" line). Right values going out alone:
-SEC holdout 8.2% -> 19.1% (621 of 3,249), banks 10.6% -> 27.0%, insurers 8.8% -> 20.1%; three holdouts together 438 ->
-1,038. Silent errors across them 0.5% (5 of 1,043; 0.2-1.1%), against 0.7% (3 of 441): the two added are Honeywell's
-short-term debt, one row of the two the line should hold, printed again in its debt note.
-
-Since D61 two confirmations from approved work count too, on the same terms (beside a check, never on a catch-all
-line): the value equals the company's approved spread for that line and period, or its row's label has been placed on
-that line and approved unchanged in at least 7 other documents and never moved (`SPREADER_LABEL_RECORD_DOCS`). The
-table above is D61 with label records learned from the dev keys (no prior year): SEC holdout 25.2% of right values
-alone (820), banks 32.4%, insurers 23.6%. With last year's 10-K approved first (`eval/reports/company-memory-holdout-d61`):
-SEC holdout 34.3% (1,231 of 3,589 right values) and none wrong; with banks and insurers, 0 of 1,726 wrong (0.0-0.2%,
-upper bound 0.22%). That prior year was "approved" against its own answer key, which flatters it: a real analyst's
-approval can be wrong. The catch-all exclusion for label records was found on the SEC holdout (three values on "other"
-lines), so that holdout is no longer unseen for it. The PDF and synthetic rows were measured before D59. Under 0.2% is not shown yet: even with no errors, about 1,900 values
-accepted alone are needed to show it at z = 1.96.
+**When a value goes out without review.** Only when two separate confirmations agree with it, and at least one is
+an accounting check that ran and held. The other can be a second check, the same number printed again elsewhere in
+the filing under a similar label, the company's approved spread from last year, or a label analysts have approved on
+that line in at least 7 other documents and never moved. Catch-all "other" lines are never confirmed by the last
+three. Everything else waits for a person. The PDF and synthetic rows above were measured before this rule. A rate
+under 0.2% is not shown yet: even with no errors, that takes about 1,900 values accepted alone (at z = 1.96).
 
 The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out without a person
 looking, how much is wrong. The holdout was measured at most once per kept change and never used to design one;
-IMPROVEMENT_LOG records each measurement, and the times it was used to confirm a decision. The holdout gains since
-2026-10-24 (74.1% right, 49 silent errors) come from two engine fixes, each measured once there: fiscal years named by
-their first calendar year (IMPROVEMENT_LOG #24) and units decided from evidence (#26).
+[IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md) records each measurement, the times a holdout was used to confirm a decision,
+and how each figure moved.
 
 **Units** (DECISIONS D39): a unit read wrong by a factor of 1,000 makes a whole statement wrong, so where a statement's
 unit came from is a measured rule like any mapping rule. A unit printed at the table (188 of 188 right on the dev
@@ -116,19 +116,13 @@ moving a value to another line, accepting or rejecting a match) is written to an
 each rule's accuracy with those decisions included, so a rule earns or loses the right to act alone from the
 organisation's own documents; the Accuracy page shows what has been recorded.
 
-**With last year's approved spread** (company memory, on by default since 2026-10-25; DECISIONS D36): the prior-year 10-K
-is approved against its own key as a stand-in for an analyst, then the current one is spread with what that approval
-left behind. A document's company is set at upload or later, on the Statements page. These figures were measured on
-2026-10-24, before the two fixes above.
-
-| Set | Silent error rate | Wrong values caught | Values right | Review items per filing (median) | Source |
-|---|---|---|---|---|---|
-| SEC dev, 33 companies | 0.7% (20 of 2,913; 0.4-1.1%) | 81.8% (90 of 110; 73.6-87.9%) | 92.3% (4,051 of 4,391; 91.4-93.0%) | 24 | `eval/reports/company-memory-dev` |
-| SEC holdout, 29 companies (measured once) | 0.4% (10 of 2,334; 0.2-0.8%) | 97.2% (350 of 360; 95.0-98.5%) | 81.7% (3,154 of 3,859; 80.5-82.9%) | 26 | `eval/reports/company-memory-holdout` |
-
-The stand-in approval is perfect (the key), so these are an upper bound on what a real analyst's approvals carry
-forward. A difference from an approved value is a warning that says whether it is likely a misread or a restatement;
-"misread" is usually right (120 of 129 judged on the holdout), "restatement" is not reliable (6 of 16).
+**With last year's approved spread** (company memory, on by default): the prior-year 10-K is approved against its
+own key as a stand-in for an analyst, then the current one is spread with what that approval left behind
+(`eval/reports/company-memory-holdout-d61`; the results table at the top). A document's company is set at upload or
+later, on the Statements page. The stand-in approval is perfect (the key), so these are an upper bound on what a real
+analyst's approvals carry forward. A difference from an approved value is a warning that says whether it is likely a
+misread or a restatement; "misread" was usually right (120 of 129 judged on the holdout, 2026-10-24), "restatement"
+was not reliable (6 of 16).
 
 **XBRL tags as a second reader** (opt-in, DECISIONS D37) are *not* graded against the keys, which come from the same
 tags. The two readers agree on 96.8% (dev) and 91.7% (holdout) of tagged printed numbers; in a hand-checked random
@@ -304,17 +298,9 @@ definite error cannot be dismissed.
 - **workflow-eval-harness** (`wfeval`, written earlier for other workflows) scored exported outputs and keys independently:
   0 silent errors and 0 silent omissions on all five invoice sets it scored and on reconciliation dev, holdout and stress; on two messy
   reconciliation sets it counts exactly the same-customer cases above.
-- **Statement engine**: anchoring column dates on the balance sheet and flagging every gap cut silent omissions on the dev
-  split from 3.9% to 2.2% and on the never-tuned holdout from 5.3% to 3.9%, without adding silent errors (holdout 68 -> 66).
-- **Statement answer keys** (a scorer fix, engine unchanged): the key builder now reads each filing's own calculation
-  links, so a total and its part tagged on one line are no longer added together (Walmart's revenue key was about twice
-  its revenue). Same engine output, old keys against new: silent errors 70 -> 60 on dev, 66 -> 55 on the holdout, 87 -> 77
-  on the printed PDFs. The statement table above is measured on the current code (2026-10-25).
-- **An outside test run on a fresh Linux install** found that lxml's Linux wheels stop reading at the first `</html>`
-  (a second statement in the same file vanished) and that the reader hid Deckers' entire 10-K behind a `font-size:0`
-  page wrapper, so the holdout had scored 29 of 30 filings. Both are fixed and measured (IMPROVEMENT_LOG #17-#18:
-  holdout with all 30 filings, 74.1% right, 55 silent errors of 2,139), and `.github/workflows/tests.yml` installs
-  fresh on Linux and runs the tests on every push.
+- **Statement answer keys** come from each filing's own XBRL tags and calculation links, so a total and its part
+  tagged on one line are not added together; `.github/workflows/tests.yml` installs fresh on Linux and runs the tests
+  on every push. Earlier statement-engine measurements: [IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md#earlier-readme-results).
 
 What these numbers do **not** show: the synthetic data and the engines were written by the same author; real
 exports are messier; minutes saved are not measured (the ROI page labels them placeholders).
