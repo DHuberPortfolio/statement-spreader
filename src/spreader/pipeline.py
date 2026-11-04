@@ -65,8 +65,9 @@ class StageTimer:
 # heading is pages above it (Hancock Whitney's "Condensed Statements of Cash Flows", found in D57: chosen over the
 # consolidated statement, its figures added up, and three wrong values per year went out without review).
 _PARENT_ROWS = re.compile(r"dividends? received from (?:bank |banking )?subsidiar|"
-                          r"equity in (?:the )?undistributed (?:net )?(?:earnings|income|loss)\w* of (?:bank |banking )?subsidiar|"
+                          r"equity in (?:the )?(?:net )?undistributed (?:net )?(?:earnings|income|loss)\w* of (?:bank |banking )?subsidiar|"
                           r"investments? in (?:and advances to )?(?:bank |banking |consolidated )?subsidiar|"
+                          r"capital contributions? to (?:bank |banking )?subsidiar|"
                           r"advances (?:to|from) subsidiar|dividends? from (?:bank |banking )?subsidiar", re.I)
 
 

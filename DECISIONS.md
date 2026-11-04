@@ -1012,3 +1012,48 @@ unknown wordings are placed, and one still set aside goes to a person.**
 - **Not done.** Under 0.2% is in reach but not shown (0 of 1,726; about 1,900 needed). Next ideas: the model as a second
   opinion, materiality tiers (Devin's call), a faster review.
 - **Tests.** `tests/test_prior_and_label_confirmations.py` (8). New code, so on the previous code the file cannot import.
+
+**D62. Sums of detail lines as confirm-only checks; failed-check blame stays as it was.**
+- **Asked by Devin**: raise accuracy and the share accepted alone with more math, "adding up individual operating costs to
+  get total", and narrower blame when a check fails.
+- **Where right values stopped** (dev sets, right values sent to review): SEC 2,679: 1,172 held by another review item (752
+  by a failed check), 1,087 in no passing check, 420 in one check with nothing else. Banks 559: 330 in no check. Insurers
+  557: 388 in no check. No-check lines were cash-flow detail, equity components, diluted EPS and shares, SG&A.
+- **Narrower blame rejected.** Simulated on the dev sets, releasing lines of a failed check that passing checks vouch for.
+  SEC, right / wrong released: two checks with no suspect inputs 17 / 2; those or one plus an echo, prior or label 140 / 3;
+  any two passing checks 17 / 2; only when the gap equals exactly one unplaced row 41 / 1 (Oracle's net income to the
+  company). About 2% wrong against a target of 0.2%: a failed check is real evidence.
+- **Built.** `CheckDef.role`: "flag" (default) or "confirm". A confirm check's pass counts toward a value; its failure raises
+  no review item, because one unplaced printed row fails a sum of details and says nothing against the lines it found.
+  Seven in `us-commercial.yaml`: operating, investing and financing lines to their totals, equity lines to the company's
+  equity, operating expenses and total costs to their parts, diluted EPS times diluted shares to net income (a bank
+  override uses net income to common).
+- **Found on bank dev.** Western Alliance's parent-company-only cash flow was read for the consolidated one; every sum
+  held, so investing cash went out wrong three times. `_PARENT_ROWS` now knows "equity in net undistributed earnings of
+  subsidiaries" and "capital contributions to subsidiaries". Wrong values there 13 -> 3; 5 of its lines became blanks with
+  no flag and 3 stopped being, the known bank-blank problem, not fixed here.
+- **Found on the insurer holdout, fixed, and said so.** The first holdout run let one new wrong value through: Horace Mann's
+  debt repaid, 509.5 for 250. Its senior-note repayment sat in "other financing" and its funding-agreement repayment on debt
+  repaid; the financing sum held and the amount was printed twice. A sum proves amounts add up and a repeated number proves
+  a reading; neither says a row sits on the right line. So a confirm-only sum counts once, and only beside a regular check,
+  the company's approved spread or the label's record. The price, right values accepted alone before and after this rule:
+  SEC dev 1,377 -> 1,283, SEC holdout 1,199 -> 1,081, banks holdout 309 -> 293, insurers holdout 261 -> 231. No alias was
+  added for that filing's wording. The holdouts are no longer unseen for this rule.
+- **Found reading the code.** The catch-all guard of D60 and D61 tested `startswith("other_")`, which misses
+  `cf_other_financing`, `cf_other_investing` and `cf_other_noncash`, though the docs said catch-alls were excluded. No wrong
+  value came of it; `echo.is_catch_all` now covers them (SEC holdout 1,081 -> 1,075 accepted alone, others unchanged).
+- **Answer key.** McDonald's tags its share counts at scale 0 ("716.4" for 716.4 million), so the key was a millionth of the
+  statement and a right value scored wrong. `_rescale_untagged_shares`: when EPS times the count is a thousandth or a
+  millionth of net income, the count takes that scale. Rebuilding all 171 keys changed only McDonald's 12 share values.
+- **Measured** against D61 (9e0a108), label records from the dev keys, right values accepted alone: SEC dev 985 -> 1,283
+  (35.0%); banks dev 294 -> 312 (36.0%); insurers dev 168 -> 188 (25.9%); SEC holdout 820 -> 1,075 (33.1%; still the 5 wrong
+  of D60); banks holdout 277 -> 293 (34.2%); insurers holdout 218 -> 231 (25.0%). None newly wrong. With the prior year
+  approved first: SEC dev 2,053 of 4,096 (50.1%), SEC holdout 1,756 of 3,589 (48.9%), none wrong. Commercial holdout with
+  the prior year plus banks and insurers: 0 of 2,280 (upper bound 0.17%), the first time under Devin's 0.2%. Without the
+  prior year: 5 of 1,604 (0.3%; 0.1-0.7%). The prior year was approved against its own key, which flatters it. Review items
+  per document unchanged except banks dev 22.7 -> 22.4.
+- **Not done.** Bank and insurer checks of their own (deposits, premiums, losses); label wording through the local model
+  (idea 3); the catch-all lines most often wrong (idea 4).
+- **Tests.** `tests/test_confirm_only_checks.py` (32). With the sum rule or the rescale switched off, three of them fail; with
+  the old catch-all test, four;
+  the checks' own tests need the new check ids, which the previous profile lacks.

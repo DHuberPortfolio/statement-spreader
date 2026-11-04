@@ -633,10 +633,29 @@ def build_key(document: str, data: bytes, profile: Profile, calc_xml: bytes | No
             else:
                 value = uniq[0]
             key.spread.append(TruthValue(statement=stmt, line=line, period=pk, value=value, precision=_precision(fs)))
+    _rescale_untagged_shares(key)
     _equivalents(key)
     key.periods = sorted(periods)
     key.unknown_lines = sorted(unknown)
     return key, statements
+
+
+def _rescale_untagged_shares(key: AnswerKey) -> None:
+    """A share count tagged without its printed scale (McDonald's 2025 10-K tags "716.4" diluted shares, printed in
+    millions, at scale 0; found in D62) is keyed at that scale when EPS times the count is a thousandth or a millionth
+    of net income: a statement's own arithmetic, not a guess."""
+    at = {(v.line, v.period): v for v in key.spread}
+    for (line, pk), v in at.items():
+        eps = at.get(("eps_basic" if line == "shares_basic" else "eps_diluted", pk)) if line in (
+            "shares_basic", "shares_diluted") else None
+        ni = at.get(("net_income_parent", pk)) or at.get(("net_income", pk))
+        if eps is None or ni is None or not eps.value or not v.value or not ni.value:
+            continue
+        ratio = ni.value / (eps.value * v.value)
+        for factor in (Decimal(1000), Decimal(1_000_000)):
+            if abs(ratio / factor - 1) <= Decimal("0.02"):
+                v.value *= factor
+                v.precision *= factor
 
 
 def _line_value(f: Fact, ldef: LineDef) -> Decimal:

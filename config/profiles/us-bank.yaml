@@ -103,6 +103,9 @@ checks:
      lhs: net_income_common, rhs: "net_income - nci_net_income_or_zero - preferred_dividends_or_zero", severity: warning}
   - {id: is_eps, statement: income_statement, title: "Basic EPS times basic shares is close to net income to common",
      lhs: "eps_basic * shares_basic", rhs: "coalesce(net_income_common, net_income_parent)", relative_tolerance: 0.02, severity: warning}
+  - {id: is_eps_diluted, statement: income_statement, title: "Diluted EPS times diluted shares is close to net income to common",
+     lhs: "eps_diluted * shares_diluted", rhs: "coalesce(net_income_common, net_income_parent)", relative_tolerance: 0.02,
+     severity: warning, role: confirm}
   - {id: bank_loans_net, statement: balance_sheet, title: "Loans less the allowance equal net loans",
      lhs: loans_net, rhs: "loans_gross + allowance_loan_losses", severity: warning,
      note: "The allowance is printed as a deduction (negative)."}

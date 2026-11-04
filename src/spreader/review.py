@@ -191,6 +191,8 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
         if c.status is not CheckStatus.FAIL:
             continue
         cdef = next(cd for cd in profile.checks if cd.id == c.id)
+        if cdef.role == "confirm":
+            continue
         sev = Severity.BLOCKER if cdef.severity == "blocker" else Severity.WARNING
         hint = _likely_causes(c, statements, profile)
         confirmed = _confirmed_elsewhere(c, checks, profile)
@@ -399,20 +401,33 @@ def unconfirmed_items(values: list[SpreadValue], checks: list[CheckResult], item
                 doubted.add((ln, p))
                 if p.endswith("M"):
                     doubted.add((ln, p.split("/")[0] + "/I"))
+    # A confirm-only sum of detail lines (D62) proves the lines' amounts add up, not that each row sits on the right
+    # line: two rows swapped between a line and the sum's catch-all still add up (Horace Mann's senior-note repayment in
+    # "other financing" and its funding-agreement repayment on debt repaid, found on the insurer holdout). So such sums
+    # count once, and only beside a regular check or evidence about the line itself (the approved spread, the label's
+    # record); a number printed twice proves the reading, as the sum does.
+    confirm_only = {cd.id for cd in profile.checks if cd.role == "confirm"}
     held: dict[tuple[str, str], set[str]] = {}
+    summed: set[tuple[str, str]] = set()
     for c in checks:
         if c.status is not CheckStatus.PASS:
             continue
         for ln in c.lines:
             for p in {c.period, c.period.split("/")[0] + "/I"}:
-                held.setdefault((ln, p), set()).add(c.id)
+                if c.id in confirm_only:
+                    summed.add((ln, p))
+                else:
+                    held.setdefault((ln, p), set()).add(c.id)
     by_group: dict[tuple[str, str], list[str]] = {}
     for v in values:
         if v.value is None or v.status is ValueStatus.HUMAN or (v.line, v.period) in doubted:
             continue
         n_checks = len(held.get((v.line, v.period), ()))
-        extra = len(sources.get((v.line, v.period, v.value), ()))  # type: ignore[arg-type]
+        found = sources.get((v.line, v.period, v.value), set())  # type: ignore[arg-type]
+        extra = len(found) + ((v.line, v.period) in summed)
         if n_checks >= need or (n_checks >= 1 and n_checks + extra >= need):
+            continue
+        if (v.line, v.period) in summed and 1 + len(found & {"prior", "label"}) >= need:
             continue
         by_group.setdefault((profile.line_statement[v.line].value, v.period), []).append(v.line)
     out = []

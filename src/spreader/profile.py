@@ -92,6 +92,10 @@ class CheckDef(BaseModel):
     severity: str = "blocker"
     relative_tolerance: float | None = None
     note: str = ""
+    # "confirm": the check only ever confirms. A pass counts toward a value's confirmations; a failure raises no review
+    # item, because a sum of detail lines fails whenever one printed row is left unplaced, which says nothing against
+    # the lines it did find (D62).
+    role: str = "flag"
 
 
 class RatioDef(BaseModel):

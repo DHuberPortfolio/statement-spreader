@@ -8,19 +8,20 @@
 
 ## Results at a glance
 
-Statement spreading on SEC 10-K filings the engine was never tuned on (the holdout sets), measured 2026-11-01:
+Statement spreading on SEC 10-K filings held back from tuning (the holdout sets), measured 2026-11-03:
 
 | Set | Values read right | Right values that go out with no review | Wrong values that go out with no review |
 |---|---|---|---|
-| Commercial companies, 30 filings | 81.8% (3,249 of 3,972) | 25.2% (820) | 0.6% (5 of 825) |
-| Same, with last year's spread already approved | 91.1% (3,589 of 3,938) | 34.3% (1,231) | 0.0% (0 of 1,231) |
-| Banks, 10 filings | 71.0% (856 of 1,206) | 32.4% (277) | 0.0% (0 of 277) |
-| Insurers, 14 filings | 63.1% (924 of 1,465) | 23.6% (218) | 0.0% (0 of 218) |
+| Commercial companies, 30 filings | 81.8% (3,249 of 3,972) | 33.1% (1,075) | 0.5% (5 of 1,080) |
+| Same, with last year's spread already approved | 91.1% (3,589 of 3,938) | 48.9% (1,756) | 0.0% (0 of 1,756) |
+| Banks, 10 filings | 71.0% (856 of 1,206) | 34.2% (293) | 0.0% (0 of 293) |
+| Insurers, 14 filings | 63.1% (924 of 1,465) | 25.0% (231) | 0.0% (0 of 231) |
 
 Everything else (wrong values, blanks, values in doubt) goes to an analyst, who approves the spread. The last column
-is the one that matters most: across the last three rows, 0 of 1,726 values that went out alone were wrong (likely
-range 0.0-0.2%). That prior year was approved against its own answer key, so a real
-analyst's approvals would carry some errors forward. Full results, the dev sets and what the numbers do not show:
+is the one that matters most: across the last three rows, 0 of 2,280 values that went out alone were wrong (likely
+range 0.0-0.2%, upper bound 0.17%). That prior year was approved against its own answer key, so a real analyst's
+approvals would carry some errors forward, and without it 5 of 1,604 were wrong (0.3%). Two safety rules came from
+looking at these sets, so they are no longer unseen for those rules. Full results, the dev sets and what the numbers do not show:
 [below](#financial-statement-spreading-results); the history of each change: [IMPROVEMENT_LOG.md](IMPROVEMENT_LOG.md).
 
 ## Who uses it, what it replaces, what stays human
@@ -86,17 +87,19 @@ private-company packages in HTML, Excel and PDF, with exact keys.
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Wrong values caught | Review items per filing (median) | Source |
 |---|---|---|---|---|---|---|---|
-| SEC dev, HTML (tuned on) | 33 | 82.9% (3,664 of 4,422; 81.7-83.9%) | 0.0% (0 of 985; 0.0-0.4%) | 1.8% (78 of 4,422; 1.4-2.2%) | 100.0% (195 of 195; 98.1-100.0%) | 31 | `eval/reports/stmt-dev-d61` |
-| **SEC holdout, HTML (never tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 0.6% (5 of 825; 0.3-1.4%) | 1.7% (67 of 3,972; 1.3-2.1%) | 97.1% (165 of 170; 93.3-98.7%) | 32 | `eval/reports/stmt-holdout-d61` |
+| SEC dev, HTML (tuned on) | 33 | 83.0% (3,670 of 4,422; 81.9-84.1%) | 0.0% (0 of 1,283; 0.0-0.3%) | 1.8% (78 of 4,422; 1.4-2.2%) | 100.0% (189 of 189; 98.0-100.0%) | 31 | `eval/reports/stmt-dev-d62` |
+| **SEC holdout, HTML (not tuned on)** | 30 | 81.8% (3,249 of 3,972; 80.6-83.0%) | 0.5% (5 of 1,080; 0.2-1.1%) | 1.7% (67 of 3,972; 1.3-2.1%) | 97.1% (165 of 170; 93.3-98.7%) | 32 | `eval/reports/stmt-holdout-d62` |
 | SEC dev printed to PDF | 33 | 81.3% (3,608 of 4,438; 80.1-82.4%) | 2.9% (77 of 2,626; 2.4-3.6%) | 1.9% (85 of 4,438; 1.6-2.4%) | 68.8% (170 of 247; 62.8-74.3%) | - | `eval/sec/pdf/eval-recheck-2026-10-25.json` |
 | Synthetic, 40 cases x HTML/Excel/PDF | 120 | 97.0% (14,085 of 14,517; 96.7-97.3%) | 0.0% (6 of 13,213; 0.0-0.1%) | 1.7% (252 of 14,517; 1.5-2.0%) | 0 of 6 | 2 | `eval/reports/syn-units` |
 
 **When a value goes out without review.** Only when two separate confirmations agree with it, and at least one is
 an accounting check that ran and held. The other can be a second check, the same number printed again elsewhere in
 the filing under a similar label, the company's approved spread from last year, or a label analysts have approved on
-that line in at least 7 other documents and never moved. Catch-all "other" lines are never confirmed by the last
-three. Everything else waits for a person. The PDF and synthetic rows above were measured before this rule. A rate
-under 0.2% is not shown yet: even with no errors, that takes about 1,900 values accepted alone (at z = 1.96).
+that line in at least 7 other documents and never moved. Catch-all "other" lines are never confirmed by a
+repeated number or a label's record. Sums of detail lines (operating, investing and financing lines to their totals, equity lines to total equity,
+expenses to their totals) count once, and only beside another check, the approved spread or the label's record: a sum
+shows the amounts add up, not that each row sits on the right line. Everything else waits for a person. The PDF and
+synthetic rows above were measured before this rule.
 
 The **silent error rate** is the share of auto-accepted values that are wrong: of what would go out without a person
 looking, how much is wrong. The holdout was measured at most once per kept change and never used to design one;
@@ -118,7 +121,7 @@ organisation's own documents; the Accuracy page shows what has been recorded.
 
 **With last year's approved spread** (company memory, on by default): the prior-year 10-K is approved against its
 own key as a stand-in for an analyst, then the current one is spread with what that approval left behind
-(`eval/reports/company-memory-holdout-d61`; the results table at the top). A document's company is set at upload or
+(`eval/reports/company-memory-holdout-d62`; the results table at the top). A document's company is set at upload or
 later, on the Statements page. The stand-in approval is perfect (the key), so these are an upper bound on what a real
 analyst's approvals carry forward. A difference from an approved value is a warning that says whether it is likely a
 misread or a restatement; "misread" was usually right (120 of 129 judged on the holdout, 2026-10-24), "restatement"
@@ -133,10 +136,10 @@ sample of 30 disagreements the tag was right 29 times (`eval/reports/xbrl-check`
 
 | Set | Documents | Values right | **Silent error rate** | Silent omissions | Source |
 |---|---|---|---|---|---|
-| Banks, dev (tuned on) | 11 (1 crashed) | 82.7% (853 of 1,032; 80.2-84.8%) | 0.0% (0 of 294; 0.0-1.3%) | 5.9% (61 of 1,032; 4.6-7.5%) | `eval/reports/stmt-bank-dev-d61` |
-| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 0.0% (0 of 277; 0.0-1.4%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d61` |
-| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 0.0% (0 of 168; 0.0-2.2%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d61` |
-| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 0.0% (0 of 218; 0.0-1.7%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d61` |
+| Banks, dev (tuned on) | 11 (1 crashed) | 84.2% (866 of 1,029; 81.8-86.3%) | 0.0% (0 of 312; 0.0-1.2%) | 6.1% (63 of 1,029; 4.8-7.8%) | `eval/reports/stmt-bank-dev-d62` |
+| **Banks, holdout** | 10 | 71.0% (856 of 1,206; 68.4-73.5%) | 0.0% (0 of 293; 0.0-1.3%) | 14.4% (174 of 1,206; 12.6-16.5%) | `eval/reports/stmt-bank-holdout-d62` |
+| Insurers, dev (tuned on) | 10 | 64.7% (725 of 1,121; 61.8-67.4%) | 0.0% (0 of 188; 0.0-2.0%) | 7.3% (82 of 1,121; 5.9-9.0%) | `eval/reports/stmt-insurer-dev-d62` |
+| **Insurers, holdout** | 14 | 63.1% (924 of 1,465; 60.6-65.5%) | 0.0% (0 of 231; 0.0-1.6%) | 10.5% (154 of 1,465; 9.0-12.2%) | `eval/reports/stmt-insurer-holdout-d62` |
 
 IFRS is an overlay smoke-tested on a few filings, not measured: see `eval/coverage/checks.json`.
 

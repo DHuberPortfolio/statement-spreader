@@ -22,6 +22,7 @@ from finops.core.outcomes import Outcome
 
 from .company import CompanyContext, value_tolerance
 from .contracts import Confirmation, SpreadValue, StatementResult
+from .echo import is_catch_all
 from .profile import Profile
 
 
@@ -79,7 +80,7 @@ def find_confirmations(doc_id: str, statements: dict[str, StatementResult], valu
                                         detail=f"Equals the company's approved spread ({who})."))
         # Never on a catch-all line, as for echoes (D60): the label can be right while the line collects the wrong rows
         # (Old Dominion's other current assets, YETI's other non-operating income on the holdout).
-        if needed and res is not None and v.source_rows and not v.line.startswith("other_"):
+        if needed and res is not None and v.source_rows and not is_catch_all(v.line):
             rows = {r.index: r for r in res.table.rows}
             labels = [rows[i].label_clean for i in v.source_rows if i in rows]
             counts = [record.vouches((skey, lab, v.line), doc_id, needed) for lab in labels]  # type: ignore[union-attr]

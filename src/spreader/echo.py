@@ -25,6 +25,11 @@ from .profile import Profile
 MIN_LABEL_SIMILARITY = 80
 
 
+def is_catch_all(line: str) -> bool:
+    """A line that collects what no other line took: "other_opex", and the cash flow's "cf_other_financing" (D62)."""
+    return line.startswith("other_") or "_other_" in line
+
+
 def significant(d: Decimal) -> bool:
     return len(str(abs(d)).replace(".", "").lstrip("0")) >= 3
 
@@ -53,7 +58,7 @@ def find_echoes(doc: DocumentIR, statements: dict[str, StatementResult], values:
     printed = _printed(doc)
     out = []
     for v in values:
-        if v.value is None or v.line.startswith("other_") or len(v.source_rows) != 1:
+        if v.value is None or is_catch_all(v.line) or len(v.source_rows) != 1:
             continue
         res = statements.get(profile.line_statement[v.line].value)
         if res is None:

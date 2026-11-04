@@ -655,6 +655,24 @@ checks:
      note: "Often differs by restricted cash, which the cash flow statement includes and the balance sheet shows elsewhere."}
   - {id: cross_period_cash, statement: cash_flow, title: "This period's beginning cash equals the previous period's ending cash",
      lhs: cash_begin, rhs: "prior(cash_end)"}
+  # Confirm-only checks (D62): sums of detail lines that no check covered. A pass counts as a confirmation of every line
+  # in it; a failure flags nothing, since one unplaced printed row is enough to fail a sum of details.
+  - {id: cf_operating_parts, statement: cash_flow, title: "Operating lines add up to cash from operating activities",
+     lhs: cfo, rhs: "sum_present(cf_net_income, cf_dna, cf_sbc, cf_deferred_tax, cf_other_noncash, cf_working_capital)",
+     role: confirm}
+  - {id: cf_investing_parts, statement: cash_flow, title: "Investing lines add up to cash from investing activities",
+     lhs: cfi, rhs: "sum_present(capex, acquisitions, cf_investments_net, cf_other_investing)", role: confirm}
+  - {id: cf_financing_parts, statement: cash_flow, title: "Financing lines add up to cash from financing activities",
+     lhs: cff, rhs: "sum_present(debt_issued, debt_repaid, cf_commercial_paper_net, dividends_paid, buybacks, stock_issued, cf_other_financing)",
+     role: confirm}
+  - {id: bs_equity_components, statement: balance_sheet, title: "Equity lines add up to the company's equity",
+     lhs: total_equity_parent, rhs: "sum_present(common_stock_apic, retained_earnings, aoci, treasury_stock)", role: confirm}
+  - {id: is_opex_parts, statement: income_statement, title: "Operating expense lines add up to total operating expenses",
+     lhs: total_opex, rhs: "sum_present(rnd, sga, dna_opex, other_opex)", role: confirm}
+  - {id: is_costs_parts, statement: income_statement, title: "Cost lines add up to total costs and expenses",
+     lhs: total_costs, rhs: "sum_present(cogs, rnd, sga, dna_opex, other_opex)", role: confirm}
+  - {id: is_eps_diluted, statement: income_statement, title: "Diluted EPS times diluted shares is close to net income to the company",
+     lhs: "eps_diluted * shares_diluted", rhs: net_income_parent, relative_tolerance: 0.02, severity: warning, role: confirm}
 
 ratios:
   - {id: revenue_growth, label: Revenue growth, expr: "revenue / prior(revenue) - 1", format: percent}
