@@ -1,0 +1,57 @@
+# Transportation and logistics. Carriers often have no cost-of-sales line: every operating cost sits in one list.
+industry: transportation
+title: Transportation and logistics
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: freight_revenue, label: Freight revenue, signature: true, synonyms: ["freight", "non freight", "freight revenues", "freight and logistics*", "cargo revenue*", "cargo"], sections: ["*revenue*"]}
+      - {id: transportation_revenue, label: Transportation revenue, signature: true, synonyms: ["transportation revenues"]}
+      - {id: shipping_revenue, label: Shipping revenue, signature: true, synonyms: ["voyage revenue*", "time charter revenue*", "vessel revenue*", "charter revenue*"]}
+      - {id: logistics_revenue, label: Logistics revenue, signature: true, synonyms: ["logistics"], sections: ["*revenue*"]}
+      - {id: brokerage_revenue, label: Brokerage revenue, review: always}
+      - {id: fuel_surcharge_revenue, label: Fuel surcharge revenue, signature: true, synonyms: ["fuel surcharge*"], sections: ["*revenue*"]}
+      - {id: passenger_revenue, label: Passenger revenue, signature: true, synonyms: ["passenger", "passenger revenues"], sections: ["*revenue*"]}
+
+  - family: operating_expense
+    statement: income_statement
+    destination: other_opex
+    sign: positive
+    source: "Devin's term list 2026-11-04"
+    concepts:
+      - {id: freight_brokerage_expenses, label: Freight brokerage expenses, synonyms: ["purchased transportation", "purchased transportation*", "transportation costs"], signature: true}
+      - {id: fuel_expenses, label: Fuel expenses, signature: true, synonyms: ["fuel", "fuel expense", "fuel and fuel taxes", "fuel and oil", "fuel and related taxes", "aircraft fuel*", "fuel supplies and*", "fuel taxes"]}
+      - {id: fleet_maintenance, label: Fleet maintenance, synonyms: ["maintenance materials and repairs", "operations and maintenance", "vehicle maintenance*", "repairs and maintenance"]}
+      - {id: aircraft_depreciation, label: Aircraft depreciation, destination: dna_opex}
+      - {id: vessel_operating_expenses, label: Vessel operating expenses, signature: true, synonyms: ["vessel operating expense*", "voyage expenses*"]}
+      - {id: rail_operating_expenses, label: Rail operating expenses, synonyms: ["equipment rents", "purchased services and other", "materials"]}
+      - {id: terminal_expenses, label: Terminal expenses, synonyms: ["terminal operating*", "landing fees*"]}
+      - {id: warehousing_expenses, label: Warehousing expenses}
+      - {id: equipment_leases, label: Equipment leases, synonyms: ["equipment rent*", "aircraft rent*", "rentals and landing fees*"]}
+      - {id: freight_claims, label: Freight claims, synonyms: ["insurance and claims*", "claims and insurance*", "claims"]}
+      - {id: salaries_wages_and_benefits, label: Salaries, wages and benefits, signature: false, synonyms: ["salaries wages and benefits*", "compensation and benefits*", "salaries wages benefits*", "employee compensation*", "wages and benefits"]}
+
+  - family: transport_balances
+    statement: balance_sheet
+    source: "ASC 360, ASC 842; Devin's term list 2026-11-04"
+    concepts:
+      - {id: revenue_equipment, label: Revenue equipment, signature: true, side: asset, destination: ppe_net, synonyms: ["revenue equipment*", "flight equipment*", "vessels*", "aircraft and*", "railroad properties*", "road properties*", "tractors and trailers*", "properties"]}
+      - {id: materials_and_supplies, label: Materials and supplies, side: asset, destination: inventory, synonyms: ["materials and supplies*", "materials supplies*", "spare parts*", "fuel inventory*"]}
+      - {id: accumulated_depreciation, label: Accumulated depreciation, sign: contra, side: asset, destination: ppe_net, synonyms: ["less accumulated depreciation", "less accumulated depreciation and amortization", "accumulated depreciation and amortization"]}
+      - {id: operating_lease_liabilities, label: Operating lease liabilities, side: liability, current: operating_lease_liab_current, noncurrent: operating_lease_liab_noncurrent}
+      - {id: right_of_use_assets, label: Right-of-use assets, side: asset, destination: operating_lease_rou}
+      - {id: cargo_liabilities, label: Cargo liabilities, side: liability, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities}
+      - {id: air_traffic_liability, label: Air traffic liability, side: liability, signature: true, destination: deferred_revenue_current, context: "Tickets sold and not yet flown."}
+
+  - family: transport_measure
+    role: disclosure
+    statement: any
+    source: "Devin's term list 2026-11-04"
+    concepts:
+      - {id: load_factor, label: Load factor, unit: percent}
+      - {id: revenue_per_mile, label: Revenue per mile, unit: per_unit}
+      - {id: revenue_per_shipment, label: Revenue per shipment, unit: per_unit}

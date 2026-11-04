@@ -1,0 +1,64 @@
+{
+"d66-code": {
+"filings": 87,
+"crashed": 0,
+"no_values": 0,
+"values": 8901,
+"buckets": {
+"correct_auto": 1565,
+"missing_silent": 392,
+"correct_review": 5474,
+"missing_flagged": 779,
+"unjudged": 501,
+"wrong_review": 671,
+"wrong_auto": 20
+},
+"right": 0.7908,
+"silent_wrong": [
+20,
+1585
+],
+"silent_rate": 0.0126,
+"right_alone": 0.1758,
+"caught": [
+671,
+691
+],
+"blank_unflagged": [
+392,
+8901
+],
+"seconds_per_filing": 6.4
+},
+"d67": {
+"filings": 87,
+"crashed": 0,
+"no_values": 0,
+"values": 8887,
+"buckets": {
+"correct_auto": 1558,
+"missing_silent": 328,
+"correct_review": 5579,
+"missing_flagged": 745,
+"unjudged": 515,
+"wrong_review": 663,
+"wrong_auto": 14
+},
+"right": 0.8031,
+"silent_wrong": [
+14,
+1572
+],
+"silent_rate": 0.0089,
+"right_alone": 0.1753,
+"caught": [
+663,
+677
+],
+"blank_unflagged": [
+328,
+8887
+],
+"seconds_per_filing": 9.1
+}
+}

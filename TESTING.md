@@ -59,6 +59,8 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | Test batches in plain words, the newest update of each batch by number, a summary route, the app's page map (D64) | `tests/test_report_names.py`, `web/src/lib/nav.test.ts` | - |
 | Background review time, its limits, approval closing it, management-only access, nothing in an analyst's audit log (D65) | `tests/test_background_timing.py` | - |
 | Statements across two tables, ties between statements, weeks and fiscal years, basic and diluted rows, sides, whole dollars (D66) | `tests/test_statement_assembly.py` | - |
+| Industry concepts in context, every requested term present, combined filings (D67) | `tests/test_ontology.py`, `tests/test_statement_assembly.py` | - |
+| The app's library never holds a sealed filing (D68) | `tests/test_load_library.py` | - |
 | Workbooks laid out like the SEC's Financial_Report.xlsx (D56) | `tests/test_workbook_layouts.py` | The real workbooks in `var/real-samples` (download list in its manifest), scored against `eval/sec/keys-prior` |
 | What rulings teach; go-live report; export (D55) | `tests/test_teaching.py`, `tests/test_learning_redteam.py` | `spreader learning report`; with `llama-server` running, `scripts/measure_ruling_examples.py` |
 | A senior's blind ruling, corrected after review (D54) | `tests/test_rulings.py` | Sign in as Sam Senior, open Model disagreements, rule; then as Ana open the run |
@@ -212,6 +214,10 @@ The wide set (D66), real filings drawn at random by industry and size:
 .venv/Scripts/python scripts/fetch_wide.py                  # collect; --scale 4 draws four times as many
 .venv/Scripts/python scripts/run_wide.py --save <name>      # the tuning half, by industry, size and filing type
 .venv/Scripts/python scripts/run_wide.py --split sealed --open-seal --save <name>   # logged in eval/wide/seal-log.txt
+WIDE_SET=eval/vocab .venv/Scripts/python scripts/run_wide.py --save <name>     # the same, on the set weighted to energy, utilities, real estate
+.venv/Scripts/python scripts/eval_ontology.py --set eval/vocab --save <name>   # the ontology's placements against the filer's own tags
+.venv/Scripts/python scripts/mine_labels.py --set eval/vocab                   # printed labels beside tags, tuning half only
+.venv/Scripts/python scripts/load_library.py var/demo                          # the real filings into the app, never a sealed one
 ```
 
 ```bash

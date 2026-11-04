@@ -1,0 +1,2748 @@
+{
+"set": "eval/wide",
+"split": "dev",
+"filings": 118,
+"crashed": [],
+"verdicts": {
+"right": 60,
+"false": 14,
+"unjudged": 126
+},
+"judged": 74,
+"right_low": 0.707122301658184,
+"false_mappings": [
+{
+"concept": "cross_industry.income_taxes_payable",
+"label": "tax payable",
+"line": "other_current_liabilities",
+"filer_lines": [
+"accrued_liabilities"
+],
+"n": 1
+},
+{
+"concept": "cross_industry.shareholders_equity",
+"label": "shareholders equity",
+"line": "total_equity",
+"filer_lines": [
+"total_equity_parent"
+],
+"n": 1
+},
+{
+"concept": "real_estate.hotel_rooms_expense",
+"label": "rooms",
+"line": "other_opex",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "real_estate.hotel_rooms_expense",
+"label": "food and beverage",
+"line": "other_opex",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "real_estate.hotel_operating_costs",
+"label": "other departmental and support expenses",
+"line": "other_opex",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "real_estate.hotel_operating_costs",
+"label": "management fees",
+"line": "other_opex",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "real_estate.hotel_operating_costs",
+"label": "franchise fees",
+"line": "other_opex",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "real_estate.property_operating_expenses",
+"label": "other property level expenses",
+"line": "other_opex",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "transportation.cargo_liabilities",
+"label": "air traffic liability",
+"line": "other_current_liabilities",
+"filer_lines": [
+"deferred_revenue_current"
+],
+"n": 1
+},
+{
+"concept": "technology.subscription_revenue",
+"label": "subscription",
+"line": "revenue",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "technology.professional_services_revenue",
+"label": "professional services and other",
+"line": "revenue",
+"filer_lines": [
+"cogs"
+],
+"n": 1
+},
+{
+"concept": "banking.provision_for_credit_losses",
+"label": "credit loss expense benefit",
+"line": "cf_other_noncash",
+"filer_lines": [
+"provision_credit_losses"
+],
+"n": 1
+},
+{
+"concept": "utilities.utility_operating_expenses",
+"label": "operating and maintenance expenses",
+"line": "other_opex",
+"filer_lines": [
+"total_costs"
+],
+"n": 1
+},
+{
+"concept": "cross_industry.income_taxes_payable",
+"label": "income tax payable",
+"line": "other_current_liabilities",
+"filer_lines": [
+"accrued_liabilities"
+],
+"n": 1
+}
+],
+"industry_detected": {
+"banking": {
+"banking": 10
+},
+"consumer goods": {
+"(none)": 8
+},
+"energy": {
+"(none)": 8,
+"utilities": 3,
+"energy": 1
+},
+"financial services": {
+"(none)": 8
+},
+"healthcare": {
+"(none)": 14
+},
+"insurance": {
+"insurance": 9,
+"utilities": 1
+},
+"manufacturing": {
+"(none)": 14,
+"manufacturing": 1
+},
+"real estate": {
+"real_estate": 7,
+"(none)": 2
+},
+"retail": {
+"(none)": 11
+},
+"technology": {
+"(none)": 12,
+"technology": 1
+},
+"transportation": {
+"transportation": 4,
+"(none)": 5
+}
+},
+"rows": [
+{
+"label": "short term bank and other loans",
+"statement": "balance_sheet",
+"concept": "cross_industry.notes_payable",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"ShortTermBorrowings"
+],
+"filer_lines": [
+"st_debt"
+],
+"verdict": "right"
+},
+{
+"label": "tax payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.income_taxes_payable",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"TaxesPayableCurrent"
+],
+"filer_lines": [
+"accrued_liabilities"
+],
+"verdict": "false"
+},
+{
+"label": "tenant security deposit",
+"statement": "balance_sheet",
+"concept": "cross_industry.security_deposit_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"SecurityDepositLiability"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "operating lease liability non current",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityNoncurrent"
+],
+"filer_lines": [
+"operating_lease_liab_noncurrent"
+],
+"verdict": "right"
+},
+{
+"label": "promissory note",
+"statement": "balance_sheet",
+"concept": "cross_industry.notes_payable",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"OtherNotesPayableCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "warrant liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"FinancialLiabilitiesFairValueDisclosure",
+"WarrantLiabilities"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "operating lease asset",
+"statement": "balance_sheet",
+"concept": "cross_industry.right_of_use_assets",
+"line": "operating_lease_rou",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseRightOfUseAsset"
+],
+"filer_lines": [
+"operating_lease_rou"
+],
+"verdict": "right"
+},
+{
+"label": "trademarks",
+"statement": "balance_sheet",
+"concept": "cross_industry.intangible_assets",
+"line": "intangibles",
+"rule": "ontology.line",
+"tags": [
+"Trademarks"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "security deposit",
+"statement": "balance_sheet",
+"concept": "cross_industry.security_deposits",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"SecurityDeposit"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "derivative liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilitiesCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "non current operating lease liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityNoncurrent"
+],
+"filer_lines": [
+"operating_lease_liab_noncurrent"
+],
+"verdict": "right"
+},
+{
+"label": "loans payable net of discount of 11 337 and 0",
+"statement": "balance_sheet",
+"concept": "cross_industry.notes_payable",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"LongTermLoansPayable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "policyholders account balances",
+"statement": "balance_sheet",
+"concept": "insurance.policyholder_liabilities",
+"line": "future_policy_benefits",
+"rule": "ontology.line",
+"tags": [
+"PolicyholderFunds"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "policy and contract claims",
+"statement": "balance_sheet",
+"concept": "insurance.claims_payable",
+"line": "loss_reserves",
+"rule": "ontology.line",
+"tags": [
+"LiabilityForClaimsAndClaimsAdjustmentExpense"
+],
+"filer_lines": [
+"loss_reserves"
+],
+"verdict": "right"
+},
+{
+"label": "other policyholder funds",
+"statement": "balance_sheet",
+"concept": "insurance.policyholder_liabilities",
+"line": "future_policy_benefits",
+"rule": "ontology.line",
+"tags": [
+"PolicyholderFundsOther"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loss on extinguishment of debt",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "derivative liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilitiesCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loss on early extinguishment of debt",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt",
+"PaymentsOfDebtExtinguishmentCosts"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "finished goods",
+"statement": "balance_sheet",
+"concept": "manufacturing.finished_goods_inventory",
+"line": "inventory",
+"rule": "ontology.line",
+"tags": [
+"InventoryFinishedGoodsNetOfReserves"
+],
+"filer_lines": [
+"inventory"
+],
+"verdict": "right"
+},
+{
+"label": "work in process",
+"statement": "balance_sheet",
+"concept": "manufacturing.work_in_process_inventory",
+"line": "inventory",
+"rule": "ontology.line",
+"tags": [
+"InventoryWorkInProcessNetOfReserves"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "raw materials",
+"statement": "balance_sheet",
+"concept": "manufacturing.raw_materials_inventory",
+"line": "inventory",
+"rule": "ontology.line",
+"tags": [
+"InventoryRawMaterialsNetOfReserves"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "shareholders equity",
+"statement": "balance_sheet",
+"concept": "cross_industry.shareholders_equity",
+"line": "total_equity",
+"rule": "ontology.line",
+"tags": [
+"StockholdersEquity"
+],
+"filer_lines": [
+"total_equity_parent"
+],
+"verdict": "false"
+},
+{
+"label": "loss on debt extinguishment",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "warrant liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"WarrantLiabilitiesNonCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "lease liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityNoncurrent"
+],
+"filer_lines": [
+"operating_lease_liab_noncurrent"
+],
+"verdict": "right"
+},
+{
+"label": "accrued interest receivable",
+"statement": "balance_sheet",
+"concept": "banking.accrued_interest_receivable",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"InterestReceivable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "securities sold under agreements to repurchase",
+"statement": "balance_sheet",
+"concept": "banking.repurchase_agreements",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"SecuritiesLoanedOrSoldUnderAgreementsToRepurchaseFairValueDisclosure",
+"SecuritiesSoldUnderAgreementsToRepurchase"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "regulatory assets",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_assets",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"RegulatoryAssets"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "regulatory liabilities",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"RegulatoryLiabilities"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "accrued interest receivable",
+"statement": "balance_sheet",
+"concept": "banking.accrued_interest_receivable",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"AccruedInvestmentIncomeReceivable",
+"InterestReceivable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "subordinated debentures",
+"statement": "balance_sheet",
+"concept": "banking.subordinated_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"FairValueLiabilitiesMeasuredOnRecurringBasisSubordinatedDebtObligations",
+"SubordinatedDebt"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loans held for investment",
+"statement": "balance_sheet",
+"concept": "banking.loans_held_for_investment",
+"line": "loans_gross",
+"rule": "ontology.line",
+"tags": [
+"FinancingReceivableExcludingAccruedInterestBeforeAllowanceForCreditLoss"
+],
+"filer_lines": [
+"loans_gross"
+],
+"verdict": "right"
+},
+{
+"label": "federal funds purchased and customer repurchase agreements",
+"statement": "balance_sheet",
+"concept": "banking.federal_funds_purchased",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"FederalFundsPurchasedAndSecuritiesLoanedOrSoldUnderAgreementsToRepurchaseFairValueDisclosure",
+"FederalFundsPurchasedAndSecuritiesSoldUnderAgreementsToRepurchase"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "lease liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_current",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityCurrent"
+],
+"filer_lines": [
+"operating_lease_liab_current"
+],
+"verdict": "right"
+},
+{
+"label": "lease liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityNoncurrent"
+],
+"filer_lines": [
+"operating_lease_liab_noncurrent"
+],
+"verdict": "right"
+},
+{
+"label": "accrued interest receivable",
+"statement": "balance_sheet",
+"concept": "banking.accrued_interest_receivable",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"AccruedInterestReceivableFairValueDisclosure",
+"InterestReceivable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "freight",
+"statement": "income_statement",
+"concept": "transportation.freight_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"Revenues"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "non freight",
+"statement": "income_statement",
+"concept": "transportation.freight_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"Revenues"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "compensation and benefits note 11 23 24",
+"statement": "income_statement",
+"concept": "transportation.salaries_wages_and_benefits",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"LaborAndRelatedExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "fuel",
+"statement": "income_statement",
+"concept": "transportation.fuel_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"FuelCosts"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "materials",
+"statement": "income_statement",
+"concept": "transportation.rail_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostDirectMaterial"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "equipment rents",
+"statement": "income_statement",
+"concept": "transportation.rail_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"EquipmentRents"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "materials and supplies",
+"statement": "balance_sheet",
+"concept": "transportation.materials_and_supplies",
+"line": "inventory",
+"rule": "ontology.line",
+"tags": [
+"MaterialsSuppliesAndOther"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "purchased services and other",
+"statement": "income_statement",
+"concept": "transportation.rail_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"OtherCostAndExpenseOperating"
+],
+"filer_lines": [
+"other_opex"
+],
+"verdict": "right"
+},
+{
+"label": "fuel",
+"statement": "income_statement",
+"concept": "transportation.fuel_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"FuelCosts"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "materials and supplies",
+"statement": "balance_sheet",
+"concept": "transportation.materials_and_supplies",
+"line": "inventory",
+"rule": "ontology.line",
+"tags": [
+"MaterialsSuppliesAndOther"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "properties",
+"statement": "balance_sheet",
+"concept": "transportation.revenue_equipment",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"PropertyPlantAndEquipmentGross"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "transportation.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "interest payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.interest_payable",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"InterestPayableCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "rooms",
+"statement": "income_statement",
+"concept": "real_estate.hotel_rooms_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "rooms",
+"statement": "income_statement",
+"concept": "real_estate.hotel_rooms_expense",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "food and beverage",
+"statement": "income_statement",
+"concept": "real_estate.hotel_rooms_expense",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "other departmental and support expenses",
+"statement": "income_statement",
+"concept": "real_estate.hotel_operating_costs",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "management fees",
+"statement": "income_statement",
+"concept": "real_estate.hotel_operating_costs",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "franchise fees",
+"statement": "income_statement",
+"concept": "real_estate.hotel_operating_costs",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "other property level expenses",
+"statement": "income_statement",
+"concept": "real_estate.property_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "loss on debt extinguishment",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "due from hotel managers",
+"statement": "balance_sheet",
+"concept": "real_estate.tenant_receivables",
+"line": "receivables",
+"rule": "ontology.line",
+"tags": [
+"DueFromManagers"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "lease liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiability"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "operation and maintenance",
+"statement": "income_statement",
+"concept": "utilities.utility_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"OtherCostAndExpenseOperating"
+],
+"filer_lines": [
+"other_opex"
+],
+"verdict": "right"
+},
+{
+"label": "taxes other than income",
+"statement": "income_statement",
+"concept": "utilities.taxes_other_than_income",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"TaxesExcludingIncomeAndExciseTaxes"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "utilities.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "interest payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.interest_payable",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"InterestPayableCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "regulatory liabilities",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedRegulatoryLiabilities",
+"RegulatoryLiabilityNoncurrent"
+],
+"filer_lines": [
+"other_noncurrent_liabilities"
+],
+"verdict": "right"
+},
+{
+"label": "real estate investments net of accumulated depreciation of 1 714 886 and 1 562 645 at december 31 2025 and 2024 respectively",
+"statement": "balance_sheet",
+"concept": "real_estate.investment_properties",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyNet"
+],
+"filer_lines": [
+"ppe_net"
+],
+"verdict": "right"
+},
+{
+"label": "land held for development",
+"statement": "balance_sheet",
+"concept": "real_estate.land_held_for_development",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"LandAvailableForDevelopment",
+"RealEstateAndAccumulatedDepreciationCarryingAmountOfLand",
+"RealEstateAndAccumulatedDepreciationInitialCostOfLand",
+"RealEstateGrossAtCarryingValue"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "investment in joint ventures",
+"statement": "balance_sheet",
+"concept": "real_estate.real_estate_joint_ventures",
+"line": "lt_investments",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentsJointVentures"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "proceeds from sale of real estate",
+"statement": "cash_flow",
+"concept": "real_estate.proceeds_from_property_sales",
+"line": "cf_other_investing",
+"rule": "ontology.line",
+"tags": [
+"ProceedsFromSaleOfProductiveAssets"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "rental revenue",
+"statement": "income_statement",
+"concept": "real_estate.rental_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLeaseIncome"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "property operating expense",
+"statement": "income_statement",
+"concept": "real_estate.property_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"DirectCostsOfLeasedAndRentedPropertyOrEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "derivative liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilitiesCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "lease liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_current",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityCurrent"
+],
+"filer_lines": [
+"operating_lease_liab_current"
+],
+"verdict": "right"
+},
+{
+"label": "interest payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.interest_payable",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"InterestPayableCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "convertible debentures net",
+"statement": "balance_sheet",
+"concept": "cross_industry.convertible_notes",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"ConvertibleDebtCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "accrued interest receivable",
+"statement": "balance_sheet",
+"concept": "banking.accrued_interest_receivable",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"InterestReceivable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "rental income",
+"statement": "income_statement",
+"concept": "real_estate.rental_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLeaseIncome"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "rental expenses",
+"statement": "income_statement",
+"concept": "real_estate.property_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"OtherCostAndExpenseOperating"
+],
+"filer_lines": [
+"other_opex"
+],
+"verdict": "right"
+},
+{
+"label": "real estate taxes",
+"statement": "income_statement",
+"concept": "real_estate.real_estate_taxes",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"RealEstateTaxExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "gain on sale of real estate",
+"statement": "income_statement",
+"concept": "real_estate.property_disposition_gains",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainOnSaleOfRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "construction in progress including 28 418 and 9 939 of consolidated variable interest entities respectively",
+"statement": "balance_sheet",
+"concept": "real_estate.construction_in_progress",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"ConstructionInProgressGross"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated depreciation and amortization including 468 725 and 424 044 of consolidated variable interest entities respectively",
+"statement": "balance_sheet",
+"concept": "real_estate.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyAccumulatedDepreciation"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "net real estate",
+"statement": "balance_sheet",
+"concept": "real_estate.investment_properties",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyNet"
+],
+"filer_lines": [
+"ppe_net"
+],
+"verdict": "right"
+},
+{
+"label": "mortgages payable net including 194 176 and 186 643 of consolidated variable interest entities respectively",
+"statement": "balance_sheet",
+"concept": "real_estate.mortgage_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"SecuredDebt"
+],
+"filer_lines": [
+"lt_debt"
+],
+"verdict": "right"
+},
+{
+"label": "security deposits payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.security_deposit_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"SecurityDepositLiability"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "gain on sale of real estate",
+"statement": "cash_flow",
+"concept": "real_estate.property_disposition_gains",
+"line": "cf_other_noncash",
+"rule": "ontology.line",
+"tags": [
+"GainOnSaleOfRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "straight line rent",
+"statement": "cash_flow",
+"concept": "real_estate.straight_line_rent",
+"line": "cf_other_noncash",
+"rule": "ontology.line",
+"tags": [
+"StraightLineRent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "acquisition of real estate",
+"statement": "cash_flow",
+"concept": "real_estate.real_estate_acquisitions",
+"line": "capex",
+"rule": "ontology.line",
+"tags": [
+"PaymentsToAcquireRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "proceeds from sale of real estate",
+"statement": "cash_flow",
+"concept": "real_estate.proceeds_from_property_sales",
+"line": "cf_other_investing",
+"rule": "ontology.line",
+"tags": [
+"ProceedsFromRealEstateAndRealEstateJointVentures"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "senior unsecured notes net of debt issuance costs discount and premium",
+"statement": "balance_sheet",
+"concept": "cross_industry.senior_unsecured_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"UnsecuredLongTermDebt"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "land",
+"statement": "balance_sheet",
+"concept": "real_estate.land",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"Land"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "real_estate.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "total real estate net",
+"statement": "balance_sheet",
+"concept": "real_estate.investment_properties",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"PropertyPlantAndEquipmentNet"
+],
+"filer_lines": [
+"ppe_net"
+],
+"verdict": "right"
+},
+{
+"label": "security deposits",
+"statement": "balance_sheet",
+"concept": "cross_industry.security_deposits",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"DepositsAssets"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "security deposits payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.security_deposit_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"SecurityDepositLiability"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "mortgages payable net of debt discounts current maturities",
+"statement": "balance_sheet",
+"concept": "real_estate.mortgage_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"MortgagesPayableNetOfDebtDiscountsCurrentMaturities"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "mortgages payable related party",
+"statement": "balance_sheet",
+"concept": "real_estate.mortgage_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"FinancialInstrumentsSoldNotYetPurchasedMortgagesMortgageBackedAndAssetBackedSecurities",
+"MortgagesPayableNonCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "mortgages payable net of debt discounts",
+"statement": "balance_sheet",
+"concept": "real_estate.mortgage_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"MortgagesPayableNonCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "rental revenue",
+"statement": "income_statement",
+"concept": "real_estate.rental_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "utilities",
+"statement": "income_statement",
+"concept": "real_estate.utilities_expense",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"UtilitiesOperatingExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "property taxes",
+"statement": "income_statement",
+"concept": "real_estate.real_estate_taxes",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"TaxesExcludingIncomeAndExciseTaxes"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "repairs and maintenance",
+"statement": "income_statement",
+"concept": "real_estate.repairs_and_maintenance",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"RepairsAndMaintenance"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "purchased power",
+"statement": "income_statement",
+"concept": "utilities.purchased_power_costs",
+"line": "cogs",
+"rule": "ontology.line",
+"tags": [
+"UtilitiesOperatingExpensePurchasedPower"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "other operation and maintenance",
+"statement": "income_statement",
+"concept": "utilities.utility_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"UtilitiesOperatingExpenseMaintenanceAndOperations"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "taxes other than income taxes",
+"statement": "income_statement",
+"concept": "utilities.taxes_other_than_income",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"UtilitiesOperatingExpenseOtherTaxes"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "regulatory assets",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_assets",
+"line": "other_current_assets",
+"rule": "ontology.line",
+"tags": [
+"RegulatoryAssetsCurrent"
+],
+"filer_lines": [
+"other_current_assets"
+],
+"verdict": "right"
+},
+{
+"label": "less accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "utilities.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"PropertyPlantAndEquipmentNet"
+],
+"filer_lines": [
+"ppe_net"
+],
+"verdict": "right"
+},
+{
+"label": "regulatory assets",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_assets",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"RegulatoryAssetsNoncurrent"
+],
+"filer_lines": [
+"other_noncurrent_assets"
+],
+"verdict": "right"
+},
+{
+"label": "regulatory liabilities",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"RegulatoryLiabilityCurrent"
+],
+"filer_lines": [
+"other_current_liabilities"
+],
+"verdict": "right"
+},
+{
+"label": "regulatory liabilities",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"RegulatoryLiabilityNoncurrent"
+],
+"filer_lines": [
+"other_noncurrent_liabilities"
+],
+"verdict": "right"
+},
+{
+"label": "earned premium net",
+"statement": "income_statement",
+"concept": "insurance.earned_premiums",
+"line": "premiums_earned",
+"rule": "ontology.line",
+"tags": [
+"PremiumsEarnedNet"
+],
+"filer_lines": [
+"premiums_earned"
+],
+"verdict": "right"
+},
+{
+"label": "lease liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiability"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "lease liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.operating_lease_liabilities",
+"line": "operating_lease_liab_noncurrent",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLiabilityNoncurrent"
+],
+"filer_lines": [
+"operating_lease_liab_noncurrent"
+],
+"verdict": "right"
+},
+{
+"label": "land",
+"statement": "balance_sheet",
+"concept": "real_estate.land",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"Land"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "real_estate.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyAccumulatedDepreciation"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "rental income",
+"statement": "income_statement",
+"concept": "real_estate.rental_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"OperatingLeaseLeaseIncome"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "property operating expenses",
+"statement": "income_statement",
+"concept": "real_estate.property_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"DirectCostsOfLeasedAndRentedPropertyOrEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "real estate tax expense",
+"statement": "income_statement",
+"concept": "real_estate.real_estate_taxes",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"RealEstateTaxExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "gain on sale of investment property",
+"statement": "income_statement",
+"concept": "real_estate.property_disposition_gains",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnSalesOfInvestmentRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "gain on sale of investment property",
+"statement": "cash_flow",
+"concept": "real_estate.property_disposition_gains",
+"line": "cf_other_noncash",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnSalesOfInvestmentRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "proceeds from sale of investment property",
+"statement": "cash_flow",
+"concept": "real_estate.proceeds_from_property_sales",
+"line": "cf_other_investing",
+"rule": "ontology.line",
+"tags": [
+"ProceedsFromSaleOfRealEstateHeldforinvestment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "distributions paid",
+"statement": "cash_flow",
+"concept": "real_estate.distributions_to_shareholders",
+"line": "dividends_paid",
+"rule": "ontology.line",
+"tags": [
+"PaymentsOfDividends"
+],
+"filer_lines": [
+"dividends_paid"
+],
+"verdict": "right"
+},
+{
+"label": "property operating and maintenance",
+"statement": "income_statement",
+"concept": "real_estate.property_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"DirectCostsOfLeasedAndRentedPropertyOrEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "property management expense",
+"statement": "income_statement",
+"concept": "real_estate.property_management_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"CostOfOtherPropertyOperatingExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "gain on sale of property net of tax",
+"statement": "income_statement",
+"concept": "real_estate.property_disposition_gains",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainLossOnSaleOfProperties"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "land",
+"statement": "balance_sheet",
+"concept": "real_estate.land",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"Land"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "building and improvements",
+"statement": "balance_sheet",
+"concept": "real_estate.buildings_and_improvements",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"InvestmentBuildingAndBuildingImprovements"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "real_estate.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyAccumulatedDepreciation"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "secured debt net",
+"statement": "balance_sheet",
+"concept": "real_estate.secured_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"SecuredDebt"
+],
+"filer_lines": [
+"lt_debt"
+],
+"verdict": "right"
+},
+{
+"label": "unsecured notes net",
+"statement": "balance_sheet",
+"concept": "real_estate.unsecured_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"SeniorNotes"
+],
+"filer_lines": [
+"lt_debt"
+],
+"verdict": "right"
+},
+{
+"label": "passenger",
+"statement": "income_statement",
+"concept": "transportation.passenger_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "aircraft fuel",
+"statement": "income_statement",
+"concept": "transportation.fuel_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"FuelCosts"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "salaries wages and benefits",
+"statement": "income_statement",
+"concept": "transportation.salaries_wages_and_benefits",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"LaborAndRelatedExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "landing fees and other rents",
+"statement": "income_statement",
+"concept": "transportation.terminal_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"LandingFeesAndOtherRentals"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "aircraft rent",
+"statement": "income_statement",
+"concept": "transportation.equipment_leases",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"AircraftRental"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "maintenance materials and repairs",
+"statement": "income_statement",
+"concept": "transportation.fleet_maintenance",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"AircraftMaintenanceMaterialsAndRepairs"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "spare parts aircraft fuel and supplies less allowance 2025 37 2024 43",
+"statement": "balance_sheet",
+"concept": "transportation.materials_and_supplies",
+"line": "inventory",
+"rule": "ontology.line",
+"tags": [
+"InventoryNet"
+],
+"filer_lines": [
+"inventory"
+],
+"verdict": "right"
+},
+{
+"label": "flight equipment",
+"statement": "balance_sheet",
+"concept": "transportation.revenue_equipment",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"FlightEquipmentGross"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "transportation.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"FlightEquipmentAccumulatedDepreciation"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "transportation.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"PropertyPlantAndEquipmentOtherAccumulatedDepreciation"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "air traffic liability",
+"statement": "balance_sheet",
+"concept": "transportation.cargo_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"ContractWithCustomerLiabilityCurrent"
+],
+"filer_lines": [
+"deferred_revenue_current"
+],
+"verdict": "false"
+},
+{
+"label": "air traffic liability non current",
+"statement": "balance_sheet",
+"concept": "transportation.cargo_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"ContractWithCustomerLiabilityNoncurrent"
+],
+"filer_lines": [
+"other_noncurrent_liabilities"
+],
+"verdict": "right"
+},
+{
+"label": "convertible debt and conversion feature note 8",
+"statement": "balance_sheet",
+"concept": "cross_industry.convertible_notes",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"ConvertibleDebtAndConversionFeatureNoncurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "derivative liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilitiesCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "warrant liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilitiesNoncurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "unearned premium revenue",
+"statement": "balance_sheet",
+"concept": "insurance.unearned_premiums",
+"line": "unearned_premiums",
+"rule": "ontology.line",
+"tags": [
+"UnearnedPremiums"
+],
+"filer_lines": [
+"unearned_premiums"
+],
+"verdict": "right"
+},
+{
+"label": "securities sold under agreements to repurchase",
+"statement": "balance_sheet",
+"concept": "banking.repurchase_agreements",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"SecuritiesSoldUnderAgreementsToRepurchase"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "federal home loan bank advances",
+"statement": "balance_sheet",
+"concept": "banking.long_term_borrowings",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"AdvancesFromFederalHomeLoanBanks"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loss on extinguishment of debt",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "accrued interest receivable",
+"statement": "balance_sheet",
+"concept": "banking.accrued_interest_receivable",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"InterestReceivable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "subscription",
+"statement": "income_statement",
+"concept": "technology.subscription_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "professional services and other",
+"statement": "income_statement",
+"concept": "technology.professional_services_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "subscription",
+"statement": "income_statement",
+"concept": "technology.subscription_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "professional services and other",
+"statement": "income_statement",
+"concept": "technology.professional_services_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"CostOfGoodsAndServicesSold"
+],
+"filer_lines": [
+"cogs"
+],
+"verdict": "false"
+},
+{
+"label": "convertible senior notes net",
+"statement": "balance_sheet",
+"concept": "cross_industry.convertible_notes",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"ConvertibleDebtCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "convertible senior notes net noncurrent",
+"statement": "balance_sheet",
+"concept": "cross_industry.convertible_notes",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"ConvertibleDebtNoncurrent"
+],
+"filer_lines": [
+"lt_debt"
+],
+"verdict": "right"
+},
+{
+"label": "revenue equipment",
+"statement": "balance_sheet",
+"concept": "transportation.revenue_equipment",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"MachineryAndEquipmentGross"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "transportation.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "fuel surcharge",
+"statement": "income_statement",
+"concept": "transportation.fuel_surcharge_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerIncludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "salaries wages and benefits",
+"statement": "income_statement",
+"concept": "transportation.salaries_wages_and_benefits",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"LaborAndRelatedExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "insurance and claims",
+"statement": "income_statement",
+"concept": "transportation.freight_claims",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"GeneralInsuranceExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "land",
+"statement": "balance_sheet",
+"concept": "real_estate.land",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"Land"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "accumulated depreciation",
+"statement": "balance_sheet",
+"concept": "real_estate.accumulated_depreciation",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyAccumulatedDepreciation"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "construction in process",
+"statement": "balance_sheet",
+"concept": "real_estate.construction_in_progress",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"DevelopmentInProcess"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "total real estate facilities net",
+"statement": "balance_sheet",
+"concept": "real_estate.investment_properties",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"RealEstateInvestmentPropertyNet"
+],
+"filer_lines": [
+"ppe_net"
+],
+"verdict": "right"
+},
+{
+"label": "investment in unconsolidated real estate entity",
+"statement": "balance_sheet",
+"concept": "real_estate.real_estate_joint_ventures",
+"line": "lt_investments",
+"rule": "ontology.line",
+"tags": [
+"InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "gain on sale of real estate",
+"statement": "cash_flow",
+"concept": "real_estate.property_disposition_gains",
+"line": "cf_other_noncash",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnSalesOfInvestmentRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "acquisition of real estate facilities and intangible assets",
+"statement": "cash_flow",
+"concept": "real_estate.real_estate_acquisitions",
+"line": "capex",
+"rule": "ontology.line",
+"tags": [
+"PaymentsToAcquireRealEstate"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "distributions paid to preferred shareholders common shareholders restricted share unitholders and unvested ltip unitholders",
+"statement": "cash_flow",
+"concept": "real_estate.distributions_to_shareholders",
+"line": "dividends_paid",
+"rule": "ontology.line",
+"tags": [
+"PaymentsOfCapitalDistribution"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "distributions paid to noncontrolling interests",
+"statement": "cash_flow",
+"concept": "real_estate.distributions_to_shareholders",
+"line": "dividends_paid",
+"rule": "ontology.line",
+"tags": [
+"PaymentsOfDividendsMinorityInterest"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "losses and settlement expenses",
+"statement": "income_statement",
+"concept": "insurance.loss_adjustment_expenses",
+"line": "losses_lae",
+"rule": "ontology.line",
+"tags": [
+"PolicyholderBenefitsAndClaimsIncurredNet"
+],
+"filer_lines": [
+"losses_lae"
+],
+"verdict": "right"
+},
+{
+"label": "reinsurance balances recoverable on unpaid losses and settlement expenses net of allowances for uncollectible amounts of 11 107 in 2025 and 9 580 in 2024",
+"statement": "balance_sheet",
+"concept": "insurance.reinsurance_recoverables",
+"line": "reinsurance_recoverables",
+"rule": "ontology.line",
+"tags": [
+"ReinsuranceRecoverableForUnpaidClaimsAndClaimsAdjustments"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loss on debt extinguishment",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "warrant liability",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilities",
+"WarrantsAndRightsOutstanding"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "revolving credit facility borrowings",
+"statement": "balance_sheet",
+"concept": "cross_industry.revolving_credit_facility",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"LinesOfCreditCurrent",
+"LinesOfCreditCurrentCarryingValue",
+"LinesOfCreditCurrentFairValue"
+],
+"filer_lines": [
+"st_debt"
+],
+"verdict": "right"
+},
+{
+"label": "revolver",
+"statement": "balance_sheet",
+"concept": "cross_industry.revolving_credit_facility",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"ShortTermBorrowings"
+],
+"filer_lines": [
+"st_debt"
+],
+"verdict": "right"
+},
+{
+"label": "federal home loan bank advances",
+"statement": "balance_sheet",
+"concept": "banking.long_term_borrowings",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"AdvancesFromFederalHomeLoanBanks",
+"FederalHomeLoanBankBorrowingsFairValueDisclosure"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "subordinated notes",
+"statement": "balance_sheet",
+"concept": "banking.subordinated_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"SubordinatedDebt"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "junior subordinated debentures",
+"statement": "balance_sheet",
+"concept": "banking.subordinated_debt",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"JuniorSubordinatedDebentureOwedToUnconsolidatedSubsidiaryTrust"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "credit loss expense benefit",
+"statement": "income_statement",
+"concept": "banking.provision_for_credit_losses",
+"line": "provision_credit_losses",
+"rule": "ontology.line",
+"tags": [
+"FinancingReceivableExcludingAccruedInterestCreditLossExpenseReversal"
+],
+"filer_lines": [
+"provision_credit_losses"
+],
+"verdict": "right"
+},
+{
+"label": "credit loss expense benefit",
+"statement": "cash_flow",
+"concept": "banking.provision_for_credit_losses",
+"line": "cf_other_noncash",
+"rule": "ontology.line",
+"tags": [
+"FinancingReceivableExcludingAccruedInterestCreditLossExpenseReversal"
+],
+"filer_lines": [
+"provision_credit_losses"
+],
+"verdict": "false"
+},
+{
+"label": "accrued interest receivable",
+"statement": "balance_sheet",
+"concept": "banking.accrued_interest_receivable",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"AccruedInterestReceivableFairValueDisclosure",
+"InterestReceivable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loss on extinguishment of debt",
+"statement": "income_statement",
+"concept": "cross_industry.loss_on_extinguishment_of_debt",
+"line": "other_nonoperating",
+"rule": "ontology.line",
+"tags": [
+"GainsLossesOnExtinguishmentOfDebt"
+],
+"filer_lines": [
+"other_nonoperating"
+],
+"verdict": "right"
+},
+{
+"label": "development of oil and gas properties",
+"statement": "cash_flow",
+"concept": "energy.oil_gas_capex",
+"line": "capex",
+"rule": "ontology.line",
+"tags": [
+"PaymentsToExploreAndDevelopOilAndGasProperties"
+],
+"filer_lines": [
+"capex"
+],
+"verdict": "right"
+},
+{
+"label": "proved oil and gas properties",
+"statement": "balance_sheet",
+"concept": "energy.oil_and_gas_properties",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"ProvedOilAndGasPropertySuccessfulEffortMethod"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "less accumulated dd and a and impairment",
+"statement": "balance_sheet",
+"concept": "energy.accumulated_dda",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "total oil and gas properties",
+"statement": "balance_sheet",
+"concept": "energy.oil_and_gas_properties",
+"line": "ppe_net",
+"rule": "ontology.line",
+"tags": [
+"OilAndGasPropertySuccessfulEffortMethodNet"
+],
+"filer_lines": [
+"ppe_net"
+],
+"verdict": "right"
+},
+{
+"label": "revolving credit facility",
+"statement": "balance_sheet",
+"concept": "cross_industry.revolving_credit_facility",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"LongTermLineOfCredit"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "asset retirement obligations",
+"statement": "balance_sheet",
+"concept": "energy.asset_retirement_obligations",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"AssetRetirementObligationsNoncurrent"
+],
+"filer_lines": [
+"other_noncurrent_liabilities"
+],
+"verdict": "right"
+},
+{
+"label": "oil",
+"statement": "income_statement",
+"concept": "energy.oil_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "natural gas",
+"statement": "income_statement",
+"concept": "energy.natural_gas_revenue",
+"line": "revenue",
+"rule": "ontology.line",
+"tags": [
+"RevenueFromContractWithCustomerExcludingAssessedTax"
+],
+"filer_lines": [
+"revenue"
+],
+"verdict": "right"
+},
+{
+"label": "lease operating expense",
+"statement": "income_statement",
+"concept": "energy.lease_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"ResultsOfOperationsProductionOrLiftingCosts"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "production taxes",
+"statement": "income_statement",
+"concept": "energy.lease_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"ProductionTaxExpense"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "depletion depreciation amortization and accretion",
+"statement": "income_statement",
+"concept": "energy.dda",
+"line": "dna_opex",
+"rule": "ontology.line",
+"tags": [
+"ResultsOfOperationsDepreciationDepletionAmortizationAndAccretion"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "promissory note",
+"statement": "balance_sheet",
+"concept": "cross_industry.notes_payable",
+"line": "lt_debt",
+"rule": "ontology.line",
+"tags": [
+"LongTermNotesPayable"
+],
+"filer_lines": [
+"lt_debt"
+],
+"verdict": "right"
+},
+{
+"label": "operating and maintenance expenses",
+"statement": "income_statement",
+"concept": "utilities.utility_operating_expenses",
+"line": "other_opex",
+"rule": "ontology.line",
+"tags": [
+"OperatingCostsAndExpenses"
+],
+"filer_lines": [
+"total_costs"
+],
+"verdict": "false"
+},
+{
+"label": "regulatory assets deferred charges and other",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_assets",
+"line": "other_noncurrent_assets",
+"rule": "ontology.line",
+"tags": [
+"OtherAssetsNoncurrent"
+],
+"filer_lines": [
+"other_noncurrent_assets"
+],
+"verdict": "right"
+},
+{
+"label": "derivative liabilities",
+"statement": "balance_sheet",
+"concept": "cross_industry.warrant_liabilities",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"DerivativeLiabilitiesCurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "regulatory liabilities deferred income and other",
+"statement": "balance_sheet",
+"concept": "utilities.regulatory_liabilities",
+"line": "other_noncurrent_liabilities",
+"rule": "ontology.line",
+"tags": [
+"OtherLiabilitiesAndDeferredRevenueNoncurrent"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "loans payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.notes_payable",
+"line": "st_debt",
+"rule": "ontology.line",
+"tags": [
+"LoansPayable"
+],
+"filer_lines": [],
+"verdict": "unjudged"
+},
+{
+"label": "income tax payable",
+"statement": "balance_sheet",
+"concept": "cross_industry.income_taxes_payable",
+"line": "other_current_liabilities",
+"rule": "ontology.line",
+"tags": [
+"TaxesPayableCurrent"
+],
+"filer_lines": [
+"accrued_liabilities"
+],
+"verdict": "false"
+}
+]
+}

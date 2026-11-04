@@ -1,0 +1,117 @@
+# Regulated utilities: electric, gas and water. Plant comes first on the balance sheet, and regulatory assets and liabilities
+# are real items with no counterpart elsewhere.
+industry: utilities
+title: Utilities
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 980, ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: electricity_sales, label: Electricity sales, signature: true, synonyms: ["electric", "electric revenue*", "electric utility revenue*", "electric operating revenue*", "electric sales", "utility electric*", "electricity", "electric utility", "regulated electric*"], sections: ["*revenue*", "*sales*"]}
+      - {id: retail_electricity_revenue, label: Retail electricity revenue, synonyms: ["retail electric revenue*"]}
+      - {id: wholesale_electricity_revenue, label: Wholesale electricity revenue, synonyms: ["wholesale electric revenue*", "wholesale revenue*"]}
+      - {id: transmission_revenue, label: Transmission revenue}
+      - {id: distribution_revenue, label: Distribution revenue, review: always, context: "A wires business here. An industrial distributor's sales are not this."}
+      - {id: generation_revenue, label: Generation revenue}
+      - {id: capacity_revenue, label: Capacity revenue}
+      - {id: fuel_adjustment_revenue, label: Fuel adjustment revenue, synonyms: ["fuel clause revenue*"]}
+      - {id: natural_gas_distribution_revenue, label: Natural gas distribution revenue, signature: true, synonyms: ["gas", "gas revenue*", "gas utility revenue*", "gas operating revenue*", "regulated natural gas*", "natural gas utility revenue*", "utility natural gas*", "natural gas distribution"], sections: ["*revenue*", "*sales*"]}
+      - {id: gas_transportation_revenue, label: Gas transportation revenue}
+      - {id: gas_storage_revenue, label: Gas storage revenue}
+      - {id: water_service_revenue, label: Water service revenue, signature: true, synonyms: ["water revenue*", "water services", "water utility revenue*", "water operating revenue*"]}
+      - {id: wastewater_revenue, label: Wastewater revenue, signature: true, synonyms: ["wastewater services*"]}
+      - {id: sewer_service_revenue, label: Sewer service revenue, signature: true, synonyms: ["sewer revenue*"]}
+      - {id: weather_normalization_adjustments, label: Weather normalization adjustments, review: always}
+
+  - family: cost_of_energy
+    statement: income_statement
+    destination: [cogs, other_opex]
+    sign: positive
+    source: "ASC 980; Devin's term list 2026-11-04"
+    concepts:
+      - {id: purchased_power_costs, label: Purchased power costs, signature: true, synonyms: ["purchased power", "purchased power expense*", "cost of purchased power", "power purchased"]}
+      - {id: fuel_and_purchased_power, label: Fuel and purchased power expense, signature: true, synonyms: ["fuel and purchased power", "fuel purchased power*", "fuel used in electric generation*", "fuel for electric generation", "fuel and purchased energy", "purchased power and fuel*", "fuel used in generation", "cost of fuel and purchased power", "electric fuel and purchased power"]}
+      - {id: gas_commodity_costs, label: Gas commodity costs, synonyms: ["cost of gas sold", "cost of natural gas*", "natural gas purchased*", "cost of gas"], review: always}
+      - {id: purchased_gas_costs, label: Purchased gas costs, signature: true, synonyms: ["purchased gas", "purchased gas expense*", "gas purchased*", "cost of purchased gas", "purchased natural gas*"]}
+
+  - family: operating_expense
+    statement: income_statement
+    destination: other_opex
+    sign: positive
+    source: "ASC 980; FERC Uniform System of Accounts; Devin's term list 2026-11-04"
+    concepts:
+      - {id: utility_operating_expenses, label: Utility operating expenses, signature: true, synonyms: ["operation and maintenance*", "operations and maintenance*", "other operation and maintenance*", "other operations and maintenance*", "operating and maintenance*", "o m", "utility operations and maintenance*", "other operation*", "maintenance"], context: "Not the same concept as lease operating or property operating expenses, though the family is the same."}
+      - {id: transmission_expenses, label: Transmission expenses, synonyms: ["transmission expense"]}
+      - {id: distribution_expenses, label: Distribution expenses}
+      - {id: grid_maintenance, label: Grid maintenance}
+      - {id: power_generation_costs, label: Power generation costs}
+      - {id: pipeline_operating_expenses, label: Pipeline operating expenses}
+      - {id: water_treatment_expenses, label: Water treatment expenses}
+      - {id: wastewater_treatment_expenses, label: Wastewater treatment expenses}
+      - {id: infrastructure_replacement_costs, label: Infrastructure replacement costs}
+      - {id: environmental_compliance_costs, label: Environmental compliance costs}
+      - {id: storm_restoration_costs, label: Storm restoration costs, synonyms: ["storm costs", "storm restoration*"]}
+      - {id: decommissioning_costs, label: Decommissioning costs}
+      - {id: taxes_other_than_income, label: Taxes other than income taxes, synonyms: ["taxes other than income*", "general taxes", "taxes other than on income*", "other taxes", "property and other taxes", "taxes other than federal income*"], signature: true}
+
+  - family: fixed_assets
+    statement: balance_sheet
+    side: asset
+    destination: ppe_net
+    source: "ASC 980-360; FERC Uniform System of Accounts; Devin's term list 2026-11-04"
+    concepts:
+      - {id: utility_plant_in_service, label: Utility plant in service, signature: true, synonyms: ["utility plant*", "plant in service", "total utility plant*", "net utility plant*", "property plant and equipment in service", "total plant in service", "electric plant in service", "gas plant in service", "gas utility plant", "electric utility plant", "utility property*", "net plant*", "plant net", "utility plant net*", "regulated property*", "property plant and equipment at original cost*", "utility plant at original cost"]}
+      - {id: cwip, label: Construction work in progress (CWIP), signature: true, synonyms: ["construction work in progress*", "cwip"]}
+      - {id: electric_infrastructure, label: Electric infrastructure}
+      - {id: transmission_and_distribution_assets, label: Transmission and distribution assets}
+      - {id: gas_distribution_infrastructure, label: Gas distribution infrastructure}
+      - {id: storage_facilities, label: Storage facilities}
+      - {id: underground_storage_assets, label: Underground storage assets, synonyms: ["underground gas storage*"]}
+      - {id: water_distribution_infrastructure, label: Water distribution infrastructure}
+      - {id: water_mains, label: Water mains}
+      - {id: treatment_facilities, label: Treatment facilities}
+      - {id: pumping_stations, label: Pumping stations}
+      - {id: water_rights, label: Water rights, destination: [intangibles, ppe_net]}
+      - {id: nuclear_fuel, label: Nuclear fuel, synonyms: ["nuclear fuel*"]}
+      - {id: accumulated_depreciation, label: Accumulated depreciation, sign: contra, synonyms: ["less accumulated depreciation", "accumulated provision for depreciation*", "accumulated depreciation and amortization", "less accumulated provision for depreciation*", "less accumulated depreciation and amortization"]}
+
+  - family: regulatory_balance
+    statement: balance_sheet
+    side: asset
+    current: other_current_assets
+    noncurrent: other_noncurrent_assets
+    source: "ASC 980-340; Devin's term list 2026-11-04"
+    concepts:
+      - {id: regulatory_assets, label: Regulatory assets, signature: true, synonyms: ["regulatory assets*", "regulatory asset*", "current regulatory assets", "noncurrent regulatory assets", "regulatory deferrals"], context: "Costs a regulator has agreed customers will repay later. Current when it sits under current assets."}
+      - {id: deferred_fuel_costs, label: Deferred fuel costs, synonyms: ["deferred fuel*", "under recovered fuel*", "fuel cost recovery*", "deferred purchased gas*", "purchased gas adjustment*"]}
+      - {id: pension_regulatory_assets, label: Pension regulatory assets}
+      - {id: nuclear_decommissioning_trust, label: Nuclear decommissioning trust funds, destination: lt_investments, noncurrent: lt_investments, current: null, synonyms: ["nuclear decommissioning trust*", "decommissioning trust*"], signature: true}
+      - {id: gas_balancing_receivables, label: Gas balancing receivables}
+
+  - family: regulatory_balance
+    statement: balance_sheet
+    side: liability
+    current: other_current_liabilities
+    noncurrent: other_noncurrent_liabilities
+    source: "ASC 980-405, ASC 410; Devin's term list 2026-11-04"
+    concepts:
+      - {id: regulatory_liabilities, label: Regulatory liabilities, signature: true, synonyms: ["regulatory liabilities*", "regulatory liability*", "current regulatory liabilities", "noncurrent regulatory liabilities"], context: "Amounts owed back to customers."}
+      - {id: gas_balancing_payables, label: Gas balancing payables}
+      - {id: environmental_remediation_liabilities, label: Environmental remediation liabilities, synonyms: ["environmental remediation*", "environmental liabilities", "environmental reserves*"]}
+      - {id: renewable_energy_obligations, label: Renewable energy obligations}
+      - {id: customer_deposits, label: Customer deposits, synonyms: ["customer deposits*"]}
+      - {id: customer_advances, label: Customer advances for construction, synonyms: ["customer advances*", "advances for construction*", "contributions in aid of construction*"]}
+      - {id: utility_aro, label: Asset retirement obligations, synonyms: ["asset retirement obligations*", "asset retirement obligation*", "nuclear decommissioning*"]}
+
+  - family: utility_measure
+    role: disclosure
+    statement: any
+    source: "ASC 980; Devin's term list 2026-11-04"
+    concepts:
+      - {id: rate_base, label: Rate base}
+      - {id: allowed_return_on_equity, label: Allowed return on equity, unit: percent}
+      - {id: rate_recovery_mechanisms, label: Rate recovery mechanisms, unit: text}
+      - {id: purchased_gas_adjustment, label: Purchased gas adjustment (PGA), unit: text}

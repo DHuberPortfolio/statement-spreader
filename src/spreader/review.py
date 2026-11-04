@@ -93,6 +93,11 @@ def build_review(statements: dict[str, StatementResult], values: list[SpreadValu
                                         statement=stype, periods=[p.key for p in t.periods],
                                         lines=sorted({m.canonical for m in res.mappings if m.canonical}),
                                         message=w.split(":", 1)[1].strip().capitalize()))
+            if w.startswith("MULTI_REGISTRANT:"):
+                items.append(ReviewItem(id=f"multi_registrant:{skey}", kind=ReviewKind.CONFLICT, severity=Severity.BLOCKER,
+                                        statement=stype, periods=[p.key for p in t.periods],
+                                        lines=sorted({m.canonical for m in res.mappings if m.canonical}),
+                                        message=w.split(":", 1)[1].strip()))
             if w.startswith("COMPETING_TABLE:"):
                 items.append(ReviewItem(id=f"competing:{skey}", kind=ReviewKind.CONFLICT, severity=Severity.WARNING,
                                         statement=stype, message=w.split(":", 1)[1].strip()))

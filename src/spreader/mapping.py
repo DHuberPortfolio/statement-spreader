@@ -23,6 +23,7 @@ from rapidfuzz import fuzz, process
 
 from finops.core import policy
 
+from . import ontology
 from .contracts import MapMethod, RowMapping, RowRole, StatementRow, StatementTable, StatementType, ValueUnit
 from .profile import LineDef, Profile, matches
 
@@ -100,9 +101,27 @@ def _section_parts(row: StatementRow) -> list[str]:
     return [s for s in reversed(row.section.split(" > ")) if s] if row.section else []
 
 
+def _from_ontology(row: StatementRow, found: ontology.Match, lab: str) -> RowMapping:
+    """A row the ontology recognised. A disclosure is left off the template; a line is measured like any rule, so an
+    unmeasured or ambiguous term goes to a person."""
+    c = found.concept
+    name = c.industry.replace("_", " ")
+    if c.role == "disclosure":
+        return RowMapping(row_index=row.index, canonical=None, method=MapMethod.STRUCTURE, confidence=0.95, excluded=True, concept=c.id,
+                          rule="ontology.disclosure", reason=f"'{lab}' is {c.label}, a {name} measure, not a line of this statement.")
+    confidence = calibrated("ontology.line")
+    if c.review == "always":
+        confidence = min(confidence, CONFIDENCE_REVIEW - 0.01)
+    context = f" {c.context}" if c.context else ""
+    return RowMapping(row_index=row.index, canonical=found.destination, method=MapMethod.ALIAS, confidence=confidence, concept=c.id,
+                      contra=c.sign == "contra", rule="ontology.line", reason=f"'{lab}' means {c.label} ({name}).{context}")
+
+
 def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: Memory | None = None,
-            company: CompanyMemory | None = None, wrong_side: frozenset[str] = frozenset()) -> RowMapping:
-    """wrong_side: kinds of line this row cannot feed because of where it sits on the balance sheet."""
+            company: CompanyMemory | None = None, wrong_side: frozenset[str] = frozenset(),
+            industries: frozenset[str] = frozenset()) -> RowMapping:
+    """wrong_side: kinds of line this row cannot feed because of where it sits on the balance sheet.
+    industries: what the document's own rows show it to be (spreader.ontology)."""
     sdef = profile.statements[table.statement]
     lines = [ln for ln in sdef.lines if _unit_ok(ln, row) and ln.kind not in wrong_side]
     lab = row.label_clean
@@ -134,6 +153,12 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
 
     if (share_row := _per_share_rule(row, lab, lines)) is not None:
         return share_row
+
+    terms = ontology.load()
+    line_ids = {ln.id for ln in lines}
+    found = terms.match(lab, table.statement.value, sections, industries, line_ids, wrong_side)
+    if found and found.concept.overrides_alias:  # in this industry these words mean something else than the alias says
+        return _from_ontology(row, found, lab)
 
     if row.role is RowRole.TOTAL:
         for ln in lines:
@@ -190,6 +215,9 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
                           reason=f"'{lab}' is a total of the company's own shareholders' equity, named after the company.",
                           rule="structure.own_equity_total")
 
+    if found and (found.destination or found.concept.role == "disclosure"):
+        return _from_ontology(row, found, lab)
+
     choices = {(ln.id, a): a for ln in lines for a in ln.aliases if "*" not in a}
     if choices:
         hits = process.extract(lab, choices, scorer=fuzz.token_sort_ratio, limit=3)
@@ -227,15 +255,52 @@ def _balance_sheet_sides(table: StatementTable) -> dict[int, frozenset[str]]:
     return {r.index: frozenset({"liability", "equity"}) if i <= at else frozenset({"asset"}) for i, r in enumerate(table.rows)}
 
 
+def _name_the_concepts(table: StatementTable, out: dict[int, RowMapping], profile: Profile, industries: frozenset[str],
+                       sides: dict[int, frozenset[str]]) -> None:
+    """Give a row placed by any rule its detailed concept, when one means the same line here. The template rolls lease
+    operating expenses and property operating expenses into one line; the concept keeps them apart."""
+    terms = ontology.load()
+    lines = set(profile.lines)
+    for row in table.rows:
+        m = out.get(row.index)
+        if m is None or m.concept or not m.canonical:
+            continue
+        sections = _section_parts(row)
+        for c in terms.candidates(row.label_clean, table.statement.value, sections, industries, sides.get(row.index, frozenset())):
+            if terms.resolve(c, sections, lines, table.statement.value) == m.canonical:
+                out[row.index] = m.model_copy(update={"concept": c.id})
+                break
+
+
+def _parts_within_their_total(table: StatementTable, out: dict[int, RowMapping], profile: Profile) -> None:
+    """A concept that is part of a line cannot be larger than that line's total in any period. If it is, the words meant
+    something else here, so the row goes to a person."""
+    terms = ontology.load()
+    by_index = {r.index: r for r in table.rows}
+    totals = {m.canonical: by_index[i] for i, m in out.items() if m.canonical and by_index[i].role is RowRole.TOTAL}
+    for i, m in list(out.items()):
+        c = terms.by_id.get(m.concept or "")
+        total = totals.get(c.part_of) if c and c.part_of else None
+        if total is None or total.index == i:
+            continue
+        for key, v in by_index[i].values.items():
+            t = total.values.get(key)
+            if v.displayed is not None and t is not None and t.displayed is not None and abs(v.displayed) > abs(t.displayed):
+                out[i] = m.model_copy(update={"canonical": None, "confidence": 0.0, "candidates": [(m.canonical, 0.5)], "rule": "ontology.part_exceeds_total",
+                                              "reason": f"'{by_index[i].label}' reads as part of {profile.lines[c.part_of].label}, but it is larger than the total."})
+                break
+
+
 def map_table(table: StatementTable, profile: Profile, memory: Memory | None = None,
-              model: ModelMapper | None = None, company: CompanyMemory | None = None) -> list[RowMapping]:
+              model: ModelMapper | None = None, company: CompanyMemory | None = None,
+              industries: frozenset[str] = frozenset()) -> list[RowMapping]:
     by_index = {r.index: r for r in table.rows}
     out: dict[int, RowMapping] = {}
     sides = _balance_sheet_sides(table)
     for row in table.rows:
         if row.role is RowRole.HEADER:
             continue
-        out[row.index] = map_row(row, table, profile, memory, company, sides.get(row.index, frozenset()))
+        out[row.index] = map_row(row, table, profile, memory, company, sides.get(row.index, frozenset()), industries)
 
     # A printed subtotal of rows already placed on different lines ("Total cash, cash equivalents
     # and short-term investments") is not a template line: placing it anywhere counts its rows
@@ -286,6 +351,9 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
                 out[earlier] = out[earlier].model_copy(update={"canonical": None, "also": [], "excluded": True, "rule": "structure.per_share_superseded",
                                                                 "reason": f"A later row gives {profile.lines[m.canonical].label} for the whole company."})
             seen[m.canonical] = row.index
+
+    _name_the_concepts(table, out, profile, industries, sides)
+    _parts_within_their_total(table, out, profile)
 
     if model is not None:
         sdef = profile.statements[table.statement]

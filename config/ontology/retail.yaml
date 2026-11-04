@@ -1,0 +1,51 @@
+# Retail and consumer goods. Gross merchandise sales are not revenue, and comparable-store sales are a growth measure.
+industry: retail
+title: Retail and consumer goods
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: net_sales, label: Net sales, part_of: null}
+      - {id: e_commerce_revenue, label: E-commerce revenue, signature: true, synonyms: ["ecommerce revenue*", "online sales", "digital sales", "e commerce sales"]}
+      - {id: wholesale_revenue, label: Wholesale revenue, review: always, synonyms: ["wholesale sales", "wholesale"], sections: ["*revenue*", "*sales*"]}
+      - {id: retail_revenue, label: Retail revenue, review: always, synonyms: ["retail sales", "retail"], sections: ["*revenue*", "*sales*"]}
+      - {id: franchise_royalties, label: Franchise royalties, signature: true, synonyms: ["franchise royalties and fees", "royalties and franchise fees", "franchise revenue*", "franchise fees"], sections: ["*revenue*", "*sales*"], context: "Income for a franchisor. A hotel's franchise fees are a cost."}
+
+  - family: cost_of_sales
+    statement: income_statement
+    destination: sga
+    sign: positive
+    source: "Devin's term list 2026-11-04"
+    concepts:
+      - {id: occupancy_costs, label: Occupancy costs, destination: [cogs], signature: true, synonyms: ["cost of sales buying and occupancy*", "cost of sales including buying and occupancy*", "buying and occupancy*", "cost of sales including occupancy*", "occupancy and buying*"], review: always, context: "Many retailers fold this into cost of sales."}
+      - {id: store_operating_expenses, label: Store operating expenses, signature: true, synonyms: ["store expenses", "store operating expense", "store operating costs", "stores operating*"]}
+      - {id: distribution_center_expenses, label: Distribution center expenses}
+      - {id: fulfillment_costs, label: Fulfillment costs, synonyms: ["fulfillment expense*", "fulfillment"]}
+      - {id: last_mile_delivery_costs, label: Last-mile delivery costs}
+
+  - family: retail_balances
+    statement: balance_sheet
+    source: "ASC 330, ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: merchandise_inventory, label: Merchandise inventory, signature: true, side: asset, destination: inventory, synonyms: ["merchandise inventories*", "merchandise inventory*", "merchandise"]}
+      - {id: loyalty_program_liabilities, label: Loyalty program liabilities, side: liability, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities, synonyms: ["loyalty program*", "customer loyalty*"]}
+      - {id: gift_card_liabilities, label: Gift card liabilities, signature: true, side: liability, destination: deferred_revenue_current, synonyms: ["gift card liabilit*", "gift cards*", "unredeemed gift cards*", "gift certificates*"]}
+      - {id: deferred_revenue, label: Deferred revenue, side: liability, current: deferred_revenue_current, noncurrent: other_noncurrent_liabilities}
+
+  - family: retail_measure
+    role: disclosure
+    statement: any
+    source: "Devin's term list 2026-11-04"
+    concepts:
+      - {id: gross_merchandise_sales, label: Gross merchandise sales, synonyms: ["gross merchandise value", "gmv"], context: "Value of goods sold through a platform. Never revenue."}
+      - {id: same_store_sales, label: Same-store sales, unit: percent, signature: true, synonyms: ["same store sales*"]}
+      - {id: comparable_store_sales, label: Comparable-store sales, unit: percent, signature: true, synonyms: ["comparable store sales*", "comparable sales*"]}
+      - {id: inventory_shrinkage, label: Inventory shrinkage}
+      - {id: markdown_allowances, label: Markdown allowances}
+      - {id: sales_returns, label: Sales returns}
+      - {id: sales_discounts, label: Sales discounts}
+      - {id: vendor_allowances, label: Vendor allowances}

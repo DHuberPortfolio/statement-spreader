@@ -8,6 +8,10 @@ Two things a table's own wording cannot settle, both found on the wide set of re
   flow's ending cash is on the balance sheet, and its net income is on the income statement. A parent-only cash flow or a
   table of quarterly results does not tie, however much it reads like a statement.
 
+- Which company a combined filing is about (D67). A utility holding company files one 10-K for itself and its subsidiaries, each
+  with full statements. A subsidiary's add up perfectly, so nothing else catches reading the wrong company. The SEC's order
+  puts the parent first, so the first full balance sheet anchors the choice, and the ties above find its other statements.
+
 Only tables that were already candidates can be chosen here, and a tie only ever moves the choice to a table that ties, so
 this cannot make a wrong number look confirmed: the checks and review run afterwards as they always did.
 """
@@ -29,6 +33,9 @@ _CASH_END = re.compile(r"\b(end of|ending|at end)\b.*|cash.*\b(end|close)\b", re
 _CONTINUED = re.compile(r"\bcontinued\b|\(cont", re.I)
 _CF_NET_INCOME = re.compile(r"^(consolidated )?net (income|loss|earnings|\(loss\)|profit)", re.I)
 INDEX_GAP = 100_000  # keeps a second table's row numbers apart from the first's
+REGISTRANT_MARGIN = 7  # a subsidiary's sheet scores below the parent's; a summary or an average balance table scores far below
+COMPANION_MARGIN = 10  # a parent's cash flow can score below a subsidiary's; a summary in the discussion scores far below both
+REGISTRANT_ROWS = 15  # shorter than a full balance sheet, or its half on one page
 
 
 def _labels(table: RawTable) -> list[str]:
@@ -65,8 +72,47 @@ def _neighbours(doc: DocumentIR, table: RawTable) -> list[RawTable]:
     return [] if i is None else [doc.tables[j] for j in (i - 1, i + 1) if 0 <= j < len(doc.tables)]
 
 
-def choose_by_ties(doc: DocumentIR, best: dict[StatementType, tuple], rivals: dict[StatementType, list[tuple]]) -> None:
-    """Move the cash flow and income statement to the candidates that tie to the other statements, when the current ones do not."""
+def first_registrant(best: dict[StatementType, tuple], rivals: dict[StatementType, list[tuple]]) -> int:
+    """In a combined filing, anchor on the first company's balance sheet. Returns how many companies' sheets it holds (0: one).
+
+    Several candidates count as different companies only if each scores like a primary statement, is long enough to be one, and
+    shows its own total assets. A table of average balances or a summary falls short of the first two."""
+    bs = best.get(StatementType.BALANCE)
+    if bs is None:
+        return 0
+    totals = {c[0].index: _row_numbers(c[0], _TOTAL_ASSETS, first_only=True) for c in rivals[StatementType.BALANCE]}
+    cands = [c for c in rivals[StatementType.BALANCE] if totals[c[0].index] and len(c[0].rows) >= REGISTRANT_ROWS]
+    if not cands:  # a sheet split over two tables can have its liabilities half score higher, so the scores compared are of the asset halves
+        return 0
+    top = max(c[2].score for c in cands)
+    cands = [c for c in cands if c[2].score >= top - REGISTRANT_MARGIN]
+    distinct: list[set[Decimal]] = []
+    for c in cands:
+        if not any(totals[c[0].index] & seen for seen in distinct):
+            distinct.append(totals[c[0].index])
+    if len(distinct) < 2:
+        return 0
+    best[StatementType.BALANCE] = min(cands, key=lambda c: c[0].index)
+    return len(distinct)
+
+
+def _nearest(cands: list[tuple], anchor: tuple) -> tuple:
+    """A combined filing keeps each company's statements together: the closest candidate, the earlier one if two are as close."""
+    return min(cands, key=lambda c: (abs(c[0].index - anchor[0].index), c[0].index))
+
+
+def choose_by_ties(doc: DocumentIR, best: dict[StatementType, tuple], rivals: dict[StatementType, list[tuple]], combined: bool = False) -> None:
+    """Move the cash flow and income statement to the candidates that tie to the other statements, when the current ones do not.
+    combined: the filing holds several companies. Their statements look alike, so the choice stays beside the anchor."""
+    if combined:
+        anchor = best[StatementType.BALANCE]
+        for stype in (StatementType.CASH_FLOW, StatementType.INCOME):
+            if stype in best:
+                top = max(c[2].score for c in rivals[stype])
+                near = [c for c in rivals[stype] if c[2].score >= top - COMPANION_MARGIN and len(c[0].rows) >= REGISTRANT_ROWS]
+                if near:
+                    best[stype] = _nearest(near, anchor)
+        return  # the ties below would look across companies, and a subsidiary's table can match on a shared figure
     bs = best.get(StatementType.BALANCE)
     if bs is not None and StatementType.CASH_FLOW in best:
         sheet = _numbers(bs[0]).union(*(_numbers(t) for t in _neighbours(doc, bs[0])))

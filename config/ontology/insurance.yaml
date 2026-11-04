@@ -1,0 +1,58 @@
+# Insurers. Written and earned premiums are different concepts: only earned reaches the income statement.
+industry: insurance
+title: Insurance
+groups:
+  - family: premiums
+    statement: income_statement
+    source: "ASC 944; Devin's term list 2026-11-04"
+    concepts:
+      - {id: earned_premiums, label: Earned premiums, signature: true, destination: [premiums_earned, revenue], synonyms: ["premiums earned*", "net premiums earned*", "net earned premiums*", "net premium earned*", "earned premium*"], context: "The income statement figure."}
+      - {id: gross_written_premiums, label: Gross written premiums, role: disclosure, destination: [], signature: true, synonyms: ["gross premiums written*", "direct premiums written*"], context: "A production measure. Never revenue."}
+      - {id: net_written_premiums, label: Net written premiums, role: disclosure, destination: [], signature: true, synonyms: ["net premiums written*"], context: "A production measure. Never revenue."}
+      - {id: ceded_premiums, label: Ceded premiums, role: disclosure, destination: [], synonyms: ["premiums ceded*", "ceded premiums written*"]}
+      - {id: assumed_premiums, label: Assumed premiums, role: disclosure, destination: [], synonyms: ["premiums assumed*", "assumed premiums written*"]}
+      - {id: investment_income, label: Investment income, destination: [net_investment_income, other_nonoperating], synonyms: ["net investment income*", "investment income*"]}
+
+  - family: claims
+    statement: income_statement
+    destination: [losses_lae, other_opex]
+    sign: positive
+    source: "ASC 944-40; Devin's term list 2026-11-04"
+    concepts:
+      - {id: incurred_losses, label: Incurred losses, signature: true, synonyms: ["losses incurred*", "net losses incurred*", "claims incurred*", "net claims incurred*"]}
+      - {id: loss_adjustment_expenses, label: Loss adjustment expenses, signature: true, synonyms: ["losses and loss adjustment expenses*", "loss and loss adjustment expenses*", "loss and lae*", "losses and lae*", "claims and claim adjustment expenses*", "losses and settlement expenses*", "claims and claims adjustment*"]}
+      - {id: paid_claims, label: Paid claims, role: disclosure, destination: [], statement: any}
+      - {id: policyholder_benefits, label: Policyholder benefits, signature: true, synonyms: ["policyholder benefits*", "benefits and claims*", "policyholder benefits and claims*", "benefits claims*", "policy benefits*"]}
+      - {id: acquisition_expenses, label: Acquisition expenses, destination: [acquisition_costs, other_opex], synonyms: ["policy acquisition costs*", "acquisition costs*", "amortization of deferred policy acquisition*", "amortization of deferred acquisition*", "policy acquisition and other*", "commissions and acquisition*"]}
+
+  - family: insurance_balances
+    statement: balance_sheet
+    side: asset
+    source: "ASC 944; Devin's term list 2026-11-04"
+    concepts:
+      - {id: premiums_receivable, label: Premiums receivable, signature: true, destination: [premiums_receivable, receivables], synonyms: ["premiums receivable*", "premiums and other receivables*", "premiums and agents balances*", "insurance premiums receivable*", "premium receivables*"]}
+      - {id: reinsurance_recoverables, label: Reinsurance recoverables, signature: true, destination: [reinsurance_recoverables, other_noncurrent_assets], synonyms: ["reinsurance recoverable*", "reinsurance recoverables*", "reinsurance receivable*", "reinsurance receivables*", "amounts recoverable from reinsurers*", "reinsurance balances recoverable*"]}
+      - {id: dac, label: Deferred acquisition costs (DAC), signature: true, destination: [deferred_acquisition_costs, other_noncurrent_assets], synonyms: ["deferred acquisition costs*", "deferred policy acquisition costs*"]}
+
+  - family: insurance_liabilities
+    statement: balance_sheet
+    side: liability
+    source: "ASC 944-40; Devin's term list 2026-11-04"
+    concepts:
+      - {id: loss_reserves, label: Loss reserves, signature: true, destination: [loss_reserves, other_noncurrent_liabilities], synonyms: ["unpaid losses and loss adjustment expenses*", "reserve for losses*", "reserves for losses*", "liability for unpaid*", "losses and loss adjustment expense reserves*", "unpaid claims*", "loss and loss adjustment expense reserves*", "reserves for losses and loss adjustment*"]}
+      - {id: claims_payable, label: Claims payable, destination: [loss_reserves, other_current_liabilities], synonyms: ["claims payable*", "policy and contract claims*", "medical claims payable*"]}
+      - {id: unearned_premiums, label: Unearned premiums, signature: true, destination: [unearned_premiums, deferred_revenue_current], synonyms: ["unearned premiums*", "unearned premium*", "unearned premium reserves*"]}
+      - {id: policyholder_liabilities, label: Policyholder liabilities, destination: [future_policy_benefits, other_noncurrent_liabilities], synonyms: ["future policy benefits*", "policyholder account balances*", "policyholders account*", "liability for future policy benefits*", "policyholder contract deposits*", "other policyholder funds*"]}
+
+  - family: insurance_measure
+    role: disclosure
+    statement: any
+    source: "NAIC statutory accounting; Devin's term list 2026-11-04"
+    concepts:
+      - {id: combined_ratio, label: Combined ratio, unit: percent, signature: true}
+      - {id: loss_ratio, label: Loss ratio, unit: percent}
+      - {id: expense_ratio, label: Expense ratio, unit: percent}
+      - {id: persistency_ratio, label: Persistency ratio, unit: percent}
+      - {id: insurance_float, label: Insurance float}
+      - {id: statutory_surplus, label: Statutory surplus}
+      - {id: rbc, label: Risk-based capital (RBC)}

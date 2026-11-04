@@ -1,15 +1,15 @@
 {
- "name": "stmt-holdout-d66",
+ "name": "stmt-holdout-d67",
  "documents": 30,
  "crashed": 0,
- "seconds": 221.2,
- "profile": "us-commercial 2026.11.04-1+b2166b77ced3",
+ "seconds": 91.3,
+ "profile": "us-commercial 2026.11.04-1+e6cf4754763d",
  "buckets": {
-  "correct_review": 2280,
+  "correct_review": 2285,
   "wrong_review": 166,
-  "correct_auto": 1152,
+  "correct_auto": 1154,
   "unjudged": 169,
-  "missing_flagged": 317,
+  "missing_flagged": 310,
   "missing_silent": 56,
   "wrong_auto": 2
  },
@@ -20,18 +20,18 @@
  },
  "rates": {
   "accuracy": {
-   "n": 3432,
+   "n": 3439,
    "d": 3973,
-   "rate": 0.863830858293481,
-   "low": 0.8528140147224519,
-   "high": 0.874144785949921
+   "rate": 0.8655927510697207,
+   "low": 0.8546325091459589,
+   "high": 0.8758466731277329
   },
   "silent_error_rate": {
    "n": 2,
-   "d": 1154,
-   "rate": 0.0017331022530329288,
-   "low": 0.00047539792932241483,
-   "high": 0.006297203780617873
+   "d": 1156,
+   "rate": 0.0017301038062283738,
+   "low": 0.00047457521910175895,
+   "high": 0.006286347996620112
   },
   "silent_omission_rate": {
    "n": 56,
@@ -41,11 +41,11 @@
    "high": 0.018258329204193787
   },
   "review_rate": {
-   "n": 2446,
-   "d": 3600,
-   "rate": 0.6794444444444444,
-   "low": 0.6640148770511534,
-   "high": 0.6944914457572631
+   "n": 2451,
+   "d": 3607,
+   "rate": 0.6795120598835598,
+   "low": 0.6640984186040461,
+   "high": 0.6945437328544949
   },
   "catch_rate": {
    "n": 166,
@@ -55,18 +55,18 @@
    "high": 0.9967292591352631
   },
   "unnecessary_review_rate": {
-   "n": 2280,
-   "d": 3432,
-   "rate": 0.6643356643356644,
-   "low": 0.6483607156425641,
-   "high": 0.6799431270025684
+   "n": 2285,
+   "d": 3439,
+   "rate": 0.6644373364350101,
+   "low": 0.6484798925151887,
+   "high": 0.6800278146067422
   },
   "coverage": {
-   "n": 3600,
+   "n": 3607,
    "d": 3973,
-   "rate": 0.9061162849232318,
-   "low": 0.8966503649778493,
-   "high": 0.9147975941261793
+   "rate": 0.9078781776994714,
+   "low": 0.8984871474546364,
+   "high": 0.9164811932507112
   }
  },
  "cells": {
@@ -83,14 +83,14 @@
    "total": 6082
   },
   "mapping": {
-   "ok": 4056,
+   "ok": 4065,
    "total": 4609
   }
  },
  "documents_detail": [
   {
    "doc": "sec:CROX",
-   "ms": 7910,
+   "ms": 2982,
    "error": null,
    "statements": [
     "income_statement",
@@ -112,7 +112,7 @@
   },
   {
    "doc": "sec:CSCO",
-   "ms": 9127,
+   "ms": 3705,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -135,7 +135,7 @@
   },
   {
    "doc": "sec:CVX",
-   "ms": 21135,
+   "ms": 8481,
    "error": null,
    "statements": [
     "income_statement",
@@ -143,10 +143,10 @@
     "cash_flow"
    ],
    "buckets": {
-    "correct_review": 63,
-    "missing_flagged": 31,
+    "correct_review": 66,
+    "missing_flagged": 26,
     "unjudged": 3,
-    "wrong_review": 5,
+    "wrong_review": 7,
     "correct_auto": 28
    },
    "checks_failed": 19,
@@ -158,7 +158,7 @@
   },
   {
    "doc": "sec:DE",
-   "ms": 8526,
+   "ms": 3538,
    "error": null,
    "statements": [
     "cash_flow",
@@ -180,7 +180,7 @@
   },
   {
    "doc": "sec:DECK",
-   "ms": 3642,
+   "ms": 1442,
    "error": null,
    "statements": [
     "income_statement",
@@ -188,22 +188,22 @@
     "cash_flow"
    ],
    "buckets": {
-    "correct_review": 50,
-    "wrong_review": 6,
+    "correct_review": 52,
+    "wrong_review": 4,
     "missing_flagged": 4,
     "correct_auto": 28,
     "unjudged": 8
    },
    "checks_failed": 12,
    "checks_run": 44,
-   "review_items": 27,
+   "review_items": 28,
    "blockers": 6,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:FDX",
-   "ms": 9646,
+   "ms": 3978,
    "error": null,
    "statements": [
     "cash_flow",
@@ -217,16 +217,16 @@
     "missing_flagged": 7,
     "wrong_review": 4
    },
-   "checks_failed": 6,
+   "checks_failed": 8,
    "checks_run": 39,
-   "review_items": 38,
-   "blockers": 0,
+   "review_items": 40,
+   "blockers": 2,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:GOOGL",
-   "ms": 7501,
+   "ms": 2885,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -249,7 +249,7 @@
   },
   {
    "doc": "sec:GPC",
-   "ms": 5126,
+   "ms": 2180,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -272,7 +272,7 @@
   },
   {
    "doc": "sec:HD",
-   "ms": 4665,
+   "ms": 1923,
    "error": null,
    "statements": [
     "income_statement",
@@ -296,7 +296,7 @@
   },
   {
    "doc": "sec:HON",
-   "ms": 13971,
+   "ms": 5253,
    "error": null,
    "statements": [
     "income_statement",
@@ -321,7 +321,7 @@
   },
   {
    "doc": "sec:IBM",
-   "ms": 587,
+   "ms": 256,
    "error": null,
    "statements": [],
    "buckets": {},
@@ -334,7 +334,7 @@
   },
   {
    "doc": "sec:INTC",
-   "ms": 10883,
+   "ms": 4136,
    "error": null,
    "statements": [
     "income_statement",
@@ -357,7 +357,7 @@
   },
   {
    "doc": "sec:JNJ",
-   "ms": 8223,
+   "ms": 3294,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -380,7 +380,7 @@
   },
   {
    "doc": "sec:LMT",
-   "ms": 6044,
+   "ms": 2556,
    "error": null,
    "statements": [
     "income_statement",
@@ -404,7 +404,7 @@
   },
   {
    "doc": "sec:LOW",
-   "ms": 7327,
+   "ms": 2879,
    "error": null,
    "statements": [
     "cash_flow",
@@ -426,7 +426,7 @@
   },
   {
    "doc": "sec:META",
-   "ms": 8060,
+   "ms": 3458,
    "error": null,
    "statements": [
     "income_statement",
@@ -449,7 +449,7 @@
   },
   {
    "doc": "sec:MRK",
-   "ms": 13582,
+   "ms": 5655,
    "error": null,
    "statements": [
     "income_statement",
@@ -457,9 +457,9 @@
     "cash_flow"
    ],
    "buckets": {
-    "correct_review": 109,
+    "correct_review": 111,
     "correct_auto": 19,
-    "missing_flagged": 10,
+    "missing_flagged": 8,
     "wrong_review": 6,
     "unjudged": 8,
     "missing_silent": 1
@@ -473,7 +473,7 @@
   },
   {
    "doc": "sec:MSFT",
-   "ms": 6503,
+   "ms": 2830,
    "error": null,
    "statements": [
     "income_statement",
@@ -494,7 +494,7 @@
   },
   {
    "doc": "sec:NFLX",
-   "ms": 4901,
+   "ms": 2057,
    "error": null,
    "statements": [
     "income_statement",
@@ -515,7 +515,7 @@
   },
   {
    "doc": "sec:NKE",
-   "ms": 7259,
+   "ms": 2995,
    "error": null,
    "statements": [
     "income_statement",
@@ -538,7 +538,7 @@
   },
   {
    "doc": "sec:NVDA",
-   "ms": 5091,
+   "ms": 2144,
    "error": null,
    "statements": [
     "income_statement",
@@ -561,7 +561,7 @@
   },
   {
    "doc": "sec:ODFL",
-   "ms": 2090,
+   "ms": 902,
    "error": null,
    "statements": [
     "income_statement",
@@ -569,22 +569,22 @@
     "balance_sheet"
    ],
    "buckets": {
-    "correct_auto": 56,
+    "correct_auto": 52,
     "unjudged": 7,
-    "wrong_review": 8,
-    "correct_review": 51,
+    "wrong_review": 10,
+    "correct_review": 53,
     "missing_flagged": 6
    },
-   "checks_failed": 6,
+   "checks_failed": 8,
    "checks_run": 51,
-   "review_items": 33,
-   "blockers": 0,
+   "review_items": 35,
+   "blockers": 2,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:QCOM",
-   "ms": 4204,
+   "ms": 1707,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -607,7 +607,7 @@
   },
   {
    "doc": "sec:ROKU",
-   "ms": 6205,
+   "ms": 2571,
    "error": null,
    "statements": [
     "income_statement",
@@ -629,7 +629,7 @@
   },
   {
    "doc": "sec:SBUX",
-   "ms": 8100,
+   "ms": 3342,
    "error": null,
    "statements": [
     "income_statement",
@@ -653,7 +653,7 @@
   },
   {
    "doc": "sec:TGT",
-   "ms": 5689,
+   "ms": 2415,
    "error": null,
    "statements": [
     "income_statement",
@@ -676,7 +676,7 @@
   },
   {
    "doc": "sec:TSLA",
-   "ms": 6017,
+   "ms": 2416,
    "error": null,
    "statements": [
     "balance_sheet",
@@ -699,7 +699,7 @@
   },
   {
    "doc": "sec:TXN",
-   "ms": 3673,
+   "ms": 1523,
    "error": null,
    "statements": [
     "income_statement",
@@ -707,23 +707,23 @@
     "cash_flow"
    ],
    "buckets": {
-    "correct_review": 80,
-    "wrong_review": 9,
-    "correct_auto": 39,
+    "correct_auto": 45,
+    "correct_review": 76,
+    "wrong_review": 7,
     "missing_flagged": 7,
     "unjudged": 9,
     "missing_silent": 3
    },
-   "checks_failed": 14,
+   "checks_failed": 12,
    "checks_run": 51,
-   "review_items": 25,
-   "blockers": 6,
+   "review_items": 20,
+   "blockers": 4,
    "expected_review_missing": [],
    "forbidden_present": []
   },
   {
    "doc": "sec:UPS",
-   "ms": 10857,
+   "ms": 4615,
    "error": null,
    "statements": [
     "cash_flow",
@@ -747,7 +747,7 @@
   },
   {
    "doc": "sec:YETI",
-   "ms": 4535,
+   "ms": 1951,
    "error": null,
    "statements": [
     "income_statement",
@@ -1032,6 +1032,34 @@
   },
   {
    "doc": "sec:CVX",
+   "line": "ppe_net",
+   "period": "2025-12-31/I",
+   "truth": "219729000000",
+   "predicted": "-215226000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "confidence:balance_sheet:19",
+    "check:bs_assets_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
+   "line": "ppe_net",
+   "period": "2024-12-31/I",
+   "truth": "147799000000",
+   "predicted": "-198134000000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "extracted",
+   "flags": [
+    "confidence:balance_sheet:19",
+    "check:bs_assets_parts:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:CVX",
    "line": "accrued_liabilities",
    "period": "2025-12-31/I",
    "truth": "11607000000",
@@ -1288,32 +1316,6 @@
    "status": "normalized",
    "flags": [
     "check:bs_current_assets:2025-03-31/I"
-   ]
-  },
-  {
-   "doc": "sec:DECK",
-   "line": "accrued_liabilities",
-   "period": "2026-03-31/I",
-   "truth": "156072000",
-   "predicted": "119597000",
-   "bucket": "wrong_review",
-   "kind": "value",
-   "status": "extracted",
-   "flags": [
-    "check:bs_current_liabilities:2026-03-31/I"
-   ]
-  },
-  {
-   "doc": "sec:DECK",
-   "line": "accrued_liabilities",
-   "period": "2025-03-31/I",
-   "truth": "148716000",
-   "predicted": "125417000",
-   "bucket": "wrong_review",
-   "kind": "value",
-   "status": "extracted",
-   "flags": [
-    "check:bs_current_liabilities:2025-03-31/I"
    ]
   },
   {
@@ -2462,12 +2464,11 @@
    "line": "other_current_liabilities",
    "period": "2025-12-31/I",
    "truth": "14468000000",
-   "predicted": "4729000000",
+   "predicted": "2140000000",
    "bucket": "wrong_review",
    "kind": "value",
-   "status": "normalized",
+   "status": "extracted",
    "flags": [
-    "confidence:balance_sheet:25",
     "confidence:balance_sheet:29"
    ]
   },
@@ -2476,12 +2477,11 @@
    "line": "other_current_liabilities",
    "period": "2024-12-31/I",
    "truth": "15694000000",
-   "predicted": "4733000000",
+   "predicted": "2084000000",
    "bucket": "wrong_review",
    "kind": "value",
-   "status": "normalized",
+   "status": "extracted",
    "flags": [
-    "confidence:balance_sheet:25",
     "confidence:balance_sheet:29"
    ]
   },
@@ -2743,6 +2743,34 @@
    "status": "extracted",
    "flags": [
     "unconfirmed:balance_sheet:2024-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "ppe_net",
+   "period": "2025-12-31/I",
+   "truth": "4504204000",
+   "predicted": "7182650000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:11",
+    "check:bs_assets_parts:2025-12-31/I"
+   ]
+  },
+  {
+   "doc": "sec:ODFL",
+   "line": "ppe_net",
+   "period": "2024-12-31/I",
+   "truth": "4505431000",
+   "predicted": "7258025000",
+   "bucket": "wrong_review",
+   "kind": "value",
+   "status": "normalized",
+   "flags": [
+    "confidence:balance_sheet:11",
+    "check:bs_assets_parts:2024-12-31/I"
    ]
   },
   {
@@ -3329,38 +3357,6 @@
   },
   {
    "doc": "sec:TXN",
-   "line": "other_current_assets",
-   "period": "2025-12-31/I",
-   "truth": "2102000000",
-   "predicted": "6906000000",
-   "bucket": "wrong_review",
-   "kind": "value",
-   "status": "normalized",
-   "flags": [
-    "confidence:balance_sheet:8",
-    "confidence:balance_sheet:9",
-    "confidence:balance_sheet:10",
-    "check:bs_current_assets:2025-12-31/I"
-   ]
-  },
-  {
-   "doc": "sec:TXN",
-   "line": "other_current_assets",
-   "period": "2024-12-31/I",
-   "truth": "1200000000",
-   "predicted": "5727000000",
-   "bucket": "wrong_review",
-   "kind": "value",
-   "status": "normalized",
-   "flags": [
-    "confidence:balance_sheet:8",
-    "confidence:balance_sheet:9",
-    "confidence:balance_sheet:10",
-    "check:bs_current_assets:2024-12-31/I"
-   ]
-  },
-  {
-   "doc": "sec:TXN",
    "line": "accrued_liabilities",
    "period": "2025-12-31/I",
    "truth": "896000000",
@@ -3692,8 +3688,8 @@
   }
  ],
  "provenance": {
-  "created": "2026-11-04T07:46:15+00:00",
-  "commit": "22f07e2c3d97e641e2ed62d42e94663659249744",
+  "created": "2026-11-04T18:23:51+00:00",
+  "commit": "ab54be2be0391156db692702e4c08434ddff8c95",
   "dirty": true,
   "datasets": [
    {
@@ -3705,7 +3701,7 @@
    }
   ],
   "config": {
-   "profile": "us-commercial 2026.11.04-1+b2166b77ced3"
+   "profile": "us-commercial 2026.11.04-1+e6cf4754763d"
   }
  }
 }

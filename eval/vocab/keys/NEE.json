@@ -1,0 +1,3943 @@
+{
+ "document": "NEE-0000753308-26-000015.htm",
+ "source": "sec",
+ "description": "Answer key from the filing's inline XBRL tags",
+ "periods": [
+  "2023-12-31/12M",
+  "2024-12-31/12M",
+  "2025-12-31/12M"
+ ],
+ "spread": [
+  {
+   "statement": "balance_sheet",
+   "line": "cash",
+   "period": "2025-12-31/I",
+   "value": "2812000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "cash",
+   "period": "2024-12-31/I",
+   "value": "1487000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "receivables",
+   "period": "2025-12-31/I",
+   "value": "4018000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "receivables",
+   "period": "2024-12-31/I",
+   "value": "3336000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "inventory",
+   "period": "2025-12-31/I",
+   "value": "2420000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "inventory",
+   "period": "2024-12-31/I",
+   "value": "2214000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_current_assets",
+   "period": "2025-12-31/I",
+   "value": "1604000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_current_assets",
+   "period": "2024-12-31/I",
+   "value": "2855000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_current_assets",
+   "period": "2025-12-31/I",
+   "value": "13584000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_current_assets",
+   "period": "2024-12-31/I",
+   "value": "11951000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "ppe_net",
+   "period": "2025-12-31/I",
+   "value": "156197000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "ppe_net",
+   "period": "2024-12-31/I",
+   "value": "138852000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "lt_investments",
+   "period": "2025-12-31/I",
+   "value": "5528000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "lt_investments",
+   "period": "2024-12-31/I",
+   "value": "6118000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_noncurrent_assets",
+   "period": "2025-12-31/I",
+   "value": "16743000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_noncurrent_assets",
+   "period": "2024-12-31/I",
+   "value": "14287000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "goodwill",
+   "period": "2025-12-31/I",
+   "value": "4849000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "goodwill",
+   "period": "2024-12-31/I",
+   "value": "4866000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_noncurrent_assets",
+   "period": "2025-12-31/I",
+   "value": "199137000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_noncurrent_assets",
+   "period": "2024-12-31/I",
+   "value": "178193000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "value": "212721000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2024-12-31/I",
+   "value": "190144000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "st_debt",
+   "period": "2025-12-31/I",
+   "value": "5455000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "st_debt",
+   "period": "2024-12-31/I",
+   "value": "9731000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "deferred_revenue_current",
+   "period": "2025-12-31/I",
+   "value": "709000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "deferred_revenue_current",
+   "period": "2024-12-31/I",
+   "value": "694000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_current_liabilities",
+   "period": "2025-12-31/I",
+   "value": "3198000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_current_liabilities",
+   "period": "2024-12-31/I",
+   "value": "3296000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_current_liabilities",
+   "period": "2025-12-31/I",
+   "value": "22817000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_current_liabilities",
+   "period": "2024-12-31/I",
+   "value": "25355000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "lt_debt",
+   "period": "2025-12-31/I",
+   "value": "89556000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "lt_debt",
+   "period": "2024-12-31/I",
+   "value": "72385000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "value": "19362000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "other_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "value": "17786000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "deferred_tax_liabilities",
+   "period": "2025-12-31/I",
+   "value": "12359000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "deferred_tax_liabilities",
+   "period": "2024-12-31/I",
+   "value": "11749000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_noncurrent_liabilities",
+   "period": "2025-12-31/I",
+   "value": "123425000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_noncurrent_liabilities",
+   "period": "2024-12-31/I",
+   "value": "103928000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "value": "146242000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2024-12-31/I",
+   "value": "129283000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "temporary_equity",
+   "period": "2025-12-31/I",
+   "value": "0",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "temporary_equity",
+   "period": "2024-12-31/I",
+   "value": "401000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "value": "19515000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "common_stock_apic",
+   "period": "2024-12-31/I",
+   "value": "17281000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "retained_earnings",
+   "period": "2025-12-31/I",
+   "value": "35102000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "retained_earnings",
+   "period": "2024-12-31/I",
+   "value": "32946000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "aoci",
+   "period": "2025-12-31/I",
+   "value": "-9000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "aoci",
+   "period": "2024-12-31/I",
+   "value": "-126000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "value": "54608000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity_parent",
+   "period": "2024-12-31/I",
+   "value": "50101000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "nci_equity",
+   "period": "2025-12-31/I",
+   "value": "11871000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "nci_equity",
+   "period": "2024-12-31/I",
+   "value": "10359000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "value": "66479000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity",
+   "period": "2024-12-31/I",
+   "value": "60460000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities_equity",
+   "period": "2025-12-31/I",
+   "value": "212721000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities_equity",
+   "period": "2024-12-31/I",
+   "value": "190144000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "revenue",
+   "period": "2025-12-31/12M",
+   "value": "27412000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "revenue",
+   "period": "2024-12-31/12M",
+   "value": "24753000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "revenue",
+   "period": "2023-12-31/12M",
+   "value": "28114000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "total_opex",
+   "period": "2025-12-31/12M",
+   "value": "19392000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "total_opex",
+   "period": "2024-12-31/12M",
+   "value": "17626000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "total_opex",
+   "period": "2023-12-31/12M",
+   "value": "18282000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "operating_income",
+   "period": "2025-12-31/12M",
+   "value": "8280000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "operating_income",
+   "period": "2024-12-31/12M",
+   "value": "7479000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "operating_income",
+   "period": "2023-12-31/12M",
+   "value": "10237000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "other_nonoperating",
+   "period": "2025-12-31/12M",
+   "value": "267000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "other_nonoperating",
+   "period": "2024-12-31/12M",
+   "value": "253000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "other_nonoperating",
+   "period": "2023-12-31/12M",
+   "value": "-190000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "pretax_income",
+   "period": "2025-12-31/12M",
+   "value": "4530000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "pretax_income",
+   "period": "2024-12-31/12M",
+   "value": "6037000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "pretax_income",
+   "period": "2023-12-31/12M",
+   "value": "7288000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "income_tax",
+   "period": "2025-12-31/12M",
+   "value": "-802000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "income_tax",
+   "period": "2024-12-31/12M",
+   "value": "339000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "income_tax",
+   "period": "2023-12-31/12M",
+   "value": "1006000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2025-12-31/12M",
+   "value": "5332000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2024-12-31/12M",
+   "value": "5698000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "value": "6282000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "value": "6835000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "value": "6946000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "value": "7310000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "value": "3.31",
+   "precision": "0.01"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "value": "3.38",
+   "precision": "0.01"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "value": "3.61",
+   "precision": "0.01"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_diluted",
+   "period": "2025-12-31/12M",
+   "value": "3.30",
+   "precision": "0.01"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_diluted",
+   "period": "2024-12-31/12M",
+   "value": "3.37",
+   "precision": "0.01"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_diluted",
+   "period": "2023-12-31/12M",
+   "value": "3.60",
+   "precision": "0.01"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_net_income",
+   "period": "2025-12-31/12M",
+   "value": "5332000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_net_income",
+   "period": "2024-12-31/12M",
+   "value": "5698000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_net_income",
+   "period": "2023-12-31/12M",
+   "value": "6282000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_dna",
+   "period": "2025-12-31/12M",
+   "value": "6580000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_dna",
+   "period": "2024-12-31/12M",
+   "value": "5462000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_dna",
+   "period": "2023-12-31/12M",
+   "value": "5879000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_deferred_tax",
+   "period": "2025-12-31/12M",
+   "value": "453000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_deferred_tax",
+   "period": "2024-12-31/12M",
+   "value": "1308000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_deferred_tax",
+   "period": "2023-12-31/12M",
+   "value": "708000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_working_capital",
+   "period": "2025-12-31/12M",
+   "value": "-373000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_working_capital",
+   "period": "2024-12-31/12M",
+   "value": "160000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_working_capital",
+   "period": "2023-12-31/12M",
+   "value": "-1393000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cfo",
+   "period": "2025-12-31/12M",
+   "value": "12485000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cfo",
+   "period": "2024-12-31/12M",
+   "value": "13260000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cfo",
+   "period": "2023-12-31/12M",
+   "value": "11301000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cfi",
+   "period": "2025-12-31/12M",
+   "value": "-23865000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cfi",
+   "period": "2024-12-31/12M",
+   "value": "-22264000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cfi",
+   "period": "2023-12-31/12M",
+   "value": "-23467000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "debt_issued",
+   "period": "2025-12-31/12M",
+   "value": "23394000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "debt_issued",
+   "period": "2024-12-31/12M",
+   "value": "24769000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "debt_issued",
+   "period": "2023-12-31/12M",
+   "value": "13857000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "debt_repaid",
+   "period": "2025-12-31/12M",
+   "value": "-10347000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "debt_repaid",
+   "period": "2024-12-31/12M",
+   "value": "-10113000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "debt_repaid",
+   "period": "2023-12-31/12M",
+   "value": "-7978000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_commercial_paper_net",
+   "period": "2025-12-31/12M",
+   "value": "285000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_commercial_paper_net",
+   "period": "2024-12-31/12M",
+   "value": "-2980000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_commercial_paper_net",
+   "period": "2023-12-31/12M",
+   "value": "2941000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "stock_issued",
+   "period": "2025-12-31/12M",
+   "value": "2038000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "stock_issued",
+   "period": "2024-12-31/12M",
+   "value": "48000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "stock_issued",
+   "period": "2023-12-31/12M",
+   "value": "4514000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "dividends_paid",
+   "period": "2025-12-31/12M",
+   "value": "-4680000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "dividends_paid",
+   "period": "2024-12-31/12M",
+   "value": "-4235000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "dividends_paid",
+   "period": "2023-12-31/12M",
+   "value": "-3782000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_other_financing",
+   "period": "2025-12-31/12M",
+   "value": "-731000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_other_financing",
+   "period": "2024-12-31/12M",
+   "value": "-597000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cf_other_financing",
+   "period": "2023-12-31/12M",
+   "value": "-653000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "fx_effect",
+   "period": "2025-12-31/12M",
+   "value": "5000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "fx_effect",
+   "period": "2024-12-31/12M",
+   "value": "-14000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "fx_effect",
+   "period": "2023-12-31/12M",
+   "value": "-4000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "net_change_cash",
+   "period": "2025-12-31/12M",
+   "value": "1604000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "net_change_cash",
+   "period": "2024-12-31/12M",
+   "value": "-2018000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "net_change_cash",
+   "period": "2023-12-31/12M",
+   "value": "-21000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cash_end",
+   "period": "2024-12-31/12M",
+   "value": "1402000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cash_end",
+   "period": "2023-12-31/12M",
+   "value": "3420000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cash_begin",
+   "period": "2023-12-31/12M",
+   "value": "3441000000",
+   "precision": "1000000"
+  },
+  {
+   "statement": "cash_flow",
+   "line": "cash_end",
+   "period": "2025-12-31/12M",
+   "value": "3006000000",
+   "precision": "1000000"
+  }
+ ],
+ "cells": [
+  {
+   "statement": "balance_sheet",
+   "row_label": "Cash and cash equivalents",
+   "period": "2025-12-31/I",
+   "value": "2812000000",
+   "line": "cash",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[6]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Cash and cash equivalents",
+   "period": "2024-12-31/I",
+   "value": "1487000000",
+   "line": "cash",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[6]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Customer receivables, net of allowances of $82 and $56, respectively",
+   "period": "2025-12-31/I",
+   "value": "82000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[7]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Customer receivables, net of allowances of $82 and $56, respectively",
+   "period": "2024-12-31/I",
+   "value": "56000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[7]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Customer receivables, net of allowances of $82 and $56, respectively",
+   "period": "2025-12-31/I",
+   "value": "4018000000",
+   "line": "receivables",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[7]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Customer receivables, net of allowances of $82 and $56, respectively",
+   "period": "2024-12-31/I",
+   "value": "3336000000",
+   "line": "receivables",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[7]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other receivables",
+   "period": "2025-12-31/I",
+   "value": "1733000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[8]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other receivables",
+   "period": "2024-12-31/I",
+   "value": "1180000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[8]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Materials, supplies and fuel inventory",
+   "period": "2025-12-31/I",
+   "value": "2420000000",
+   "line": "inventory",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[9]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Materials, supplies and fuel inventory",
+   "period": "2024-12-31/I",
+   "value": "2214000000",
+   "line": "inventory",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[9]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory assets",
+   "period": "2025-12-31/I",
+   "value": "433000000",
+   "line": "other_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[10]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory assets",
+   "period": "2024-12-31/I",
+   "value": "1417000000",
+   "line": "other_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[10]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2025-12-31/I",
+   "value": "997000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[11]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2024-12-31/I",
+   "value": "879000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[11]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2025-12-31/I",
+   "value": "1171000000",
+   "line": "other_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[13]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2024-12-31/I",
+   "value": "1438000000",
+   "line": "other_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[13]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total current assets",
+   "period": "2025-12-31/I",
+   "value": "13584000000",
+   "line": "total_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[14]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total current assets",
+   "period": "2024-12-31/I",
+   "value": "11951000000",
+   "line": "total_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[14]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Property, plant and equipment – net ($28,988 and $25,632 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "28988000000",
+   "line": "ppe_net",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Property, plant and equipment – net ($28,988 and $25,632 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "25632000000",
+   "line": "ppe_net",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Property, plant and equipment – net ($28,988 and $25,632 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "156197000000",
+   "line": "ppe_net",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[16]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Property, plant and equipment – net ($28,988 and $25,632 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "138852000000",
+   "line": "ppe_net",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[16]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Special use funds",
+   "period": "2025-12-31/I",
+   "value": "10954000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[17]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Special use funds",
+   "period": "2024-12-31/I",
+   "value": "9800000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[17]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in equity method investees",
+   "period": "2025-12-31/I",
+   "value": "5528000000",
+   "line": "lt_investments",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[18]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in equity method investees",
+   "period": "2024-12-31/I",
+   "value": "6118000000",
+   "line": "lt_investments",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[18]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Prepaid benefit costs",
+   "period": "2025-12-31/I",
+   "value": "2868000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[19]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Prepaid benefit costs",
+   "period": "2024-12-31/I",
+   "value": "2496000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[19]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory assets",
+   "period": "2025-12-31/I",
+   "value": "5639000000",
+   "line": "other_noncurrent_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[20]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory assets",
+   "period": "2024-12-31/I",
+   "value": "4828000000",
+   "line": "other_noncurrent_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[20]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2025-12-31/I",
+   "value": "1998000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[21]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2024-12-31/I",
+   "value": "1774000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[21]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Goodwill",
+   "period": "2025-12-31/I",
+   "value": "4849000000",
+   "line": "goodwill",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[22]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Goodwill",
+   "period": "2024-12-31/I",
+   "value": "4866000000",
+   "line": "goodwill",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[22]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2025-12-31/I",
+   "value": "11104000000",
+   "line": "other_noncurrent_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[23]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2024-12-31/I",
+   "value": "9459000000",
+   "line": "other_noncurrent_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[23]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total other assets",
+   "period": "2025-12-31/I",
+   "value": "199137000000",
+   "line": "total_noncurrent_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[24]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total other assets",
+   "period": "2024-12-31/I",
+   "value": "178193000000",
+   "line": "total_noncurrent_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[24]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL ASSETS",
+   "period": "2025-12-31/I",
+   "value": "212721000000",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[25]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL ASSETS",
+   "period": "2024-12-31/I",
+   "value": "190144000000",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[25]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Commercial paper",
+   "period": "2025-12-31/I",
+   "value": "1955000000",
+   "line": "st_debt",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[28]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Commercial paper",
+   "period": "2024-12-31/I",
+   "value": "1670000000",
+   "line": "st_debt",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[28]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other short-term debt",
+   "period": "2025-12-31/I",
+   "value": "608000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[29]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other short-term debt",
+   "period": "2024-12-31/I",
+   "value": "217000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[29]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Current portion of long-term debt ($9 and $25 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "9000000",
+   "line": "st_debt",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Current portion of long-term debt ($9 and $25 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "25000000",
+   "line": "st_debt",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Current portion of long-term debt ($9 and $25 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "3500000000",
+   "line": "st_debt",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[30]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Current portion of long-term debt ($9 and $25 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "8061000000",
+   "line": "st_debt",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[30]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accounts payable ($502 and $631 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "502000000",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accounts payable ($502 and $631 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "631000000",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accounts payable ($502 and $631 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "7583000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[31]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accounts payable ($502 and $631 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "6982000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[31]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Customer deposits",
+   "period": "2025-12-31/I",
+   "value": "709000000",
+   "line": "deferred_revenue_current",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[32]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Customer deposits",
+   "period": "2024-12-31/I",
+   "value": "694000000",
+   "line": "deferred_revenue_current",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[32]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued interest and taxes",
+   "period": "2025-12-31/I",
+   "value": "1185000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[33]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued interest and taxes",
+   "period": "2024-12-31/I",
+   "value": "1016000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[33]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2025-12-31/I",
+   "value": "1113000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[34]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2024-12-31/I",
+   "value": "1073000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[34]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued construction-related expenditures",
+   "period": "2025-12-31/I",
+   "value": "2966000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[35]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued construction-related expenditures",
+   "period": "2024-12-31/I",
+   "value": "2346000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[35]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory liabilities",
+   "period": "2025-12-31/I",
+   "value": "356000000",
+   "line": "other_current_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[36]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory liabilities",
+   "period": "2024-12-31/I",
+   "value": "279000000",
+   "line": "other_current_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[36]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2025-12-31/I",
+   "value": "2842000000",
+   "line": "other_current_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[37]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2024-12-31/I",
+   "value": "3017000000",
+   "line": "other_current_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[37]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total current liabilities",
+   "period": "2025-12-31/I",
+   "value": "22817000000",
+   "line": "total_current_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[38]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total current liabilities",
+   "period": "2024-12-31/I",
+   "value": "25355000000",
+   "line": "total_current_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[38]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Long-term debt ($190 and $436 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "190000000",
+   "line": "lt_debt",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Long-term debt ($190 and $436 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "436000000",
+   "line": "lt_debt",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Long-term debt ($190 and $436 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "89556000000",
+   "line": "lt_debt",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[40]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Long-term debt ($190 and $436 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "72385000000",
+   "line": "lt_debt",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[40]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Asset retirement obligations",
+   "period": "2025-12-31/I",
+   "value": "3669000000",
+   "line": "other_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[41]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Asset retirement obligations",
+   "period": "2024-12-31/I",
+   "value": "3671000000",
+   "line": "other_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[41]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Deferred income taxes",
+   "period": "2025-12-31/I",
+   "value": "12359000000",
+   "line": "deferred_tax_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[42]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Deferred income taxes",
+   "period": "2024-12-31/I",
+   "value": "11749000000",
+   "line": "deferred_tax_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[42]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory liabilities",
+   "period": "2025-12-31/I",
+   "value": "11474000000",
+   "line": "other_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[43]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Regulatory liabilities",
+   "period": "2024-12-31/I",
+   "value": "10635000000",
+   "line": "other_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[43]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2025-12-31/I",
+   "value": "2148000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[44]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Derivatives",
+   "period": "2024-12-31/I",
+   "value": "2008000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[44]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2025-12-31/I",
+   "value": "4219000000",
+   "line": "other_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[45]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Other",
+   "period": "2024-12-31/I",
+   "value": "3480000000",
+   "line": "other_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[45]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total other liabilities and deferred credits",
+   "period": "2025-12-31/I",
+   "value": "123425000000",
+   "line": "total_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[46]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total other liabilities and deferred credits",
+   "period": "2024-12-31/I",
+   "value": "103928000000",
+   "line": "total_noncurrent_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[46]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL LIABILITIES",
+   "period": "2025-12-31/I",
+   "value": "146242000000",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[47]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL LIABILITIES",
+   "period": "2024-12-31/I",
+   "value": "129283000000",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[47]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "COMMITMENTS AND CONTINGENCIES",
+   "period": "2025-12-31/I",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[48]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "COMMITMENTS AND CONTINGENCIES",
+   "period": "2024-12-31/I",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[48]/td[5]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "REDEEMABLE NONCONTROLLING INTERESTS – VIEs",
+   "period": "2025-12-31/I",
+   "value": "0",
+   "line": "temporary_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[49]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "REDEEMABLE NONCONTROLLING INTERESTS – VIEs",
+   "period": "2024-12-31/I",
+   "value": "401000000",
+   "line": "temporary_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[49]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2025-12-31/I",
+   "value": "0.01",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2024-12-31/I",
+   "value": "0.01",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2025-12-31/I",
+   "value": "-3200000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2024-12-31/I",
+   "value": "-3200000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2025-12-31/I",
+   "value": "-2083000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2025-12-31/I",
+   "value": "-2083000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2024-12-31/I",
+   "value": "2057000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2024-12-31/I",
+   "value": "2057000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2025-12-31/I",
+   "value": "21000000",
+   "line": "common_stock_apic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Common stock ($0.01 par value, authorized shares – 3,200; outstanding shares – 2,083 and 2,057, respectively)",
+   "period": "2024-12-31/I",
+   "value": "21000000",
+   "line": "common_stock_apic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[51]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Additional paid-in capital",
+   "period": "2025-12-31/I",
+   "value": "19494000000",
+   "line": "common_stock_apic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[52]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Additional paid-in capital",
+   "period": "2024-12-31/I",
+   "value": "17260000000",
+   "line": "common_stock_apic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[52]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Retained earnings",
+   "period": "2025-12-31/I",
+   "value": "35102000000",
+   "line": "retained_earnings",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[53]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Retained earnings",
+   "period": "2024-12-31/I",
+   "value": "32946000000",
+   "line": "retained_earnings",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[53]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accumulated other comprehensive loss",
+   "period": "2025-12-31/I",
+   "value": "-9000000",
+   "line": "aoci",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[54]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accumulated other comprehensive loss",
+   "period": "2024-12-31/I",
+   "value": "-126000000",
+   "line": "aoci",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[54]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total common shareholders' equity",
+   "period": "2025-12-31/I",
+   "value": "54608000000",
+   "line": "total_equity_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[55]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total common shareholders' equity",
+   "period": "2024-12-31/I",
+   "value": "50101000000",
+   "line": "total_equity_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[55]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Noncontrolling interests ($11,711 and $10,206 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "11711000000",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Noncontrolling interests ($11,711 and $10,206 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "10206000000",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Noncontrolling interests ($11,711 and $10,206 related to VIEs, respectively)",
+   "period": "2025-12-31/I",
+   "value": "11871000000",
+   "line": "nci_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[56]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Noncontrolling interests ($11,711 and $10,206 related to VIEs, respectively)",
+   "period": "2024-12-31/I",
+   "value": "10359000000",
+   "line": "nci_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[56]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL EQUITY",
+   "period": "2025-12-31/I",
+   "value": "66479000000",
+   "line": "total_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[57]/td[3]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL EQUITY",
+   "period": "2024-12-31/I",
+   "value": "60460000000",
+   "line": "total_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[57]/td[6]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL LIABILITIES, REDEEMABLE NONCONTROLLING INTERESTS AND EQUITY",
+   "period": "2025-12-31/I",
+   "value": "212721000000",
+   "line": "total_liabilities_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[58]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "TOTAL LIABILITIES, REDEEMABLE NONCONTROLLING INTERESTS AND EQUITY",
+   "period": "2024-12-31/I",
+   "value": "190144000000",
+   "line": "total_liabilities_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1496]/table[1]/tr[58]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "OPERATING REVENUES",
+   "period": "2025-12-31/12M",
+   "value": "27412000000",
+   "line": "revenue",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[4]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "OPERATING REVENUES",
+   "period": "2024-12-31/12M",
+   "value": "24753000000",
+   "line": "revenue",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[4]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "OPERATING REVENUES",
+   "period": "2023-12-31/12M",
+   "value": "28114000000",
+   "line": "revenue",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[4]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Fuel, purchased power and interchange",
+   "period": "2025-12-31/12M",
+   "value": "4944000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[6]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Fuel, purchased power and interchange",
+   "period": "2024-12-31/12M",
+   "value": "5029000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[6]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Fuel, purchased power and interchange",
+   "period": "2023-12-31/12M",
+   "value": "5457000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[6]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other operations and maintenance",
+   "period": "2025-12-31/12M",
+   "value": "5399000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[7]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other operations and maintenance",
+   "period": "2024-12-31/12M",
+   "value": "4857000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[7]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other operations and maintenance",
+   "period": "2023-12-31/12M",
+   "value": "4681000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[7]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Depreciation and amortization",
+   "period": "2025-12-31/12M",
+   "value": "6580000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[11]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Depreciation and amortization",
+   "period": "2024-12-31/12M",
+   "value": "5462000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[11]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Depreciation and amortization",
+   "period": "2023-12-31/12M",
+   "value": "5879000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[11]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Taxes other than income taxes and other – net",
+   "period": "2025-12-31/12M",
+   "value": "2469000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[12]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Taxes other than income taxes and other – net",
+   "period": "2024-12-31/12M",
+   "value": "2278000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[12]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Taxes other than income taxes and other – net",
+   "period": "2023-12-31/12M",
+   "value": "2265000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[12]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total operating expenses – net",
+   "period": "2025-12-31/12M",
+   "value": "19392000000",
+   "line": "total_opex",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[13]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total operating expenses – net",
+   "period": "2024-12-31/12M",
+   "value": "17626000000",
+   "line": "total_opex",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[13]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total operating expenses – net",
+   "period": "2023-12-31/12M",
+   "value": "18282000000",
+   "line": "total_opex",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[13]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "GAINS ON DISPOSAL OF BUSINESSES/ASSETS – NET",
+   "period": "2025-12-31/12M",
+   "value": "260000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[14]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "GAINS ON DISPOSAL OF BUSINESSES/ASSETS – NET",
+   "period": "2024-12-31/12M",
+   "value": "352000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[14]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "GAINS ON DISPOSAL OF BUSINESSES/ASSETS – NET",
+   "period": "2023-12-31/12M",
+   "value": "405000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[14]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "OPERATING INCOME",
+   "period": "2025-12-31/12M",
+   "value": "8280000000",
+   "line": "operating_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[15]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "OPERATING INCOME",
+   "period": "2024-12-31/12M",
+   "value": "7479000000",
+   "line": "operating_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[15]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "OPERATING INCOME",
+   "period": "2023-12-31/12M",
+   "value": "10237000000",
+   "line": "operating_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[15]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Interest expense",
+   "period": "2025-12-31/12M",
+   "value": "-4572000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[17]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Interest expense",
+   "period": "2024-12-31/12M",
+   "value": "-2235000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[17]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Interest expense",
+   "period": "2023-12-31/12M",
+   "value": "-3324000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[17]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Equity in losses of equity method investees",
+   "period": "2025-12-31/12M",
+   "value": "-184000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[19]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Equity in losses of equity method investees",
+   "period": "2024-12-31/12M",
+   "value": "-246000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[19]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Equity in losses of equity method investees",
+   "period": "2023-12-31/12M",
+   "value": "-648000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[19]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Allowance for equity funds used during construction",
+   "period": "2025-12-31/12M",
+   "value": "181000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[20]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Allowance for equity funds used during construction",
+   "period": "2024-12-31/12M",
+   "value": "198000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[20]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Allowance for equity funds used during construction",
+   "period": "2023-12-31/12M",
+   "value": "161000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[20]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Gains on disposal of investments and other property – net",
+   "period": "2025-12-31/12M",
+   "value": "179000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[22]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Gains on disposal of investments and other property – net",
+   "period": "2024-12-31/12M",
+   "value": "163000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[22]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Gains on disposal of investments and other property – net",
+   "period": "2023-12-31/12M",
+   "value": "125000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[22]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in unrealized gains (losses) on equity securities held in NEER's nuclear decommissioning funds – net",
+   "period": "2025-12-31/12M",
+   "value": "107000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[23]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in unrealized gains (losses) on equity securities held in NEER's nuclear decommissioning funds – net",
+   "period": "2024-12-31/12M",
+   "value": "107000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[23]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in unrealized gains (losses) on equity securities held in NEER's nuclear decommissioning funds – net",
+   "period": "2023-12-31/12M",
+   "value": "159000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[23]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other net periodic benefit income",
+   "period": "2025-12-31/12M",
+   "value": "267000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[24]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other net periodic benefit income",
+   "period": "2024-12-31/12M",
+   "value": "235000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[24]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other net periodic benefit income",
+   "period": "2023-12-31/12M",
+   "value": "245000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[24]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other – net",
+   "period": "2025-12-31/12M",
+   "value": "272000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[25]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other – net",
+   "period": "2024-12-31/12M",
+   "value": "336000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[25]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Other – net",
+   "period": "2023-12-31/12M",
+   "value": "333000000",
+   "line": "other_nonoperating",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[25]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total other income (deductions) – net",
+   "period": "2025-12-31/12M",
+   "value": "-3750000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[26]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total other income (deductions) – net",
+   "period": "2024-12-31/12M",
+   "value": "-1442000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[26]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total other income (deductions) – net",
+   "period": "2023-12-31/12M",
+   "value": "-2949000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[26]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "INCOME BEFORE INCOME TAXES",
+   "period": "2025-12-31/12M",
+   "value": "4530000000",
+   "line": "pretax_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[27]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "INCOME BEFORE INCOME TAXES",
+   "period": "2024-12-31/12M",
+   "value": "6037000000",
+   "line": "pretax_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[27]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "INCOME BEFORE INCOME TAXES",
+   "period": "2023-12-31/12M",
+   "value": "7288000000",
+   "line": "pretax_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[27]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "INCOME TAX EXPENSE (BENEFIT)",
+   "period": "2025-12-31/12M",
+   "value": "-802000000",
+   "line": "income_tax",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[28]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "INCOME TAX EXPENSE (BENEFIT)",
+   "period": "2024-12-31/12M",
+   "value": "339000000",
+   "line": "income_tax",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[28]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "INCOME TAX EXPENSE (BENEFIT)",
+   "period": "2023-12-31/12M",
+   "value": "1006000000",
+   "line": "income_tax",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[28]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET INCOME",
+   "period": "2025-12-31/12M",
+   "value": "5332000000",
+   "line": "net_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[29]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET INCOME",
+   "period": "2024-12-31/12M",
+   "value": "5698000000",
+   "line": "net_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[29]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET INCOME",
+   "period": "2023-12-31/12M",
+   "value": "6282000000",
+   "line": "net_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[29]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET LOSS ATTRIBUTABLE TO NONCONTROLLING INTERESTS",
+   "period": "2025-12-31/12M",
+   "value": "1503000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[30]/td[3]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET LOSS ATTRIBUTABLE TO NONCONTROLLING INTERESTS",
+   "period": "2024-12-31/12M",
+   "value": "1248000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[30]/td[6]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET LOSS ATTRIBUTABLE TO NONCONTROLLING INTERESTS",
+   "period": "2023-12-31/12M",
+   "value": "1028000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[30]/td[9]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET INCOME ATTRIBUTABLE TO NEE",
+   "period": "2025-12-31/12M",
+   "value": "6835000000",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[31]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET INCOME ATTRIBUTABLE TO NEE",
+   "period": "2024-12-31/12M",
+   "value": "6946000000",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[31]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "NET INCOME ATTRIBUTABLE TO NEE",
+   "period": "2023-12-31/12M",
+   "value": "7310000000",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[31]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic",
+   "period": "2025-12-31/12M",
+   "value": "3.31",
+   "line": "eps_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[33]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic",
+   "period": "2024-12-31/12M",
+   "value": "3.38",
+   "line": "eps_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[33]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic",
+   "period": "2023-12-31/12M",
+   "value": "3.61",
+   "line": "eps_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[33]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Assuming dilution",
+   "period": "2025-12-31/12M",
+   "value": "3.30",
+   "line": "eps_diluted",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[34]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Assuming dilution",
+   "period": "2024-12-31/12M",
+   "value": "3.37",
+   "line": "eps_diluted",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[34]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Assuming dilution",
+   "period": "2023-12-31/12M",
+   "value": "3.60",
+   "line": "eps_diluted",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1429]/table[1]/tr[34]/td[12]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net income",
+   "period": "2025-12-31/12M",
+   "value": "5332000000",
+   "line": "cf_net_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[5]/td[3]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net income",
+   "period": "2024-12-31/12M",
+   "value": "5698000000",
+   "line": "cf_net_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[5]/td[7]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net income",
+   "period": "2023-12-31/12M",
+   "value": "6282000000",
+   "line": "cf_net_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[5]/td[11]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Depreciation and amortization",
+   "period": "2025-12-31/12M",
+   "value": "6580000000",
+   "line": "cf_dna",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[7]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Depreciation and amortization",
+   "period": "2024-12-31/12M",
+   "value": "5462000000",
+   "line": "cf_dna",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[7]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Depreciation and amortization",
+   "period": "2023-12-31/12M",
+   "value": "5879000000",
+   "line": "cf_dna",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[7]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Nuclear fuel and other amortization",
+   "period": "2025-12-31/12M",
+   "value": "361000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[8]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Nuclear fuel and other amortization",
+   "period": "2024-12-31/12M",
+   "value": "299000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[8]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Nuclear fuel and other amortization",
+   "period": "2023-12-31/12M",
+   "value": "272000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[8]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Unrealized losses (gains) on marked to market derivative contracts – net",
+   "period": "2025-12-31/12M",
+   "value": "199000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[10]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Unrealized losses (gains) on marked to market derivative contracts – net",
+   "period": "2024-12-31/12M",
+   "value": "-492000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[10]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Unrealized losses (gains) on marked to market derivative contracts – net",
+   "period": "2023-12-31/12M",
+   "value": "-1949000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[10]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Unrealized losses (gains) on equity securities held in NEER's nuclear decommissioning funds – net",
+   "period": "2025-12-31/12M",
+   "value": "-107000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[11]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Unrealized losses (gains) on equity securities held in NEER's nuclear decommissioning funds – net",
+   "period": "2024-12-31/12M",
+   "value": "-107000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[11]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Unrealized losses (gains) on equity securities held in NEER's nuclear decommissioning funds – net",
+   "period": "2023-12-31/12M",
+   "value": "-159000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[11]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Foreign currency transaction losses (gains)",
+   "period": "2025-12-31/12M",
+   "value": "110000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[12]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Foreign currency transaction losses (gains)",
+   "period": "2024-12-31/12M",
+   "value": "-85000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[12]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Foreign currency transaction losses (gains)",
+   "period": "2023-12-31/12M",
+   "value": "92000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[12]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Deferred income taxes",
+   "period": "2025-12-31/12M",
+   "value": "453000000",
+   "line": "cf_deferred_tax",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[13]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Deferred income taxes",
+   "period": "2024-12-31/12M",
+   "value": "1308000000",
+   "line": "cf_deferred_tax",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[13]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Deferred income taxes",
+   "period": "2023-12-31/12M",
+   "value": "708000000",
+   "line": "cf_deferred_tax",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[13]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cost recovery clauses and franchise fees",
+   "period": "2025-12-31/12M",
+   "value": "-89000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[14]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cost recovery clauses and franchise fees",
+   "period": "2024-12-31/12M",
+   "value": "1016000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[14]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cost recovery clauses and franchise fees",
+   "period": "2023-12-31/12M",
+   "value": "1104000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[14]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Equity in losses of equity method investees",
+   "period": "2025-12-31/12M",
+   "value": "184000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[17]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Equity in losses of equity method investees",
+   "period": "2024-12-31/12M",
+   "value": "246000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[17]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Equity in losses of equity method investees",
+   "period": "2023-12-31/12M",
+   "value": "648000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[17]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Distributions of earnings from equity method investees",
+   "period": "2025-12-31/12M",
+   "value": "446000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[18]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Distributions of earnings from equity method investees",
+   "period": "2024-12-31/12M",
+   "value": "811000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[18]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Distributions of earnings from equity method investees",
+   "period": "2023-12-31/12M",
+   "value": "712000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[18]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Gains on disposal of businesses, assets and investments – net",
+   "period": "2025-12-31/12M",
+   "value": "-439000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[20]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Gains on disposal of businesses, assets and investments – net",
+   "period": "2024-12-31/12M",
+   "value": "-515000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[20]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Gains on disposal of businesses, assets and investments – net",
+   "period": "2023-12-31/12M",
+   "value": "-530000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[20]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Recoverable storm-related costs",
+   "period": "2025-12-31/12M",
+   "value": "-460000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[22]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Recoverable storm-related costs",
+   "period": "2024-12-31/12M",
+   "value": "-676000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[22]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Recoverable storm-related costs",
+   "period": "2023-12-31/12M",
+   "value": "-399000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[22]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2025-12-31/12M",
+   "value": "288000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[24]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2024-12-31/12M",
+   "value": "135000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[24]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2023-12-31/12M",
+   "value": "34000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[24]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Current assets",
+   "period": "2025-12-31/12M",
+   "value": "-920000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[26]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Current assets",
+   "period": "2024-12-31/12M",
+   "value": "-382000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[26]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Current assets",
+   "period": "2023-12-31/12M",
+   "value": "58000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[26]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Noncurrent assets",
+   "period": "2025-12-31/12M",
+   "value": "-440000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[27]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Noncurrent assets",
+   "period": "2024-12-31/12M",
+   "value": "-473000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[27]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Noncurrent assets",
+   "period": "2023-12-31/12M",
+   "value": "-408000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[27]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Current liabilities",
+   "period": "2025-12-31/12M",
+   "value": "487000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[28]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Current liabilities",
+   "period": "2024-12-31/12M",
+   "value": "767000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[28]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Current liabilities",
+   "period": "2023-12-31/12M",
+   "value": "-1109000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[28]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Noncurrent liabilities",
+   "period": "2025-12-31/12M",
+   "value": "500000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[29]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Noncurrent liabilities",
+   "period": "2024-12-31/12M",
+   "value": "248000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[29]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Noncurrent liabilities",
+   "period": "2023-12-31/12M",
+   "value": "66000000",
+   "line": "cf_working_capital",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[29]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash provided by operating activities",
+   "period": "2025-12-31/12M",
+   "value": "12485000000",
+   "line": "cfo",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[30]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash provided by operating activities",
+   "period": "2024-12-31/12M",
+   "value": "13260000000",
+   "line": "cfo",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[30]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash provided by operating activities",
+   "period": "2023-12-31/12M",
+   "value": "11301000000",
+   "line": "cfo",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[30]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Capital expenditures of FPL",
+   "period": "2025-12-31/12M",
+   "value": "-8719000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[32]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Capital expenditures of FPL",
+   "period": "2024-12-31/12M",
+   "value": "-7992000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[32]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Capital expenditures of FPL",
+   "period": "2023-12-31/12M",
+   "value": "-9302000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[32]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Independent power and other investments of NEER",
+   "period": "2025-12-31/12M",
+   "value": "-15332000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[34]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Independent power and other investments of NEER",
+   "period": "2024-12-31/12M",
+   "value": "-16215000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[34]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Independent power and other investments of NEER",
+   "period": "2023-12-31/12M",
+   "value": "-15565000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[34]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Nuclear fuel purchases",
+   "period": "2025-12-31/12M",
+   "value": "-553000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[36]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Nuclear fuel purchases",
+   "period": "2024-12-31/12M",
+   "value": "-399000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[36]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Nuclear fuel purchases",
+   "period": "2023-12-31/12M",
+   "value": "-185000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[36]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other capital expenditures",
+   "period": "2025-12-31/12M",
+   "value": "-2000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[37]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other capital expenditures",
+   "period": "2024-12-31/12M",
+   "value": "-123000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[37]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other capital expenditures",
+   "period": "2023-12-31/12M",
+   "value": "-61000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[37]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from the sale of Florida City Gas business",
+   "period": "2025-12-31/12M",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[38]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from the sale of Florida City Gas business",
+   "period": "2024-12-31/12M",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[38]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from the sale of Florida City Gas business",
+   "period": "2023-12-31/12M",
+   "value": "924000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[38]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Sale of independent power and other investments of NEER",
+   "period": "2025-12-31/12M",
+   "value": "1115000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[39]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Sale of independent power and other investments of NEER",
+   "period": "2024-12-31/12M",
+   "value": "2659000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[39]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Sale of independent power and other investments of NEER",
+   "period": "2023-12-31/12M",
+   "value": "1883000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[39]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from sale or maturity of securities in special use funds and other investments",
+   "period": "2025-12-31/12M",
+   "value": "5401000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[40]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from sale or maturity of securities in special use funds and other investments",
+   "period": "2024-12-31/12M",
+   "value": "5445000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[40]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from sale or maturity of securities in special use funds and other investments",
+   "period": "2023-12-31/12M",
+   "value": "4875000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[40]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Purchases of securities in special use funds and other investments",
+   "period": "2025-12-31/12M",
+   "value": "-5893000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[41]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Purchases of securities in special use funds and other investments",
+   "period": "2024-12-31/12M",
+   "value": "-5623000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[41]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Purchases of securities in special use funds and other investments",
+   "period": "2023-12-31/12M",
+   "value": "-5926000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[41]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2025-12-31/12M",
+   "value": "118000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[43]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2024-12-31/12M",
+   "value": "-16000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[43]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2023-12-31/12M",
+   "value": "-110000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[43]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash used in investing activities",
+   "period": "2025-12-31/12M",
+   "value": "-23865000000",
+   "line": "cfi",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[44]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash used in investing activities",
+   "period": "2024-12-31/12M",
+   "value": "-22264000000",
+   "line": "cfi",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[44]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash used in investing activities",
+   "period": "2023-12-31/12M",
+   "value": "-23467000000",
+   "line": "cfi",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[44]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Issuances of long-term debt, including premiums and discounts",
+   "period": "2025-12-31/12M",
+   "value": "23394000000",
+   "line": "debt_issued",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[46]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Issuances of long-term debt, including premiums and discounts",
+   "period": "2024-12-31/12M",
+   "value": "24769000000",
+   "line": "debt_issued",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[46]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Issuances of long-term debt, including premiums and discounts",
+   "period": "2023-12-31/12M",
+   "value": "13857000000",
+   "line": "debt_issued",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[46]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Retirements of long-term debt",
+   "period": "2025-12-31/12M",
+   "value": "-10347000000",
+   "line": "debt_repaid",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[47]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Retirements of long-term debt",
+   "period": "2024-12-31/12M",
+   "value": "-10113000000",
+   "line": "debt_repaid",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[47]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Retirements of long-term debt",
+   "period": "2023-12-31/12M",
+   "value": "-7978000000",
+   "line": "debt_repaid",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[47]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from differential membership investors",
+   "period": "2025-12-31/12M",
+   "value": "3276000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[48]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from differential membership investors",
+   "period": "2024-12-31/12M",
+   "value": "2257000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[48]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from differential membership investors",
+   "period": "2023-12-31/12M",
+   "value": "2745000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[48]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Payments to differential membership investors",
+   "period": "2025-12-31/12M",
+   "value": "-516000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[49]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Payments to differential membership investors",
+   "period": "2024-12-31/12M",
+   "value": "-740000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[49]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Payments to differential membership investors",
+   "period": "2023-12-31/12M",
+   "value": "-75000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[49]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net change in commercial paper",
+   "period": "2025-12-31/12M",
+   "value": "285000000",
+   "line": "cf_commercial_paper_net",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[50]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net change in commercial paper",
+   "period": "2024-12-31/12M",
+   "value": "-2980000000",
+   "line": "cf_commercial_paper_net",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[50]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net change in commercial paper",
+   "period": "2023-12-31/12M",
+   "value": "2941000000",
+   "line": "cf_commercial_paper_net",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[50]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from other short-term debt",
+   "period": "2025-12-31/12M",
+   "value": "2558000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[51]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from other short-term debt",
+   "period": "2024-12-31/12M",
+   "value": "6575000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[51]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Proceeds from other short-term debt",
+   "period": "2023-12-31/12M",
+   "value": "1980000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[51]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Repayments of other short-term debt",
+   "period": "2025-12-31/12M",
+   "value": "-2167000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[52]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Repayments of other short-term debt",
+   "period": "2024-12-31/12M",
+   "value": "-6613000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[52]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Repayments of other short-term debt",
+   "period": "2023-12-31/12M",
+   "value": "-2613000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[52]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash swept from (repayments to) related parties – net",
+   "period": "2025-12-31/12M",
+   "value": "-131000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[53]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash swept from (repayments to) related parties – net",
+   "period": "2024-12-31/12M",
+   "value": "-1371000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[53]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash swept from (repayments to) related parties – net",
+   "period": "2023-12-31/12M",
+   "value": "1213000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[53]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Issuances of common stock/equity units",
+   "period": "2025-12-31/12M",
+   "value": "2038000000",
+   "line": "stock_issued",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[54]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Issuances of common stock/equity units",
+   "period": "2024-12-31/12M",
+   "value": "48000000",
+   "line": "stock_issued",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[54]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Issuances of common stock/equity units",
+   "period": "2023-12-31/12M",
+   "value": "4514000000",
+   "line": "stock_issued",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[54]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Dividends on common stock",
+   "period": "2025-12-31/12M",
+   "value": "-4680000000",
+   "line": "dividends_paid",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[56]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Dividends on common stock",
+   "period": "2024-12-31/12M",
+   "value": "-4235000000",
+   "line": "dividends_paid",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[56]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Dividends on common stock",
+   "period": "2023-12-31/12M",
+   "value": "-3782000000",
+   "line": "dividends_paid",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[56]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2025-12-31/12M",
+   "value": "-731000000",
+   "line": "cf_other_financing",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[58]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2024-12-31/12M",
+   "value": "-597000000",
+   "line": "cf_other_financing",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[58]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Other – net",
+   "period": "2023-12-31/12M",
+   "value": "-653000000",
+   "line": "cf_other_financing",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[58]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash provided by financing activities",
+   "period": "2025-12-31/12M",
+   "value": "12979000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[59]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash provided by financing activities",
+   "period": "2024-12-31/12M",
+   "value": "7000000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[59]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net cash provided by financing activities",
+   "period": "2023-12-31/12M",
+   "value": "12149000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[59]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Effects of currency translation on cash, cash equivalents and restricted cash",
+   "period": "2025-12-31/12M",
+   "value": "5000000",
+   "line": "fx_effect",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[60]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Effects of currency translation on cash, cash equivalents and restricted cash",
+   "period": "2024-12-31/12M",
+   "value": "-14000000",
+   "line": "fx_effect",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[60]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Effects of currency translation on cash, cash equivalents and restricted cash",
+   "period": "2023-12-31/12M",
+   "value": "-4000000",
+   "line": "fx_effect",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[60]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net increase (decrease) in cash, cash equivalents and restricted cash",
+   "period": "2025-12-31/12M",
+   "value": "1604000000",
+   "line": "net_change_cash",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[61]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net increase (decrease) in cash, cash equivalents and restricted cash",
+   "period": "2024-12-31/12M",
+   "value": "-2018000000",
+   "line": "net_change_cash",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[61]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Net increase (decrease) in cash, cash equivalents and restricted cash",
+   "period": "2023-12-31/12M",
+   "value": "-21000000",
+   "line": "net_change_cash",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[61]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash, cash equivalents and restricted cash at beginning of year",
+   "period": "2024-12-31/I",
+   "value": "1402000000",
+   "line": "cash_end",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[62]/td[2]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash, cash equivalents and restricted cash at beginning of year",
+   "period": "2023-12-31/I",
+   "value": "3420000000",
+   "line": "cash_end",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[62]/td[5]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash, cash equivalents and restricted cash at beginning of year",
+   "period": "2022-12-31/I",
+   "value": "3441000000",
+   "line": "cash_end",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[62]/td[8]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash, cash equivalents and restricted cash at end of year",
+   "period": "2025-12-31/I",
+   "value": "3006000000",
+   "line": "cash_end",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[63]/td[3]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash, cash equivalents and restricted cash at end of year",
+   "period": "2024-12-31/I",
+   "value": "1402000000",
+   "line": "cash_end",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[63]/td[7]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash, cash equivalents and restricted cash at end of year",
+   "period": "2023-12-31/I",
+   "value": "3420000000",
+   "line": "cash_end",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[63]/td[11]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash paid for interest (net of amount capitalized)",
+   "period": "2025-12-31/12M",
+   "value": "3501000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[65]/td[3]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash paid for interest (net of amount capitalized)",
+   "period": "2024-12-31/12M",
+   "value": "2737000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[65]/td[7]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash paid for interest (net of amount capitalized)",
+   "period": "2023-12-31/12M",
+   "value": "2463000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[65]/td[11]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash paid (received) for income taxes – net",
+   "period": "2025-12-31/12M",
+   "value": "-1275000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[66]/td[3]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash paid (received) for income taxes – net",
+   "period": "2024-12-31/12M",
+   "value": "-760000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[66]/td[7]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Cash paid (received) for income taxes – net",
+   "period": "2023-12-31/12M",
+   "value": "321000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[66]/td[11]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Accrued property additions",
+   "period": "2025-12-31/12M",
+   "value": "7645000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[68]/td[3]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Accrued property additions",
+   "period": "2024-12-31/12M",
+   "value": "6835000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[68]/td[7]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Accrued property additions",
+   "period": "2023-12-31/12M",
+   "value": "7104000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[68]/td[11]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Right-of-use asset in exchange for finance lease liability",
+   "period": "2025-12-31/12M",
+   "value": "344000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[72]/td[3]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Right-of-use asset in exchange for finance lease liability",
+   "period": "2024-12-31/12M",
+   "value": "533000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[72]/td[7]"
+  },
+  {
+   "statement": "cash_flow",
+   "row_label": "Right-of-use asset in exchange for finance lease liability",
+   "period": "2023-12-31/12M",
+   "value": "124000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[1510]/table[1]/tr[72]/td[11]"
+  }
+ ],
+ "expect_review": [],
+ "forbid_values": [],
+ "unknown_lines": [
+  "nee:AccruedInterestAndTaxes",
+  "nee:CapitalExpendituresOfFPL",
+  "nee:CostRecoveryClausesAndFranchiseFees",
+  "nee:DepreciationAndAmortizationExcludingNuclearFuel",
+  "nee:FuelPurchasedPowerAndInterchangeExpense",
+  "nee:IncomeTaxesPaidReceivedNet",
+  "nee:IndependentPowerInvestments",
+  "nee:InterestExpenseAggregateExpenses",
+  "nee:NuclearFuelAndOtherAmortization",
+  "nee:OtherCapitalExpenditures",
+  "nee:OtherThanTemporaryImpairmentLossesOnSecuritiesHeldInNuclearDecommissioningFunds",
+  "nee:PaymentsToDifferentialMembershipInvestors",
+  "nee:ProceedsfromSaleofIndependentPowerInvestments",
+  "nee:SaleOfDifferentialMembershipInterests",
+  "nee:UnrealizedGainLossOnOnEquitySecuritiesHeldInDecommissioningFunds",
+  "us-gaap:AccountsPayableCurrentAndNoncurrent",
+  "us-gaap:AllowanceForDoubtfulAccountsReceivableCurrent",
+  "us-gaap:AmountRecognizedInNetPeriodicBenefitCostAndOtherComprehensiveIncomeLossBeforeTax",
+  "us-gaap:CapitalExpendituresIncurredButNotYetPaid",
+  "us-gaap:CommitmentsAndContingencies",
+  "us-gaap:CommonStockParOrStatedValuePerShare",
+  "us-gaap:CommonStockSharesAuthorized",
+  "us-gaap:CommonStockSharesIssued",
+  "us-gaap:CommonStockSharesOutstanding",
+  "us-gaap:ConstructionPayableCurrent",
+  "us-gaap:DecommissioningFundInvestments",
+  "us-gaap:DefinedBenefitPlanAssetsForPlanBenefitsNoncurrent",
+  "us-gaap:DerivativeAssetsCurrent",
+  "us-gaap:DerivativeAssetsNoncurrent",
+  "us-gaap:DerivativeLiabilitiesCurrent",
+  "us-gaap:DerivativeLiabilitiesNoncurrent",
+  "us-gaap:DisposalGroupNotDiscontinuedOperationGainLossOnDisposal",
+  "us-gaap:EquityMethodInvestmentDividendsOrDistributions",
+  "us-gaap:ForeignCurrencyTransactionGainLossBeforeTax",
+  "us-gaap:GainLossOnDispositionOfAssets1",
+  "us-gaap:IncomeLossFromEquityMethodInvestments",
+  "us-gaap:IncreaseDecreaseInRecoverablePropertyDamageCosts",
+  "us-gaap:InterestPaidNet",
+  "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+  "us-gaap:NetIncomeLossAttributableToNonredeemableNoncontrollingInterest",
+  "us-gaap:NonoperatingIncomeExpense",
+  "us-gaap:OtherOperatingActivitiesCashFlowStatement",
+  "us-gaap:OtherReceivablesNetCurrent",
+  "us-gaap:OtherShortTermBorrowings",
+  "us-gaap:PaymentsForProceedsFromNuclearFuel",
+  "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
+  "us-gaap:PaymentsToInvestInDecommissioningFund",
+  "us-gaap:ProceedsFromDecommissioningFund",
+  "us-gaap:ProceedsFromOtherShortTermDebt",
+  "us-gaap:ProceedsFromRepaymentsOfRelatedPartyDebt",
+  "us-gaap:ProceedsFromSaleOfProductiveAssets",
+  "us-gaap:PublicUtilitiesAllowanceForFundsUsedDuringConstructionCapitalizedCostOfEquity",
+  "us-gaap:RepaymentsOfOtherShortTermDebt",
+  "us-gaap:RightOfUseAssetObtainedInExchangeForFinanceLeaseLiability",
+  "us-gaap:TaxesExcludingIncomeAndExciseTaxes",
+  "us-gaap:UnrealizedGainLossOnDerivativesAndCommodityContracts",
+  "us-gaap:UtilitiesOperatingExpenseMaintenanceAndOperations"
+ ],
+ "tags": []
+}

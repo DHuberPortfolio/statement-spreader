@@ -78,6 +78,7 @@ def detect_filing(data: bytes) -> dict[str, str] | None:
     name = _cover_tag(data, "EntityRegistrantName")
     if not name:
         return None
+    name = " ".join(name.split())  # a cover page can break a name across lines or use a non-breaking space
     if name.isupper():
         name = name.title()
     form, year = _cover_tag(data, "DocumentType"), _cover_tag(data, "DocumentFiscalYearFocus")

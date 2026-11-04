@@ -1,0 +1,61 @@
+# Healthcare and pharmaceuticals. Gross charges are not revenue: net patient revenue is what is earned after contractual adjustments.
+industry: healthcare
+title: Healthcare and pharmaceuticals
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 954, ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: patient_service_revenue, label: Patient service revenue, signature: true, synonyms: ["patient services revenue*", "patient service revenues", "patient services"], sections: ["*revenue*", ""]}
+      - {id: net_patient_revenue, label: Net patient revenue, signature: true, synonyms: ["net patient service revenue*", "net patient services revenue*", "net patient revenues"], part_of: null}
+      - {id: managed_care_revenue, label: Managed care revenue}
+      - {id: pharmaceutical_product_revenue, label: Pharmaceutical product revenue, signature: true, synonyms: ["net product revenue*", "product revenue net", "net product sales", "product sales net", "product revenues net"]}
+      - {id: licensing_revenue, label: Licensing revenue, signature: true, synonyms: ["license revenue*", "license and milestone revenue*", "licensing and royalty revenue*", "royalty revenue*", "license fees"], review: always}
+      - {id: collaboration_revenue, label: Collaboration revenue, signature: true, synonyms: ["collaboration and license revenue*", "collaborative revenue*", "collaboration revenues", "collaboration and licensing revenue*", "license and collaboration revenue*"]}
+      - {id: milestone_payments, label: Milestone payments, synonyms: ["milestone revenue*"], review: always}
+      - {id: medicare_reimbursement, label: Medicare reimbursement, synonyms: ["medicare revenue*"]}
+      - {id: medicaid_reimbursement, label: Medicaid reimbursement, synonyms: ["medicaid revenue*"]}
+
+  - family: research
+    statement: income_statement
+    destination: rnd
+    sign: positive
+    source: "ASC 730; Devin's term list 2026-11-04"
+    concepts:
+      - {id: research_and_development_pharma, label: Research and development expenses}
+      - {id: clinical_trial_expenses, label: Clinical trial expenses, signature: true, synonyms: ["clinical trial expense", "clinical trial costs", "clinical development*"]}
+      - {id: drug_development_costs, label: Drug development costs}
+      - {id: regulatory_approval_costs, label: Regulatory approval costs}
+
+  - family: operating_expense
+    statement: income_statement
+    destination: other_opex
+    sign: positive
+    source: "ASC 954; Devin's term list 2026-11-04"
+    concepts:
+      - {id: cost_of_services, label: Cost of services, destination: [cogs], synonyms: ["costs of services", "cost of service"]}
+      - {id: bad_debt_expense, label: Bad debt expense, synonyms: ["provision for doubtful accounts", "provision for bad debts"], review: always}
+      - {id: goodwill_impairment, label: Goodwill impairment, in_cash_flow: cf_other_noncash}
+
+  - family: healthcare_balances
+    statement: balance_sheet
+    source: "ASC 954, ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: patient_receivables, label: Accounts receivable - patients, side: asset, destination: receivables, signature: true, synonyms: ["patient accounts receivable*", "patient receivables*", "accounts receivable patients*"]}
+      - {id: inventory_reserves, label: Inventory reserves, side: asset, sign: contra, destination: inventory}
+      - {id: rebate_liabilities, label: Rebate liabilities, side: liability, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities, signature: true, synonyms: ["accrued rebates*", "rebates payable*", "accrued chargebacks*", "accrued rebates chargebacks*"]}
+      - {id: product_returns_reserves, label: Product returns reserves, side: liability, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities}
+      - {id: intangible_assets, label: Intangible assets, side: asset, destination: intangibles}
+
+  - family: healthcare_measure
+    role: disclosure
+    statement: any
+    source: "ASC 954-605; Devin's term list 2026-11-04"
+    concepts:
+      - {id: gross_patient_charges, label: Gross patient charges, context: "List prices. Never revenue."}
+      - {id: contractual_adjustments, label: Contractual adjustments}
+      - {id: charity_care, label: Charity care}
+      - {id: chargebacks, label: Chargebacks}

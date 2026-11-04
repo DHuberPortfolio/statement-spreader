@@ -179,6 +179,8 @@ class RowMapping(BaseModel):
     candidates: list[tuple[str, float]] = Field(default_factory=list)
     reason: str = ""
     rule: str = ""  # the exact path that placed the row (calibration is per rule: finops.core.policy)
+    concept: str | None = None  # the detailed idea behind the row (config/ontology), kept when lines roll up
+    contra: bool = False  # deducted from its line however it is printed ("Less accumulated depreciation")
 
 
 class ValueStatus(str, Enum):

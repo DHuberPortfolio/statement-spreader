@@ -46,6 +46,7 @@ a fresh set of filings would be the cleanest next measurement.
 | 36 | D64: finance-first Accuracy and Time saved, sidebar drop-downs and breadcrumbs from one map, list and add pages split in every area, an area for engineers, plain batch names, fictional names on generated demo statements | Screens only: no spreading figure changes |
 | 37 | D65: review time recorded in the background and closed by approval; time and ROI for the manager and admin roles only; Errors avoided as a comparison; Time saved reads the same final test as Accuracy | ROI page silent rate 32 of 2,154 -> 5 of 1,080 (an older report before); no spreading figure changes |
 | 38 | D66: 219 new real filings, random by industry and size; statements joined across tables, chosen by ties, weeks and 53-week periods, combined basic and diluted rows, balance sheet sides, vocabulary | Sealed 101 filings: right 74.8% -> 81.5%, blank unflagged 707 -> 502, silent 6 of 1,574 -> 6 of 1,762 |
+| 39 | D67: industry ontology (11 files), combined filings read from the first company, units in a table's first row, 179 new real filings weighted to energy, utilities and real estate | Sealed 87 filings: right 79.1% -> 80.3%, silent 20 of 1,585 -> 14 of 1,572, blank unflagged 392 -> 328, utilities right 72.1% -> 76.6% |
 
 Known measurement limitation (fixed in #4): when a filing tags a row with a
 company-specific concept, the answer key does not know which template line that row feeds, so the

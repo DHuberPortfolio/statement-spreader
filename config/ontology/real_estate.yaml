@@ -1,0 +1,173 @@
+# Real estate: REITs, operators and developers. Many present an unclassified balance sheet.
+# Gross rental revenue and net rental revenue are different concepts, so the wording of each is kept apart.
+industry: real_estate
+title: Real estate
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 842; Devin's term list 2026-11-04"
+    concepts:
+      - {id: rental_revenue, label: Rental revenue, signature: true, synonyms: ["rental income", "rental revenues", "rental", "rental and other property revenue*", "rental and other property income*", "property rental income", "lease revenue", "lease income", "lease revenues", "minimum rent", "minimum rents", "base rental revenue", "base rent", "base rents", "tenant rental payments", "revenue from tenants", "rental income net", "real estate rental income", "total rental income", "rental and tenant reimbursements"], not_when: ["net rental*", "rental income from discontinued*", "*sublease*"], related: [tenant_reimbursements, deferred_rent, straight_line_rent, lease_incentives], context: "Gross rent from tenants. Net rental income, after property costs, is a different concept."}
+      - {id: net_rental_income, label: Net rental income, review: always, synonyms: ["net rental revenue", "rental income net of property expenses"], context: "Rent after property costs. Spread on revenue only when the statement prints no gross figure, so a person checks it."}
+      - {id: straight_line_rent, label: Straight-line rental revenue, synonyms: ["straight line rent*"], in_cash_flow: cf_other_noncash, context: "A non-cash adjustment on the cash flow statement."}
+      - {id: percentage_rent, label: Percentage rent, signature: true, synonyms: ["percentage rents", "percentage rental income"]}
+      - {id: tenant_reimbursements, label: Tenant reimbursements, signature: true, synonyms: ["tenant recoveries", "expense reimbursements", "tenant reimbursement*", "reimbursement revenue", "recoveries from tenants", "real estate tax and operating expense reimbursement*"]}
+      - {id: cam_recoveries, label: Common area maintenance (CAM) recoveries, synonyms: ["common area maintenance recover*", "cam recover*", "cam reimbursement*"]}
+      - {id: operating_expense_recoveries, label: Operating expense recoveries, synonyms: ["operating cost recoveries", "property operating expense recoveries"]}
+      - {id: lease_termination_fees, label: Lease termination fees, signature: true, synonyms: ["lease termination income", "lease termination revenue*", "termination fees", "lease cancellation*"]}
+      - {id: early_termination_revenue, label: Early termination revenue}
+      - {id: parking_revenue, label: Parking revenue, synonyms: ["parking revenues", "parking income", "parking"]}
+      - {id: storage_revenue, label: Storage revenue, review: always, synonyms: ["storage revenues", "self storage revenue*"]}
+      - {id: property_management_fees, label: Property management fees, synonyms: ["property management fee income", "management fees from affiliates", "management and other fees*", "management fee income"], review: always, context: "Income for the manager; a cost for the owner, see property_management_expenses."}
+      - {id: leasing_commissions_income, label: Leasing commissions, synonyms: ["leasing commission income", "leasing fees"], review: always, context: "Income for a broker. An owner's paid commissions are a cost."}
+      - {id: development_fees, label: Development fees, synonyms: ["development fee income", "development and construction fee*"]}
+      - {id: real_estate_sales_revenue, label: Real estate sales revenue, synonyms: ["sales of real estate", "home sales", "land sales", "lot sales", "real estate sales", "sales of homes", "condominium sales*"], review: always}
+      - {id: hotel_rooms_revenue, label: Rooms revenue, synonyms: ["rooms", "hotel revenue*"], sections: ["revenue*", "hotel revenue*"], context: "A hotel REIT's room sales. The same word under expenses is a cost, so the section decides."}
+
+  - family: revenue_reduction
+    statement: income_statement
+    role: disclosure
+    source: "ASC 842; Devin's term list 2026-11-04"
+    concepts:
+      - {id: tenant_concessions, label: Tenant concessions, context: "Taken in the revenue figure; not a separate line."}
+      - {id: rent_abatements, label: Rent abatements}
+      - {id: free_rent, label: Free rent}
+      - {id: lease_incentives, label: Lease incentives, statement: any}
+
+  - family: operating_expense
+    statement: income_statement
+    destination: other_opex
+    sign: positive
+    source: "ASC 970, ASC 842; Devin's term list 2026-11-04"
+    concepts:
+      - {id: property_operating_expenses, label: Property operating expenses, signature: true, synonyms: ["property operating expense", "property operating", "property operating costs", "property expenses", "property operations", "operating expenses of real estate*", "rental operating expenses", "rental operating", "rental property operating*", "property operating and maintenance", "property operating and other", "property operations and maintenance", "rental expenses", "rental expense", "property level operating*", "other property level expenses", "other property expenses", "property costs"], context: "A landlord's cost of running buildings. Stays apart from an oil producer's lease operating expenses."}
+      - {id: real_estate_taxes, label: Real estate taxes, signature: true, synonyms: ["real estate tax", "real estate tax expense", "real estate taxes and insurance", "property taxes", "property tax", "property taxes and insurance", "real estate and other taxes", "taxes on real estate"]}
+      - {id: property_insurance, label: Property insurance, synonyms: ["insurance expense property"]}
+      - {id: repairs_and_maintenance, label: Repairs and maintenance, synonyms: ["repairs maintenance*", "maintenance and repairs"]}
+      - {id: property_management_expenses, label: Property management expenses, synonyms: ["property management expense", "property management", "property management costs"], review: always}
+      - {id: utilities_expense, label: Utilities expense, synonyms: ["utilities"]}
+      - {id: janitorial_expenses, label: Janitorial expenses}
+      - {id: security_expenses, label: Security expenses}
+      - {id: landscaping_expenses, label: Landscaping expenses}
+      - {id: leasing_expenses, label: Leasing expenses, synonyms: ["leasing expense", "leasing costs", "marketing and leasing"]}
+      - {id: building_maintenance, label: Building maintenance}
+      - {id: brokerage_commissions, label: Brokerage commissions, review: always}
+      - {id: predevelopment_expenses, label: Predevelopment expenses, synonyms: ["pre development expense*", "pursuit costs", "abandoned project costs", "abandoned pursuit costs"]}
+      - {id: cost_of_real_estate_sold, label: Cost of real estate sold, destination: [cogs, other_opex], synonyms: ["cost of home sales", "cost of land sales", "cost of real estate sales", "cost of homes sold", "cost of sales real estate"]}
+      - {id: hotel_operating_costs, label: Hotel operating expenses, review: always, synonyms: ["hotel operating expense*", "other departmental and support expenses", "management fees", "franchise fees"], sections: ["*expense*", "*costs*"]}
+      - {id: hotel_rooms_expense, label: Rooms expense, review: always, synonyms: ["rooms", "food and beverage"], sections: ["*expense*", "*costs*"]}
+
+  - family: nonoperating
+    statement: income_statement
+    destination: other_nonoperating
+    source: "ASC 360-10; Devin's term list 2026-11-04"
+    concepts:
+      - {id: property_disposition_gains, label: Property disposition gains, signature: true, destination: [other_nonoperating], in_cash_flow: cf_other_noncash, synonyms: ["gain on sale of real estate*", "gain on sales of real estate*", "gains on sale of real estate*", "gain loss on sale of real estate*", "gain on sale of investment propert*", "gain on disposition of real estate*", "gain on sale of properties*", "gain on sale of property*", "loss on sale of real estate*", "gain on dispositions of*", "gains on sales of real estate*", "gain on the sale of real estate*"], review: always, context: "Non-recurring. Some REITs print it above operating income."}
+
+  - family: fixed_assets
+    statement: balance_sheet
+    side: asset
+    destination: ppe_net
+    source: "ASC 360, ASC 970; Devin's term list 2026-11-04"
+    concepts:
+      - {id: investment_properties, label: Investment properties, signature: true, synonyms: ["investment property*", "investment in real estate*", "investments in real estate*", "real estate investments*", "real estate net", "net investment in real estate*", "net investments in real estate*", "net real estate*", "real estate held for investment*", "total real estate*", "real estate at cost", "real estate investment property*", "operating real estate*", "real estate assets net", "total investment in real estate*", "total investments in real estate*", "net operating real estate*", "real estate facilities*"], not_when: ["*held for sale*", "*joint venture*", "*unconsolidated*"]}
+      - {id: income_producing_properties, label: Income-producing properties, synonyms: ["income producing propert*", "income producing real estate*", "rental propert*", "rental real estate*", "operating properties*", "operating propert*", "properties net"], side: asset}
+      - {id: commercial_real_estate, label: Commercial real estate, side: asset}
+      - {id: residential_properties, label: Residential properties, synonyms: ["single family residential propert*", "investments in single family*"]}
+      - {id: multifamily_properties, label: Multifamily properties}
+      - {id: industrial_properties, label: Industrial properties}
+      - {id: office_properties, label: Office properties}
+      - {id: retail_properties, label: Retail properties}
+      - {id: land, label: Land, signature: false, sections: ["*real estate*", "*propert*", "*investment*", "*rental*", ""], synonyms: ["land and land improvements", "land and improvements", "land and buildings*"]}
+      - {id: land_held_for_development, label: Land held for development, signature: true, synonyms: ["land held for future development*", "land and land under development", "land under development", "land parcels*"]}
+      - {id: construction_in_progress, label: Construction in progress, synonyms: ["construction in process", "construction in progress*", "development in progress", "projects under development"]}
+      - {id: real_estate_under_development, label: Real estate under development, signature: true, synonyms: ["properties under development", "real estate development in progress", "developments in progress", "development properties*", "development projects*"]}
+      - {id: buildings_and_improvements, label: Buildings and improvements, synonyms: ["building and improvements", "buildings improvements*", "buildings and building improvements", "building and building improvements", "buildings and equipment"]}
+      - {id: land_improvements, label: Land improvements}
+      - {id: tenant_improvements, label: Tenant improvements, signature: true, synonyms: ["tenant improvement*"]}
+      - {id: leasehold_improvements, label: Leasehold improvements, synonyms: ["leasehold improvement*"]}
+      - {id: accumulated_depreciation, label: Accumulated depreciation, sign: contra, synonyms: ["less accumulated depreciation", "less accumulated depreciation and amortization", "accumulated depreciation and amortization", "less accumulated depreciation*"]}
+      - {id: accumulated_impairment, label: Accumulated impairment, sign: contra}
+      - {id: stabilized_assets, label: Stabilized assets}
+      - {id: completed_developments, label: Completed developments}
+
+  - family: other_real_estate_assets
+    statement: balance_sheet
+    side: asset
+    current: other_current_assets
+    noncurrent: other_noncurrent_assets
+    source: "ASC 360, ASC 842, ASC 323; Devin's term list 2026-11-04"
+    concepts:
+      - {id: real_estate_held_for_sale, label: Real estate held for sale, synonyms: ["real estate held for sale*", "properties held for sale*", "assets held for sale*"]}
+      - {id: development_inventory, label: Development inventory, destination: inventory, synonyms: ["real estate inventory*", "homebuilding inventor*", "real estate inventories*"], current: null, noncurrent: null}
+      - {id: deferred_rent, label: Deferred rent, statement: balance_sheet, synonyms: ["deferred rents receivable*", "deferred rent receivable*", "straight line rent receivable*", "straight line rents receivable*"], related: [straight_line_rent], not_when: ["deferred rent liabilit*"], context: "An asset for a landlord, a liability for a tenant."}
+      - {id: unbilled_rent, label: Unbilled rent, synonyms: ["unbilled rents*", "unbilled rent*"]}
+      - {id: real_estate_joint_ventures, label: Real estate joint ventures, destination: lt_investments, current: null, noncurrent: null, synonyms: ["investment in unconsolidated*", "investments in unconsolidated*", "investments in joint ventures*", "investment in joint ventures*", "investments in real estate joint ventures*", "investments in and advances to unconsolidated*", "investments in unconsolidated real estate*", "investments in partially owned*", "unconsolidated real estate*"]}
+      - {id: deferred_leasing_costs, label: Deferred leasing costs, synonyms: ["deferred leasing costs*", "deferred lease costs*", "deferred leasing and other*", "deferred costs*"]}
+
+  - family: receivables
+    statement: balance_sheet
+    side: asset
+    destination: receivables
+    source: "ASC 842; Devin's term list 2026-11-04"
+    concepts:
+      - {id: tenant_receivables, label: Accounts receivable - tenants, synonyms: ["tenant receivables*", "tenant and other receivables*", "tenant accounts receivable*", "accounts receivable tenants*", "rents and other receivables*", "rent and other receivables*", "due from hotel managers"]}
+      - {id: rent_receivable, label: Rent receivable, synonyms: ["rents receivable*", "rent receivables*"]}
+
+  - family: debt
+    statement: balance_sheet
+    side: liability
+    destination: lt_debt
+    source: "ASC 470; Devin's term list 2026-11-04"
+    concepts:
+      - {id: mortgage_debt, label: Mortgage debt, signature: true, synonyms: ["mortgage notes payable*", "mortgage notes*", "mortgages payable*", "mortgage loans payable*", "mortgage loans*", "mortgage debt*", "mortgage indebtedness*", "mortgages and notes payable*", "secured mortgage*", "property debt*"], not_when: ["mortgage loans held*", "mortgage loans receivable*"], context: "A liability. Mortgage loans an investor holds are an asset."}
+      - {id: secured_debt, label: Secured debt, synonyms: ["secured debt*", "secured notes*", "secured term loan*", "secured credit facilit*", "secured loans*"]}
+      - {id: unsecured_debt, label: Unsecured debt, synonyms: ["unsecured debt*", "unsecured notes*", "unsecured senior notes*", "senior unsecured notes*", "unsecured term loan*", "unsecured credit facilit*", "unsecured revolving*", "unsecured line of credit*"]}
+      - {id: construction_loan_payable, label: Construction loan payable, synonyms: ["construction loans*", "construction loan*", "construction financing"]}
+
+  - family: cash_flow_real_estate
+    statement: cash_flow
+    source: "ASC 230; Devin's term list 2026-11-04"
+    concepts:
+      - {id: distributions_to_shareholders, label: Distributions to shareholders, destination: dividends_paid, synonyms: ["distributions paid*", "distributions to stockholders*", "distributions to shareholders*", "distributions to common*", "dividends and distributions paid*", "distributions to unitholders*", "dividends paid to common stockholders*", "distributions to preferred*"], not_when: ["distributions to noncontrolling*", "*joint venture*"]}
+      - {id: real_estate_acquisitions, label: Land acquisition costs, destination: capex, synonyms: ["acquisitions of real estate*", "acquisition of real estate*", "acquisition of properties*", "acquisitions of properties*", "acquisition of property*", "investments in real estate*", "investment in real estate*", "purchases of real estate*", "purchase of real estate*", "acquisition of investment propert*"], review: always, context: "Spent on the core asset, so it behaves as capex even when the filing calls it an acquisition."}
+      - {id: development_costs, label: Development costs, destination: capex, synonyms: ["development of real estate*", "real estate development*", "additions to real estate*", "additions to investment propert*", "improvements to real estate*", "improvements to properties*", "capital improvements*", "capital improvements to real estate*", "construction and development*", "real estate improvements*", "development and redevelopment*", "development and construction of real estate*"]}
+      - {id: capital_improvements, label: Capital improvements, destination: capex}
+      - {id: construction_costs, label: Construction costs, destination: capex}
+      - {id: proceeds_from_property_sales, label: Proceeds from sale of real estate, destination: cf_other_investing, synonyms: ["proceeds from sale of real estate*", "proceeds from sales of real estate*", "proceeds from sale of properties*", "proceeds from sale of investment propert*", "net proceeds from sale of real estate*", "proceeds from dispositions of real estate*", "proceeds from the sale of real estate*", "net proceeds from sales of real estate*"]}
+
+  - family: other_real_estate_costs
+    statement: balance_sheet
+    role: disclosure
+    source: "ASC 835-20, ASC 970; Devin's term list 2026-11-04"
+    concepts:
+      - {id: entitlement_costs, label: Entitlement costs}
+      - {id: capitalized_interest, label: Capitalized interest, statement: any, review: always, context: "Part of a total; rarely its own row."}
+      - {id: tenant_improvement_allowances, label: Tenant improvement allowances}
+      - {id: lease_up_costs, label: Lease-up costs}
+
+  - family: real_estate_measure
+    role: disclosure
+    statement: any
+    source: "Nareit definitions; SEC Regulation G; Devin's term list 2026-11-04"
+    concepts:
+      - {id: ffo, label: Funds from operations (FFO), signature: true, overrides_alias: true, synonyms: ["funds from operations*", "ffo", "ffo per share*"], context: "Non-GAAP. Must never land on net income."}
+      - {id: affo, label: Adjusted funds from operations (AFFO), signature: true, overrides_alias: true, synonyms: ["adjusted funds from operations*", "affo", "affo per share*"]}
+      - {id: noi, label: Net operating income (NOI), signature: true, overrides_alias: true, sections: ["*non gaap*", "*supplemental*", "*reconciliation*", "*same store*"], context: "Property-level and non-GAAP. It is not the statement's operating income, and only the section can tell them apart."}
+      - {id: same_store_noi, label: Same-store NOI, signature: true, synonyms: ["same property noi", "same store net operating income", "same property net operating income"]}
+      - {id: same_property_revenue, label: Same-property revenue, synonyms: ["same store revenue*"]}
+      - {id: same_property_expenses, label: Same-property expenses, synonyms: ["same store expense*"]}
+      - {id: occupancy_rate, label: Occupancy rate, unit: percent, synonyms: ["occupancy", "average occupancy", "period end occupancy", "leased occupancy"]}
+      - {id: economic_occupancy, label: Economic occupancy, unit: percent}
+      - {id: physical_occupancy, label: Physical occupancy, unit: percent}
+      - {id: capitalization_rate, label: Capitalization rate, unit: percent, synonyms: ["cap rate"]}
+      - {id: walt, label: Weighted average lease term (WALT), unit: ratio}
+      - {id: average_rent_per_square_foot, label: Average rent per square foot, unit: per_unit, synonyms: ["rent per square foot"]}
+      - {id: net_effective_rent, label: Net effective rent, unit: per_unit}
+      - {id: leasing_spreads, label: Leasing spreads, unit: percent}
+      - {id: tenant_retention_rate, label: Tenant retention rate, unit: percent}
+      - {id: dscr, label: Debt service coverage ratio (DSCR), unit: ratio}
+      - {id: ltv, label: Loan-to-value (LTV), unit: percent}

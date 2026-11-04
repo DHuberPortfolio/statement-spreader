@@ -1,0 +1,80 @@
+# Banks and depository institutions. The us-bank profile holds the lines; a concept lists a commercial line after it, so the same
+# concept still resolves if a lender is spread on the commercial template.
+industry: banking
+title: Banking and financial services
+groups:
+  - family: earning_assets
+    statement: balance_sheet
+    side: asset
+    source: "ASC 942, ASC 320, ASC 326; Devin's term list 2026-11-04"
+    concepts:
+      - {id: cash_and_equivalents, label: Cash and cash equivalents, destination: cash}
+      - {id: interest_bearing_deposits_assets, label: Interest-bearing deposits, destination: cash, synonyms: ["interest bearing deposits in banks*", "interest bearing deposits with banks*", "interest bearing deposits in other banks*", "interest bearing balances*", "deposits with banks*"], review: always, context: "An asset when placed with other banks. Interest-bearing deposits owed to customers are a liability, so the side decides."}
+      - {id: federal_funds_sold, label: Federal funds sold, signature: true, destination: [cash, st_investments], synonyms: ["federal funds sold*", "fed funds sold*"]}
+      - {id: investment_securities, label: Investment securities, signature: true, destination: [bank_securities, lt_investments], synonyms: ["investment securities*"]}
+      - {id: afs_securities, label: Available-for-sale securities (AFS), destination: [bank_securities, lt_investments], synonyms: ["securities available for sale*", "available for sale securities*", "debt securities available for sale*"]}
+      - {id: htm_securities, label: Held-to-maturity securities (HTM), destination: [bank_securities, lt_investments], synonyms: ["securities held to maturity*", "held to maturity securities*", "debt securities held to maturity*"]}
+      - {id: trading_securities, label: Trading securities, destination: [bank_securities, st_investments], synonyms: ["trading account assets*", "trading assets*"]}
+      - {id: loans_held_for_investment, label: Loans held for investment, signature: true, destination: [loans_gross, loans_net], synonyms: ["loans held for investment*", "loans and leases held for investment*", "portfolio loans*"]}
+      - {id: loans_held_for_sale, label: Loans held for sale, signature: true, destination: [loans_held_for_sale, other_current_assets], synonyms: ["loans held for sale*", "mortgage loans held for sale*"]}
+      - {id: commercial_and_industrial_loans, label: Commercial and industrial loans, signature: true, destination: [loans_gross], synonyms: ["commercial and industrial*"], sections: ["*loans*"]}
+      - {id: commercial_real_estate_loans, label: Commercial real estate loans, destination: [loans_gross], synonyms: ["commercial real estate*"], sections: ["*loans*"]}
+      - {id: residential_mortgage_loans, label: Residential mortgage loans, destination: [loans_gross], synonyms: ["residential mortgage*"], sections: ["*loans*"]}
+      - {id: consumer_loans, label: Consumer loans, destination: [loans_gross], synonyms: ["consumer*"], sections: ["*loans*"]}
+      - {id: credit_card_receivables, label: Credit card receivables, destination: [loans_gross, receivables], synonyms: ["credit card loans*"]}
+      - {id: allowance_for_credit_losses, label: Allowance for credit losses (ACL), signature: true, sign: contra, destination: [allowance_loan_losses], synonyms: ["allowance for credit losses*", "allowance for loan losses*", "allowance for loan and lease losses*", "less allowance for credit losses*", "less allowance for loan losses*", "acl"], context: "Deducted from loans."}
+      - {id: accrued_interest_receivable, label: Accrued interest receivable, destination: [other_noncurrent_assets], synonyms: ["accrued interest receivable*", "interest receivable*"], signature: true}
+      - {id: goodwill, label: Goodwill, destination: goodwill}
+      - {id: core_deposit_intangibles, label: Core deposit intangibles, signature: true, destination: intangibles, synonyms: ["core deposit intangible*", "core deposit and other intangible*"]}
+
+  - family: deposits
+    statement: balance_sheet
+    side: liability
+    destination: [deposits, other_current_liabilities]
+    source: "ASC 942-405; Devin's term list 2026-11-04"
+    concepts:
+      - {id: noninterest_bearing_deposits, label: Noninterest-bearing deposits, signature: true, synonyms: ["noninterest bearing*", "non interest bearing*"], sections: ["*deposits*"], not_when: ["*cash*"]}
+      - {id: interest_bearing_deposits_liabilities, label: Interest-bearing deposits, synonyms: ["interest bearing*"], sections: ["*deposits*"]}
+      - {id: demand_deposits, label: Demand deposits, signature: true, synonyms: ["demand"], sections: ["*deposits*"]}
+      - {id: savings_deposits, label: Savings deposits, signature: true, synonyms: ["savings", "savings and money market*", "money market*"], sections: ["*deposits*"]}
+      - {id: time_deposits, label: Time deposits, signature: true, synonyms: ["time*"], sections: ["*deposits*"]}
+      - {id: certificates_of_deposit, label: Certificates of deposit, synonyms: ["certificates of deposit*"], sections: ["*deposits*"]}
+      - {id: brokered_deposits, label: Brokered deposits, synonyms: ["brokered*"], sections: ["*deposits*"]}
+
+  - family: borrowings
+    statement: balance_sheet
+    side: liability
+    source: "ASC 942-470; Devin's term list 2026-11-04"
+    concepts:
+      - {id: federal_funds_purchased, label: Federal funds purchased, signature: true, destination: st_debt, synonyms: ["federal funds purchased*", "fed funds purchased*"]}
+      - {id: repurchase_agreements, label: Repurchase agreements, signature: true, destination: st_debt, synonyms: ["securities sold under agreements to repurchase*", "repurchase agreements*", "securities sold under repurchase*"]}
+      - {id: subordinated_debt, label: Subordinated debt, destination: lt_debt, synonyms: ["subordinated debt*", "subordinated notes*", "subordinated debentures*", "junior subordinated*"]}
+      - {id: long_term_borrowings, label: Long-term borrowings, destination: lt_debt, synonyms: ["long term borrowings*", "federal home loan bank advances*", "fhlb advances*", "advances from federal home loan bank*"]}
+      - {id: accrued_interest_payable, label: Accrued interest payable, destination: [other_noncurrent_liabilities], synonyms: ["accrued interest payable*"]}
+
+  - family: bank_income
+    statement: income_statement
+    source: "ASC 942-225; Devin's term list 2026-11-04"
+    concepts:
+      - {id: nii, label: Net interest income (NII), signature: true, destination: [net_interest_income], synonyms: ["net interest income", "net interest revenue"]}
+      - {id: provision_for_credit_losses, label: Provision for credit losses, signature: true, destination: [provision_credit_losses], in_cash_flow: cf_other_noncash, synonyms: ["provision for credit losses*", "provision for loan losses*", "provision for loan and lease losses*", "credit loss expense*"]}
+
+  - family: credit_quality
+    role: disclosure
+    statement: any
+    source: "Basel III; SEC Guide 3 successors; Devin's term list 2026-11-04"
+    concepts:
+      - {id: nim, label: Net interest margin (NIM), unit: percent}
+      - {id: charge_offs, label: Charge-offs, synonyms: ["net charge offs", "loans charged off"]}
+      - {id: recoveries, label: Recoveries, sections: ["*allowance*", "*credit quality*"]}
+      - {id: npl, label: Nonperforming loans (NPL)}
+      - {id: npa, label: Nonperforming assets (NPA)}
+      - {id: classified_loans, label: Classified loans}
+      - {id: criticized_loans, label: Criticized loans}
+      - {id: delinquency_ratios, label: Delinquency ratios, unit: percent}
+      - {id: loan_to_deposit_ratio, label: Loan-to-deposit ratio, unit: percent}
+      - {id: tier_1_capital, label: Tier 1 capital}
+      - {id: cet1, label: Common Equity Tier 1 (CET1)}
+      - {id: rwa, label: Risk-weighted assets (RWA)}
+      - {id: tangible_common_equity, label: Tangible common equity}
+      - {id: efficiency_ratio, label: Efficiency ratio, unit: percent}

@@ -176,3 +176,44 @@ def test_a_march_year_end_keeps_each_columns_own_year() -> None:
     title = "Years ended March 31, 2024"
     assert parse_period("2023", StatementType.INCOME, title=title).key == "2023-03-31/12M"
 
+
+
+def _sheet(index: int, total: str, score: float, rows: int = 20) -> tuple:
+    from types import SimpleNamespace
+
+    filler = [SimpleNamespace(tokens=[SimpleNamespace(text="Line"), SimpleNamespace(text="5")]) for _ in range(rows - 1)]
+    last = SimpleNamespace(tokens=[SimpleNamespace(text="Total assets"), SimpleNamespace(text=total)])
+    return (SimpleNamespace(index=index, rows=[*filler, last]), None, SimpleNamespace(score=score))
+
+
+def test_a_combined_filing_reads_the_first_company_not_the_best_scoring_one() -> None:
+    """Southern, Sempra and MGE: a subsidiary's statements add up, so reading them passed every check and went out unflagged."""
+    from spreader.assembly import first_registrant
+
+    parent, subsidiary = _sheet(10, "145,180", 21.0), _sheet(20, "36,538", 24.0)
+    best = {StatementType.BALANCE: subsidiary}
+    assert first_registrant(best, {StatementType.BALANCE: [parent, subsidiary]}) == 2
+    assert best[StatementType.BALANCE] is parent
+
+
+def test_a_table_that_scores_far_below_is_not_a_second_company() -> None:
+    from spreader.assembly import first_registrant
+
+    average_balances, sheet = _sheet(3, "9,000", 8.0), _sheet(30, "10,000", 24.0)
+    best = {StatementType.BALANCE: sheet}
+    assert first_registrant(best, {StatementType.BALANCE: [average_balances, sheet]}) == 0
+    assert best[StatementType.BALANCE] is sheet
+
+
+def test_a_short_table_is_not_a_second_company() -> None:
+    from spreader.assembly import first_registrant
+
+    summary, sheet = _sheet(3, "9,000", 24.0, rows=6), _sheet(30, "10,000", 24.0)
+    assert first_registrant({StatementType.BALANCE: sheet}, {StatementType.BALANCE: [summary, sheet]}) == 0
+
+
+def test_one_company_printed_twice_is_one_company() -> None:
+    from spreader.assembly import first_registrant
+
+    a, b = _sheet(3, "10,000", 24.0), _sheet(30, "10,000", 24.0)
+    assert first_registrant({StatementType.BALANCE: b}, {StatementType.BALANCE: [a, b]}) == 0

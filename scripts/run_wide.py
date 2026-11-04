@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from collections import Counter
@@ -27,7 +28,7 @@ from spreader.pipeline import spread_document
 from spreader.profile import load_profile
 
 ROOT = Path(__file__).resolve().parents[1]
-WIDE = ROOT / "eval" / "wide"
+WIDE = ROOT / os.environ.get("WIDE_SET", "eval/wide")
 REPORTS = ROOT / "eval" / "reports"
 PROFILE_FILES = {"us-bank": ROOT / "config/profiles/us-bank.yaml", "us-insurer": ROOT / "config/profiles/us-insurer.yaml",
                  "us-commercial": None}
@@ -112,7 +113,7 @@ def main() -> None:
     ap.add_argument("--rebuild-keys", action="store_true")
     ap.add_argument("--only", default=None, help="comma-separated filings")
     ap.add_argument("--workers", type=int, default=8)
-    args = ap.parse_args()
+    args = ap.parse_args()  # another collected set: set WIDE_SET=eval/vocab first, so the worker processes see it too
     if args.split == "sealed":
         if not args.open_seal:
             sys.exit("The sealed half is measured once: pass --open-seal to do that, knowing it is logged.")
@@ -124,7 +125,7 @@ def main() -> None:
     t0 = time.perf_counter()
     with ProcessPoolExecutor(args.workers) as pool:
         rows = list(pool.map(one, items))
-    report: dict[str, Any] = {"name": f"wide-{args.split}-{args.save}", "split": args.split, "wall_seconds": round(time.perf_counter() - t0, 1),
+    report: dict[str, Any] = {"name": f"{WIDE.name}-{args.split}-{args.save}", "split": args.split, "wall_seconds": round(time.perf_counter() - t0, 1),
                               "all": summary(rows)}
     for field in ("sector", "size", "form", "profile"):
         groups: dict[str, list[dict[str, Any]]] = {}

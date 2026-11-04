@@ -1,9 +1,10 @@
 import { documentTitle, OriginChip } from "../components/Origin";
-import { useEffect, useRef, useState, type DragEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import { api, ApiError, uploadDocument } from "../api/client";
 import type { DocumentRow, RunSummary } from "../api/types";
 import { Glyph } from "../components/Markers";
 import { EmptyState, ErrorState, InlineMessage, Loading } from "../components/States";
+import { pageOfDocuments } from "../lib/docList";
 import { formatBytes, formatDateTime } from "../lib/format";
 import { Link, navigate } from "../lib/router";
 import { flash } from "../lib/store";
@@ -228,19 +229,21 @@ function UploadZone({ onUploaded }: { onUploaded: () => void }) {
   );
 }
 
-/** /api/documents has no review counts, so each run's summary is fetched (two at a time). */
+/** /api/documents has no review counts, so each visible run's summary is fetched (two at a time) and kept. */
 function useRunSummaries(docs: DocumentRow[] | null): Record<number, RunSummary | "error"> {
   const [summaries, setSummaries] = useState<Record<number, RunSummary | "error">>({});
+  const fetched = useRef(new Set<number>());
   useEffect(() => {
     if (!docs) return;
     const ctrl = new AbortController();
-    const ids = docs.map((d) => d.run_id).filter((id): id is number => typeof id === "number");
+    const ids = docs.map((d) => d.run_id).filter((id): id is number => typeof id === "number" && !fetched.current.has(id));
     let next = 0;
     const worker = async () => {
       while (next < ids.length && !ctrl.signal.aborted) {
         const id = ids[next++]!;
         try {
           const p = await api.run(id, ctrl.signal);
+          fetched.current.add(id);
           if (p.summary) setSummaries((s) => ({ ...s, [id]: p.summary! }));
         } catch {
           if (!ctrl.signal.aborted) setSummaries((s) => ({ ...s, [id]: "error" }));
@@ -262,7 +265,10 @@ function RunStatus({ doc }: { doc: DocumentRow }) {
 
 export function DocumentsPage({ view }: { view: "list" | "add" }) {
   const docs = useApi(() => api.documents(), []);
-  const summaries = useRunSummaries(docs.data);
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const shown = useMemo(() => pageOfDocuments(docs.data ?? [], query, page), [docs.data, query, page]);
+  const summaries = useRunSummaries(docs.data ? shown.rows : null);
 
   return (
     <div className="page page-documents">
@@ -315,6 +321,24 @@ export function DocumentsPage({ view }: { view: "list" | "add" }) {
           </EmptyState>
         )}
         {docs.data && docs.data.length > 0 && (
+          <div className="doc-find">
+            <input
+              type="search"
+              aria-label="Find a company or filing"
+              placeholder="Find a company or filing"
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setPage(1);
+              }}
+            />
+            <span className="muted small" aria-live="polite">
+              {shown.matches === docs.data.length ? `${shown.matches} documents` : `${shown.matches} of ${docs.data.length} documents`}
+            </span>
+          </div>
+        )}
+        {docs.data && docs.data.length > 0 && shown.matches === 0 && <p className="muted">No company or filing matches that.</p>}
+        {docs.data && shown.matches > 0 && (
           <div className="grid-scroll">
             <table className="data-table doc-table">
               <thead>
@@ -332,7 +356,7 @@ export function DocumentsPage({ view }: { view: "list" | "add" }) {
                 </tr>
               </thead>
               <tbody>
-                {docs.data.map((d) => {
+                {shown.rows.map((d) => {
                   const s = d.run_id ? summaries[d.run_id] : undefined;
                   return (
                     <tr key={d.id}>
@@ -378,6 +402,19 @@ export function DocumentsPage({ view }: { view: "list" | "add" }) {
               </tbody>
             </table>
           </div>
+        )}
+        {shown.pages > 1 && (
+          <nav className="doc-pager" aria-label="Pages of documents">
+            <button type="button" className="btn" disabled={shown.page <= 1} onClick={() => setPage(shown.page - 1)}>
+              Previous
+            </button>
+            <span className="muted small">
+              Page {shown.page} of {shown.pages}
+            </span>
+            <button type="button" className="btn" disabled={shown.page >= shown.pages} onClick={() => setPage(shown.page + 1)}>
+              Next
+            </button>
+          </nav>
         )}
       </section>}
     </div>

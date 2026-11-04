@@ -12,19 +12,20 @@ from __future__ import annotations
 
 import re
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from typing import Any, TypeVar
 
 from .checks import add_derived, run_checks, run_ratios
 from .company import CompanyContext, compare_with_approved
 from .units import resolve_units
-from .contracts import DocumentIR, ProvenanceStep, SourceFormat, Spread, StatementResult, StatementType
+from .contracts import DocumentIR, ProvenanceStep, SourceFormat, Spread, StatementResult, StatementTable, StatementType
 from .detect import classify
 from .confirm import LabelRecord, find_confirmations
 from .echo import find_echoes
-from .assembly import choose_by_ties, join_halves
+from .assembly import choose_by_ties, first_registrant, join_halves
 from .layout import lay_out
+from . import ontology
 from .mapping import Memory, ModelMapper, map_table
 from .profile import Profile
 from .review import attach_flags, build_review, unconfirmed_items
@@ -100,13 +101,25 @@ def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dic
         cur = best.get(det.statement)
         if cur is None or det.score > cur[2].score:
             best[det.statement] = (table, layout, det)
-    choose_by_ties(doc, best, rivals)
+    registrants = first_registrant(best, rivals)
+    choose_by_ties(doc, best, rivals, combined=registrants > 1)
+    if registrants > 1:
+        best[StatementType.BALANCE][0].__dict__["_registrants"] = registrants
     for stype, cands in rivals.items():
         chosen = best[stype]
         close = [c for c in cands if c[0] is not chosen[0] and c[2].score >= chosen[2].score - 3]
         if close:
             chosen[0].__dict__.setdefault("_rivals", [c[0].index for c in close])
     return best
+
+
+PROFILE_INDUSTRY = {"us-bank": "banking", "us-insurer": "insurance"}
+
+
+def document_industries(tables: Iterable[StatementTable], profile_id: str) -> frozenset[str]:
+    """The industries a filing's own rows show it to be in. A bank or insurer profile says so outright."""
+    labels = [r.label_clean for t in tables for r in t.rows]
+    return ontology.load().industries(labels) | {i for k, i in PROFILE_INDUSTRY.items() if k == profile_id}
 
 
 def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = None,
@@ -129,6 +142,10 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
             built[stype].warnings.append(
                 f"PARENT_ONLY: the only {stype.value.replace('_', ' ')} found is the registrant's own (parent company, "
                 "unconsolidated) statement, not the consolidated one; the consolidated statements may be in an exhibit.")
+        if (companies := table.__dict__.get("_registrants")) and stype is StatementType.BALANCE:
+            built[stype].warnings.append(
+                f"MULTI_REGISTRANT: this filing holds the full statements of {companies} companies. The first was read, which is the parent "
+                "in the SEC's order. Confirm it is the company you are spreading.")
         rival_ids = [i for i in table.__dict__.get("_rivals", []) if i not in built[stype].joined_tables]
         if rival_ids:
             built[stype].warnings.append(
@@ -140,8 +157,9 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
                         " ".join(" ".join(t.text for t in r.tokens) for r in layout.header_rows), table.context[-400:]]
                 for stype, (table, layout, _det) in picked.items()}
     resolve_units(built, contexts, doc.unit_statements, (t.context[-400:] + " " + " ".join(k.text for r in t.rows for k in r.tokens) for t in doc.tables))
+    industries = document_industries(built.values(), profile.id)
     for stype, st in built.items():
-        mappings = timer.run("map", map_table, st, profile, memory, model, company.mappings if company else None)
+        mappings = timer.run("map", map_table, st, profile, memory, model, company.mappings if company else None, industries)
         statements[stype.value] = StatementResult(table=st, mappings=mappings)
         values.extend(timer.run("assemble", assemble_statement, st, mappings, profile))
 

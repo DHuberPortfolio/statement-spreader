@@ -1,0 +1,51 @@
+# Technology and software. Recurring-revenue measures are company metrics, not statement lines.
+industry: technology
+title: Technology and software
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: subscription_revenue, label: Subscription revenue, signature: true, synonyms: ["subscription", "subscriptions", "subscription and support", "subscription and returns", "subscription and transaction*", "subscription revenues", "saas revenue*", "software subscriptions", "cloud subscriptions*"], sections: ["*revenue*", "*sales*", ""]}
+      - {id: usage_based_revenue, label: Usage-based revenue, synonyms: ["usage revenue*"]}
+      - {id: professional_services_revenue, label: Professional services revenue, signature: true, synonyms: ["professional services", "professional services and other", "services and other"], sections: ["*revenue*", "*sales*"]}
+      - {id: implementation_revenue, label: Implementation revenue}
+
+  - family: cost_of_revenue
+    statement: income_statement
+    destination: cogs
+    sign: positive
+    source: "ASC 985-20; Devin's term list 2026-11-04"
+    concepts:
+      - {id: hosting_costs, label: Hosting costs, signature: true, synonyms: ["hosting expense*"]}
+      - {id: cloud_infrastructure_costs, label: Cloud infrastructure costs}
+      - {id: software_amortization, label: Software amortization, synonyms: ["amortization of capitalized software*", "amortization of software*"], in_cash_flow: cf_dna, review: always}
+
+  - family: technology_balances
+    statement: balance_sheet
+    source: "ASC 350-40, ASC 606; Devin's term list 2026-11-04"
+    concepts:
+      - {id: capitalized_software, label: Capitalized software development costs, side: asset, signature: true, destination: intangibles, synonyms: ["capitalized software*", "software development costs*", "capitalized internal use software*"], review: always, context: "Some filers show it in fixed assets."}
+      - {id: internal_use_software, label: Internal-use software, side: asset, destination: ppe_net, review: always}
+      - {id: acquired_technology_intangibles, label: Acquired technology intangibles, side: asset, destination: intangibles, synonyms: ["acquired technology*", "developed technology*"]}
+      - {id: contract_assets, label: Contract assets, side: asset, current: other_current_assets, noncurrent: other_noncurrent_assets, synonyms: ["contract assets*", "contract asset*"]}
+      - {id: contract_liabilities, label: Contract liabilities, side: liability, current: deferred_revenue_current, noncurrent: other_noncurrent_liabilities, synonyms: ["contract liabilities*", "contract liability*"]}
+      - {id: deferred_revenue, label: Deferred revenue, side: liability, current: deferred_revenue_current, noncurrent: other_noncurrent_liabilities}
+
+  - family: technology_measure
+    role: disclosure
+    statement: any
+    source: "SEC Regulation G; ASC 606-10-50; Devin's term list 2026-11-04"
+    concepts:
+      - {id: arr, label: Annual recurring revenue (ARR), signature: true, synonyms: ["annualized recurring revenue*"], overrides_alias: true}
+      - {id: mrr, label: Monthly recurring revenue (MRR), signature: true, overrides_alias: true}
+      - {id: rpo, label: Remaining performance obligations (RPO)}
+      - {id: current_rpo, label: Current RPO}
+      - {id: noncurrent_rpo, label: Noncurrent RPO}
+      - {id: customer_acquisition_costs, label: Customer acquisition costs}
+      - {id: customer_churn, label: Customer churn, unit: percent}
+      - {id: net_revenue_retention, label: Net revenue retention, unit: percent}
+      - {id: gross_revenue_retention, label: Gross revenue retention, unit: percent}

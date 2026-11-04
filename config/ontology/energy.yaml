@@ -1,0 +1,118 @@
+# Energy: oil and gas (upstream, midstream, downstream) and renewables.
+# Field meanings are in src/spreader/ontology.py. A group's fields are defaults for the concepts inside it.
+industry: energy
+title: Energy
+groups:
+  - family: revenue
+    statement: income_statement
+    destination: revenue
+    part_of: revenue
+    sign: positive
+    source: "ASC 606, ASC 932; Devin's term list 2026-11-04"
+    concepts:
+      - {id: oil_revenue, label: Oil revenue, signature: true, synonyms: ["oil", "crude oil", "oil sales", "crude oil sales", "oil and condensate", "oil and condensate sales", "oil and natural gas sales", "oil and gas sales", "oil natural gas and ngl sales", "oil natural gas and natural gas liquids", "oil and gas revenue*", "oil and natural gas revenue*"], sections: ["revenue*", "operating revenue*", "sales*"], context: "Sales of produced crude. Bare words count only under a revenue heading."}
+      - {id: natural_gas_revenue, label: Natural gas revenue, signature: true, synonyms: ["natural gas", "natural gas sales", "gas sales"], sections: ["revenue*", "operating revenue*", "sales*"], context: "Gross of gathering costs for most producers; net for a few."}
+      - {id: ngl_revenue, label: Natural gas liquids (NGL), signature: true, synonyms: ["natural gas liquids sales", "ngl sales", "ngls", "ngl", "natural gas liquids"], sections: ["revenue*", "operating revenue*", "sales*"], related: [fractionation_revenue]}
+      - {id: production_revenue, label: Production revenue, synonyms: ["production revenues"]}
+      - {id: gathering_revenue, label: Gathering revenue, signature: true, synonyms: ["gathering and processing revenue*", "gathering processing and transportation*"], review: always, context: "Fee income for a midstream company; a contra-cost for a producer."}
+      - {id: processing_revenue, label: Processing revenue, synonyms: ["gas processing revenue*"]}
+      - {id: transportation_revenue, label: Transportation revenue, synonyms: ["transportation revenues", "transportation and storage revenue*"], review: always, context: "A midstream service here. A carrier's freight is in transportation.yaml."}
+      - {id: pipeline_revenue, label: Pipeline revenue, signature: true, synonyms: ["pipeline revenues", "pipeline tariffs", "pipeline transportation revenue*"]}
+      - {id: storage_revenue, label: Storage revenue, synonyms: ["storage revenues", "terminalling and storage*"], review: always, context: "Tank or cavern storage. A self-storage landlord's storage revenue is in real_estate.yaml."}
+      - {id: fractionation_revenue, label: Fractionation revenue, signature: true, synonyms: ["fractionation revenues"]}
+      - {id: gathering_and_processing_fees, label: Gathering and processing fees, synonyms: ["gathering and processing fee*"], review: always}
+      - {id: petroleum_product_sales, label: Petroleum product sales, signature: true, synonyms: ["refined product sales", "refined products", "refined product revenue*"]}
+      - {id: wholesale_fuel_revenue, label: Wholesale fuel revenue, synonyms: ["wholesale fuel sales", "wholesale motor fuel*"]}
+      - {id: retail_fuel_revenue, label: Retail fuel revenue, synonyms: ["retail fuel sales", "retail motor fuel*"]}
+      - {id: solar_generation_revenue, label: Solar generation revenue, signature: true, synonyms: ["solar energy revenue*", "solar revenue*"]}
+      - {id: wind_generation_revenue, label: Wind generation revenue, signature: true, synonyms: ["wind energy revenue*", "wind revenue*"]}
+      - {id: capacity_payments, label: Capacity payments, synonyms: ["capacity payment revenue*"], review: always}
+      - {id: renewable_energy_credits, label: Renewable energy credits (RECs), signature: true, synonyms: ["sales of renewable energy credits", "renewable energy credit revenue*", "recs revenue"], review: always, context: "Revenue when sold; an inventory or intangible when held."}
+
+  - family: operating_expense
+    statement: income_statement
+    destination: other_opex
+    sign: positive
+    source: "ASC 932; Devin's term list 2026-11-04"
+    concepts:
+      - {id: lease_operating_expenses, label: Lease operating expenses (LOE), signature: true, synonyms: ["lease operating expense", "lease operating", "lease operating costs", "loe", "oil and gas production expense*", "production expenses", "production costs", "production and ad valorem taxes", "severance and ad valorem taxes", "severance taxes", "production taxes", "taxes other than income production*"], context: "The cost of lifting oil and gas from a producing lease. Not the same concept as a landlord's property operating expenses, though both are operating expenses."}
+      - {id: exploration_expenses, label: Exploration expenses, signature: true, synonyms: ["exploration expense", "exploration", "exploration costs", "exploration and abandonment*"], in_cash_flow: cf_other_noncash, review: always, context: "Expensed geology and dry holes under successful efforts. Capitalised under full cost."}
+      - {id: drilling_costs, label: Drilling costs, synonyms: ["drilling expense*", "dry hole costs", "dry hole expense"]}
+      - {id: completion_costs, label: Completion costs}
+      - {id: workover_expenses, label: Workover expenses, signature: true, synonyms: ["workover expense", "workover costs"]}
+      - {id: midstream_operating_expenses, label: Midstream operating expenses, synonyms: ["gathering and transportation expense*", "gathering processing and transportation expense*", "gathering transportation and processing", "gathering processing and transportation", "transportation and processing"], context: "A producer's cost of moving product to market."}
+      - {id: refining_operating_costs, label: Refining operating costs, signature: true, synonyms: ["refining operating expense*", "refinery operating expense*"]}
+      - {id: feedstock_costs, label: Feedstock costs, destination: [cogs, other_opex], synonyms: ["feedstock", "feedstocks", "crude oil and feedstocks", "raw materials feedstock*"]}
+      - {id: project_development_costs, label: Project development costs, synonyms: ["project development expense*"]}
+      - {id: interconnection_costs, label: Interconnection costs}
+      - {id: curtailment_losses, label: Curtailment losses, sign: as_printed}
+      - {id: accretion_expense, label: Accretion expense, synonyms: ["accretion of asset retirement obligation*", "accretion of aro", "accretion on asset retirement obligation*", "asset retirement obligation accretion*", "accretion"], in_cash_flow: cf_other_noncash, not_when: ["accretion of discount*", "accretion of debt*", "accretion of deferred*"], related: [asset_retirement_obligations], context: "Unwinding the discount on a retirement obligation. Not the accretion of a bond discount."}
+      - {id: impairment_of_oil_and_gas_properties, label: Impairment of oil and gas properties, signature: true, synonyms: ["impairment of proved*", "impairment of unproved*", "impairment of oil*", "impairment of natural gas*", "impairment of long lived assets and goodwill oil*", "ceiling test impairment*", "full cost ceiling*"], in_cash_flow: cf_other_noncash}
+      - {id: inventory_valuation_adjustments, label: Inventory valuation adjustments, synonyms: ["lower of cost or market inventory*", "lcm inventory*", "lifo inventory adjustment*"], review: always}
+      - {id: turbine_depreciation, label: Turbine depreciation, destination: dna_opex}
+      - {id: solar_asset_depreciation, label: Solar asset depreciation, destination: dna_opex}
+      - {id: dda, label: "Depletion, depreciation and amortization (DD&A)", signature: true, destination: dna_opex, in_cash_flow: cf_dna, synonyms: ["depreciation depletion and amortization*", "depletion depreciation and amortization*", "depletion depreciation amortization*", "depreciation depletion amortization*", "dd a", "dda", "depreciation depletion accretion*", "depletion depreciation amortization and accretion*", "depreciation depletion and accretion*", "depletion and depreciation*", "depreciation and depletion*", "depletion"], context: "Depletion of the reservoir is the producer's version of depreciation."}
+
+  - family: fixed_assets
+    statement: balance_sheet
+    side: asset
+    destination: ppe_net
+    source: "ASC 932-360; Devin's term list 2026-11-04"
+    concepts:
+      - {id: oil_and_gas_properties, label: Oil and gas properties, signature: true, synonyms: ["oil and gas properties*", "oil and natural gas properties*", "natural gas and oil properties*", "total oil and gas properties*", "total oil and natural gas properties*", "proved properties*", "proved oil and gas properties*", "evaluated properties*", "oil and gas property*", "oil and gas interests*"]}
+      - {id: unproved_properties, label: Unproved properties, signature: true, synonyms: ["unproved oil and gas properties*", "unproved properties*", "unevaluated properties*", "unproved leasehold*"], context: "Held at cost, not depleted. Still a fixed asset."}
+      - {id: mineral_rights, label: Mineral rights, signature: true, synonyms: ["mineral rights*", "mineral interests*", "mineral properties*", "mineral and royalty interests*", "oil and gas mineral*", "royalty interests*"]}
+      - {id: successful_efforts_method, label: Successful efforts method, synonyms: ["*successful efforts method*"], context: "A costing method. It appears inside a property row's caption."}
+      - {id: full_cost_method, label: Full cost method, synonyms: ["*full cost method*"], context: "A costing method. It appears inside a property row's caption."}
+      - {id: renewable_project_cip, label: Renewable project construction in progress, synonyms: ["renewable energy projects*", "solar projects in progress*", "solar energy systems*", "construction in progress renewable*"]}
+      - {id: accumulated_dda, label: "Accumulated depletion, depreciation and amortization", sign: contra, synonyms: ["accumulated depreciation depletion*", "accumulated depletion*", "less accumulated depreciation depletion*", "less accumulated depletion*", "less accumulated depreciation and depletion*", "less accumulated dd a*"]}
+
+  - family: asset_retirement
+    statement: balance_sheet
+    side: liability
+    current: other_current_liabilities
+    noncurrent: other_noncurrent_liabilities
+    source: "ASC 410-20; Devin's term list 2026-11-04"
+    concepts:
+      - {id: asset_retirement_obligations, label: Asset retirement obligations (ARO), synonyms: ["asset retirement obligations*", "asset retirement obligation*", "aro", "plugging and abandonment*", "abandonment obligations*", "decommissioning obligations*"], related: [accretion_expense], context: "Current portion when it sits under current liabilities."}
+      - {id: contract_liabilities_midstream, label: Contract liabilities, review: always, synonyms: ["deferred revenue minimum volume*"], current: deferred_revenue_current, context: "Minimum-volume shortfalls billed in advance."}
+
+  - family: capital_spending
+    statement: cash_flow
+    destination: capex
+    sign: as_printed
+    source: "ASC 932-230; Devin's term list 2026-11-04"
+    concepts:
+      - {id: oil_gas_capex, label: Additions to oil and gas properties, synonyms: ["additions to oil and*", "additions to natural gas*", "additions to proved*", "additions to unproved*", "capital expenditures for oil*", "drilling and completion*", "development of oil and*", "development of proved*", "exploration and development*", "oil and gas capital expenditures*", "investment in oil and*", "investments in oil and*", "purchases of oil and*", "payments for oil and*", "payments for exploration*", "acquisition and development of oil*"], context: "Named on the cash flow statement only."}
+
+  - family: operating_measure
+    role: disclosure
+    statement: any
+    source: "SEC Regulation S-K subpart 1200; Regulation G; Devin's term list 2026-11-04"
+    concepts:
+      - {id: proved_developed_reserves, label: Proved developed reserves, unit: volume, synonyms: ["proved developed*"]}
+      - {id: proved_undeveloped_reserves, label: Proved undeveloped reserves, unit: volume, synonyms: ["proved undeveloped*"]}
+      - {id: probable_reserves, label: Probable reserves, unit: volume}
+      - {id: possible_reserves, label: Possible reserves, unit: volume}
+      - {id: oil_production, label: Oil production, unit: volume}
+      - {id: natural_gas_production, label: Natural gas production, unit: volume}
+      - {id: liquids_production, label: Liquids production, unit: volume}
+      - {id: realized_oil_prices, label: Realized oil prices, unit: per_unit, synonyms: ["average realized oil price*", "realized price oil*"]}
+      - {id: realized_natural_gas_prices, label: Realized natural gas prices, unit: per_unit, synonyms: ["average realized natural gas price*", "realized price natural gas*"]}
+      - {id: finding_and_development_costs, label: Finding and development costs, unit: per_unit}
+      - {id: take_or_pay_contracts, label: Take-or-pay contracts, unit: text}
+      - {id: throughput_volumes, label: Throughput volumes, unit: volume}
+      - {id: minimum_volume_commitments, label: Minimum volume commitments, unit: volume}
+      - {id: refining_margins, label: Refining margins, unit: per_unit, synonyms: ["refining margin*"]}
+      - {id: refinery_throughput, label: Refinery throughput, unit: volume}
+      - {id: crack_spreads, label: Crack spreads, unit: per_unit, synonyms: ["crack spread*"]}
+      - {id: marketing_margins, label: Marketing margins, unit: per_unit, synonyms: ["marketing margin*"]}
+      - {id: power_purchase_agreements, label: Power purchase agreements (PPAs), unit: text}
+      - {id: renewable_production_tax_credits, label: Renewable energy production tax credits, unit: currency, review: always, context: "A tax item, not revenue."}
+      - {id: investment_tax_credits, label: Investment tax credits, unit: currency, review: always, context: "A tax item, not revenue."}
+      - {id: funds_available_for_distribution, label: Funds available for distribution (FAD), unit: currency, overrides_alias: true}
+      - {id: debt_adjusted_cash_flow, label: Debt-adjusted cash flow, unit: currency}
+      - {id: reserve_replacement_ratio, label: Reserve replacement ratio, unit: percent}
+      - {id: production_replacement_ratio, label: Production replacement ratio, unit: percent}
+      - {id: maintenance_capex, label: Maintenance capex, unit: currency, synonyms: ["maintenance capital expenditures"]}
+      - {id: growth_capex, label: Growth capex, unit: currency, synonyms: ["growth capital expenditures"]}

@@ -456,6 +456,19 @@ def drop_fallbacks(fs: list[Fact]) -> list[Fact]:
     return main or fs
 
 
+# Industry tags the template lines take (D67). Without them a landlord's, producer's or utility's main assets had no answer in the
+# key, so no improvement to those lines could be proved. Listed after the general concepts, which stay preferred.
+_cw("revenue", "RealEstateRevenueNet", "OilAndGasRevenue", "RegulatedAndUnregulatedOperatingRevenue")
+_cw("ppe_net", "RealEstateInvestmentPropertyNet", "OilAndGasPropertySuccessfulEffortMethodNet", "OilAndGasPropertyFullCostMethodNet",
+    "PublicUtilitiesPropertyPlantAndEquipmentNet")
+_cw("other_current_assets", "RegulatoryAssetsCurrent")
+_cw("other_noncurrent_assets", "RegulatoryAssetsNoncurrent")
+_cw("other_current_liabilities", "RegulatoryLiabilityCurrent", "AssetRetirementObligationCurrent")
+_cw("other_noncurrent_liabilities", "RegulatoryLiabilityNoncurrent", "AssetRetirementObligationsNoncurrent")
+_cw("capex", "PaymentsToExploreAndDevelopOilAndGasProperties", "PaymentsToAcquireOilAndGasPropertyAndEquipment", "PaymentsToAcquireOilAndGasProperty",
+    "PaymentsToDevelopRealEstateAssets", "PaymentsToAcquireAndDevelopRealEstate")
+_cw("lt_debt", "SecuredDebt", "UnsecuredDebt")
+
 # Industry overlays on the crosswalk, for the profiles that add an industry's lines (DECISIONS D41). Same rule as the
 # base: only concepts whose meaning for the template line is unambiguous. A concept can be moved to an industry line
 # (a bank's InterestExpense is its interest expense on deposits and borrowings, the overlay's bank_interest_expense,

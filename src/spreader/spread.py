@@ -138,7 +138,7 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
                 refs.append(v.ref) if v.ref else None
                 shown = "a dash (nothing)" if v.dash else f"'{v.raw}'"
                 steps.append(ProvenanceStep(kind="read", detail=f"Row '{by_index[i].label}': {shown} read as {_fmt(v.displayed)}"))
-                total += v.displayed
+                total += -abs(v.displayed) if mapping_of[i].contra else v.displayed
             if len(parts) > 1:
                 steps.append(ProvenanceStep(kind="sum", detail=f"Added {len(parts)} rows: {_fmt(total)}"))
             if total_note:

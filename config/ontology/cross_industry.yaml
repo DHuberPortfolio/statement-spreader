@@ -1,0 +1,118 @@
+# Accounting language every industry shares. Always active, so a term here must mean one thing whatever the company does.
+# The profile's aliases still come first; these give each row a concept and catch the wordings the aliases miss.
+industry: cross_industry
+title: Cross-industry accounting
+groups:
+  - family: balance_sheet
+    statement: balance_sheet
+    source: "US GAAP presentation; Devin's term list 2026-11-04"
+    concepts:
+      - {label: Current assets, destination: total_current_assets}
+      - {label: Noncurrent assets, destination: total_noncurrent_assets}
+      - {label: Total assets, destination: total_assets}
+      - {label: Current liabilities, destination: total_current_liabilities}
+      - {label: Noncurrent liabilities, destination: total_noncurrent_liabilities}
+      - {label: Total liabilities, destination: total_liabilities}
+      - {label: Shareholders' equity, destination: total_equity_parent}
+      - {label: Retained earnings, destination: retained_earnings}
+      - {label: Additional paid-in capital, destination: common_stock_apic}
+      - {label: Treasury stock, destination: treasury_stock}
+      - {label: Accumulated other comprehensive income, destination: aoci}
+      - {label: Accounts receivable, destination: receivables}
+      - {label: Accounts payable, destination: payables}
+      - {label: Accrued expenses, destination: accrued_liabilities}
+      - {label: Prepaid expenses, destination: other_current_assets}
+      - {label: Deferred tax assets, destination: deferred_tax_assets}
+      - {label: Deferred tax liabilities, destination: deferred_tax_liabilities}
+      - {label: Intangible assets, destination: intangibles, synonyms: ["trademarks", "trade names", "patents net", "licenses net"]}
+      - {label: Goodwill, destination: goodwill}
+      - {label: Operating lease liabilities, side: liability, current: operating_lease_liab_current, noncurrent: operating_lease_liab_noncurrent, synonyms: ["operating lease liability", "lease liabilities", "lease liability", "operating lease liability non current", "non current operating lease liability", "noncurrent operating lease liability"], review: always}
+      - {label: Right-of-use assets, side: asset, destination: operating_lease_rou, synonyms: ["operating lease asset", "operating lease assets", "right of use asset", "right of use assets"]}
+      - {label: Warrant liabilities, side: liability, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities, synonyms: ["warrant liability", "derivative liability", "derivative liabilities"]}
+      - {label: Restricted cash, side: asset, current: other_current_assets, noncurrent: other_noncurrent_assets, review: always, context: "Held apart from cash. Filers place it on either side of the current line."}
+      - {label: Security deposits, side: asset, destination: other_noncurrent_assets, synonyms: ["security deposit"]}
+      - {label: Security deposit liabilities, side: liability, destination: other_noncurrent_liabilities, synonyms: ["security deposits payable", "tenant security deposit", "tenant security deposits", "tenant deposits", "security deposits and prepaid rents"]}
+      - {label: Noncontrolling interests, side: equity, destination: nci_equity}
+      - {label: Deferred income taxes, side: liability, destination: deferred_tax_liabilities, in_cash_flow: cf_deferred_tax}
+      - {label: Income taxes payable, side: liability, destination: accrued_liabilities, synonyms: ["tax payable", "taxes payable", "income tax payable"]}
+
+  - family: debt
+    statement: balance_sheet
+    side: liability
+    source: "ASC 470, ASC 835; Devin's term list 2026-11-04"
+    concepts:
+      - {label: Revolving credit facility, current: st_debt, noncurrent: lt_debt, synonyms: ["revolving credit facility*", "revolving line of credit*", "revolver*", "revolving loan*", "line of credit*", "lines of credit*"]}
+      - {label: Term loans, current: st_debt, noncurrent: lt_debt, synonyms: ["term loan*"]}
+      - {label: Senior secured debt, current: st_debt, noncurrent: lt_debt, synonyms: ["senior secured notes*"]}
+      - {label: Senior unsecured debt, current: st_debt, noncurrent: lt_debt, synonyms: ["senior notes*", "senior unsecured notes*"]}
+      - {label: Subordinated debt, current: st_debt, noncurrent: lt_debt}
+      - {label: Convertible notes, current: st_debt, noncurrent: lt_debt, synonyms: ["convertible notes*", "convertible senior notes*", "convertible debt*", "convertible debentures*"]}
+      - {label: Current maturities of long-term debt, destination: st_debt}
+      - {label: Long-term debt, destination: lt_debt}
+      - {label: Interest payable, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities, synonyms: ["accrued interest"]}
+      - {label: Notes payable, current: st_debt, noncurrent: lt_debt, synonyms: ["promissory note", "promissory notes", "loans payable*", "loan payable*", "short term bank and other loans"], not_when: ["*related part*"], review: always}
+
+  - family: debt_detail
+    role: disclosure
+    statement: any
+    source: "ASC 835-30; Devin's term list 2026-11-04"
+    concepts:
+      - {label: Debt issuance costs, context: "Netted in the debt caption; the cash flow's amortization is separate."}
+      - {label: Unamortized discount}
+      - {label: Unamortized premium}
+      - {label: Covenant violations, unit: text}
+      - {label: Debt service coverage, unit: ratio}
+      - {label: Net leverage ratio, unit: ratio}
+      - {label: Fixed charge coverage ratio, unit: ratio}
+
+  - family: income_statement
+    statement: income_statement
+    source: "US GAAP presentation; Devin's term list 2026-11-04"
+    concepts:
+      - {label: Revenue, destination: revenue}
+      - {label: Net revenue, destination: revenue}
+      - {label: Gross profit, destination: gross_profit}
+      - {label: Cost of revenue, destination: cogs}
+      - {label: Cost of sales, destination: cogs}
+      - {label: Operating income, destination: operating_income}
+      - {label: Operating expenses, destination: total_opex}
+      - {label: "Selling, general and administrative expenses", destination: sga}
+      - {label: Research and development, destination: rnd}
+      - {label: Depreciation and amortization, destination: dna_opex, in_cash_flow: cf_dna}
+      - {label: Depreciation expense, destination: dna_opex, in_cash_flow: cf_dna}
+      - {label: Interest expense, destination: interest_expense}
+      - {label: Interest income, destination: interest_income}
+      - {label: Other income, destination: other_nonoperating}
+      - {label: Income before taxes, destination: pretax_income}
+      - {label: Income tax expense, destination: income_tax}
+      - {label: Net income, destination: net_income}
+      - {label: Earnings attributable to noncontrolling interests, destination: nci_net_income}
+      - {label: Diluted earnings per share, destination: eps_diluted, unit: per_share}
+      - {label: Loss on extinguishment of debt, destination: other_nonoperating, synonyms: ["loss on debt extinguishment", "gain on extinguishment of debt", "loss on early extinguishment of debt", "gain loss on extinguishment of debt"]}
+
+  - family: cash_flow
+    statement: cash_flow
+    source: "ASC 230; Devin's term list 2026-11-04"
+    concepts:
+      - {label: Cash from operating activities, destination: cfo, synonyms: ["operating cash flow"]}
+      - {label: Cash from investing activities, destination: cfi}
+      - {label: Cash from financing activities, destination: cff}
+      - {label: Capital expenditures, destination: capex}
+      - {label: Acquisitions, destination: acquisitions}
+      - {label: Divestitures, destination: cf_other_investing}
+      - {label: Proceeds from debt issuance, destination: debt_issued}
+      - {label: Debt repayments, destination: debt_repaid}
+      - {label: Dividends paid, destination: dividends_paid}
+      - {label: Share repurchases, destination: buybacks}
+      - {label: Stock-based compensation, destination: cf_sbc}
+      - {label: Changes in working capital, destination: cf_working_capital}
+
+  - family: measure
+    role: disclosure
+    statement: any
+    source: "SEC Regulation G; Devin's term list 2026-11-04"
+    concepts:
+      - {label: EBITDA, overrides_alias: true}
+      - {label: Adjusted EBITDA, overrides_alias: true}
+      - {label: Free cash flow, overrides_alias: true}
+      - {label: Net debt}

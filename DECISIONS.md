@@ -1165,3 +1165,51 @@ unknown wordings are placed, and one still set aside goes to a person.**
 - **Timing of the validation reports.** The `stmt-*-d66` reports were measured before that last narrowing. The release gate and the
   sealed half were run again after it.
 - **Tests.** `tests/test_statement_assembly.py` (16). 11 fail on the previous code; 5 guard the new rules against their own failure modes.
+
+**D67. An industry ontology, and what testing it on the right filings exposed.**
+- **Asked by Devin**: teach the spreader the language of each industry, as concepts in context, not a longer synonym list.
+- **The ontology.** `config/ontology` holds 11 files and `src/spreader/ontology.py` reads them. Each concept has a family, a destination
+  line, its statement and side, where it applies and where it does not, unit, sign, a part-of relationship, a review requirement and
+  its source. Lease operating, property operating and utility operating expenses share the family `operating_expense` and stay three
+  concepts. The detail survives on the mapping as `concept`, so the template can roll lines up without losing it.
+- **Context, not words.** A concept applies only if the document's own rows show the industry (two different signature terms, or a
+  bank or insurer profile). Disclosure measures (FFO, occupancy, reserves) are recognised and kept off the template. Concepts that
+  disagree on a line place nothing. A revenue concept cannot sit under a cost heading. A part larger than its total goes to a person.
+- **Nothing was granted trust.** `ontology.line` has no calibration yet, so its confidence is 0 and each such placement is reviewed.
+  The profile's aliases still come first. `SPREADER_ONTOLOGY=off` turns the ontology off.
+- **The test had a blind spot.** The key had no tags for a landlord's, producer's or utility's main assets, so nothing could prove those
+  lines. Twenty industry tags were added to the crosswalk, listed after the general ones. Stored keys are unchanged.
+- **New filings.** `eval/vocab`: 179 real filings drawn at random, weighted to energy, utilities and real estate, 90 to tune on and 89
+  sealed. Utilities are now their own industry. The collection was stopped one utility short of its quota.
+- **The biggest finding was not vocabulary.** Utilities showed 45 wrong values with no flag out of 233 with the ontology off. Combined
+  filings hold the full statements of a parent and its subsidiaries, and a subsidiary's add up, so every check passed on the wrong
+  company. `assembly.first_registrant` anchors on the first full balance sheet, which is the parent in the SEC's order, and the
+  statements beside it. It fires on 10 of 208 tuning filings, and the filing gets a blocker naming the choice.
+- **Also fixed.** A unit printed as a table's first row, below the dates ("(millions)" at Dominion), which left the filing unscaled.
+- **Tuning result (90 filings, ontology off with D66's other code -> all of D67).** Right 75.3% -> 80.6%. Wrong with no flag 54 of 1,345 ->
+  13 of 1,378. Blank with no flag 428 -> 389. Utilities right 60.3% -> 77.4%, wrong with no flag 45 -> 4.
+- **Sealed result (87 distinct filings, the previous commit's code -> D67).** Right 79.1% -> 80.3%. Wrong with no flag 20 of 1,585 -> 14 of
+  1,572 (0.9%, likely 0.5-1.5%). Blank with no flag 392 -> 328. Right with no person 17.6% -> 17.5%. Utilities (12) right 72.1% -> 76.6%,
+  wrong with no flag 12 -> 6. Before D67 the seal on these had never been opened. Large companies' silent count went up, from CMS.
+- **Two filings dropped from that result.** Combined filings are one document under several companies. Georgia Power (sealed) is the file
+  of Southern Company (tuning), and Union Electric is the file of Ameren Illinois, also sealed. The first was tuned on, so both are
+  out of the count: 89 became 87. `fetch_wide.py` now refuses a filing already held.
+- **False mappings, against the filer's tags (`scripts/eval_ontology.py`).** Tuning 109 of 116. Sealed 75 of 83 (90.4%, lower bound 82.1%).
+  Most placements are unjudged, because the filer's tag is not in the crosswalk: 214 and 147.
+- **Validation filings (D66 -> D67).** Public 3,432 -> 3,439 right, wrong with no flag 2 -> 2. Banks 945 -> 946, 2 -> 2, blank 103 -> 94.
+  Insurers 1,037 -> 1,045, 0 -> 0, blank 85 -> 78.
+- **Not reached.** Silent errors are 0.9% on this harder set, above the 0.2% goal. Vocabulary alone moved little; the structure of combined
+  filings moved most.
+- **Tests.** `tests/test_ontology.py` (18). `tests/test_statement_assembly.py` gained 4 for combined filings. On the previous code the
+  ontology file cannot import and `first_registrant` does not exist.
+- **Caught on the way.** A Bash heredoc turned the cost-heading rule's `\b` into a control character, so revenue concepts ran unguarded until
+  a new test failed. Every changed file was scanned afterwards.
+
+**D68. The real filings in the app.**
+- **Asked by Devin**: the app showed 7 documents while the tests used hundreds; show them, under real company names, and never the sealed ones.
+- `scripts/load_library.py` loads filings into the app. It leaves out both sealed halves, any file identical to a sealed one, and banks and
+  insurers, because the app spreads everything on one template and theirs would look wrong on the commercial one. Run again, it resumes.
+- **Loaded.** 241 real filings beside the 4 generated samples, none failed, no sealed file among them. Southern Company stays out, because its
+  file is a sealed filing's. A cover page can break a name across lines, so names are put on one line when read.
+- **The list had to change.** It fetched every run's full record on each visit, about 450 KB each. It now has a find box and shows 25 documents
+  a page, fetching only those (`web/src/lib/docList.ts`).

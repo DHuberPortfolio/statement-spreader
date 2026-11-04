@@ -2,6 +2,7 @@
 
     .venv/Scripts/python scripts/fetch_wide.py                # fill the quotas in QUOTAS
     .venv/Scripts/python scripts/fetch_wide.py --scale 4      # four times as many; companies already held stay
+    .venv/Scripts/python scripts/fetch_wide.py --out eval/vocab --seed 67 --quota "energy=40,utilities=30"   # a set of its own
 
 Companies are drawn at random (a fixed seed, so the draw repeats) from the SEC's ticker list, by industry and by size, so
 nobody picks the easy ones. Filings already used anywhere in eval/ are skipped: a company is in one set only. The SEC's
@@ -52,7 +53,9 @@ def sector_of(sic: int) -> str | None:
         return "healthcare"
     if 3570 <= sic <= 3579 or 3660 <= sic <= 3679 or 7370 <= sic <= 7379:
         return "technology"
-    if 1000 <= sic <= 1499 or 2900 <= sic <= 2999 or 4900 <= sic <= 4999:
+    if 4900 <= sic <= 4949:
+        return "utilities"
+    if 1000 <= sic <= 1499 or 2900 <= sic <= 2999 or 4950 <= sic <= 4999:
         return "energy"
     if 4000 <= sic <= 4799:
         return "transportation"
@@ -68,10 +71,17 @@ def sector_of(sic: int) -> str | None:
 def held_ciks() -> set[int]:
     """Every company already in an evaluation set."""
     out: set[int] = set()
-    for path in [ROOT / "eval/sec/manifest.json", ROOT / "eval/coverage/manifest.json", *ROOT.glob("eval/industry/*/manifest.json")]:
+    for path in [ROOT / "eval/sec/manifest.json", ROOT / "eval/coverage/manifest.json", ROOT / "eval/wide/manifest.json",
+                 *ROOT.glob("eval/industry/*/manifest.json")]:
         data = json.loads(path.read_text())
         out |= {int(m["cik"]) for m in data.values() if isinstance(m, dict) and m.get("cik")}
     return out
+
+
+def held_accessions() -> set[str]:
+    """Every filing already in a collected set."""
+    return {m["accession"] for path in ROOT.glob("eval/*/manifest.json") for m in json.loads(path.read_text()).values()
+            if isinstance(m, dict) and m.get("accession")}
 
 
 def get(client: httpx.Client, url: str) -> httpx.Response:
@@ -99,10 +109,10 @@ def split_by_sector(manifest: dict[str, dict[str, Any]]) -> None:
             m.setdefault("split", "dev" if i % 2 == 0 else "sealed")
 
 
-def main(scale: int) -> None:
-    (OUT / "raw").mkdir(parents=True, exist_ok=True)
-    (OUT / "cal").mkdir(parents=True, exist_ok=True)
-    path = OUT / "manifest.json"
+def main(scale: int, out: Path = OUT, seed: int = SEED, quotas: dict[str, int] = QUOTAS) -> None:
+    (out / "raw").mkdir(parents=True, exist_ok=True)
+    (out / "cal").mkdir(parents=True, exist_ok=True)
+    path = out / "manifest.json"
     manifest: dict[str, dict[str, Any]] = json.loads(path.read_text()) if path.exists() else {}
     client = httpx.Client(headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate"}, timeout=60)
     tickers = list(client.get("https://www.sec.gov/files/company_tickers.json").json().values())
@@ -111,15 +121,17 @@ def main(scale: int) -> None:
     third = len(tickers) // 3
     sizes = {t["ticker"]: ("large" if i < third else "mid" if i < 2 * third else "small") for i, t in enumerate(tickers)}
     order = tickers[:]
-    random.Random(SEED).shuffle(order)
-    held, seen = held_ciks(), {int(m["cik"]) for m in manifest.values()}
-    want = {s: n * scale for s, n in QUOTAS.items()}
+    random.Random(seed).shuffle(order)
+    held = held_ciks() - ({int(m["cik"]) for m in manifest.values()} if out == OUT else set())
+    seen = {int(m["cik"]) for m in manifest.values()}
+    want = {s: n * scale for s, n in quotas.items()}
     have: dict[tuple[str, str], int] = {}
-    count = dict.fromkeys(QUOTAS, 0)
+    count = dict.fromkeys(quotas, 0)
     for m in manifest.values():
         count[m["sector"]] += 1
         have[(m["sector"], m["size"])] = have.get((m["sector"], m["size"]), 0) + 1
     failures: list[str] = []
+    accessions = held_accessions() | {m["accession"] for m in manifest.values()}
     done = len(manifest)
     for t in order:
         if all(count[s] >= want[s] for s in want):
@@ -136,7 +148,7 @@ def main(scale: int) -> None:
         sector = sector_of(int(sub.get("sic") or 0))
         size = sizes[t["ticker"]]
         # No size may take more than half an industry's places, or small companies would crowd out the rest.
-        if sector is None or count[sector] >= want[sector] or have.get((sector, size), 0) * 2 >= want[sector]:
+        if sector not in want or count[sector] >= want[sector] or have.get((sector, size), 0) * 2 >= want[sector]:
             continue
         rec = sub["filings"]["recent"]
         form = "10-Q" if done % QUARTERLY_EVERY == QUARTERLY_EVERY - 1 else "10-K"
@@ -148,6 +160,10 @@ def main(scale: int) -> None:
             failures.append(f"{t['ticker']}: no recent inline XBRL filing")
             continue
         acc, doc = rec["accessionNumber"][pick], rec["primaryDocument"][pick]
+        if acc in accessions:  # a combined filing is one document under several companies: it must not land on both sides of a seal
+            failures.append(f"{t['ticker']}: same combined filing as a company already held")
+            continue
+        accessions.add(acc)
         url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/{doc}"
         r = get(client, url)
         if r.status_code != 200:
@@ -155,14 +171,14 @@ def main(scale: int) -> None:
             continue
         key = re.sub(r"[^A-Za-z0-9]", "_", t["ticker"])
         name = f"{key}-{acc}.htm"
-        (OUT / "raw" / name).write_bytes(r.content)
+        (out / "raw" / name).write_bytes(r.content)
         entry = {"ticker": t["ticker"], "company": sub.get("name"), "cik": cik, "sic": int(sub["sic"]), "sic_description": sub.get("sicDescription"),
                  "sector": sector, "size": size, "profile": PROFILES.get(sector, "us-commercial"), "form": form, "accession": acc,
                  "filed": rec["filingDate"][pick], "period": rec["reportDate"][pick], "url": url, "file": name,
                  "sha256": hashlib.sha256(r.content).hexdigest()}
         content, where = calc_linkbase(client, cik, acc)
         if content is not None:
-            (OUT / "cal" / f"{key}_cal.xml").write_bytes(content)
+            (out / "cal" / f"{key}_cal.xml").write_bytes(content)
             entry["cal"] = {"file": f"{key}_cal.xml", "url": where, "sha256": hashlib.sha256(content).hexdigest()}
         else:
             failures.append(f"{t['ticker']}: no calculation links ({where})")
@@ -175,11 +191,16 @@ def main(scale: int) -> None:
         path.write_text(json.dumps(manifest, indent=1, sort_keys=True))
     split_by_sector(manifest)
     path.write_text(json.dumps(manifest, indent=1, sort_keys=True))
-    (OUT / "collection-log.txt").write_text("\n".join(failures) + "\n")
-    print(f"{len(manifest)} filings; {len(failures)} companies or links not used (eval/wide/collection-log.txt)")
+    (out / "collection-log.txt").write_text("\n".join(failures) + "\n")
+    print(f"{len(manifest)} filings; {len(failures)} companies or links not used (collection-log.txt)")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--scale", type=int, default=1)
-    sys.exit(main(ap.parse_args().scale))
+    ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--seed", type=int, default=SEED)
+    ap.add_argument("--quota", default="", help="sector=count,sector=count; the default is QUOTAS")
+    a = ap.parse_args()
+    q = {k.strip(): int(v) for k, v in (p.split("=") for p in a.quota.split(",") if p)} or QUOTAS
+    sys.exit(main(a.scale, Path(a.out).resolve(), a.seed, q))

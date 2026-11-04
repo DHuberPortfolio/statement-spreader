@@ -1,0 +1,59 @@
+# Manufacturing and industrial. Costing terms are mostly notes, not statement rows, so they are recognised and left off the template.
+industry: manufacturing
+title: Manufacturing and industrial
+groups:
+  - family: inventory
+    statement: balance_sheet
+    side: asset
+    destination: inventory
+    source: "ASC 330; Devin's term list 2026-11-04"
+    concepts:
+      - {id: raw_materials_inventory, label: Raw materials inventory, signature: true, synonyms: ["raw materials", "raw materials and supplies", "raw material"], sections: ["*inventor*", "current assets"]}
+      - {id: work_in_process_inventory, label: Work-in-process inventory, signature: true, synonyms: ["work in process", "work in progress"], sections: ["*inventor*", "current assets"]}
+      - {id: finished_goods_inventory, label: Finished goods inventory, signature: true, synonyms: ["finished goods", "finished products"], sections: ["*inventor*", "current assets"]}
+      - {id: inventory_obsolescence_reserve, label: Inventory obsolescence reserve, sign: contra, synonyms: ["reserve for obsolescence*", "inventory reserves"]}
+
+  - family: fixed_assets
+    statement: balance_sheet
+    side: asset
+    destination: ppe_net
+    source: "ASC 360; Devin's term list 2026-11-04"
+    concepts:
+      - {id: production_equipment, label: Production equipment}
+      - {id: machinery_and_equipment, label: Machinery and equipment, synonyms: ["machinery equipment*"]}
+      - {id: plant_and_equipment, label: Plant and equipment}
+
+  - family: cost_of_production
+    statement: income_statement
+    destination: cogs
+    sign: positive
+    source: "ASC 330; Devin's term list 2026-11-04"
+    concepts:
+      - {id: cost_of_goods_manufactured, label: Cost of goods manufactured}
+      - {id: cost_of_goods_sold, label: Cost of goods sold}
+      - {id: direct_labor, label: Direct labor}
+      - {id: direct_materials, label: Direct materials}
+      - {id: manufacturing_overhead, label: Manufacturing overhead}
+      - {id: factory_depreciation, label: Factory depreciation}
+      - {id: inventory_write_downs, label: Inventory write-downs, in_cash_flow: cf_other_noncash, synonyms: ["inventory write down*", "write down of inventor*", "write downs of inventor*", "inventory impairment*"], review: always}
+      - {id: scrap_and_waste, label: Scrap and waste}
+      - {id: freight_in_costs, label: Freight-in costs}
+      - {id: capitalized_production_costs, label: Capitalized production costs}
+      - {id: production_variances, label: Production variances}
+
+  - family: warranty
+    source: "ASC 460; Devin's term list 2026-11-04"
+    concepts:
+      - {id: warranty_reserves, label: Warranty reserves, statement: balance_sheet, side: liability, current: other_current_liabilities, noncurrent: other_noncurrent_liabilities, synonyms: ["warranty reserve*", "accrued warranty*", "product warranty*", "warranty liabilit*", "warranty obligations*"]}
+      - {id: warranty_expense, label: Warranty expense, statement: income_statement, destination: other_opex}
+      - {id: freight_out_costs, label: Freight-out costs, statement: income_statement, destination: sga}
+      - {id: supplier_rebates, label: Supplier rebates, statement: income_statement, role: disclosure}
+
+  - family: production_measure
+    role: disclosure
+    statement: any
+    source: "Devin's term list 2026-11-04"
+    concepts:
+      - {id: purchase_commitments, label: Purchase commitments, statement: any, unit: currency}
+      - {id: capacity_utilization, label: Capacity utilization, unit: percent}
+      - {id: absorption_costing, label: Absorption costing, unit: text}

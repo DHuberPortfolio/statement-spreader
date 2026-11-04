@@ -90,8 +90,14 @@ def build_statement(table: RawTable, layout: Layout, statement: StatementType, d
         else:
             seen[p.key] = i
 
+    # A unit can be a table's first row, below the dates ("(millions)" at Dominion): the rows before the first number count.
+    lead: list[str] = []
+    for lo in layout.rows[:4]:
+        if lo.values:
+            break
+        lead.append(" ".join(t.text for t in lo.row.tokens))
     texts = [layout.title_text + " " + layout.header_label_text,
-             " ".join(" ".join(t.text for t in r.tokens) for r in layout.header_rows),
+             " ".join(" ".join(t.text for t in r.tokens) for r in layout.header_rows) + " " + " | ".join(lead),
              table.context[-400:], table.context]
     scale, share_scale = detect_scale(texts)
 

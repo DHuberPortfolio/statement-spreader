@@ -51,6 +51,7 @@ from .contracts import (
     ValueStatus,
 )
 from .ingest import IngestError, doc_id_for, read_document, sniff_format
+from .ontology import fingerprint as ontology_fingerprint
 from .learning import approval_outcomes, remap_outcome
 from .mapping import MemoryKey
 from .pipeline import spread_document
@@ -232,7 +233,7 @@ class Service:
 
     def idempotency_key(self, doc_id: str) -> str:
         ctx = self.company_context(doc_id)
-        parts = [doc_id, self.profile.id, f"{self.profile.version}+{self.profile.content_hash}",
+        parts = [doc_id, self.profile.id, f"{self.profile.version}+{self.profile.content_hash}", ontology_fingerprint(),
                  str(self.store.memory_version(self.profile.id)), self.model_id, ENGINE_VERSION,
                  # a live model's prompt includes earlier rulings (D55): new rulings can change its answers
                  self.examples.version() if getattr(self.model, "examples", None) is not None else "",
