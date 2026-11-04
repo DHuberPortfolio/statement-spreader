@@ -4,7 +4,7 @@ import { api, ApiError, uploadDocument } from "../api/client";
 import type { DocumentRow, RunSummary } from "../api/types";
 import { Glyph } from "../components/Markers";
 import { EmptyState, ErrorState, InlineMessage, Loading } from "../components/States";
-import { pageOfDocuments } from "../lib/docList";
+import { pageOfDocuments, DOCS_PER_PAGE, type DocFilter } from "../lib/docList";
 import { formatBytes, formatDateTime } from "../lib/format";
 import { Link, navigate } from "../lib/router";
 import { flash } from "../lib/store";
@@ -267,7 +267,9 @@ export function DocumentsPage({ view }: { view: "list" | "add" }) {
   const docs = useApi(() => api.documents(), []);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  const shown = useMemo(() => pageOfDocuments(docs.data ?? [], query, page), [docs.data, query, page]);
+  const [filter, setFilter] = useState<DocFilter>("all");
+  const shown = useMemo(() => pageOfDocuments(docs.data ?? [], query, page, DOCS_PER_PAGE, filter), [docs.data, query, page, filter]);
+  const completed = docs.data?.filter((d) => d.approved).length ?? 0;
   const summaries = useRunSummaries(docs.data ? shown.rows : null);
 
   return (
@@ -295,7 +297,7 @@ export function DocumentsPage({ view }: { view: "list" | "add" }) {
         <h2 id="doc-list-title" className="section-title">
           Spread documents
         </h2>
-        {docs.data && docs.data.some((d) => d.origin === "generated") && (
+        {docs.data && docs.data.some((d) => d.origin === "generated") && docs.data.some((d) => d.origin === "sec") && (
           <p className="muted small doc-origin-note">
             {docs.data.filter((d) => d.origin === "sec").length} real SEC filings and{" "}
             {docs.data.filter((d) => d.origin === "generated").length} documents generated to prove concept.
@@ -322,6 +324,22 @@ export function DocumentsPage({ view }: { view: "list" | "add" }) {
         )}
         {docs.data && docs.data.length > 0 && (
           <div className="doc-find">
+            <div className="segmented" role="group" aria-label="Show">
+              {([["all", `All (${docs.data.length})`], ["in_review", `In review (${docs.data.length - completed})`], ["completed", `Completed (${completed})`]] as [DocFilter, string][]).map(([key, text]) => (
+                <button
+                  key={key}
+                  type="button"
+                  className={filter === key ? "is-on" : ""}
+                  aria-pressed={filter === key}
+                  onClick={() => {
+                    setFilter(key);
+                    setPage(1);
+                  }}
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
             <input
               type="search"
               aria-label="Find a company or filing"

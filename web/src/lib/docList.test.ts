@@ -23,6 +23,13 @@ describe("pageOfDocuments", () => {
     expect(pageOfDocuments(many, "Company 59", 3).page).toBe(1);
   });
 
+  it("separates completed work from work in review", () => {
+    const docs = [{ ...doc("Done"), approved: true }, doc("Waiting")] as DocumentRow[];
+    expect(pageOfDocuments(docs, "", 1, 25, "completed").rows.map((d) => d.company_name)).toEqual(["Done"]);
+    expect(pageOfDocuments(docs, "", 1, 25, "in_review").rows.map((d) => d.company_name)).toEqual(["Waiting"]);
+    expect(pageOfDocuments(docs, "", 1, 25, "all").matches).toBe(2);
+  });
+
   it("says when nothing matches", () => {
     expect(pageOfDocuments(many, "no such company", 1)).toMatchObject({ rows: [], matches: 0, pages: 1 });
   });

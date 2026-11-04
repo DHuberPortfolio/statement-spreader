@@ -6,6 +6,7 @@ import { Link, navigate, useLocation } from "../lib/router";
 import { endActiveSession } from "../lib/session";
 import { flash, useFlash, useSession } from "../lib/store";
 import { useTimer } from "../lib/timer";
+import { useSimulated } from "../lib/simulated";
 import { InlineMessage } from "./States";
 
 function UserBadge() {
@@ -246,6 +247,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
           <span className="topbar-note">Local prototype · public and synthetic data only</span>
           <UserBadge />
         </header>
+        <SimulatedBanner />
         <SessionBanner />
         <FlashArea />
         <main id="main" className={wide ? "main main-wide" : "main"} tabIndex={-1}>
@@ -254,5 +256,15 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
         </main>
       </div>
     </div>
+  );
+}
+
+/** A workspace of made-up work says so on every page: its time and money figures are not measurements (D69). */
+function SimulatedBanner() {
+  if (!useSimulated()) return null;
+  return (
+    <p className="sim-banner" role="note">
+      <strong>Simulated workspace.</strong> Two weeks of made-up work by demo analysts on fictional companies. No time, cost or accuracy figure from this work is a measurement.
+    </p>
   );
 }

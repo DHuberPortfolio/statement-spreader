@@ -2732,3 +2732,5 @@ input[type="file"]::file-selector-button:hover {
 .doc-find { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; flex-wrap: wrap; }
 .doc-find input { flex: 1 1 260px; max-width: 420px; }
 .doc-pager { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; }
+
+.sim-banner { margin: 0; padding: 10px 24px; background: #fef3c7; color: #713f12; border-bottom: 1px solid #f59e0b; font-size: 0.9rem; }

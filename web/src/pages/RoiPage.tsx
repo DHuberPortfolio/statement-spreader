@@ -9,6 +9,7 @@ import { formatDateTime, formatDuration, formatNumber } from "../lib/format";
 import { Link, navigate } from "../lib/router";
 import { setSession, useSession } from "../lib/store";
 import { useApi } from "../lib/useApi";
+import { useSimulated } from "../lib/simulated";
 import { FinopsRoiSection } from "./FinopsRoi";
 
 // ---- labels ----
@@ -32,6 +33,14 @@ export const LABEL_WORDS: Record<RoiLabel, string> = {
 };
 
 export function LabelBadge({ label }: { label: RoiLabel }) {
+  const simulated = useSimulated();
+  if (simulated && (label === "observed" || label === "estimated" || label === "hypothetical")) {
+    return (
+      <span className="roi-label roi-label-default" title="Worked out from made-up work in a simulated workspace. Not a measurement.">
+        Simulated
+      </span>
+    );
+  }
   return (
     <span className={`roi-label roi-label-${label}`} title={LABELS[label]}>
       {LABEL_WORDS[label]}

@@ -106,7 +106,7 @@ export async function sendJson<T>(path: string, method: "POST" | "PUT", body: un
 // ---- endpoints ----
 
 export const api = {
-  health: () => getJson<{ ok: boolean; version: string; profile: string; model: string }>("/api/health"),
+  health: () => getJson<{ ok: boolean; version: string; profile: string; model: string; simulated: string | null }>("/api/health"),
   profile: () => getJson<Profile>("/api/profile"),
   documents: () => getJson<DocumentRow[]>("/api/documents"),
   companies: () => getJson<CompanyRow[]>("/api/companies"),

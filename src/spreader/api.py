@@ -223,7 +223,9 @@ def learning_report() -> dict[str, Any]:
 @app.get("/api/health")
 def health() -> dict[str, Any]:
     svc = service()
-    return {"ok": True, "version": __version__, "profile": f"{svc.profile.id} {svc.profile.version}", "model": svc.model_id}
+    simulated = svc.store.query("SELECT value FROM meta WHERE key='simulated'")
+    return {"ok": True, "version": __version__, "profile": f"{svc.profile.id} {svc.profile.version}", "model": svc.model_id,
+            "simulated": simulated[0]["value"] if simulated else None}
 
 
 @app.get("/api/profile")

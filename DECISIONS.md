@@ -1213,3 +1213,17 @@ unknown wordings are placed, and one still set aside goes to a person.**
   file is a sealed filing's. A cover page can break a name across lines, so names are put on one line when read.
 - **The list had to change.** It fetched every run's full record on each visit, about 450 KB each. It now has a find box and shows 25 documents
   a page, fetching only those (`web/src/lib/docList.ts`).
+
+**D69. A simulated workspace: the platform after two weeks of work. For display only.**
+- **Asked by Devin**: show what the platform looks like once analysts have worked in it for about two weeks, with work marked complete.
+- `scripts/simulate_two_weeks.py` fills a new data folder (`var/two-weeks`, git-ignored). 48 fictional companies are spread by the real pipeline and
+  reviewed and approved by the demo users through the real services over ten working days, and 8 are left in review. Reconciliations, invoices, a
+  data load and a workbook are worked through the same way, with a little left open.
+- **Why a real run and not rows written by hand.** The app's two clock functions read a simulated clock, in a new folder, so the audit chain is valid
+  (`verify_chain` passes), with no history edited afterwards. The script refuses a folder that already exists, so it cannot touch real data.
+- **Marked in the data.** `meta.simulated` makes the app show a banner on every page, and Time saved says Simulated, not Measured. Review minutes are drawn at
+  random, so these figures must not be quoted as results. The real workspace (`var/demo`) and its measured results are untouched.
+- **Names.** None of the 48 shares its first word with a company on the SEC's list (10,409 names). Private companies were not checked, so search any name before
+  it appears outside a demo.
+- **Bank changes.** The platform refuses to explain away changed bank details, so the simulated reviewer rejects those invoices, as a careful one would.
+- **The statements list** gained All, In review and Completed filters. The simulated statements read perfectly, so they show no corrected values.
