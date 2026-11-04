@@ -19,5 +19,7 @@ dev_users:
   - {username: ari, name: Ari, roles: [approver]}
   - {username: aud, name: Aud, roles: [auditor]}
   - {username: adm, name: Adm, roles: [admin]}
+  - {username: mia, name: Mia, roles: [manager]}
+  - {username: both, name: Both, roles: [analyst, manager]}
   - {username: vic, name: Vic, roles: [viewer]}
   - {username: nobody, name: Nobody, roles: []}

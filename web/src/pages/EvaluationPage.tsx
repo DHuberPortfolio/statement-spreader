@@ -1,253 +1,110 @@
-import { useState } from "react";
+// Accuracy for the people who rely on the numbers: what was tested, what slipped through, what was caught.
+// The raw reports and every statistic live in the technical area (TechnicalPage).
+
 import { api } from "../api/client";
-import type { EvalReport, Rate } from "../api/types";
+import type { EvalBatch, EvalGroup, Rate, WideResult, WideSummary } from "../api/types";
 import { Layout } from "../components/Layout";
 import { EmptyState, ErrorState, Loading } from "../components/States";
 import { formatNumber } from "../lib/format";
+import { Link } from "../lib/router";
 import { useApi } from "../lib/useApi";
 
-const RATE_INFO: Record<string, { label: string; good: "low" | "high"; explain: string }> = {
-  silent_error_rate: {
-    label: "Silent error rate",
-    good: "low",
-    explain: "Wrong values with no review item, out of all values that would go out without review.",
-  },
-  accuracy: { label: "Values right", good: "high", explain: "Spread values that match the answer key, out of every value in the answer keys." },
-  silent_omission_rate: {
-    label: "Silent omissions",
-    good: "low",
-    explain: "Answer-key values missing from the spread with nothing flagging the gap.",
-  },
-  review_rate: { label: "Sent to review", good: "low", explain: "Values present in the spread that a person is asked to look at." },
-  catch_rate: { label: "Wrong values caught", good: "high", explain: "Wrong values that review items do flag, out of all wrong values." },
-  unnecessary_review_rate: {
-    label: "Right values sent to review",
-    good: "low",
-    explain: "Correct values that were flagged anyway (review effort spent on nothing).",
-  },
-  coverage: { label: "Coverage", good: "high", explain: "Answer-key values present in the spread at all." },
-};
-const RATE_ORDER = ["silent_error_rate", "accuracy", "catch_rate", "silent_omission_rate", "review_rate", "unnecessary_review_rate", "coverage"];
+const count = (x: number | null | undefined) => formatNumber(x ?? 0);
+const pct = (x: number | null | undefined, d = 1) => (x == null ? "" : formatNumber(x * 100, { decimals: d, suffix: "%", parens: false }));
 
-const BUCKETS: { key: string; label: string; explain: string; tone: "ok" | "warn" | "bad" | "muted" }[] = [
-  { key: "correct_auto", label: "Right, auto-accepted", explain: "Right and nothing flagged it.", tone: "ok" },
-  { key: "correct_review", label: "Right, sent to review", explain: "Right, but a person was asked to look.", tone: "muted" },
-  { key: "wrong_review", label: "Wrong, caught", explain: "Wrong, and a review item makes a person look before it is used.", tone: "warn" },
-  { key: "wrong_auto", label: "Wrong, silent", explain: "Wrong and nothing says so: the silent errors.", tone: "bad" },
-  { key: "missing_flagged", label: "Missing, flagged", explain: "Absent, and the run says rows were left unplaced or a check failed.", tone: "warn" },
-  { key: "missing_silent", label: "Missing, silent", explain: "Absent and nothing says so.", tone: "bad" },
-];
+function useSummary() {
+  return useApi(() => api.evaluationSummary(), []);
+}
 
-const SHOWN_FIRST = 6;
-
-const pct = (x: number | null | undefined, d = 1) => (x == null ? "" : formatNumber(x * 100, { decimals: d, suffix: "%" }));
-
-function IntervalBar({ rate }: { rate: Rate }) {
-  if (rate.rate == null) return null;
-  const lo = (rate.low ?? rate.rate) * 100;
-  const hi = (rate.high ?? rate.rate) * 100;
+function Figure({ value, label, tone }: { value: string; label: string; tone?: "bad" | "ok" }) {
   return (
-    <span className="interval" aria-hidden="true">
-      <span className="interval-range" style={{ left: `${lo}%`, width: `${Math.max(0.6, hi - lo)}%` }} />
-      <span className="interval-point" style={{ left: `${rate.rate * 100}%` }} />
-    </span>
+    <div className="acc-figure">
+      <span className={`num acc-figure-value ${tone ? `acc-${tone}` : ""}`}>{value}</span>
+      <span className="small muted">{label}</span>
+    </div>
   );
 }
 
-function ReportView({ r }: { r: EvalReport }) {
-  const silent = r.rates.silent_error_rate;
-  const totalBuckets = Object.values(r.buckets ?? {}).reduce((a, b) => a + b, 0);
-  const kinds = Object.entries(r.error_kinds ?? {}).sort((a, b) => b[1] - a[1]);
-  const maxKind = Math.max(1, ...kinds.map(([, n]) => n));
+function SlippedThrough({ rate }: { rate: Rate | undefined }) {
+  if (!rate || rate.rate == null) return null;
   return (
-    <article className="eval-report" aria-labelledby={`ev-${r.file}`}>
-      <header className="eval-head">
-        <h2 id={`ev-${r.file}`}>
-          {r.name} <span className="muted small">({r.file})</span>
-        </h2>
-        <p className="small muted">
-          {r.documents} documents{r.crashed ? `, ${r.crashed} crashed` : ""} · profile {r.profile}
-          {r.seconds != null && ` · ${formatNumber(r.seconds, { decimals: 1 })} s`}
-        </p>
-      </header>
+    <p className="acc-headline">
+      <span className={`num acc-big ${rate.n ? "acc-bad" : "acc-ok"}`}>
+        {count(rate.n)} of {count(rate.d)}
+      </span>
+      <span>
+        numbers that went through with no one looking were wrong ({pct(rate.rate)}).
+        <span className="small muted block">Could be as high as {pct(rate.high)}: this is a sample.</span>
+      </span>
+    </p>
+  );
+}
 
-      {silent && silent.rate != null && (
-        <div className="silent-callout">
-          <div className="silent-figure">
-            <span className="num big">{pct(silent.rate)}</span>
-            <span className="small">silent error rate</span>
-          </div>
-          <div>
-            <p>
-              Of the <strong className="num">{formatNumber(silent.d)}</strong> values that would have gone out <em>without anyone looking</em> (no
-              review item on them), <strong className="num">{formatNumber(silent.n)}</strong> were wrong. That is the number that matters most:
-              those are the errors a reviewer has no reason to catch.
-            </p>
-            <p className="small muted">
-              Likely between {pct(silent.low)} and {pct(silent.high)} (95% Wilson interval). Measured on this evaluation set, not on your
-              organisation's documents.
-            </p>
-          </div>
-        </div>
-      )}
-
-      <div className="grid-scroll">
-        <table className="data-table eval-table">
-          <thead>
-            <tr>
-              <th scope="col">Measure</th>
-              <th scope="col" className="num">
-                Value
-              </th>
-              <th scope="col" className="interval-col">
-                Likely range (0–100%)
-              </th>
-              <th scope="col" className="num">
-                Count
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {RATE_ORDER.filter((k) => r.rates[k]).map((k) => {
-              const rate = r.rates[k]!;
-              const info = RATE_INFO[k];
-              return (
-                <tr key={k} className={k === "silent_error_rate" ? "is-key" : ""}>
-                  <th scope="row">
-                    {info?.label ?? k}
-                    <span className="small muted block">
-                      {info?.explain} {info && <>({info.good === "low" ? "lower is better" : "higher is better"})</>}
-                    </span>
-                  </th>
-                  <td className="num strong">{rate.rate == null ? "not measured" : pct(rate.rate)}</td>
-                  <td className="interval-col">
-                    <IntervalBar rate={rate} />
-                    {rate.rate != null && (
-                      <span className="small muted num">
-                        {pct(rate.low)} – {pct(rate.high)}
-                      </span>
-                    )}
-                  </td>
-                  <td className="num small">
-                    {formatNumber(rate.n)} of {formatNumber(rate.d)}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+function GroupCard({ g }: { g: EvalGroup }) {
+  const b: EvalBatch | undefined = g.holdout ?? g.dev;
+  if (!b) return null;
+  const buckets = b.buckets ?? {};
+  const caught = b.rates.catch_rate;
+  return (
+    <article className="acc-card" aria-label={g.title}>
+      <h2>{g.title}</h2>
+      <p className="small muted">{count(b.documents)} filings.</p>
+      <SlippedThrough rate={b.rates.silent_error_rate} />
+      <div className="acc-figures">
+        <Figure value={pct(b.rates.accuracy?.rate, 0)} label="of all numbers came out right" />
+        <Figure value={caught ? `${count(caught.n)} of ${count(caught.d)}` : ""} label="wrong numbers were caught for review" />
+        <Figure value={count(b.rates.review_rate?.n)} label="numbers sent to a person" />
+        <Figure value={count(buckets.missing_silent)} label="numbers left blank with no flag" tone={buckets.missing_silent ? "bad" : "ok"} />
       </div>
-
-      {r.buckets && totalBuckets > 0 && (
-        <section aria-label="Where every answer-key value ended up" className="buckets">
-          <h3 className="subsection-title">Where every answer-key value ended up</h3>
-          <div className="bucket-bar" aria-hidden="true">
-            {BUCKETS.map((b) => {
-              const n = r.buckets?.[b.key] ?? 0;
-              return n ? <span key={b.key} className={`bucket-seg tone-${b.tone}`} style={{ width: `${(n / totalBuckets) * 100}%` }} title={`${b.label}: ${n}`} /> : null;
-            })}
-          </div>
-          <table className="data-table compact">
-            <tbody>
-              {BUCKETS.map((b) => (
-                <tr key={b.key}>
-                  <th scope="row">
-                    <span className={`swatch tone-${b.tone}`} aria-hidden="true" /> {b.label}
-                    <span className="small muted block">{b.explain}</span>
-                  </th>
-                  <td className="num">{formatNumber(r.buckets?.[b.key] ?? 0)}</td>
-                  <td className="num small muted">{pct((r.buckets?.[b.key] ?? 0) / totalBuckets)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      )}
-
-      {kinds.length > 0 && (
-        <section aria-label="Wrong values by kind" className="kinds">
-          <h3 className="subsection-title">Wrong values by kind</h3>
-          <p className="small muted">Each kind has a different fix: value or mapping, sign, scale (off by a power of ten), period (another period's value).</p>
-          <table className="data-table compact">
-            <tbody>
-              {kinds.map(([k, n]) => (
-                <tr key={k}>
-                  <th scope="row">{k}</th>
-                  <td className="num">{formatNumber(n)}</td>
-                  <td className="bar-cell">
-                    <span className="hbar" style={{ width: `${(n / maxKind) * 100}%` }} aria-hidden="true" />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      )}
     </article>
   );
 }
 
-const ENGINE_NAMES: Record<string, string> = {
-  statements: "Statement rows placed on a line",
-  units: "Statement units (thousands, millions)",
-  recon: "Reconciliation matches (recorded, not yet learned from)",
-};
-
-/** What reviewers' decisions have recorded so far: the outcomes calibration learns from (DECISIONS D40). */
-function LearningSection() {
-  const o = useApi(() => api.outcomes(), []);
-  const engines = Object.entries(o.data?.engines ?? {});
+function WideRow({ name, s }: { name: string; s: WideSummary }) {
   return (
-    <section aria-labelledby="learning-title">
-      <h2 id="learning-title" className="section-title">
-        What reviewers have taught it
-      </h2>
-      <p className="muted">
-        Every approval, remap and match decision is written down as evidence about the rule that made the call. When the
-        rules are re-measured, this evidence counts alongside the answer keys, so a rule earns or loses automatic
-        acceptance from your own reviewers' decisions.
+    <tr>
+      <th scope="row">{name}</th>
+      <td className="num">{count(s.filings)}</td>
+      <td className="num">{pct(s.right, 0)}</td>
+      <td className="num">{count(s.silent_wrong[0])} of {count(s.silent_wrong[1])}</td>
+      <td className="num">{count(s.blank_unflagged[0])}</td>
+    </tr>
+  );
+}
+
+function WideTable({ wide }: { wide: WideResult }) {
+  const title = (k: string) => k.charAt(0).toUpperCase() + k.slice(1);
+  return (
+    <section aria-labelledby="wide-title">
+      <h2 id="wide-title" className="section-title">Unseen test: real companies drawn at random</h2>
+      <p className="small muted">
+        Companies of every size and industry, drawn at random from the SEC's list and kept out of tuning. This set was opened more than once while a bug was fixed, so it is close to unseen, not perfectly unseen.
       </p>
-      {o.error && <ErrorState error={o.error} onRetry={o.reload} />}
-      {o.data && engines.length === 0 && (
-        <EmptyState title="No reviewer decisions recorded yet">
-          <p>Approve a spread or decide a match, and its evidence appears here.</p>
-        </EmptyState>
-      )}
-      {engines.length > 0 && (
-        <div className="grid-scroll">
-          <table className="data-table learning-table">
-            <thead>
-              <tr>
-                <th scope="col">Rule</th>
-                <th scope="col">What it decides</th>
-                <th scope="col" className="num">Right</th>
-                <th scope="col" className="num">Wrong</th>
-              </tr>
-            </thead>
-            <tbody>
-              {engines.flatMap(([engine, e]) =>
-                Object.entries(e.methods).map(([method, c]) => (
-                  <tr key={`${engine}:${method}`}>
-                    <td>{method}</td>
-                    <td>{ENGINE_NAMES[engine] ?? engine}</td>
-                    <td className="num">{c.right ?? 0}</td>
-                    <td className="num">{c.wrong ? <span className="count-bad">{c.wrong}</span> : 0}</td>
-                  </tr>
-                )),
-              )}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {o.data && <p className="muted small">Kept in {o.data.folder}.</p>}
+      <div className="grid-scroll">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Group</th>
+              <th scope="col" className="num">Filings</th>
+              <th scope="col" className="num">Right</th>
+              <th scope="col" className="num">Wrong with no flag</th>
+              <th scope="col" className="num">Blank with no flag</th>
+            </tr>
+          </thead>
+          <tbody>
+            <WideRow name="All filings" s={wide.all} />
+            {Object.entries(wide.by_sector).map(([k, s]) => <WideRow key={k} name={title(k)} s={s} />)}
+            {Object.entries(wide.by_form).map(([k, s]) => <WideRow key={k} name={k} s={s} />)}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }
 
 export function EvaluationPage() {
-  const ev = useApi(() => api.evaluation(), []);
-  const [all, setAll] = useState(false);
-  const reports = ev.data?.reports ?? [];
+  const s = useSummary();
+  const groups = s.data?.groups ?? [];
   return (
     <Layout>
       <div className="page page-eval">
@@ -255,27 +112,175 @@ export function EvaluationPage() {
           <p className="eyebrow">Results</p>
           <h1>Accuracy</h1>
           <p className="lede">
-            How often each part is right, measured against answer keys: for SEC filings, the filings' own inline XBRL
-            tags; for synthetic statements, the values they were generated from. Every rate comes with the range it likely
-            falls in; a small sample gives a wide range.
+            Every number the platform spreads is compared with the answer in the company's own filing. The figure to watch is the wrong
+            numbers no one was asked to look at.
           </p>
         </header>
-        <LearningSection />
-        <h2 className="section-title">Evaluation reports</h2>
-        {ev.loading && !ev.data && <Loading label="Loading evaluation reports" />}
-        {ev.error && <ErrorState error={ev.error} onRetry={ev.reload} />}
-        {ev.data && ev.data.reports.length === 0 && (
-          <EmptyState title="No evaluation reports yet">
-            <p>
-              Run <code>.venv/Scripts/python scripts/run_eval.py</code>; reports are saved in <code>eval/reports/</code>.
-            </p>
+        {s.loading && !s.data && <Loading label="Loading results" />}
+        {s.error && <ErrorState error={s.error} onRetry={s.reload} />}
+        {s.data && groups.length === 0 && (
+          <EmptyState title="No test results yet">
+            <p>Results appear here after the platform has been tested.</p>
           </EmptyState>
         )}
-        {(all ? reports : reports.slice(0, SHOWN_FIRST)).map((r) => <ReportView key={r.file} r={r} />)}
-        {!all && reports.length > SHOWN_FIRST && (
-          <button type="button" className="btn" onClick={() => setAll(true)}>
-            Show {reports.length - SHOWN_FIRST} older reports
-          </button>
+        {s.data?.wide && <WideTable wide={s.data.wide} />}
+        <h2 className="section-title">Validation filings</h2>
+        <p className="small muted">
+          Kept apart from tuning, but failures found here have been studied and fixed, so these are a regression check, not an unseen test.
+        </p>
+        <div className="acc-grid">
+          {groups.map((g) => <GroupCard key={g.key} g={g} />)}
+        </div>
+        <p className="small muted">
+          Measured on public filings, not on your organisation's documents. A company with last year's spread on file gets more
+          numbers confirmed.
+        </p>
+        <nav className="link-tiles" aria-label="More on accuracy">
+          <Link to="/evaluation/errors" className="link-tile">
+            <strong>Types of error</strong>
+            <span className="small muted">What went wrong and where every number ended up.</span>
+          </Link>
+          <Link to="/evaluation/reviewers" className="link-tile">
+            <strong>Reviewer decisions</strong>
+            <span className="small muted">What your team's approvals and corrections have recorded.</span>
+          </Link>
+          <Link to="/technical" className="link-tile">
+            <strong>Full test reports</strong>
+            <span className="small muted">Every report and statistic, for engineers and data scientists.</span>
+          </Link>
+        </nav>
+      </div>
+    </Layout>
+  );
+}
+
+const KIND_NAMES: Record<string, { label: string; explain: string }> = {
+  value: { label: "Wrong amount or wrong line", explain: "The number does not match the filing, or sits on the wrong line." },
+  sign: { label: "Wrong sign", explain: "Positive where the filing is negative, or the other way round." },
+  scale: { label: "Wrong scale", explain: "Off by thousands or millions." },
+  period: { label: "Wrong period", explain: "The number belongs to another year or quarter." },
+};
+
+const OUTCOMES: { key: string; label: string; tone: "ok" | "warn" | "bad" | "muted" }[] = [
+  { key: "correct_auto", label: "Right, went straight through", tone: "ok" },
+  { key: "correct_review", label: "Right, a person checks it", tone: "muted" },
+  { key: "wrong_review", label: "Wrong, caught for review", tone: "warn" },
+  { key: "wrong_auto", label: "Wrong, not flagged", tone: "bad" },
+  { key: "missing_flagged", label: "Blank, flagged", tone: "warn" },
+  { key: "missing_silent", label: "Blank, not flagged", tone: "bad" },
+];
+
+function ErrorCard({ g }: { g: EvalGroup }) {
+  const b = g.holdout ?? g.dev;
+  if (!b) return null;
+  const total = OUTCOMES.reduce((n, o) => n + (b.buckets?.[o.key] ?? 0), 0);
+  const kinds = Object.entries(b.error_kinds ?? {}).sort((x, y) => y[1] - x[1]);
+  return (
+    <article className="acc-card" aria-label={g.title}>
+      <h2>{g.title}</h2>
+      <h3 className="subsection-title">Where every number ended up</h3>
+      <div className="bucket-bar" aria-hidden="true">
+        {OUTCOMES.map((o) => {
+          const n = b.buckets?.[o.key] ?? 0;
+          return n ? <span key={o.key} className={`bucket-seg tone-${o.tone}`} style={{ width: `${(n / total) * 100}%` }} title={`${o.label}: ${n}`} /> : null;
+        })}
+      </div>
+      <table className="data-table compact">
+        <tbody>
+          {OUTCOMES.map((o) => (
+            <tr key={o.key}>
+              <th scope="row">
+                <span className={`swatch tone-${o.tone}`} aria-hidden="true" /> {o.label}
+              </th>
+              <td className="num">{count(b.buckets?.[o.key])}</td>
+              <td className="num small muted">{total ? pct((b.buckets?.[o.key] ?? 0) / total) : ""}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {kinds.length > 0 && (
+        <>
+          <h3 className="subsection-title">What the wrong numbers were</h3>
+          <table className="data-table compact">
+            <tbody>
+              {kinds.map(([k, n]) => (
+                <tr key={k}>
+                  <th scope="row">
+                    {KIND_NAMES[k]?.label ?? k}
+                    <span className="small muted block">{KIND_NAMES[k]?.explain}</span>
+                  </th>
+                  <td className="num">{count(n)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
+    </article>
+  );
+}
+
+export function ErrorTypesPage() {
+  const s = useSummary();
+  return (
+    <Layout>
+      <div className="page page-eval">
+        <header className="page-head">
+          <p className="eyebrow">Accuracy</p>
+          <h1>Types of error</h1>
+          <p className="lede">Where every number on the validation filings ended up, and what kind of mistake the wrong ones were.</p>
+        </header>
+        {s.loading && !s.data && <Loading label="Loading results" />}
+        {s.error && <ErrorState error={s.error} onRetry={s.reload} />}
+        <div className="acc-grid">{(s.data?.groups ?? []).map((g) => <ErrorCard key={g.key} g={g} />)}</div>
+      </div>
+    </Layout>
+  );
+}
+
+const AREA_NAMES: Record<string, string> = { statements: "Statement lines", units: "Statement units", recon: "Reconciliation matches" };
+
+export function ReviewersPage() {
+  const o = useApi(() => api.outcomes(), []);
+  const engines = Object.entries(o.data?.engines ?? {});
+  const tally = (m: Record<string, { right?: number; wrong?: number }>, k: "right" | "wrong") =>
+    Object.values(m).reduce((n, c) => n + (c[k] ?? 0), 0);
+  return (
+    <Layout>
+      <div className="page page-eval">
+        <header className="page-head">
+          <p className="eyebrow">Accuracy</p>
+          <h1>Reviewer decisions</h1>
+          <p className="lede">
+            Every approval, correction and match decision is recorded. Those decisions decide which of the platform's answers can be
+            trusted without a second look, so your team's judgement shapes it.
+          </p>
+        </header>
+        {o.error && <ErrorState error={o.error} onRetry={o.reload} />}
+        {o.data && engines.length === 0 && (
+          <EmptyState title="No reviewer decisions recorded yet">
+            <p>Approve a spread or decide a match, and it appears here.</p>
+          </EmptyState>
+        )}
+        {engines.length > 0 && (
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Area</th>
+                <th scope="col" className="num">Confirmed right</th>
+                <th scope="col" className="num">Corrected</th>
+              </tr>
+            </thead>
+            <tbody>
+              {engines.map(([engine, e]) => (
+                <tr key={engine}>
+                  <th scope="row">{AREA_NAMES[engine] ?? engine}</th>
+                  <td className="num">{count(tally(e.methods, "right"))}</td>
+                  <td className="num">{count(tally(e.methods, "wrong"))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </Layout>

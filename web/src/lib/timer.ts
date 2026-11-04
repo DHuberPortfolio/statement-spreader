@@ -116,3 +116,41 @@ export function useCountActiveTime(enabled: boolean): void {
 export function resetTimer(): void {
   set({ pending: 0, active: false });
 }
+
+/** Records review time for a run in the background: nothing on screen, and a failed send is simply lost. */
+export function useBackgroundActivity(runId: number, enabled: boolean): void {
+  useEffect(() => {
+    if (!enabled) return;
+    let last = Date.now();
+    let prevTick = Date.now();
+    let pending = 0;
+    const touch = () => {
+      last = Date.now();
+    };
+    const send = () => {
+      const seconds = Math.min(MAX_PER_HEARTBEAT, Math.round(pending * 10) / 10);
+      pending = 0;
+      api.activity(runId, seconds).catch(() => undefined);
+    };
+    const events = ["mousemove", "mousedown", "keydown", "wheel", "touchstart", "pointerdown"] as const;
+    events.forEach((ev) => window.addEventListener(ev, touch, { passive: true }));
+    window.addEventListener("scroll", touch, { passive: true, capture: true });
+    send();
+    const tick = window.setInterval(() => {
+      const now = Date.now();
+      const elapsed = Math.min(2, (now - prevTick) / 1000);
+      prevTick = now;
+      if (isActive(document.visibilityState === "visible", last, now)) pending += elapsed;
+    }, 1000);
+    const beat = window.setInterval(() => {
+      if (pending > 0) send();
+    }, HEARTBEAT_EVERY_MS);
+    return () => {
+      events.forEach((ev) => window.removeEventListener(ev, touch));
+      window.removeEventListener("scroll", touch, { capture: true });
+      window.clearInterval(tick);
+      window.clearInterval(beat);
+      if (pending > 0) send();
+    };
+  }, [runId, enabled]);
+}

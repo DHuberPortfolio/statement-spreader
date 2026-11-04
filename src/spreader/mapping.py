@@ -23,7 +23,7 @@ from rapidfuzz import fuzz, process
 
 from finops.core import policy
 
-from .contracts import MapMethod, RowMapping, RowRole, StatementRow, StatementTable, ValueUnit
+from .contracts import MapMethod, RowMapping, RowRole, StatementRow, StatementTable, StatementType, ValueUnit
 from .profile import LineDef, Profile, matches
 
 FUZZY_ACCEPT = 93.0
@@ -64,6 +64,32 @@ def _own_equity_total(row: StatementRow, lab: str) -> bool:
     return row.role is RowRole.TOTAL and bool(_OWN_EQUITY.match(lab)) and not _NOT_OWN_EQUITY.search(lab)
 
 
+# A row of basic or diluted earnings or shares. Filers word these every possible way, and a good many print one row for
+# both, so the row's unit and these words decide rather than an alias list.
+_BASIC = re.compile(r"\bbasic\b")
+_DILUTED = re.compile(r"\bdilut\w*|assuming dilution")
+_NOT_COMMON = re.compile(r"\b(preferred|class [b-z]\b|continuing|discontinu|adjusted|pro forma|non gaap)")
+
+
+def _per_share_rule(row: StatementRow, lab: str, lines: list[LineDef]) -> RowMapping | None:
+    if _NOT_COMMON.search(f"{lab} {row.section.lower()}") or row.unit not in (ValueUnit.PER_SHARE, ValueUnit.SHARES):
+        return None
+    basic, diluted = bool(_BASIC.search(lab)), bool(_DILUTED.search(lab))
+    if not (basic or diluted):
+        return None
+    pair = ("eps_basic", "eps_diluted") if row.unit is ValueUnit.PER_SHARE else ("shares_basic", "shares_diluted")
+    have = {ln.id for ln in lines}
+    if not set(pair) <= have:
+        return None
+    if basic and diluted:
+        return RowMapping(row_index=row.index, canonical=pair[0], also=[pair[1]], method=MapMethod.ALIAS,
+                          confidence=calibrated("alias.pattern"), rule="alias.pattern",
+                          reason="One printed row gives both the basic and the diluted figure.")
+    line = pair[0] if basic else pair[1]
+    return RowMapping(row_index=row.index, canonical=line, method=MapMethod.ALIAS, confidence=calibrated("alias.pattern"),
+                      rule="alias.pattern", reason=f"'{lab}' is the {'basic' if basic else 'diluted'} per-share row.")
+
+
 def _unit_ok(line: LineDef, row: StatementRow) -> bool:
     if row.unit is ValueUnit.PERCENT:
         return False
@@ -75,9 +101,10 @@ def _section_parts(row: StatementRow) -> list[str]:
 
 
 def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: Memory | None = None,
-            company: CompanyMemory | None = None) -> RowMapping:
+            company: CompanyMemory | None = None, wrong_side: frozenset[str] = frozenset()) -> RowMapping:
+    """wrong_side: kinds of line this row cannot feed because of where it sits on the balance sheet."""
     sdef = profile.statements[table.statement]
-    lines = [ln for ln in sdef.lines if _unit_ok(ln, row)]
+    lines = [ln for ln in sdef.lines if _unit_ok(ln, row) and ln.kind not in wrong_side]
     lab = row.label_clean
     sections = _section_parts(row)
 
@@ -104,6 +131,9 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
     if not lab:
         return RowMapping(row_index=row.index, canonical=None, method=MapMethod.NONE, confidence=0.0,
                           reason="The row has no label.", rule="none")
+
+    if (share_row := _per_share_rule(row, lab, lines)) is not None:
+        return share_row
 
     if row.role is RowRole.TOTAL:
         for ln in lines:
@@ -184,14 +214,28 @@ def map_row(row: StatementRow, table: StatementTable, profile: Profile, memory: 
                       reason=f"No alias or rule matches '{lab}'.", rule="none")
 
 
+def _balance_sheet_sides(table: StatementTable) -> dict[int, frozenset[str]]:
+    """Rows above "Total assets" are assets and rows below it are claims on them, whatever a label could mean elsewhere:
+    "Deferred income taxes" below the line is a liability. Empty when the table has no such row."""
+    if table.statement is not StatementType.BALANCE:
+        return {}
+    at = next((i for i, r in enumerate(table.rows) if r.label_clean == "total assets" or r.label_clean.startswith("total assets ")), None)
+    if at is None:  # no such row: the first liabilities heading marks the same place
+        at = next((i - 1 for i, r in enumerate(table.rows) if "liabilit" in r.label_clean and r.role is RowRole.HEADER), None)
+    if at is None:
+        return {}
+    return {r.index: frozenset({"liability", "equity"}) if i <= at else frozenset({"asset"}) for i, r in enumerate(table.rows)}
+
+
 def map_table(table: StatementTable, profile: Profile, memory: Memory | None = None,
               model: ModelMapper | None = None, company: CompanyMemory | None = None) -> list[RowMapping]:
     by_index = {r.index: r for r in table.rows}
     out: dict[int, RowMapping] = {}
+    sides = _balance_sheet_sides(table)
     for row in table.rows:
         if row.role is RowRole.HEADER:
             continue
-        out[row.index] = map_row(row, table, profile, memory, company)
+        out[row.index] = map_row(row, table, profile, memory, company, sides.get(row.index, frozenset()))
 
     # A printed subtotal of rows already placed on different lines ("Total cash, cash equivalents
     # and short-term investments") is not a template line: placing it anywhere counts its rows
@@ -200,9 +244,13 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
         if row.role is not RowRole.TOTAL:
             continue
         m = out[row.index]
-        if m.method not in (MapMethod.STRUCTURE, MapMethod.NONE, MapMethod.FUZZY) or m.rule == "structure.own_equity_total":
-            continue
         targets = {out[c].canonical for c in row.children if c in out and out[c].canonical}
+        # "Cash and cash equivalents" over "Cash" and "Interest-bearing deposits": worded like one of its own rows' lines,
+        # but placing it there counts the other row twice.
+        worded_like_a_part = (m.method is MapMethod.ALIAS and m.rule != "alias.total" and m.canonical in targets
+                              and profile.lines[m.canonical].kind in {"asset", "liability"})
+        if (m.method not in (MapMethod.STRUCTURE, MapMethod.NONE, MapMethod.FUZZY) and not worded_like_a_part) or m.rule == "structure.own_equity_total":
+            continue
         if len(targets) >= 2:
             names = ", ".join(sorted(profile.lines[t].label for t in targets))
             out[row.index] = RowMapping(row_index=row.index, canonical=None, method=MapMethod.STRUCTURE, confidence=0.95,
@@ -226,6 +274,18 @@ def map_table(table: StatementTable, profile: Profile, memory: Memory | None = N
         elif m.canonical == "total_opex" and any(cm.canonical == "cogs" for cm in child_maps) and "total_costs" in profile.lines:
             out[row.index] = m.model_copy(update={"canonical": "total_costs", "confidence": min(m.confidence, 0.95),
                                                   "reason": m.reason + " Its rows include cost of revenue, so it is total costs and expenses."})
+
+    # Per-share figures never add: several rows on one line (continuing operations, then the total) mean the last one is
+    # the company's figure.
+    seen: dict[str, int] = {}
+    for row in table.rows:
+        m = out.get(row.index)
+        if m and m.canonical and profile.lines[m.canonical].unit is ValueUnit.PER_SHARE and not m.excluded:
+            earlier = seen.get(m.canonical)
+            if earlier is not None:
+                out[earlier] = out[earlier].model_copy(update={"canonical": None, "also": [], "excluded": True, "rule": "structure.per_share_superseded",
+                                                                "reason": f"A later row gives {profile.lines[m.canonical].label} for the whole company."})
+            seen[m.canonical] = row.index
 
     if model is not None:
         sdef = profile.statements[table.statement]

@@ -236,10 +236,10 @@ export function DisagreementsPage() {
   return (
     <Layout>
       <header className="page-head">
-        <h1>Model disagreements</h1>
+        <h1>AI second opinions</h1>
         <p className="lede">
-          During its learning period the model gives a hidden opinion on every line. Where it would have placed a line
-          differently from what an analyst approved, decide which was right and why. The model learns from your ruling.
+          During its learning period the AI gives a hidden opinion on every line. Where it would have placed a line
+          differently from what an analyst approved, decide which was right and why. It learns from your ruling.
           {list?.blind && " You see the two answers as A and B; whose is whose shows once you have ruled."}
           {list && ` Without a ruling in ${list.review_days} days, the analyst's answer stands.`}
         </p>

@@ -8,6 +8,8 @@ measured like any other rule:
 - scale.document: a unit stated once for the whole document ("All amounts are presented in millions of U.S.
   dollars", Deere), used only when every such statement in the document names the same unit;
 - scale.sibling: no statement at the table, but every other primary statement in the document prints the same unit;
+- scale.whole_dollars: no statement anywhere in the document and figures of six digits or more printed to the last digit.
+  Filers that round say so; a company reporting in whole dollars has nothing to say (D66);
 - scale.none: nothing found; the values are taken as printed. Never accepted without a person (never_auto).
 
 A rule's unit is accepted without a person only when its measured accuracy (config/calibration/units.json, fitted by
@@ -23,11 +25,12 @@ rate date that a person chooses).
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterable
 
 from finops.core import policy
 
-from .contracts import StatementTable, StatementType
+from .contracts import StatementTable, StatementType, ValueUnit
 from .detect import detect_currency, doc_unit_multiplier
 
 BAR = 0.80
@@ -50,13 +53,19 @@ def document_unit(statements: Iterable[str]) -> tuple[int, str] | None:
     return mult, words
 
 
+_ROUNDED = re.compile(r"\b(?:in|of)\s+(?:thousands|millions|billions)\b|\((?:thousands|millions)\)|\$\s*000|000s\b", re.I)
+
+
 def resolve_units(tables: dict[StatementType, StatementTable], contexts: dict[StatementType, list[str]],
-                  unit_statements: list[str]) -> None:
+                  unit_statements: list[str], other_tables: Iterable[str] = ()) -> None:
     """Sets each table's scale (rule, confidence, assumed) and currency in place. contexts: the text at each table,
     nearest first (title, headings, the text above it)."""
     cal = calibration()
     printed = {st: t.scale.multiplier for st, t in tables.items() if t.scale.rule == "scale.table"}
     document = document_unit(unit_statements)
+    # Whole dollars is read from silence, so anything anywhere saying "in thousands" (a subsidiary's statements, a note's
+    # table) rules it out: Hawaiian Electric's unlabelled tables are in thousands, and read as dollars they went out wrong.
+    silent = not any(_ROUNDED.search(text) for text in other_tables)
     for st, t in tables.items():
         scale = t.scale
         if scale.rule == "scale.none":
@@ -75,6 +84,11 @@ def resolve_units(tables: dict[StatementType, StatementTable], contexts: dict[St
                     "multiplier": mult, "rule": "scale.sibling",
                     "evidence": f"No unit statement at the table; the document's other statements are all in "
                                 f"{_WORDS.get(mult, mult)}."})
+            elif not printed and silent and all(_to_the_dollar(x) for x in tables.values()):
+                scale = scale.model_copy(update={
+                    "multiplier": 1, "rule": "scale.whole_dollars",
+                    "evidence": "No unit statement anywhere in the document, and every statement prints figures in the "
+                                "to the last digit: whole dollars."})
         decision = cal.decide(scale.rule, BAR)
         currency, cur_words = detect_currency(contexts.get(st, []))
         if currency is None and not cur_words:
@@ -83,6 +97,11 @@ def resolve_units(tables: dict[StatementType, StatementTable], contexts: dict[St
             currency, cur_words = REPORTING_CURRENCY, "'$' printed in the cells"
         t.scale = scale.model_copy(update={"assumed": not decision.auto, "confidence": decision.confidence,
                                            "currency": currency, "currency_evidence": cur_words})
+
+
+def _to_the_dollar(t: StatementTable) -> bool:
+    money = [abs(pv.displayed) for r in t.rows if r.unit is ValueUnit.MONEY for pv in r.values.values() if pv.displayed]
+    return bool(money) and max(money) >= 100_000 and sum(1 for m in money if m % 1000) >= 0.8 * len(money)
 
 
 def _dollar_in_cells(t: StatementTable) -> bool:

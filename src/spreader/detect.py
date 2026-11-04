@@ -34,10 +34,10 @@ _STATEMENT_TITLE = {
 _COMPARISON = re.compile(r"%|\bchange\b|increase|decrease|\bvariance\b|\bfavorable\b|\bunfavorable\b", re.I)
 
 _DURATIONS = [
-    (re.compile(r"\b(three|3)[\s-]+months?\b|\bquarter\b|\b13 weeks\b", re.I), 3),
-    (re.compile(r"\b(six|6)[\s-]+months?\b|\b26 weeks\b|\bhalf[\s-]year\b", re.I), 6),
-    (re.compile(r"\b(nine|9)[\s-]+months?\b|\b39 weeks\b", re.I), 9),
-    (re.compile(r"\b(twelve|12)[\s-]+months?\b|\byears?\b|\bfiscal\b|\bannual\b|\b5[23] weeks\b|\bfy\b", re.I), 12),
+    (re.compile(r"\b(three|3)[\s-]+months?\b|\bquarter\b|\b(twelve|thirteen|fourteen|sixteen|seventeen|12|13|14|16|17)[\s-]+weeks\b", re.I), 3),
+    (re.compile(r"\b(six|6)[\s-]+months?\b|\b(twenty[\s-]+(four|five|six|seven|eight)|2[4-8])[\s-]+weeks\b|\bhalf[\s-]year\b", re.I), 6),
+    (re.compile(r"\b(nine|9)[\s-]+months?\b|\b(thirty[\s-]+(six|seven|eight|nine)|forty|3[6-9]|40)[\s-]+weeks\b", re.I), 9),
+    (re.compile(r"\b(twelve|12)[\s-]+months?\b|\byears?\b|\bfiscal\b|\bannual\b|\b(fifty[\s-]+(two|three)|5[23])[\s-]+weeks\b|\bfy\b", re.I), 12),
 ]
 
 _SCALE_WORDS = {"thousand": 1_000, "thousands": 1_000, "million": 1_000_000, "millions": 1_000_000,
@@ -51,6 +51,7 @@ _SCALE = re.compile(
     r"|\$\s*in\s+(thousands|millions|billions)"
     r"|(?:^|[(\[|;:])\s*(?:u\.?s\.?\s+)?(?:\$|dollars|usd)?\s*(thousands|millions|billions)\b(?=\s*(?:,|\)|except|of|$))"
     r"|\b(thousands|millions|billions)\s*,?\s*except\b"
+    r"|(?:^|[\s(\[|;:])(?:us)?\$\s*['\u2019\ufffd`]\s*(000)\b"
     # "(Dollars and Shares in Millions ...)" (J&J), "(Dollars in Millions)", "(€ in millions)", "(EUR millions)"
     r"|(?:dollars|euros?|pounds|francs|yen|amounts|€|£|¥|eur|gbp|chf|jpy|cad|usd)\s+(?:and\s+shares\s+)?in\s+"
     r"(thousands|millions|billions)"
@@ -140,11 +141,15 @@ def classify(layout: Layout, table: RawTable, profile: Profile) -> Detection | N
     for stype, sdef in profile.statements.items():
         d = sdef.detect
         must = sum(1 for lab in labels if any(matches(p, lab) for p in d.must_any))
-        if not must:
+        # A long table right under the statement's heading is that statement, even if its marking rows are in a second half.
+        titled = len(labels) >= 15 and bool(_STATEMENT_TITLE[stype].search(table.context[-120:]))
+        if not must and not titled:
             continue
         also = sum(1 for lab in labels if any(matches(p, lab) for p in d.also_any))
         excl = sum(1 for lab in labels if any(matches(p, lab) for p in d.exclude_any))
-        if excl:
+        # "Statements of Income and Comprehensive Income" print both on one table: comprehensive-income rows only rule a
+        # table out when it does not also read as an income statement.
+        if excl and not (stype is StatementType.INCOME and must and also >= 3):
             continue
         # How many distinct template lines the table's labels hit: a primary statement hits many,
         # a summary table in management's discussion hits a few.
@@ -229,9 +234,15 @@ def parse_period(header: str, statement: StatementType, fallback_month_day: tupl
         year = _YEAR.findall(text)[-1]
         # "Fiscal years ended December 27, 2025, December 28, 2024 and ..." names each year's date.
         exact = {m.group(3): (m.group(1), m.group(2)) for m in _FULL_DATE.finditer(clean_text(title))}
+        next_year = str(int(year) + 1)
         if year in exact:
             text = f"{exact[year][0]} {exact[year][1]}, {text}"
             notes.append(f"Month and day read from the title ({exact[year][0]} {exact[year][1]}, {year}).")
+        elif next_year in exact and _MONTHS[exact[next_year][0].lower()[:3]] == 1 and int(exact[next_year][1]) <= 7 and re.search(
+                rf"end(?:ed|ing)\b[^.]{{0,40}}{exact[next_year][0]}[a-z]*\.?\s+{exact[next_year][1]},?\s+{next_year}", clean_text(title), re.I):
+            # Fiscal 2025 of a 53-week year can end on January 3, 2026: the column names the fiscal year, the title the date.
+            text = f"{exact[next_year][0]} {exact[next_year][1]}, {next_year}"
+            notes.append(f"Fiscal {year} ended {exact[next_year][0]} {exact[next_year][1]}, {next_year} (from the title).")
         elif title_md:
             text = f"{calendar.month_name[title_md[0]]} {title_md[1]}, {text}"
             notes.append(f"Month and day read from the title ({calendar.month_name[title_md[0]]} {title_md[1]}).")

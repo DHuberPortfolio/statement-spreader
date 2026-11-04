@@ -9,7 +9,9 @@ import type {
   Disagreement,
   DisagreementList,
   DocumentRow,
+  EvalGroup,
   EvalReport,
+  WideResult,
   GoLiveReport,
   OutcomeSummary,
   Profile,
@@ -118,6 +120,7 @@ export const api = {
   roi: () => getJson<RoiReport>("/api/roi"),
   setAssumptions: (values: Record<string, number>) => sendJson<RoiReport>("/api/roi/assumptions", "PUT", values),
   sessions: () => getJson<WorkSession[]>("/api/sessions"),
+  activity: (runId: number, activeSeconds: number) => sendJson<object>(`/api/runs/${runId}/activity`, "POST", { active_seconds: activeSeconds }),
   startSession: (body: {
     mode: "baseline" | "assisted";
     document_id: string;
@@ -130,6 +133,7 @@ export const api = {
     sendJson<{ active_seconds: number }>(`/api/sessions/${sid}/heartbeat`, "POST", { active_seconds: activeSeconds }),
   endSession: (sid: number, body: Record<string, unknown>) => sendJson<WorkSession>(`/api/sessions/${sid}/end`, "POST", body),
   evaluation: () => getJson<{ reports: EvalReport[] }>("/api/evaluation"),
+  evaluationSummary: () => getJson<{ groups: EvalGroup[]; wide: WideResult | null }>("/api/evaluation/summary"),
   disagreements: (signal?: AbortSignal) => getJson<DisagreementList>("/api/disagreements", signal),
   rule: (id: number, body: { choice: "a" | "b" | "neither"; correct_line?: string; reason: string; note: string }) =>
     sendJson<Disagreement>(`/api/disagreements/${id}/rule`, "POST", body),

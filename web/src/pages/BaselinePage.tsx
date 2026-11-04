@@ -92,7 +92,7 @@ export function BaselinePage({ sessionId }: { sessionId: number }) {
         <div className="state state-empty">
           <h1>Session #{sessionId} is not running here</h1>
           <p>It has ended, or it was started in another browser. Start a new baseline session from the ROI page.</p>
-          <Link to="/roi" className="btn">
+          <Link to="/roi/timing" className="btn">
             Go to ROI
           </Link>
         </div>
@@ -120,7 +120,7 @@ export function BaselinePage({ sessionId }: { sessionId: number }) {
     writeStored(draftKey, null);
     writeStored(`${draftKey}.units`, null);
     setBusy(false);
-    navigate("/roi");
+    navigate("/roi/timing");
   };
 
   return (
@@ -128,7 +128,7 @@ export function BaselinePage({ sessionId }: { sessionId: number }) {
       <div className="page page-baseline">
         <header className="page-head">
           <p className="eyebrow">
-            <Link to="/roi">ROI</Link> / baseline session #{sessionId}
+            <Link to="/roi/timing">Time a document</Link> / by-hand session
           </p>
           <h1>Spread {mine.filename} by hand</h1>
           <p className="lede">

@@ -68,7 +68,7 @@ def find_echoes(doc: DocumentIR, statements: dict[str, StatementResult], values:
         if row is None or pv is None or not pv.displayed or not significant(pv.displayed):
             continue
         for table, label, ref in printed.get(abs(pv.displayed), []):
-            if table != res.table.table_index and fuzz.token_sort_ratio(label, row.label_clean) >= MIN_LABEL_SIMILARITY:
+            if table != res.table.table_index and table not in res.table.joined_tables and fuzz.token_sort_ratio(label, row.label_clean) >= MIN_LABEL_SIMILARITY:
                 out.append(Echo(line=v.line, period=v.period, value=v.value, label=label, ref=ref))
                 break
     return out

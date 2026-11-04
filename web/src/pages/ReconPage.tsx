@@ -11,7 +11,7 @@ import { AuditList, Checks, ExceptionCard, NameReminder, StatusPill, money } fro
 
 const RESOLUTIONS = ["explained", "journal_entry_posted", "corrected_in_source", "timing_will_clear", "write_off_approved", "not_an_issue"];
 
-export function ReconListPage() {
+export function ReconListPage({ view }: { view: "list" | "new" }) {
   const ws = useApi(() => finops.workspaces(), []);
   const profiles = useApi(() => finops.profiles(), []);
   const [name, setName] = useState("Operating account, March 2026");
@@ -26,6 +26,7 @@ export function ReconListPage() {
     try {
       const r = await fn();
       if ("run" in r) navigate(`/recon/runs/${r.run.id}`);
+      else if (view === "new") navigate("/recon");
       else ws.reload();
     } catch (x) {
       setErr(errorText(x));
@@ -36,14 +37,21 @@ export function ReconListPage() {
 
   return (
     <Layout>
-      <h1>Reconciliation</h1>
+      <div className="page-title-row">
+        <h1>{view === "new" ? "New reconciliation" : "Reconciliation"}</h1>
+        {view === "list" && (
+          <Link to="/recon/new" className="btn btn-primary">
+            New reconciliation
+          </Link>
+        )}
+      </div>
       <p className="lede">
-        Match two sources (a bank statement and the cash ledger), see what does not match and why, and settle each
-        exception with a recorded decision. Rules settle only what is unambiguous; everything else is proposed to a person.
+        Match a bank statement to the cash ledger, see what does not match and why, and settle each exception with a recorded
+        decision. Only what is unambiguous settles on its own; everything else is proposed to a person.
       </p>
       <NameReminder />
       {err && <InlineMessage kind="error">{err}</InlineMessage>}
-      <section className="fo-panel" aria-labelledby="new-ws">
+      {view === "new" && <section className="fo-panel" aria-labelledby="new-ws">
         <h2 id="new-ws">New reconciliation</h2>
         <form
           className="fo-row"
@@ -56,7 +64,7 @@ export function ReconListPage() {
             Name <input value={name} onChange={(e) => setName(e.target.value)} />
           </label>
           <label>
-            Profile{" "}
+            Type{" "}
             <select value={profile} onChange={(e) => setProfile(e.target.value)}>
               {(profiles.data ?? []).map((p) => (
                 <option key={p.file} value={p.file} disabled={!!p.error}>
@@ -70,18 +78,22 @@ export function ReconListPage() {
             Create
           </button>
         </form>
-      </section>
-      {ws.loading && <Loading />}
-      {ws.error && <ErrorState error={ws.error} onRetry={ws.reload} />}
-      {ws.data && ws.data.length === 0 && <EmptyState title="No reconciliations yet">Create one above, then upload two files or try the sample data.</EmptyState>}
-      {ws.data && ws.data.length > 0 && (
+      </section>}
+      {view === "list" && ws.loading && <Loading />}
+      {view === "list" && ws.error && <ErrorState error={ws.error} onRetry={ws.reload} />}
+      {view === "list" && ws.data && ws.data.length === 0 && (
+        <EmptyState title="No reconciliations yet">
+          <Link to="/recon/new">Start one</Link>, then upload two files or try the sample data.
+        </EmptyState>
+      )}
+      {view === "list" && ws.data && ws.data.length > 0 && (
         <table className="data-table fo-table">
           <thead>
             <tr>
               <th>Reconciliation</th>
-              <th>Profile</th>
-              <th>Latest run</th>
-              <th>Run with files</th>
+              <th>Type</th>
+              <th>Latest result</th>
+              <th>Load files</th>
             </tr>
           </thead>
           <tbody>
@@ -93,16 +105,16 @@ export function ReconListPage() {
                     by {w.created_by}, {formatDateTime(w.created_at)}
                   </div>
                 </td>
-                <td className="small">{w.profile}</td>
-                <td>{w.latest_run ? <Link to={`/recon/runs/${w.latest_run}`}>Run {w.latest_run}</Link> : <span className="muted">none</span>}</td>
+                <td className="small">{(profiles.data ?? []).find((p) => p.file === w.profile)?.name ?? w.profile}</td>
+                <td>{w.latest_run ? <Link to={`/recon/runs/${w.latest_run}`}>Open</Link> : <span className="muted">none</span>}</td>
                 <td>
                   <div className="fo-row">
                     <label className="small">
-                      Left (bank){" "}
+                      Bank file{" "}
                       <input type="file" accept=".csv,.xlsx" onChange={(e) => setFiles({ ...files, [w.id]: { left: e.target.files?.[0] ?? null, right: files[w.id]?.right ?? null } })} />
                     </label>
                     <label className="small">
-                      Right (ledger){" "}
+                      Ledger file{" "}
                       <input type="file" accept=".csv,.xlsx" onChange={(e) => setFiles({ ...files, [w.id]: { left: files[w.id]?.left ?? null, right: e.target.files?.[0] ?? null } })} />
                     </label>
                     <button
@@ -111,10 +123,10 @@ export function ReconListPage() {
                       disabled={busy !== null || (!w.latest_run && !(files[w.id]?.left && files[w.id]?.right))}
                       onClick={() => void act(`run${w.id}`, () => finops.runFiles(w.id, files[w.id]?.left ?? null, files[w.id]?.right ?? null))}
                     >
-                      {busy === `run${w.id}` ? "Running…" : "Run"}
+                      {busy === `run${w.id}` ? "Reconciling…" : "Reconcile"}
                     </button>
                     <button className="btn btn-small btn-quiet" type="button" disabled={busy !== null} onClick={() => void act(`s${w.id}`, () => finops.runSample(w.id))}>
-                      {busy === `s${w.id}` ? "Running…" : "Try sample data"}
+                      {busy === `s${w.id}` ? "Reconciling…" : "Try sample data"}
                     </button>
                   </div>
                 </td>

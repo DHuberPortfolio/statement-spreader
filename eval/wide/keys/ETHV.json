@@ -1,0 +1,269 @@
+{
+ "document": "ETHV-0000930413-26-002504.htm",
+ "source": "sec",
+ "description": "Answer key from the filing's inline XBRL tags",
+ "periods": [],
+ "spread": [
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2026-06-30/I",
+   "value": "77842105",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "value": "171708508",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2026-06-30/I",
+   "value": "13830",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "value": "14129567",
+   "precision": "1"
+  }
+ ],
+ "cells": [
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in ether, at fair value (cost $151,725,831, and $181,475,994, respectively)",
+   "period": "2026-06-30/I",
+   "value": "151725831",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[3]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in ether, at fair value (cost $151,725,831, and $181,475,994, respectively)",
+   "period": "2025-12-31/I",
+   "value": "181475994",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[3]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in ether, at fair value (cost $151,725,831, and $181,475,994, respectively)",
+   "period": "2026-06-30/I",
+   "value": "77842105",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[3]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in ether, at fair value (cost $151,725,831, and $181,475,994, respectively)",
+   "period": "2025-12-31/I",
+   "value": "157608454",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[3]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Receivable for investment in ether sold",
+   "period": "2026-06-30/I",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[4]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Receivable for investment in ether sold",
+   "period": "2025-12-31/I",
+   "value": "14100054",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[4]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total assets",
+   "period": "2026-06-30/I",
+   "value": "77842105",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[5]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total assets",
+   "period": "2025-12-31/I",
+   "value": "171708508",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[5]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Payable for shares redeemed",
+   "period": "2026-06-30/I",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[8]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Payable for shares redeemed",
+   "period": "2025-12-31/I",
+   "value": "14100054",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[8]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued Sponsor fee",
+   "period": "2026-06-30/I",
+   "value": "13830",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[9]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued Sponsor fee",
+   "period": "2025-12-31/I",
+   "value": "29513",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[9]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total liabilities",
+   "period": "2026-06-30/I",
+   "value": "13830",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[10]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total liabilities",
+   "period": "2025-12-31/I",
+   "value": "14129567",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[10]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Net assets",
+   "period": "2026-06-30/I",
+   "value": "77828275",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[12]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Net assets",
+   "period": "2025-12-31/I",
+   "value": "157578941",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[12]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Shares issued and outstanding (no par value, unlimited amount authorized)",
+   "period": "2026-06-30/I",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[14]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Shares issued and outstanding (no par value, unlimited amount authorized)",
+   "period": "2025-12-31/I",
+   "value": "0",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[14]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Shares issued and outstanding (no par value, unlimited amount authorized)",
+   "period": "2026-06-30/I",
+   "value": "3350000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[14]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Shares issued and outstanding (no par value, unlimited amount authorized)",
+   "period": "2026-06-30/I",
+   "value": "3350000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[14]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Shares issued and outstanding (no par value, unlimited amount authorized)",
+   "period": "2025-12-31/I",
+   "value": "3625000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[14]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Shares issued and outstanding (no par value, unlimited amount authorized)",
+   "period": "2025-12-31/I",
+   "value": "3625000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[14]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Net Asset Value per Share",
+   "period": "2026-06-30/I",
+   "value": "23.23",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[16]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Net Asset Value per Share",
+   "period": "2025-12-31/I",
+   "value": "43.47",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[7]/tr[16]/td[8]"
+  }
+ ],
+ "expect_review": [],
+ "forbid_values": [],
+ "unknown_lines": [
+  "ethv:AccruedSponsorFee",
+  "us-gaap:AssetsNet",
+  "us-gaap:CommonStockNoParValue",
+  "us-gaap:InvestmentOwnedAtCost",
+  "us-gaap:Investments",
+  "us-gaap:NetAssetValuePerShare",
+  "us-gaap:PayableCommonStockRedeemed",
+  "us-gaap:ReceivableInvestmentSale",
+  "us-gaap:SharesIssued",
+  "us-gaap:SharesOutstanding"
+ ],
+ "tags": []
+}

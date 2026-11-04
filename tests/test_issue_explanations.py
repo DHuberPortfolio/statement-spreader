@@ -153,6 +153,13 @@ def test_a_generated_document_says_so_and_a_plain_upload_is_only_an_upload(tmp_p
     assert svc.store.document(plain.run["document_id"])["origin"] == "uploaded"
 
 
+def test_a_generated_document_can_carry_a_made_up_company_name(tmp_path: Any, profile: Any) -> None:
+    svc = _service(tmp_path, profile)
+    made = _upload(svc, generated=True, display_name="Everhollow Trading", company_id="Everhollow Trading")
+    doc = svc.store.document(made.run["document_id"])
+    assert (doc["company_name"], doc["filing"], doc["origin"]) == ("Everhollow Trading", "Sample statements", "generated")
+
+
 def test_documents_stored_earlier_are_identified_when_listed(tmp_path: Any, profile: Any) -> None:
     svc = _service(tmp_path, profile)
     view = _upload(svc)

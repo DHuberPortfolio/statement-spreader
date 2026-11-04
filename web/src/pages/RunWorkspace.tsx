@@ -8,8 +8,9 @@ import { ErrorState, InlineMessage, Loading } from "../components/States";
 import { readStored, writeStored } from "../lib/actor";
 import { formatDateTime } from "../lib/format";
 import { Link, navigate, setQuery, useLocation } from "../lib/router";
-import { flash, getSession, setSession, updateSession, useProfile, useSession } from "../lib/store";
-import { useCountActiveTime } from "../lib/timer";
+import { can } from "../lib/auth";
+import { flash, useProfile } from "../lib/store";
+import { useBackgroundActivity } from "../lib/timer";
 import { useApi } from "../lib/useApi";
 import { WorkspaceContext, type WorkspaceApi, type WorkspaceTab } from "../workspace/context";
 import { EvidencePanel } from "../workspace/Evidence";
@@ -41,7 +42,6 @@ function RunHeader({
   const { run, document: doc, summary } = payload;
   const [busy, setBusy] = useState<string | null>(null);
   const [message, setMessage] = useState<{ kind: "error" | "success" | "info"; text: string } | null>(null);
-  const session = useSession();
   const approved = run.state.approved;
   const blockers = summary?.open_blockers ?? 0;
   const [profileVersion, profileHash] = run.profile_version.split("+");
@@ -91,43 +91,30 @@ function RunHeader({
 
   const exportAs = (fmt: "xlsx" | "csv" | "json") => doAction(`export-${fmt}`, () => downloadExport(run.id, fmt));
 
-  const startTimed = () =>
-    doAction("session", async () => {
-      const res = await api.startSession({ mode: "assisted", document_id: run.document_id, run_id: run.id });
-      setSession({
-        id: res.id,
-        mode: "assisted",
-        documentId: run.document_id,
-        runId: run.id,
-        filename: doc?.filename ?? "document",
-        startedAt: new Date().toISOString(),
-        activeSeconds: 0,
-        corrections: 0,
-      });
-    });
-
   return (
     <header className="run-header">
       <div className="run-title-row">
         <div className="run-title">
           <p className="eyebrow">
-            <Link to="/statements">Statements</Link> / run #{run.id}
+            <Link to="/statements">All statements</Link>
+          </p>
+          <h1>{documentTitle(doc)}</h1>
+          <p className="run-origin">
+            <OriginChip doc={doc} />
+            <span className="small muted">Read {formatDateTime(run.finished_at)}</span>
+          </p>
+          <details className="run-meta small muted">
+            <summary>Technical details</summary>
+            File {doc?.filename} · run #{run.id}
             {run.parent_run && (
               <>
                 {" "}
                 (from <Link to={`/runs/${run.parent_run}`}>#{run.parent_run}</Link>)
               </>
-            )}
-          </p>
-          <h1>{documentTitle(doc)}</h1>
-          <p className="run-origin">
-            <OriginChip doc={doc} />
-            {doc && documentTitle(doc) !== doc.filename && <span className="small muted">{doc.filename}</span>}
-          </p>
-          <p className="run-meta small muted">
-            Profile <span title={`content hash ${profileHash ?? ""}`}>{run.profile_id} {profileVersion}</span> · engine {run.engine_version} · mapping model{" "}
-            {run.model} · reviewer memory v{run.memory_version} · finished {formatDateTime(run.finished_at)}
-          </p>
+            )}{" "}
+            · profile <span title={`content hash ${profileHash ?? ""}`}>{run.profile_id} {profileVersion}</span> · engine {run.engine_version} · mapping model{" "}
+            {run.model} · reviewer memory v{run.memory_version}
+          </details>
         </div>
         <div className="run-actions">
           <button type="button" className="btn" onClick={rerun} disabled={!!busy}>
@@ -167,11 +154,6 @@ function RunHeader({
               </a>
             ))}
           </span>
-          {!session && (
-            <button type="button" className="btn btn-small btn-quiet" onClick={startTimed} disabled={!!busy} title="Measure your active review time for the ROI report">
-              Time my review
-            </button>
-          )}
         </div>
       </div>
 
@@ -364,8 +346,6 @@ function Workspace({
       const p = await api.act(runId, action);
       if (p.run.id !== runId) {
         // remap/exclude create a new run: move to it and keep the reviewer where they were
-        const s = getSession();
-        if (s && s.documentId === p.run.document_id) updateSession({ runId: p.run.id });
         flash({
           kind: "success",
           text: `Mapping changed: new run #${p.run.id} (from #${runId}). Corrections and resolutions were carried over; the mapping is remembered for future documents.`,
@@ -407,9 +387,8 @@ function Workspace({
 
   const ctx: WorkspaceApi = { model, runId, unit, setUnit, act, selectCell, selectedCell, gotoTab, gotoSource };
 
-  // Count active review time when an assisted session for this document is running.
-  const session = useSession();
-  useCountActiveTime(!!session && session.mode === "assisted" && session.documentId === model.spread.doc_id);
+  // Review time for management's figures (D65): nothing on screen. Managers looking at a spread are not reviewing it.
+  useBackgroundActivity(runId, can("edit") && !can("roi") && !model.payload.run.state.approved);
 
   const issues = loc.query.get("issues");
 

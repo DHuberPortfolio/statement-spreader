@@ -330,8 +330,10 @@ and set the client secret in `FINOPS_OIDC_CLIENT_SECRET` (DECISIONS D43).
 
 On a spread, press the blocker or warning count: each issue says what is wrong, why it blocks approval, the numbers behind it and suggested fixes, with a place to fix it and say why. The demo holds three real SEC filings (Apple, Coca-Cola, Procter & Gamble) and four documents generated to prove concept, each labelled.
 
-Then: **Statements**, **Reconciliation** (/recon: create one, then upload two files or
-"Try sample data") and **Invoices** (/invoices: upload a PDF or JSON, or "Load the sample inbox"); the samples are
+The sidebar's drop-downs reach every page: each work area splits its list from its add page, **Accuracy** and **Time saved** are written for finance readers, and **For engineers** holds the raw reports.
+
+Then: **Statements**, **Reconciliation** (/recon/new: create one, then upload two files or
+"Try sample data") and **Invoices** (/invoices/add: upload a PDF or JSON, or "Load the sample inbox"); the samples are
 the synthetic sets in `eval/`. Invoice matching reads its vendor master, POs and receipts from
 `FINOPS_MASTER_DIR` (default: the synthetic `eval/invoice/dev/master`) under the policy in `FINOPS_AP_POLICY`
 (default `config/finops/invoice/default-ap.yaml`). To use an organisation's statement overlay:

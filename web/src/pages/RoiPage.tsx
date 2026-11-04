@@ -3,7 +3,8 @@ import { api } from "../api/client";
 import type { DocumentRow, MoneyBlock, RoiLabel, RoiNumber, RoiReport, WorkSession } from "../api/types";
 import { Layout } from "../components/Layout";
 import { endActiveSession } from "../lib/session";
-import { ErrorState, InlineMessage, Loading } from "../components/States";
+import { EmptyState, ErrorState, InlineMessage, Loading } from "../components/States";
+import { can } from "../lib/auth";
 import { formatDateTime, formatDuration, formatNumber } from "../lib/format";
 import { Link, navigate } from "../lib/router";
 import { setSession, useSession } from "../lib/store";
@@ -13,18 +14,27 @@ import { FinopsRoiSection } from "./FinopsRoi";
 // ---- labels ----
 
 const LABELS: Record<RoiLabel, string> = {
-  observed: "Measured in this application: timed sessions, runs, evaluations.",
+  observed: "Measured in this application: timed sessions and tests.",
   estimated: "An observed number multiplied by an assumption.",
   hypothetical: "Rests mainly on assumptions (for example the money value of an avoided error).",
-  verified: "A realised financial outcome someone recorded. This application never produces one.",
+  verified: "A financial result someone recorded. This application never produces one.",
   assumption: "A figure your organisation entered.",
   default: "A placeholder still to be replaced with your organisation's figure.",
+};
+
+export const LABEL_WORDS: Record<RoiLabel, string> = {
+  observed: "Measured",
+  estimated: "Estimated",
+  hypothetical: "Rough estimate",
+  verified: "Confirmed",
+  assumption: "Your figure",
+  default: "Placeholder",
 };
 
 export function LabelBadge({ label }: { label: RoiLabel }) {
   return (
     <span className={`roi-label roi-label-${label}`} title={LABELS[label]}>
-      {label}
+      {LABEL_WORDS[label]}
     </span>
   );
 }
@@ -34,9 +44,9 @@ const TITLES: Record<string, string> = {
   assisted_minutes: "Assisted review, per document",
   minutes_saved: "Minutes saved per document",
   compute_seconds: "Processing time per document",
-  compute_cost: "Compute energy per document",
+  compute_cost: "Electricity per document",
   baseline_error_rate: "Hand-keying error rate",
-  silent_error_rate: "Silent error rate of the tool",
+  silent_error_rate: "Wrong numbers no one was asked to check",
   monthly_costs: "Running costs",
   implementation_cost: "Implementation",
   capacity_hours: "Analyst hours released",
@@ -44,7 +54,7 @@ const TITLES: Record<string, string> = {
   cash_savings: "Cash saved",
   net_monthly_cash: "Net monthly cash",
   net_monthly_capacity: "Net monthly capacity value",
-  first_year_roi_cash: "First-year cash ROI",
+  first_year_roi_cash: "First-year cash return",
   payback_months_cash: "Cash payback",
   errors_avoided_per_month: "Errors avoided",
   error_value_per_month: "Value of errors avoided",
@@ -101,7 +111,7 @@ function formatRoiValue(v: number | null | undefined, unit: string): string {
   }
 }
 
-function NumberCard({ id, n, emphasis }: { id: string; n: RoiNumber | undefined; emphasis?: boolean }) {
+export function NumberCard({ id, n, emphasis }: { id: string; n: RoiNumber | undefined; emphasis?: boolean }) {
   if (!n) return null;
   const finite = (x: number | null) => x !== null && Number.isFinite(x);
   return (
@@ -122,7 +132,7 @@ function NumberCard({ id, n, emphasis }: { id: string; n: RoiNumber | undefined;
           )}
           {n.n != null && (
             <span className="muted">
-              {finite(n.low) && finite(n.high) ? " · " : ""}n = {n.n}
+              {finite(n.low) && finite(n.high) ? " · " : ""}based on {n.n}
             </span>
           )}
         </div>
@@ -341,7 +351,7 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
   const active = useSession();
   const usable = docs.filter((d) => d.run_id && d.run_status === "succeeded");
   const [docId, setDocId] = useState("");
-  const [mode, setMode] = useState<"assisted" | "baseline">("assisted");
+  const mode = "baseline" as const;
   const [difficulty, setDifficulty] = useState("");
   const [experience, setExperience] = useState("");
   const [busy, setBusy] = useState(false);
@@ -378,7 +388,7 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
         activeSeconds: 0,
         corrections: 0,
       });
-      navigate(mode === "assisted" ? `/runs/${doc.run_id}` : `/sessions/${res.id}/baseline`);
+      navigate(`/sessions/${res.id}/baseline`);
     } catch (error) {
       setErr(error instanceof Error ? error.message : String(error));
     } finally {
@@ -418,27 +428,10 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
             <select id="timing-doc" value={docId} onChange={(e) => setDocId(e.target.value)}>
               {usable.map((d) => (
                 <option key={d.id} value={d.id}>
-                  {d.label || d.filename} (run #{d.run_id})
+                  {d.company_name || d.label || d.filename}
                 </option>
               ))}
             </select>
-            <span className="form-label-like">Mode</span>
-            <fieldset className="mode-choice">
-              <legend className="sr-only">Mode</legend>
-              <label>
-                <input type="radio" name="mode" checked={mode === "assisted"} onChange={() => setMode("assisted")} />
-                <span>
-                  <strong>Assisted</strong>: review the automated spread in the workspace, correct and approve it. Every minute of checking counts.
-                </span>
-              </label>
-              <label>
-                <input type="radio" name="mode" checked={mode === "baseline"} onChange={() => setMode("baseline")} />
-                <span>
-                  <strong>Baseline</strong>: key the main lines by hand into a blank template while reading the statement. Your values are
-                  compared with the spread to measure hand-keying errors.
-                </span>
-              </label>
-            </fieldset>
             <label htmlFor="timing-difficulty">Difficulty</label>
             <select id="timing-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
               <option value="">not rated</option>
@@ -461,8 +454,7 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
             </button>
           </div>
           <p className="small muted">
-            Only active time counts: the tab must be visible and you must have used the mouse or keyboard in the last minute. Heartbeats go every
-            15 seconds.
+            Only active time counts: the tab must be visible and the mouse or keyboard used in the last minute.
           </p>
         </form>
       )}
@@ -480,7 +472,6 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
                 </th>
                 <th scope="col">Mode</th>
                 <th scope="col">Document</th>
-                <th scope="col">Who</th>
                 <th scope="col">Started</th>
                 <th scope="col" className="num">
                   Active
@@ -500,7 +491,6 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
                   <td className="num">{s.id}</td>
                   <td>{s.mode}</td>
                   <td>{byId.get(s.document_id)?.filename ?? s.document_id.slice(0, 10)}</td>
-                  <td>{s.actor}</td>
                   <td className="nowrap">{formatDateTime(s.started_at)}</td>
                   <td className="num">{formatDuration(s.active_seconds)}</td>
                   <td className="num">{s.mode === "assisted" ? s.corrections ?? 0 : ""}</td>
@@ -518,163 +508,267 @@ function TimingTool({ docs, sessions, reloadSessions }: { docs: DocumentRow[]; s
 
 // ---- page ----
 
-export function RoiPage() {
-  const roi = useApi(() => api.roi(), []);
+export type RoiView = "summary" | "value" | "costs" | "errors" | "scenarios" | "areas" | "assumptions" | "timing";
+
+const VIEWS: Record<RoiView, { title: string; lede: string }> = {
+  summary: {
+    title: "Time saved",
+    lede: "What the platform saves, built from measurements where they exist and clearly labelled assumptions where they do not.",
+  },
+  value: {
+    title: "Hours and cash",
+    lede: "Hours freed for other work are not money saved. They become cash only through the share a finance owner enters.",
+  },
+  costs: { title: "Costs", lede: "What it costs to set up and run." },
+  errors: { title: "Errors avoided", lede: "A comparison: how often numbers go wrong keyed by hand, against how often a wrong number gets past the platform unflagged." },
+  scenarios: { title: "What-if scenarios", lede: "How the result moves if the numbers turn out lower or higher than expected." },
+  areas: { title: "Reconciliation and other areas", lede: "Hours and value for reconciliation, invoices, data quality and spreadsheets." },
+  assumptions: { title: "Assumptions", lede: "The figures only your organisation knows. Replace the placeholders and every result updates." },
+  timing: {
+    title: "Time a document",
+    lede: "Review time is recorded in the background and only people with this page see it. Spreading by hand still needs timing here, to compare against.",
+  },
+};
+
+const TILES: { view: RoiView; text: string }[] = [
+  { view: "value", text: "Hours released, what they are worth, and cash payback." },
+  { view: "costs", text: "Setup and monthly running costs." },
+  { view: "errors", text: "Keying errors prevented and their value." },
+  { view: "scenarios", text: "Low, expected and high cases." },
+  { view: "areas", text: "Results outside statement spreading." },
+  { view: "assumptions", text: "Change hourly costs, volumes and other figures." },
+  { view: "timing", text: "Start a timed session." },
+];
+
+function Summary({ r }: { r: RoiReport }) {
+  return (
+    <>
+      <p className="small muted">
+        Timed so far: {r.sessions.baseline} by hand, {r.sessions.assisted} assisted. At least three of each are needed.
+      </p>
+      <div className="roi-cards">
+        <NumberCard id="minutes_saved" n={r.numbers.minutes_saved} emphasis />
+        <NumberCard id="capacity_hours" n={r.numbers.capacity_hours} />
+        <NumberCard id="cash_savings" n={r.numbers.cash_savings} />
+        <NumberCard id="payback_months_cash" n={r.numbers.payback_months_cash} />
+      </div>
+      <nav className="link-tiles" aria-label="More on time saved">
+        {TILES.map((t) => (
+          <Link key={t.view} to={`/roi/${t.view}`} className="link-tile">
+            <strong>{VIEWS[t.view].title}</strong>
+            <span className="small muted">{t.text}</span>
+          </Link>
+        ))}
+      </nav>
+      {r.warnings.length > 0 && (
+        <details className="legend-box">
+          <summary>Limits of these numbers ({r.warnings.length})</summary>
+          <ul>
+            {r.warnings.map((w, i) => (
+              <li key={i}>{w}</li>
+            ))}
+          </ul>
+        </details>
+      )}
+      <details className="legend-box">
+        <summary>How each number is labelled</summary>
+        <ul className="legend legend-labels">
+          {(Object.keys(LABELS) as RoiLabel[]).map((l) => (
+            <li key={l}>
+              <LabelBadge label={l} /> <span className="small">{LABELS[l]}</span>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </>
+  );
+}
+
+function ValueView({ r }: { r: RoiReport }) {
+  return (
+    <>
+      <section className="roi-section" aria-labelledby="roi-time">
+        <h2 id="roi-time" className="section-title">
+          Time per document
+        </h2>
+        <div className="roi-cards">
+          <NumberCard id="baseline_minutes" n={r.numbers.baseline_minutes} />
+          <NumberCard id="assisted_minutes" n={r.numbers.assisted_minutes} />
+          <NumberCard id="minutes_saved" n={r.numbers.minutes_saved} emphasis />
+        </div>
+      </section>
+      <div className="roi-split">
+        <div className="roi-split-col">
+          <h3>Hours released</h3>
+          <p className="small">
+            Hours freed for other work. <strong>This is not money saved</strong>: payroll does not fall because a task got faster.
+          </p>
+          <NumberCard id="capacity_hours" n={r.numbers.capacity_hours} emphasis />
+          <NumberCard id="capacity_value" n={r.numbers.capacity_value} />
+          <NumberCard id="net_monthly_capacity" n={r.numbers.net_monthly_capacity} />
+          <NumberCard id="break_even_documents" n={r.numbers.break_even_documents} />
+        </div>
+        <div className="roi-split-col is-cash">
+          <h3>Cash saved</h3>
+          <p className="small">
+            Only the share of released hours that turns into cash (overtime, contractors or hiring avoided), currently{" "}
+            <strong>{formatRoiValue(r.numbers["assumption.cash_realization_share"]?.value ?? 0, "share")}</strong>.{" "}
+            <Link to="/roi/assumptions">Change it</Link>
+          </p>
+          <NumberCard id="cash_savings" n={r.numbers.cash_savings} emphasis />
+          <NumberCard id="net_monthly_cash" n={r.numbers.net_monthly_cash} />
+          <NumberCard id="first_year_roi_cash" n={r.numbers.first_year_roi_cash} />
+          <NumberCard id="payback_months_cash" n={r.numbers.payback_months_cash} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ErrorsView({ r }: { r: RoiReport }) {
+  const hand = r.numbers.baseline_error_rate;
+  const tool = r.numbers.silent_error_rate;
+  const avoided = r.numbers.errors_avoided_per_month;
+  const value = r.numbers.error_value_per_month;
+  const rate = (n: RoiNumber | undefined) => (n?.value == null ? "Not measured yet" : formatRoiValue(n.value, "share"));
+  return (
+    <>
+      <div className="compare-pair">
+        <div className="compare-side">
+          <h2>Keyed by hand</h2>
+          <p className={`num compare-value ${hand ? "" : "is-none"}`}>{rate(hand)}</p>
+          <p className="small muted">Numbers keyed wrong, out of all keyed.</p>
+        </div>
+        <span className="compare-vs" aria-hidden="true">vs</span>
+        <div className="compare-side">
+          <h2>With the platform</h2>
+          <p className={`num compare-value ${tool ? "" : "is-none"}`}>{rate(tool)}</p>
+          <p className="small muted">
+            Wrong numbers that went through with no flag{tool?.n != null ? `, out of ${formatNumber(tool.n)} that went straight through` : ""}.
+            From test filings, not your documents.
+          </p>
+        </div>
+      </div>
+      <p className="small muted">Both are error rates, so lower is better. Neither box is a saving on its own: the saving is the gap between them.</p>
+      {avoided?.value != null ? (
+        <>
+          <h2 className="section-title">The result</h2>
+          <p>
+            {avoided.value >= 0
+              ? `About ${formatNumber(avoided.value, { parens: false })} fewer wrong numbers a month than keying by hand.`
+              : `About ${formatNumber(Math.abs(avoided.value), { parens: false })} more wrong numbers a month than keying by hand: the platform is letting more through.`}
+          </p>
+          <NumberCard id="error_value_per_month" n={value} />
+          <p className="small muted">
+            The dollar value uses the cost of one uncaught error from <Link to="/roi/assumptions">Assumptions</Link>.
+          </p>
+        </>
+      ) : (
+        <InlineMessage kind="info">
+          The saving can't be worked out yet because the by-hand side has no measurement. <Link to="/roi/timing">Time one document by hand</Link> to
+          fill it in; the number of errors avoided each month and their dollar value then appear here.
+        </InlineMessage>
+      )}
+    </>
+  );
+}
+
+function TimingView({ reload }: { reload: () => void }) {
   const docs = useApi(() => api.documents(), []);
   const sessions = useApi(() => api.sessions(), []);
-  const r = roi.data;
+  if (docs.error) return <ErrorState error={docs.error} onRetry={docs.reload} />;
+  if (!docs.data) return <Loading />;
+  return (
+    <TimingTool
+      docs={docs.data}
+      sessions={sessions.data ?? []}
+      reloadSessions={() => {
+        sessions.reload();
+        reload();
+      }}
+    />
+  );
+}
 
+export function RoiPage({ view }: { view: RoiView }) {
+  if (!can("roi")) {
+    return (
+      <Layout>
+        <EmptyState title="This page is for managers">
+          <p>Ask an administrator if you need access.</p>
+        </EmptyState>
+      </Layout>
+    );
+  }
+  return <RoiPages view={view} />;
+}
+
+function RoiPages({ view }: { view: RoiView }) {
+  const roi = useApi(() => api.roi(), []);
+  const r = roi.data;
+  const needsReport = view !== "areas" && view !== "timing";
   return (
     <Layout>
       <div className="page page-roi">
         <header className="page-head">
-          <h1>Return on investment</h1>
-          <p className="lede">
-            Built from measurements where they exist and labelled assumptions where they do not. Released analyst time is <em>capacity</em>; it
-            becomes <em>cash</em> only through the share a finance owner enters.
-          </p>
+          {view !== "summary" && <p className="eyebrow">Time saved</p>}
+          <h1>{VIEWS[view].title}</h1>
+          <p className="lede">{VIEWS[view].lede}</p>
+        </header>
+        {needsReport && roi.loading && !r && <Loading label="Calculating" />}
+        {needsReport && roi.error && <ErrorState error={roi.error} onRetry={roi.reload} />}
+        {r && view === "summary" && <Summary r={r} />}
+        {r && view === "value" && <ValueView r={r} />}
+        {r && view === "costs" && (
+          <div className="roi-cards">
+            <NumberCard id="monthly_costs" n={r.numbers.monthly_costs} />
+            <NumberCard id="implementation_cost" n={r.numbers.implementation_cost} />
+          </div>
+        )}
+        {r && view === "errors" && <ErrorsView r={r} />}
+        {r && view === "scenarios" && (
+          <>
+            <Scenarios report={r} />
+            <section className="roi-section" aria-labelledby="roi-sens">
+              <h2 id="roi-sens" className="section-title">
+                What moves the result most
+              </h2>
+              <Sensitivity report={r} />
+            </section>
+          </>
+        )}
+        {r && view === "assumptions" && (
+          <>
+            <AssumptionsEditor report={r} onSaved={roi.setData} />
+            <FinopsRoiSection view="assumptions" />
+          </>
+        )}
+        {view === "areas" && <FinopsRoiSection view="results" />}
+        {view === "timing" && <TimingView reload={roi.reload} />}
+      </div>
+    </Layout>
+  );
+}
+
+export function TechnicalProcessingPage() {
+  const roi = useApi(() => api.roi(), []);
+  const r = roi.data;
+  return (
+    <Layout>
+      <div className="page page-roi">
+        <header className="page-head">
+          <p className="eyebrow">For engineers</p>
+          <h1>Processing</h1>
+          <p className="lede">Compute time and energy per document, from the recorded runs.</p>
         </header>
         {roi.loading && !r && <Loading label="Calculating" />}
         {roi.error && <ErrorState error={roi.error} onRetry={roi.reload} />}
         {r && (
-          <>
-            {r.warnings.length > 0 && (
-              <div className="warning-box" role="alert">
-                <h2>Read this first</h2>
-                <ul>
-                  {r.warnings.map((w, i) => (
-                    <li key={i}>{w}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <details className="legend-box" open>
-              <summary>How each number is labelled</summary>
-              <ul className="legend legend-labels">
-                {(Object.keys(LABELS) as RoiLabel[]).map((l) => (
-                  <li key={l}>
-                    <LabelBadge label={l} /> <span className="small">{LABELS[l]}</span>
-                  </li>
-                ))}
-              </ul>
-            </details>
-
-            <section className="roi-section" aria-labelledby="roi-time">
-              <h2 id="roi-time" className="section-title">
-                Time per document
-              </h2>
-              <p className="small muted">
-                Sessions so far: {r.sessions.baseline} by hand, {r.sessions.assisted} assisted. At least three of each are needed.
-              </p>
-              <div className="roi-cards">
-                <NumberCard id="baseline_minutes" n={r.numbers.baseline_minutes} />
-                <NumberCard id="assisted_minutes" n={r.numbers.assisted_minutes} />
-                <NumberCard id="minutes_saved" n={r.numbers.minutes_saved} emphasis />
-              </div>
-            </section>
-
-            <section className="roi-section" aria-labelledby="roi-split">
-              <h2 id="roi-split" className="section-title">
-                Capacity released versus cash saved
-              </h2>
-              <div className="roi-split">
-                <div className="roi-split-col">
-                  <h3>Capacity released</h3>
-                  <p className="small">
-                    Hours freed for other work. <strong>This is not money saved</strong>: payroll does not fall because a task got faster.
-                  </p>
-                  <NumberCard id="capacity_hours" n={r.numbers.capacity_hours} emphasis />
-                  <NumberCard id="capacity_value" n={r.numbers.capacity_value} />
-                  <NumberCard id="net_monthly_capacity" n={r.numbers.net_monthly_capacity} />
-                  <NumberCard id="break_even_documents" n={r.numbers.break_even_documents} />
-                </div>
-                <div className="roi-split-col is-cash">
-                  <h3>Cash saved</h3>
-                  <p className="small">
-                    Only the share of released capacity that turns into cash (overtime, contractors or hiring avoided). Set by a finance owner:
-                    currently{" "}
-                    <strong>{formatRoiValue(r.numbers["assumption.cash_realization_share"]?.value ?? 0, "share")}</strong>{" "}
-                    {r.numbers["assumption.cash_realization_share"] && <LabelBadge label={r.numbers["assumption.cash_realization_share"].label} />}.
-                  </p>
-                  <NumberCard id="cash_savings" n={r.numbers.cash_savings} emphasis />
-                  <NumberCard id="net_monthly_cash" n={r.numbers.net_monthly_cash} />
-                  <NumberCard id="first_year_roi_cash" n={r.numbers.first_year_roi_cash} />
-                  <NumberCard id="payback_months_cash" n={r.numbers.payback_months_cash} />
-                </div>
-              </div>
-            </section>
-
-            <section className="roi-section" aria-labelledby="roi-costs">
-              <h2 id="roi-costs" className="section-title">
-                Costs
-              </h2>
-              <div className="roi-cards">
-                <NumberCard id="monthly_costs" n={r.numbers.monthly_costs} />
-                <NumberCard id="implementation_cost" n={r.numbers.implementation_cost} />
-                <NumberCard id="compute_seconds" n={r.numbers.compute_seconds} />
-                <NumberCard id="compute_cost" n={r.numbers.compute_cost} />
-              </div>
-            </section>
-
-            <section className="roi-section" aria-labelledby="roi-quality">
-              <h2 id="roi-quality" className="section-title">
-                Quality
-              </h2>
-              <div className="roi-cards">
-                <NumberCard id="baseline_error_rate" n={r.numbers.baseline_error_rate} />
-                <NumberCard id="silent_error_rate" n={r.numbers.silent_error_rate} />
-                <NumberCard id="errors_avoided_per_month" n={r.numbers.errors_avoided_per_month} />
-                <NumberCard id="error_value_per_month" n={r.numbers.error_value_per_month} />
-              </div>
-              {!r.numbers.baseline_error_rate && (
-                <p className="small muted">The hand-keying error rate appears once a baseline session has been ended with keyed values.</p>
-              )}
-            </section>
-
-            <section className="roi-section" aria-labelledby="roi-scen">
-              <h2 id="roi-scen" className="section-title">
-                Scenarios
-              </h2>
-              <Scenarios report={r} />
-            </section>
-
-            <section className="roi-section" aria-labelledby="roi-sens">
-              <h2 id="roi-sens" className="section-title">
-                Sensitivity
-              </h2>
-              <Sensitivity report={r} />
-            </section>
-
-            <section className="roi-section" aria-labelledby="roi-assume">
-              <h2 id="roi-assume" className="section-title">
-                Assumptions
-              </h2>
-              <AssumptionsEditor report={r} onSaved={roi.setData} />
-            </section>
-          </>
+          <div className="roi-cards">
+            <NumberCard id="compute_seconds" n={r.numbers.compute_seconds} />
+            <NumberCard id="compute_cost" n={r.numbers.compute_cost} />
+          </div>
         )}
-
-        <section className="roi-section" aria-labelledby="roi-timing">
-          <h2 id="roi-timing" className="section-title">
-            Timing tool
-          </h2>
-          {docs.error ? (
-            <ErrorState error={docs.error} onRetry={docs.reload} />
-          ) : docs.data ? (
-            <TimingTool
-              docs={docs.data}
-              sessions={sessions.data ?? []}
-              reloadSessions={() => {
-                sessions.reload();
-                roi.reload();
-              }}
-            />
-          ) : (
-            <Loading />
-          )}
-        </section>
-        <FinopsRoiSection />
       </div>
     </Layout>
   );

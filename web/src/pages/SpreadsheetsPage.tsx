@@ -28,7 +28,7 @@ function Counts({ c }: { c: SheetCounts | null }) {
   );
 }
 
-export function SpreadsheetsPage() {
+export function SpreadsheetsPage({ view }: { view: "list" | "new" }) {
   const scans = useApi(() => finops.sheetScans(), []);
   const [wb, setWb] = useState<File | null>(null);
   const [prev, setPrev] = useState<File | null>(null);
@@ -50,7 +50,10 @@ export function SpreadsheetsPage() {
 
   return (
     <Layout>
-      <h1>Spreadsheets</h1>
+      <div className="page-title-row">
+        <h1>{view === "new" ? "Scan a workbook" : "Spreadsheets"}</h1>
+        {view === "list" && <Link to="/spreadsheets/new" className="btn btn-primary">Scan a workbook</Link>}
+      </div>
       <p className="lede">
         Scan a workbook for broken references, formulas that differ from their neighbours, typed numbers over formulas, totals
         that miss or double-count rows, and links to other files. Give an earlier version too to see which formulas changed in
@@ -58,8 +61,7 @@ export function SpreadsheetsPage() {
       </p>
       <NameReminder />
       {err && <InlineMessage kind="error">{err}</InlineMessage>}
-      <section className="fo-panel" aria-labelledby="new-scan">
-        <h2 id="new-scan">Scan a workbook</h2>
+      {view === "new" && <section className="fo-panel" aria-label="Scan a workbook">
         <form
           className="fo-stack"
           onSubmit={(e) => {
@@ -89,11 +91,15 @@ export function SpreadsheetsPage() {
             <span className="muted small">Sample: a synthetic budget with planted problems, and an edited copy of another compared with its original.</span>
           </div>
         </form>
-      </section>
-      {scans.loading && <Loading />}
-      {scans.error && <ErrorState error={scans.error} onRetry={scans.reload} />}
-      {scans.data && scans.data.length === 0 && <EmptyState title="No scans yet">Upload a workbook above or try the sample.</EmptyState>}
-      {scans.data && scans.data.length > 0 && (
+      </section>}
+      {view === "list" && scans.loading && <Loading />}
+      {view === "list" && scans.error && <ErrorState error={scans.error} onRetry={scans.reload} />}
+      {view === "list" && scans.data && scans.data.length === 0 && (
+        <EmptyState title="No scans yet">
+          <Link to="/spreadsheets/new">Upload a workbook or try the sample.</Link>
+        </EmptyState>
+      )}
+      {view === "list" && scans.data && scans.data.length > 0 && (
         <table className="data-table fo-table">
           <thead>
             <tr>

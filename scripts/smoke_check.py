@@ -222,8 +222,10 @@ def _sheets() -> str:
 
 @step("ROI and evaluation pages' data")
 def _roi() -> str:
-    roi = ok(client.get("/api/finops/roi"), "finops roi")
-    ok(client.get("/api/roi"), "statement roi")
+    check(client.get("/api/roi").status_code == 403, "a reviewer could read the time and ROI figures")
+    manager = signed_in("mia")
+    roi = ok(manager.get("/api/finops/roi"), "finops roi")
+    ok(manager.get("/api/roi"), "statement roi")
     ev = ok(client.get("/api/evaluation"), "evaluation")
     return f"{len(ev['reports'])} evaluation reports; ROI engines {sorted(roi.get('engines', {}))}"
 

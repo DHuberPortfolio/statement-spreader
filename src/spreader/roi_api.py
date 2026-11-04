@@ -16,7 +16,10 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
+from finops.core import identity as idn
+
 from . import roi
+from .report_names import latest_batches
 from .store import now
 
 router = APIRouter()
@@ -26,10 +29,17 @@ MANIFEST = REPORTS.parent / "sec" / "manifest.json"
 
 
 def silent_error_rate() -> tuple[tuple[int, int] | None, str]:
-    """The tool's silent error rate for the ROI page, from the latest-* reports every full evaluation run writes.
+    """The tool's silent error rate for the ROI page: the newest final test of public companies, the figure the Accuracy
+    page shows; without one, from the latest-* reports every full evaluation run writes.
 
     The holdout half (never tuned on) from whichever run measured it last, else the dev half, labelled as such. The
     page used to read latest-dev only, which named runs never refreshed, so it showed a figure from the first day."""
+    final = latest_batches(REPORTS).get(("public", "holdout"))
+    if final is not None:
+        data = json.loads(final.read_text())
+        r = data["rates"]["silent_error_rate"]
+        return (int(r["n"]), int(r["d"])), f"the final test of {data['documents']} filings, the figure on the Accuracy page"
+
     def load(name: str) -> tuple[float, dict[str, Any]] | None:
         # "Which run is newer" comes from the time the report records; file times are arbitrary after a clone
         # (IMPROVEMENT_LOG O1). Reports from before provenance existed fall back to the file time.
@@ -119,6 +129,42 @@ async def start_session(request: Request) -> dict[str, Any]:
     return {"id": sid}
 
 
+@router.post("/api/runs/{run_id}/activity")
+async def activity(run_id: int, request: Request) -> dict[str, Any]:
+    """Records time spent reviewing a spread, with nothing for the reviewer to start, see or end (D65).
+
+    The time lands in one open background session per person and document, under the same limits as a heartbeat, and
+    approval closes it. It answers the same way whatever happened, so it tells the caller nothing about the measure."""
+    svc, actor_of = _svc()
+    b = await _body(request)
+    try:
+        delta = float(b.get("active_seconds", 0))
+    except (TypeError, ValueError) as exc:
+        raise HTTPException(400, "active_seconds must be a number") from exc
+    if not math.isfinite(delta):
+        raise HTTPException(400, "active_seconds must be a finite number")
+    delta = max(0.0, min(delta, MAX_HEARTBEAT_SECONDS))
+    run = svc.store.query("SELECT document_id FROM runs WHERE id=?", (run_id,))
+    if not run or idn.current().can("roi"):  # managers looking at a spread are not reviewing it
+        return {}
+    doc, actor = run[0]["document_id"], actor_of()
+    with svc.store.tx() as c:
+        # A closed session means this document's review already finished: reopening it would mix in another kind of work.
+        if c.execute("SELECT 1 FROM work_sessions WHERE document_id=? AND background=1 AND ended_at IS NOT NULL",
+                     (doc,)).fetchone():
+            return {}
+        row = c.execute("SELECT id, started_at, active_seconds FROM work_sessions WHERE document_id=? AND actor=? "
+                        "AND background=1 AND ended_at IS NULL", (doc, actor)).fetchone()
+        if row is None:
+            c.execute("INSERT INTO work_sessions(document_id, run_id, mode, actor, started_at, background) VALUES (?,?,?,?,?,1)",
+                      (doc, run_id, "assisted", actor, now()))
+            return {}
+        elapsed = (datetime.now(UTC) - datetime.fromisoformat(row["started_at"])).total_seconds() + 1
+        c.execute("UPDATE work_sessions SET active_seconds = active_seconds + ?, run_id=? WHERE id=?",
+                  (max(0.0, min(delta, elapsed - row["active_seconds"])), run_id, row["id"]))
+    return {}
+
+
 @router.post("/api/sessions/{sid}/heartbeat")
 async def heartbeat(sid: int, request: Request) -> dict[str, Any]:
     svc, _ = _svc()
@@ -185,7 +231,9 @@ async def end_session(sid: int, request: Request) -> dict[str, Any]:
 @router.get("/api/sessions")
 def sessions() -> list[dict[str, Any]]:
     svc, _ = _svc()
-    return [dict(r) for r in svc.store.query("SELECT * FROM work_sessions ORDER BY id DESC")]
+    # Time is for understanding the work, not for rating people: management sees documents and time, never who.
+    return [{k: v for k, v in dict(r).items() if k != "actor"}
+            for r in svc.store.query("SELECT * FROM work_sessions ORDER BY id DESC")]
 
 
 def _assumptions(svc: Any) -> dict[str, tuple[float, str]]:
@@ -227,7 +275,14 @@ def report() -> dict[str, Any]:
     rows = svc.store.query("SELECT * FROM work_sessions WHERE ended_at IS NOT NULL")
     sessions = [roi.Session(mode=r["mode"], document_id=r["document_id"], active_seconds=r["active_seconds"],
                             corrections=r["corrections"], values_entered=r["values_entered"], errors_found=r["errors_found"],
-                            values_checked=r["values_checked"]) for r in rows]
+                            values_checked=r["values_checked"]) for r in rows if not r["background"]]
+    # Several people may review one document: its time is what they spent together.
+    together: dict[str, float] = {}
+    for r in rows:
+        if r["background"] and r["active_seconds"] > 0:
+            together[r["document_id"]] = together.get(r["document_id"], 0.0) + r["active_seconds"]
+    sessions += [roi.Session(mode="assisted", document_id=d, active_seconds=s, corrections=0, values_entered=0,
+                             errors_found=None, values_checked=None) for d, s in together.items()]
     compute = []
     for r in svc.store.query("SELECT timings FROM runs WHERE status='succeeded' AND timings IS NOT NULL"):
         t = json.loads(r["timings"])

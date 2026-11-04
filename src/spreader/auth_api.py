@@ -30,7 +30,7 @@ _ID = r"[^/]+"
 ROUTE_PERMISSIONS: list[tuple[str, str, str]] = [
     # statement spreading
     ("GET", r"/api/profile", "view"), ("GET", r"/api/documents", "view"), ("GET", r"/api/outcomes", "view"),
-    ("GET", r"/api/companies", "view"), ("GET", r"/api/evaluation", "view"),
+    ("GET", r"/api/companies", "view"), ("GET", r"/api/evaluation", "view"), ("GET", r"/api/evaluation/summary", "view"),
     ("POST", r"/api/documents", "upload"),
     ("POST", rf"/api/documents/{_ID}/company", "edit"),
     ("POST", rf"/api/documents/{_ID}/runs", "upload"),
@@ -43,12 +43,13 @@ ROUTE_PERMISSIONS: list[tuple[str, str, str]] = [
     ("GET", r"/api/learning/report", "adjudicate"),
     ("GET", rf"/api/runs/{_ID}/source/{_ID}", "view"),
     ("GET", rf"/api/runs/{_ID}/export\.{_ID}", "export"),
-    # analyst timing (ROI)
-    ("GET", r"/api/sessions", "view"), ("POST", r"/api/sessions", "edit"),
-    ("POST", rf"/api/sessions/{_ID}/heartbeat", "edit"), ("POST", rf"/api/sessions/{_ID}/end", "edit"),
-    ("GET", r"/api/roi", "view"), ("PUT", r"/api/roi/assumptions", "admin"),
+    # time and ROI: management only (D65). Review time is recorded in the background from whoever reviews.
+    ("GET", r"/api/sessions", "roi"), ("POST", r"/api/sessions", "roi"),
+    ("POST", rf"/api/sessions/{_ID}/heartbeat", "roi"), ("POST", rf"/api/sessions/{_ID}/end", "roi"),
+    ("POST", rf"/api/runs/{_ID}/activity", "edit"),
+    ("GET", r"/api/roi", "roi"), ("PUT", r"/api/roi/assumptions", "admin"),
     # platform engines
-    ("GET", r"/api/finops/overview", "view"), ("GET", r"/api/finops/roi", "view"),
+    ("GET", r"/api/finops/overview", "view"), ("GET", r"/api/finops/roi", "roi"),
     ("PUT", r"/api/finops/roi/assumptions", "admin"),
     ("GET", r"/api/finops/recon/profiles", "view"), ("GET", r"/api/finops/recon/workspaces", "view"),
     ("POST", r"/api/finops/recon/workspaces", "upload"),

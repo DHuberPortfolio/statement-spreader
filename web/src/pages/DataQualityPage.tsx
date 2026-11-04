@@ -31,7 +31,7 @@ function Counts({ c }: { c: GateRun["counts"] }) {
   );
 }
 
-export function DataQualityListPage() {
+export function DataQualityListPage({ view }: { view: "list" | "new" }) {
   const runs = useApi(() => finops.dqRuns(), []);
   const datasets = useApi(() => finops.dqDatasets(), []);
   const [dataset, setDataset] = useState("vendors.yaml");
@@ -54,7 +54,10 @@ export function DataQualityListPage() {
 
   return (
     <Layout>
-      <h1>Data quality</h1>
+      <div className="page-title-row">
+        <h1>{view === "new" ? "Check an export" : "Data quality"}</h1>
+        {view === "list" && <Link to="/data-quality/new" className="btn btn-primary">Check an export</Link>}
+      </div>
       <p className="lede">
         Check records before another system loads them. Each source system's columns are mapped into one record; definite
         errors are rejected, suspicious records are held for a person, and only accepted records are exported for loading.
@@ -62,8 +65,7 @@ export function DataQualityListPage() {
       </p>
       <NameReminder />
       {err && <InlineMessage kind="error">{err}</InlineMessage>}
-      <section className="fo-panel" aria-labelledby="new-gate">
-        <h2 id="new-gate">Run the gate</h2>
+      {view === "new" && <section className="fo-panel" aria-label="Check an export">
         <form
           className="fo-stack"
           onSubmit={(e) => {
@@ -72,7 +74,7 @@ export function DataQualityListPage() {
           }}
         >
           <label>
-            Dataset{" "}
+            Type of export{" "}
             <select
               value={dataset}
               onChange={(e) => {
@@ -109,7 +111,7 @@ export function DataQualityListPage() {
           )}
           <div className="fo-row">
             <button className="btn btn-primary" type="submit" disabled={busy || !Object.keys(files).some((k) => k.startsWith("source_") && files[k])}>
-              Run
+              Check
             </button>
             <button className="btn" type="button" disabled={busy} onClick={() => void go(async () => (await finops.dqSample()).vendors)}>
               Try sample data
@@ -117,16 +119,20 @@ export function DataQualityListPage() {
             <span className="muted small">Sample: synthetic vendor exports from two systems, then purchase orders checked against them.</span>
           </div>
         </form>
-      </section>
-      {runs.loading && <Loading />}
-      {runs.error && <ErrorState error={runs.error} onRetry={runs.reload} />}
-      {runs.data && runs.data.length === 0 && <EmptyState title="No gate runs yet">Upload files above or try the sample data.</EmptyState>}
-      {runs.data && runs.data.length > 0 && (
+      </section>}
+      {view === "list" && runs.loading && <Loading />}
+      {view === "list" && runs.error && <ErrorState error={runs.error} onRetry={runs.reload} />}
+      {view === "list" && runs.data && runs.data.length === 0 && (
+        <EmptyState title="No exports checked yet">
+          <Link to="/data-quality/new">Check an export or try the sample data.</Link>
+        </EmptyState>
+      )}
+      {view === "list" && runs.data && runs.data.length > 0 && (
         <table className="data-table fo-table">
           <thead>
             <tr>
-              <th>Run</th>
-              <th>Dataset</th>
+              <th>Check</th>
+              <th>Type</th>
               <th>Files</th>
               <th>Result</th>
               <th>By</th>

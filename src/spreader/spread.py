@@ -93,7 +93,8 @@ def assemble_statement(table: StatementTable, mappings: list[RowMapping], profil
     feeding: dict[str, list[int]] = {}
     for m in mappings:
         if m.canonical and not m.excluded:
-            feeding.setdefault(m.canonical, []).append(m.row_index)
+            for line in [m.canonical, *m.also]:
+                feeding.setdefault(line, []).append(m.row_index)
     components: set[int] = set()
     for line, idxs in feeding.items():
         for i in idxs:

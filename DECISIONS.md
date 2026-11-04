@@ -1088,3 +1088,80 @@ unknown wordings are placed, and one still set aside goes to a person.**
   affect suggestions only, never mapping. Spreading results are unchanged: `explain` reads the spread and writes nothing.
 - **Tests.** `tests/test_issue_explanations.py` (15), new code, so on the previous code the file cannot import. Checked in the
   browser on a copy of the demo: the suggested fix on Coca-Cola took blockers 2 -> 0 (new run), warnings open the same panel.
+
+**D64. Screens for finance people; engineers get their own area, and every area gets a menu.**
+- **Asked by Devin**: Accuracy and Time saved read as if for engineers, names like `stmt-insurer-dev-d62` do not read well, and
+  moving around should work like a store's drop-downs, in every area.
+- **What that name was.** A batch of test statements, not a company: statements, insurers, practice split, decision 62. So
+  batches get plain names ("Insurers, practice set, update 62", `spreader/report_names.py`), and the fictional names went on
+  the four generated demo statements. SEC filings keep their real names, and generated ones still say they are generated.
+- **One map.** `web/src/lib/nav.ts` lists every page; the sidebar drop-downs, breadcrumbs and tab titles all read it. Sections
+  open by themselves on the current page, and the menu keeps its scroll position.
+- **Pages split by subject.** Accuracy: summary, types of error, reviewer decisions, AI second opinions. Time saved: summary,
+  hours and cash, costs, errors avoided, what-if scenarios, reconciliation and more, assumptions, time a document. Each work area
+  separates its list from its add or new page.
+- **For engineers** holds what left the main pages: every saved report with its raw file name and intervals, each rule's track
+  record, and processing time and energy. A statement's profile and engine versions moved behind "Technical details".
+- **The summary leaves nothing out to look better.** Numbers left blank with no flag sit on each company card beside wrong
+  numbers, and the summary uses the highest update of the final test, not the newest file.
+- **Not changed.** Spreading, checks and every measured figure. Only names and wording on these screens.
+- **Fictional names.** Searched for and not found. That is not a registry check, so `scripts/load_demo.py` says to change one if
+  a real company turns up.
+- **Tests.** `tests/test_report_names.py` (on the old code the module cannot import and the summary route does not exist),
+  `web/src/lib/nav.test.ts`, one more in `tests/test_issue_explanations.py`. Pages checked in the browser, including at phone width.
+
+**D65. Review time is measured in the background, for management only; Errors avoided reads as a comparison.**
+- **Asked by Devin**: analysts who know they are timed may rush, which would raise errors and skew the ROI, and a visible clock
+  makes people fear for their jobs. Timing should be obvious to admins and higher-ups and absent for analysts. And the Errors
+  avoided page showed one box with no way to tell whether it was good.
+- **Built.** Opening a spread records active time with nothing to start, see or end (`POST /api/runs/{id}/activity`), under the
+  same limits as before: visible tab, used in the last minute, capped per report and by the clock. Approval closes it, and only
+  closed time counts. People reviewing one document count as one document. "Time my review" and the timing banner are gone.
+- **Who sees what.** New permission `roi`, held by the new `manager` role and `admin`. Without it, Time saved, the session list and
+  both ROI routes are refused, the menu entries are gone, and timing entries are left out of the audit log.
+- **Time, not people.** Management sees documents and time; the session list no longer names anyone. The purpose is the ROI, and
+  a per-person view would turn it into the thing Devin wants to avoid.
+- **Limits.** The call is visible to someone who opens the browser's developer tools; it answers `{}` whatever happens. By-hand
+  timing cannot be hidden, because it is deliberate work on a form, so for now only `roi` holders can run it. Whether analysts should
+  run it is open.
+- **Disclosure.** Some places require written notice of electronic monitoring. An organisation should cover this in its general
+  policy before use; this screen change does not replace that.
+- **Errors avoided.** Both error rates side by side, marked lower is better, and a plain statement of what is missing. The two
+  boxes are rates, not savings. Found along the way: Time saved read `latest-holdout.json`, an older run than the Accuracy page
+  (32 of 2,154 against 5 of 1,080). It now reads the same final test.
+- **Tests.** `tests/test_background_timing.py`. On the old code the route and the permission do not exist. It caught a real
+  error on the first run: the audit filter's missing import. Checked in the browser as an analyst and as a manager.
+
+**D66. A wide set of real filings, drawn at random, and the failures it exposed.**
+- **Asked by Devin**: test on real companies of every size and industry, with a set that has not influenced the build.
+- **The old sets, honestly.** Failures on the 54 kept-back filings were studied and fixed, so they are now validation filings, a
+  regression check. The app no longer calls them a final test.
+- **The wide set.** `scripts/fetch_wide.py` draws companies at random from the SEC's ticker list, by industry and by size, one
+  filing per company and none already held: 219 filings (176 10-K, 43 10-Q) across 11 industries, 118 to tune on and 101 sealed.
+  Every filing's URL, accession, dates and hash are in `eval/wide/manifest.json`. Keys come from the filing's XBRL tags, a route
+  that never touches the table reader. `scripts/run_wide.py` reports by industry, size and filing type in parallel.
+- **What real filings exposed (all systemic, none written for one filing).**
+  - Statements printed across two tables came out half blank (`assembly.join_halves`).
+  - A parent-only cash flow or quarterly table could beat the real statement. Statements of one company tie to each other, so a
+    candidate that ties now beats one that does not (`assembly.choose_by_ties`), and the choice can only move to a table that ties.
+  - Combined "Statements of Income and Comprehensive Income" were rejected outright.
+  - "Thirteen Weeks Ended" read as a full year, and 53-week years took the wrong year.
+  - One row for basic and diluted filled one line; continuing and total per-share rows were added together.
+  - Rows below total assets could land on asset lines; a subtotal worded like its own row counted the other row twice.
+  - "$'000" in a column heading was missed; ordinary wording for buybacks, debt, leases and working capital went to catch-alls.
+- **Whole dollars.** Small filers print no unit, which blocked approval on a sixth of the filings. `scale.whole_dollars` reads
+  silence plus figures to the last digit, and any unit wording anywhere rules it out. It is measured 15 of 15 filings, a lower bound
+  of 79.6% against the 80% bar, so it stays under review with a better explanation. One more verified filing clears the bar. The bar
+  was not moved.
+- **Caught on the way.** The first version of that rule read Hawaiian Electric's tables, in thousands, as dollars: 25 wrong values went
+  through on the tuning half, and the rule was hardened. The first fiscal-year rule read an audit report's date as a year-end and
+  blanked three filings; the validation filings caught it after the first sealed measurement.
+- **Sealed result (101 filings).** Right 74.8% -> 81.5%. Blank with no flag 707 -> 502. Wrong with no flag 6 of 1,574 -> 6 of 1,762
+  (0.3%, likely 0.2-0.7%). Right with no person 15.6% -> 17.5%. The "before" is the previous commit's code on the same filings.
+- **How clean the seal is.** `eval/wide/seal-log.txt` lists each opening. One was stopped unread, one was measured with the date
+  bug, and its wrong values and industry table were seen; the only changes after that are the date fix, which came from the validation
+  filings, and its narrowing, which the release gate forced when it caught March year-ends. The sealed result did not change with the
+  narrowing. So this is close to unseen, not perfectly unseen. The next honest test needs fresh filings.
+- **Timing of the validation reports.** The `stmt-*-d66` reports were measured before that last narrowing. The release gate and the
+  sealed half were run again after it.
+- **Tests.** `tests/test_statement_assembly.py` (16). 11 fail on the previous code; 5 guard the new rules against their own failure modes.

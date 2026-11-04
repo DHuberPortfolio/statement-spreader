@@ -480,4 +480,37 @@ export interface EvalReport {
   buckets: Record<string, number> | null;
   seconds: number | null;
   file: string;
+  about?: { title: string; group: string; split: string | null; update: number | null };
+}
+
+export interface EvalBatch {
+  documents: number;
+  rates: Record<string, Rate>;
+  buckets: Record<string, number> | null;
+  error_kinds: Record<string, number> | null;
+  update: number | null;
+}
+
+export interface WideSummary {
+  filings: number;
+  values: number;
+  right: number | null;
+  right_alone: number | null;
+  silent_wrong: [number, number];
+  caught: [number, number];
+  blank_unflagged: [number, number];
+}
+
+export interface WideResult {
+  all: WideSummary;
+  by_sector: Record<string, WideSummary>;
+  by_form: Record<string, WideSummary>;
+  by_size: Record<string, WideSummary>;
+}
+
+export interface EvalGroup {
+  key: string;
+  title: string;
+  holdout?: EvalBatch;
+  dev?: EvalBatch;
 }

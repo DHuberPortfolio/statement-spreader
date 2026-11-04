@@ -138,10 +138,11 @@ class Service:
 
     # ---- upload and run ----
     def upload(self, filename: str, data: bytes, actor: str, company_id: str | None = None,
-               generated: bool = False) -> tuple[dict[str, Any], RunView]:
+               generated: bool = False, display_name: str | None = None) -> tuple[dict[str, Any], RunView]:
         """company_id: any identifier the organisation uses for the borrower or client; for an SEC filing it defaults to
         the CIK on its cover page. Documents of one company share its approved spreads and confirmed mappings.
-        generated: a made-up document, there to show the platform working; every screen says so."""
+        generated: a made-up document, there to show the platform working; every screen says so.
+        display_name: the made-up company a generated document is shown under."""
         try:
             fmt = sniff_format(filename, data)
         except IngestError as exc:
@@ -153,7 +154,9 @@ class Service:
             if company:
                 c.execute("UPDATE documents SET company_id=? WHERE id=?", (company, doc_id))
             if generated:
-                c.execute("UPDATE documents SET origin='generated' WHERE id=?", (doc_id,))
+                c.execute("UPDATE documents SET origin='generated', company_name=COALESCE(?, company_name), "
+                          "filing=COALESCE(?, filing) WHERE id=?",
+                          (display_name, "Sample statements" if display_name else None, doc_id))
             self.store.log(c, "upload" if new else "upload_duplicate", {"filename": _safe_name(filename), "size": len(data),
                                                                         "company_id": company}, actor, document_id=doc_id)
         self.identify(doc_id)
@@ -663,6 +666,9 @@ class Service:
                           "created_at, created_by, source_run) VALUES (?,?,?,?,?,?,?,?)",
                           (self.profile.id, stmt, row.label_clean, memory_section(row), line, now(), actor, run_id))
             self.store.log(c, kind, payload, actor, run_id, run["document_id"])
+            if kind == "approve":  # the review is over: its background time now counts (D65)
+                c.execute("UPDATE work_sessions SET ended_at=? WHERE document_id=? AND background=1 AND ended_at IS NULL",
+                          (now(), run["document_id"]))
             if kind == "approve" and payload.get("company_id"):
                 self._remember(c, run_id, run["document_id"], payload["company_id"], spread, state, actor)
             elif kind == "reopen":

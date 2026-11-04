@@ -56,6 +56,9 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | Confirmations from the approved spread and a label's record; never on catch-all lines; a document not counting toward its own record (D61) | `tests/test_prior_and_label_confirmations.py` | - |
 | Confirm-only checks flag nothing and count once, never beside a repeated number alone; parent-only wording; a share count tagged without its scale (D62) | `tests/test_confirm_only_checks.py` | - |
 | Issues explained, suggestions from the numbers, a person's sentence never written for them, fixes clear blockers with the reason logged, documents named or marked generated (D63) | `tests/test_issue_explanations.py` | - |
+| Test batches in plain words, the newest update of each batch by number, a summary route, the app's page map (D64) | `tests/test_report_names.py`, `web/src/lib/nav.test.ts` | - |
+| Background review time, its limits, approval closing it, management-only access, nothing in an analyst's audit log (D65) | `tests/test_background_timing.py` | - |
+| Statements across two tables, ties between statements, weeks and fiscal years, basic and diluted rows, sides, whole dollars (D66) | `tests/test_statement_assembly.py` | - |
 | Workbooks laid out like the SEC's Financial_Report.xlsx (D56) | `tests/test_workbook_layouts.py` | The real workbooks in `var/real-samples` (download list in its manifest), scored against `eval/sec/keys-prior` |
 | What rulings teach; go-live report; export (D55) | `tests/test_teaching.py`, `tests/test_learning_redteam.py` | `spreader learning report`; with `llama-server` running, `scripts/measure_ruling_examples.py` |
 | A senior's blind ruling, corrected after review (D54) | `tests/test_rulings.py` | Sign in as Sam Senior, open Model disagreements, rule; then as Ana open the run |
@@ -202,6 +205,14 @@ What the Python tests cover:
   off by default (and switching it on is a new run); documents without tags compare nothing.
 
 ## Evaluation against answer keys
+
+The wide set (D66), real filings drawn at random by industry and size:
+
+```
+.venv/Scripts/python scripts/fetch_wide.py                  # collect; --scale 4 draws four times as many
+.venv/Scripts/python scripts/run_wide.py --save <name>      # the tuning half, by industry, size and filing type
+.venv/Scripts/python scripts/run_wide.py --split sealed --open-seal --save <name>   # logged in eval/wide/seal-log.txt
+```
 
 ```bash
 .venv/Scripts/python scripts/fetch_sec.py                       # download the SEC 10-Ks (fair-access rate)

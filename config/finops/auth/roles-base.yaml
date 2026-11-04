@@ -15,7 +15,9 @@ roles:
   reviewer: [view, edit, review, export]
   approver: [view, review, approve, export]
   auditor: [view, audit, export]
-  admin: [view, admin, audit]
+  # Time saved and the time measurements are for management, never shown to the people being measured (D65).
+  manager: [view, roi, export]
+  admin: [view, admin, audit, roi]
 # Two-person sign-off ("maker-checker"), off by default (D51). A larger organisation turns these on in its own
 # sign-in file and gives people preparer/reviewer/approver instead of analyst:
 #   approver_not_uploader: whoever uploaded a document cannot approve its spread

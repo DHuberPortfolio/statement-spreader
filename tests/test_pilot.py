@@ -41,16 +41,16 @@ def _timed(c: Any, doc: str, run: int, mode: str, seconds: float, **extra: Any) 
 def test_the_same_analyst_cannot_be_timed_twice_on_one_document(svc: Service) -> None:
     view = client_as(api.app, "pat").post("/api/documents", files={"file": ("a.htm", DOC.read_bytes())}).json()
     doc, run = view["run"]["document_id"], view["run"]["id"]
-    rae = client_as(api.app, "rae")
-    assert _timed(rae, doc, run, "baseline", 900, difficulty="low", analyst_experience="1-3 years").status_code == 200
-    again = rae.post("/api/sessions", json={"mode": "assisted", "document_id": doc, "run_id": run})
+    first = client_as(api.app, "adm")
+    assert _timed(first, doc, run, "baseline", 900, difficulty="low", analyst_experience="1-3 years").status_code == 200
+    again = first.post("/api/sessions", json={"mode": "assisted", "document_id": doc, "run_id": run})
     assert again.status_code == 409 and "already timed this document" in again.json()["detail"]
-    assert _timed(client_as(api.app, "erin"), doc, run, "assisted", 300).status_code == 200  # another analyst may
+    assert _timed(client_as(api.app, "mia"), doc, run, "assisted", 300).status_code == 200  # another analyst may
 
 
 def test_session_context_is_validated(svc: Service) -> None:
     view = client_as(api.app, "pat").post("/api/documents", files={"file": ("a.htm", DOC.read_bytes())}).json()
-    c = client_as(api.app, "rae")
+    c = client_as(api.app, "mia")
     for bad in ({"difficulty": "extreme"}, {"analyst_experience": "lots"}):
         r = c.post("/api/sessions", json={"mode": "baseline", "document_id": view["run"]["document_id"],
                                           "run_id": view["run"]["id"], **bad})

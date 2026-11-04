@@ -390,10 +390,25 @@ def _follow_fiscal_pattern(tables: list[StatementTable]) -> None:
             _relabel(t, changes)
 
 
+_EARNINGS_ROW = re.compile(r"\b(basic|dilut\w*|assuming dilution)\b")
+_SHARES_NEAR = re.compile(r"\bshares\b(?! ?(of|used|outstanding)? ?(in )?(computing|calculating)? ?(net )?(income|loss|earnings) per)|weighted", re.I)
+
+
+def _looks_per_share(period_texts: list[str]) -> bool:
+    """Printed like a per-share amount: cents shown, under a thousand. Share counts are whole, or one decimal in millions."""
+    nums = [t for t in period_texts if re.search(r"\d", t)]
+    return bool(nums) and all(re.search(r"\.\d{2}\b", t) and len(re.sub(r"\D", "", t.split(".")[0])) <= 3 for t in nums)
+
+
 def _unit(lab: str, section: str, period_texts: list[str], label: str = "") -> ValueUnit:
     raw_vals = " ".join(period_texts)
     if "%" in raw_vals:
         return ValueUnit.PERCENT
+    # A basic or diluted row says what it is by how it is printed, whatever the words around it ("Basic" under
+    # "Net income", "Net loss per share, basic and diluted", which holds the money word "net loss").
+    near = section.split(" > ")[-1] if section else ""
+    if _EARNINGS_ROW.search(lab) and _looks_per_share(period_texts) and not _SHARES_NEAR.search(lab) and not _SHARES_SECTION.search(near):
+        return ValueUnit.PER_SHARE
     if _STATED_PER_SHARE.search(label):
         return ValueUnit.PER_SHARE
     if _STATED_SHARES.search(label):

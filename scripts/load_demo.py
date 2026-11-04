@@ -18,6 +18,16 @@ from spreader.store import Store
 ROOT = Path(__file__).resolve().parents[1]
 
 
+# Made-up companies for the generated statements. Each name was searched for and no such company turned up; change one
+# if a real company by that name appears. SEC filings keep their real names.
+DEMO_NAMES = {
+    "s7-001-clean": "Larkspur Vale Foods",
+    "s7-005-clean": "Quillon Peak Industries",
+    "s7-031-no-unit-statement": "Tessarine Harbor Co.",
+    "s7-032-footing-error": "Everhollow Trading",
+}
+
+
 def main(data_dir: str) -> None:
     svc = Service(Store(Path(data_dir) / "spreader.sqlite3"))
     manifest = json.loads((ROOT / "eval" / "sec" / "manifest.json").read_text())
@@ -33,7 +43,9 @@ def main(data_dir: str) -> None:
             files.append(f)
     for f in files:
         name = f.name if f.parent.name == "raw" else f"{f.parent.name}.{f.suffix.lstrip('.')}"
-        _, view = svc.upload(name, f.read_bytes(), "demo-loader", generated=f.parent.name != "raw")
+        display = DEMO_NAMES.get(f.parent.name)
+        _, view = svc.upload(name, f.read_bytes(), "demo-loader", company_id=display, generated=f.parent.name != "raw",
+                             display_name=display)
         s = view.spread
         print(f"{name:45s} run {view.run['id']:3d} {view.run['status']:9s} "
               f"{len(s.values) if s else 0:4d} values, {sum(1 for i in s.review if i.severity.value == 'blocker') if s else 0} blockers")

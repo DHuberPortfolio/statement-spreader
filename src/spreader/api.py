@@ -24,11 +24,14 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from finops.core import identity as idn
+
 from . import __version__
 from .contracts import RowRole
 from .explain import explain
 from .export import to_csv, to_json, to_xlsx
 from .ingest import MAX_BYTES
+from .report_names import GROUPS, describe_report, latest_batches
 from .service import ActionError, SeparationError, Service, StaleError
 from .store import Store, now
 
@@ -327,7 +330,10 @@ def events(run_id: int) -> list[dict[str, Any]]:
         service().get(run_id)
     except ActionError as exc:
         raise HTTPException(404, str(exc)) from exc
-    return service().events(run_id)
+    events = service().events(run_id)
+    if idn.current().can("roi"):
+        return events
+    return [e for e in events if not str(e.get("kind", "")).startswith("session_")]  # timing is not for those it measures (D65)
 
 
 @app.get("/api/runs/{run_id}/source/{statement}")
@@ -422,8 +428,36 @@ def evaluation() -> dict[str, Any]:
         if not isinstance(r, dict) or not isinstance(r.get("rates"), dict) or "silent_error_rate" not in r["rates"]:
             continue
         reports.append({k: r.get(k) for k in ("name", "documents", "crashed", "profile", "rates", "cells", "error_kinds",
-                                              "buckets", "seconds")} | {"file": p.name})
+                                              "buckets", "seconds")} | {"file": p.name, "about": describe_report(str(r.get("name")))})
     return {"reports": reports}
+
+
+@app.get("/api/evaluation/summary")
+def evaluation_summary() -> dict[str, Any]:
+    """The newest final test and practice set of each kind of company, in the fields the results pages show."""
+    latest = latest_batches(REPORTS)
+    groups = []
+    for key, title in GROUPS.items():
+        entry: dict[str, Any] = {"key": key, "title": title}
+        for split in ("holdout", "dev"):
+            path = latest.get((key, split))
+            if path is None:
+                continue
+            r = json.loads(path.read_text())
+            entry[split] = {k: r.get(k) for k in ("documents", "rates", "buckets", "error_kinds")} | {
+                "update": describe_report(path.stem)["update"]}
+        if "holdout" in entry or "dev" in entry:
+            groups.append(entry)
+    return {"groups": groups, "wide": _wide_result()}
+
+
+def _wide_result() -> dict[str, Any] | None:
+    """The one sealed measurement of the wide set (D66): by industry and filing type, without the filing-level detail."""
+    path = REPORTS / "wide-sealed-first-look.json"
+    if not path.exists():
+        return None
+    r = json.loads(path.read_text())
+    return {k: r[k] for k in ("all", "by_sector", "by_form", "by_size")}
 
 
 from . import roi_api  # noqa: E402  (registers the ROI routes)

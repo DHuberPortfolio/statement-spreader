@@ -63,6 +63,6 @@ pending.
 
 ## Limits to state with any result
 
-Six sessions; two or three analysts; documents chosen, not sampled; analysts aware they are timed; the tool's
+Six sessions; two or three analysts; documents chosen, not sampled; by-hand sessions are known to be timed, review time is recorded in the background (D65); the tool's
 accuracy on these documents may differ from the evaluation sets. Report the medians with their ranges and the
 quality figures side by side; never a time saving without the error rates of both arms.

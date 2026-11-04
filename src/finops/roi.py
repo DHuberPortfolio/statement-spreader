@@ -36,8 +36,8 @@ DEFAULTS: dict[str, dict[str, tuple[float, str]]] = {
         "minutes_per_exception_invoice": (9.0, "Minutes to work one invoice that stops in the exception queue. Placeholder."),
     },
     "dq": {
-        "dq_records_per_month": (2000.0, "Records gated per month (vendor master, purchase-order lines). Placeholder."),
-        "dq_error_share": (0.02, "Share of records with an error before the gate. Placeholder: the gate's first runs on real "
+        "dq_records_per_month": (2000.0, "Records checked per month (vendor master, purchase-order lines). Placeholder."),
+        "dq_error_share": (0.02, "Share of records with an error before the checks. Placeholder: the first runs on real "
                                  "exports measure it."),
         "dq_minutes_per_held_record": (4.0, "Minutes for a person to resolve one held record. Placeholder: time it."),
         "dq_cost_per_bad_record_loaded": (0.0, "Cost of one bad record loaded into the next system (rework, a payment to the "
@@ -45,7 +45,7 @@ DEFAULTS: dict[str, dict[str, tuple[float, str]]] = {
     },
     "sheets": {
         "sheets_workbooks_per_month": (30.0, "Workbooks reviewed per month (models, workpapers, close files). Placeholder."),
-        "sheets_findings_per_workbook": (4.0, "Errors and risks the scanner reports per real workbook. Placeholder: the synthetic "
+        "sheets_findings_per_workbook": (4.0, "Errors and risks reported per real workbook. Placeholder: the synthetic "
                                                "sets plant problems on purpose, so their count is not a guide."),
         "sheets_minutes_per_finding": (3.0, "Minutes to check one finding against the workbook. Placeholder: time it."),
         "sheets_cost_per_error_shipped": (0.0, "Cost of one spreadsheet error reaching a decision or a report. Default 0: not "
@@ -88,8 +88,8 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
     entered = entered or {}
     A: dict[str, float] = {}
     out: dict[str, Any] = {"engines": {}, "warnings": [
-        "Automation rates are measured on synthetic known-answer sets, not on your data. Treat them as an upper "
-        "bound until the engines run on a sample of real records.",
+        "Automation rates are measured on generated test records, not on your data. Treat them as a best case "
+        "until the platform runs on a sample of your real records.",
         "Minutes per item are placeholders until someone times real work; every money figure inherits that.",
         "No external benchmark is imported: none was verified, so none is quoted."]}
     assumptions: dict[str, Number] = {}
@@ -107,9 +107,9 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         exc_per_record = counts["exceptions"] / counts["records"] if counts["records"] else None
         nums = {
             "false_match_rate": _obs(_rate(run["rates"]["false_match_rate"]), "share of automatic matches",
-                                     f"Wrong automatic matches on the held-out synthetic set ({rec['_file']})."),
+                                     f"Wrong automatic matches on the generated test set."),
             "exceptions_per_record": Number(exc_per_record, "observed", "exceptions per record",
-                                            "Exceptions raised per record on the held-out synthetic set (built with many "
+                                            "Exceptions raised per record on the generated test set (built with many "
                                             "planted problems, so higher than a typical month)."),
             "records_auto_settled": _obs(_rate(run["rates"].get("records_auto_settled")), "share of records",
                                          "Records settled by correct automatic matches (no person needed)."),
@@ -124,8 +124,8 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
                                        "observed exception rate).")
         nums["hours_with_engine"] = Number(assisted_h, "estimated", "hours per month",
                                            "Tick off only records not settled automatically + the same investigation time. "
-                                           "No claim that the engine makes investigation faster.")
-        nums["hours_released"] = Number(manual_h - assisted_h, "estimated", "hours per month", "By hand minus with the engine.")
+                                           "No claim that the platform makes investigation faster.")
+        nums["hours_released"] = Number(manual_h - assisted_h, "estimated", "hours per month", "By hand minus with the platform.")
         nums["cash_value"] = Number((manual_h - assisted_h) * rate * cash, "estimated", "$ per month",
                                     "Released hours x hourly cost x cash-realisation share (default 0).")
         out["engines"]["recon"] = {k: v.as_dict() for k, v in nums.items()} | {"source": rec["_file"]}
@@ -135,8 +135,8 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         s = inv["sets"].get("holdout") or next(iter(inv["sets"].values()))
         touch = _rate(s["rates"]["touchless_rate"])
         nums = {
-            "touchless_rate": _obs(touch, "share of invoices", f"Invoices eligible with no person on the held-out synthetic set "
-                                   f"({inv['_file']}); the set plants a problem in nearly half of them."),
+            "touchless_rate": _obs(touch, "share of invoices", f"Invoices eligible with no person on the generated test set; "
+                                   f"the set plants a problem in nearly half of them."),
             "false_touchless": _obs(_rate(s["rates"]["false_touchless"]), "share of problem invoices",
                                     "Problem invoices that went through untouched (must stay at 0)."),
         }
@@ -150,7 +150,7 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         nums["hours_with_engine"] = Number(assisted_h, "estimated", "hours per month",
                                            "Only invoices that stop in the queue cost keying time (assumed in full, though they "
                                            "arrive pre-read) + the same problem time. Approval in the ERP is left out of both.")
-        nums["hours_released"] = Number(manual_h - assisted_h, "estimated", "hours per month", "By hand minus with the engine.")
+        nums["hours_released"] = Number(manual_h - assisted_h, "estimated", "hours per month", "By hand minus with the platform.")
         nums["cash_value"] = Number((manual_h - assisted_h) * rate * cash, "estimated", "$ per month",
                                     "Released hours x hourly cost x cash-realisation share (default 0).")
         out["engines"]["invoice"] = {k: v.as_dict() for k, v in nums.items()} | {"source": inv["_file"]}
@@ -164,7 +164,7 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         false_q = max((f for _, f in rates if f), key=lambda nd: nd[0] / nd[1], default=None)
         nums = {
             "faults_caught": _obs(caught, "share of bad records", f"Bad records held or rejected, worst of the measured sets "
-                                  f"({dq['_file']}: synthetic and independently written test exports)."),
+                                  f"(generated and independently written test exports)."),
             "false_quarantine": _obs(false_q, "share of valid records", "Valid records held for review anyway, worst of the "
                                      "measured sets: the cost of the checks."),
         }
@@ -172,12 +172,12 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         R, e = A["dq_records_per_month"], A["dq_error_share"]
         mins, cost = A["dq_minutes_per_held_record"], A["dq_cost_per_bad_record_loaded"]
         nums["review_hours_added"] = Number(R * (e * c + (1 - e) * fq) * mins / 60, "estimated", "hours per month",
-                                            "Held records x assumed minutes: time the gate adds. Without the gate this time is "
+                                            "Held records x assumed minutes: time the checks add. Without the checks this time is "
                                             "not saved; it moves downstream, to fixing what loaded.")
         nums["bad_records_stopped"] = Number(R * e * c, "estimated", "records per month",
                                              "Records x assumed error share x observed catch rate.")
         nums["bad_records_still_loaded"] = Number(R * e * (1 - c), "estimated", "records per month",
-                                                  "What the gate would miss at the observed rate.")
+                                                  "What the checks would miss at the observed rate.")
         nums["value_of_stopped_records"] = Number(R * e * c * cost, "hypothetical", "$ per month",
                                                   "Stopped records x the cost of one bad record loaded (default 0: not claimed).")
         out["engines"]["dq"] = {k: v.as_dict() for k, v in nums.items()} | {"source": dq["_file"]}
@@ -199,13 +199,13 @@ def compute(reports: Path, entered: dict[str, float] | None = None) -> dict[str,
         worst_r = min((x for x in recalls if x), key=lambda nd: nd[0] / nd[1], default=None)
         nums = {
             "precision": _obs(worst_p, "share of reported errors and risks", f"Findings that were planted problems, worst first "
-                              f"scoring of the independently written workbooks ({sh['_file']}; synthetic, not real models)."),
-            "recall": _obs(worst_r, "share of planted problems", "Planted problems the scanner reported, worst first scoring of the independent sets."),
+                              f"scoring of the independently written workbooks (generated, not real models)."),
+            "recall": _obs(worst_r, "share of planted problems", "Planted problems found, on the worst of the independent test sets."),
         }
         W, F, M = A["sheets_workbooks_per_month"], A["sheets_findings_per_workbook"], A["sheets_minutes_per_finding"]
         p_ = nums["precision"].value or 0.0
         nums["triage_hours"] = Number(W * F * M / 60, "estimated", "hours per month",
-                                      "Workbooks x assumed findings per workbook x assumed minutes: the time the scanner adds. "
+                                      "Workbooks x assumed findings per workbook x assumed minutes: the time checking them adds. "
                                       "It replaces no review; it points the review at cells.")
         nums["real_problems_reported"] = Number(W * F * p_, "estimated", "findings per month",
                                                 "Assumed findings x observed precision.")

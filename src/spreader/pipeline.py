@@ -23,6 +23,7 @@ from .contracts import DocumentIR, ProvenanceStep, SourceFormat, Spread, Stateme
 from .detect import classify
 from .confirm import LabelRecord, find_confirmations
 from .echo import find_echoes
+from .assembly import choose_by_ties, join_halves
 from .layout import lay_out
 from .mapping import Memory, ModelMapper, map_table
 from .profile import Profile
@@ -38,7 +39,7 @@ LAYOUT_TOLERANCE = {SourceFormat.HTML: 0.0, SourceFormat.XLSX: 0.0, SourceFormat
 # The registrant's own, unconsolidated statements (SEC Schedule I/II): never the borrower's financial statements.
 _PARENT_ONLY = re.compile(r"condensed financial information of (the )?registrant|parent company only|registrant only|"
                           r"\(parent company\)", re.I)
-_NOT_PRIMARY = re.compile(r"pro\s*forma|unaudited|segment|quarterly|selected financial|summary|condensed consolidating|"
+_NOT_PRIMARY = re.compile(r"pro\s*forma|unaudited|segment|quarterly|selected financial|summary|consolidating|"
                           r"supplementary|non-gaap|illustrative", re.I)
 
 
@@ -65,7 +66,8 @@ class StageTimer:
 # heading is pages above it (Hancock Whitney's "Condensed Statements of Cash Flows", found in D57: chosen over the
 # consolidated statement, its figures added up, and three wrong values per year went out without review).
 _PARENT_ROWS = re.compile(r"dividends? received from (?:bank |banking )?subsidiar|"
-                          r"equity in (?:the )?(?:net )?undistributed (?:net )?(?:earnings|income|loss)\w* of (?:bank |banking )?subsidiar|"
+                          r"equity in (?:the )?(?:net )?undistributed (?:net )?(?:earnings|income|loss)\w* of (?:the )?(?:bank\b|banking |subsidiar)|"
+                          r"^investment in (?:the )?bank\b|"
                           r"investments? in (?:and advances to )?(?:bank |banking |consolidated )?subsidiar|"
                           r"capital contributions? to (?:bank |banking )?subsidiar|"
                           r"advances (?:to|from) subsidiar|dividends? from (?:bank |banking )?subsidiar", re.I)
@@ -98,6 +100,7 @@ def pick_statements(doc: DocumentIR, profile: Profile, timer: StageTimer) -> dic
         cur = best.get(det.statement)
         if cur is None or det.score > cur[2].score:
             best[det.statement] = (table, layout, det)
+    choose_by_ties(doc, best, rivals)
     for stype, cands in rivals.items():
         chosen = best[stype]
         close = [c for c in cands if c[0] is not chosen[0] and c[2].score >= chosen[2].score - 3]
@@ -118,6 +121,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     values = []
     built = {stype: timer.run("structure", build_statement, table, layout, stype, doc.doc_id, det.score)
              for stype, (table, layout, det) in picked.items()}
+    join_halves(doc, picked, built, lambda t: lay_out(t, LAYOUT_TOLERANCE[doc.format]), build_statement)
     for stype, (table, layout, _det) in picked.items():
         if is_parent_only(table, layout):
             # Found on a 10-K whose consolidated statements are in an exhibit: the only balance sheet in the document was
@@ -125,7 +129,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
             built[stype].warnings.append(
                 f"PARENT_ONLY: the only {stype.value.replace('_', ' ')} found is the registrant's own (parent company, "
                 "unconsolidated) statement, not the consolidated one; the consolidated statements may be in an exhibit.")
-        rival_ids = table.__dict__.get("_rivals")
+        rival_ids = [i for i in table.__dict__.get("_rivals", []) if i not in built[stype].joined_tables]
         if rival_ids:
             built[stype].warnings.append(
                 f"COMPETING_TABLE: another table (table {', '.join(str(i + 1) for i in rival_ids)}) also looks like the "
@@ -135,7 +139,7 @@ def spread_document(doc: DocumentIR, profile: Profile, memory: Memory | None = N
     contexts = {stype: [layout.title_text + " " + layout.header_label_text,
                         " ".join(" ".join(t.text for t in r.tokens) for r in layout.header_rows), table.context[-400:]]
                 for stype, (table, layout, _det) in picked.items()}
-    resolve_units(built, contexts, doc.unit_statements)
+    resolve_units(built, contexts, doc.unit_statements, (t.context[-400:] + " " + " ".join(k.text for r in t.rows for k in r.tokens) for t in doc.tables))
     for stype, st in built.items():
         mappings = timer.run("map", map_table, st, profile, memory, model, company.mappings if company else None)
         statements[stype.value] = StatementResult(table=st, mappings=mappings)

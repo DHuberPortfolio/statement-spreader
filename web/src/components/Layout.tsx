@@ -1,6 +1,7 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { authState, can, onAuthChange, signOut } from "../lib/auth";
 import { formatDuration } from "../lib/format";
+import { NAV, breadcrumbs, findPage, normalPath, type IconName, type NavItem } from "../lib/nav";
 import { Link, navigate, useLocation } from "../lib/router";
 import { endActiveSession } from "../lib/session";
 import { flash, useFlash, useSession } from "../lib/store";
@@ -32,7 +33,7 @@ function SessionBanner() {
   const s = useSession();
   const t = useTimer();
   const [ending, setEnding] = useState(false);
-  if (!s) return null;
+  if (!s || !can("roi")) return null;
   const where = s.mode === "assisted" ? (s.runId ? `/runs/${s.runId}` : "/") : `/sessions/${s.id}/baseline`;
   return (
     <div className="session-banner" role="region" aria-label="Timed work session">
@@ -89,51 +90,6 @@ function FlashArea() {
   );
 }
 
-type NavItem = {
-  to: string;
-  label: string;
-  hint: string;
-  icon: IconName;
-  active: (path: string) => boolean;
-  /** shown only to someone with this permission */
-  needs?: string;
-};
-
-const NAV: { group: string; items: NavItem[] }[] = [
-  {
-    group: "",
-    items: [{ to: "/", label: "Overview", hint: "What needs attention", icon: "home", active: (p) => p === "/" }],
-  },
-  {
-    group: "Daily work",
-    items: [
-      { to: "/statements", label: "Statements", hint: "Spread financial statements", icon: "statement",
-        active: (p) => p.startsWith("/statements") || p.startsWith("/runs") },
-      { to: "/recon", label: "Reconciliation", hint: "Bank against ledger", icon: "match", active: (p) => p.startsWith("/recon") },
-      { to: "/invoices", label: "Invoices", hint: "Match to orders and receipts", icon: "invoice", active: (p) => p.startsWith("/invoices") },
-    ],
-  },
-  {
-    group: "Data checks",
-    items: [
-      { to: "/data-quality", label: "Data quality", hint: "Vendor and order exports", icon: "shield", active: (p) => p.startsWith("/data-quality") },
-      { to: "/spreadsheets", label: "Spreadsheets", hint: "Formula risks in workbooks", icon: "grid", active: (p) => p.startsWith("/spreadsheets") },
-    ],
-  },
-  {
-    group: "Results",
-    items: [
-      { to: "/roi", label: "Time saved", hint: "Measured hours and cost", icon: "clock",
-        active: (p) => p.startsWith("/roi") || p.startsWith("/sessions") },
-      { to: "/evaluation", label: "Accuracy", hint: "How right it is, and learning", icon: "target", active: (p) => p.startsWith("/evaluation") },
-      { to: "/disagreements", label: "Model disagreements", hint: "Rule on the model's learning", icon: "match",
-        active: (p) => p.startsWith("/disagreements"), needs: "adjudicate" },
-    ],
-  },
-];
-
-type IconName = "home" | "statement" | "match" | "invoice" | "shield" | "grid" | "clock" | "target" | "menu";
-
 const ICON_PATHS: Record<IconName, string> = {
   home: "M3 9.5 10 4l7 5.5V16a1 1 0 0 1-1 1h-3.5v-4.5h-5V17H4a1 1 0 0 1-1-1z",
   statement: "M5 3h7l3 3v11H5zM12 3v3h3M7.5 9.5h5M7.5 12.5h5M7.5 15h3",
@@ -143,6 +99,7 @@ const ICON_PATHS: Record<IconName, string> = {
   grid: "M3.5 4h13v12h-13zM3.5 8h13M3.5 12h13M8 4v12M12.5 4v12",
   clock: "M10 3.5a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zM10 6.5V10l2.5 1.5",
   target: "M10 3.5a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zM10 7a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM10 9.6a.4.4 0 1 1 0 .8.4.4 0 0 1 0-.8z",
+  wrench: "M15.7 5.2a3.8 3.8 0 0 1-5 4.7l-5 5a1.4 1.4 0 0 1-2-2l5-5a3.8 3.8 0 0 1 4.7-5l-2.2 2.2.6 1.7 1.7.6z",
   menu: "M3.5 5.5h13M3.5 10h13M3.5 14.5h13",
 };
 
@@ -154,16 +111,98 @@ export function Icon({ name, size = 18 }: { name: IconName; size?: number }) {
   );
 }
 
+// Which drop-downs a person opened or closed: each page draws its own Layout, so this outlives one page.
+const toggled = new Map<string, boolean>();
+let sidebarScroll = 0;
+
+function NavSection({ item, path }: { item: NavItem; path: string }) {
+  const [, redraw] = useState(0);
+  const here = findPage(path);
+  const active = here?.item === item;
+  const children = (item.children ?? []).filter((c) => !c.needs || can(c.needs));
+  const open = toggled.get(item.label) ?? active;
+  const hasMenu = children.length > 0;
+  return (
+    <li>
+      <div className="nav-row">
+        <Link
+          to={item.to}
+          aria-current={active && !hasMenu ? "page" : undefined}
+          className={active ? "is-current" : ""}
+          onClick={() => toggled.delete(item.label)}
+        >
+          <Icon name={item.icon} />
+          <span className="nav-text">
+            <span className="nav-label">{item.label}</span>
+            <span className="nav-hint">{item.hint}</span>
+          </span>
+        </Link>
+        {hasMenu && (
+          <button
+            type="button"
+            className={`nav-caret ${open ? "is-open" : ""}`}
+            aria-expanded={open}
+            aria-label={`${open ? "Hide" : "Show"} ${item.label} pages`}
+            onClick={() => {
+              toggled.set(item.label, !open);
+              redraw((n) => n + 1);
+            }}
+          >
+            <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
+              <path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        )}
+      </div>
+      {hasMenu && open && (
+        <ul className="nav-sub">
+          {children.map((c) => {
+            const current = here?.child?.to === c.to;
+            return (
+              <li key={c.to}>
+                <Link to={c.to} aria-current={current ? "page" : undefined} className={current ? "is-sub-current" : ""}>
+                  {c.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </li>
+  );
+}
+
+function Breadcrumbs({ path }: { path: string }) {
+  const crumbs = breadcrumbs(path);
+  if (crumbs.length === 0) return null;
+  return (
+    <nav className="breadcrumbs small" aria-label="You are here">
+      {crumbs.map((c, i) => (
+        <span key={c.to}>
+          {i > 0 && <span className="muted" aria-hidden="true"> / </span>}
+          {i < crumbs.length - 1 ? <Link to={c.to}>{c.label}</Link> : <span aria-current="page">{c.label}</span>}
+        </span>
+      ))}
+    </nav>
+  );
+}
+
 export function Layout({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
   const loc = useLocation();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [loc.path]);
+  const path = normalPath(loc.path);
+  const side = useRef<HTMLElement>(null);
+  // The menu stays where it was when a click opens another page.
+  useLayoutEffect(() => {
+    if (side.current) side.current.scrollTop = sidebarScroll;
+  }, []);
   return (
     <div className={`app ${open ? "nav-open" : ""}`}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <aside className="sidebar" aria-label="Sections">
+      <aside className="sidebar" aria-label="Sections" ref={side} onScroll={(e) => (sidebarScroll = e.currentTarget.scrollTop)}>
         <div className="sidebar-head">
           <a
             className="brand"
@@ -193,20 +232,9 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
             <div className="nav-group" key={g.group || "home"}>
               {g.group && <p className="nav-group-title">{g.group}</p>}
               <ul>
-                {g.items.filter((n) => !n.needs || can(n.needs)).map((n) => {
-                  const active = n.active(loc.path);
-                  return (
-                    <li key={n.to}>
-                      <Link to={n.to} aria-current={active ? "page" : undefined} className={active ? "is-current" : ""}>
-                        <Icon name={n.icon} />
-                        <span className="nav-text">
-                          <span className="nav-label">{n.label}</span>
-                          <span className="nav-hint">{n.hint}</span>
-                        </span>
-                      </Link>
-                    </li>
-                  );
-                })}
+                {g.items.filter((n) => !n.needs || can(n.needs)).map((n) => (
+                  <NavSection key={n.to} item={n} path={path} />
+                ))}
               </ul>
             </div>
           ))}
@@ -221,6 +249,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
         <SessionBanner />
         <FlashArea />
         <main id="main" className={wide ? "main main-wide" : "main"} tabIndex={-1}>
+          <Breadcrumbs path={path} />
           {children}
         </main>
       </div>

@@ -1,0 +1,361 @@
+{
+ "document": "IPXGU-0001213900-26-036382.htm",
+ "source": "sec",
+ "description": "Answer key from the filing's inline XBRL tags",
+ "periods": [
+  "2025-12-31/9M"
+ ],
+ "spread": [
+  {
+   "statement": "balance_sheet",
+   "line": "other_current_assets",
+   "period": "2025-12-31/I",
+   "value": "6013",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_current_assets",
+   "period": "2025-12-31/I",
+   "value": "6013",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "value": "153984",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "accrued_liabilities",
+   "period": "2025-12-31/I",
+   "value": "2890",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "value": "175048",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "common_stock_apic",
+   "period": "2025-12-31/I",
+   "value": "24233",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "retained_earnings",
+   "period": "2025-12-31/I",
+   "value": "-46064",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity_parent",
+   "period": "2025-12-31/I",
+   "value": "-21064",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities_equity",
+   "period": "2025-12-31/I",
+   "value": "153984",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "sga",
+   "period": "2025-12-31/9M",
+   "value": "46064",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "operating_income",
+   "period": "2025-12-31/9M",
+   "value": "-46064",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2025-12-31/9M",
+   "value": "-46064",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2025-12-31/9M",
+   "value": "-46064",
+   "precision": "1"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_equity",
+   "period": "2025-12-31/I",
+   "value": "-21064",
+   "precision": "1"
+  }
+ ],
+ "cells": [
+  {
+   "statement": "balance_sheet",
+   "row_label": "Prepaid expenses",
+   "period": "2025-12-31/I",
+   "value": "6013",
+   "line": "other_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[3]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total current assets",
+   "period": "2025-12-31/I",
+   "value": "6013",
+   "line": "total_current_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[4]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Deferred offering costs",
+   "period": "2025-12-31/I",
+   "value": "147971",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[5]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total Assets",
+   "period": "2025-12-31/I",
+   "value": "153984",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[6]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accrued offering costs",
+   "period": "2025-12-31/I",
+   "value": "2890",
+   "line": "accrued_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[10]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Promissory note – related party",
+   "period": "2025-12-31/I",
+   "value": "172158",
+   "line": "st_debt",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total Liabilities",
+   "period": "2025-12-31/I",
+   "value": "175048",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[12]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Preferred shares, $0.0001 par value; 5,000,000 shares authorized; none issued or outstanding",
+   "period": "2025-12-31/I",
+   "value": "0.0001",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[17]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Preferred shares, $0.0001 par value; 5,000,000 shares authorized; none issued or outstanding",
+   "period": "2025-12-31/I",
+   "value": "5000000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[17]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class A Ordinary Shares, $0.0001 par value; 500,000,000 shares authorized; none issued or outstanding",
+   "period": "2025-12-31/I",
+   "value": "0.0001",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class A Ordinary Shares, $0.0001 par value; 500,000,000 shares authorized; none issued or outstanding",
+   "period": "2025-12-31/I",
+   "value": "500000000",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class B Ordinary Shares, $0.0001 par value; 50,000,000 shares authorized; 7,666,667 shares issued and outstanding(1)",
+   "period": "2025-12-31/I",
+   "value": "0.0001",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class B Ordinary Shares, $0.0001 par value; 50,000,000 shares authorized; 7,666,667 shares issued and outstanding(1)",
+   "period": "2025-12-31/I",
+   "value": "50000000",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class B Ordinary Shares, $0.0001 par value; 50,000,000 shares authorized; 7,666,667 shares issued and outstanding(1)",
+   "period": "2025-12-31/I",
+   "value": "7666667",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class B Ordinary Shares, $0.0001 par value; 50,000,000 shares authorized; 7,666,667 shares issued and outstanding(1)",
+   "period": "2025-12-31/I",
+   "value": "7666667",
+   "line": null,
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Class B Ordinary Shares, $0.0001 par value; 50,000,000 shares authorized; 7,666,667 shares issued and outstanding(1)",
+   "period": "2025-12-31/I",
+   "value": "767",
+   "line": "common_stock_apic",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Additional paid-in capital",
+   "period": "2025-12-31/I",
+   "value": "24233",
+   "line": "common_stock_apic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[20]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Accumulated deficit",
+   "period": "2025-12-31/I",
+   "value": "-46064",
+   "line": "retained_earnings",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[21]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total Shareholder’s Deficit",
+   "period": "2025-12-31/I",
+   "value": "-21064",
+   "line": "total_equity_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[22]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total Liabilities and Shareholder’s Deficit",
+   "period": "2025-12-31/I",
+   "value": "153984",
+   "line": "total_liabilities_equity",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[286]/tbody[1]/tr[23]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "General and administrative costs",
+   "period": "2025-12-31/9M",
+   "value": "46064",
+   "line": "sga",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[288]/tbody[1]/tr[1]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Loss from operations",
+   "period": "2025-12-31/9M",
+   "value": "-46064",
+   "line": "operating_income",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[288]/tbody[1]/tr[2]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net loss",
+   "period": "2025-12-31/9M",
+   "value": "-46064",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/table[288]/tbody[1]/tr[4]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic and diluted weighted average shares outstanding, Class B Ordinary Shares (1)",
+   "period": "2025-12-31/9M",
+   "value": "6666667",
+   "line": "shares_basic",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic and diluted weighted average shares outstanding, Class B Ordinary Shares (1)",
+   "period": "2025-12-31/9M",
+   "value": "6666667",
+   "line": "shares_diluted",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic and diluted net loss per share, Class B Ordinary Shares",
+   "period": "2025-12-31/9M",
+   "value": "-0.01",
+   "line": "eps_basic",
+   "role": "component",
+   "xpath": null
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Basic and diluted net loss per share, Class B Ordinary Shares",
+   "period": "2025-12-31/9M",
+   "value": "-0.01",
+   "line": "eps_diluted",
+   "role": "component",
+   "xpath": null
+  }
+ ],
+ "expect_review": [],
+ "forbid_values": [],
+ "unknown_lines": [
+  "us-gaap:DeferredCosts",
+  "us-gaap:PreferredStockParOrStatedValuePerShare",
+  "us-gaap:PreferredStockSharesAuthorized"
+ ],
+ "tags": []
+}

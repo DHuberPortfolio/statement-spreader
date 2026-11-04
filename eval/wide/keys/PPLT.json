@@ -1,0 +1,553 @@
+{
+ "document": "PPLT-0001999371-26-004880.htm",
+ "source": "sec",
+ "description": "Answer key from the filing's inline XBRL tags",
+ "periods": [
+  "2023-12-31/12M",
+  "2024-12-31/12M",
+  "2025-12-31/12M"
+ ],
+ "spread": [
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2025-12-31/I",
+   "value": "2864352000",
+   "precision": "1000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_assets",
+   "period": "2024-12-31/I",
+   "value": "1019466000",
+   "precision": "1000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "payables",
+   "period": "2025-12-31/I",
+   "value": "1384000",
+   "precision": "1000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "payables",
+   "period": "2024-12-31/I",
+   "value": "519000",
+   "precision": "1000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2025-12-31/I",
+   "value": "1384000",
+   "precision": "1000"
+  },
+  {
+   "statement": "balance_sheet",
+   "line": "total_liabilities",
+   "period": "2024-12-31/I",
+   "value": "519000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "total_opex",
+   "period": "2025-12-31/12M",
+   "value": "9189000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "total_opex",
+   "period": "2024-12-31/12M",
+   "value": "5968000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "total_opex",
+   "period": "2023-12-31/12M",
+   "value": "5772000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2025-12-31/12M",
+   "value": "1341630000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2024-12-31/12M",
+   "value": "-94684000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income_parent",
+   "period": "2023-12-31/12M",
+   "value": "-32804000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_basic",
+   "period": "2025-12-31/12M",
+   "value": "105.31",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_basic",
+   "period": "2024-12-31/12M",
+   "value": "-8.36",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "eps_basic",
+   "period": "2023-12-31/12M",
+   "value": "-3.05",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "shares_basic",
+   "period": "2025-12-31/12M",
+   "value": "12740274",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "shares_basic",
+   "period": "2024-12-31/12M",
+   "value": "11321721",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "shares_basic",
+   "period": "2023-12-31/12M",
+   "value": "10763562",
+   "precision": "1"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2023-12-31/12M",
+   "value": "-32804000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2024-12-31/12M",
+   "value": "-94684000",
+   "precision": "1000"
+  },
+  {
+   "statement": "income_statement",
+   "line": "net_income",
+   "period": "2025-12-31/12M",
+   "value": "1341630000",
+   "precision": "1000"
+  }
+ ],
+ "cells": [
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in platinum (cost: December 31, 2025: $1,663,841; December 31, 2024: $1,074,183)",
+   "period": "2025-12-31/I",
+   "value": "1663841000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[4]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in platinum (cost: December 31, 2025: $1,663,841; December 31, 2024: $1,074,183)",
+   "period": "2024-12-31/I",
+   "value": "1074183000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[4]/td[1]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in platinum (cost: December 31, 2025: $1,663,841; December 31, 2024: $1,074,183)",
+   "period": "2025-12-31/I",
+   "value": "2864352000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[4]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Investment in platinum (cost: December 31, 2025: $1,663,841; December 31, 2024: $1,074,183)",
+   "period": "2024-12-31/I",
+   "value": "1019466000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[4]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total assets",
+   "period": "2025-12-31/I",
+   "value": "2864352000",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[5]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total assets",
+   "period": "2024-12-31/I",
+   "value": "1019466000",
+   "line": "total_assets",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[5]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Fees payable to Sponsor",
+   "period": "2025-12-31/I",
+   "value": "1384000",
+   "line": "payables",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[8]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Fees payable to Sponsor",
+   "period": "2024-12-31/I",
+   "value": "519000",
+   "line": "payables",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[8]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total liabilities",
+   "period": "2025-12-31/I",
+   "value": "1384000",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[9]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "Total liabilities",
+   "period": "2024-12-31/I",
+   "value": "519000",
+   "line": "total_liabilities",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[9]/td[8]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "NET ASSETS(1)",
+   "period": "2025-12-31/I",
+   "value": "2862968000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[11]/td[4]"
+  },
+  {
+   "statement": "balance_sheet",
+   "row_label": "NET ASSETS(1)",
+   "period": "2024-12-31/I",
+   "value": "1018947000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[1]/tr[11]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Sponsor’s Fee",
+   "period": "2025-12-31/12M",
+   "value": "9189000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[4]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Sponsor’s Fee",
+   "period": "2024-12-31/12M",
+   "value": "5968000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[4]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Sponsor’s Fee",
+   "period": "2023-12-31/12M",
+   "value": "5772000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[4]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total expenses",
+   "period": "2025-12-31/12M",
+   "value": "9189000",
+   "line": "total_opex",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[5]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total expenses",
+   "period": "2024-12-31/12M",
+   "value": "5968000",
+   "line": "total_opex",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[5]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total expenses",
+   "period": "2023-12-31/12M",
+   "value": "5772000",
+   "line": "total_opex",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[5]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net investment loss",
+   "period": "2025-12-31/12M",
+   "value": "-9189000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[6]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net investment loss",
+   "period": "2024-12-31/12M",
+   "value": "-5968000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[6]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net investment loss",
+   "period": "2023-12-31/12M",
+   "value": "-5772000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[6]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Realized gain on platinum transferred to pay expenses",
+   "period": "2025-12-31/12M",
+   "value": "1447000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[9]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Realized gain on platinum transferred to pay expenses",
+   "period": "2024-12-31/12M",
+   "value": "5000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[9]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Realized gain on platinum transferred to pay expenses",
+   "period": "2023-12-31/12M",
+   "value": "6000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[9]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Realized gain / (loss) on platinum distributed for the redemption of Shares",
+   "period": "2025-12-31/12M",
+   "value": "94144000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[10]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Realized gain / (loss) on platinum distributed for the redemption of Shares",
+   "period": "2024-12-31/12M",
+   "value": "-85000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[10]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Realized gain / (loss) on platinum distributed for the redemption of Shares",
+   "period": "2023-12-31/12M",
+   "value": "8064000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[10]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in unrealized gain / (loss) on investment in platinum",
+   "period": "2025-12-31/12M",
+   "value": "1255228000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[11]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in unrealized gain / (loss) on investment in platinum",
+   "period": "2024-12-31/12M",
+   "value": "-88636000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[11]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in unrealized gain / (loss) on investment in platinum",
+   "period": "2023-12-31/12M",
+   "value": "-35102000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[11]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total gain / (loss) on investment in platinum",
+   "period": "2025-12-31/12M",
+   "value": "1350819000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[12]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total gain / (loss) on investment in platinum",
+   "period": "2024-12-31/12M",
+   "value": "-88716000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[12]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Total gain / (loss) on investment in platinum",
+   "period": "2023-12-31/12M",
+   "value": "-27032000",
+   "line": null,
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[12]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in net assets from operations",
+   "period": "2025-12-31/12M",
+   "value": "1341630000",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[14]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in net assets from operations",
+   "period": "2024-12-31/12M",
+   "value": "-94684000",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[14]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Change in net assets from operations",
+   "period": "2023-12-31/12M",
+   "value": "-32804000",
+   "line": "net_income_parent",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[14]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net increase / (decrease) in net assets per Share",
+   "period": "2025-12-31/12M",
+   "value": "105.31",
+   "line": "eps_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[16]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net increase / (decrease) in net assets per Share",
+   "period": "2024-12-31/12M",
+   "value": "-8.36",
+   "line": "eps_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[16]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Net increase / (decrease) in net assets per Share",
+   "period": "2023-12-31/12M",
+   "value": "-3.05",
+   "line": "eps_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[16]/td[12]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Weighted average number of Shares",
+   "period": "2025-12-31/12M",
+   "value": "12740274",
+   "line": "shares_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[18]/td[4]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Weighted average number of Shares",
+   "period": "2024-12-31/12M",
+   "value": "11321721",
+   "line": "shares_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[18]/td[8]"
+  },
+  {
+   "statement": "income_statement",
+   "row_label": "Weighted average number of Shares",
+   "period": "2023-12-31/12M",
+   "value": "10763562",
+   "line": "shares_basic",
+   "role": "detail",
+   "xpath": "/html[1]/body[1]/div[5]/table[5]/tr[18]/td[12]"
+  }
+ ],
+ "expect_review": [],
+ "forbid_values": [],
+ "unknown_lines": [
+  "pplt:ChangeInUnrealizedGainLossOnInvestmentInBullion",
+  "pplt:NetInvestmentGainLoss",
+  "pplt:RealizedGainLossOnBullionDistributedForRedemptionOfShares",
+  "pplt:TotalGainLossOnBullion",
+  "us-gaap:AssetsNet",
+  "us-gaap:GainLossOnSaleOfTrustAssetsToPayExpenses",
+  "us-gaap:InvestmentInPhysicalCommodities",
+  "us-gaap:InvestmentOwnedAtCost",
+  "us-gaap:SponsorFees"
+ ],
+ "tags": []
+}

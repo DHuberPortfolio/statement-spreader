@@ -48,6 +48,7 @@ PERMISSIONS = {
     "export": "Download exports",
     "audit": "Read audit trails and verify their integrity",
     "admin": "Change ROI assumptions and run retention",
+    "roi": "See time saved, costs and the time measurements behind them, and run by-hand timing",
     "adjudicate": "Rule on disagreements between an approved spread and the model during its learning period",
 }
 

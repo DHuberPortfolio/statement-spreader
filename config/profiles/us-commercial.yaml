@@ -18,12 +18,13 @@
 #   parts     for a total: the lines that add up to it (used by the composition checks)
 
 id: us-commercial
-version: "2026.10.24-1"
+version: "2026.11.04-1"
 title: US commercial borrower spread (US GAAP presentation)
 
 statements:
   income_statement:
     title: Income statement
+    ignore_sections: ["comprehensive income*", "comprehensive loss*", "other comprehensive*", "comprehensive earnings*"]
     detect:
       must_any: ["net income*", "net loss*", "net earnings*", "net income loss*", "net loss income*", "profit", "profit loss",
                  "profit attributable to*"]
@@ -59,12 +60,14 @@ statements:
       - id: rnd
         label: Research and development
         kind: cost
-        aliases: [research and development, research and development expense, research and development expenses,
+        aliases: ["technology and product development*", "technology and development*", "product development*",
+                  research and development, research and development expense, research and development expenses,
                   "research development*", "product development*", technology and development, research and engineering]
       - id: sga
         label: Selling, general and administrative
         kind: cost
-        aliases: [selling general and administrative, selling general and administrative expense,
+        aliases: ["selling delivery and administrative*", "administrative and other expenses*", "selling and administrative*",
+                  selling general and administrative, selling general and administrative expense,
                   selling general and administrative expenses, "selling general*", general and administrative,
                   general and administrative expense, general and administrative expenses, sales and marketing,
                   selling and marketing, marketing and sales, "sales and marketing*", "selling and marketing*",
@@ -76,7 +79,8 @@ statements:
       - id: dna_opex
         label: Depreciation and amortization (operating)
         kind: cost
-        aliases: [depreciation and amortization, depreciation, amortization, amortization of intangible assets,
+        aliases: ["depreciation amortization and impairment*",
+                  depreciation and amortization, depreciation, amortization, amortization of intangible assets,
                   "amortization of acquired intangible*", "amortization of intangibles*", depreciation and amortization expense]
       - id: other_opex
         label: Other operating expenses
@@ -107,7 +111,8 @@ statements:
         label: Interest expense
         kind: cost
         critical: true
-        aliases: [interest expense, interest expense net, "interest expense*", interest and debt expense, interest costs,
+        aliases: ["interest and other financial charges*",
+                  interest expense, interest expense net, "interest expense*", interest and debt expense, interest costs,
                   "interest expense net of*", finance costs]
       - id: interest_income
         label: Interest income
@@ -117,7 +122,8 @@ statements:
       - id: other_nonoperating
         label: Other income (expense), net
         kind: either
-        aliases: [other income expense net, other income expense, other income net, other expense net, other income,
+        aliases: ["equity earnings*", "equity in income of*", "equity in earnings*", "equity in net income*", "income from equity*", "interest and other income*",
+                  other income expense net, other income expense, other income net, other expense net, other income,
                   other expense, other nonoperating income expense, "other income*", "other expense*",
                   other non operating income expense, "nonoperating*", "non operating*", total other income expense,
                   total other income expense net, other net, "gain loss on*", "loss gain on*",
@@ -128,7 +134,9 @@ statements:
         label: Income before income taxes
         kind: result
         critical: true
-        aliases: ["income before*", "income loss before*", "loss before*", "loss income before*", "earnings before*",
+        aliases: ["income loss from continuing operations before*", "income from continuing operations before*", "loss from continuing operations before*",
+                  "net income*before*tax*", "net loss*before*tax*",
+                  "income before*", "income loss before*", "loss before*", "loss income before*", "earnings before*",
                   "income from continuing operations before*", "pretax income*", "pre tax income*", income before taxes,
                   "profit before tax*", "earnings loss before*", "loss earnings before*"]
       - id: income_tax
@@ -142,7 +150,8 @@ statements:
       - id: discontinued_ops
         label: Discontinued operations, net
         kind: either
-        aliases: ["income from discontinued*", "loss from discontinued*", "income loss from discontinued*", "discontinued operations*"]
+        aliases: ["*from discontinu*",
+                  "income from discontinued*", "loss from discontinued*", "income loss from discontinued*", "discontinued operations*"]
       - id: net_income
         label: Net income
         kind: result
@@ -155,12 +164,15 @@ statements:
       - id: nci_net_income
         label: Net income attributable to noncontrolling interests
         kind: either
-        aliases: ["*attributable to noncontrolling*", "*attributable to non controlling*", "*attributable to minority*",
+        aliases: ["non controlling interest", "noncontrolling interest", "noncontrolling interests", "non controlling interests",
+                  "*attributable to noncontrolling interest*", "*attributable to non controlling interest*", "*attributable to redeemable noncontrolling*",
+                  "*attributable to noncontrolling*", "*attributable to non controlling*", "*attributable to minority*",
                   "less net income attributable to noncontrolling*", "net income attributable to noncontrolling*"]
       - id: net_income_parent
         label: Net income attributable to the company
         kind: result
-        aliases: ["net income attributable to*", "net loss attributable to*", "net income loss attributable to*",
+        aliases: ["net income*allocable*",
+                  "net income attributable to*", "net loss attributable to*", "net income loss attributable to*",
                   "net earnings attributable to*", "net income available to common*", "net income applicable to common*",
                   "net income to common*", "net earnings to common*"]
       - id: eps_basic
@@ -217,7 +229,8 @@ statements:
       - id: inventory
         label: Inventories
         kind: asset
-        aliases: [inventories, inventory, inventories net, inventory net, "inventories*", merchandise inventories]
+        aliases: ["trade inventory*",
+                  inventories, inventory, inventories net, inventory net, "inventories*", merchandise inventories]
       - id: other_current_assets
         label: Other current assets
         kind: asset
@@ -230,11 +243,14 @@ statements:
         kind: asset
         critical: true
         aliases: [total current assets]
+        total_aliases: [current assets]
         parts: [cash, st_investments, receivables, inventory, other_current_assets]
       - id: ppe_net
         label: Property, plant and equipment, net
         kind: asset
-        aliases: ["property plant and equipment*", "property and equipment*", "property equipment*", "plant and equipment*",
+        aliases: ["net property*",
+                  "furniture fixtures and equipment*",
+                  "property plant and equipment*", "property and equipment*", "property equipment*", "plant and equipment*",
                   fixed assets net, "premises and equipment*"]
       - id: goodwill
         label: Goodwill
@@ -243,26 +259,34 @@ statements:
       - id: intangibles
         label: Intangible assets, net
         kind: asset
-        aliases: ["intangible assets*", "acquired intangible*", "other intangible*", intangibles net, "purchased intangible*",
+        aliases: ["goodwill and*intangible*",
+                  "intangible assets*", "acquired intangible*", "other intangible*", intangibles net, "purchased intangible*",
                   "identifiable intangible*", "intangibles*"]
       - id: lt_investments
         label: Long-term investments
         kind: asset
-        aliases: ["long term investments*", "non current marketable securities*", "investments*", "equity method investments*"]
+        aliases: ["equity investments*",
+                  "long term marketable securities*",
+                  "long term investments*", "non current marketable securities*", "investments*", "equity method investments*"]
         sections:
           - {section: ["non current assets", "noncurrent assets", "long term assets"], labels: ["marketable securities*"]}
       - id: operating_lease_rou
         label: Operating lease right-of-use assets
         kind: asset
-        aliases: ["operating lease right of use*", "right of use assets*", "operating lease assets*", "operating lease rou*"]
+        aliases: ["operating right of use*", "lease assets*",
+                  "lease right of use*", "right of use*",
+                  "operating lease right of use*", "right of use assets*", "operating lease assets*", "operating lease rou*"]
       - id: deferred_tax_assets
         label: Deferred tax assets
         kind: asset
-        aliases: ["deferred tax assets*", "deferred income taxes", "deferred income tax assets*"]
+        aliases: ["deferred income tax asset*",
+                  "deferred tax asset*",
+                  "deferred tax assets*", "deferred income taxes", "deferred income tax assets*"]
       - id: other_noncurrent_assets
         label: Other non-current assets
         kind: asset
-        aliases: [other non current assets, other noncurrent assets, other assets, "other non current assets*", "other noncurrent assets*",
+        aliases: ["all other non current assets*", "all other noncurrent assets*",
+                  other non current assets, other noncurrent assets, other assets, "other non current assets*", "other noncurrent assets*",
                   "other long term assets*", "other assets*", "deposits*"]
         sections:
           - {section: ["non current assets", "noncurrent assets", "long term assets", "other assets"], labels: ["*"]}
@@ -297,7 +321,8 @@ statements:
         label: Short-term debt and current portion of long-term debt
         kind: liability
         critical: true
-        aliases: [commercial paper, "short term debt*", "current portion of long term debt*", "current maturities of long term debt*",
+        aliases: ["short term loans*", "note payable", "notes payable", "short term notes payable*",
+                  commercial paper, "short term debt*", "current portion of long term debt*", "current maturities of long term debt*",
                   "short term borrowings*", "term debt current*", "notes payable*", "line of credit*", "current portion of debt*",
                   "current debt*", "borrowings current*", "current portion of finance lease*", "current portion of term loan*"]
         sections:
@@ -305,7 +330,9 @@ statements:
       - id: operating_lease_liab_current
         label: Operating lease liabilities, current
         kind: liability
-        aliases: ["operating lease liabilities current*", "current operating lease liabilities*", "current portion of operating lease*",
+        aliases: ["current operating lease*",
+                  "current portion of lease liabilit*", "lease liability current*", "lease liabilities current*", "current lease liabilit*",
+                  "operating lease liabilities current*", "current operating lease liabilities*", "current portion of operating lease*",
                   "operating lease liability current*"]
         sections:
           - {section: ["current liabilities"], labels: ["operating lease liabilities*", "operating lease liability*"]}
@@ -321,12 +348,14 @@ statements:
         kind: liability
         critical: true
         aliases: [total current liabilities]
+        total_aliases: [current liabilities]
         parts: [payables, accrued_liabilities, deferred_revenue_current, st_debt, operating_lease_liab_current, other_current_liabilities]
       - id: lt_debt
         label: Long-term debt
         kind: liability
         critical: true
-        aliases: ["long term debt*", "term debt non current*", "long term borrowings*", "notes payable non current*", "senior notes*",
+        aliases: ["debt", "debt net*",
+                  "long term debt*", "term debt non current*", "long term borrowings*", "notes payable non current*", "senior notes*",
                   "long term debt net of current*", "debt net of current*", "long term notes*", "convertible notes*",
                   "finance lease liabilities*", "term loan*", "bonds payable*"]
         sections:
@@ -334,12 +363,17 @@ statements:
       - id: operating_lease_liab_noncurrent
         label: Operating lease liabilities, non-current
         kind: liability
-        aliases: ["operating lease liabilities non current*", "operating lease liabilities noncurrent*", "long term operating lease*",
+        aliases: ["operating lease liability", "operating lease obligations*",
+                  "lease liability non current*", "lease liabilities non current*", "lease liability noncurrent*", "long term lease liabilit*", "lease liabilities net of current*",
+                  "operating lease liabilities non current*", "operating lease liabilities noncurrent*", "long term operating lease*",
                   "operating lease liabilities net of current*", "operating lease liabilities less current*", "operating lease liabilities"]
       - id: deferred_tax_liabilities
         label: Deferred tax liabilities
         kind: liability
-        aliases: ["deferred tax liabilities*", "deferred income tax liabilities*", "deferred income taxes and other*"]
+        aliases: ["deferred income taxes net*", "deferred income tax liability*",
+                  "deferred income taxes non current*", "deferred income taxes noncurrent*",
+                  "deferred income taxes", "deferred tax liability*",
+                  "deferred tax liabilities*", "deferred income tax liabilities*", "deferred income taxes and other*"]
       - id: other_noncurrent_liabilities
         label: Other non-current liabilities
         kind: liability
@@ -372,12 +406,14 @@ statements:
       - id: retained_earnings
         label: Retained earnings (accumulated deficit)
         kind: equity
-        aliases: ["retained earnings*", "accumulated deficit*", "retained earnings accumulated deficit*",
+        aliases: ["retained deficit*",
+                  "retained earnings*", "accumulated deficit*", "retained earnings accumulated deficit*",
                   "accumulated deficit retained earnings*", "reinvested earnings*", "earnings retained*"]
       - id: aoci
         label: Accumulated other comprehensive income (loss)
         kind: equity
-        aliases: ["accumulated other comprehensive*", "aoci*"]
+        aliases: ["total accumulated other comprehensive*",
+                  "accumulated other comprehensive*", "aoci*"]
       - id: treasury_stock
         label: Treasury stock
         kind: equity
@@ -398,7 +434,8 @@ statements:
         label: Total equity
         kind: equity
         critical: true
-        aliases: [total equity, total equity deficit, total deficit, total stockholders equity including noncontrolling interests,
+        aliases: ["total shareholders investment*", "total stockholders investment*",
+                  total equity, total equity deficit, total deficit, total stockholders equity including noncontrolling interests,
                   "total equity including*"]
         parts: [total_equity_parent, nci_equity]
       - id: total_liabilities_equity
@@ -422,23 +459,28 @@ statements:
       - id: cf_net_income
         label: Net income (cash flow statement)
         kind: either
-        aliases: [net income, net loss, net income loss, net loss income, net earnings, "net income including*", consolidated net income,
+        aliases: ["loss for the year*", "profit for the year*",
+                  net income, net loss, net income loss, net loss income, net earnings, "net income including*", consolidated net income,
                   "net income loss including*"]
       - id: cf_dna
         label: Depreciation and amortization
         kind: flow
-        aliases: [depreciation and amortization, "depreciation and amortization*", depreciation, "depreciation amortization*",
+        aliases: ["depreciation of property*",
+                  depreciation and amortization, "depreciation and amortization*", depreciation, "depreciation amortization*",
                   "depreciation depletion and amortization*", amortization of intangible assets, "amortization*", "depreciation*",
                   "*depreciation*amortization*"]
       - id: cf_sbc
         label: Share-based compensation
         kind: flow
-        aliases: ["share based compensation*", "stock based compensation*", "equity based compensation*", "share based payment*",
+        aliases: ["non cash compensation*", "noncash compensation*",
+                  "amortization of stock based*", "amortization of share based*",
+                  "share based compensation*", "stock based compensation*", "equity based compensation*", "share based payment*",
                   "stock compensation*"]
       - id: cf_deferred_tax
         label: Deferred income taxes
         kind: flow
-        aliases: [deferred income taxes, deferred income tax, "deferred income tax*", "deferred taxes*", deferred income tax expense benefit,
+        aliases: ["provision for deferred*", "deferred tax*",
+                  deferred income taxes, deferred income tax, "deferred income tax*", "deferred taxes*", deferred income tax expense benefit,
                   "deferred tax*", "*deferred*tax*"]
       - id: cf_other_noncash
         label: Other non-cash items
@@ -456,13 +498,18 @@ statements:
         sections:
           - {section: ["changes in operating assets and liabilities*", "change in operating assets and liabilities*",
                        "changes in assets and liabilities*", "changes in working capital*", "changes in operating assets*",
-                       "change in assets and liabilities*", "net changes in operating*"], labels: ["*"], confidence: 0.92}
+                       "change in assets and liabilities*", "net changes in operating*", "increase decrease in*", "decrease increase in*"], labels: ["*"], confidence: 0.92}
+          - {section: ["*operating activities*"], labels: ["accounts receivable*", "receivables*", "trade receivables*", "inventor*", "accounts payable*",
+                                                           "trade payables*", "prepaid*", "accrued*", "other assets*", "other liabilities*",
+                                                           "other current assets*", "other current liabilities*", "deferred revenue*", "contract assets*",
+                                                           "contract liabilities*"]}
       - id: cfo
         label: Cash from operating activities
         kind: flow
         critical: true
         total_aliases: ["*operating activities*"]
-        aliases: ["*provided by operating activities*", "*used in operating activities*", "*from operating activities*",
+        aliases: ["net cash*by*operating*",
+                  "*provided by operating activities*", "*used in operating activities*", "*from operating activities*",
                   "*generated by operating activities*", "*operating activities net*", "net cash provided by used in operating*",
                   "cash flows from operating activities total*",
                   cash provided by operations, cash provided by used in operations, net cash provided by operations,
@@ -471,7 +518,10 @@ statements:
         label: Capital expenditures
         kind: flow
         critical: true
-        aliases: ["payments for acquisition of property*", "purchases of property*", "capital expenditures*", "purchase of property*",
+        aliases: ["additions to properties*",
+                  "purchase of fixed assets*", "plant and equipment expenditures*", "*expenditures for plant*",
+                  "*property additions*", "plant additions*", "capital additions*", "construction expenditures*",
+                  "payments for acquisition of property*", "purchases of property*", "capital expenditures*", "purchase of property*",
                   "additions to property*", "acquisition of property*", "expenditures for property*", "investment in property*",
                   "payments for property*", "purchases of plant*", "capital spending*", "purchase*property*",
                   "purchases*property*", "additions to*property*", "payments*property*", "*capital expenditure*",
@@ -480,7 +530,9 @@ statements:
       - id: acquisitions
         label: Acquisitions, net of cash acquired
         kind: flow
-        aliases: ["acquisitions*", "acquisition of businesses*", "acquisitions of businesses*", "payments made in connection with business*",
+        aliases: ["purchases of businesses*", "acquisition*business combination*", "payment for*acquisition*", "payments for*acquisition*",
+                  "business acquisition*", "*acquisition*net of cash acquired*", "purchase of business*",
+                  "acquisitions*", "acquisition of businesses*", "acquisitions of businesses*", "payments made in connection with business*",
                   "business acquisitions*", "purchase of businesses*", "cash paid for acquisitions*", "payments for acquisitions*"]
       - id: cf_investments_net
         label: Purchases and sales of investments, net
@@ -505,12 +557,14 @@ statements:
         kind: flow
         critical: true
         total_aliases: ["*investing activities*"]
-        aliases: ["*provided by investing activities*", "*used in investing activities*", "*from investing activities*",
+        aliases: ["net cash used by investing*", "net cash provided by used by investing*", "net cash*by*investing*",
+                  "*provided by investing activities*", "*used in investing activities*", "*from investing activities*",
                   "*generated by investing activities*", "*investing activities net*", "net cash provided by used in investing*"]
       - id: debt_issued
         label: Debt issued
         kind: flow
-        aliases: ["proceeds from issuance of term debt*", "proceeds from issuance of long term debt*", "proceeds from issuance of debt*",
+        aliases: ["long term debt issued*", "*revolving*borrowings*", "proceeds from*revolv*", "proceeds from*credit facility*", "borrowings on*", "borrowings from*",
+                  "proceeds from issuance of term debt*", "proceeds from issuance of long term debt*", "proceeds from issuance of debt*",
                   "proceeds from borrowings*", "proceeds from long term debt*", "proceeds from term loan*", "proceeds from notes*",
                   "borrowings under*", "proceeds from issuance of senior notes*", "proceeds from issuance of notes*",
                   "proceeds from commercial paper*", "proceeds from debt*", "proceeds from*debt*", "proceeds from*borrowing*",
@@ -519,7 +573,8 @@ statements:
       - id: debt_repaid
         label: Debt repaid
         kind: flow
-        aliases: ["repayments of term debt*", "repayments of long term debt*", "repayment of debt*", "repayments of debt*",
+        aliases: ["long term debt repaid*", "*repayments*revolv*", "payments on*revolv*", "payments on*credit facility*", "repayments*credit facility*", "revolving*repayments*", "revolving*payments*",
+                  "repayments of term debt*", "repayments of long term debt*", "repayment of debt*", "repayments of debt*",
                   "payments on long term debt*", "repayments of borrowings*", "principal payments*", "payments of debt*",
                   "repayment of term loan*", "repayments under*", "repayments of commercial paper*", "repayments of notes*",
                   "payments on debt*", "repayment of long term debt*", "repayment*", "*repayments of*debt*",
@@ -533,27 +588,36 @@ statements:
                   "net borrowings under*", "short term borrowings net*", "net increase decrease in short term*"]
         sections:
           - {section: ["*financing activities*"], labels: ["*commercial paper*", "*short term borrowings*", "*short term debt*",
-                                                          "*revolving*", "*credit facility*", "*credit facilities*"]}
+                                                          "*revolving*net*", "net*revolving*", "*credit facility*net*", "net*credit facilit*"]}
       - id: dividends_paid
         label: Dividends paid
         kind: flow
-        aliases: ["payments for dividends*", "dividends paid*", "cash dividends paid*", "payment of dividends*", "dividends*"]
+        aliases: ["payments of dividends*", "payment of dividends*",
+                  "payments for dividends*", "dividends paid*", "cash dividends paid*", "payment of dividends*", "dividends*"]
       - id: buybacks
         label: Share repurchases
         kind: flow
-        aliases: ["repurchases of common stock*", "repurchase of common stock*", "purchases of treasury stock*", "share repurchases*",
+        aliases: ["payments related to share repurchases*",
+                  "purchase of common shares*", "common stock repurchase*", "repurchases of common shares*", "repurchase of common shares*",
+                  "purchase of treasury stock*", "purchase of treasury shares*", "shares repurchased*", "treasury stock purchased*", "acquisition of treasury*", "repurchase of stock*", "payments to repurchase*", "stock repurchase*",
+                  "repurchases of common stock*", "repurchase of common stock*", "purchases of treasury stock*", "share repurchases*",
                   "repurchases of shares*", "payments for repurchase*", "common stock repurchased*", "purchase of common stock*",
                   "purchases of common stock*", "repurchase of shares*"]
       - id: stock_issued
         label: Stock issued
         kind: flow
-        aliases: ["proceeds from issuance of common stock*", "proceeds from exercise of stock options*", "proceeds from stock*",
+        aliases: ["issuance of common shares*",
+                  "net proceeds from issuance of common*", "*proceeds from the sale of common stock*", "proceeds from*sale of common*", "proceeds from*issuance of common*",
+                  "proceeds from exercises of stock options*", "proceeds from*exercise*options*", "proceeds from*stock option*",
+                  "proceeds from issuance of common stock*", "proceeds from exercise of stock options*", "proceeds from stock*",
                   "issuance of common stock*", "proceeds from employee stock*", "proceeds from issuance of stock*",
                   "proceeds from issuance of shares*"]
       - id: cf_other_financing
         label: Other financing activities
         kind: flow
-        aliases: ["payments for taxes related to net share settlement*", "taxes paid related to net share settlement*",
+        aliases: ["principal payments on finance lease*", "payments on finance lease*",
+                  "*debt issuance cost*", "*debt issue cost*", "*deferred financing*", "*financing cost*", "*finance lease*",
+                  "payments for taxes related to net share settlement*", "taxes paid related to net share settlement*",
                   "other financing*", "payments for financing costs*", "debt issuance costs*", "payment of debt issuance*",
                   "finance lease principal payments*", "principal payments on finance leases*", "distributions to noncontrolling*"]
         sections:
@@ -564,12 +628,15 @@ statements:
         kind: flow
         critical: true
         total_aliases: ["*financing activities*"]
-        aliases: ["*provided by financing activities*", "*used in financing activities*", "*from financing activities*",
+        aliases: ["net cash*by*financing*",
+                  "*provided by financing activities*", "*used in financing activities*", "*from financing activities*",
                   "*generated by financing activities*", "*financing activities net*", "net cash provided by used in financing*"]
       - id: fx_effect
         label: Effect of exchange rates on cash
         kind: flow
-        aliases: ["effect of exchange rate*", "effect of foreign exchange*", "effect of foreign currency*", "exchange rate effect*",
+        aliases: ["effects of foreign currency*", "effects of*exchange rate*",
+                  "effect of*currency*", "effect of*exchange rate*",
+                  "effect of exchange rate*", "effect of foreign exchange*", "effect of foreign currency*", "exchange rate effect*",
                   "effect of changes in exchange rates*", "foreign currency effect*", "effects of exchange rate*"]
       - id: net_change_cash
         label: Net change in cash
@@ -607,6 +674,7 @@ derived:
   - {line: gross_profit, expr: "revenue - cogs", skip_check: is_gross_profit}
   - {line: total_opex, expr: "sum_present(rnd, sga, dna_opex, other_opex)", requires: [rnd, sga]}
   - {line: total_liabilities, expr: "total_liabilities_equity - total_equity - temporary_equity_or_zero", skip_check: bs_liab_plus_equity}
+  - {line: total_equity_parent, expr: "total_equity - nci_equity_or_zero", skip_check: bs_equity_parts}
   - {line: total_equity, expr: "total_equity_parent + nci_equity_or_zero", skip_check: bs_equity_parts}
   - {line: net_income_parent, expr: "net_income - nci_net_income_or_zero", skip_check: is_attributable}
   - {line: net_change_cash, expr: "cfo + cfi + cff + fx_effect_or_zero", skip_check: cf_sum}

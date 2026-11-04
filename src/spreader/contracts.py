@@ -156,6 +156,7 @@ class StatementTable(BaseModel):
     rows: list[StatementRow]
     detection_score: float = 0.0
     warnings: list[str] = Field(default_factory=list)
+    joined_tables: list[int] = Field(default_factory=list)  # the other half of a statement printed across two tables
 
 
 class MapMethod(str, Enum):
@@ -170,6 +171,7 @@ class MapMethod(str, Enum):
 
 class RowMapping(BaseModel):
     row_index: int
+    also: list[str] = Field(default_factory=list)  # a second line one printed row stands for ("Basic and diluted")
     canonical: str | None  # canonical line id, or None when unmapped / excluded
     method: MapMethod
     confidence: float  # 0..1

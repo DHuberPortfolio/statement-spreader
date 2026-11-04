@@ -1,4 +1,4 @@
-import { OriginChip } from "../components/Origin";
+import { documentTitle, OriginChip } from "../components/Origin";
 import { useEffect, useRef, useState, type DragEvent } from "react";
 import { api, ApiError, uploadDocument } from "../api/client";
 import type { DocumentRow, RunSummary } from "../api/types";
@@ -51,18 +51,7 @@ function CompanyCell({ doc, onSaved }: { doc: DocumentRow; onSaved: () => void }
   const [draft, setDraft] = useState(doc.company_id ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  if (doc.origin === "generated") return <OriginChip doc={doc} />;
   if (!editing) {
-    if (doc.company_name) {
-      return (
-        <span className="company-cell company-real">
-          <span>{doc.company_name}</span>
-          <span className="muted small">
-            <OriginChip doc={doc} /> {doc.filing}
-          </span>
-        </span>
-      );
-    }
     return (
       <span className="company-cell">
         {doc.company_id ? <span>{doc.company_id}</span> : <span className="muted">not set</span>}
@@ -265,16 +254,13 @@ function useRunSummaries(docs: DocumentRow[] | null): Record<number, RunSummary 
 }
 
 function RunStatus({ doc }: { doc: DocumentRow }) {
-  if (!doc.run_id) return <span className="muted">no run</span>;
+  if (!doc.run_id) return <span className="muted">Not read yet</span>;
   const cls = doc.run_status === "failed" ? "pill pill-bad" : doc.run_status === "running" ? "pill pill-warn" : "pill";
-  return (
-    <span className={cls}>
-      #{doc.run_id} {doc.run_status}
-    </span>
-  );
+  const word = doc.run_status === "failed" ? "Could not read" : doc.run_status === "running" ? "Reading" : "Read";
+  return <span className={cls}>{word}</span>;
 }
 
-export function DocumentsPage() {
+export function DocumentsPage({ view }: { view: "list" | "add" }) {
   const docs = useApi(() => api.documents(), []);
   const summaries = useRunSummaries(docs.data);
 
@@ -282,16 +268,24 @@ export function DocumentsPage() {
     <div className="page page-documents">
       <header className="page-head">
         <p className="eyebrow">Daily work</p>
-        <h1>Statements</h1>
+        <div className="page-title-row">
+          <h1>{view === "add" ? "Add statements" : "Statements"}</h1>
+          {view === "list" && (
+            <Link to="/statements/add" className="btn btn-primary">
+              Add statements
+            </Link>
+          )}
+        </div>
         <p className="lede">
-          Upload a company's financial statements and they are spread into the standard template. Every value links back
-          to the printed cell it came from; anything the checks doubt goes to the review queue for a person.
+          {view === "add"
+            ? "Upload a company's financial statements and they are spread into the standard template."
+            : "Every value links back to the printed cell it came from; anything the checks doubt goes to the review queue for a person."}
         </p>
       </header>
 
-      <UploadZone onUploaded={docs.reload} />
+      {view === "add" && <UploadZone onUploaded={() => navigate("/statements")} />}
 
-      <section aria-labelledby="doc-list-title" className="doc-list">
+      {view === "list" && <section aria-labelledby="doc-list-title" className="doc-list">
         <h2 id="doc-list-title" className="section-title">
           Spread documents
         </h2>
@@ -325,10 +319,9 @@ export function DocumentsPage() {
             <table className="data-table doc-table">
               <thead>
                 <tr>
-                  <th scope="col">Document</th>
                   <th scope="col">Company</th>
                   <th scope="col">Uploaded</th>
-                  <th scope="col">Run</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Approval</th>
                   <th scope="col" className="num">
                     Open blockers
@@ -344,14 +337,12 @@ export function DocumentsPage() {
                   return (
                     <tr key={d.id}>
                       <th scope="row">
-                        {d.run_id ? <Link to={`/runs/${d.run_id}`}>{d.label || d.filename}</Link> : d.label || d.filename}
+                        {d.run_id ? <Link to={`/runs/${d.run_id}`}>{documentTitle(d)}</Link> : documentTitle(d)}
                         <span className="muted small doc-meta">
-                          {d.format.toUpperCase()} · {formatBytes(d.size)}
+                          <OriginChip doc={d} /> {d.format.toUpperCase()} · {formatBytes(d.size)}
                         </span>
+                        {!d.company_name && <CompanyCell doc={d} onSaved={docs.reload} />}
                       </th>
-                      <td>
-                        <CompanyCell doc={d} onSaved={docs.reload} />
-                      </td>
                       <td className="nowrap">{formatDateTime(d.uploaded_at)}</td>
                       <td>
                         <RunStatus doc={d} />
@@ -388,7 +379,7 @@ export function DocumentsPage() {
             </table>
           </div>
         )}
-      </section>
+      </section>}
     </div>
   );
 }

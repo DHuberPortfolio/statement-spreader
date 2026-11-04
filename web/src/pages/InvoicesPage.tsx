@@ -25,7 +25,7 @@ function actionsFor(code: string): string[] {
   return GENERAL;
 }
 
-export function InvoiceListPage() {
+export function InvoiceListPage({ view }: { view: "list" | "add" }) {
   const list = useApi(() => finops.invoices(), []);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -36,6 +36,7 @@ export function InvoiceListPage() {
     try {
       const r = await fn();
       if (r && typeof r === "object" && "document" in r) navigate(`/invoices/${(r as InvoiceDetail).document.doc_id}`);
+      else if (view === "add") navigate("/invoices");
       else list.reload();
     } catch (x) {
       setErr(errorText(x));
@@ -46,7 +47,15 @@ export function InvoiceListPage() {
 
   return (
     <Layout>
-      <h1>Invoices</h1>
+      <div className="page-title-row">
+        <h1>{view === "add" ? "Add invoices" : "Invoices"}</h1>
+        {view === "list" && (
+          <span className="fo-row">
+            <a className="btn" href="/api/finops/invoices/export.csv">Export CSV</a>
+            <Link to="/invoices/add" className="btn btn-primary">Add invoices</Link>
+          </span>
+        )}
+      </div>
       <p className="lede">
         Invoices are read, checked arithmetically, matched to purchase orders and goods receipts, and screened for duplicates and
         changed bank details. The best status an invoice can reach here is <em>eligible for approval</em>: approval and payment happen
@@ -54,7 +63,7 @@ export function InvoiceListPage() {
       </p>
       <NameReminder />
       {err && <InlineMessage kind="error">{err}</InlineMessage>}
-      <div className="fo-row fo-panel">
+      {view === "add" && <div className="fo-row fo-panel">
         <label>
           Upload an invoice (PDF with a text layer, or JSON){" "}
           <input type="file" accept=".pdf,.json" disabled={busy} onChange={(e) => {
@@ -65,14 +74,15 @@ export function InvoiceListPage() {
         <button className="btn btn-quiet" type="button" disabled={busy} onClick={() => void run(() => finops.sampleInvoices())}>
           {busy ? "Working…" : "Load the sample inbox (81 synthetic invoices)"}
         </button>
-        <a className="small" href="/api/finops/invoices/export.csv">
-          Export CSV
-        </a>
-      </div>
-      {list.loading && <Loading />}
-      {list.error && <ErrorState error={list.error} onRetry={list.reload} />}
-      {list.data && list.data.length === 0 && <EmptyState title="No invoices yet">Upload one, or load the sample inbox.</EmptyState>}
-      {list.data && list.data.length > 0 && (
+      </div>}
+      {view === "list" && list.loading && <Loading />}
+      {view === "list" && list.error && <ErrorState error={list.error} onRetry={list.reload} />}
+      {view === "list" && list.data && list.data.length === 0 && (
+        <EmptyState title="No invoices yet">
+          <Link to="/invoices/add">Upload one, or load the sample inbox.</Link>
+        </EmptyState>
+      )}
+      {view === "list" && list.data && list.data.length > 0 && (
         <table className="data-table fo-table">
           <thead>
             <tr>
@@ -99,7 +109,7 @@ export function InvoiceListPage() {
                 </td>
                 <td>
                   <StatusPill s={i.eligibility} />
-                  {i.touchless && <div className="small muted">touchless</div>}
+                  {i.touchless && <div className="small muted">cleared automatically</div>}
                 </td>
                 <td>
                   <span className="reason-list">
