@@ -81,6 +81,7 @@ def detect_filing(data: bytes) -> dict[str, str] | None:
     name = " ".join(name.split())  # a cover page can break a name across lines or use a non-breaking space
     if name.isupper():
         name = name.title()
+        name = re.sub(r"(['\u2019])S\b", lambda m: m.group(1) + "s", name)  # "Wendy'S" is what title case makes of "WENDYS'S"
     form, year = _cover_tag(data, "DocumentType"), _cover_tag(data, "DocumentFiscalYearFocus")
     return {"company_name": name, "filing": " ".join(x for x in (form, f"fiscal {year}" if year else None) if x)}
 

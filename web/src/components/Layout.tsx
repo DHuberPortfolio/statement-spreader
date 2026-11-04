@@ -264,7 +264,7 @@ function SimulatedBanner() {
   if (!useSimulated()) return null;
   return (
     <p className="sim-banner" role="note">
-      <strong>Simulated workspace.</strong> Two weeks of made-up work by demo analysts on fictional companies. No time, cost or accuracy figure from this work is a measurement.
+      <strong>Simulated workspace.</strong> The completed work is made up: demo analysts on fictional companies, so no time, cost or accuracy figure from it is a measurement. Filings marked Real SEC filing are real and have not been worked on.
     </p>
   );
 }

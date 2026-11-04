@@ -36,6 +36,13 @@ def test_a_copy_of_a_sealed_filing_in_another_set_stays_out(tmp_path: Path) -> N
     assert load_library.library_files(tmp_path) == []
 
 
+def test_a_sample_takes_every_industry_in_turn_and_repeats_exactly() -> None:
+    files = [(Path(f"{s}{i}.htm"), {"sector": s, "file": f"{s}{i}"}) for s in ("energy", "retail") for i in range(5)]
+    picked = load_library.sample(files, 4)
+    assert sorted(m["sector"] for _, m in picked) == ["energy", "energy", "retail", "retail"]
+    assert load_library.sample(files, 4) == picked
+
+
 def test_no_real_sealed_filing_is_in_the_library() -> None:
     sealed = load_library.sealed_hashes(ROOT)
     assert sealed
@@ -47,4 +54,11 @@ def test_a_company_name_broken_across_lines_is_shown_on_one_line() -> None:
 
     html = '<ix:nonNumeric name="dei:EntityRegistrantName">Xmax\nInc.</ix:nonNumeric><ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>'
     assert detect_filing(html.encode())["company_name"] == "Xmax Inc."
+
+
+def test_title_case_does_not_capitalise_after_an_apostrophe() -> None:
+    from spreader.company import detect_filing
+
+    html = '<ix:nonNumeric name="dei:EntityRegistrantName">THE WENDY\'S COMPANY</ix:nonNumeric><ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>'
+    assert detect_filing(html.encode())["company_name"] == "The Wendy's Company"
 

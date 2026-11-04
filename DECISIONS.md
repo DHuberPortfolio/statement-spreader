@@ -1227,3 +1227,5 @@ unknown wordings are placed, and one still set aside goes to a person.**
   it appears outside a demo.
 - **Bank changes.** The platform refuses to explain away changed bank details, so the simulated reviewer rejects those invoices, as a careful one would.
 - **The statements list** gained All, In review and Completed filters. The simulated statements read perfectly, so they show no corrected values.
+- **Real companies in the queue (asked by Devin).** Generated statements are tidy, so the workspace showed almost no blockers. `load_library.py --sample 40` adds a
+  mix of real filings, one industry at a time, none sealed. They stay unworked: approving a real company's filing under a made-up analyst would be a fabricated record.
