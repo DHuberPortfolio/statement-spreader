@@ -20,6 +20,8 @@ import type {
   WorkSession,
 } from "./types";
 
+const RETRY_WAITS = [400, 1000, 2000];
+
 export class ApiError extends Error {
   status: number;
   /** true when the server could not be reached at all (stopped, network down) */
@@ -60,18 +62,26 @@ async function messageFrom(res: Response): Promise<string> {
 
 export async function request(path: string, init: RequestInit = {}): Promise<Response> {
   const headers = new Headers(init.headers);
-  let res: Response;
-  try {
-    res = await fetch(path, { ...init, headers, credentials: "same-origin" });
-  } catch {
-    throw new ApiError("Cannot reach the spreading service. Is the backend running on port 8765?", 0, true);
+  let res: Response | undefined;
+  // A read can safely be tried again, so a moment's restart of the server never reaches the screen. A write is not
+  // repeated: it may have gone through.
+  const waits = !init.method || init.method === "GET" ? RETRY_WAITS : [];
+  for (let attempt = 0; res === undefined; attempt++) {
+    try {
+      res = await fetch(path, { ...init, headers, credentials: "same-origin" });
+    } catch (e) {
+      if (e instanceof DOMException && e.name === "AbortError") throw e;
+      const wait = waits[attempt];
+      if (wait === undefined) throw new ApiError("The app's server is not answering.", 0, true);
+      await new Promise((resolve) => window.setTimeout(resolve, wait));
+    }
   }
   if (!res.ok) {
     if (res.status === 401) sessionEnded();
     const text = await res.clone().text().catch(() => "");
     // A gateway error, or the Vite dev proxy's empty 500 when nothing listens on the backend port.
     const offline = (res.status >= 502 && res.status <= 504) || (res.status === 500 && text.trim() === "");
-    if (offline) throw new ApiError("Cannot reach the spreading service. Is the backend running on port 8765?", res.status, true);
+    if (offline) throw new ApiError("The app's server is not answering.", res.status, true);
     throw new ApiError(await messageFrom(res), res.status, false);
   }
   return res;

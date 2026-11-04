@@ -33,7 +33,7 @@ def main(data_dir: str) -> None:
             files.append(f)
     for f in files:
         name = f.name if f.parent.name == "raw" else f"{f.parent.name}.{f.suffix.lstrip('.')}"
-        _, view = svc.upload(name, f.read_bytes(), "demo-loader")
+        _, view = svc.upload(name, f.read_bytes(), "demo-loader", generated=f.parent.name != "raw")
         s = view.spread
         print(f"{name:45s} run {view.run['id']:3d} {view.run['status']:9s} "
               f"{len(s.values) if s else 0:4d} values, {sum(1 for i in s.review if i.severity.value == 'blocker') if s else 0} blockers")

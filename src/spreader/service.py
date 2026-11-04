@@ -35,6 +35,7 @@ from .company import (
     CompanyContext,
     approved_from_spread,
     confirmed_mappings,
+    detect_filing,
     detect_company_id,
 )
 from .contracts import (
@@ -136,9 +137,11 @@ class Service:
                 for r in self.store.memory_rows(self.profile.id)}
 
     # ---- upload and run ----
-    def upload(self, filename: str, data: bytes, actor: str, company_id: str | None = None) -> tuple[dict[str, Any], RunView]:
+    def upload(self, filename: str, data: bytes, actor: str, company_id: str | None = None,
+               generated: bool = False) -> tuple[dict[str, Any], RunView]:
         """company_id: any identifier the organisation uses for the borrower or client; for an SEC filing it defaults to
-        the CIK on its cover page. Documents of one company share its approved spreads and confirmed mappings."""
+        the CIK on its cover page. Documents of one company share its approved spreads and confirmed mappings.
+        generated: a made-up document, there to show the platform working; every screen says so."""
         try:
             fmt = sniff_format(filename, data)
         except IngestError as exc:
@@ -149,11 +152,29 @@ class Service:
         with self.store.tx() as c:
             if company:
                 c.execute("UPDATE documents SET company_id=? WHERE id=?", (company, doc_id))
+            if generated:
+                c.execute("UPDATE documents SET origin='generated' WHERE id=?", (doc_id,))
             self.store.log(c, "upload" if new else "upload_duplicate", {"filename": _safe_name(filename), "size": len(data),
                                                                         "company_id": company}, actor, document_id=doc_id)
+        self.identify(doc_id)
         run = self.run(doc_id, actor)
         doc = dict(self.store.document(doc_id))  # type: ignore[arg-type]
         return doc, run
+
+    def identify(self, doc_id: str) -> None:
+        """Works out once what a document is: an SEC filing (named from its cover page, its CIK as the company when none
+        was given) or an upload. Documents stored before this are identified the first time they are shown."""
+        doc = self.store.document(doc_id)
+        if doc is None or doc["origin"]:
+            return
+        data = self.store.document_bytes(doc_id, doc["format"])
+        info = detect_filing(data)
+        with self.store.tx() as c:
+            if info is None:
+                c.execute("UPDATE documents SET origin='uploaded' WHERE id=?", (doc_id,))
+                return
+            c.execute("UPDATE documents SET origin='sec', company_name=?, filing=?, company_id=COALESCE(company_id, ?) "
+                      "WHERE id=?", (info["company_name"], info["filing"], detect_company_id(data), doc_id))
 
     def set_company(self, doc_id: str, company_id: str, actor: str) -> RunView:
         """Says which company a document is about after upload, then re-runs it so last year's approvals apply. Refused
@@ -698,6 +719,7 @@ class Service:
             self.store.log(c, action.get("type", "remap_row"),
                            {"statement": stmt, "row": row_index, "label": row.label, "section": section, "line": target,
                             "previous_line": mapping.canonical if mapping else None,
+                            "reason": str(action.get("reason", "")).strip()[:500],
                             "previous_rule": (mapping.rule or mapping.method.value) if mapping else None},
                            actor, run["id"], run["document_id"])
         wrong = remap_outcome(stmt, row, mapping, target, actor, now(), {"run": run["id"], "document": run["document_id"]})
@@ -724,6 +746,8 @@ class Service:
         return [{**dict(r), "payload": json.loads(r["payload"])} for r in rows]
 
     def documents(self) -> list[dict[str, Any]]:
+        for r in self.store.query("SELECT id FROM documents WHERE origin IS NULL"):
+            self.identify(r["id"])
         rows = self.store.query(
             "SELECT d.*, r.id AS run_id, r.status AS run_status, r.started_at AS run_at, r.state AS run_state "
             "FROM documents d LEFT JOIN runs r ON r.id = (SELECT MAX(id) FROM runs WHERE document_id = d.id) "

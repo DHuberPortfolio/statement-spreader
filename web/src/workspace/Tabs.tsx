@@ -269,9 +269,9 @@ function describe(e: AuditEvent): string {
     case "resolve_item":
       return `Resolved ${String(p.item)}: ${String(p.note ?? "")}`;
     case "remap_row":
-      return `Placed row “${String(p.label)}” on ${String(p.line)} (${String(p.statement)})`;
+      return `Placed row “${String(p.label)}” on ${String(p.line)} (${String(p.statement)})${p.reason ? `: ${String(p.reason)}` : ""}`;
     case "exclude_row":
-      return `Excluded row “${String(p.label)}” (${String(p.statement)})`;
+      return `Excluded row “${String(p.label)}” (${String(p.statement)})${p.reason ? `: ${String(p.reason)}` : ""}`;
     case "approve":
       return "Approved the spread";
     case "reopen":

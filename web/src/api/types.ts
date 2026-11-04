@@ -194,6 +194,10 @@ export interface DocumentRow {
   approved?: boolean;
   corrected_after_review?: number;
   company_id?: string | null;
+  company_name?: string | null;
+  filing?: string | null;
+  /** sec: named from its cover page; generated: made up to show the platform working; uploaded: anything else */
+  origin?: "sec" | "generated" | "uploaded" | null;
   summary?: { blocker: number; warning: number; info: number; values: number; auto_accepted: number } | null;
 }
 
@@ -226,12 +230,46 @@ export interface RunSummary {
   checks_skipped: number;
 }
 
+export type FixMode = "move" | "exclude" | "value" | "accept";
+
+export interface SuggestedFix {
+  /** strong: the numbers show it; possible: plausible; manual: a person decides after looking */
+  strength: "strong" | "possible" | "manual";
+  title: string;
+  detail: string;
+  fix: {
+    mode: FixMode;
+    statement?: StatementKey;
+    row?: number | null;
+    line?: string | null;
+    period?: string;
+    value?: string;
+  };
+  /** A reason that follows from the numbers; empty when only the person can say it. */
+  reason: string;
+}
+
+export interface Explanation {
+  title: string;
+  headline: string;
+  what: string;
+  why: string;
+  compare: { left_label: string; left: string; right_label: string; right: string; gap: string } | null;
+  values: { line: string; label: string; period: string; value: string | null; status: string; rows: number[]; confirmed_by: string[] }[];
+  rows: { statement: StatementKey; row: number; label: string; section: string; amount: string | null; line: string | null; line_label: string | null; excluded: boolean }[];
+  suggestions: SuggestedFix[];
+  modes: FixMode[];
+  needs_confirm_word: boolean;
+}
+
 export interface RunPayload {
   run: Run;
   spread: Spread | null;
   lines?: Record<string, LineInfo>;
   summary?: RunSummary;
   document: DocumentRow | null;
+  /** Open blockers and warnings in plain words, by review item id (D63). */
+  explanations?: Record<string, Explanation>;
   /** Lines a senior ruled wrong in this approved spread (D54); cleared when the spread is reopened. */
   corrected_after_review?: ReviewCorrection[];
 }

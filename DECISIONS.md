@@ -1057,3 +1057,34 @@ unknown wordings are placed, and one still set aside goes to a person.**
 - **Tests.** `tests/test_confirm_only_checks.py` (32). With the sum rule or the rescale switched off, three of them fail; with
   the old catch-all test, four;
   the checks' own tests need the new check ids, which the previous profile lacks.
+
+**D63. Blockers and warnings you can open: what is wrong, why, suggested fixes, and a place to fix it; documents say what they are.**
+- **Asked by Devin**: it was hard to tell what a blocker was. Pressing one should show every issue, why it blocks, suggested
+  answers and an area to fix it, with an explanation of why it needed changing; the same for warnings. And why did documents
+  say "Demo Company A" and "not set"?
+- **Built.** `spreader/explain.py` turns each open blocker and warning into plain words at read time: what is wrong, why it
+  blocks or is flagged, the numbers side by side, the values and rows involved, and suggested fixes. Nothing is stored and
+  nothing changes until a person acts. The screen: `web/src/workspace/IssuesPanel.tsx`, opened from the blocker and warning
+  counts, the "Not approved" line, the review queue and the Statements list. Fixes use the existing actions (move a row,
+  leave a row off, change a value, accept), and every one asks why; a row move now records its reason in the audit log.
+- **The sheet stays in view (Devin, after trying it).** The first panel covered the spread and asked him to fix a row he could not
+  see. Each issue now shows the printed statement inside it, with its rows marked and centred, each row saying where it sits on
+  the spread; clicking any row picks it, and a move says what the line would become.
+- **Suggestions come from the numbers.** For a failed check: an unplaced row equal to the gap ("the numbers show this"), up to
+  three unplaced rows that together equal it, a row on another line or a set-aside subtotal equal to it. Coca-Cola's two
+  blockers both name "Trademarks with indefinite lives", and placing it on intangibles once clears both.
+- **A sentence only a person can say is never written for them.** "I compared these with the filing" is left blank for the
+  reviewer. A reason that follows from the numbers is offered and can be edited. `tests/test_issue_explanations.py` holds this.
+- **Documents.** The demo's "not set" was a gap: SEC filings were recognised by their CIK only at upload, and the screen had
+  no name to show. `company.detect_filing` reads the registrant, form and fiscal year from the cover page (schema 8, identified
+  once, stored documents when first shown). Apple, Coca-Cola and Procter & Gamble are real filings and now say so. The other
+  four demo documents are generated, and say "Generated to prove concept"; `scripts/load_demo.py` marks them.
+- **Two breakages fixed.** The Accuracy page went blank: `/api/evaluation` passed on saved reports with no rates, the comparison
+  reports were the newest files after D62, and nothing caught the error. The route now returns accuracy reports only, the page
+  shows the 6 newest with the rest behind a button, and a screen that fails shows a message and a reload button
+  (`ErrorBoundary`). "Service not reachable" was a test server stopped while the pane was on it, but a server restart should
+  not reach the screen either: reads are retried three times, and an offline page comes back by itself.
+- **Not measured.** How often a suggestion is right. The wording hints in `explain.HINTS` were written from Coca-Cola and
+  affect suggestions only, never mapping. Spreading results are unchanged: `explain` reads the spread and writes nothing.
+- **Tests.** `tests/test_issue_explanations.py` (15), new code, so on the previous code the file cannot import. Checked in the
+  browser on a copy of the demo: the suggested fix on Coca-Cola took blockers 2 -> 0 (new run), warnings open the same panel.

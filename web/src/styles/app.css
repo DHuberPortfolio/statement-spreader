@@ -2599,3 +2599,90 @@ input[type="file"]::file-selector-button:hover {
 .golive-not_yet {
   border-left-color: var(--warn-mark);
 }
+
+/* Issues: blockers and warnings, what each one is, and where to fix it (D63) */
+.issues-backdrop { position: fixed; inset: 0; z-index: 60; background: rgb(0 0 0 / 0.55); display: flex; justify-content: center; align-items: stretch; padding: 24px; }
+.issues-panel { width: min(1240px, 100%); background: var(--paper); border: 1px solid var(--rule); border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; }
+.issues-head { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--rule); background: var(--sheet); }
+.issues-head h2 { margin: 0; font-size: 1.15rem; }
+.issues-close { margin-left: auto; }
+.issues-body { display: grid; grid-template-columns: 340px 1fr; flex: 1; min-height: 0; }
+.issues-list { list-style: none; margin: 0; padding: 10px; overflow-y: auto; border-right: 1px solid var(--rule); background: var(--sheet); }
+.issues-list button { display: block; width: 100%; text-align: left; padding: 10px 12px; border: 1px solid transparent; border-radius: 8px; background: none; color: inherit; font: inherit; cursor: pointer; }
+.issues-list button:hover { background: var(--sheet-2); }
+.issues-list button.is-on { background: var(--accent-wash); border-color: var(--accent-soft); }
+.il-title { display: block; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.il-meta { display: block; margin-top: 2px; }
+.issues-empty { padding: 48px 24px; text-align: center; }
+.issue-detail { overflow-y: auto; padding: 20px 28px 32px; min-width: 0; }
+.issue-detail header h3 { margin: 4px 0 0; font-size: 1.35rem; }
+.issue-detail section { margin-top: 20px; }
+.issue-detail h4 { margin: 0 0 6px; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.issue-detail p { margin: 0 0 6px; }
+.issue-kicker { font-size: 0.85rem; font-weight: 600; }
+.issue-compare { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 0; }
+.issue-compare > div { flex: 1 1 160px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; }
+.issue-compare > p { flex-basis: 100%; }
+.issue-compare dt { font-size: 0.8rem; color: var(--muted); }
+.issue-compare dd { margin: 2px 0 0; font-size: 1.25rem; font-weight: 600; }
+.issue-compare .is-gap { border-color: var(--bad); background: var(--bad-wash); }
+.issue-suggestions { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.issue-suggestions li { display: flex; gap: 14px; align-items: center; justify-content: space-between; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; }
+.issue-suggestions li.is-chosen { border-color: var(--accent); background: var(--accent-wash); }
+.s-title { font-weight: 600; }
+.strength { display: inline-block; font-size: 0.72rem; font-weight: 600; margin-bottom: 2px; color: var(--muted); }
+.strength-strong { color: var(--ok); }
+.fix-modes { display: inline-flex; width: fit-content; border: 1px solid var(--rule-strong); border-radius: 8px; overflow: hidden; }
+.fix-modes button { border: 0; background: var(--sheet); color: inherit; font: inherit; padding: 6px 12px; cursor: pointer; }
+.fix-modes button + button { border-left: 1px solid var(--rule-strong); }
+.fix-modes button.is-on { background: var(--accent); color: var(--accent-ink); }
+.fix-form { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 14px; display: grid; gap: 12px; }
+.fix-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fix-fields label, .fix-reason { display: grid; gap: 4px; font-weight: 600; font-size: 0.85rem; min-width: 0; }
+.fix-fields select, .fix-fields input, .fix-reason textarea { font: inherit; font-weight: 400; width: 100%; min-width: 0; }
+.fix-note { grid-column: 1 / -1; }
+.issue-values { width: 100%; border-collapse: collapse; }
+.issue-values th { text-align: left; font-weight: 500; }
+.issue-values th, .issue-values td { padding: 6px 8px; border-top: 1px solid var(--rule-faint); vertical-align: top; }
+.issue-technical { margin-top: 20px; }
+.count-button, .link-button { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.q-open { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 4px 0; font: inherit; color: inherit; cursor: pointer; }
+.q-open span:first-child { display: block; font-weight: 600; overflow-wrap: anywhere; }
+.q-open-cta { color: var(--accent); font-size: 0.85rem; }
+.q-open:hover .q-open-cta { text-decoration: underline; }
+.run-origin { display: flex; gap: 10px; align-items: center; margin: 4px 0; }
+.chip-generated { background: var(--warn-wash); color: var(--warn); border-color: transparent; }
+.chip-sec { background: var(--ok-wash); color: var(--ok); border-color: transparent; }
+.company-real { display: grid; gap: 2px; }
+.doc-origin-note { margin: 0 0 8px; }
+@media (max-width: 860px) {
+  .issues-backdrop { padding: 0; }
+  .issues-body { grid-template-columns: 1fr; grid-template-rows: 180px 1fr; }
+  .issues-list { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .fix-fields { grid-template-columns: 1fr; }
+}
+
+.issues-panel { width: min(1400px, 100%); }
+.issues-body { grid-template-columns: 300px 1fr; }
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin-bottom: 4px; }
+.sheet-caption { margin: 0; padding: 8px 12px; border-bottom: 1px solid var(--rule); }
+.sheet-scroll { position: relative; max-height: 320px; overflow: auto; }
+.sheet-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.sheet-table thead th { position: sticky; top: 0; z-index: 1; background: var(--sheet-2); text-align: left; font-weight: 600; padding: 6px 10px; white-space: nowrap; }
+.sheet-table thead th.num { text-align: right; }
+.sheet-dur { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
+.sheet-table tbody th { text-align: left; font-weight: 400; padding: 4px 10px; min-width: 240px; }
+.sheet-table tbody td { padding: 4px 10px; white-space: nowrap; border-top: 1px solid var(--rule-faint); }
+.sheet-table tbody th { border-top: 1px solid var(--rule-faint); }
+.sheet-table tr.is-strong th { font-weight: 600; }
+.sheet-table tr.is-pickable { cursor: pointer; }
+.sheet-table tr.is-pickable:hover { background: var(--sheet-2); }
+.sheet-table tr.is-marked { background: var(--warn-wash); color: var(--warn); }
+.sheet-table tr.is-marked .muted { color: inherit; }
+.sheet-table tr.is-picked { background: var(--accent-wash); color: inherit; box-shadow: inset 3px 0 0 var(--accent); }
+.sheet-table tr:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.sheet-unplaced { color: var(--bad); font-weight: 600; }
+.sheet-more { margin: 4px 0 12px; }
+.issues-body { grid-template-columns: 270px 1fr; }
+.sheet-table tbody th { min-width: 0; overflow-wrap: anywhere; }
+.sheet-placed { display: block; font-weight: 400; }

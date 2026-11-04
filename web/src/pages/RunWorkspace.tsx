@@ -3,6 +3,7 @@ import { api, ApiError, downloadExport } from "../api/client";
 import type { RunPayload, StatementKey } from "../api/types";
 import { Layout } from "../components/Layout";
 import { StatusLegend, TickMark } from "../components/Markers";
+import { documentTitle, OriginChip } from "../components/Origin";
 import { ErrorState, InlineMessage, Loading } from "../components/States";
 import { readStored, writeStored } from "../lib/actor";
 import { formatDateTime } from "../lib/format";
@@ -12,6 +13,7 @@ import { useCountActiveTime } from "../lib/timer";
 import { useApi } from "../lib/useApi";
 import { WorkspaceContext, type WorkspaceApi, type WorkspaceTab } from "../workspace/context";
 import { EvidencePanel } from "../workspace/Evidence";
+import { IssuesPanel } from "../workspace/IssuesPanel";
 import { buildModel, type WorkspaceModel } from "../workspace/model";
 import { ReviewQueue } from "../workspace/ReviewQueue";
 import { SourceView } from "../workspace/SourceView";
@@ -117,7 +119,11 @@ function RunHeader({
               </>
             )}
           </p>
-          <h1>{doc?.label || doc?.filename || "Document"}</h1>
+          <h1>{documentTitle(doc)}</h1>
+          <p className="run-origin">
+            <OriginChip doc={doc} />
+            {doc && documentTitle(doc) !== doc.filename && <span className="small muted">{doc.filename}</span>}
+          </p>
           <p className="run-meta small muted">
             Profile <span title={`content hash ${profileHash ?? ""}`}>{run.profile_id} {profileVersion}</span> · engine {run.engine_version} · mapping model{" "}
             {run.model} · reviewer memory v{run.memory_version} · finished {formatDateTime(run.finished_at)}
@@ -176,9 +182,13 @@ function RunHeader({
           </span>
         ) : (
           <span id="approve-reason" className={blockers > 0 ? "approve-reason is-blocked" : "approve-reason"}>
-            {blockers > 0
-              ? `Not approved: ${blockers} blocking item${blockers === 1 ? "" : "s"} open. Resolve or correct them first.`
-              : "Not approved. No blockers are open."}
+            {blockers > 0 ? (
+              <button type="button" className="link-button" onClick={() => setQuery({ issues: "blocker", issue: null }, { push: true })}>
+                Not approved: {blockers} blocking item{blockers === 1 ? "" : "s"} open. See what's blocking it →
+              </button>
+            ) : (
+              "Not approved. No blockers are open."
+            )}
           </span>
         )}
         {summary && (
@@ -193,11 +203,19 @@ function RunHeader({
             </div>
             <div className={summary.open_blockers ? "is-bad" : ""}>
               <dt>Blockers</dt>
-              <dd className="num">{summary.open_blockers}</dd>
+              <dd className="num">
+                <button type="button" className="count-button" aria-label={`Open the ${summary.open_blockers} blockers`} onClick={() => setQuery({ issues: "blocker", issue: null }, { push: true })}>
+                  {summary.open_blockers}
+                </button>
+              </dd>
             </div>
             <div className={summary.open_warnings ? "is-warn" : ""}>
               <dt>Warnings</dt>
-              <dd className="num">{summary.open_warnings}</dd>
+              <dd className="num">
+                <button type="button" className="count-button" aria-label={`Open the ${summary.open_warnings} warnings`} onClick={() => setQuery({ issues: "warning", issue: null }, { push: true })}>
+                  {summary.open_warnings}
+                </button>
+              </dd>
             </div>
             <div className="counts-checks">
               <dt>Checks</dt>
@@ -393,8 +411,11 @@ function Workspace({
   const session = useSession();
   useCountActiveTime(!!session && session.mode === "assisted" && session.documentId === model.spread.doc_id);
 
+  const issues = loc.query.get("issues");
+
   return (
     <WorkspaceContext.Provider value={ctx}>
+      {issues && <IssuesPanel filter={issues} selected={loc.query.get("issue")} />}
       <RunHeader model={model} onPayload={onPayload} onReload={onReload} />
       <TabList tab={tab} model={model} />
       <div id="tabpanel" role="tabpanel" aria-labelledby={`tab-${tab}`} className="tabpanel">

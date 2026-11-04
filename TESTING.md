@@ -55,6 +55,7 @@ Every API test signs in: `tests/conftest.py` gives each test its own development
 | The same number printed twice as a confirmation: what counts, and only beside a check (D60) | `tests/test_echo.py` | - |
 | Confirmations from the approved spread and a label's record; never on catch-all lines; a document not counting toward its own record (D61) | `tests/test_prior_and_label_confirmations.py` | - |
 | Confirm-only checks flag nothing and count once, never beside a repeated number alone; parent-only wording; a share count tagged without its scale (D62) | `tests/test_confirm_only_checks.py` | - |
+| Issues explained, suggestions from the numbers, a person's sentence never written for them, fixes clear blockers with the reason logged, documents named or marked generated (D63) | `tests/test_issue_explanations.py` | - |
 | Workbooks laid out like the SEC's Financial_Report.xlsx (D56) | `tests/test_workbook_layouts.py` | The real workbooks in `var/real-samples` (download list in its manifest), scored against `eval/sec/keys-prior` |
 | What rulings teach; go-live report; export (D55) | `tests/test_teaching.py`, `tests/test_learning_redteam.py` | `spreader learning report`; with `llama-server` running, `scripts/measure_ruling_examples.py` |
 | A senior's blind ruling, corrected after review (D54) | `tests/test_rulings.py` | Sign in as Sam Senior, open Model disagreements, rule; then as Ana open the run |

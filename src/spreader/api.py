@@ -26,6 +26,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from . import __version__
 from .contracts import RowRole
+from .explain import explain
 from .export import to_csv, to_json, to_xlsx
 from .ingest import MAX_BYTES
 from .service import ActionError, SeparationError, Service, StaleError
@@ -117,6 +118,8 @@ def _run_payload(view: Any) -> dict[str, Any]:
             "checks_failed": sum(1 for c in spread.checks if c.status.value == "fail"),
             "checks_skipped": sum(1 for c in spread.checks if c.status.value == "skipped"),
         }
+        out["explanations"] = explain(spread, svc.profile)
+    svc.identify(view.run["document_id"])
     doc = svc.store.document(view.run["document_id"])
     out["document"] = dict(doc) if doc else None
     out["corrected_after_review"] = [{**c, "approved_label": _line_label(c["approved_line"]),
@@ -414,6 +417,9 @@ def evaluation() -> dict[str, Any]:
         try:
             r = json.loads(p.read_text())
         except (OSError, json.JSONDecodeError):
+            continue
+        # Only accuracy reports: the folder also holds comparisons and other engines' reports, without these rates.
+        if not isinstance(r, dict) or not isinstance(r.get("rates"), dict) or "silent_error_rate" not in r["rates"]:
             continue
         reports.append({k: r.get(k) for k in ("name", "documents", "crashed", "profile", "rates", "cells", "error_kinds",
                                               "buckets", "seconds")} | {"file": p.name})

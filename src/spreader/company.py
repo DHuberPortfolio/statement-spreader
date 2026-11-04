@@ -20,6 +20,7 @@ What the comparison can tell from the document alone (it never sees the notes):
 
 from __future__ import annotations
 
+import html
 import math
 import re
 from dataclasses import dataclass, field
@@ -64,6 +65,23 @@ def detect_company_id(data: bytes) -> str | None:
     numbers are still read only from what a person can see (D1). None when the tag is absent."""
     m = re.search(rb"name=\"dei:EntityCentralIndexKey\"[^>]*>\s*(?:<[^>]+>\s*)*0*(\d{1,10})\s*<", data[:3_000_000])
     return f"cik:{int(m.group(1))}" if m else None
+
+
+def _cover_tag(data: bytes, name: str) -> str | None:
+    m = re.search(rb"name=\"dei:" + name.encode() + rb"\"[^>]*>\s*(?:<[^>]+>\s*)*([^<]+?)\s*<", data[:3_000_000])
+    return html.unescape(m.group(1).decode("utf-8", "replace")).strip() if m else None
+
+
+def detect_filing(data: bytes) -> dict[str, str] | None:
+    """Who filed a document and what it is, from its SEC cover-page tags. None for anything that is not a tagged filing.
+    For display only, like detect_company_id. EDGAR's names are often capitals ("COCA COLA CO"): shown in title case."""
+    name = _cover_tag(data, "EntityRegistrantName")
+    if not name:
+        return None
+    if name.isupper():
+        name = name.title()
+    form, year = _cover_tag(data, "DocumentType"), _cover_tag(data, "DocumentFiscalYearFocus")
+    return {"company_name": name, "filing": " ".join(x for x in (form, f"fiscal {year}" if year else None) if x)}
 
 
 def value_tolerance(v: SpreadValue, multiplier: Decimal) -> Decimal:

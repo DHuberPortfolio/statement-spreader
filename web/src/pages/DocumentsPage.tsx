@@ -1,3 +1,4 @@
+import { OriginChip } from "../components/Origin";
 import { useEffect, useRef, useState, type DragEvent } from "react";
 import { api, ApiError, uploadDocument } from "../api/client";
 import type { DocumentRow, RunSummary } from "../api/types";
@@ -50,7 +51,18 @@ function CompanyCell({ doc, onSaved }: { doc: DocumentRow; onSaved: () => void }
   const [draft, setDraft] = useState(doc.company_id ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  if (doc.origin === "generated") return <OriginChip doc={doc} />;
   if (!editing) {
+    if (doc.company_name) {
+      return (
+        <span className="company-cell company-real">
+          <span>{doc.company_name}</span>
+          <span className="muted small">
+            <OriginChip doc={doc} /> {doc.filing}
+          </span>
+        </span>
+      );
+    }
     return (
       <span className="company-cell">
         {doc.company_id ? <span>{doc.company_id}</span> : <span className="muted">not set</span>}
@@ -283,6 +295,12 @@ export function DocumentsPage() {
         <h2 id="doc-list-title" className="section-title">
           Spread documents
         </h2>
+        {docs.data && docs.data.some((d) => d.origin === "generated") && (
+          <p className="muted small doc-origin-note">
+            {docs.data.filter((d) => d.origin === "sec").length} real SEC filings and{" "}
+            {docs.data.filter((d) => d.origin === "generated").length} documents generated to prove concept.
+          </p>
+        )}
         {docs.loading && !docs.data && <Loading label="Loading documents" />}
         {docs.error && <ErrorState error={docs.error} onRetry={docs.reload} />}
         {docs.data && docs.data.length === 0 && (
@@ -353,12 +371,16 @@ export function DocumentsPage() {
                         ) : s === "error" ? (
                           <span className="muted">?</span>
                         ) : s.open_blockers > 0 ? (
-                          <span className="count-bad">{s.open_blockers}</span>
+                          <Link className="count-bad" to={`/runs/${d.run_id}?issues=blocker`}>
+                            {s.open_blockers}
+                          </Link>
                         ) : (
                           <span className="count-ok">0</span>
                         )}
                       </td>
-                      <td className="num">{s && s !== "error" ? s.open_warnings : ""}</td>
+                      <td className="num">
+                        {s && s !== "error" ? s.open_warnings > 0 ? <Link to={`/runs/${d.run_id}?issues=warning`}>{s.open_warnings}</Link> : 0 : ""}
+                      </td>
                     </tr>
                   );
                 })}

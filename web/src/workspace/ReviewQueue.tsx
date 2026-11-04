@@ -3,6 +3,7 @@ import type { ReviewItem } from "../api/types";
 import { SeverityMark } from "../components/Markers";
 import { formatDate } from "../lib/format";
 import { findValue, valueKey } from "../lib/periods";
+import { setQuery } from "../lib/router";
 import { REVIEW_KIND, SEVERITY, SEVERITY_ORDER, STATEMENT_TITLE } from "../lib/status";
 import { useWorkspace } from "./context";
 import { ResolveForm } from "./Evidence";
@@ -46,7 +47,9 @@ function ItemLinks({ item }: { item: ReviewItem }) {
 }
 
 function QueueItem({ item, index }: { item: ReviewItem; index: number }) {
+  const { model } = useWorkspace();
   const [resolving, setResolving] = useState(false);
+  const explained = model.payload.explanations?.[item.id];
   return (
     <li className={`q-item sev-row-${item.severity}`} tabIndex={index === 0 ? 0 : -1} data-qi={index} aria-label={`${SEVERITY[item.severity].label}: ${REVIEW_KIND[item.kind] ?? item.kind}. ${item.message}`}>
       <div className="q-head">
@@ -54,9 +57,20 @@ function QueueItem({ item, index }: { item: ReviewItem; index: number }) {
         <span className="q-kind">{REVIEW_KIND[item.kind] ?? item.kind}</span>
         {item.statement && <span className="q-stmt">{STATEMENT_TITLE[item.statement]}</span>}
       </div>
-      <p className="q-msg">{item.message}</p>
+      {explained ? (
+        <button
+          type="button"
+          className="q-open"
+          onClick={() => setQuery({ issues: item.severity === "blocker" ? "blocker" : "warning", issue: item.id }, { push: true })}
+        >
+          <span>{explained.headline}</span>
+          <span className="q-open-cta">See why and fix it →</span>
+        </button>
+      ) : (
+        <p className="q-msg">{item.message}</p>
+      )}
       <ItemLinks item={item} />
-      {resolving ? (
+      {explained ? null : resolving ? (
         <ResolveForm item={item} onDone={() => setResolving(false)} compact />
       ) : (
         <button type="button" className="btn btn-small btn-quiet q-resolve" onClick={() => setResolving(true)}>

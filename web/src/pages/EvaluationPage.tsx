@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { api } from "../api/client";
 import type { EvalReport, Rate } from "../api/types";
 import { Layout } from "../components/Layout";
@@ -36,6 +37,8 @@ const BUCKETS: { key: string; label: string; explain: string; tone: "ok" | "warn
   { key: "missing_flagged", label: "Missing, flagged", explain: "Absent, and the run says rows were left unplaced or a check failed.", tone: "warn" },
   { key: "missing_silent", label: "Missing, silent", explain: "Absent and nothing says so.", tone: "bad" },
 ];
+
+const SHOWN_FIRST = 6;
 
 const pct = (x: number | null | undefined, d = 1) => (x == null ? "" : formatNumber(x * 100, { decimals: d, suffix: "%" }));
 
@@ -243,6 +246,8 @@ function LearningSection() {
 
 export function EvaluationPage() {
   const ev = useApi(() => api.evaluation(), []);
+  const [all, setAll] = useState(false);
+  const reports = ev.data?.reports ?? [];
   return (
     <Layout>
       <div className="page page-eval">
@@ -266,7 +271,12 @@ export function EvaluationPage() {
             </p>
           </EmptyState>
         )}
-        {ev.data?.reports.map((r) => <ReportView key={r.file} r={r} />)}
+        {(all ? reports : reports.slice(0, SHOWN_FIRST)).map((r) => <ReportView key={r.file} r={r} />)}
+        {!all && reports.length > SHOWN_FIRST && (
+          <button type="button" className="btn" onClick={() => setAll(true)}>
+            Show {reports.length - SHOWN_FIRST} older reports
+          </button>
+        )}
       </div>
     </Layout>
   );

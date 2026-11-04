@@ -22,7 +22,7 @@ from typing import Any
 
 from finops.core.vault import vault
 
-SCHEMA_VERSION = 7
+SCHEMA_VERSION = 8
 
 SCHEMA = [
     """CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)""",
@@ -261,6 +261,10 @@ class Store:
                 c.execute(stmt)
             if "company_id" not in {r["name"] for r in c.execute("PRAGMA table_info(documents)")}:
                 c.execute("ALTER TABLE documents ADD COLUMN company_id TEXT")  # schema 3: who the document is about
+            if "origin" not in {r["name"] for r in c.execute("PRAGMA table_info(documents)")}:
+                # schema 8: what the document is, for the screens (D63): sec | generated | uploaded; NULL until looked at
+                for col in ("company_name", "filing", "origin"):
+                    c.execute(f"ALTER TABLE documents ADD COLUMN {col} TEXT")
             ws = {r["name"] for r in c.execute("PRAGMA table_info(work_sessions)")}
             for col in ("difficulty", "analyst_experience"):  # schema 5: pilot context (PILOT_PROTOCOL.md)
                 if col not in ws:

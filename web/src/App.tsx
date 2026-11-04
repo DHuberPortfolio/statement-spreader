@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Layout } from "./components/Layout";
 import { BaselinePage } from "./pages/BaselinePage";
 import { DataQualityListPage, DataQualityRunPage } from "./pages/DataQualityPage";
@@ -28,6 +29,14 @@ const TITLES: [RegExp, string][] = [
 
 export function App() {
   const { path } = useLocation();
+  return (
+    <ErrorBoundary key={path}>
+      <Routes path={path} />
+    </ErrorBoundary>
+  );
+}
+
+function Routes({ path }: { path: string }) {
 
   useEffect(() => {
     const t = TITLES.find(([re]) => re.test(path))?.[1] ?? "Overview";
